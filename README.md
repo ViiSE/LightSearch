@@ -39,7 +39,7 @@ LightSearch состоит из четырех программ:
    - Отделение программы от бизнес-логики;
    - Полная кросс-платформенность.
 
-4) [LightSearchAdmin](https://github.com/ViiSE/LightSearch/blob/master/LightSearchAdmin.pdf) - работает под операционными системами GNU/Linux и Windows. Обеспечивает настройку и администрирование LightSearchServer.
+4) [LightSearchAdminPanel](https://github.com/ViiSE/LightSearch/blob/master/LightSearchAdminPanel.pdf) - работает под операционными системами GNU/Linux и Windows. Обеспечивает настройку и администрирование LightSearchServer.
  * Реализованы следующие функции:
    - Подключение к любому серверу LightSearchServer;
    - Установка таймаута клиента на сервере;
