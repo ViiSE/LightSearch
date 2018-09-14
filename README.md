@@ -19,7 +19,7 @@ LightSearch состоит из четырех программ:
    - Полная кросс-платформенность;
    - Улучшенная защита ini-файла.
   
-2) [LightSearchAdnroid](https://github.com/ViiSE/LightSearch/blob/master/LightSearchAndroid.pdf) - работает под операционной системой Android версии 4.4 и выше. Обеспечивает оперативный поиск по базе данных.
+2) [LightSearchAndroid](https://github.com/ViiSE/LightSearch/blob/master/LightSearchAndroid.pdf) - работает под операционной системой Android версии 4.4 и выше. Обеспечивает оперативный поиск по базе данных.
  * Реализованы следующие функции:
    -  Поиск по штрих-коду;
    -  Считывание штрих-кода через камеру смартфона;
@@ -28,7 +28,7 @@ LightSearch состоит из четырех программ:
  * Что будет добавлено и изменено:
    - Создание мягкого чека.
 
-3) [LightSearchServer](https://github.com/ViiSE/LightSearch/blob/master/LightSearchServer.pdf) - работает под операционными системами GNU/Linux и Windows. Обеспечивает связь между LightSearch Adnroid и базой данных.
+3) [LightSearchServer](https://github.com/ViiSE/LightSearch/blob/master/LightSearchServer.pdf) - работает под операционными системами GNU/Linux и Windows. Обеспечивает связь между LightSearchAndroid и базой данных.
  * Реализованы следующие функции:
    - Общение между клиентом и сервером через JSON по принципу "команда-ответ";
    - Сохранение настроек, параметров базы данных и списка администраторов;
@@ -39,9 +39,9 @@ LightSearch состоит из четырех программ:
    - Отделение программы от бизнес-логики;
    - Полная кросс-платформенность.
 
-4) [LightSearchAdmin](https://github.com/ViiSE/LightSearch/blob/master/LightSearchAdmin.pdf) - работает под операционными системами GNU/Linux и Windows. Обеспечивает настройку и администрирование LightSearch Server.
+4) [LightSearchAdmin](https://github.com/ViiSE/LightSearch/blob/master/LightSearchAdmin.pdf) - работает под операционными системами GNU/Linux и Windows. Обеспечивает настройку и администрирование LightSearchServer.
  * Реализованы следующие функции:
-   - Подключение к любому серверу LightSearch Server;
+   - Подключение к любому серверу LightSearchServer;
    - Установка таймаута клиента на сервере;
    - Установка времени перезагрузки сервера и непосредственно перезагрузка сервера;
    - Запрос списка клиентов;
