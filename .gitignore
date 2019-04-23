@@ -1,0 +1,14 @@
+# Manifest
+**/manifest.mf
+
+# Build
+**/build.xml
+
+# Build path
+**/build/*
+
+# NetBeans project folder
+**/nbproject/*
+
+# Dist folder
+**/dist/*
