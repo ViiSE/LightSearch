@@ -13,24 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lightsearch.server.cmd.client.processor;
+package lightsearch.server.cmd.client.processor.debug;
 
 import lightsearch.server.checker.LightSearchChecker;
 import lightsearch.server.cmd.client.ClientCommand;
+import lightsearch.server.cmd.client.processor.AbstractProcessorClient;
 import lightsearch.server.cmd.result.CommandResult;
 import lightsearch.server.data.ClientDAO;
-import lightsearch.server.database.DatabaseConnection;
-import lightsearch.server.database.DatabaseConnectionCreator;
-import lightsearch.server.database.DatabaseConnectionCreatorInit;
-import lightsearch.server.database.cmd.message.DatabaseCommandMessage;
-import lightsearch.server.database.cmd.message.DatabaseCommandMessageInit;
-import lightsearch.server.exception.DatabaseConnectionCreatorException;
-import lightsearch.server.database.statement.DatabaseStatementExecutor;
-import lightsearch.server.database.statement.DatabaseStatementExecutorInit;
-import lightsearch.server.exception.DatabaseStatementExecutorException;
-import lightsearch.server.database.statement.result.DatabaseStatementResult;
-import lightsearch.server.iterator.IteratorDatabaseRecord;
-import lightsearch.server.time.CurrentDateTime;
 import lightsearch.server.data.LightSearchServerDTO;
 import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.message.result.ResultTypeMessageEnum;
@@ -39,19 +28,14 @@ import lightsearch.server.message.result.ResultTypeMessageEnum;
  *
  * @author ViiSE
  */
-public class AuthenticationProcessor extends AbstractProcessorClient {
+public class AuthenticationProcessorDebug extends AbstractProcessorClient {
     
     private final ClientDAO clientDAO;
-    private final CurrentDateTime currentDateTime;
-    private final IteratorDatabaseRecord iteratorDatabaseRecord;
     
-    public AuthenticationProcessor(LightSearchServerDTO serverDTO, LightSearchChecker checker, 
-            ClientDAO clientDAO, CurrentDateTime currentDateTime, 
-            IteratorDatabaseRecord iteratorDatabaseRecord) {
+    public AuthenticationProcessorDebug(LightSearchServerDTO serverDTO, 
+            LightSearchChecker checker, ClientDAO clientDAO) {
         super(serverDTO, checker);
         this.clientDAO = clientDAO;
-        this.currentDateTime = currentDateTime;
-        this.iteratorDatabaseRecord = iteratorDatabaseRecord;
     }
 
     @Override
@@ -59,42 +43,27 @@ public class AuthenticationProcessor extends AbstractProcessorClient {
         if(!super.checker.isNull(clientCommand.username(), clientCommand.password(), clientCommand.IMEI(), 
                 clientCommand.ip(), clientCommand.os(), clientCommand.model())) {
             if(!serverDTO.blacklist().contains(clientCommand.IMEI())) {
-                try {
-                    DatabaseConnectionCreator dbConnCreator = DatabaseConnectionCreatorInit.databaseConnectionCreator(
-                            serverDTO.databaseDTO(), clientCommand.username(), clientCommand.password());
-                    DatabaseConnection databaseConnection = dbConnCreator.createFirebirdConnection();
+                String message = "IMEI - "  + clientCommand.IMEI()
+                    + ", ip - "    + clientCommand.ip()
+                    + ", os - "    + clientCommand.os()
+                    + ", model - " + clientCommand.model()
+                    + ", username - "  + clientCommand.username();
 
-                    DatabaseCommandMessage dbCmdMessage = DatabaseCommandMessageInit.databaseCommandMessageConnection(clientCommand.command(), clientCommand.IMEI());
-                    
-                    DatabaseStatementExecutor dbStatementExecutor = DatabaseStatementExecutorInit.databaseStatementExecutor(
-                            databaseConnection, iteratorDatabaseRecord.next(), 
-                            currentDateTime.dateTimeInStandartFormat(), dbCmdMessage);
-                    
-                    DatabaseStatementResult dbStatRes = dbStatementExecutor.exec();
+                serverDTO.clients().put(clientCommand.IMEI(), clientCommand.username());
 
-                    String message = "IMEI - "  + clientCommand.IMEI()
-                        + ", ip - "    + clientCommand.ip()
-                        + ", os - "    + clientCommand.os()
-                        + ", model - " + clientCommand.model()
-                        + ", username - "  + clientCommand.username();
+                clientDAO.setIsFirst(false);
+                clientDAO.setUsername(clientCommand.username());
 
-                    serverDTO.clients().put(clientCommand.IMEI(), clientCommand.username());
+                String result = 
+                        "{\n"
+                            + "\"IMEI\": \"" + clientCommand.IMEI() + "\"\n"
+                            + "\"isDone\": \"True\"\n"
+                            + "\"message\": \"Соединение установлено!\"\n"
+                        + "}";
 
-                    clientDAO.setIsFirst(false);
-                    clientDAO.setUsername(clientCommand.username());
-                    clientDAO.setDatabaseConnection(databaseConnection);
-
-                    String result = dbStatRes.result();
-
-                    return super.commandResult(clientCommand.IMEI(), LogMessageTypeEnum.INFO, ResultTypeMessageEnum.TRUE, 
-                            result, "Client " + clientCommand.IMEI() + " connected: " + message);        
-                } catch(DatabaseConnectionCreatorException ex) {
-                    return super.commandResult(clientCommand.IMEI(), LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE, 
-                            ex.getMessageRU(), "Client " + clientCommand.IMEI() + " " + ex.getMessage());
-                } catch(DatabaseStatementExecutorException ex) {
-                    return super.commandResult(clientCommand.IMEI(), LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE,
-                            ex.getMessageRU(), "Client " + clientCommand.IMEI() + " " + ex.getMessage());
-                }    
+                return super.commandResult(clientCommand.IMEI(), LogMessageTypeEnum.INFO, 
+                        ResultTypeMessageEnum.TRUE, result, 
+                        "Client " + clientCommand.IMEI() + " connected: " + message);
             }
             else
                 return super.commandResult(clientCommand.IMEI(), LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE, 
