@@ -25,7 +25,11 @@ public class MessageTypeInit {
         return new MessageTypeJSONAdminDefaultImpl();
     }
     
-    public static MessageType messageTypeClient() {
-        return new MessageTypeClientDefaultImpl();
+    public static MessageType messageTypeJSONClientSuccess() {
+        return new MessageTypeClientJSONSuccessDefaultImpl();
+    }
+    
+    public static MessageType messageTypeJSONClientFail() {
+        return new MessageTypeClientJSONFailDefaultImpl();
     }
 }

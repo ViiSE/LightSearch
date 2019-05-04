@@ -74,7 +74,7 @@ public class MessageTypeTestNG {
         String nullMessage = messageTypeNull.createFormattedMessage(name, isDone, nullString);
         System.out.println(nullMessage);
         
-        MessageType messageTypeClient = MessageTypeInit.messageTypeClient();
+        MessageType messageTypeClient = MessageTypeInit.messageTypeJSONClientSuccess();
         String IMEI = "123456879765";
         String clientMessage = messageTypeClient.createFormattedMessage(IMEI, isDone, message);
         System.out.println(clientMessage);

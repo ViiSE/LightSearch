@@ -73,6 +73,5 @@ public enum ClientCommandContentEnum {
         public String stringValue() {return "cardCode";}
     };
     
-    
     public abstract String stringValue();
 }

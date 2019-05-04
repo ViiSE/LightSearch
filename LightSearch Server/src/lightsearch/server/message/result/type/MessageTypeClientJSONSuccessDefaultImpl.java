@@ -19,8 +19,8 @@ package lightsearch.server.message.result.type;
  *
  * @author ViiSE
  */
-public class MessageTypeClientDefaultImpl implements MessageType {
-
+public class MessageTypeClientJSONSuccessDefaultImpl implements MessageType {
+    
     @Override
     public String createFormattedMessage(String IMEI, String isDone, Object message) {
         return message.toString();

@@ -40,8 +40,15 @@ public abstract class AbstractProcessorClient extends SuperAbstractProcessor imp
     }
     
     @Override
-    protected CommandResult commandResult(String name, LogMessageTypeEnum type, ResultTypeMessageEnum resultValue, Object message, String logMessage) {       
-        MessageType messageType = MessageTypeInit.messageTypeClient();
+    protected CommandResult commandResult(String name, LogMessageTypeEnum type, 
+            ResultTypeMessageEnum resultValue, Object message, String logMessage) {       
+        MessageType messageType;
+        
+        if(resultValue.equals(ResultTypeMessageEnum.TRUE))
+            messageType = MessageTypeInit.messageTypeJSONClientSuccess();
+        else
+            messageType = MessageTypeInit.messageTypeJSONClientFail();
+        
         MessageCreator messageCreator = MessageCreatorInit.messageCreator(messageType);
         String messageResult = messageCreator.createMessage(name, resultValue, message);
         return CommandResultInit.commandResult(type, messageResult, logMessage);
