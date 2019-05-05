@@ -70,7 +70,7 @@ public enum ClientCommandContentEnum {
     },
     CARD_CODE {
         @Override
-        public String stringValue() {return "cardCode";}
+        public String stringValue() {return "card_сode";}
     };
     
     public abstract String stringValue();

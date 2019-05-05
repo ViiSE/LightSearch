@@ -22,39 +22,39 @@ package lightsearch.server.database.cmd.message;
 public enum DatabaseCommandMessageEnum {
     COMMAND {
         @Override
-        public String stringValue() {return "cmd"; }
+        public String stringValue() { return "cmd"; }
     },
     IMEI {
         @Override
-        public String stringValue() {return "IMEI"; }
+        public String stringValue() { return "IMEI"; }
     },
     DATA {
         @Override
-        public String stringValue() {return "data"; }
+        public String stringValue() { return "data"; }
     },
     USERNAME {
         @Override
-        public String stringValue() {return "username"; }
+        public String stringValue() { return "username"; }
     },
     BARCODE {
         @Override
-        public String stringValue() {return "barcode"; }
+        public String stringValue() { return "barcode"; }
     },
     SKLAD {
         @Override
-        public String stringValue() {return "sklad"; }
+        public String stringValue() { return "sklad"; }
     },
     TK {
         @Override
-        public String stringValue() {return "TK"; }
+        public String stringValue() { return "TK"; }
     },
     DELIVERY {
         @Override
-        public String stringValue() {return "delivery"; }
+        public String stringValue() { return "delivery"; }
     },
     CARD_CODE {
         @Override
-        public String stringValue() {return "cardCode"; }
+        public String stringValue() { return "card_code"; }
     };
     
     public abstract String stringValue();
