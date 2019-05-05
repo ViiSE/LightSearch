@@ -26,15 +26,15 @@ public enum ClientCommandEnum {
     },
     OPEN_SOFT_CHECK {
         @Override
-        public String stringValue() {return "openSoftCheck";}
+        public String stringValue() {return "open_soft_check";}
     },
     CLOSE_SOFT_CHECK {
         @Override
-        public String stringValue() {return "closeSoftCheck";}
+        public String stringValue() {return "close_soft_check";}
     },
     CANCEL_SOFT_CHECK {
         @Override
-        public String stringValue() {return "cancelSoftCheck";}
+        public String stringValue() {return "cancel_soft_check";}
     },
     SEARCH {
         @Override
