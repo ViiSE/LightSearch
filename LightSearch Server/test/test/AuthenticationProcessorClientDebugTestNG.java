@@ -20,7 +20,6 @@ import lightsearch.server.cmd.client.ClientCommandConverter;
 import lightsearch.server.cmd.client.ClientCommandConverterInit;
 import lightsearch.server.cmd.client.ClientCommandCreator;
 import lightsearch.server.cmd.client.ClientCommandCreatorDebugDefaultImpl;
-import lightsearch.server.cmd.client.ClientCommandCreatorInit;
 import lightsearch.server.cmd.result.CommandResult;
 import lightsearch.server.data.ClientDAO;
 import lightsearch.server.data.ClientDAOInit;
