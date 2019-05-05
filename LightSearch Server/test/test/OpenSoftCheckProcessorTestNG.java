@@ -166,7 +166,7 @@ public class OpenSoftCheckProcessorTestNG {
                             + "\"command\":\"open_soft_check\","
                             + "\"IMEI\":\"123456789123456\","
                             + "\"username\":\"user\","
-                            + "\"card_code\":\"123456\","
+                            + "\"card_code\":\"123456\""
                         + "}";
             ClientCommandConverter clientCmdConverter = ClientCommandConverterInit.clientCommandConverter();
             ClientCommand clientCmd;
