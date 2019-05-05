@@ -221,7 +221,8 @@ public class DatabaseCommandMessageTestNG {
         assertNotNull(clientCmdCancelSoftCheck, "Client Command is null!");
         
         DatabaseCommandMessage dbMessageConn = DatabaseCommandMessageInit.databaseCommandMessageCancelSoftCheck(
-                clientCmdCancelSoftCheck.command(), clientCmdCancelSoftCheck.IMEI());
+                clientCmdCancelSoftCheck.command(), clientCmdCancelSoftCheck.IMEI(),
+                clientCmdCancelSoftCheck.username(), clientCmdCancelSoftCheck.cardCode());
         assertNotNull(dbMessageConn, "Database command message is null!");
         
         System.out.println("DatabaseCommandMessageConnection.message(): " + dbMessageConn.message());

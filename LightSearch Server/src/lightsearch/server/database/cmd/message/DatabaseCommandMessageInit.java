@@ -35,8 +35,10 @@ public class DatabaseCommandMessageInit {
         return new DatabaseCommandMessageOpenSoftCheckDefaultWindowsJSONImpl(command, IMEI, username, cardCode);
     }
     
-    public static DatabaseCommandMessage databaseCommandMessageCancelSoftCheck(String command, String IMEI) {
-        return new DatabaseCommandMessageCancelSoftCheckDefaultWindowsJSONImpl(command, IMEI);
+    public static DatabaseCommandMessage databaseCommandMessageCancelSoftCheck(String command, 
+            String IMEI, String username, String cardCode) {
+        return new DatabaseCommandMessageCancelSoftCheckDefaultWindowsJSONImpl(command, 
+                IMEI, username, cardCode);
     }
     
     public static DatabaseCommandMessage databaseCommandMessageCloseSoftCheck(String command, 
