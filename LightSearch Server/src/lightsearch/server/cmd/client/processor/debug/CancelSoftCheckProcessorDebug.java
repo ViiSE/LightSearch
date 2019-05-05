@@ -39,12 +39,14 @@ public class CancelSoftCheckProcessorDebug extends AbstractProcessorClient {
     
     @Override
     public CommandResult apply(ClientCommand clientCommand) {
-        if(!super.checker.isNull(clientCommand.IMEI())) {
+        if(!super.checker.isNull(clientCommand.IMEI(), clientCommand.username(),
+                clientCommand.cardCode())) {
             if(!serverDTO.blacklist().contains(clientCommand.IMEI())) {       
                 if(softCheck.cancelSoftCheck()) {
                     String logMessage 
                             = "Client " + clientCommand.IMEI() + 
-                            " cancel SoftCheck, username - " + clientCommand.username();
+                            " cancel SoftCheck, username - " + clientCommand.username()
+                            + " card code - " + clientCommand.cardCode();
 
                     String result = 
                             "{\n"
@@ -59,7 +61,8 @@ public class CancelSoftCheckProcessorDebug extends AbstractProcessorClient {
                 else
                     return super.commandResult(clientCommand.IMEI(), LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE,
                             "Невозможно отменить мягкий чек. Попробуйте позже.", 
-                            "Client " + clientCommand.IMEI() + " - cannot cancel SoftCheck, username - " + clientCommand.username());
+                            "Client " + clientCommand.IMEI() + " - cannot cancel SoftCheck, username - " + clientCommand.username()
+                                    + "card code - " + clientCommand.cardCode());
             }
             else
                 return super.commandResult(clientCommand.IMEI(), LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE,
