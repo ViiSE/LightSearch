@@ -163,7 +163,7 @@ public class CancelSoftCheckProcessorTestNG {
     private ClientCommand initClientCommand() {
         try {
             String message = "{"
-                              + "\"command\":\"cancelSoftCheck\","
+                              + "\"command\":\"cancel_soft_check\","
                               + "\"IMEI\":\"12346789123456\","
                               + "\"username\":\"name\","
                               + "\"card_code\":\"123456\""
