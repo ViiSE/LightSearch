@@ -37,9 +37,9 @@ public class ConfirmSoftCheckProductsProcessorDebug extends AbstractProcessorCli
     private final ProductsMapDebug products;
     
     public ConfirmSoftCheckProductsProcessorDebug(LightSearchServerDTO serverDTO, 
-            LightSearchChecker checker, ProductsMapDebug products) {
+            LightSearchChecker checker) {
         super(serverDTO, checker);
-        this.products = products;
+        this.products = ProductsMapDebugInit.productsMapDebug();
     }
     
     @Override
@@ -58,7 +58,7 @@ public class ConfirmSoftCheckProductsProcessorDebug extends AbstractProcessorCli
                     
                     for(Object product : data) {
                         JSONObject productJSON = (JSONObject)product;
-                        String id = productJSON.get("id").toString();
+                        String id = productJSON.get("ID").toString();
                         int amount = Integer.parseInt(productJSON.get("amount").toString());
                         if(products.map().get(id) != null) {
                             int maxAmountProduct = 
@@ -66,7 +66,7 @@ public class ConfirmSoftCheckProductsProcessorDebug extends AbstractProcessorCli
                             
                             if(maxAmountProduct < amount) {
                                 JSONObject newProd = new JSONObject();
-                                newProd.put("id", id);
+                                newProd.put("ID", id);
                                 newProd.put("amount", maxAmountProduct);
                                 
                                 newData.add(newProd);
