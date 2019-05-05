@@ -78,7 +78,7 @@ import static test.message.TestMessage.testEnd;
  *
  * @author ViiSE
  */
-public class CancelSoftCheckProcessor {
+public class CancelSoftCheckProcessorTestNG {
     
     private LightSearchServerDTO initDTO() {
         CurrentServerDirectory currentDirectory;
