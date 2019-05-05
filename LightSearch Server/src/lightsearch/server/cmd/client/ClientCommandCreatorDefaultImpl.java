@@ -21,6 +21,7 @@ import java.util.function.Function;
 import lightsearch.server.cmd.client.processor.AuthenticationProcessor;
 import lightsearch.server.cmd.client.processor.CancelSoftCheckProcessor;
 import lightsearch.server.cmd.client.processor.CloseSoftCheckProcessor;
+import lightsearch.server.cmd.client.processor.ConfirmSoftCheckProductsProcessor;
 import lightsearch.server.cmd.client.processor.OpenSoftCheckProcessor;
 import lightsearch.server.cmd.client.processor.SearchProcessor;
 import lightsearch.server.cmd.result.CommandResult;
@@ -34,11 +35,12 @@ import lightsearch.server.data.LightSearchServerDTO;
  */
 public class ClientCommandCreatorDefaultImpl implements ClientCommandCreator {
 
-    private final String CONNECT           = ClientCommandEnum.CONNECT.stringValue();
-    private final String OPEN_SOFT_CHECK   = ClientCommandEnum.OPEN_SOFT_CHECK.stringValue();
-    private final String CLOSE_SOFT_CHECK  = ClientCommandEnum.CLOSE_SOFT_CHECK.stringValue();
-    private final String CANCEL_SOFT_CHECK = ClientCommandEnum.CANCEL_SOFT_CHECK.stringValue();
-    private final String SEARCH            = ClientCommandEnum.SEARCH.stringValue();
+    private final String CONNECT                     = ClientCommandEnum.CONNECT.stringValue();
+    private final String OPEN_SOFT_CHECK             = ClientCommandEnum.OPEN_SOFT_CHECK.stringValue();
+    private final String CLOSE_SOFT_CHECK            = ClientCommandEnum.CLOSE_SOFT_CHECK.stringValue();
+    private final String CANCEL_SOFT_CHECK           = ClientCommandEnum.CANCEL_SOFT_CHECK.stringValue();
+    private final String CONFIRM_SOFT_CHECK_PRODUCTS = ClientCommandEnum.CONFIRM_SOFT_CHECK_PRODUCTS.stringValue();
+    private final String SEARCH                      = ClientCommandEnum.SEARCH.stringValue();
     
     private final LightSearchServerDTO serverDTO;
     private final LightSearchListenerDTO listenerDTO;
@@ -65,6 +67,9 @@ public class ClientCommandCreatorDefaultImpl implements ClientCommandCreator {
                 listenerDTO.currentDateTime(), listenerDTO.iteratorDatabaseRecord()));
         result.put(CANCEL_SOFT_CHECK, new CancelSoftCheckProcessor(serverDTO, listenerDTO.checker(), 
                 clientDAO, listenerDTO.currentDateTime(), listenerDTO.iteratorDatabaseRecord()));
+        result.put(CONFIRM_SOFT_CHECK_PRODUCTS, new ConfirmSoftCheckProductsProcessor(serverDTO, 
+                listenerDTO.checker(), clientDAO, listenerDTO.currentDateTime(), 
+                listenerDTO.iteratorDatabaseRecord()));
         
         return result;
     }

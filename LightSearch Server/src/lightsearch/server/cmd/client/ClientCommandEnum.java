@@ -36,6 +36,10 @@ public enum ClientCommandEnum {
         @Override
         public String stringValue() {return "cancel_soft_check";}
     },
+    CONFIRM_SOFT_CHECK_PRODUCTS {
+        @Override
+        public String stringValue() {return "confirm_prod_sf";}
+    },
     SEARCH {
         @Override
         public String stringValue() {return "search";}
