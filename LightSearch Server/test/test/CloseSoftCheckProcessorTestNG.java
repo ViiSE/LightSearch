@@ -181,6 +181,8 @@ public class CloseSoftCheckProcessorTestNG {
             assertNotNull(clientCmd, "Client Command is null!");
             assertNotNull(clientCmd.command(), "Client command is null!");
             assertNotNull(clientCmd.IMEI(), "Client IMEI is null!");
+            assertNotNull(clientCmd.username(), "Client username is null!");
+            assertNotNull(clientCmd.cardCode(), "Client card code is null!");
             assertNotNull(clientCmd.data(), "Client data is null!");
             assertNotNull(clientCmd.delivery(), "Client delivery is null!");
             
