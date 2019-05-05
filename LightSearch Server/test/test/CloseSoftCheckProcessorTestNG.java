@@ -165,6 +165,8 @@ public class CloseSoftCheckProcessorTestNG {
             String message = "{"
                               + "\"command\": \"closeSoftCheck\","
                               + "\"IMEI\": \"12346789123456\","
+                              + "\"username\": \"name\","
+                              + "\"card_code\": \"123456\","
                               + "\"data\":" 
                               + "["
                               +     "{ \"ID\": \"511354\", \"amount\": \"4\"},"
