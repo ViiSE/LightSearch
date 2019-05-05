@@ -62,7 +62,7 @@ public class ConfirmSoftCheckProductsProcessorDebug extends AbstractProcessorCli
                         int amount = Integer.parseInt(productJSON.get("amount").toString());
                         if(products.map().get(id) != null) {
                             int maxAmountProduct = 
-                                    Integer.parseInt(products.map().get(id).amount());
+                                    Integer.parseInt(products.map().get(id).amount().replace(" шт.", ""));
                             
                             if(maxAmountProduct < amount) {
                                 JSONObject newProd = new JSONObject();
