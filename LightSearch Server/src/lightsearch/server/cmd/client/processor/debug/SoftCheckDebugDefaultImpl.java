@@ -9,9 +9,6 @@
  */
 package lightsearch.server.cmd.client.processor.debug;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author ViiSE
@@ -20,37 +17,7 @@ public class SoftCheckDebugDefaultImpl implements SoftCheckDebug {
 
     private static boolean isOpen  = false;
     private static boolean isClose = false;
-    private final List<ProductDebug> products;
     
-    public SoftCheckDebugDefaultImpl() {
-        products = new ArrayList<>();
-    }
-
-    @Override
-    public List<ProductDebug> products() {
-        return products;
-    }
-
-    @Override
-    public void addProduct(ProductDebug product) {
-        products.add(product);
-    }
-
-    @Override
-    public void delProduct(String id) {
-        for(ProductDebug product: products) {
-            if(product.id().equals(id)) {
-                products.remove(product);
-                return;
-            }
-        }
-    }
-
-    @Override
-    public void delAllProducts() {
-        products.clear();
-    }
-
     @Override
     public boolean closeSoftCheck() {
         if(isOpen) {

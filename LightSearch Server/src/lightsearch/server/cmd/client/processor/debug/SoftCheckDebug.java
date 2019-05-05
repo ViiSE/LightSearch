@@ -19,8 +19,4 @@ public interface SoftCheckDebug {
     boolean closeSoftCheck();
     boolean openSoftCheck();
     boolean cancelSoftCheck();
-    List<ProductDebug> products();
-    void addProduct(ProductDebug product);
-    void delProduct(String id);
-    void delAllProducts();
 }
