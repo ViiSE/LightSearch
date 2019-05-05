@@ -64,7 +64,9 @@ public class CancelSoftCheckProcessor extends AbstractProcessorClient {
                             currentDateTime.dateTimeInStandartFormat(), dbCmdMessage);
                     DatabaseStatementResult dbStatRes = dbStatementExecutor.exec();
 
-                    String logMessage = "Client " + clientCommand.IMEI() + " cancel SoftCheck, username - " + clientCommand.username();
+                    String logMessage = "Client " + clientCommand.IMEI() + 
+                            " cancel SoftCheck, username - " + clientCommand.username() +
+                            ", card code - " + clientCommand.cardCode();
                     
                     String result = dbStatRes.result();
 
