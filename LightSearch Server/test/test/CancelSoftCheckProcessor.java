@@ -164,7 +164,9 @@ public class CancelSoftCheckProcessor {
         try {
             String message = "{"
                               + "\"command\":\"cancelSoftCheck\","
-                              + "\"IMEI\":\"12346789123456\""
+                              + "\"IMEI\":\"12346789123456\","
+                              + "\"username\":\"name\","
+                              + "\"card_code\":\"123456\""
                             + "}";
             ClientCommandConverter clientCmdConverter = ClientCommandConverterInit.clientCommandConverter();
             ClientCommand clientCmd;
@@ -172,6 +174,8 @@ public class CancelSoftCheckProcessor {
             assertNotNull(clientCmd, "Client Command is null!");
             assertNotNull(clientCmd.command(), "Client command is null!");
             assertNotNull(clientCmd.IMEI(), "Client IMEI is null!");
+            assertNotNull(clientCmd.username(), "Client username is null!");
+            assertNotNull(clientCmd.cardCode(), "Client card code is null!");
             
             return clientCmd;
         } catch (CommandConverterException ex) {
