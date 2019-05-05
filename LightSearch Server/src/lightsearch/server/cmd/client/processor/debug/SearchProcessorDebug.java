@@ -15,8 +15,6 @@
  */
 package lightsearch.server.cmd.client.processor.debug;
 
-import java.util.HashMap;
-import java.util.Map;
 import lightsearch.server.checker.LightSearchChecker;
 import lightsearch.server.cmd.client.ClientCommand;
 import lightsearch.server.cmd.client.processor.AbstractProcessorClient;
@@ -33,33 +31,12 @@ import org.json.simple.JSONObject;
  */
 public class SearchProcessorDebug extends AbstractProcessorClient {
     
-    Map<String, ProductDebug> products;
+    private final ProductsMapDebug products;
     
     public SearchProcessorDebug(LightSearchServerDTO serverDTO, LightSearchChecker checker) {
         super(serverDTO, checker);
     
-        initProducts();
-    }
-
-    private void initProducts() {
-        products = new HashMap<>();
-        
-        ProductDebug pr1 = createProduct("Склад 1", "111111", "Товар 1", "100 руб.", "5 шт.");
-        ProductDebug pr2 = createProduct("Склад 1", "222222", "Товар 2", "150 руб.", "10 шт.");
-        ProductDebug pr3 = createProduct("Склад 2", "333333", "Товар 3", "10 руб.", "100 шт.");
-        ProductDebug pr4 = createProduct("Склад 2", "444444", "Товар 4", "65 руб.", "7 шт.");
-        
-        products.put(pr1.id(), pr1);
-        products.put(pr2.id(), pr2);
-        products.put(pr3.id(), pr3);
-        products.put(pr4.id(), pr4);
-    }
-    
-    private ProductDebug createProduct(String podr, String id, String name, 
-            String price, String amount) {
-        ProductDebug pr = 
-                ProductDebugInit.productDebug(podr, id, name, price, amount);
-        return pr;
+        products = ProductsMapDebugInit.productsMapDebug();
     }
     
     @Override
@@ -67,13 +44,9 @@ public class SearchProcessorDebug extends AbstractProcessorClient {
         if(!super.checker.isNull(clientCommand.IMEI(), clientCommand.barcode(), 
                 clientCommand.sklad(), clientCommand.TK())) {
             if(!serverDTO.blacklist().contains(clientCommand.IMEI())) {
-                
-                JSONObject resJSON = new JSONObject();
-                resJSON.put("IMEI", clientCommand.IMEI());
-                
                 JSONArray jData = new JSONArray();
                 
-                products.forEach((id, product) -> {
+                products.map().forEach((id, product) -> {
                     if(id.equals(clientCommand.barcode()))
                         if(product.podrazdelenie().equals(clientCommand.sklad())) {
                             JSONObject jProd = new JSONObject();
@@ -87,6 +60,9 @@ public class SearchProcessorDebug extends AbstractProcessorClient {
                         }
                 });
                 
+                JSONObject resJSON = new JSONObject();
+                resJSON.put("IMEI", clientCommand.IMEI());
+                resJSON.put("isDone", "True");
                 resJSON.put("data", jData);
                 
                 String result = resJSON.toJSONString();
