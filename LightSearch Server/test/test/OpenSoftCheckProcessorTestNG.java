@@ -163,9 +163,10 @@ public class OpenSoftCheckProcessorTestNG {
     private ClientCommand initClientCommand() {
         try {
             String message = "{"
-                            + "\"command\":\"openSoftCheck\","
+                            + "\"command\":\"open_soft_check\","
                             + "\"IMEI\":\"123456789123456\","
-                            + "\"username\":\"user\""
+                            + "\"username\":\"user\","
+                            + "\"card_code\":\"123456\","
                         + "}";
             ClientCommandConverter clientCmdConverter = ClientCommandConverterInit.clientCommandConverter();
             ClientCommand clientCmd;
@@ -173,7 +174,8 @@ public class OpenSoftCheckProcessorTestNG {
             assertNotNull(clientCmd, "Client Command is null!");
             assertNotNull(clientCmd.command(), "Client command is null!");
             assertNotNull(clientCmd.IMEI(), "Client IMEI is null!");
-            assertNotNull(clientCmd.username(), "Client barcode is null!");
+            assertNotNull(clientCmd.username(), "Client username is null!");
+            assertNotNull(clientCmd.cardCode(), "Client card code is null!");
             
             return clientCmd;
         } catch (CommandConverterException ex) {
