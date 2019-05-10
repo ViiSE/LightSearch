@@ -49,8 +49,8 @@ public class OpenSoftCheckProcessorDebug extends AbstractProcessorClient {
                 
                     String result = 
                             "{\n"
-                                + "\"IMEI\": \"" + clientCommand.IMEI() + "\"\n"
-                                + "\"is_done\": \"True\"\n"
+                                + "\"IMEI\": \"" + clientCommand.IMEI() + "\",\n"
+                                + "\"is_done\": \"True\",\n"
                                 + "\"message\": \"Мягкий чек открыт.\"\n"
                             + "}";
 
