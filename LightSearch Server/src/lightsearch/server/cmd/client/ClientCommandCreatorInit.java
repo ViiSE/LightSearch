@@ -27,6 +27,6 @@ public class ClientCommandCreatorInit {
     
     public static ClientCommandCreator clientCommandCreator(LightSearchServerDTO serverDTO,
             LightSearchListenerDTO listenerDTO, ClientDAO clientDAO) {
-        return new ClientCommandCreatorDebugDefaultImpl(serverDTO, listenerDTO, clientDAO);
+        return new ClientCommandCreatorDefaultImpl(serverDTO, listenerDTO, clientDAO);
     }
 }
