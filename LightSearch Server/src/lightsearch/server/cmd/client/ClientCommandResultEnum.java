@@ -20,7 +20,7 @@ public enum ClientCommandResultEnum {
     },
     IS_DONE {
         @Override
-        public String stringValue() {return "isDone";}
+        public String stringValue() {return "is_done";}
     },
     MESSAGE {
         @Override

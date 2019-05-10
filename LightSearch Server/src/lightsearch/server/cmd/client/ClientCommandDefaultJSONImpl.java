@@ -25,19 +25,20 @@ public class ClientCommandDefaultJSONImpl implements ClientCommand {
 
     private final JSONObject clientInfoObj;
 
-    private final String COMMAND   = ClientCommandContentEnum.COMMAND.stringValue();
-    private final String IMEI      = ClientCommandContentEnum.IMEI.stringValue();
-    private final String IP        = ClientCommandContentEnum.IP.stringValue();
-    private final String OS        = ClientCommandContentEnum.OS.stringValue();
-    private final String MODEL     = ClientCommandContentEnum.MODEL.stringValue();
-    private final String USERNAME  = ClientCommandContentEnum.USERNAME.stringValue();
-    private final String PASSWORD  = ClientCommandContentEnum.PASSWORD.stringValue();
-    private final String BARCODE   = ClientCommandContentEnum.BARCODE.stringValue();
-    private final String SKLAD     = ClientCommandContentEnum.SKLAD.stringValue();
-    private final String TK        = ClientCommandContentEnum.TK.stringValue();
-    private final String DATA      = ClientCommandContentEnum.DATA.stringValue();
-    private final String DELIVERY  = ClientCommandContentEnum.DELIVERY.stringValue();
-    private final String CARD_CODE = ClientCommandContentEnum.CARD_CODE.stringValue();
+    private final String COMMAND    = ClientCommandContentEnum.COMMAND.stringValue();
+    private final String IMEI       = ClientCommandContentEnum.IMEI.stringValue();
+    private final String IP         = ClientCommandContentEnum.IP.stringValue();
+    private final String OS         = ClientCommandContentEnum.OS.stringValue();
+    private final String MODEL      = ClientCommandContentEnum.MODEL.stringValue();
+    private final String USERNAME   = ClientCommandContentEnum.USERNAME.stringValue();
+    private final String PASSWORD   = ClientCommandContentEnum.PASSWORD.stringValue();
+    private final String BARCODE    = ClientCommandContentEnum.BARCODE.stringValue();
+    private final String SKLAD      = ClientCommandContentEnum.SKLAD.stringValue();
+    private final String TK         = ClientCommandContentEnum.TK.stringValue();
+    private final String DATA       = ClientCommandContentEnum.DATA.stringValue();
+    private final String DELIVERY   = ClientCommandContentEnum.DELIVERY.stringValue();
+    private final String USER_IDENT = ClientCommandContentEnum.USER_IDENT.stringValue();
+    private final String CARD_CODE  = ClientCommandContentEnum.CARD_CODE.stringValue();
     
     public ClientCommandDefaultJSONImpl(Object clientInfoObj) {
         this.clientInfoObj = (JSONObject)clientInfoObj;
@@ -163,6 +164,16 @@ public class ClientCommandDefaultJSONImpl implements ClientCommand {
         }
     }
 
+    @Override
+    public String userIdentifier() {
+        try {
+            return clientInfoObj.get(USER_IDENT).toString();
+        }
+        catch(NullPointerException ignore) {
+            return null;
+        }
+    }
+    
     @Override
     public String cardCode() {
         try {

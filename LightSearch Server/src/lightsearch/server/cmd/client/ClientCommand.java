@@ -32,6 +32,7 @@ public interface ClientCommand extends Command {
     String sklad();
     String TK();
     String data();
+    String userIdentifier();
     String delivery();
     String cardCode();
 }

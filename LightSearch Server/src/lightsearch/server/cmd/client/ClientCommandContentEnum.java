@@ -64,6 +64,10 @@ public enum ClientCommandContentEnum {
         @Override
         public String stringValue() {return "data";}
     },
+    USER_IDENT {
+        @Override
+        public String stringValue() {return "ident";}
+    },
     DELIVERY {
         @Override
         public String stringValue() {return "delivery";}
