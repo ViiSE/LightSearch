@@ -39,18 +39,18 @@ public class OpenSoftCheckProcessorDebug extends AbstractProcessorClient {
     
     @Override
     public CommandResult apply(ClientCommand clientCommand) {
-        if(!super.checker.isNull(clientCommand.IMEI(), clientCommand.username(), clientCommand.cardCode())) {
+        if(!super.checker.isNull(clientCommand.IMEI(), clientCommand.userIdentifier(), clientCommand.cardCode())) {
             if(!serverDTO.blacklist().contains(clientCommand.IMEI())) {
                 if(softCheck.openSoftCheck()) {
                     String logMessage = "Client " + clientCommand.IMEI() + 
                             " open SoftCheck," +
-                            " username - " + clientCommand.username() + "," + 
+                            " user ident - " + clientCommand.userIdentifier()+ "," + 
                             " card code - " + clientCommand.cardCode();
                 
                     String result = 
                             "{\n"
                                 + "\"IMEI\": \"" + clientCommand.IMEI() + "\"\n"
-                                + "\"isDone\": \"True\"\n"
+                                + "\"is_done\": \"True\"\n"
                                 + "\"message\": \"Мягкий чек открыт.\"\n"
                             + "}";
 

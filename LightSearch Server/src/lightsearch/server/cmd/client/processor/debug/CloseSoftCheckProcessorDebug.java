@@ -39,14 +39,14 @@ public class CloseSoftCheckProcessorDebug extends AbstractProcessorClient {
     
     @Override
     public CommandResult apply(ClientCommand clientCommand) {
-        if(!super.checker.isNull(clientCommand.IMEI(), clientCommand.username(), 
+        if(!super.checker.isNull(clientCommand.IMEI(), clientCommand.userIdentifier(), 
                 clientCommand.cardCode(), clientCommand.data(), clientCommand.delivery())) {
             if(!serverDTO.blacklist().contains(clientCommand.IMEI())) {
                 if(softCheck.closeSoftCheck()) {
                    
                     String logMessage = "Client " + clientCommand.IMEI() + 
                             " close SoftCheck," +
-                            " username - " + clientCommand.username() + "," +
+                            " user ident - " + clientCommand.userIdentifier()+ "," +
                             " card code - " + clientCommand.cardCode() + "," +
                             " data - " + clientCommand.data() + "," + 
                             " delivery type - " + clientCommand.delivery();
@@ -54,7 +54,7 @@ public class CloseSoftCheckProcessorDebug extends AbstractProcessorClient {
                     String result = 
                             "{\n"
                                 + "\"IMEI\": \"" + clientCommand.IMEI() + "\"\n"
-                                + "\"isDone\": \"True\"\n"
+                                + "\"is_done\": \"True\"\n"
                                 + "\"message\": \"Мягкий чек закрыт!\"\n"
                             + "}";
 

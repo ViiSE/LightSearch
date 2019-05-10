@@ -39,19 +39,19 @@ public class CancelSoftCheckProcessorDebug extends AbstractProcessorClient {
     
     @Override
     public CommandResult apply(ClientCommand clientCommand) {
-        if(!super.checker.isNull(clientCommand.IMEI(), clientCommand.username(),
+        if(!super.checker.isNull(clientCommand.IMEI(), clientCommand.userIdentifier(),
                 clientCommand.cardCode())) {
             if(!serverDTO.blacklist().contains(clientCommand.IMEI())) {       
                 if(softCheck.cancelSoftCheck()) {
                     String logMessage 
                             = "Client " + clientCommand.IMEI() + 
-                            " cancel SoftCheck, username - " + clientCommand.username()
-                            + " card code - " + clientCommand.cardCode();
+                            " cancel SoftCheck, user ident - " + clientCommand.userIdentifier()
+                            + ", card code - " + clientCommand.cardCode();
 
                     String result = 
                             "{\n"
                                 + "\"IMEI\": \"" + clientCommand.IMEI() + "\"\n"
-                                + "\"isDone\": \"True\"\n"
+                                + "\"is_done\": \"True\"\n"
                                 + "\"message\": \"Мягкий чек отменен.\"\n"
                             + "}";
 

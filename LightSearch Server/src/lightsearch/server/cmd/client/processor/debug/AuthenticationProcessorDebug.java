@@ -40,7 +40,8 @@ public class AuthenticationProcessorDebug extends AbstractProcessorClient {
 
     @Override
     public CommandResult apply(ClientCommand clientCommand) {
-        if(!super.checker.isNull(clientCommand.username(), clientCommand.password(), clientCommand.IMEI(), 
+        if(!super.checker.isNull(clientCommand.username(), clientCommand.password(), 
+                clientCommand.IMEI(), 
                 clientCommand.ip(), clientCommand.os(), clientCommand.model())) {
             if(!serverDTO.blacklist().contains(clientCommand.IMEI())) {
                 String message = "IMEI - "  + clientCommand.IMEI()
@@ -56,9 +57,11 @@ public class AuthenticationProcessorDebug extends AbstractProcessorClient {
 
                 String result = 
                         "{\n"
-                            + "\"IMEI\": \"" + clientCommand.IMEI() + "\"\n"
-                            + "\"isDone\": \"True\"\n"
-                            + "\"message\": \"Соединение установлено!\"\n"
+                            + "\"IMEI\": \"" + clientCommand.IMEI() + "\",\n"
+                            + "\"is_done\": \"True\",\n"
+                            + "\"message\": \"Соединение установлено!\",\n"
+                            + "\"sklad_list\": [\"Склад 1\", \"Склад 2\"],\n"
+                            + "\"TK_list\": [\"ТК 1\"]\n"
                         + "}";
 
                 return super.commandResult(clientCommand.IMEI(), LogMessageTypeEnum.INFO, 

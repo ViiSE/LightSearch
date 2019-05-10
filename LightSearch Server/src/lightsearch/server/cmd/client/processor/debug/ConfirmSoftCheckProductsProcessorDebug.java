@@ -44,7 +44,7 @@ public class ConfirmSoftCheckProductsProcessorDebug extends AbstractProcessorCli
     
     @Override
     public CommandResult apply(ClientCommand clientCommand) {
-        if(!super.checker.isNull(clientCommand.IMEI(), clientCommand.username(), 
+        if(!super.checker.isNull(clientCommand.IMEI(), clientCommand.userIdentifier(), 
                 clientCommand.cardCode(), clientCommand.data())) {
             if(!serverDTO.blacklist().contains(clientCommand.IMEI())) {
                 
@@ -76,13 +76,13 @@ public class ConfirmSoftCheckProductsProcessorDebug extends AbstractProcessorCli
 
                     JSONObject resJSON = new JSONObject();
                     resJSON.put("IMEI", clientCommand.IMEI());
-                    resJSON.put("isDone", "True");
+                    resJSON.put("is_done", "True");
                     resJSON.put("data", newData);
                     
                     String result = resJSON.toJSONString();
 
                     String logMessage = "Client " + clientCommand.IMEI() + " confirm SoftCheck products, "
-                                + "username - " + clientCommand.username() 
+                                + "user ident - " + clientCommand.userIdentifier()
                                 + ", card code - " + clientCommand.cardCode();
 
                     return super.commandResult(clientCommand.IMEI(), LogMessageTypeEnum.INFO, ResultTypeMessageEnum.TRUE,

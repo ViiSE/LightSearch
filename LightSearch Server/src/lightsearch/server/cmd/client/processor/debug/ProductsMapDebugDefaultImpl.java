@@ -30,11 +30,15 @@ public class ProductsMapDebugDefaultImpl implements ProductsMapDebug {
         ProductDebug pr2 = createProduct("Склад 1", "222222", "Товар 2", "150 руб.", "10 шт.");
         ProductDebug pr3 = createProduct("Склад 2", "333333", "Товар 3", "10 руб.", "100 шт.");
         ProductDebug pr4 = createProduct("Склад 2", "444444", "Товар 4", "65 руб.", "7 шт.");
+        ProductDebug pr5 = createProduct("ТК 1", "111111", "Товар 1", "100 руб.", "7 шт.");
+        ProductDebug pr6 = createProduct("ТК 1", "222222", "Товар 2", "150 руб.", "12 шт.");
         
         products.put(pr1.id(), pr1);
         products.put(pr2.id(), pr2);
         products.put(pr3.id(), pr3);
         products.put(pr4.id(), pr4);
+        products.put(pr5.id(), pr5);
+        products.put(pr6.id(), pr6);
     }
     
     private ProductDebug createProduct(String podr, String id, String name, 
