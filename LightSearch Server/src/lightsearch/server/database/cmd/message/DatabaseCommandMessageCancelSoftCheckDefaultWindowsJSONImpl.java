@@ -21,21 +21,21 @@ package lightsearch.server.database.cmd.message;
  */
 public class DatabaseCommandMessageCancelSoftCheckDefaultWindowsJSONImpl implements DatabaseCommandMessage {
 
-    private final String CMD_FIELD       = DatabaseCommandMessageEnum.COMMAND.stringValue();
-    private final String IMEI_FIELD      = DatabaseCommandMessageEnum.IMEI.stringValue();
-    private final String USERNAME_FIELD  = DatabaseCommandMessageEnum.USERNAME.stringValue();
-    private final String CARD_CODE_FIELD = DatabaseCommandMessageEnum.CARD_CODE.stringValue();
+    private final String CMD_FIELD        = DatabaseCommandMessageEnum.COMMAND.stringValue();
+    private final String IMEI_FIELD       = DatabaseCommandMessageEnum.IMEI.stringValue();
+    private final String USER_IDENT_FIELD = DatabaseCommandMessageEnum.USER_IDENT.stringValue();
+    private final String CARD_CODE_FIELD  = DatabaseCommandMessageEnum.CARD_CODE.stringValue();
     
     private final String command;
     private final String IMEI;
-    private final String username;
+    private final String userIdent;
     private final String cardCode;
 
-    public DatabaseCommandMessageCancelSoftCheckDefaultWindowsJSONImpl(String command, String IMEI, String username, String cardCode) {
-        this.command  = command;
-        this.IMEI     = IMEI;
-        this.username = username;
-        this.cardCode = cardCode;
+    public DatabaseCommandMessageCancelSoftCheckDefaultWindowsJSONImpl(String command, String IMEI, String userIdent, String cardCode) {
+        this.command   = command;
+        this.IMEI      = IMEI;
+        this.userIdent = userIdent;
+        this.cardCode  = cardCode;
     }
 
     @Override
@@ -43,7 +43,7 @@ public class DatabaseCommandMessageCancelSoftCheckDefaultWindowsJSONImpl impleme
         String message = "{\r\n"
                 + "\"" + CMD_FIELD + "\":\""  + command + "\",\r\n"
                 + "\"" + IMEI_FIELD + "\":\"" + IMEI + "\",\r\n"
-                + "\"" + USERNAME_FIELD + "\":\"" + username + "\",\r\n"
+                + "\"" + USER_IDENT_FIELD + "\":\"" + userIdent + "\",\r\n"
                 + "\"" + CARD_CODE_FIELD + "\":\"" + cardCode + "\"\r\n"
                 + "}";
         return message;

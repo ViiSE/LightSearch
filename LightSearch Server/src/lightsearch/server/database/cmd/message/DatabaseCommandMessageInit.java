@@ -31,25 +31,25 @@ public class DatabaseCommandMessageInit {
     }
     
     public static DatabaseCommandMessage databaseCommandMessageOpenSoftCheck(String command, String IMEI,
-            String username, String cardCode) {
-        return new DatabaseCommandMessageOpenSoftCheckDefaultWindowsJSONImpl(command, IMEI, username, cardCode);
+            String userIdent, String cardCode) {
+        return new DatabaseCommandMessageOpenSoftCheckDefaultWindowsJSONImpl(command, IMEI, userIdent, cardCode);
     }
     
     public static DatabaseCommandMessage databaseCommandMessageCancelSoftCheck(String command, 
-            String IMEI, String username, String cardCode) {
+            String IMEI, String userIdent, String cardCode) {
         return new DatabaseCommandMessageCancelSoftCheckDefaultWindowsJSONImpl(command, 
-                IMEI, username, cardCode);
+                IMEI, userIdent, cardCode);
     }
     
     public static DatabaseCommandMessage databaseCommandMessageCloseSoftCheck(String command, 
-            String IMEI, String username, String cardCode, String data, String delivery) {
+            String IMEI, String userIdent, String cardCode, String data, String delivery) {
         return new DatabaseCommandMessageCloseSoftCheckDefaultWindowsJSONImpl(command, 
-                IMEI, username, cardCode, data, delivery);
+                IMEI, userIdent, cardCode, data, delivery);
     }
     
     public static DatabaseCommandMessage databaseCommandMessageConfirmSoftCheckProducts(String command, 
-            String IMEI, String username, String cardCode, String data) {
+            String IMEI, String userIdent, String cardCode, String data) {
         return new DatabaseCommandMessageConfirmSoftCheckProductsDefaultWindowsJSONImpl(command, 
-                IMEI, username, cardCode, data);
+                IMEI, userIdent, cardCode, data);
     }
 }

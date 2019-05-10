@@ -48,6 +48,10 @@ public enum DatabaseCommandMessageEnum {
         @Override
         public String stringValue() { return "TK"; }
     },
+    USER_IDENT {
+        @Override
+        public String stringValue() { return "ident"; }
+    },
     DELIVERY {
         @Override
         public String stringValue() { return "delivery"; }
