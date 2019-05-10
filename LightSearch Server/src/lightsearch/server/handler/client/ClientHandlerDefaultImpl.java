@@ -93,7 +93,7 @@ public class ClientHandlerDefaultImpl extends Handler {
                         doCommand(messageSender, clientCommand);
                     else {
                         receivedCmdVerifier.verifyReceivedClientCommand(clientCommand, clientDAO.IMEI());
-                            doCommand(messageSender, clientCommand);
+                        doCommand(messageSender, clientCommand);
                     }
                     
                     if(exit)

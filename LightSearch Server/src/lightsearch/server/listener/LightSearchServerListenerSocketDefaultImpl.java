@@ -66,7 +66,7 @@ public class LightSearchServerListenerSocketDefaultImpl implements LightSearchSe
                     
                     HandlerCreator handlerCreator = HandlerCreatorInit.handlerCreator(
                             connectionIdentifierResult, serverDTO, listenerDTO, loggerServer);
-                        handlerExecutor.executeHandler(handlerCreator.getHandler());
+                    handlerExecutor.executeHandler(handlerCreator.getHandler());
                 }
                 catch(IOException ex) {
                     loggerServer.log(LogMessageTypeEnum.ERROR, listenerDTO.currentDateTime(), "StartServer, acceptSocket, message - " + ex.getMessage());

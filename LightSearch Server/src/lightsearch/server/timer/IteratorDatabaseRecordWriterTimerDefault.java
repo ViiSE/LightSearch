@@ -49,7 +49,7 @@ public class IteratorDatabaseRecordWriterTimerDefault extends SuperIteratorDatab
             while(!isDone) {
                 if(super.dateTimeComparator().isBefore(dateTimeToWrite, LocalDateTime.now())) {
                     try {
-                        System.out.println("I AM WRITING NOW!");
+                        //System.out.println("I AM WRITING NOW!");
                         super.iteratorDatabaseRecordWriter().write(super.iteratorDatabaseRecord().iteratorDatabaseRecord());
                         isDone = true;
                     } catch (IteratorException ex) {
