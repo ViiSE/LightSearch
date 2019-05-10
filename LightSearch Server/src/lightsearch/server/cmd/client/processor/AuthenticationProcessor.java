@@ -56,8 +56,9 @@ public class AuthenticationProcessor extends AbstractProcessorClient {
 
     @Override
     public CommandResult apply(ClientCommand clientCommand) {
-        if(!super.checker.isNull(clientCommand.username(), clientCommand.password(), clientCommand.IMEI(), 
-                clientCommand.ip(), clientCommand.os(), clientCommand.model())) {
+        if(!super.checker.isNull(clientCommand.username(), clientCommand.password(), 
+                clientCommand.IMEI(), clientCommand.ip(), clientCommand.os(), 
+                clientCommand.model())) {
             if(!serverDTO.blacklist().contains(clientCommand.IMEI())) {
                 try {
                     DatabaseConnectionCreator dbConnCreator = DatabaseConnectionCreatorInit.databaseConnectionCreator(
@@ -67,7 +68,7 @@ public class AuthenticationProcessor extends AbstractProcessorClient {
                     DatabaseCommandMessage dbCmdMessage = DatabaseCommandMessageInit.databaseCommandMessageConnection(clientCommand.command(), clientCommand.IMEI());
                     
                     DatabaseStatementExecutor dbStatementExecutor = DatabaseStatementExecutorInit.databaseStatementExecutor(
-                            databaseConnection, iteratorDatabaseRecord.next(), 
+                            databaseConnection, iteratorDatabaseRecord.next(),
                             currentDateTime.dateTimeInStandartFormat(), dbCmdMessage);
                     
                     DatabaseStatementResult dbStatRes = dbStatementExecutor.exec();

@@ -52,18 +52,20 @@ public class OpenSoftCheckProcessor extends AbstractProcessorClient {
     
     @Override
     public CommandResult apply(ClientCommand clientCommand) {
-        if(!super.checker.isNull(clientCommand.IMEI(), clientCommand.username(), clientCommand.cardCode())) {
+        if(!super.checker.isNull(clientCommand.IMEI(), clientCommand.userIdentifier(), clientCommand.cardCode())) {
             if(!serverDTO.blacklist().contains(clientCommand.IMEI())) {
                 try {
                     DatabaseCommandMessage dbCmdMessage = DatabaseCommandMessageInit.databaseCommandMessageOpenSoftCheck(
-                            clientCommand.command(), clientCommand.IMEI(), clientCommand.username(), clientCommand.cardCode());
+                            clientCommand.command(), clientCommand.IMEI(), 
+                            clientCommand.userIdentifier(), clientCommand.cardCode());
                     
                     DatabaseStatementExecutor dbStatementExecutor = DatabaseStatementExecutorInit.databaseStatementExecutor(
                             clientDAO.databaseConnection(), iteratorDatabaseRecord.next(), 
                             currentDateTime.dateTimeInStandartFormat(), dbCmdMessage);
                     DatabaseStatementResult dbStatRes = dbStatementExecutor.exec();
 
-                    String logMessage = "Client " + clientCommand.IMEI() + " open SoftCheck, username - " + clientCommand.username();
+                    String logMessage = "Client " + clientCommand.IMEI() 
+                            + " open SoftCheck, user ident - " + clientCommand.userIdentifier();
                     
                     String result = dbStatRes.result();
 

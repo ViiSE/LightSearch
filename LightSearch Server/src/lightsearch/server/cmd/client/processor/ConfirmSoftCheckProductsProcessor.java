@@ -52,14 +52,14 @@ public class ConfirmSoftCheckProductsProcessor extends AbstractProcessorClient {
     
     @Override
     public CommandResult apply(ClientCommand clientCommand) {
-        if(!super.checker.isNull(clientCommand.IMEI(), clientCommand.username(), 
+        if(!super.checker.isNull(clientCommand.IMEI(), clientCommand.userIdentifier(), 
                 clientCommand.cardCode(), clientCommand.data())) {
             if(!serverDTO.blacklist().contains(clientCommand.IMEI())) {
                 try {
                     DatabaseCommandMessage dbCmdMessage = 
                             DatabaseCommandMessageInit.databaseCommandMessageConfirmSoftCheckProducts(
                             clientCommand.command(), clientCommand.IMEI(), 
-                            clientCommand.username(), clientCommand.cardCode(), 
+                            clientCommand.userIdentifier(), clientCommand.cardCode(), 
                             clientCommand.data());
                     
                     DatabaseStatementExecutor dbStatementExecutor = DatabaseStatementExecutorInit.databaseStatementExecutor(
@@ -68,7 +68,7 @@ public class ConfirmSoftCheckProductsProcessor extends AbstractProcessorClient {
                     DatabaseStatementResult dbStatRes = dbStatementExecutor.exec();
 
                     String logMessage = "Client " + clientCommand.IMEI() + " confirm SoftCheck products, "
-                            + "username - " + clientCommand.username() 
+                            + "user ident - " + clientCommand.userIdentifier()
                             + ", card code - " + clientCommand.cardCode();
                     
                     String result = dbStatRes.result();

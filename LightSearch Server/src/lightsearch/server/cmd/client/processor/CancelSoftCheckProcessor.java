@@ -52,12 +52,13 @@ public class CancelSoftCheckProcessor extends AbstractProcessorClient {
     
     @Override
     public CommandResult apply(ClientCommand clientCommand) {
-        if(!super.checker.isNull(clientCommand.IMEI(), clientCommand.username(), clientCommand.cardCode())) {
+        if(!super.checker.isNull(clientCommand.IMEI(), clientCommand.userIdentifier(), 
+                clientCommand.cardCode())) {
             if(!serverDTO.blacklist().contains(clientCommand.IMEI())) {
                 try {
                     DatabaseCommandMessage dbCmdMessage = DatabaseCommandMessageInit.databaseCommandMessageCancelSoftCheck(
                             clientCommand.command(), clientCommand.IMEI(), 
-                            clientCommand.username(), clientCommand.cardCode());
+                            clientCommand.userIdentifier(), clientCommand.cardCode());
                     
                     DatabaseStatementExecutor dbStatementExecutor = DatabaseStatementExecutorInit.databaseStatementExecutor(
                             clientDAO.databaseConnection(), iteratorDatabaseRecord.next(), 
@@ -65,7 +66,7 @@ public class CancelSoftCheckProcessor extends AbstractProcessorClient {
                     DatabaseStatementResult dbStatRes = dbStatementExecutor.exec();
 
                     String logMessage = "Client " + clientCommand.IMEI() + 
-                            " cancel SoftCheck, username - " + clientCommand.username() +
+                            " cancel SoftCheck, user ident - " + clientCommand.userIdentifier()+
                             ", card code - " + clientCommand.cardCode();
                     
                     String result = dbStatRes.result();
