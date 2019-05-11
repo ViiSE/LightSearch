@@ -165,7 +165,7 @@ public class CancelSoftCheckProcessorTestNG {
             String message = "{"
                               + "\"command\":\"cancel_soft_check\","
                               + "\"IMEI\":\"12346789123456\","
-                              + "\"username\":\"name\","
+                              + "\"user_ident\":\"111\","
                               + "\"card_code\":\"123456\""
                             + "}";
             ClientCommandConverter clientCmdConverter = ClientCommandConverterInit.clientCommandConverter();
@@ -174,7 +174,7 @@ public class CancelSoftCheckProcessorTestNG {
             assertNotNull(clientCmd, "Client Command is null!");
             assertNotNull(clientCmd.command(), "Client command is null!");
             assertNotNull(clientCmd.IMEI(), "Client IMEI is null!");
-            assertNotNull(clientCmd.username(), "Client username is null!");
+            assertNotNull(clientCmd.userIdentifier(), "Client user ident is null!");
             assertNotNull(clientCmd.cardCode(), "Client card code is null!");
             
             return clientCmd;

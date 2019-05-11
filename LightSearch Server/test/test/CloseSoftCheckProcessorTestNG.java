@@ -165,7 +165,7 @@ public class CloseSoftCheckProcessorTestNG {
             String message = "{"
                               + "\"command\": \"close_soft_check\","
                               + "\"IMEI\": \"12346789123456\","
-                              + "\"username\": \"name\","
+                              + "\"user_ident\": \"111\","
                               + "\"card_code\": \"123456\","
                               + "\"data\":" 
                               + "["
@@ -173,7 +173,8 @@ public class CloseSoftCheckProcessorTestNG {
                               +     "{ \"ID\": \"248462\", \"amount\": \"10\"},"
                               +     "{ \"ID\": \"741265\", \"amount\": \"1\"}"
                               + "],"
-                              + "\"delivery\": \"1\""
+                              + "\"delivery\": \"1\","
+                              + "\"date_time\": \"2019-05-11 12:00:00\""
                             + "}";
             ClientCommandConverter clientCmdConverter = ClientCommandConverterInit.clientCommandConverter();
             ClientCommand clientCmd;
@@ -181,10 +182,11 @@ public class CloseSoftCheckProcessorTestNG {
             assertNotNull(clientCmd, "Client Command is null!");
             assertNotNull(clientCmd.command(), "Client command is null!");
             assertNotNull(clientCmd.IMEI(), "Client IMEI is null!");
-            assertNotNull(clientCmd.username(), "Client username is null!");
+            assertNotNull(clientCmd.userIdentifier(), "Client user ident is null!");
             assertNotNull(clientCmd.cardCode(), "Client card code is null!");
             assertNotNull(clientCmd.data(), "Client data is null!");
             assertNotNull(clientCmd.delivery(), "Client delivery is null!");
+            assertNotNull(clientCmd.dateTime(), "Client date time is null!");
             
             return clientCmd;
         } catch (CommandConverterException ex) {

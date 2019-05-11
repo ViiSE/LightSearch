@@ -153,7 +153,7 @@ public class ConfirmSoftCheckProductsProcessorDebugTestNG {
             String message = "{"
                               + "\"command\": \"confirm_prod_sf\","
                               + "\"IMEI\": \"12346789123456\","
-                              + "\"username\": \"user\","
+                              + "\"user_ident\": \"111\","
                               + "\"card_code\": \"123456\","
                               + "\"data\":" 
                               + "["
@@ -167,7 +167,7 @@ public class ConfirmSoftCheckProductsProcessorDebugTestNG {
             assertNotNull(clientCmd, "Client Command is null!");
             assertNotNull(clientCmd.command(), "Client command is null!");
             assertNotNull(clientCmd.IMEI(), "Client IMEI is null!");
-            assertNotNull(clientCmd.username(), "Client username is null!");
+            assertNotNull(clientCmd.userIdentifier(), "Client user ident is null!");
             assertNotNull(clientCmd.cardCode(), "Client card code is null!");
             assertNotNull(clientCmd.data(), "Client data is null!");
             

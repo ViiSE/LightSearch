@@ -108,13 +108,16 @@ public class DatabaseCommandMessageTestNG {
             String message = "{"
                               + "\"command\": \"closeSoftCheck\","
                               + "\"IMEI\": \"12346789123456\","
+                              + "\"user_ident\": \"111\","
+                              + "\"card_code\": \"123456\","
                               + "\"data\":" 
                               + "["
                               +     "{ \"ID\": \"511354\", \"amount\": \"4\"},"
                               +     "{ \"ID\": \"248462\", \"amount\": \"10\"},"
                               +     "{ \"ID\": \"741265\", \"amount\": \"1\"}"
                               + "],"
-                              + "\"delivery\": \"1\""
+                              + "\"delivery\": \"1\","
+                              + "\"date_time\": \"2019-05-11 12:00:00\""
                             + "}";
             ClientCommandConverter clientCmdConverter = ClientCommandConverterInit.clientCommandConverter();
             ClientCommand clientCmd;
@@ -122,8 +125,11 @@ public class DatabaseCommandMessageTestNG {
             assertNotNull(clientCmd, "Client Command is null!");
             assertNotNull(clientCmd.command(), "Client command is null!");
             assertNotNull(clientCmd.IMEI(), "Client IMEI is null!");
+            assertNotNull(clientCmd.userIdentifier(), "Client user ident is null!");
+            assertNotNull(clientCmd.cardCode(), "Client card code is null!");
             assertNotNull(clientCmd.data(), "Client data is null!");
             assertNotNull(clientCmd.delivery(), "Client delivery is null!");
+            assertNotNull(clientCmd.dateTime(), "Client date time is null!");
             
             return clientCmd;
         } catch (CommandConverterException ex) {
@@ -136,7 +142,9 @@ public class DatabaseCommandMessageTestNG {
         try {
             String message = "{"
                               + "\"command\": \"cancelSoftCheck\","
-                              + "\"IMEI\": \"12346789123456\""
+                              + "\"IMEI\": \"12346789123456\","
+                              + "\"user_ident\": \"111\","
+                              + "\"card_code\": \"123456\","
                             + "}";
             ClientCommandConverter clientCmdConverter = ClientCommandConverterInit.clientCommandConverter();
             ClientCommand clientCmd;
@@ -144,6 +152,8 @@ public class DatabaseCommandMessageTestNG {
             assertNotNull(clientCmd, "Client Command is null!");
             assertNotNull(clientCmd.command(), "Client command is null!");
             assertNotNull(clientCmd.IMEI(), "Client IMEI is null!");
+            assertNotNull(clientCmd.userIdentifier(), "Client user ident is null!");
+            assertNotNull(clientCmd.cardCode(), "Client card code is null!");
             
             return clientCmd;
         } catch (CommandConverterException ex) {
@@ -157,8 +167,8 @@ public class DatabaseCommandMessageTestNG {
             String message = "{"
                               + "\"command\": \"openSoftCheck\","
                               + "\"IMEI\": \"12346789123456\","
-                              + "\"username\": \"user\","
-                              + "\"cardCode\": \"5425489\""
+                              + "\"user_ident\": \"111\","
+                              + "\"card_code\": \"5425489\""
                             + "}";
             ClientCommandConverter clientCmdConverter = ClientCommandConverterInit.clientCommandConverter();
             ClientCommand clientCmd;
@@ -166,8 +176,38 @@ public class DatabaseCommandMessageTestNG {
             assertNotNull(clientCmd, "Client Command is null!");
             assertNotNull(clientCmd.command(), "Client command is null!");
             assertNotNull(clientCmd.IMEI(), "Client IMEI is null!");
-            assertNotNull(clientCmd.username(), "Client username is null!");
-            assertNotNull(clientCmd.cardCode(), "Card code is null!");
+            assertNotNull(clientCmd.userIdentifier(), "Client user ident is null!");
+            assertNotNull(clientCmd.cardCode(), "Client card code is null!");
+            
+            return clientCmd;
+        } catch (CommandConverterException ex) {
+            System.out.println("CATCH! " + ex.getMessage());
+            return null;
+        }
+    }
+    
+    private ClientCommand initClientCommandConfirmSoftCheckProducts() {
+        try {
+            String message = "{"
+                              + "\"command\": \"confirm_prod_sf\","
+                              + "\"IMEI\": \"12346789123456\","
+                              + "\"user_ident\": \"111\","
+                              + "\"card_code\": \"123456\","
+                              + "\"data\":" 
+                              + "["
+                              +     "{\"ID\": \"111111\", \"amount\": \"1\"},"
+                              +     "{\"ID\": \"222222\", \"amount\": \"3\"},"
+                              + "]"
+                            + "}";
+            ClientCommandConverter clientCmdConverter = ClientCommandConverterInit.clientCommandConverter();
+            ClientCommand clientCmd;
+            clientCmd = clientCmdConverter.convertToClientCommand(message);
+            assertNotNull(clientCmd, "Client Command is null!");
+            assertNotNull(clientCmd.command(), "Client command is null!");
+            assertNotNull(clientCmd.IMEI(), "Client IMEI is null!");
+            assertNotNull(clientCmd.userIdentifier(), "Client user ident is null!");
+            assertNotNull(clientCmd.cardCode(), "Client card code is null!");
+            assertNotNull(clientCmd.data(), "Client data is null!");
             
             return clientCmd;
         } catch (CommandConverterException ex) {
@@ -208,8 +248,9 @@ public class DatabaseCommandMessageTestNG {
         
         DatabaseCommandMessage dbMessageConn = DatabaseCommandMessageInit.databaseCommandMessageCloseSoftCheck(
                 clientCmdCloseSoftCheck.command(), clientCmdCloseSoftCheck.IMEI(), 
-                clientCmdCloseSoftCheck.username(), clientCmdCloseSoftCheck.cardCode(),
-                clientCmdCloseSoftCheck.data(), clientCmdCloseSoftCheck.delivery());
+                clientCmdCloseSoftCheck.userIdentifier(), clientCmdCloseSoftCheck.cardCode(),
+                clientCmdCloseSoftCheck.data(), clientCmdCloseSoftCheck.delivery(),
+                clientCmdCloseSoftCheck.dateTime());
         assertNotNull(dbMessageConn, "Database command message is null!");
         
         System.out.println("DatabaseCommandMessageConnection.message(): " + dbMessageConn.message());
@@ -222,7 +263,7 @@ public class DatabaseCommandMessageTestNG {
         
         DatabaseCommandMessage dbMessageConn = DatabaseCommandMessageInit.databaseCommandMessageCancelSoftCheck(
                 clientCmdCancelSoftCheck.command(), clientCmdCancelSoftCheck.IMEI(),
-                clientCmdCancelSoftCheck.username(), clientCmdCancelSoftCheck.cardCode());
+                clientCmdCancelSoftCheck.userIdentifier(), clientCmdCancelSoftCheck.cardCode());
         assertNotNull(dbMessageConn, "Database command message is null!");
         
         System.out.println("DatabaseCommandMessageConnection.message(): " + dbMessageConn.message());
@@ -235,7 +276,23 @@ public class DatabaseCommandMessageTestNG {
         
         DatabaseCommandMessage dbMessageConn = DatabaseCommandMessageInit.databaseCommandMessageOpenSoftCheck(
                 clientCmdOpenSoftCheck.command(), clientCmdOpenSoftCheck.IMEI(), 
-                clientCmdOpenSoftCheck.username(), clientCmdOpenSoftCheck.cardCode());
+                clientCmdOpenSoftCheck.userIdentifier(), clientCmdOpenSoftCheck.cardCode());
+        assertNotNull(dbMessageConn, "Database command message is null!");
+        
+        System.out.println("DatabaseCommandMessageConnection.message(): " + dbMessageConn.message());
+    }
+    
+    private void messageConfirmSoftCheckProducts() {
+        System.out.println("DatabaseCommandMessageInit.databaseCommandMessageConfirmSoftCheckProducts(): ");
+        ClientCommand clientCmdConfirmSoftCheckProducts = initClientCommandConfirmSoftCheckProducts();
+        assertNotNull(clientCmdConfirmSoftCheckProducts, "Client Command is null!");
+        
+        DatabaseCommandMessage dbMessageConn = DatabaseCommandMessageInit.databaseCommandMessageConfirmSoftCheckProducts(
+                clientCmdConfirmSoftCheckProducts.command(), 
+                clientCmdConfirmSoftCheckProducts.IMEI(), 
+                clientCmdConfirmSoftCheckProducts.userIdentifier(), 
+                clientCmdConfirmSoftCheckProducts.cardCode(),
+                clientCmdConfirmSoftCheckProducts.data());
         assertNotNull(dbMessageConn, "Database command message is null!");
         
         System.out.println("DatabaseCommandMessageConnection.message(): " + dbMessageConn.message());
@@ -246,10 +303,11 @@ public class DatabaseCommandMessageTestNG {
         testBegin("DatabaseCommandMessage", "message()");
         
         messageConnect();
-        //messageSearch();
-        //messageCloseSoftCheck();
-        //messageCancelSoftCheck();
-        //messageOpenSoftCheck();
+        messageSearch();
+        messageCloseSoftCheck();
+        messageCancelSoftCheck();
+        messageOpenSoftCheck();
+        messageConfirmSoftCheckProducts();
         
         testEnd("DatabaseCommandMessage", "message()");
     }
