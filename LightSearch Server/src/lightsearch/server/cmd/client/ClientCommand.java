@@ -35,4 +35,5 @@ public interface ClientCommand extends Command {
     String userIdentifier();
     String delivery();
     String cardCode();
+    String dateTime();
 }

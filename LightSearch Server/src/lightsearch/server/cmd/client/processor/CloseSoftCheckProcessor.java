@@ -53,13 +53,14 @@ public class CloseSoftCheckProcessor extends AbstractProcessorClient {
     @Override
     public CommandResult apply(ClientCommand clientCommand) {
         if(!super.checker.isNull(clientCommand.IMEI(), clientCommand.userIdentifier(), 
-                clientCommand.cardCode(), clientCommand.data(), clientCommand.delivery())) {
+                clientCommand.cardCode(), clientCommand.data(), 
+                clientCommand.delivery(), clientCommand.dateTime())) {
             if(!serverDTO.blacklist().contains(clientCommand.IMEI())) {
                 try {
                     DatabaseCommandMessage dbCmdMessage = DatabaseCommandMessageInit.databaseCommandMessageCloseSoftCheck(
                             clientCommand.command(), clientCommand.IMEI(), 
                             clientCommand.userIdentifier(), clientCommand.cardCode(), 
-                            clientCommand.data(), clientCommand.delivery());
+                            clientCommand.data(), clientCommand.delivery(), clientCommand.dateTime());
                     
                     DatabaseStatementExecutor dbStatementExecutor = DatabaseStatementExecutorInit.databaseStatementExecutor(
                             clientDAO.databaseConnection(), iteratorDatabaseRecord.next(), 

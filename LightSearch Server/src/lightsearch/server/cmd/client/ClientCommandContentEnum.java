@@ -75,6 +75,10 @@ public enum ClientCommandContentEnum {
     CARD_CODE {
         @Override
         public String stringValue() {return "card_code";}
+    },
+    DATE_TIME {
+        @Override
+        public String stringValue() {return "date_time";}
     };
     
     public abstract String stringValue();

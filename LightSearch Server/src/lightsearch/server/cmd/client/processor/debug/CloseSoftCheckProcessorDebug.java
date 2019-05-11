@@ -40,7 +40,8 @@ public class CloseSoftCheckProcessorDebug extends AbstractProcessorClient {
     @Override
     public CommandResult apply(ClientCommand clientCommand) {
         if(!super.checker.isNull(clientCommand.IMEI(), clientCommand.userIdentifier(), 
-                clientCommand.cardCode(), clientCommand.data(), clientCommand.delivery())) {
+                clientCommand.cardCode(), clientCommand.data(), 
+                clientCommand.delivery(), clientCommand.dateTime())) {
             if(!serverDTO.blacklist().contains(clientCommand.IMEI())) {
                 if(softCheck.closeSoftCheck()) {
                    
@@ -49,7 +50,8 @@ public class CloseSoftCheckProcessorDebug extends AbstractProcessorClient {
                             " user ident - " + clientCommand.userIdentifier()+ "," +
                             " card code - " + clientCommand.cardCode() + "," +
                             " data - " + clientCommand.data() + "," + 
-                            " delivery type - " + clientCommand.delivery();
+                            " delivery type - " + clientCommand.delivery() + "," + 
+                            " date time - " + clientCommand.dateTime();
                 
                     String result = 
                             "{\n"

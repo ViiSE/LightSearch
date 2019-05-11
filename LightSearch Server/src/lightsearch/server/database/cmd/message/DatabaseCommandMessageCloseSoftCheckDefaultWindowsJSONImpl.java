@@ -27,6 +27,7 @@ public class DatabaseCommandMessageCloseSoftCheckDefaultWindowsJSONImpl implemen
     private final String CARD_CODE_FIELD = DatabaseCommandMessageEnum.CARD_CODE.stringValue();
     private final String DATA_FIELD      = DatabaseCommandMessageEnum.DATA.stringValue();
     private final String DELIVERY_FIELD  = DatabaseCommandMessageEnum.DELIVERY.stringValue();
+    private final String DATE_TIME_FIELD = DatabaseCommandMessageEnum.DATE_TIME.stringValue();
     
     private final String command;
     private final String IMEI;
@@ -34,15 +35,18 @@ public class DatabaseCommandMessageCloseSoftCheckDefaultWindowsJSONImpl implemen
     private final String cardCode;
     private final String data;
     private final String delivery;
+    private final String dateTime;
     
     public DatabaseCommandMessageCloseSoftCheckDefaultWindowsJSONImpl(String command, 
-            String IMEI, String userIdent, String cardCode, String data, String delivery) {
+            String IMEI, String userIdent, String cardCode, String data, 
+            String delivery, String dateTime) {
         this.command   = command;
         this.IMEI      = IMEI;
         this.userIdent = userIdent;
         this.cardCode  = cardCode;
         this.data      = data;
         this.delivery  = delivery;
+        this.dateTime  = dateTime;
     }
     
     @Override
@@ -53,7 +57,8 @@ public class DatabaseCommandMessageCloseSoftCheckDefaultWindowsJSONImpl implemen
                 + "\"" + USER_IDENT_FIELD + "\":\"" + userIdent + "\",\r\n"
                 + "\"" + CARD_CODE_FIELD + "\":\"" + cardCode + "\",\r\n"
                 + "\"" + DATA_FIELD + "\":[\r\n" + data + "\r\n],\r\n"
-                + "\"" + DELIVERY_FIELD + "\":\"" + delivery + "\"\r\n" 
+                + "\"" + DELIVERY_FIELD + "\":\"" + delivery + "\",\r\n"
+                + "\"" + DATE_TIME_FIELD + "\":\"" + dateTime + "\"\r\n"
                 + "}";
         return message;
     }
