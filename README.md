@@ -54,7 +54,7 @@ LightSearch состоит из четырех программ:
 
 Используемые библиотеки
 ------------------------------------------
-- [JSON.simple] (https://github.com/fangyidong/json-simple)
-- [spots-dialog] (https://github.com/d-max/spots-dialog)
-- [Jaybird] (https://github.com/d-max/spots-dialog)
-- [ZXing] (https://github.com/zxing/zxing)
+- [JSON.simple](https://github.com/fangyidong/json-simple)
+- [spots-dialog](https://github.com/d-max/spots-dialog)
+- [Jaybird](https://github.com/d-max/spots-dialog)
+- [ZXing](https://github.com/zxing/zxing)
