@@ -30,8 +30,8 @@ public class ProductsMapDebugDefaultImpl implements ProductsMapDebug {
         ProductDebug pr2 = createProduct("Склад 1", "222222", "Товар 2", "150 руб.", "10 шт.");
         ProductDebug pr3 = createProduct("Склад 2", "333333", "Товар 3", "10 руб.", "100 шт.");
         ProductDebug pr4 = createProduct("Склад 2", "444444", "Товар 4", "65 руб.", "7 шт.");
-        ProductDebug pr5 = createProduct("ТК 1", "111111", "Товар 1", "100 руб.", "7 шт.");
-        ProductDebug pr6 = createProduct("ТК 1", "222222", "Товар 2", "150 руб.", "12 шт.");
+        ProductDebug pr5 = createProduct("ТК 1", "555555", "Товар 5", "100 руб.", "7 шт.");
+        ProductDebug pr6 = createProduct("ТК 1", "666666", "Товар 5", "150 руб.", "12 шт.");
         
         products.put(pr1.id(), pr1);
         products.put(pr2.id(), pr2);
