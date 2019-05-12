@@ -51,3 +51,10 @@ LightSearch состоит из четырех программ:
    - Смена параметров базы данных.
 
 История проекта будет описываться в документах, расположенных в папке Documents/Project history.
+
+Используемые библиотеки
+------------------------------------------
+[JSON.simple] (https://github.com/fangyidong/json-simple)
+[spots-dialog] (https://github.com/d-max/spots-dialog)
+[Jaybird] (https://github.com/d-max/spots-dialog)
+[ZXing] (https://github.com/zxing/zxing)
