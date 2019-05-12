@@ -1,0 +1,65 @@
+<resources>
+    <string name="app_name">LightSearch</string>
+
+    <!-- TextView -->
+    <string name="username_label">Имя пользователя:</string>
+    <string name="password_label">Пароль:</string>
+    <string name="search_label">Поиск:</string>
+    <string name="host_label">Хост сервера:</string>
+    <string name="port_label">Порт сервера:</string>
+    <!-- ======== -->
+
+    <!-- CheckBox -->
+    <string name="checkBox_settings">Расширенные настройки</string>
+    <!-- ======== -->
+
+    <!-- RadioButton -->
+    <string name="skladRB">Склады</string>
+    <string name="TKRB">ТК</string>
+    <string name="AllRB">Все</string>
+    <!-- ============ -->
+
+    <!-- Button -->
+    <string name="buttonSearch_label">Поиск</string>
+    <string name="buttonBarcode_label">Сканировать штрихкод</string>
+    <string name="buttonConnect_label">Подключиться</string>
+    <string name="buttonChPass_label">Изменить пароль администратора</string>
+    <!-- ====== -->
+
+    <!-- Spinner -->
+    <string name="sklad_label">Выберите склад:</string>
+    <string name="TK_label">Выберите ТК:</string>
+    <!-- ======= -->
+
+    <!-- Dialog Window -->
+    <string name="dialog_error">Ошибка</string>
+    <string name="dialog_OK">OK</string>
+    <string name="dialog_cancel">Cancel</string>
+    <!-- ============= -->
+
+    <!-- TableResult -->
+    <string name="podrazColLabel">Подразделение</string>
+    <string name="idColLabel">ИД</string>
+    <string name="nameColLabel">Наим-ие</string>
+    <string name="priceColLabel">Цена</string>
+    <string name="amountColLabel">Кол-во</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_3">Tab 3</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- Fragment Tag -->
+    <string name="fragment_authorization">Авторизация</string>
+    <string name="fragment_search">Поиск</string>
+    <string name="fragment_soft_check">Мягкий чек</string>
+    <string name="fragment_container">LightSearch</string>
+    <string name="fragment_result_search">Результат</string>
+    <!-- ============ -->
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- =========== -->
+
+</resources>
