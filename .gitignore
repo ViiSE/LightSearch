@@ -12,3 +12,18 @@
 
 # Dist folder
 **/dist/*
+
+#Android
+LightSearch\ Android/LightSearch/*.iml
+LightSearch\ Android/LightSearch/.gradle
+LightSearch\ Android/LightSearch/local.properties
+LightSearch\ Android/LightSearch/.idea/libraries
+LightSearch\ Android/LightSearch/.idea/modules.xml
+LightSearch\ Android/LightSearch/.idea/workspace.xml
+LightSearch\ Android/LightSearch/.DS_Store
+LightSearch\ Android/LightSearch/build
+LightSearch\ Android/LightSearch/captures
+LightSearch\ Android/LightSearch/.externalNativeBuild
+
+#Android: app
+LightSearch\ Android/LightSearch/app/build
