@@ -82,7 +82,7 @@ public class AuthenticationProcessor extends AbstractProcessorClient {
                     serverDTO.clients().put(clientCommand.IMEI(), clientCommand.username());
 
                     clientDAO.setIsFirst(false);
-                    clientDAO.setUsername(clientCommand.username());
+                    clientDAO.setIMEI(clientCommand.IMEI());
                     clientDAO.setDatabaseConnection(databaseConnection);
 
                     String result = dbStatRes.result();
