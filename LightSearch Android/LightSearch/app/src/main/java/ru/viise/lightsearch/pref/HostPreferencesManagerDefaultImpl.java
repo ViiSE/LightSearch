@@ -23,7 +23,7 @@ import ru.viise.lightsearch.data.AuthorizationPreferenceEnum;
 public class HostPreferencesManagerDefaultImpl implements HostPreferencesManager {
 
     private final String HOST = AuthorizationPreferenceEnum.HOST.stringValue();
-    private final String IP   = "192.168.3.215";
+    private final String IP   = "127.0.0.1";
 
     private final SharedPreferences sPref;
 
