@@ -62,7 +62,7 @@ public class SearchProcessorDebug extends AbstractProcessorClient {
                 
                 JSONObject resJSON = new JSONObject();
                 resJSON.put("IMEI", clientCommand.IMEI());
-                resJSON.put("isDone", "True");
+                resJSON.put("is_done", "True");
                 resJSON.put("data", jData);
                 
                 String result = resJSON.toJSONString();

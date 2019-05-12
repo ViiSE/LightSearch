@@ -53,7 +53,7 @@ public class AuthenticationProcessorDebug extends AbstractProcessorClient {
                 serverDTO.clients().put(clientCommand.IMEI(), clientCommand.username());
 
                 clientDAO.setIsFirst(false);
-                clientDAO.setUsername(clientCommand.username());
+                clientDAO.setIMEI(clientCommand.IMEI());
 
                 String result = 
                         "{\n"
