@@ -41,20 +41,6 @@ import static test.message.TestMessage.testEnd;
 public class ClientDAOTestNG {
     
     @Test
-    public void username() {
-        testBegin("ClientDAO", "username()");
-        
-        ClientDAO clientDAO = ClientDAOInit.clientDAO();
-        String username = "username";
-        assertNotNull(username, "Username is null!");
-        assertFalse(username.equals(""), "Username is null!");
-        clientDAO.setUsername(username);
-        System.out.println("username: " + clientDAO.username());
-        
-        testEnd("ClientDAO", "username()");
-    }
-    
-    @Test
     public void IMEI() {
         testBegin("ClientDAO", "IMEI()");
         
@@ -115,21 +101,6 @@ public class ClientDAOTestNG {
         System.out.println("isFirst: " + clientDAO.isFirst());
         
         testEnd("ClientDAO", "isFirst()");
-    }
-    
-    @Test
-    public void setUsername() {
-        testBegin("ClientDAO", "setUsername()");
-        
-        ClientDAO clientDAO = ClientDAOInit.clientDAO();
-        String username = "username";
-        assertNotNull(username, "Username is null!");
-        assertFalse(username.equals(""), "Username is null!");
-        System.out.println("SetUsername: before: username " + clientDAO.username());
-        clientDAO.setUsername(username);
-        System.out.println("SetUsername: after: username " + clientDAO.username());
-        
-        testEnd("ClientDAO", "setUsername()");
     }
     
     @Test

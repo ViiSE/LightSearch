@@ -23,14 +23,12 @@ import lightsearch.server.database.DatabaseConnection;
  * @author ViiSE
  */
 public interface ClientDAO {
-    String username();
     String IMEI();
     Map<String, String> codesSklad();
     Map<String, String> codesTK();
     DatabaseConnection databaseConnection();
     boolean isFirst();
     
-    void setUsername(String username);
     void setIMEI(String IMEI);
     void setCodesSklad(Map<String, String> codesSklad);
     void setCodesTK(Map<String, String> codesTK);

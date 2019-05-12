@@ -25,18 +25,12 @@ import lightsearch.server.database.DatabaseConnection;
  */
 public class ClientDAODefaultImpl implements ClientDAO {
 
-    private String username;
     private String IMEI;
     Map<String, String> codesSklad = new HashMap<>();
     Map<String, String> codesTK = new HashMap<>();
     private DatabaseConnection databaseConnection;
     private boolean isFirst = true;
     
-    @Override
-    public String username() {
-        return username;
-    }
-
     @Override
     public String IMEI() {
         return IMEI;
@@ -50,11 +44,6 @@ public class ClientDAODefaultImpl implements ClientDAO {
     @Override
     public boolean isFirst() {
         return isFirst;
-    }
-
-    @Override
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     @Override
