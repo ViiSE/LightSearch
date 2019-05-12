@@ -64,6 +64,8 @@ public class ClientHandlerDefaultImpl extends Handler {
                 CommandResult result = processor.apply(clientCommand);
                 try {
                     messageSender.sendMessage(result.message());
+                    if(result.logMessage().isEmpty())
+                        return;
                     if(result.logMessage() != null)
                             super.logger().log(result.type(), super.currentDateTime(), result.logMessage());
                     else
@@ -73,6 +75,8 @@ public class ClientHandlerDefaultImpl extends Handler {
                 }
             }
         }
+        else
+            exit = true;
     }
     
     @Override
@@ -106,7 +110,7 @@ public class ClientHandlerDefaultImpl extends Handler {
                     break;
                 } catch(ReceivedCommandVerifierException ex) {
                     super.logger().log(LogMessageTypeEnum.ERROR, super.currentDateTime(),
-                            "Received Admin Command Verifier: " + ex.getMessage());
+                            "Received Client Command Verifier: " + ex.getMessage());
                     super.threadManager().interrupt(super.threadParametersHolder().id());
                     break;
                 }
