@@ -38,7 +38,7 @@ public class OpenSoftCheckFragment extends Fragment {
         Button openSoftCheckButton = view.findViewById(R.id.buttonOpenSoftCheck);
 
         openSoftCheckButton.setOnClickListener(view1 -> {
-            Toast t = Toast.makeText(this.getActivity().getApplicationContext(), "УРА", Toast.LENGTH_LONG);
+            Toast t = Toast.makeText(this.getActivity().getApplicationContext(), "open soft check", Toast.LENGTH_LONG);
             t.show();
         });
 

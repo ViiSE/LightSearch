@@ -26,6 +26,7 @@
     <string name="buttonConnect_label">Подключиться</string>
     <string name="buttonChPass_label">Изменить пароль администратора</string>
     <string name="buttonOpenSC_label">Открыть мягкий чек</string>
+    <string name="buttonCart_label">В корзину</string>
     <!-- ====== -->
 
     <!-- Spinner -->

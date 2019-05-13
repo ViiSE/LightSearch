@@ -2,16 +2,16 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="0dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,27 +28,27 @@
 
         <EditText
             android:id="@+id/editTextSearch"
-            android:background="@drawable/edittextshape"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/edittextshape"
             android:ems="10"
             android:imeOptions="flagNoExtractUi"
             android:inputType="number"
-            android:layout_marginTop="5dp"
             android:textSize="20sp" />
 
         <Button
             android:id="@+id/buttonBarcode"
-            android:textColor="@color/buttonTextColor"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/buttonshape"
             android:shadowColor="@color/buttonShadowColor"
             android:shadowDx="0"
             android:shadowDy="0"
             android:shadowRadius="1"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/buttonBarcode_label" />
+            android:text="@string/buttonBarcode_label"
+            android:textColor="@color/buttonTextColor" />
 
         <Space
             android:id="@+id/spaceSearch1"
@@ -126,14 +126,16 @@
 
         <Button
             android:id="@+id/buttonSearch"
-            android:textColor="@color/buttonTextColor"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/buttonshape"
             android:shadowColor="@color/buttonShadowColor"
             android:shadowDx="0"
             android:shadowDy="0"
             android:shadowRadius="1"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="@string/buttonSearch_label" />
+            android:text="@string/buttonSearch_label"
+            android:textColor="@color/buttonTextColor" />
     </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>
