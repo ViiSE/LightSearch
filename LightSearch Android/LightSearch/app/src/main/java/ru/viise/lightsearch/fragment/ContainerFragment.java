@@ -48,7 +48,7 @@ public class ContainerFragment extends Fragment implements OnBackPressedListener
     private ManagerActivityUI managerActivityUI;
 
     private SearchFragment searchFragment;
-    private SoftCheckFragment softCheckFragment;
+    private OpenSoftCheckFragment openSoftCheckFragment;
 
     private CommandManager commandManager;
 
@@ -77,9 +77,9 @@ public class ContainerFragment extends Fragment implements OnBackPressedListener
     private void setupViewPager(ViewPager viewPager) {
         fragmentPageAdapter = new FragmentPageAdapter(getChildFragmentManager());
         searchFragment = new SearchFragment();
-        softCheckFragment = new SoftCheckFragment();
+        openSoftCheckFragment = new OpenSoftCheckFragment();
         fragmentPageAdapter.addFragment(searchFragment, getString(R.string.fragment_search));
-        fragmentPageAdapter.addFragment(softCheckFragment, getString(R.string.fragment_soft_check));
+        fragmentPageAdapter.addFragment(openSoftCheckFragment, getString(R.string.fragment_soft_check));
 
         searchFragment.init(skladArray, TKArray);
         commandManager = managerActivityUI.commandManager();
