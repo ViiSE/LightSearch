@@ -19,7 +19,7 @@ LightSearch состоит из четырех программ:
    - Полная кросс-платформенность;
    - Улучшенная защита ini-файла.
   
-2) [LightSearchAndroid](https://github.com/ViiSE/LightSearch/blob/master/Documents/Project%20history/LightSearchAndroid.pdf) - работает под операционной системой Android версии 4.4 и выше. Обеспечивает оперативный поиск по базе данных.
+2) [LightSearchAndroid](https://github.com/ViiSE/LightSearch/blob/master/Documents/Project%20history/LightSearchAndroid.pdf) - работает под операционной системой Android версии 7.0 и выше. Обеспечивает оперативный поиск по базе данных.
  * Реализованы следующие функции:
    -  Поиск по штрих-коду;
    -  Считывание штрих-кода через камеру смартфона;
