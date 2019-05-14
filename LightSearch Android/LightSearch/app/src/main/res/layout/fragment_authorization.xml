@@ -58,6 +58,23 @@
             android:textSize="20sp"/>
         <!--android:importantForAutofill="no"-->
 
+        <TextView
+            android:id="@+id/textViewUserIdent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/userIdent_label"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/editTextUserIdent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittextshape"
+            android:ems="10"
+            android:fontFamily="sans-serif"
+            android:inputType="number"
+            android:textSize="20sp" />
+
         <CheckBox
             android:id="@+id/checkBoxSettings"
             android:layout_width="match_parent"
@@ -121,7 +138,7 @@
         <Space
             android:id="@+id/spaceAuto"
             android:layout_width="match_parent"
-            android:layout_height="137dp" />
+            android:layout_height="88dp" />
 
         <Button
             android:id="@+id/buttonConnect"

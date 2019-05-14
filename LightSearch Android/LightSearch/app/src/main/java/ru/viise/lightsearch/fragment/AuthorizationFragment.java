@@ -32,6 +32,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.activity.ManagerActivityUI;
@@ -72,6 +73,7 @@ public class AuthorizationFragment extends Fragment implements IAuthorizationFra
 
     private EditText editTextUsername;
     private EditText editTextPassword;
+    private EditText editTextUserIdent;
     private EditText editTextHost;
     private EditText editTextPort;
 
@@ -79,17 +81,13 @@ public class AuthorizationFragment extends Fragment implements IAuthorizationFra
     private TextView twPort;
 
     private CheckBox cbSettings;
-
-    private Button buttonConnect;
     private Button buttonChPass;
 
     private AlertDialog inputPassword;
     private AlertDialog createPass;
     private AlertDialog createPassFirst;
 
-    private SharedPreferences sPref;
     private PreferencesManager prefManager;
-
     private ManagerActivityUI mIManagerActivity;
 
     private Animation animAlpha;
@@ -101,13 +99,14 @@ public class AuthorizationFragment extends Fragment implements IAuthorizationFra
 
         animAlpha = AnimationUtils.loadAnimation(this.getActivity(), R.anim.alpha);
 
-        sPref = this.getActivity().getSharedPreferences(PREF, Context.MODE_PRIVATE);
+        SharedPreferences sPref = this.getActivity().getSharedPreferences(PREF, Context.MODE_PRIVATE);
         prefManager = PreferencesManagerInit.preferencesManager(sPref);
 
         // Блок авторизации
         editTextUsername = view.findViewById(R.id.editTextUsername);
         editTextPassword = view.findViewById(R.id.editTextPassword);
-        buttonConnect    = view.findViewById(R.id.buttonConnect);
+        editTextUserIdent = view.findViewById(R.id.editTextUserIdent);
+        Button buttonConnect = view.findViewById(R.id.buttonConnect);
 
         // Блок с расширенными настройками
         editTextHost = view.findViewById(R.id.editTextHost);
@@ -162,13 +161,22 @@ public class AuthorizationFragment extends Fragment implements IAuthorizationFra
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.buttonConnect:
-                v.startAnimation(animAlpha);
-                prefManager.save(PreferencesManagerType.USERNAME_MANAGER, editTextUsername.getText().toString());
-                prefManager.save(PreferencesManagerType.HOST_MANAGER, editTextHost.getText().toString());
-                prefManager.save(PreferencesManagerType.PORT_MANAGER, editTextPort.getText().toString());
-                ConnectionDTO connDTO = ConnectionDTOInit.connectionDTO(editTextHost.getText().toString(),
-                        editTextPort.getText().toString());
-                mIManagerActivity.connect(connDTO);
+                if(editTextUsername.getText().toString().isEmpty()  ||
+                    editTextPassword.getText().toString().isEmpty() ||
+                    editTextUserIdent.getText().toString().isEmpty()) {
+                    Toast t = Toast.makeText(this.getActivity().getApplicationContext(), "Заполните все поля, необходимые для регистрации!", Toast.LENGTH_LONG);
+                    t.show();
+                }
+                else {
+                    v.startAnimation(animAlpha);
+                    prefManager.save(PreferencesManagerType.USERNAME_MANAGER, editTextUsername.getText().toString());
+                    prefManager.save(PreferencesManagerType.HOST_MANAGER, editTextHost.getText().toString());
+                    prefManager.save(PreferencesManagerType.PORT_MANAGER, editTextPort.getText().toString());
+                    prefManager.save(PreferencesManagerType.USER_IDENT_MANAGER, editTextUserIdent.getText().toString());
+                    ConnectionDTO connDTO = ConnectionDTOInit.connectionDTO(editTextHost.getText().toString(),
+                            editTextPort.getText().toString());
+                    mIManagerActivity.connect(connDTO);
+                }
                 break;
             case R.id.checkBoxSettings:
                 if(cbSettings.isChecked()) {

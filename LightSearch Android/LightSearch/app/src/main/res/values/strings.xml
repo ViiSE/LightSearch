@@ -8,6 +8,7 @@
     <string name="host_label">Хост сервера:</string>
     <string name="port_label">Порт сервера:</string>
     <string name="openSC_label">Мягкий чек не открыт.</string>
+    <string name="userIdent_label">Идентификатор пользователя:</string>
     <!-- ======== -->
 
     <!-- CheckBox -->
