@@ -22,6 +22,7 @@ import java.util.function.Function;
 
 import ru.viise.lightsearch.cmd.CommandTypeEnum;
 import ru.viise.lightsearch.cmd.processor.AuthorizationProcessor;
+import ru.viise.lightsearch.cmd.processor.CancelSoftCheckProcessor;
 import ru.viise.lightsearch.cmd.processor.OpenSoftCheckProcessor;
 import ru.viise.lightsearch.cmd.processor.SearchProcessor;
 import ru.viise.lightsearch.cmd.result.CommandResult;
@@ -33,9 +34,10 @@ import ru.viise.lightsearch.message.MessageSender;
 
 public class ClientCommandCreatorDefaultImpl implements ClientCommandCreator {
 
-    private final CommandTypeEnum AUTHORIZATION   = CommandTypeEnum.AUTHORIZATION;
-    private final CommandTypeEnum SEARCH          = CommandTypeEnum.SEARCH;
-    private final CommandTypeEnum OPEN_SOFT_CHECK = CommandTypeEnum.OPEN_SOFT_CHECK;
+    private final CommandTypeEnum AUTHORIZATION     = CommandTypeEnum.AUTHORIZATION;
+    private final CommandTypeEnum SEARCH            = CommandTypeEnum.SEARCH;
+    private final CommandTypeEnum OPEN_SOFT_CHECK   = CommandTypeEnum.OPEN_SOFT_CHECK;
+    private final CommandTypeEnum CANCEL_SOFT_CHECK = CommandTypeEnum.CANCEL_SOFT_CHECK;
 
     private final String IMEI;
     private final MessageSender msgSender;
@@ -56,8 +58,8 @@ public class ClientCommandCreatorDefaultImpl implements ClientCommandCreator {
         cmdHolder.put(AUTHORIZATION, new AuthorizationProcessor(clCmdDTO));
         cmdHolder.put(SEARCH, new SearchProcessor(clCmdDTO));
         cmdHolder.put(OPEN_SOFT_CHECK, new OpenSoftCheckProcessor(clCmdDTO));
+        cmdHolder.put(CANCEL_SOFT_CHECK, new CancelSoftCheckProcessor(clCmdDTO));
 
-        ClientCommandHolder cmdClHolder = ClientCommandHolderInit.clientCommandHolder(cmdHolder);
-        return cmdClHolder;
+        return ClientCommandHolderInit.clientCommandHolder(cmdHolder);
     }
 }

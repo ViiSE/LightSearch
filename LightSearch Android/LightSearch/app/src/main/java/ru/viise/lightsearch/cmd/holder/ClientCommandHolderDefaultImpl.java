@@ -36,7 +36,6 @@ public class ClientCommandHolderDefaultImpl implements ClientCommandHolder {
     @Override
     public ClientProcessor get(CommandTypeEnum type) {
         Function<CommandDTO, CommandResult> prc = commandHolder.get(type);
-        ClientProcessor clPrc = ClientProcessorInit.clientProcessor(prc);
-        return clPrc;
+        return ClientProcessorInit.clientProcessor(prc);
     }
 }

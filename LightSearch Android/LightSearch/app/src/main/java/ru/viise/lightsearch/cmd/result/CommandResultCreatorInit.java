@@ -42,4 +42,12 @@ public class CommandResultCreatorInit {
     public static CommandResultCreator commandResultOpenSoftCheckCreator(boolean isDone, String message) {
         return new CommandResultOpenSoftCheckCreatorErrorDefaultImpl(isDone, message);
     }
+
+    public static CommandResultCreator commandResultCancelSoftCheckCreator(String rawMessage, String IMEI) {
+        return new CommandResultCancelSoftCheckCreatorDefaultImpl(rawMessage, IMEI);
+    }
+
+    public static CommandResultCreator commandResultCancelSoftCheckCreator(boolean isDone, String message) {
+        return new CommandResultCancelSoftCheckCreatorErrorDefaultImpl(isDone, message);
+    }
 }
