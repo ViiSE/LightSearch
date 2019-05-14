@@ -37,6 +37,10 @@ public enum AuthorizationPreferenceEnum {
     PORT {
         @Override
         public String stringValue() { return "port"; }
+    },
+    USER_IDENT {
+        @Override
+        public String stringValue() { return "userIdent"; }
     };
 
     public abstract String stringValue();
