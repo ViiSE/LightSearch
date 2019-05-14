@@ -74,30 +74,24 @@ public class ClientHandlerCreatorDefaultImpl implements ClientHandlerCreator {
                 ClientCommandHolder cmdClHolder = cmdClCr.createClientCommandHolder();
                 ClientHandler clientHandler = ClientHandlerInit.clientHandler(clientSocket, cmdClHolder);
 
-                ClientHandlerDTO clHandlerDTO =
-                        ClientHandlerDTOInit.clientHandlerDTO(clientHandler, null);
-                return clHandlerDTO;
+                return ClientHandlerDTOInit.clientHandlerDTO(clientHandler, null);
+
             }
             else {
                 String message = "Сервер не дал разрешение на подключение. " +
                         "Обратитесь к администратору для устранения проблемы.";
-                ClientHandlerDTO clHandlerDTO =
-                        ClientHandlerDTOInit.clientHandlerDTO(null, message);
-                return clHandlerDTO;
+
+                return ClientHandlerDTOInit.clientHandlerDTO(null, message);
             }
         }
         catch(SocketException ex) {
             String message = "Не удалось подключиться к серверу: превышен лимит ожидания. " +
                     "Проверьте подключение к сети и повторите попытку.";
-            ClientHandlerDTO clHandlerDTO =
-                    ClientHandlerDTOInit.clientHandlerDTO(null, message);
-            return clHandlerDTO;
+            return ClientHandlerDTOInit.clientHandlerDTO(null, message);
         }
         catch(DataStreamCreatorException ex) {
             String message = "Возникла ошибка, сообщение: " + ex.getMessage();
-            ClientHandlerDTO clHandlerDTO =
-                    ClientHandlerDTOInit.clientHandlerDTO(null, message);
-            return clHandlerDTO;
+            return ClientHandlerDTOInit.clientHandlerDTO(null, message);
         }
     }
 }

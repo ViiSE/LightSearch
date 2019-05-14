@@ -66,8 +66,6 @@ public class CommandSearchDTOCreatorDefaultImpl implements CommandSearchDTOCreat
                 podrStr = "Все";
                 break;
         }
-        CommandSearchDTO cmdSearchDTO = CommandSearchDTOInit.commandSearchDTO(
-                barcode, sklad, TK, podrStr);
-        return cmdSearchDTO;
+        return CommandSearchDTOInit.commandSearchDTO(barcode, sklad, TK, podrStr);
     }
 }

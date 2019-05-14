@@ -16,9 +16,6 @@
 
 package ru.viise.lightsearch.cmd.result;
 
-import ru.viise.lightsearch.connect.processor.result.SearchCommandResult;
-import ru.viise.lightsearch.connect.processor.result.SearchCommandResultInit;
-
 public class CommandResultSearchCreatorErrorDefaultImpl implements CommandResultCreator {
 
     private final boolean isDone;

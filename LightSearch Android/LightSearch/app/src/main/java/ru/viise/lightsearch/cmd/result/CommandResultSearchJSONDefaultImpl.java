@@ -21,8 +21,6 @@ import org.json.simple.JSONObject;
 import java.util.List;
 
 import ru.viise.lightsearch.cmd.ClientCommandContentEnum;
-import ru.viise.lightsearch.connect.processor.result.SearchCommandResult;
-import ru.viise.lightsearch.connect.processor.result.SearchCommandResultInit;
 import ru.viise.lightsearch.data.SearchRecordDTO;
 import ru.viise.lightsearch.data.creator.SearchRecordsDTOCreator;
 import ru.viise.lightsearch.data.creator.SearchRecordsDTOCreatorInit;

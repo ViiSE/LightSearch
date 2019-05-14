@@ -45,9 +45,7 @@ public class ConnectionProcessorDefaultImpl implements ConnectionProcessor {
             String msgConnStr = msgConn.message();
             messageSender.sendMessage(msgConnStr);
             String message = messageRecipient.acceptMessage();
-            ConnectionProcessorResult connProcRes = 
-                    ConnectionProcessorResultInit.connectionProcessorResult(message);
-            return connProcRes;
+            return ConnectionProcessorResultInit.connectionProcessorResult(message);
         } 
         catch (MessageSenderException |
                 MessageRecipientException ex) {

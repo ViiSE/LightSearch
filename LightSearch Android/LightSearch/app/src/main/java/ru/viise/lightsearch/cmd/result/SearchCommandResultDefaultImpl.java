@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.connect.processor.result;
+package ru.viise.lightsearch.cmd.result;
 
 import java.util.List;
 
