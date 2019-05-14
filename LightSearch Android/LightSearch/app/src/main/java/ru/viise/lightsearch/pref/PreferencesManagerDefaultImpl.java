@@ -23,11 +23,15 @@ public class PreferencesManagerDefaultImpl implements PreferencesManager {
     private final UsernamePreferencesManager usernamePrefManager;
     private final HostPreferencesManager hostPrefManager;
     private final PortPreferencesManager portPrefManager;
+    private final UserIdentifierPreferencesManager userIdentManager;
+    private final CardCodePreferencesManager cardCodeManager;
 
     public PreferencesManagerDefaultImpl(SharedPreferences sPref) {
         usernamePrefManager = UsernamePreferencesManagerInit.usernamePreferencesManager(sPref);
         portPrefManager     = PortReferencesManagerInit.portPreferencesManager(sPref);
         hostPrefManager     = HostPreferencesManagerInit.hostPreferencesManager(sPref);
+        userIdentManager    = UserIdentifierPreferencesManagerInit.userIdentifierPreferencesManager(sPref);
+        cardCodeManager     = CardCodePreferencesManagerInit.cardCodePreferencesManager(sPref);
     }
 
     @Override
@@ -39,6 +43,10 @@ public class PreferencesManagerDefaultImpl implements PreferencesManager {
                 return hostPrefManager.loadHost();
             case PORT_MANAGER:
                 return portPrefManager.loadPort();
+            case USER_IDENT_MANAGER:
+                return userIdentManager.loadUserIdentifier();
+            case CARD_CODE_MANAGER:
+                return cardCodeManager.loadCardCode();
             default:
                 return null;
         }
@@ -53,6 +61,10 @@ public class PreferencesManagerDefaultImpl implements PreferencesManager {
                 hostPrefManager.saveHost(value);
             case PORT_MANAGER:
                 portPrefManager.savePort(value);
+            case USER_IDENT_MANAGER:
+                userIdentManager.saveUserIdentifier(value);
+            case CARD_CODE_MANAGER:
+                cardCodeManager.saveCardCode(value);
         }
     }
 }
