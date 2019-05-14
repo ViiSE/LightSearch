@@ -14,14 +14,19 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.activity;
+package ru.viise.lightsearch.dialog.alert;
 
+import android.support.v4.app.Fragment;
+
+import ru.viise.lightsearch.activity.ManagerActivityHandler;
 import ru.viise.lightsearch.cmd.manager.CommandManager;
-import ru.viise.lightsearch.data.ConnectionDTO;
-import ru.viise.lightsearch.data.ScanType;
 
-public interface ManagerActivityUI {
-    void connect(ConnectionDTO connDTO);
-    void setScanType(ScanType type);
-    CommandManager commandManager();
+public class CancelSoftCheckAlertDialogCreatorInit {
+
+    public static CancelSoftCheckAlertDialogCreator cancelSoftCheckAlertDialogCreator(Fragment fragment,
+                    ManagerActivityHandler managerActivityHandler, android.app.AlertDialog queryDialog,
+                    CommandManager commandManager) {
+        return new CancelSoftCheckAlertDialogCreatorDefaultImpl(fragment, managerActivityHandler,
+                queryDialog, commandManager);
+    }
 }

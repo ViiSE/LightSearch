@@ -14,14 +14,10 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.activity;
+package ru.viise.lightsearch.find;
 
-import ru.viise.lightsearch.cmd.manager.CommandManager;
-import ru.viise.lightsearch.data.ConnectionDTO;
-import ru.viise.lightsearch.data.ScanType;
+import ru.viise.lightsearch.fragment.ISoftCheckContainerFragment;
 
-public interface ManagerActivityUI {
-    void connect(ConnectionDTO connDTO);
-    void setScanType(ScanType type);
-    CommandManager commandManager();
+public interface ISoftCheckContainerFragmentImplFinder {
+    ISoftCheckContainerFragment findImpl();
 }

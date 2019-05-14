@@ -16,12 +16,7 @@
 
 package ru.viise.lightsearch.activity;
 
-import ru.viise.lightsearch.cmd.manager.CommandManager;
-import ru.viise.lightsearch.data.ConnectionDTO;
-import ru.viise.lightsearch.data.ScanType;
-
-public interface ManagerActivityUI {
-    void connect(ConnectionDTO connDTO);
-    void setScanType(ScanType type);
-    CommandManager commandManager();
+public enum OnBackPressedListenerType {
+    CONTAINER_FRAGMENT,
+    SOFT_CHECK_FRAGMENT
 }

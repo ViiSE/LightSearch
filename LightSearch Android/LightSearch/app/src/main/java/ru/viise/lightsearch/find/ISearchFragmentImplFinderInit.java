@@ -20,7 +20,7 @@ import android.support.v4.app.Fragment;
 
 public class ISearchFragmentImplFinderInit {
 
-    public static ISearchFragmentImplFinder iSearchFragmentImplFinder(Fragment fragment) {
+    public static ISearchFragmentImplFinder searchFragmentImplFinder(Fragment fragment) {
         return new ISearchFragmentImplFinderDefaultImpl(fragment);
     }
 }

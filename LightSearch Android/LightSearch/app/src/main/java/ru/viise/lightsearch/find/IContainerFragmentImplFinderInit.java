@@ -20,7 +20,7 @@ import android.support.v4.app.FragmentActivity;
 
 public class IContainerFragmentImplFinderInit {
 
-    public static IContainerFragmentImplFinder iContainerFragmentImplFinder(FragmentActivity activity) {
+    public static IContainerFragmentImplFinder containerFragmentImplFinder(FragmentActivity activity) {
         return new IContainerFragmentImplFinderDefaultImpl(activity);
     }
 }

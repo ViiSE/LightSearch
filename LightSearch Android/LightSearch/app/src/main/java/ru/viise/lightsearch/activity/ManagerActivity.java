@@ -39,8 +39,10 @@ import ru.viise.lightsearch.cmd.manager.CommandManagerInit;
 import ru.viise.lightsearch.cmd.manager.task.CommandManagerAsyncTask;
 import ru.viise.lightsearch.cmd.manager.task.ConnectionAsyncTask;
 import ru.viise.lightsearch.cmd.result.AuthorizationCommandResult;
+import ru.viise.lightsearch.cmd.result.CancelSoftCheckCommandResult;
 import ru.viise.lightsearch.cmd.result.CommandResult;
-import ru.viise.lightsearch.connect.processor.result.SearchCommandResult;
+import ru.viise.lightsearch.cmd.result.OpenSoftCheckCommandResult;
+import ru.viise.lightsearch.cmd.result.SearchCommandResult;
 import ru.viise.lightsearch.data.AuthorizationDTO;
 import ru.viise.lightsearch.data.ClientHandlerCreatorDTO;
 import ru.viise.lightsearch.data.ClientHandlerCreatorDTOInit;
@@ -49,6 +51,7 @@ import ru.viise.lightsearch.data.CommandManagerAsyncTaskDTO;
 import ru.viise.lightsearch.data.CommandManagerAsyncTaskDTOInit;
 import ru.viise.lightsearch.data.ConnectionDTO;
 import ru.viise.lightsearch.data.SearchRecordDTO;
+import ru.viise.lightsearch.data.ScanType;
 import ru.viise.lightsearch.data.creator.CommandAuthorizationDTOCreator;
 import ru.viise.lightsearch.data.creator.CommandAuthorizationDTOCreatorInit;
 import ru.viise.lightsearch.dialog.alert.ErrorAlertDialogCreator;
@@ -80,6 +83,7 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
     private AlertDialog authDialog;
     private AlertDialog connectDialog;
     private CommandManager commandManager;
+    private ScanType scanType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,11 +104,11 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
 
     @Override
     public void onBackPressed() {
-        OnBackPressedListenerImplFinder onBackPressedListenerImplFinder =
+        OnBackPressedListenerImplFinder onBackPressedImplFinder =
                 OnBackPressedListenerImplFinderInit.onBackPressedListenerImplFinder(this);
-        OnBackPressedListener backPressedListener = onBackPressedListenerImplFinder.findImpl();
+        OnBackPressedListener backPressedListener = onBackPressedImplFinder.findImpl();
 
-        if(backPressedListener != null)
+        if (backPressedListener != null)
             backPressedListener.onBackPressed();
         else
             super.onBackPressed();
@@ -113,15 +117,16 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
-        if(scanningResult != null) {
+        if(scanningResult.getContents() != null) {
             String scanContent = scanningResult.getContents();
+            IContainerFragment containerFragment = getContainerFragment();
 
-            IContainerFragmentImplFinder containerFragmentImplFinder =
-                    IContainerFragmentImplFinderInit.iContainerFragmentImplFinder(this);
-            IContainerFragment containerFragment = containerFragmentImplFinder.findImpl();
+            if (containerFragment != null)
+                if(scanType == ScanType.SEARCH)
+                    containerFragment.setSearchBarcode(scanContent);
+                else if(scanType == ScanType.OPEN_SOFT_CHECK)
+                    containerFragment.setCardCode(scanContent);
 
-            if(containerFragment != null)
-                containerFragment.setSearchBarcode(scanContent);
         }
     }
 
@@ -173,6 +178,12 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
         oneResADCr.createAlertDialog().show();
     }
 
+    private IContainerFragment getContainerFragment() {
+        IContainerFragmentImplFinder containerFragmentImplFinder =
+                IContainerFragmentImplFinderInit.containerFragmentImplFinder(this);
+        return containerFragmentImplFinder.findImpl();
+    }
+
     @Override
     public void connect(ConnectionDTO connDTO) {
         ClientHandlerCreatorDTO clHandlerCrDTO =
@@ -180,6 +191,11 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
         commandManager = CommandManagerInit.commandManager(clHandlerCrDTO);
         ConnectionAsyncTask connAT = new ConnectionAsyncTask(this, commandManager, connectDialog);
         connAT.execute();
+    }
+
+    @Override
+    public void setScanType(ScanType type) {
+        scanType = type;
     }
 
     @Override
@@ -223,7 +239,7 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
             }
         }
         else if(commandResult instanceof SearchCommandResult) {
-            SearchCommandResult searchCmdRes = (SearchCommandResult) commandResult;
+            SearchCommandResult searchCmdRes = (SearchCommandResult)commandResult;
             if (searchCmdRes.records().size() != 0) {
                 SearchResultTitleCreator searchResTitleCr =
                         SearchResultTitleCreatorInit.searchResultTitleCreator(searchCmdRes.podrazdelenie(),
@@ -235,6 +251,32 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
                     doResultSearchFragmentTransaction(title, searchCmdRes.records());
             } else
                 callDialogNoResult();
+        }
+        else if(commandResult instanceof OpenSoftCheckCommandResult) {
+            OpenSoftCheckCommandResult openSCCmdRes = (OpenSoftCheckCommandResult)commandResult;
+            if(openSCCmdRes.isDone()) {
+                callDialogSuccess(openSCCmdRes.message());
+                IContainerFragment containerFragment = getContainerFragment();
+
+                if(containerFragment != null)
+                    containerFragment.switchToSoftCheckFragment();
+            }
+            else {
+                callDialogError(openSCCmdRes.message());
+            }
+        }
+        else if(commandResult instanceof CancelSoftCheckCommandResult) {
+            CancelSoftCheckCommandResult cancelSCCmdRes = (CancelSoftCheckCommandResult)commandResult;
+            if(cancelSCCmdRes.isDone()) {
+                callDialogSuccess(cancelSCCmdRes.message());
+                IContainerFragment containerFragment = getContainerFragment();
+
+                if(containerFragment != null)
+                    containerFragment.switchToOpenSoftCheckFragment();
+            }
+            else {
+                callDialogError(cancelSCCmdRes.message());
+            }
         }
     }
 }

@@ -14,14 +14,24 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.activity;
+package ru.viise.lightsearch.activity.scan;
 
-import ru.viise.lightsearch.cmd.manager.CommandManager;
-import ru.viise.lightsearch.data.ConnectionDTO;
-import ru.viise.lightsearch.data.ScanType;
+import android.app.Activity;
 
-public interface ManagerActivityUI {
-    void connect(ConnectionDTO connDTO);
-    void setScanType(ScanType type);
-    CommandManager commandManager();
+import com.google.zxing.integration.android.IntentIntegrator;
+
+public class ScannerZXingImpl implements Scanner {
+
+    private final Activity activity;
+
+    public ScannerZXingImpl(Activity activity) {
+        this.activity = activity;
+    }
+
+    @Override
+    public void scan() {
+        IntentIntegrator scanIntegrator = new IntentIntegrator(activity);
+        scanIntegrator.setOrientationLocked(false);
+        scanIntegrator.initiateScan();
+    }
 }

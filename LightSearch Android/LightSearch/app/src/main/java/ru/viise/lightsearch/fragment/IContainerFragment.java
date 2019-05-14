@@ -18,4 +18,7 @@ package ru.viise.lightsearch.fragment;
 
 public interface IContainerFragment {
     void setSearchBarcode(String barcode);
+    void setCardCode(String cardCode);
+    void switchToSoftCheckFragment();
+    void switchToOpenSoftCheckFragment();
 }

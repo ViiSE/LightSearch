@@ -18,9 +18,9 @@ package ru.viise.lightsearch.find;
 
 import android.support.v4.app.FragmentActivity;
 
-public class OnBackPressedContainerFragmentListenerImplFinderInit {
+public class OnBackPressedListenerImplFinderInit {
 
-    public static OnBackPressedContainerFragmentListenerImplFinder onBackPressedListenerImplFinder(FragmentActivity activity) {
-        return new OnBackPressedContainerFragmentListenerImplFinderDefaultImpl(activity);
+    public static OnBackPressedListenerImplFinder onBackPressedListenerImplFinder(FragmentActivity activity) {
+        return new OnBackPressedListenerImplFinderDefaultImpl(activity);
     }
 }

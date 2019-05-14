@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.activity;
+package ru.viise.lightsearch.activity.scan;
 
-import ru.viise.lightsearch.cmd.manager.CommandManager;
-import ru.viise.lightsearch.data.ConnectionDTO;
-import ru.viise.lightsearch.data.ScanType;
+import android.app.Activity;
 
-public interface ManagerActivityUI {
-    void connect(ConnectionDTO connDTO);
-    void setScanType(ScanType type);
-    CommandManager commandManager();
+public class ScannerInit {
+
+    public static Scanner scanner(Activity activity) {
+        return new ScannerZXingImpl(activity);
+    }
 }

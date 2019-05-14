@@ -17,25 +17,24 @@
 package ru.viise.lightsearch.find;
 
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 
-import ru.viise.lightsearch.activity.OnBackPressedListener;
+import ru.viise.lightsearch.fragment.ISoftCheckContainerFragment;
 
-public class OnBackPressedListenerImplFinderDefaultImpl implements OnBackPressedListenerImplFinder {
+public class ISoftCheckContainerFragmentImplFinderDefaultImpl implements ISoftCheckContainerFragmentImplFinder {
 
-    private final FragmentActivity activity;
+    private final Fragment fragment;
 
-    public OnBackPressedListenerImplFinderDefaultImpl(FragmentActivity activity) {
-        this.activity = activity;
+    public ISoftCheckContainerFragmentImplFinderDefaultImpl(Fragment fragment) {
+        this.fragment = fragment;
     }
 
     @Override
-    public OnBackPressedListener findImpl() {
-        FragmentManager fm = activity.getSupportFragmentManager();
-        for(Fragment fragment : fm.getFragments()) {
-            if(fragment instanceof OnBackPressedListener)
-                return (OnBackPressedListener) fragment;
+    public ISoftCheckContainerFragment findImpl() {
+        FragmentManager fragmentManager = fragment.getChildFragmentManager();
+        for(Fragment fragment :fragmentManager.getFragments()) {
+            if(fragment instanceof ISoftCheckContainerFragment)
+                return (ISoftCheckContainerFragment) fragment;
         }
         return null;
     }

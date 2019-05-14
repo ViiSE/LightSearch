@@ -16,6 +16,6 @@
 
 package ru.viise.lightsearch.activity;
 
-public interface OnBackPressedContainerFragmentListener {
+public interface OnBackPressedListener {
     void onBackPressed();
 }

@@ -40,12 +40,11 @@ import android.widget.Space;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.zxing.integration.android.IntentIntegrator;
-
 import dmax.dialog.SpotsDialog;
 import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.activity.ManagerActivityHandler;
 import ru.viise.lightsearch.activity.ManagerActivityUI;
+import ru.viise.lightsearch.activity.scan.ScannerInit;
 import ru.viise.lightsearch.cmd.CommandTypeEnum;
 import ru.viise.lightsearch.cmd.manager.CommandManager;
 import ru.viise.lightsearch.cmd.manager.task.CommandManagerAsyncTask;
@@ -53,6 +52,7 @@ import ru.viise.lightsearch.data.CommandManagerAsyncTaskDTO;
 import ru.viise.lightsearch.data.CommandManagerAsyncTaskDTOInit;
 import ru.viise.lightsearch.data.CommandSearchDTO;
 import ru.viise.lightsearch.data.SearchFragmentContentEnum;
+import ru.viise.lightsearch.data.ScanType;
 import ru.viise.lightsearch.data.creator.CommandSearchDTOCreator;
 import ru.viise.lightsearch.data.creator.CommandSearchDTOCreatorInit;
 
@@ -76,6 +76,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener, IS
     private String[] TKArray;
 
     private ManagerActivityHandler managerActivityHandler;
+    private ManagerActivityUI managerActivityUI;
     private CommandManager commandManager;
 
     private Animation animAlpha;
@@ -173,7 +174,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener, IS
     public void onAttach(Context context) {
         super.onAttach(context);
         managerActivityHandler = (ManagerActivityHandler) this.getActivity();
-        ManagerActivityUI managerActivityUI = (ManagerActivityUI) this.getActivity();
+        managerActivityUI = (ManagerActivityUI) this.getActivity();
         commandManager = managerActivityUI.commandManager();
     }
 
@@ -208,9 +209,8 @@ public class SearchFragment extends Fragment implements View.OnClickListener, IS
                 break;
             case R.id.buttonBarcode:
                 v.startAnimation(animAlpha);
-                IntentIntegrator scanIntegrator = new IntentIntegrator(this.getActivity());
-                scanIntegrator.setOrientationLocked(false);
-                scanIntegrator.initiateScan();
+                managerActivityUI.setScanType(ScanType.SEARCH);
+                ScannerInit.scanner(this.getActivity()).scan();
                 break;
         }
     }
@@ -230,7 +230,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener, IS
         spinner.setAdapter(adapter);
     }
 
-    public SearchFragmentContentEnum getPodrazdelenie() {
+    private SearchFragmentContentEnum getPodrazdelenie() {
         if(skladRadioButton.isChecked())
             return SearchFragmentContentEnum.SKLAD;
         else if(TKRadioButton.isChecked())
@@ -241,11 +241,11 @@ public class SearchFragment extends Fragment implements View.OnClickListener, IS
         return null;
     }
 
-    public String getSelectedSklad() {
+    private String getSelectedSklad() {
         return skladSpinner.getSelectedItem().toString();
     }
 
-    public String getSelectedTK() {
+    private String getSelectedTK() {
         return TKSpinner.getSelectedItem().toString();
     }
 
