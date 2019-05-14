@@ -14,13 +14,11 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.find;
+package ru.viise.lightsearch.data;
 
-import android.support.v4.app.FragmentActivity;
+public class CommandOpenSoftCheckDTOInit {
 
-public class OnBackPressedContainerFragmentListenerImplFinderInit {
-
-    public static OnBackPressedContainerFragmentListenerImplFinder onBackPressedListenerImplFinder(FragmentActivity activity) {
-        return new OnBackPressedContainerFragmentListenerImplFinderDefaultImpl(activity);
+    public static CommandOpenSoftCheckDTO commandOpenSoftCheckDTO(String userIdent, String cardCode) {
+        return new CommandOpenSoftCheckDTODefaultImpl(userIdent, cardCode);
     }
 }

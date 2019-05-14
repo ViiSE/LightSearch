@@ -34,4 +34,12 @@ public class CommandResultCreatorInit {
     public static CommandResultCreator commandResultSearchCreator(boolean isDone, String message) {
         return new CommandResultSearchCreatorErrorDefaultImpl(isDone, message);
     }
+
+    public static CommandResultCreator commandResultOpenSoftCheckCreator(String rawMessage, String IMEI) {
+        return new CommandResultOpenSoftCheckCreatorDefaultImpl(rawMessage, IMEI);
+    }
+
+    public static CommandResultCreator commandResultOpenSoftCheckCreator(boolean isDone, String message) {
+        return new CommandResultOpenSoftCheckCreatorErrorDefaultImpl(isDone, message);
+    }
 }

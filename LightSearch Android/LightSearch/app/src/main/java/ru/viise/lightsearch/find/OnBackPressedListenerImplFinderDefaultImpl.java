@@ -20,22 +20,22 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 
-import ru.viise.lightsearch.activity.OnBackPressedListener;
+import ru.viise.lightsearch.activity.OnBackPressedContainerFragmentListener;
 
-public class OnBackPressedListenerImplFinderDefaultImpl implements OnBackPressedListenerImplFinder {
+public class OnBackPressedContainerFragmentListenerImplFinderDefaultImpl implements OnBackPressedContainerFragmentListenerImplFinder {
 
     private final FragmentActivity activity;
 
-    public OnBackPressedListenerImplFinderDefaultImpl(FragmentActivity activity) {
+    public OnBackPressedContainerFragmentListenerImplFinderDefaultImpl(FragmentActivity activity) {
         this.activity = activity;
     }
 
     @Override
-    public OnBackPressedListener findImpl() {
+    public OnBackPressedContainerFragmentListener findImpl() {
         FragmentManager fm = activity.getSupportFragmentManager();
         for(Fragment fragment : fm.getFragments()) {
-            if(fragment instanceof OnBackPressedListener)
-                return (OnBackPressedListener) fragment;
+            if(fragment instanceof OnBackPressedContainerFragmentListener)
+                return (OnBackPressedContainerFragmentListener) fragment;
         }
         return null;
     }

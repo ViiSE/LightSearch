@@ -14,13 +14,25 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.find;
+package ru.viise.lightsearch.cmd.result;
 
-import android.support.v4.app.FragmentActivity;
+public class OpenSoftCheckCommandResultDefaultImpl implements OpenSoftCheckCommandResult {
 
-public class OnBackPressedContainerFragmentListenerImplFinderInit {
+    private final boolean isDone;
+    private final String message;
 
-    public static OnBackPressedContainerFragmentListenerImplFinder onBackPressedListenerImplFinder(FragmentActivity activity) {
-        return new OnBackPressedContainerFragmentListenerImplFinderDefaultImpl(activity);
+    public OpenSoftCheckCommandResultDefaultImpl(boolean isDone, String message) {
+        this.isDone = isDone;
+        this.message = message;
+    }
+
+    @Override
+    public boolean isDone() {
+        return isDone;
+    }
+
+    @Override
+    public String message() {
+        return message;
     }
 }

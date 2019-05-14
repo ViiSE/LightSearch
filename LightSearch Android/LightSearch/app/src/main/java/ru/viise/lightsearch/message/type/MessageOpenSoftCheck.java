@@ -14,13 +14,6 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.find;
+package ru.viise.lightsearch.message.type;
 
-import android.support.v4.app.FragmentActivity;
-
-public class OnBackPressedContainerFragmentListenerImplFinderInit {
-
-    public static OnBackPressedContainerFragmentListenerImplFinder onBackPressedListenerImplFinder(FragmentActivity activity) {
-        return new OnBackPressedContainerFragmentListenerImplFinderDefaultImpl(activity);
-    }
-}
+public interface MessageOpenSoftCheck extends Message { }
