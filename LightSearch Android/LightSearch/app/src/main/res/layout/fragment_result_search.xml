@@ -6,8 +6,13 @@
     android:layout_height="match_parent"
     tools:context="ru.viise.lightsearch.fragment.ResultSearchFragment">
 
-    <ListView android:id="@android:id/list"
+    <ListView
+        android:id="@android:id/list"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"/>
+        android:layout_height="fill_parent"
+        android:backgroundTint="@color/recycleViewBackgroundColor"
+        android:paddingTop="5dp"
+        android:divider="@color/zxing_transparent"
+        android:dividerHeight="5dp"/>
 
 </android.widget.LinearLayout>

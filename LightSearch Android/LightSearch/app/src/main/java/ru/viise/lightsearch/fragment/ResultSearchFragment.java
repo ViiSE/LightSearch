@@ -25,7 +25,6 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.List;
@@ -34,6 +33,7 @@ import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.data.SearchRecordDTO;
 import ru.viise.lightsearch.dialog.alert.OneResultAlertDialogCreator;
 import ru.viise.lightsearch.dialog.alert.OneResultAlertDialogCreatorInit;
+import ru.viise.lightsearch.fragment.adapter.ResultSearchArrayAdapter;
 
 public class ResultSearchFragment extends ListFragment {
 
@@ -53,16 +53,8 @@ public class ResultSearchFragment extends ListFragment {
     }
 
     private void initAdapter() {
-        String[] data = new String[this.searchRecords.size()];
-        int i = 0;
-        for(SearchRecordDTO record: this.searchRecords) {
-            data[i] = record.name()
-                    + "\n" + record.amount() + " шт."
-                    + "\n" + record.price() + " руб.";
-            i++;
-        }
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getActivity(),
-                android.R.layout.simple_list_item_1, data);
+        ResultSearchArrayAdapter adapter = new ResultSearchArrayAdapter(this.getActivity(),
+                R.layout.cardview_row_result_search, searchRecords);
         setListAdapter(adapter);
     }
 

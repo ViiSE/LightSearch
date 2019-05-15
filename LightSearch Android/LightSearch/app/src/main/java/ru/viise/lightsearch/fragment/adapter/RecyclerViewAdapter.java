@@ -68,12 +68,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         DefaultViewHolder(View itemView) {
             super(itemView);
-            twCardName          = itemView.findViewById(R.id.textViewCardName);
-            twCardBarcode       = itemView.findViewById(R.id.textViewCardBarcode);
-            twCardMaxAmount     = itemView.findViewById(R.id.textViewCardMaxAmount);
-            twCardPrice         = itemView.findViewById(R.id.textViewCardPrice);
-            twCardTotalCost     = itemView.findViewById(R.id.textViewCardTotalCost);
-            etCardCurrentAmount = itemView.findViewById(R.id.editTextCardCurrentAmount);
+            twCardName          = itemView.findViewById(R.id.textViewCardNameSC);
+            twCardBarcode       = itemView.findViewById(R.id.textViewCardBarcodeSC);
+            twCardMaxAmount     = itemView.findViewById(R.id.textViewCardMaxAmountSC);
+            twCardPrice         = itemView.findViewById(R.id.textViewCardPriceSC);
+            twCardTotalCost     = itemView.findViewById(R.id.textViewCardTotalCostSC);
+            etCardCurrentAmount = itemView.findViewById(R.id.editTextCardCurrentAmountSC);
 
             etCardCurrentAmount.addTextChangedListener(new TextWatcher() {
 
@@ -129,7 +129,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @NonNull
     @Override
     public DefaultViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_row, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_row_open_soft_check, parent, false);
         return new DefaultViewHolder(itemView);
     }
 
