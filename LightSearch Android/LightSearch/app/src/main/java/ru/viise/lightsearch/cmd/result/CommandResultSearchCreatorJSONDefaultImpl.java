@@ -19,6 +19,7 @@ package ru.viise.lightsearch.cmd.result;
 import org.json.simple.JSONObject;
 
 import java.util.List;
+import java.util.Objects;
 
 import ru.viise.lightsearch.cmd.ClientCommandContentEnum;
 import ru.viise.lightsearch.data.SearchRecordDTO;
@@ -49,8 +50,9 @@ public class CommandResultSearchJSONDefaultImpl implements CommandResultCreator 
         try {
             MessageParser msgParser = MessageParserInit.messageParser();
             JSONObject objMsg = (JSONObject)msgParser.parse(rawMessage);
-            String incomingIMEI = objMsg.get(IMEI_FIELD).toString();
-            String incomingIsDone = objMsg.get(IS_DONE).toString();
+            String incomingIMEI = Objects.requireNonNull(objMsg.get(IMEI_FIELD)).toString();
+
+            String incomingIsDone = Objects.requireNonNull(objMsg.get(IS_DONE)).toString();
             ResultCommandVerifier resCmdVerifier =
                     ResultCommandVerifierInit.resultCommandVerifier(incomingIMEI, IMEI, incomingIsDone);
 
@@ -63,7 +65,7 @@ public class CommandResultSearchJSONDefaultImpl implements CommandResultCreator 
                     null, searchRecords, subdivision);
             return searchCmdRes;
         }
-        catch(MessageParserException ex) {
+        catch(MessageParserException | NullPointerException ex) {
             return null;
         }
     }
