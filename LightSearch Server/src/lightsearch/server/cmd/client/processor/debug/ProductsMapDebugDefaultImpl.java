@@ -41,10 +41,10 @@ public class ProductsMapDebugDefaultImpl implements ProductsMapDebug {
         products.put("6", pr6);
     }
     
-    private ProductDebug createProduct(String podr, String id, String name, 
+    private ProductDebug createProduct(String subdiv, String id, String name, 
             String price, String amount, String unit) {
         ProductDebug pr = 
-                ProductDebugInit.productDebug(podr, id, name, price, amount, unit);
+                ProductDebugInit.productDebug(subdiv, id, name, price, amount, unit);
         return pr;
     }
 

@@ -15,8 +15,8 @@ package lightsearch.server.cmd.client.processor.debug;
  */
 public class ProductDebugInit {
     
-    public static ProductDebug productDebug(String podrazdelenie, String id, 
+    public static ProductDebug productDebug(String subdivision, String id, 
             String name, String price, String amount, String unit) {
-        return new ProductDebugDefaultImpl(podrazdelenie, id, name, price, amount, unit);
+        return new ProductDebugDefaultImpl(subdivision, id, name, price, amount, unit);
     }
 }

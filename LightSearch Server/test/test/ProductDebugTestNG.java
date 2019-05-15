@@ -27,13 +27,13 @@ public class ProductDebugTestNG {
     
     @BeforeTest
     public void setUpMethod() {
-        String podr = "Склад 1";
-        assertNotNull(podr, "Podrazdelenie is null!");
-        assertFalse(podr.isEmpty(), "Podrazdelenie is empty!");
+        String subdiv = "Склад 1";
+        assertNotNull(subdiv, "Subdivision is null!");
+        assertFalse(subdiv.isEmpty(), "Subdivision is empty!");
         
         String id = "111111";
         assertNotNull(id, "ID is null!");
-        assertFalse(id.isEmpty(), "Podrazdelenie is empty!");
+        assertFalse(id.isEmpty(), "Subdivision is empty!");
         
         String name = "Товар 1";
         assertNotNull(name, "Name is null!");
@@ -51,19 +51,19 @@ public class ProductDebugTestNG {
         assertNotNull(unit, "Unit is null!");
         assertFalse(unit.isEmpty(), "Unit is empty!");
         
-        product = ProductDebugInit.productDebug(podr, id, name, price, amount, unit);
+        product = ProductDebugInit.productDebug(subdiv, id, name, price, amount, unit);
         assertNotNull(product, "ProductDebug is null!");
     }
     
     @Test
-    public void podrazdelenie() {
-        testBegin("ProductDebug", "podrazdelenie()");
+    public void subdivision() {
+        testBegin("ProductDebug", "subdivision()");
         
-        String podr = product.podrazdelenie();
-        assertNotNull(podr, "ProductDebug: podrazdelenie is null!");
-        System.out.println("ProductDebug: podrazdelenie: " + podr);
+        String subdiv = product.subdivision();
+        assertNotNull(subdiv, "ProductDebug: subdivision is null!");
+        System.out.println("ProductDebug: subdivision: " + subdiv);
         
-        testEnd("ProductDebug", "podrazdelenie()");
+        testEnd("ProductDebug", "subdivision()");
     }
     
     @Test

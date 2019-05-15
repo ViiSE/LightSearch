@@ -14,7 +14,7 @@ package lightsearch.server.cmd.client.processor.debug;
  * @author ViiSE
  */
 public interface ProductDebug {
-    String podrazdelenie();
+    String subdivision();
     String id();
     String name();
     String price();

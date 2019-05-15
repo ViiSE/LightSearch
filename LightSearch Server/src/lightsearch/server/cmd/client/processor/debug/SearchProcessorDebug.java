@@ -51,7 +51,7 @@ public class SearchProcessorDebug extends AbstractProcessorClient {
                         if(clientCommand.sklad().equals("all") &&
                                 clientCommand.TK().equals("all")) {
                             JSONObject jProd = new JSONObject();
-                                jProd.put("podrazdelenie", product.podrazdelenie());
+                                jProd.put("subdiv", product.subdivision());
                                 jProd.put("ID", product.id());
                                 jProd.put("name", product.name());
                                 jProd.put("price", product.price());
@@ -60,9 +60,9 @@ public class SearchProcessorDebug extends AbstractProcessorClient {
                                 jData.add(jProd);
                         }
                         else if(clientCommand.sklad().equals("all")) {
-                            if(product.podrazdelenie().contains("Склад")) {
+                            if(product.subdivision().contains("Склад")) {
                                 JSONObject jProd = new JSONObject();
-                                jProd.put("podrazdelenie", product.podrazdelenie());
+                                jProd.put("subdiv", product.subdivision());
                                 jProd.put("ID", product.id());
                                 jProd.put("name", product.name());
                                 jProd.put("price", product.price());
@@ -72,9 +72,9 @@ public class SearchProcessorDebug extends AbstractProcessorClient {
                             }
                         }
                         else if(clientCommand.TK().equals("all")) {
-                            if(product.podrazdelenie().contains("Склад")) {
+                            if(product.subdivision().contains("Склад")) {
                                 JSONObject jProd = new JSONObject();
-                                jProd.put("podrazdelenie", product.podrazdelenie());
+                                jProd.put("subdiv", product.subdivision());
                                 jProd.put("ID", product.id());
                                 jProd.put("name", product.name());
                                 jProd.put("price", product.price());
@@ -83,9 +83,9 @@ public class SearchProcessorDebug extends AbstractProcessorClient {
                                 jData.add(jProd);
                             }
                         }
-                        else if(product.podrazdelenie().equals(clientCommand.sklad())) {
+                        else if(product.subdivision().equals(clientCommand.sklad())) {
                             JSONObject jProd = new JSONObject();
-                            jProd.put("podrazdelenie", product.podrazdelenie());
+                            jProd.put("subdiv", product.subdivision());
                             jProd.put("ID", product.id());
                             jProd.put("name", product.name());
                             jProd.put("price", product.price());
@@ -93,9 +93,9 @@ public class SearchProcessorDebug extends AbstractProcessorClient {
                             
                             jData.add(jProd);
                         }
-                        else if(product.podrazdelenie().equals(clientCommand.TK())) {
+                        else if(product.subdivision().equals(clientCommand.TK())) {
                             JSONObject jProd = new JSONObject();
-                            jProd.put("podrazdelenie", product.podrazdelenie());
+                            jProd.put("subdiv", product.subdivision());
                             jProd.put("ID", product.id());
                             jProd.put("name", product.name());
                             jProd.put("price", product.price());
