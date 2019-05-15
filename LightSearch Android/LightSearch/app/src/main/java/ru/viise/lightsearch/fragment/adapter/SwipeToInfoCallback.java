@@ -31,7 +31,7 @@ import android.view.View;
 
 import ru.viise.lightsearch.R;
 
-abstract public class SwipeToChangeCallback extends ItemTouchHelper.Callback {
+abstract public class SwipeToInfoCallback extends ItemTouchHelper.Callback {
 
     private Paint clearPaint;
     private ColorDrawable background;
@@ -42,12 +42,12 @@ abstract public class SwipeToChangeCallback extends ItemTouchHelper.Callback {
     private int intrinsicHeight;
 
 
-    public SwipeToChangeCallback(Context context) {
+    public SwipeToInfoCallback(Context context) {
         background = new ColorDrawable();
         backgroundColor = ContextCompat.getColor(context, R.color.colorChange);
         clearPaint = new Paint();
         clearPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OVER));
-        changeDrawable = ContextCompat.getDrawable(context, R.drawable.ic_change);
+        changeDrawable = ContextCompat.getDrawable(context, R.drawable.ic_info);
 
         intrinsicWidth = changeDrawable.getIntrinsicWidth();
         intrinsicHeight = changeDrawable.getIntrinsicHeight();
@@ -96,11 +96,10 @@ abstract public class SwipeToChangeCallback extends ItemTouchHelper.Callback {
 
     private void clearCanvas(Canvas c, Float left, Float top, Float right, Float bottom) {
         c.drawRect(left, top, right, bottom, clearPaint);
-
     }
 
     @Override
     public float getSwipeThreshold(@NonNull RecyclerView.ViewHolder viewHolder) {
-        return 0.1f;
+        return 0.3f;
     }
 }

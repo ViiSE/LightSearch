@@ -7,6 +7,7 @@
     <color name="colorDelete">#C62828</color>
     <color name="colorChange">#2E7D32</color> <!--#558B2F -->
     <color name="colorUndo">#4FC3F7</color>
+    <color name="colorSnackbar">#CD212121</color>
     <color name="tabTextColor">#CFD8DC</color>
     <color name="tabTextSelectedColor">#FFFFFF</color>
     <color name="tabIndicatorColor">#0D47A1</color>

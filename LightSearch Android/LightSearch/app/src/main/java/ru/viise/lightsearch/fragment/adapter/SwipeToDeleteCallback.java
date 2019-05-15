@@ -96,11 +96,10 @@ abstract public class SwipeToDeleteCallback extends ItemTouchHelper.Callback {
 
     private void clearCanvas(Canvas c, Float left, Float top, Float right, Float bottom) {
         c.drawRect(left, top, right, bottom, clearPaint);
-
     }
 
     @Override
     public float getSwipeThreshold(@NonNull RecyclerView.ViewHolder viewHolder) {
-        return 1.0f;
+        return 0.7f;
     }
 }

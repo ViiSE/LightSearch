@@ -23,8 +23,13 @@ import java.util.List;
 import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.data.CartRecord;
 import ru.viise.lightsearch.data.CartRecordInit;
+import ru.viise.lightsearch.data.SubdivisionInit;
+import ru.viise.lightsearch.data.SubdivisionList;
+import ru.viise.lightsearch.data.SubdivisionListInit;
+import ru.viise.lightsearch.dialog.alert.InfoProductAlertDialogCreator;
+import ru.viise.lightsearch.dialog.alert.InfoProductAlertDialogCreatorInit;
 import ru.viise.lightsearch.fragment.adapter.RecyclerViewAdapter;
-import ru.viise.lightsearch.fragment.adapter.SwipeToChangeCallback;
+import ru.viise.lightsearch.fragment.adapter.SwipeToInfoCallback;
 import ru.viise.lightsearch.fragment.adapter.SwipeToDeleteCallback;
 
 
@@ -66,72 +71,80 @@ public class SoftCheckFragment extends Fragment {
 
         initRecyclerView(tvTotalCost);
         initSwipeToDeleteAndUndo();
-        initSwipeToChange();
+        initSwipeToInfo();
 
         return view;
     }
 
     private void initRecyclerView(TextView tvTotalCost) {
+        SubdivisionList subdivisions1 = SubdivisionListInit.subdivisionList("шт.");
+        subdivisions1.addSubdivision(SubdivisionInit.subdivision("Склад 1", "40"));
+        subdivisions1.addSubdivision(SubdivisionInit.subdivision("Склад 2", "50"));
+        subdivisions1.addSubdivision(SubdivisionInit.subdivision("ТК 1", "90"));
+
+        SubdivisionList subdivisions2 = SubdivisionListInit.subdivisionList("шт.");
+        subdivisions2.addSubdivision(SubdivisionInit.subdivision("Склад 1", "70"));
+
         stringArrayList.add(CartRecordInit.cartRecord(
                 "Пена монтажная МОМЕНТ быт. 500мл",
                 "2200000738592",
                 276,
-                1000,
-                "шт."));
+                "шт.",
+                 subdivisions1));
         stringArrayList.add(CartRecordInit.cartRecord(
                 "Герметик силиконовый ГЕРМЕНТ Санитарный белый 280мл",
                 "609878",
                 116,
-                2000,
-                "шт."));
+                "шт.",
+                subdivisions2));
         stringArrayList.add(CartRecordInit.cartRecord(
                 "Кран шаровый ш/ш баб. 1/2\" л/н",
                 "725646",
                 250,
-                15,
-                "шт."));
+                "шт.",
+                subdivisions2));
         stringArrayList.add(CartRecordInit.cartRecord(
                 "Товар 1",
                 "1307469",
                 250,
-                150,
-                "м^2."));
+                "шт.",
+                subdivisions2));
         stringArrayList.add(CartRecordInit.cartRecord(
                 "Товар 2",
                 "1307469",
                 13654,
-                2000,
-                "шт."));
+                "шт.",
+                subdivisions2));
         stringArrayList.add(CartRecordInit.cartRecord(
                 "Товар 3",
                 "1307469",
                 136,
-                2,
-                "шт."));
+                "шт.",
+                subdivisions2));
         stringArrayList.add(CartRecordInit.cartRecord(
                 "Товар 4",
                 "1307469",
                 654,
-                20,
-                "шт."));
+                "шт.",
+                subdivisions2));
         stringArrayList.add(CartRecordInit.cartRecord(
                 "Товар 5",
                 "1307469",
                 32,
-                70,
-                "шт."));
+                "шт.",
+                subdivisions2));
         stringArrayList.add(CartRecordInit.cartRecord(
                 "Товар 6",
                 "1307469",
                 74,
-                41,
-                "шт."));
+                "шт.",
+                subdivisions1));
         stringArrayList.add(CartRecordInit.cartRecord(
                 "Товар 7",
                 "1307469",
                 47568,
-                1000,
-                "шт."));
+                "шт.",
+                subdivisions1));
 
         adapter = new RecyclerViewAdapter(stringArrayList, tvTotalCost, "руб.");
         recyclerView.setAdapter(adapter);
@@ -151,6 +164,7 @@ public class SoftCheckFragment extends Fragment {
                     adapter.restoreItem(item, position);
                     recyclerView.scrollToPosition(position);
                 });
+                snackbar.getView().setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.colorSnackbar));
                 snackbar.setActionTextColor(ContextCompat.getColor(getContext(), R.color.colorUndo));
                 snackbar.show();
             }
@@ -160,18 +174,20 @@ public class SoftCheckFragment extends Fragment {
         itemTouchhelper.attachToRecyclerView(recyclerView);
     }
 
-    private void initSwipeToChange() {
-        SwipeToChangeCallback swipeToChangeCallback = new SwipeToChangeCallback(this.getContext()) {
+    private void initSwipeToInfo() {
+        SwipeToInfoCallback swipeToInfoCallback = new SwipeToInfoCallback(this.getContext()) {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
                 final int position = viewHolder.getAdapterPosition();
                 adapter.notifyItemChanged(position);
-                Toast t = Toast.makeText(getContext().getApplicationContext(), "change", Toast.LENGTH_LONG);
-                t.show();
+                InfoProductAlertDialogCreator infoProdADCr =
+                        InfoProductAlertDialogCreatorInit.infoProductAlertDialogCreator(getActivity(),
+                                adapter.getItem(position));
+                infoProdADCr.createAlertDialog().show();
             }
         };
 
-        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeToChangeCallback);
+        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeToInfoCallback);
         itemTouchhelper.attachToRecyclerView(recyclerView);
     }
 }

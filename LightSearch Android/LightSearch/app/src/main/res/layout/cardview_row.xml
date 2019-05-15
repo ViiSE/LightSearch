@@ -88,7 +88,7 @@
             android:layout_toEndOf="@+id/editTextCardCurrentAmount"
             android:gravity="right"
             android:text="250000 руб."
-            android:textColor="@color/design_default_color_primary_dark"
+            android:textColor="@color/colorChange"
             android:textSize="15sp" />
 
         <TextView

@@ -25,7 +25,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -52,7 +51,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         for(CartRecord record : data) {
             totalCost += record.totalCost();
         }
-        String res = total + totalCost + priceUnit;
+        String res = total + totalCost + " " + priceUnit;
         twTotalCost.setText(res);
     }
 
@@ -131,10 +130,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public DefaultViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_row, parent, false);
-        itemView.setOnClickListener(view -> {
-            Toast t = Toast.makeText(view.getContext().getApplicationContext(), "click", Toast.LENGTH_LONG);
-            t.show();
-        });
         return new DefaultViewHolder(itemView);
     }
 
@@ -171,6 +166,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         data.add(record);
         getTotalCost();
         notifyDataSetChanged();
+    }
+
+    public CartRecord getItem(int position) {
+        return data.get(position);
     }
 
     public List<CartRecord> getData() {
