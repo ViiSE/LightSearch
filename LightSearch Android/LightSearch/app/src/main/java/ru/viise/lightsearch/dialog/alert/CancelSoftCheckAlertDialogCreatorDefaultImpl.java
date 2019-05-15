@@ -56,7 +56,7 @@ public class CancelSoftCheckAlertDialogCreatorDefaultImpl implements CancelSoftC
 
     @Override
     public AlertDialog createAlertDialog() {
-        return new android.support.v7.app.AlertDialog.Builder(fragment.getActivity()).setTitle("Сообщние")
+        return new android.support.v7.app.AlertDialog.Builder(fragment.getActivity()).setTitle("Сообщение")
                 .setMessage("Вы уверены, что хотите отменить текущий мягкий чек?")
                 .setPositiveButton(OK, (dialogInterface, i) -> {
                     SharedPreferences sPref = fragment.getActivity().getSharedPreferences(PREF, Context.MODE_PRIVATE);
