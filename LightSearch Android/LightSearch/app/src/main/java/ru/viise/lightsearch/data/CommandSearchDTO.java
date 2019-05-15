@@ -20,5 +20,5 @@ public interface CommandSearchDTO extends CommandDTO {
     String barcode();
     String sklad();
     String TK();
-    String podrazdelenie();
+    String subdivision();
 }

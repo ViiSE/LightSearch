@@ -18,7 +18,7 @@ package ru.viise.lightsearch.fragment.util;
 
 public class SearchResultTitleCreatorInit {
 
-    public static SearchResultTitleCreator searchResultTitleCreator(String podrazdelenie, String id) {
-        return new SearchResultTitleCreatorDefaultImpl(podrazdelenie, id);
+    public static SearchResultTitleCreator searchResultTitleCreator(String subdivision, String id) {
+        return new SearchResultTitleCreatorDefaultImpl(subdivision, id);
     }
 }

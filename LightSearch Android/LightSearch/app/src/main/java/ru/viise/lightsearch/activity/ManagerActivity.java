@@ -244,7 +244,7 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
             SearchCommandResult searchCmdRes = (SearchCommandResult)commandResult;
             if (searchCmdRes.records().size() != 0) {
                 SearchResultTitleCreator searchResTitleCr =
-                        SearchResultTitleCreatorInit.searchResultTitleCreator(searchCmdRes.podrazdelenie(),
+                        SearchResultTitleCreatorInit.searchResultTitleCreator(searchCmdRes.subdivision(),
                                 searchCmdRes.records().get(0).id());
                 String title = searchResTitleCr.createTitle();
                 if (searchCmdRes.records().size() == 1)

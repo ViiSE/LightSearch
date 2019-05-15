@@ -21,13 +21,13 @@ public class CommandSearchDTODefaultImpl implements CommandSearchDTO {
     private final String barcode;
     private final String sklad;
     private final String TK;
-    private final String podrazdelenie;
+    private final String subdivision;
 
-    public CommandSearchDTODefaultImpl(String barcode, String sklad, String TK, String podrazdelenie) {
+    public CommandSearchDTODefaultImpl(String barcode, String sklad, String TK, String subdivision) {
         this.barcode = barcode;
         this.sklad = sklad;
         this.TK = TK;
-        this.podrazdelenie = podrazdelenie;
+        this.subdivision = subdivision;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class CommandSearchDTODefaultImpl implements CommandSearchDTO {
     }
 
     @Override
-    public String podrazdelenie() {
-        return podrazdelenie;
+    public String subdivision() {
+        return subdivision;
     }
 }

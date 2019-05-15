@@ -21,6 +21,6 @@ import java.util.List;
 import ru.viise.lightsearch.data.SearchRecordDTO;
 
 public interface SearchCommandResult extends CommandResult {
-    String podrazdelenie();
+    String subdivision();
     List<SearchRecordDTO> records();
 }

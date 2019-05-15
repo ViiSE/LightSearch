@@ -18,8 +18,8 @@ package ru.viise.lightsearch.data;
 
 public class SearchRecordDTOInit {
 
-    public static SearchRecordDTO searchRecordDTO(String podrazdelenie, String id, String fullName,
+    public static SearchRecordDTO searchRecordDTO(String subdivision, String id, String fullName,
             String price, String amount) {
-        return new SearchRecordDTODefaultImpl(podrazdelenie, id, fullName, price, amount);
+        return new SearchRecordDTODefaultImpl(subdivision, id, fullName, price, amount);
     }
 }

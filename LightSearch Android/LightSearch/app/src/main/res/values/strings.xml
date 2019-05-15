@@ -43,7 +43,7 @@
     <!-- ============= -->
 
     <!-- TableResult -->
-    <string name="podrazColLabel">Подразделение</string>
+    <string name="subdivColLabel">Подразделение</string>
     <string name="idColLabel">ИД</string>
     <string name="nameColLabel">Наим-ие</string>
     <string name="priceColLabel">Цена</string>

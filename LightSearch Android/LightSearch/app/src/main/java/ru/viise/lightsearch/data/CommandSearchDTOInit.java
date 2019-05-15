@@ -19,7 +19,7 @@ package ru.viise.lightsearch.data;
 public class CommandSearchDTOInit {
 
     public static CommandSearchDTO commandSearchDTO(String barcode, String sklad, String TK,
-                        String podrazdelenie) {
-        return new CommandSearchDTODefaultImpl(barcode, sklad, TK, podrazdelenie);
+                        String subdivision) {
+        return new CommandSearchDTODefaultImpl(barcode, sklad, TK, subdivision);
     }
 }

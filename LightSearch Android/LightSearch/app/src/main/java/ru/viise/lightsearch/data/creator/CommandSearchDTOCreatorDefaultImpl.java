@@ -27,45 +27,45 @@ public class CommandSearchDTOCreatorDefaultImpl implements CommandSearchDTOCreat
     private final String ALL_UI = SearchFragmentContentEnum.ALL_UI.stringValue();
 
     private final String barcode;
-    private final SearchFragmentContentEnum podrazdelenie;
+    private final SearchFragmentContentEnum subdivision;
     private String sklad;
     private String TK;
 
-    public CommandSearchDTOCreatorDefaultImpl(String barcode, SearchFragmentContentEnum podrazdelenie, String sklad, String TK) {
+    public CommandSearchDTOCreatorDefaultImpl(String barcode, SearchFragmentContentEnum subdivision, String sklad, String TK) {
         this.barcode = barcode;
-        this.podrazdelenie = podrazdelenie;
+        this.subdivision = subdivision;
         this.sklad = sklad;
         this.TK = TK;
     }
 
     @Override
     public CommandSearchDTO createCommandSearchDTO() {
-        String podrStr = null;
-        switch(podrazdelenie) {
+        String subdivStr = null;
+        switch(subdivision) {
             case SKLAD:
                 if(sklad.equals(ALL_UI)) {
                     sklad = ALL;
-                    podrStr = "Все склады";
+                    subdivStr = "Все склады";
                 }
                 else
-                    podrStr = sklad;
+                    subdivStr = sklad;
                 TK = NULL;
                 break;
             case TK:
                 if(TK.equals(ALL_UI)) {
                     TK = ALL;
-                    podrStr = "Все ТК";
+                    subdivStr = "Все ТК";
                 }
                 else
-                    podrStr = TK;
+                    subdivStr = TK;
                 sklad = NULL;
                 break;
             case ALL:
                 sklad = NULL;
                 TK = NULL;
-                podrStr = "Все";
+                subdivStr = "Все";
                 break;
         }
-        return CommandSearchDTOInit.commandSearchDTO(barcode, sklad, TK, podrStr);
+        return CommandSearchDTOInit.commandSearchDTO(barcode, sklad, TK, subdivStr);
     }
 }

@@ -25,19 +25,19 @@ public class SearchCommandResultDefaultImpl implements SearchCommandResult {
     private final boolean isDone;
     private final String message;
     private final List<SearchRecordDTO> records;
-    private final String podrazdelenie;
+    private final String subdivision;
 
     public SearchCommandResultDefaultImpl(boolean isDone, String message,
-              List<SearchRecordDTO> records, String podrazdelenie) {
+              List<SearchRecordDTO> records, String subdivision) {
         this.isDone = isDone;
         this.message = message;
         this.records = records;
-        this.podrazdelenie = podrazdelenie;
+        this.subdivision = subdivision;
     }
 
     @Override
-    public String podrazdelenie() {
-        return podrazdelenie;
+    public String subdivision() {
+        return subdivision;
     }
 
     @Override

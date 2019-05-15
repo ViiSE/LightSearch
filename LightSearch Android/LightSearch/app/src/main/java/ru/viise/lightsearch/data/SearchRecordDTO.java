@@ -17,7 +17,7 @@
 package ru.viise.lightsearch.data;
 
 public interface SearchRecordDTO {
-    String podrazdelenie();
+    String subdivision();
     String id();
     String name();
     String price();

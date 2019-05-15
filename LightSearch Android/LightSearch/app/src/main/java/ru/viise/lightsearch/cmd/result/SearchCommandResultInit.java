@@ -23,7 +23,7 @@ import ru.viise.lightsearch.data.SearchRecordDTO;
 public class SearchCommandResultInit {
 
     public static SearchCommandResult searchCommandResult(boolean isDone, String message,
-                      List<SearchRecordDTO> records, String podrazdelenie) {
-        return new SearchCommandResultDefaultImpl(isDone, message, records, podrazdelenie);
+                      List<SearchRecordDTO> records, String subdivision) {
+        return new SearchCommandResultDefaultImpl(isDone, message, records, subdivision);
     }
 }

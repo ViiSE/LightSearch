@@ -72,9 +72,9 @@ public enum ClientCommandContentEnum {
         @Override
         public String stringValue() { return "data"; }
     },
-    PODRAZDELENIE {
+    SUBDIVISION {
         @Override
-        public String stringValue() { return "podrazdelenie"; }
+        public String stringValue() { return "subdivision"; }
     },
     ID {
         @Override

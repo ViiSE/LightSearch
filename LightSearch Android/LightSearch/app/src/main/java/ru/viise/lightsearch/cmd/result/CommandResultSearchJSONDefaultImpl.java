@@ -36,12 +36,12 @@ public class CommandResultSearchJSONDefaultImpl implements CommandResultCreator 
 
     private final String rawMessage;
     private final String IMEI;
-    private final String podrazdelenie;
+    private final String subdivision;
 
-    public CommandResultSearchJSONDefaultImpl(String rawMessage, String IMEI, String podrazdelenie) {
+    public CommandResultSearchJSONDefaultImpl(String rawMessage, String IMEI, String subdivision) {
         this.rawMessage = rawMessage;
         this.IMEI = IMEI;
-        this.podrazdelenie = podrazdelenie;
+        this.subdivision = subdivision;
     }
 
     @Override
@@ -60,7 +60,7 @@ public class CommandResultSearchJSONDefaultImpl implements CommandResultCreator 
             List<SearchRecordDTO> searchRecords = searchRecsDTOCr.createSearchRecordsDTO();
 
             SearchCommandResult searchCmdRes = SearchCommandResultInit.searchCommandResult(isDone,
-                    null, searchRecords, podrazdelenie);
+                    null, searchRecords, subdivision);
             return searchCmdRes;
         }
         catch(MessageParserException ex) {

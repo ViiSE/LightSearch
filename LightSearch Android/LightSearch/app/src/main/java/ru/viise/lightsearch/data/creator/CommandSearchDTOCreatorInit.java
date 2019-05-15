@@ -21,7 +21,7 @@ import ru.viise.lightsearch.data.SearchFragmentContentEnum;
 public class CommandSearchDTOCreatorInit {
 
     public static CommandSearchDTOCreator commandSearchDTOCreator(
-            String barcode, SearchFragmentContentEnum podrazdelenie, String sklad, String TK) {
-        return new CommandSearchDTOCreatorDefaultImpl(barcode, podrazdelenie, sklad, TK);
+            String barcode, SearchFragmentContentEnum subdivision, String sklad, String TK) {
+        return new CommandSearchDTOCreatorDefaultImpl(barcode, subdivision, sklad, TK);
     }
 }

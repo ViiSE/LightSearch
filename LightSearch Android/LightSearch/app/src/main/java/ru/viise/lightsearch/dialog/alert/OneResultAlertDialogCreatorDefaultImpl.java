@@ -37,7 +37,7 @@ public class OneResultAlertDialogCreatorDefaultImpl implements OneResultAlertDia
     @Override
     public AlertDialog createAlertDialog() {
         return new android.support.v7.app.AlertDialog.Builder(activity).setTitle("").setMessage(
-                "Подразделение: " + searchRecord.podrazdelenie() + "\n" +
+                "Подразделение: " + searchRecord.subdivision() + "\n" +
                         "ИД: " + searchRecord.id() + "\n" +
                         "Наименование: " + searchRecord.name() + "\n" +
                         "Цена: " + searchRecord.price() + " руб.\n" +

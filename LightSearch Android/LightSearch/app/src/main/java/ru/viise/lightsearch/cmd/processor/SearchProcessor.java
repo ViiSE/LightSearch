@@ -51,9 +51,9 @@ public class SearchProcessor implements Function<CommandDTO, CommandResult> {
             String message = msgSearch.message();
             msgSender.sendMessage(message);
             String rawMessage = msgRecipient.acceptMessage();
-            String podrazdelenie = cmdSearchDTO.podrazdelenie();
+            String subdivision = cmdSearchDTO.subdivision();
             CommandResultCreator cmdResCr =
-                    CommandResultCreatorInit.commandResultSearchCreator(rawMessage, IMEI, podrazdelenie);
+                    CommandResultCreatorInit.commandResultSearchCreator(rawMessage, IMEI, subdivision);
             CommandResult cmdRes = cmdResCr.createCommandResult();
             if(cmdRes != null)
                 return cmdRes;

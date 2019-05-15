@@ -18,19 +18,19 @@ package ru.viise.lightsearch.fragment.util;
 
 public class SearchResultTitleCreatorDefaultImpl implements SearchResultTitleCreator {
 
-    private final String podrazdelenie;
+    private final String subdivision;
     private final String id;
 
-    public SearchResultTitleCreatorDefaultImpl(String podrazdelenie, String id) {
-        this.podrazdelenie = podrazdelenie;
+    public SearchResultTitleCreatorDefaultImpl(String subdivision, String id) {
+        this.subdivision = subdivision;
         this.id = id;
     }
 
     @Override
     public String createTitle() {
-        if(podrazdelenie.indexOf('(') != -1)
-            return podrazdelenie.substring(0, podrazdelenie.indexOf('(')) + " " + id;
+        if(subdivision.indexOf('(') != -1)
+            return subdivision.substring(0, subdivision.indexOf('(')) + " " + id;
         else
-            return podrazdelenie + " " + id;
+            return subdivision + " " + id;
     }
 }

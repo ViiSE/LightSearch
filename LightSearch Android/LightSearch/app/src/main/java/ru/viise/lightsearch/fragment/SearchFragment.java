@@ -197,7 +197,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener, IS
                 else {
                     CommandSearchDTOCreator cmdSearchDTOCr =
                             CommandSearchDTOCreatorInit.commandSearchDTOCreator(
-                                    barcode, getPodrazdelenie(), getSelectedSklad(), getSelectedTK());
+                                    barcode, getSubdivision(), getSelectedSklad(), getSelectedTK());
                     CommandSearchDTO cmdSearchDTO = cmdSearchDTOCr.createCommandSearchDTO();
                     CommandManagerAsyncTaskDTO cmdManagerATDTO =
                             CommandManagerAsyncTaskDTOInit.commandManagerAsyncTaskDTO(commandManager,
@@ -230,7 +230,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener, IS
         spinner.setAdapter(adapter);
     }
 
-    private SearchFragmentContentEnum getPodrazdelenie() {
+    private SearchFragmentContentEnum getSubdivision() {
         if(skladRadioButton.isChecked())
             return SearchFragmentContentEnum.SKLAD;
         else if(TKRadioButton.isChecked())

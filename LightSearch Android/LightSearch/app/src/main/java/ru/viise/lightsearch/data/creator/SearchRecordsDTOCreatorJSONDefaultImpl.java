@@ -28,7 +28,7 @@ import ru.viise.lightsearch.data.SearchRecordDTOInit;
 
 public class SearchRecordsDTOCreatorJSONDefaultImpl implements SearchRecordsDTOCreator {
 
-    private final String PODRAZDELENIE = ClientCommandContentEnum.PODRAZDELENIE.stringValue();
+    private final String SUBDIVISION   = ClientCommandContentEnum.SUBDIVISION.stringValue();
     private final String ID            = ClientCommandContentEnum.ID.stringValue();
     private final String NAME          = ClientCommandContentEnum.NAME.stringValue();
     private final String PRICE         = ClientCommandContentEnum.PRICE.stringValue();
@@ -46,7 +46,7 @@ public class SearchRecordsDTOCreatorJSONDefaultImpl implements SearchRecordsDTOC
         for(Object rec : data) {
             JSONObject recJ = (JSONObject)rec;
             SearchRecordDTO searchRecDTO = SearchRecordDTOInit.searchRecordDTO(
-                    recJ.get(PODRAZDELENIE).toString(),
+                    recJ.get(SUBDIVISION).toString(),
                     recJ.get(ID).toString(),
                     recJ.get(NAME).toString(),
                     recJ.get(PRICE).toString(),

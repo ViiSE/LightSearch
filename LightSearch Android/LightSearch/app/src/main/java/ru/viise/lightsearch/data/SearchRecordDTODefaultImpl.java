@@ -18,14 +18,14 @@ package ru.viise.lightsearch.data;
 
 public class SearchRecordDTODefaultImpl implements SearchRecordDTO {
 
-    private final String podrazdelenie;
+    private final String subdivision;
     private final String id;
     private final String name;
     private final String price;
     private final String amount;
 
-    public SearchRecordDTODefaultImpl(String podrazdelenie, String id, String name, String price, String amount) {
-        this.podrazdelenie = podrazdelenie;
+    public SearchRecordDTODefaultImpl(String subdivision, String id, String name, String price, String amount) {
+        this.subdivision = subdivision;
         this.id = id;
         this.name = name;
         this.price = price;
@@ -33,8 +33,8 @@ public class SearchRecordDTODefaultImpl implements SearchRecordDTO {
     }
 
     @Override
-    public String podrazdelenie() {
-        return podrazdelenie;
+    public String subdivision() {
+        return subdivision;
     }
 
     @Override
