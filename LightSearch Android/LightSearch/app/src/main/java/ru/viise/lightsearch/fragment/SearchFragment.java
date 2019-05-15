@@ -51,8 +51,8 @@ import ru.viise.lightsearch.cmd.manager.task.CommandManagerAsyncTask;
 import ru.viise.lightsearch.data.CommandManagerAsyncTaskDTO;
 import ru.viise.lightsearch.data.CommandManagerAsyncTaskDTOInit;
 import ru.viise.lightsearch.data.CommandSearchDTO;
-import ru.viise.lightsearch.data.SearchFragmentContentEnum;
 import ru.viise.lightsearch.data.ScanType;
+import ru.viise.lightsearch.data.SearchFragmentContentEnum;
 import ru.viise.lightsearch.data.creator.CommandSearchDTOCreator;
 import ru.viise.lightsearch.data.creator.CommandSearchDTOCreatorInit;
 

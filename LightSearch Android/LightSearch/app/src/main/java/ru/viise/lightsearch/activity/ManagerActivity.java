@@ -50,8 +50,8 @@ import ru.viise.lightsearch.data.CommandAuthorizationDTO;
 import ru.viise.lightsearch.data.CommandManagerAsyncTaskDTO;
 import ru.viise.lightsearch.data.CommandManagerAsyncTaskDTOInit;
 import ru.viise.lightsearch.data.ConnectionDTO;
-import ru.viise.lightsearch.data.SearchRecordDTO;
 import ru.viise.lightsearch.data.ScanType;
+import ru.viise.lightsearch.data.SearchRecordDTO;
 import ru.viise.lightsearch.data.creator.CommandAuthorizationDTOCreator;
 import ru.viise.lightsearch.data.creator.CommandAuthorizationDTOCreatorInit;
 import ru.viise.lightsearch.dialog.alert.ErrorAlertDialogCreator;
@@ -263,6 +263,10 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
             }
             else {
                 callDialogError(openSCCmdRes.message());
+                IContainerFragment containerFragment = getContainerFragment();
+
+                if(containerFragment != null)
+                    containerFragment.switchToSoftCheckFragment();
             }
         }
         else if(commandResult instanceof CancelSoftCheckCommandResult) {

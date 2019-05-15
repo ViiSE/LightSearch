@@ -18,7 +18,6 @@ package ru.viise.lightsearch.cmd.result;
 
 import java.util.List;
 
-import ru.viise.lightsearch.cmd.result.CommandResult;
 import ru.viise.lightsearch.data.SearchRecordDTO;
 
 public interface SearchCommandResult extends CommandResult {
