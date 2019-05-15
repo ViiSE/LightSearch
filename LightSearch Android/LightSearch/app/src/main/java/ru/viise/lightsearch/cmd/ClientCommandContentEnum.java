@@ -74,7 +74,7 @@ public enum ClientCommandContentEnum {
     },
     SUBDIVISION {
         @Override
-        public String stringValue() { return "subdivision"; }
+        public String stringValue() { return "subdiv"; }
     },
     ID {
         @Override
@@ -91,6 +91,10 @@ public enum ClientCommandContentEnum {
     AMOUNT {
         @Override
         public String stringValue() { return "amount"; }
+    },
+    UNIT {
+        @Override
+        public String stringValue() { return "ei"; }
     },
     USER_IDENT {
         @Override

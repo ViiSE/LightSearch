@@ -21,5 +21,6 @@ public enum CommandTypeEnum {
     SEARCH,
     OPEN_SOFT_CHECK,
     CANCEL_SOFT_CHECK,
+    CONFIRM_SOFT_CHECK_PRODUCTS,
     CLOSE_SOFT_CHECK
 }
