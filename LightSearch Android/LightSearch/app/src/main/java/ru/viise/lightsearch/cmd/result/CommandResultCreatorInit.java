@@ -28,7 +28,7 @@ public class CommandResultCreatorInit {
 
     public static CommandResultCreator commandResultSearchCreator(String rawMessage, String IMEI,
                       String subdivision) {
-        return new CommandResultSearchJSONDefaultImpl(rawMessage, IMEI, subdivision);
+        return new CommandResultSearchCreatorJSONDefaultImpl(rawMessage, IMEI, subdivision);
     }
 
     public static CommandResultCreator commandResultSearchCreator(boolean isDone, String message) {

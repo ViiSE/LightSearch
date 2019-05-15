@@ -29,7 +29,7 @@ import ru.viise.lightsearch.exception.MessageParserException;
 import ru.viise.lightsearch.message.parser.MessageParser;
 import ru.viise.lightsearch.message.parser.MessageParserInit;
 
-public class CommandResultSearchJSONDefaultImpl implements CommandResultCreator {
+public class CommandResultSearchCreatorJSONDefaultImpl implements CommandResultCreator {
 
     private final String IS_DONE    = ClientCommandContentEnum.IS_DONE.stringValue();
     private final String IMEI_FIELD = ClientCommandContentEnum.IMEI.stringValue();
@@ -39,7 +39,7 @@ public class CommandResultSearchJSONDefaultImpl implements CommandResultCreator 
     private final String IMEI;
     private final String subdivision;
 
-    public CommandResultSearchJSONDefaultImpl(String rawMessage, String IMEI, String subdivision) {
+    public CommandResultSearchCreatorJSONDefaultImpl(String rawMessage, String IMEI, String subdivision) {
         this.rawMessage = rawMessage;
         this.IMEI = IMEI;
         this.subdivision = subdivision;

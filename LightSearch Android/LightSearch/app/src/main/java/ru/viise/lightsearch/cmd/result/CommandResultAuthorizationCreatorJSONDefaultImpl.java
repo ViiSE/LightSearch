@@ -20,6 +20,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 import ru.viise.lightsearch.cmd.ClientCommandContentEnum;
 import ru.viise.lightsearch.exception.MessageParserException;
@@ -47,13 +48,13 @@ public class CommandResultAuthorizationCreatorJSONDefaultImpl implements Command
         try {
             MessageParser msgParser = MessageParserInit.messageParser();
             JSONObject objMsg = (JSONObject)msgParser.parse(rawMessage);
-            String incomingIMEI = objMsg.get(IMEI_FIELD).toString();
-            String incomingIsDone = objMsg.get(IS_DONE).toString();
+            String incomingIMEI = Objects.requireNonNull(objMsg.get(IMEI_FIELD)).toString();
+            String incomingIsDone = Objects.requireNonNull(objMsg.get(IS_DONE)).toString();
             ResultCommandVerifier resCmdVerifier =
                     ResultCommandVerifierInit.resultCommandVerifier(incomingIMEI, IMEI, incomingIsDone);
 
             boolean isDone = resCmdVerifier.verify();
-            String message = objMsg.get(MESSAGE).toString();
+            String message = Objects.requireNonNull(objMsg.get(MESSAGE)).toString();
 
             JSONArray skladListJ = (JSONArray) objMsg.get(SKLAD_LIST);
             if(skladListJ.size() == 0)
@@ -70,7 +71,7 @@ public class CommandResultAuthorizationCreatorJSONDefaultImpl implements Command
                             isDone, message, skladList, TKList);
             return authCmdRes;
         }
-        catch(MessageParserException ex) {
+        catch(MessageParserException | NullPointerException ex) {
             return null;
         }
     }

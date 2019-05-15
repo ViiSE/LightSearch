@@ -18,6 +18,8 @@ package ru.viise.lightsearch.cmd.result;
 
 import org.json.simple.JSONObject;
 
+import java.util.Objects;
+
 import ru.viise.lightsearch.cmd.ClientCommandContentEnum;
 import ru.viise.lightsearch.exception.MessageParserException;
 import ru.viise.lightsearch.message.parser.MessageParser;
@@ -42,19 +44,19 @@ public class CommandResultCancelSoftCheckCreatorDefaultImpl implements CommandRe
         try {
             MessageParser msgParser = MessageParserInit.messageParser();
             JSONObject objMsg = (JSONObject)msgParser.parse(rawMessage);
-            String incomingIMEI = objMsg.get(IMEI_FIELD).toString();
-            String incomingIsDone = objMsg.get(IS_DONE).toString();
+            String incomingIMEI = Objects.requireNonNull(objMsg.get(IMEI_FIELD)).toString();
+            String incomingIsDone = Objects.requireNonNull(objMsg.get(IS_DONE)).toString();
             ResultCommandVerifier resCmdVerifier =
                     ResultCommandVerifierInit.resultCommandVerifier(incomingIMEI, IMEI, incomingIsDone);
 
             boolean isDone = resCmdVerifier.verify();
-            String message = objMsg.get(MESSAGE).toString();
+            String message = Objects.requireNonNull(objMsg.get(MESSAGE)).toString();
 
             CancelSoftCheckCommandResult cancelSCCmdRes =
                     CancelSoftCheckCommandResultInit.cancelSoftCheckCommandResult(isDone, message);
             return cancelSCCmdRes;
         }
-        catch(MessageParserException ex) {
+        catch(MessageParserException | NullPointerException ex) {
             return null;
         }
     }
