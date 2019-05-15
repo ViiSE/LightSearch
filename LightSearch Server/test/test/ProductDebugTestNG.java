@@ -39,15 +39,19 @@ public class ProductDebugTestNG {
         assertNotNull(name, "Name is null!");
         assertFalse(name.isEmpty(), "Name is empty!");
         
-        String price = "100 руб.";
+        String price = "100.0";
         assertNotNull(price, "Price is null!");
         assertFalse(price.isEmpty(), "price is empty!");
         
-        String amount = "45 шт.";
+        String amount = "45.0";
         assertNotNull(amount, "Amount is null!");
         assertFalse(amount.isEmpty(), "Amount is empty!");
         
-        product = ProductDebugInit.productDebug(podr, id, name, price, amount);
+        String unit = "шт.";
+        assertNotNull(unit, "Unit is null!");
+        assertFalse(unit.isEmpty(), "Unit is empty!");
+        
+        product = ProductDebugInit.productDebug(podr, id, name, price, amount, unit);
         assertNotNull(product, "ProductDebug is null!");
     }
     
@@ -104,5 +108,16 @@ public class ProductDebugTestNG {
         System.out.println("ProductDebug: amount: " + amount);
         
         testEnd("ProductDebug", "amount()");
+    }
+    
+    @Test
+    public void unit() {
+        testBegin("ProductDebug", "unit()");
+        
+        String unit = product.unit();
+        assertNotNull(unit, "ProductDebug: unit is null!");
+        System.out.println("ProductDebug: unit: " + unit);
+        
+        testEnd("ProductDebug", "unit()");
     }
 }

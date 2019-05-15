@@ -20,14 +20,16 @@ public class ProductDebugDefaultImpl implements ProductDebug {
     private final String name;
     private final String price;
     private final String amount;
+    private final String unit;
 
     public ProductDebugDefaultImpl(String podrazdelenie, String id, 
-            String name, String price, String amount) {
+            String name, String price, String amount, String unit) {
         this.podrazdelenie = podrazdelenie;
         this.id = id;
         this.name = name;
         this.price = price;
         this.amount = amount;
+        this.unit = unit;
     }
     
     @Override
@@ -53,5 +55,10 @@ public class ProductDebugDefaultImpl implements ProductDebug {
     @Override
     public String amount() {
         return amount;
+    }
+
+    @Override
+    public String unit() {
+        return unit;
     }
 }

@@ -19,4 +19,5 @@ public interface ProductDebug {
     String name();
     String price();
     String amount();
+    String unit();
 }

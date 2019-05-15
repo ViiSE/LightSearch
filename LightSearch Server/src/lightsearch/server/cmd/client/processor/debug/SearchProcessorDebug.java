@@ -47,8 +47,43 @@ public class SearchProcessorDebug extends AbstractProcessorClient {
                 JSONArray jData = new JSONArray();
                 
                 products.map().forEach((id, product) -> {
-                    if(id.equals(clientCommand.barcode()))
-                        if(product.podrazdelenie().equals(clientCommand.sklad())) {
+                    if(product.id().equals(clientCommand.barcode()))
+                        if(clientCommand.sklad().equals("all") &&
+                                clientCommand.TK().equals("all")) {
+                            JSONObject jProd = new JSONObject();
+                                jProd.put("podrazdelenie", product.podrazdelenie());
+                                jProd.put("ID", product.id());
+                                jProd.put("name", product.name());
+                                jProd.put("price", product.price());
+                                jProd.put("amount", product.amount());
+
+                                jData.add(jProd);
+                        }
+                        else if(clientCommand.sklad().equals("all")) {
+                            if(product.podrazdelenie().contains("Склад")) {
+                                JSONObject jProd = new JSONObject();
+                                jProd.put("podrazdelenie", product.podrazdelenie());
+                                jProd.put("ID", product.id());
+                                jProd.put("name", product.name());
+                                jProd.put("price", product.price());
+                                jProd.put("amount", product.amount());
+
+                                jData.add(jProd);
+                            }
+                        }
+                        else if(clientCommand.TK().equals("all")) {
+                            if(product.podrazdelenie().contains("Склад")) {
+                                JSONObject jProd = new JSONObject();
+                                jProd.put("podrazdelenie", product.podrazdelenie());
+                                jProd.put("ID", product.id());
+                                jProd.put("name", product.name());
+                                jProd.put("price", product.price());
+                                jProd.put("amount", product.amount());
+
+                                jData.add(jProd);
+                            }
+                        }
+                        else if(product.podrazdelenie().equals(clientCommand.sklad())) {
                             JSONObject jProd = new JSONObject();
                             jProd.put("podrazdelenie", product.podrazdelenie());
                             jProd.put("ID", product.id());
@@ -58,6 +93,16 @@ public class SearchProcessorDebug extends AbstractProcessorClient {
                             
                             jData.add(jProd);
                         }
+                        else if(product.podrazdelenie().equals(clientCommand.TK())) {
+                            JSONObject jProd = new JSONObject();
+                            jProd.put("podrazdelenie", product.podrazdelenie());
+                            jProd.put("ID", product.id());
+                            jProd.put("name", product.name());
+                            jProd.put("price", product.price());
+                            jProd.put("amount", product.amount());
+                            
+                            jData.add(jProd);
+                        } 
                 });
                 
                 JSONObject resJSON = new JSONObject();
