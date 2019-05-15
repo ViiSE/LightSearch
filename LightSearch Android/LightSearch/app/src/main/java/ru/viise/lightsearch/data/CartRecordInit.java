@@ -18,8 +18,8 @@ package ru.viise.lightsearch.data;
 
 public class CartRecordInit {
 
-    public static CartRecord cartRecord(String name, String barcode, float price,
-                                        float maxAmount, String unitAmount) {
-        return new CartRecordDefaultImpl(name, barcode, price, maxAmount, unitAmount);
+    public static CartRecord cartRecord(String name, String barcode, float price, String unitAmount,
+                                        SubdivisionList subdivisions) {
+        return new CartRecordDefaultImpl(name, barcode, price, unitAmount, subdivisions);
     }
 }

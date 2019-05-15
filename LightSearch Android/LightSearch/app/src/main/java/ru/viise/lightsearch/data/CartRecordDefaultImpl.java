@@ -24,16 +24,25 @@ public class CartRecordDefaultImpl implements CartRecord {
     private final float price;
     private final String unitAmount;
     private final String unitPrice = "руб.";
+    private final SubdivisionList subdivisions;
 
     private float currentAmount;
     private float totalCost;
 
-    public CartRecordDefaultImpl(String name, String barcode, float price, float maxAmount, String unitAmount) {
+    public CartRecordDefaultImpl(String name, String barcode, float price, String unitAmount,
+                                 SubdivisionList subdivisions) {
         this.name = name;
         this.barcode = barcode;
-        this.maxAmount = maxAmount;
         this.price = price;
         this.unitAmount = unitAmount;
+        this.subdivisions = subdivisions;
+
+        int tempMaxAmount = 0;
+        for(Subdivision subdivision : subdivisions.collection())
+            tempMaxAmount += subdivision.productAmount();
+
+        maxAmount = tempMaxAmount;
+
         currentAmount = 1;
         totalCost = price;
     }
@@ -81,5 +90,10 @@ public class CartRecordDefaultImpl implements CartRecord {
     @Override
     public String maxAmountWithUnit() {
         return maxAmount + " " + unitAmount;
+    }
+
+    @Override
+    public SubdivisionList subdivisions() {
+        return subdivisions;
     }
 }

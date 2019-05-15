@@ -16,14 +16,23 @@
 
 package ru.viise.lightsearch.data;
 
-public interface CartRecord {
-    String name();
-    String barcode();
-    String priceWithUnit();
-    float currentAmount();
-    String totalCostWithUnit();
-    float totalCost();
-    String maxAmountWithUnit();
-    void setProductsCount(float count);
-    SubdivisionList subdivisions();
+public class SubdivisionDefaultImpl implements Subdivision {
+
+    private final String name;
+    private final float productAmount;
+
+    public SubdivisionDefaultImpl(String name, String productAmount) {
+        this.name = name;
+        this.productAmount = Float.parseFloat(productAmount);
+    }
+
+    @Override
+    public String name() {
+        return name;
+    }
+
+    @Override
+    public float productAmount() {
+        return productAmount;
+    }
 }
