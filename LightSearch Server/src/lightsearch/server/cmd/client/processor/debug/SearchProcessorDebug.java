@@ -50,58 +50,23 @@ public class SearchProcessorDebug extends AbstractProcessorClient {
                     if(product.id().equals(clientCommand.barcode()))
                         if(clientCommand.sklad().equals("all") &&
                                 clientCommand.TK().equals("all")) {
-                            JSONObject jProd = new JSONObject();
-                                jProd.put("subdiv", product.subdivision());
-                                jProd.put("ID", product.id());
-                                jProd.put("name", product.name());
-                                jProd.put("price", product.price());
-                                jProd.put("amount", product.amount());
-
-                                jData.add(jProd);
+                            addProductJSONtoData(jData, product);
                         }
                         else if(clientCommand.sklad().equals("all")) {
                             if(product.subdivision().contains("Склад")) {
-                                JSONObject jProd = new JSONObject();
-                                jProd.put("subdiv", product.subdivision());
-                                jProd.put("ID", product.id());
-                                jProd.put("name", product.name());
-                                jProd.put("price", product.price());
-                                jProd.put("amount", product.amount());
-
-                                jData.add(jProd);
+                                addProductJSONtoData(jData, product);
                             }
                         }
                         else if(clientCommand.TK().equals("all")) {
                             if(product.subdivision().contains("Склад")) {
-                                JSONObject jProd = new JSONObject();
-                                jProd.put("subdiv", product.subdivision());
-                                jProd.put("ID", product.id());
-                                jProd.put("name", product.name());
-                                jProd.put("price", product.price());
-                                jProd.put("amount", product.amount());
-
-                                jData.add(jProd);
+                                addProductJSONtoData(jData, product);
                             }
                         }
                         else if(product.subdivision().equals(clientCommand.sklad())) {
-                            JSONObject jProd = new JSONObject();
-                            jProd.put("subdiv", product.subdivision());
-                            jProd.put("ID", product.id());
-                            jProd.put("name", product.name());
-                            jProd.put("price", product.price());
-                            jProd.put("amount", product.amount());
-                            
-                            jData.add(jProd);
+                            addProductJSONtoData(jData, product);
                         }
                         else if(product.subdivision().equals(clientCommand.TK())) {
-                            JSONObject jProd = new JSONObject();
-                            jProd.put("subdiv", product.subdivision());
-                            jProd.put("ID", product.id());
-                            jProd.put("name", product.name());
-                            jProd.put("price", product.price());
-                            jProd.put("amount", product.amount());
-                            
-                            jData.add(jProd);
+                            addProductJSONtoData(jData, product);
                         } 
                 });
                 
@@ -124,4 +89,15 @@ public class SearchProcessorDebug extends AbstractProcessorClient {
                     "Неверный формат команды. Обратитесь к администратору для устранения ошибки. Вы были отключены от сервера", null);
     }
     
+    private void addProductJSONtoData(JSONArray jData, ProductDebug product) {
+        JSONObject jProd = new JSONObject();
+        jProd.put("subdiv", product.subdivision());
+        jProd.put("ID", product.id());
+        jProd.put("name", product.name());
+        jProd.put("price", product.price());
+        jProd.put("amount", product.amount());
+        jProd.put("ei", product.unit());
+
+        jData.add(jProd);
+    }
 }
