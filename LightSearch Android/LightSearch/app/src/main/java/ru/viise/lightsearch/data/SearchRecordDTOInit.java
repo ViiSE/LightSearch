@@ -19,7 +19,7 @@ package ru.viise.lightsearch.data;
 public class SearchRecordDTOInit {
 
     public static SearchRecordDTO searchRecordDTO(String subdivision, String id, String fullName,
-            String price, String amount) {
-        return new SearchRecordDTODefaultImpl(subdivision, id, fullName, price, amount);
+            String price, String amount, String unit) {
+        return new SearchRecordDTODefaultImpl(subdivision, id, fullName, price, amount, unit);
     }
 }

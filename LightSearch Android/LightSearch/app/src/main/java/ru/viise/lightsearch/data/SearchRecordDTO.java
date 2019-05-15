@@ -22,4 +22,5 @@ public interface SearchRecordDTO {
     String name();
     String price();
     String amount();
+    String unit();
 }

@@ -23,13 +23,16 @@ public class SearchRecordDTODefaultImpl implements SearchRecordDTO {
     private final String name;
     private final String price;
     private final String amount;
+    private final String unit;
 
-    public SearchRecordDTODefaultImpl(String subdivision, String id, String name, String price, String amount) {
+    public SearchRecordDTODefaultImpl(String subdivision, String id, String name, String price,
+              String amount, String unit) {
         this.subdivision = subdivision;
         this.id = id;
         this.name = name;
         this.price = price;
         this.amount = amount;
+        this.unit = unit;
     }
 
     @Override
@@ -55,5 +58,10 @@ public class SearchRecordDTODefaultImpl implements SearchRecordDTO {
     @Override
     public String amount() {
         return amount;
+    }
+
+    @Override
+    public String unit() {
+        return unit;
     }
 }

@@ -41,7 +41,7 @@ public class OneResultAlertDialogCreatorDefaultImpl implements OneResultAlertDia
                         "ИД: " + searchRecord.id() + "\n" +
                         "Наименование: " + searchRecord.name() + "\n" +
                         "Цена: " + searchRecord.price() + " руб.\n" +
-                        "Кол-во: " + searchRecord.amount() + " шт.\n")
+                        "Кол-во: " + searchRecord.amount() + " " + searchRecord.unit() + "\n")
                 .setPositiveButton(OK, (dialogInterface, i) -> dialogInterface.dismiss()).create();
     }
 }
