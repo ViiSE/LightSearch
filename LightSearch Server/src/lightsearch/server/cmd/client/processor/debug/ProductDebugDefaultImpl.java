@@ -15,24 +15,26 @@ package lightsearch.server.cmd.client.processor.debug;
  */
 public class ProductDebugDefaultImpl implements ProductDebug {
 
-    private final String podrazdelenie;
+    private final String subdivision;
     private final String id;
     private final String name;
     private final String price;
     private final String amount;
+    private final String unit;
 
-    public ProductDebugDefaultImpl(String podrazdelenie, String id, 
-            String name, String price, String amount) {
-        this.podrazdelenie = podrazdelenie;
+    public ProductDebugDefaultImpl(String subdivision, String id, 
+            String name, String price, String amount, String unit) {
+        this.subdivision = subdivision;
         this.id = id;
         this.name = name;
         this.price = price;
         this.amount = amount;
+        this.unit = unit;
     }
     
     @Override
-    public String podrazdelenie() {
-        return podrazdelenie;
+    public String subdivision() {
+        return subdivision;
     }
 
     @Override
@@ -53,5 +55,10 @@ public class ProductDebugDefaultImpl implements ProductDebug {
     @Override
     public String amount() {
         return amount;
+    }
+
+    @Override
+    public String unit() {
+        return unit;
     }
 }

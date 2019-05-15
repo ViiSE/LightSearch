@@ -154,8 +154,8 @@ public class SearchProcessorDebugTestNG {
                             + "\"command\":\"search\""
                             + "\"IMEI\":\"123456789123456\""
                             + "\"barcode\":\"111111\""
-                            + "\"sklad\":\"Склад 1\""
-                            + "\"TK\":\"null\""
+                            + "\"sklad\":\"all\""
+                            + "\"TK\":\"all\""
                         + "}";
             ClientCommandConverter clientCmdConverter = ClientCommandConverterInit.clientCommandConverter();
             ClientCommand clientCmd;

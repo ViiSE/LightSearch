@@ -47,17 +47,27 @@ public class SearchProcessorDebug extends AbstractProcessorClient {
                 JSONArray jData = new JSONArray();
                 
                 products.map().forEach((id, product) -> {
-                    if(id.equals(clientCommand.barcode()))
-                        if(product.podrazdelenie().equals(clientCommand.sklad())) {
-                            JSONObject jProd = new JSONObject();
-                            jProd.put("podrazdelenie", product.podrazdelenie());
-                            jProd.put("ID", product.id());
-                            jProd.put("name", product.name());
-                            jProd.put("price", product.price());
-                            jProd.put("amount", product.amount());
-                            
-                            jData.add(jProd);
+                    if(product.id().equals(clientCommand.barcode()))
+                        if(clientCommand.sklad().equals("all") &&
+                                clientCommand.TK().equals("all")) {
+                            addProductJSONtoData(jData, product);
                         }
+                        else if(clientCommand.sklad().equals("all")) {
+                            if(product.subdivision().contains("Склад")) {
+                                addProductJSONtoData(jData, product);
+                            }
+                        }
+                        else if(clientCommand.TK().equals("all")) {
+                            if(product.subdivision().contains("Склад")) {
+                                addProductJSONtoData(jData, product);
+                            }
+                        }
+                        else if(product.subdivision().equals(clientCommand.sklad())) {
+                            addProductJSONtoData(jData, product);
+                        }
+                        else if(product.subdivision().equals(clientCommand.TK())) {
+                            addProductJSONtoData(jData, product);
+                        } 
                 });
                 
                 JSONObject resJSON = new JSONObject();
@@ -79,4 +89,15 @@ public class SearchProcessorDebug extends AbstractProcessorClient {
                     "Неверный формат команды. Обратитесь к администратору для устранения ошибки. Вы были отключены от сервера", null);
     }
     
+    private void addProductJSONtoData(JSONArray jData, ProductDebug product) {
+        JSONObject jProd = new JSONObject();
+        jProd.put("subdiv", product.subdivision());
+        jProd.put("ID", product.id());
+        jProd.put("name", product.name());
+        jProd.put("price", product.price());
+        jProd.put("amount", product.amount());
+        jProd.put("ei", product.unit());
+
+        jData.add(jProd);
+    }
 }

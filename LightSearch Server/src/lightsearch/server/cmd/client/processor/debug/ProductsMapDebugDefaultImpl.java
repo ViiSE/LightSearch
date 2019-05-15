@@ -26,25 +26,25 @@ public class ProductsMapDebugDefaultImpl implements ProductsMapDebug {
     }
 
     private void initProducts() {
-        ProductDebug pr1 = createProduct("Склад 1", "111111", "Товар 1", "100 руб.", "5 шт.");
-        ProductDebug pr2 = createProduct("Склад 1", "222222", "Товар 2", "150 руб.", "10 шт.");
-        ProductDebug pr3 = createProduct("Склад 2", "333333", "Товар 3", "10 руб.", "100 шт.");
-        ProductDebug pr4 = createProduct("Склад 2", "444444", "Товар 4", "65 руб.", "7 шт.");
-        ProductDebug pr5 = createProduct("ТК 1", "555555", "Товар 5", "100 руб.", "7 шт.");
-        ProductDebug pr6 = createProduct("ТК 1", "666666", "Товар 5", "150 руб.", "12 шт.");
+        ProductDebug pr1 = createProduct("Склад 1", "111111", "Товар 1", "100.0", "5", "шт.");
+        ProductDebug pr2 = createProduct("Склад 1", "222222", "Товар 2", "1500.0.", "10", "шт.");
+        ProductDebug pr3 = createProduct("Склад 2", "111111", "Товар 1", "100.0", "100", "шт.");
+        ProductDebug pr4 = createProduct("Склад 2", "444444", "Товар 4", "65.0", "7", "шт.");
+        ProductDebug pr5 = createProduct("ТК 1", "111111", "Товар 1", "100.0", "7", "шт.");
+        ProductDebug pr6 = createProduct("ТК 2", "444444", "Товар 4", "650.0", "12", "шт.");
         
-        products.put(pr1.id(), pr1);
-        products.put(pr2.id(), pr2);
-        products.put(pr3.id(), pr3);
-        products.put(pr4.id(), pr4);
-        products.put(pr5.id(), pr5);
-        products.put(pr6.id(), pr6);
+        products.put("1", pr1);
+        products.put("2", pr2);
+        products.put("3", pr3);
+        products.put("4", pr4);
+        products.put("5", pr5);
+        products.put("6", pr6);
     }
     
-    private ProductDebug createProduct(String podr, String id, String name, 
-            String price, String amount) {
+    private ProductDebug createProduct(String subdiv, String id, String name, 
+            String price, String amount, String unit) {
         ProductDebug pr = 
-                ProductDebugInit.productDebug(podr, id, name, price, amount);
+                ProductDebugInit.productDebug(subdiv, id, name, price, amount, unit);
         return pr;
     }
 
