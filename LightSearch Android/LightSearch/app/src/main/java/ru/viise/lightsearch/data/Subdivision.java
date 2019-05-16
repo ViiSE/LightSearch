@@ -16,7 +16,9 @@
 
 package ru.viise.lightsearch.data;
 
-public interface Subdivision {
+import android.os.Parcelable;
+
+public interface Subdivision extends Parcelable {
     String name();
     float productAmount();
 }

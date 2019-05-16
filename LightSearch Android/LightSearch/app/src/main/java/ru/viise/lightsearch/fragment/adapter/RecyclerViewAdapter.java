@@ -29,16 +29,16 @@ import android.widget.TextView;
 import java.util.List;
 
 import ru.viise.lightsearch.R;
-import ru.viise.lightsearch.data.CartRecord;
+import ru.viise.lightsearch.data.SoftCheckRecord;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.DefaultViewHolder> {
 
     private final TextView twTotalCost;
     private final String total;
-    private List<CartRecord> data;
+    private List<SoftCheckRecord> data;
     private final String priceUnit;
 
-    public RecyclerViewAdapter(List<CartRecord> data, TextView twTotalCost, String priceUnit) {
+    public RecyclerViewAdapter(List<SoftCheckRecord> data, TextView twTotalCost, String priceUnit) {
         this.data = data;
         this.twTotalCost = twTotalCost;
         total = twTotalCost.getText().toString() + " ";
@@ -48,7 +48,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private void getTotalCost() {
         float totalCost = 0;
-        for(CartRecord record : data) {
+        for(SoftCheckRecord record : data) {
             totalCost += record.totalCost();
         }
         String res = total + totalCost + " " + priceUnit;
@@ -68,12 +68,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         DefaultViewHolder(View itemView) {
             super(itemView);
-            twCardName          = itemView.findViewById(R.id.textViewCardName);
-            twCardBarcode       = itemView.findViewById(R.id.textViewCardBarcode);
-            twCardMaxAmount     = itemView.findViewById(R.id.textViewCardMaxAmount);
-            twCardPrice         = itemView.findViewById(R.id.textViewCardPrice);
-            twCardTotalCost     = itemView.findViewById(R.id.textViewCardTotalCost);
-            etCardCurrentAmount = itemView.findViewById(R.id.editTextCardCurrentAmount);
+            twCardName          = itemView.findViewById(R.id.textViewCardNameSC);
+            twCardBarcode       = itemView.findViewById(R.id.textViewCardBarcodeSC);
+            twCardMaxAmount     = itemView.findViewById(R.id.textViewCardMaxAmountSC);
+            twCardPrice         = itemView.findViewById(R.id.textViewCardPriceSC);
+            twCardTotalCost     = itemView.findViewById(R.id.textViewCardTotalCostSC);
+            etCardCurrentAmount = itemView.findViewById(R.id.editTextCardCurrentAmountSC);
 
             etCardCurrentAmount.addTextChangedListener(new TextWatcher() {
 
@@ -107,7 +107,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                             data.get(pos).setProductsCount(curAmount);
                             twCardTotalCost.setText(data.get(pos).totalCostWithUnit());
                             ignore = true;
-                            if (!delAction) {
+                            if(!delAction) {
                                 prevString = editable.toString().toLowerCase();
                                 etCardCurrentAmount.removeTextChangedListener(this);
                                 etCardCurrentAmount.setText(String.valueOf(data.get(pos).currentAmount()));
@@ -129,7 +129,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @NonNull
     @Override
     public DefaultViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_row, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_row_open_soft_check, parent, false);
         return new DefaultViewHolder(itemView);
     }
 
@@ -142,7 +142,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.ignore = true;
         holder.etCardCurrentAmount.setText(String.valueOf(data.get(position).currentAmount()));
         holder.ignore = false;
-        holder.twCardTotalCost.setText(data.get(position).priceWithUnit());
+        holder.twCardTotalCost.setText(data.get(position).totalCostWithUnit());
     }
 
     @Override
@@ -156,23 +156,34 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         notifyItemRemoved(position);
     }
 
-    public void restoreItem(CartRecord record, int position) {
+    public void restoreItem(SoftCheckRecord record, int position) {
         data.add(position, record);
         getTotalCost();
         notifyItemInserted(position);
     }
 
-    public void addItem(CartRecord record) {
-        data.add(record);
+    public void addItem(SoftCheckRecord record) {
+        boolean isFound = false;
+        for(int pos = 0; pos < data.size(); pos++) {
+            SoftCheckRecord rec = data.get(pos);
+            if(rec.barcode().equals(record.barcode())) {
+                rec.setProductsCount(rec.currentAmount() + 1);
+                isFound = true;
+                break;
+            }
+        }
+        if(!isFound)
+            data.add(record);
+
         getTotalCost();
         notifyDataSetChanged();
     }
 
-    public CartRecord getItem(int position) {
+    public SoftCheckRecord getItem(int position) {
         return data.get(position);
     }
 
-    public List<CartRecord> getData() {
+    public List<SoftCheckRecord> getData() {
         return data;
     }
 }

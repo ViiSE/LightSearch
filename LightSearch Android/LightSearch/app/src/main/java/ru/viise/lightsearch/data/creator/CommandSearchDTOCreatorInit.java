@@ -24,4 +24,8 @@ public class CommandSearchDTOCreatorInit {
             String barcode, SearchFragmentContentEnum subdivision, String sklad, String TK) {
         return new CommandSearchDTOCreatorDefaultImpl(barcode, subdivision, sklad, TK);
     }
+
+    public static CommandSearchDTOCreator commandSearchDTOCreator(String barcode) {
+        return new CommandSearchDTOCreatorSoftCheckImpl(barcode);
+    }
 }

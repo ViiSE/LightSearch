@@ -19,16 +19,18 @@ package ru.viise.lightsearch.cmd.result;
 import org.json.simple.JSONObject;
 
 import java.util.List;
+import java.util.Objects;
 
 import ru.viise.lightsearch.cmd.ClientCommandContentEnum;
 import ru.viise.lightsearch.data.SearchRecordDTO;
-import ru.viise.lightsearch.data.creator.SearchRecordsDTOCreator;
-import ru.viise.lightsearch.data.creator.SearchRecordsDTOCreatorInit;
+import ru.viise.lightsearch.data.SoftCheckRecord;
+import ru.viise.lightsearch.data.creator.SoftCheckRecordCreator;
+import ru.viise.lightsearch.data.creator.SoftCheckRecordCreatorInit;
 import ru.viise.lightsearch.exception.MessageParserException;
 import ru.viise.lightsearch.message.parser.MessageParser;
 import ru.viise.lightsearch.message.parser.MessageParserInit;
 
-public class CommandResultSearchJSONDefaultImpl implements CommandResultCreator {
+public class CommandResultSearchSoftCheckCreatorJSONDefaultImpl implements CommandResultCreator {
 
     private final String IS_DONE    = ClientCommandContentEnum.IS_DONE.stringValue();
     private final String IMEI_FIELD = ClientCommandContentEnum.IMEI.stringValue();
@@ -36,12 +38,10 @@ public class CommandResultSearchJSONDefaultImpl implements CommandResultCreator 
 
     private final String rawMessage;
     private final String IMEI;
-    private final String subdivision;
 
-    public CommandResultSearchJSONDefaultImpl(String rawMessage, String IMEI, String subdivision) {
+    public CommandResultSearchSoftCheckCreatorJSONDefaultImpl(String rawMessage, String IMEI) {
         this.rawMessage = rawMessage;
         this.IMEI = IMEI;
-        this.subdivision = subdivision;
     }
 
     @Override
@@ -49,21 +49,23 @@ public class CommandResultSearchJSONDefaultImpl implements CommandResultCreator 
         try {
             MessageParser msgParser = MessageParserInit.messageParser();
             JSONObject objMsg = (JSONObject)msgParser.parse(rawMessage);
-            String incomingIMEI = objMsg.get(IMEI_FIELD).toString();
-            String incomingIsDone = objMsg.get(IS_DONE).toString();
+            String incomingIMEI = Objects.requireNonNull(objMsg.get(IMEI_FIELD)).toString();
+
+            String incomingIsDone = Objects.requireNonNull(objMsg.get(IS_DONE)).toString();
             ResultCommandVerifier resCmdVerifier =
                     ResultCommandVerifierInit.resultCommandVerifier(incomingIMEI, IMEI, incomingIsDone);
 
             boolean isDone = resCmdVerifier.verify();
-            SearchRecordsDTOCreator searchRecsDTOCr =
-                    SearchRecordsDTOCreatorInit.searchRecordsDTOCreator(objMsg.get(DATA));
-            List<SearchRecordDTO> searchRecords = searchRecsDTOCr.createSearchRecordsDTO();
+            SoftCheckRecordCreator recordCreator =
+                    SoftCheckRecordCreatorInit.softCheckRecordCreator(objMsg.get(DATA));
+            SoftCheckRecord record = recordCreator.createSoftCheckRecord();
 
-            SearchCommandResult searchCmdRes = SearchCommandResultInit.searchCommandResult(isDone,
-                    null, searchRecords, subdivision);
-            return searchCmdRes;
+            SearchSoftCheckCommandResult result =
+                    SearchSoftCheckCommandResultInit.searchSoftCheckCommandResult(isDone,
+                            null, record);
+            return result;
         }
-        catch(MessageParserException ex) {
+        catch(MessageParserException | NullPointerException ex) {
             return null;
         }
     }

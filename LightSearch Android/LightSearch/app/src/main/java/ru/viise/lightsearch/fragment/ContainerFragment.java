@@ -36,6 +36,7 @@ import ru.viise.lightsearch.activity.ManagerActivityUI;
 import ru.viise.lightsearch.activity.OnBackPressedListener;
 import ru.viise.lightsearch.activity.OnBackPressedListenerType;
 import ru.viise.lightsearch.cmd.manager.CommandManager;
+import ru.viise.lightsearch.data.SoftCheckRecord;
 import ru.viise.lightsearch.dialog.alert.CancelSoftCheckAlertDialogCreator;
 import ru.viise.lightsearch.dialog.alert.CancelSoftCheckAlertDialogCreatorInit;
 import ru.viise.lightsearch.dialog.alert.ExitToAuthorizationAlertDialogCreator;
@@ -46,6 +47,8 @@ import ru.viise.lightsearch.find.ISearchFragmentImplFinder;
 import ru.viise.lightsearch.find.ISearchFragmentImplFinderInit;
 import ru.viise.lightsearch.find.ISoftCheckContainerFragmentImplFinder;
 import ru.viise.lightsearch.find.ISoftCheckContainerFragmentImplFinderInit;
+import ru.viise.lightsearch.find.ISoftCheckFragmentImplFinder;
+import ru.viise.lightsearch.find.ISoftCheckFragmentImplFinderInit;
 
 
 public class ContainerFragment extends Fragment implements OnBackPressedListener, IContainerFragment {
@@ -61,6 +64,18 @@ public class ContainerFragment extends Fragment implements OnBackPressedListener
     private ManagerActivityHandler managerActivityHandler;
     private OnBackPressedListenerType onBackPressedListenerType;
 
+    private static final String ON_BACK_TYPE = "OnBackType";
+    private int selected = 0; //0 - CONTAINER_FRAGMENT, 1 - SOFT_CHECK_FRAGMENT
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (savedInstanceState != null){
+            selected = savedInstanceState.getInt(ON_BACK_TYPE);
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -74,6 +89,11 @@ public class ContainerFragment extends Fragment implements OnBackPressedListener
 
         queryDialog = new SpotsDialog.Builder().setContext(this.getActivity()).setMessage("Выполнение").setCancelable(false).build();
 
+        if(selected == 0)
+            onBackPressedListenerType = OnBackPressedListenerType.CONTAINER_FRAGMENT;
+        else if(selected == 1)
+            onBackPressedListenerType = OnBackPressedListenerType.SOFT_CHECK_FRAGMENT;
+
         return view;
     }
 
@@ -83,6 +103,12 @@ public class ContainerFragment extends Fragment implements OnBackPressedListener
         managerActivityHandler = (ManagerActivityHandler) this.getActivity();
         ManagerActivityUI managerActivityUI = (ManagerActivityUI) this.getActivity();
         commandManager = managerActivityUI.commandManager();
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putInt(ON_BACK_TYPE, selected);
+        super.onSaveInstanceState(outState);
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -133,10 +159,19 @@ public class ContainerFragment extends Fragment implements OnBackPressedListener
     @Override
     public void setCardCode(String cardCode) {
         IOpenSoftCheckFragmentImplFinder openSoftCheckFragmentImplFinder =
-        IOpenSoftCheckFragmentImplFinderInit.openSoftCheckFragmentImplFinder(this);
+                IOpenSoftCheckFragmentImplFinderInit.openSoftCheckFragmentImplFinder(this);
         IOpenSoftCheckFragment openSoftCheckFragment = openSoftCheckFragmentImplFinder.findImpl();
         if(openSoftCheckFragment != null)
             openSoftCheckFragment.setCardCode(cardCode);
+    }
+
+    @Override
+    public void setSoftCheckBarcode(String barcode) {
+        ISoftCheckFragmentImplFinder softCheckFragmentImplFinder =
+                ISoftCheckFragmentImplFinderInit.softCheckFragmentImplFinder(this);
+        ISoftCheckFragment softCheckFragment = softCheckFragmentImplFinder.findImpl();
+        if(softCheckFragment != null)
+            softCheckFragment.setSoftCheckBarcode(barcode);
     }
 
     @Override
@@ -153,6 +188,15 @@ public class ContainerFragment extends Fragment implements OnBackPressedListener
         if(softCheckContainerFragment != null)
             softCheckContainerFragment.switchToOpenSoftCheckFragment();
         onBackPressedListenerType = OnBackPressedListenerType.CONTAINER_FRAGMENT;
+    }
+
+    @Override
+    public void addSoftCheckRecord(SoftCheckRecord record) {
+        ISoftCheckFragmentImplFinder softCheckFragmentImplFinder =
+                ISoftCheckFragmentImplFinderInit.softCheckFragmentImplFinder(this);
+        ISoftCheckFragment softCheckFragment = softCheckFragmentImplFinder.findImpl();
+        if(softCheckFragment != null)
+            softCheckFragment.addSoftCheckRecord(record);
     }
 
     public void setupSearchFragment(String[] skladArray, String[] TKArray) {

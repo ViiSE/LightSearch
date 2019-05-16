@@ -16,9 +16,13 @@
 
 package ru.viise.lightsearch.fragment;
 
+import ru.viise.lightsearch.data.SoftCheckRecord;
+
 public interface IContainerFragment {
     void setSearchBarcode(String barcode);
     void setCardCode(String cardCode);
+    void setSoftCheckBarcode(String barcode);
     void switchToSoftCheckFragment();
     void switchToOpenSoftCheckFragment();
+    void addSoftCheckRecord(SoftCheckRecord record);
 }

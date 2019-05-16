@@ -16,9 +16,11 @@
 
 package ru.viise.lightsearch.data;
 
+import android.os.Parcelable;
+
 import java.util.Collection;
 
-public interface SubdivisionList {
+public interface SubdivisionList extends Parcelable {
     void addSubdivision(Subdivision subdivision);
     Collection<Subdivision> collection();
 }

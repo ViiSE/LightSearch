@@ -21,6 +21,7 @@ import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import ru.viise.lightsearch.cmd.ClientCommandContentEnum;
 import ru.viise.lightsearch.data.SearchRecordDTO;
@@ -33,6 +34,7 @@ public class SearchRecordsDTOCreatorJSONDefaultImpl implements SearchRecordsDTOC
     private final String NAME          = ClientCommandContentEnum.NAME.stringValue();
     private final String PRICE         = ClientCommandContentEnum.PRICE.stringValue();
     private final String AMOUNT        = ClientCommandContentEnum.AMOUNT.stringValue();
+    private final String UNIT          = ClientCommandContentEnum.UNIT.stringValue();
 
     private final JSONArray data;
 
@@ -43,17 +45,23 @@ public class SearchRecordsDTOCreatorJSONDefaultImpl implements SearchRecordsDTOC
     @Override
     public List<SearchRecordDTO> createSearchRecordsDTO() {
         List<SearchRecordDTO> records = new ArrayList<>();
-        for(Object rec : data) {
-            JSONObject recJ = (JSONObject)rec;
-            SearchRecordDTO searchRecDTO = SearchRecordDTOInit.searchRecordDTO(
-                    recJ.get(SUBDIVISION).toString(),
-                    recJ.get(ID).toString(),
-                    recJ.get(NAME).toString(),
-                    recJ.get(PRICE).toString(),
-                    recJ.get(AMOUNT).toString()
-            );
-            records.add(searchRecDTO);
+        try {
+            for (Object rec : data) {
+                JSONObject recJ = (JSONObject) rec;
+                SearchRecordDTO searchRecDTO = SearchRecordDTOInit.searchRecordDTO(
+                        Objects.requireNonNull(recJ.get(SUBDIVISION)).toString(),
+                        Objects.requireNonNull(recJ.get(ID)).toString(),
+                        Objects.requireNonNull(recJ.get(NAME)).toString(),
+                        Objects.requireNonNull(recJ.get(PRICE)).toString(),
+                        Objects.requireNonNull(recJ.get(AMOUNT)).toString(),
+                        Objects.requireNonNull(recJ.get(UNIT)).toString()
+                );
+                records.add(searchRecDTO);
+            }
+            return records;
         }
-        return records;
+        catch(NullPointerException ex) {
+            return new ArrayList<>();
+        }
     }
 }

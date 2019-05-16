@@ -34,6 +34,9 @@ import java.util.List;
 
 import dmax.dialog.SpotsDialog;
 import ru.viise.lightsearch.R;
+import ru.viise.lightsearch.activity.result.holder.ResultCommandHolderUI;
+import ru.viise.lightsearch.activity.result.holder.ResultCommandUICreator;
+import ru.viise.lightsearch.activity.result.holder.ResultCommandUICreatorInit;
 import ru.viise.lightsearch.cmd.CommandTypeEnum;
 import ru.viise.lightsearch.cmd.manager.CommandManager;
 import ru.viise.lightsearch.cmd.manager.CommandManagerInit;
@@ -44,6 +47,7 @@ import ru.viise.lightsearch.cmd.result.CancelSoftCheckCommandResult;
 import ru.viise.lightsearch.cmd.result.CommandResult;
 import ru.viise.lightsearch.cmd.result.OpenSoftCheckCommandResult;
 import ru.viise.lightsearch.cmd.result.SearchCommandResult;
+import ru.viise.lightsearch.cmd.result.SearchSoftCheckCommandResult;
 import ru.viise.lightsearch.data.AuthorizationDTO;
 import ru.viise.lightsearch.data.ClientHandlerCreatorDTO;
 import ru.viise.lightsearch.data.ClientHandlerCreatorDTOInit;
@@ -85,6 +89,7 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
     private AlertDialog connectDialog;
     private CommandManager commandManager;
     private ScanType scanType;
+    private ResultCommandHolderUI commandHolderUI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +105,9 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
 
         connectDialog = new SpotsDialog.Builder().setContext(ManagerActivity.this).setMessage("Подключение").setCancelable(false).build();
         authDialog = new SpotsDialog.Builder().setContext(ManagerActivity.this).setMessage("Авторизация").setCancelable(false).build();
+
+        ResultCommandUICreator resCmdUiCr = ResultCommandUICreatorInit.resultCommandUICreator(this);
+        commandHolderUI = resCmdUiCr.createResultCommandHolderUI();
 
         doAuthorizationFragmentTransaction();
     }
@@ -128,7 +136,8 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
                     containerFragment.setSearchBarcode(scanContent);
                 else if(scanType == ScanType.OPEN_SOFT_CHECK)
                     containerFragment.setCardCode(scanContent);
-
+                else if(scanType == ScanType.SEARCH_SOFT_CHECK)
+                    containerFragment.setSoftCheckBarcode(scanContent);
         }
     }
 
@@ -143,44 +152,44 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
         fragmentTransactionManager.doAuthorizationFragmentTransaction();
     }
 
-    private void doContainerFragmentTransaction(String[] skladArr, String[] TKArr) {
+    public void doContainerFragmentTransaction(String[] skladArr, String[] TKArr) {
         FragmentTransactionManager fragmentTransactionManager =
                 FragmentTransactionManagerInit.fragmentTransactionManager(this);
         fragmentTransactionManager.doContainerFragmentTransaction(skladArr, TKArr);
     }
 
-    private void doResultSearchFragmentTransaction(String title, List<SearchRecordDTO> searchRecords) {
+    public void doResultSearchFragmentTransaction(String title, List<SearchRecordDTO> searchRecords) {
         FragmentTransactionManager fragmentTransactionManager =
                 FragmentTransactionManagerInit.fragmentTransactionManager(this);
         fragmentTransactionManager.doResultSearchFragmentTransaction(title, searchRecords);
     }
 
-    private void callDialogError(String errorMessage) {
+    public void callDialogError(String errorMessage) {
         ErrorAlertDialogCreator errADCr =
                 ErrorAlertDialogCreatorInit.errorAlertDialogCreator(this, errorMessage);
         errADCr.createAlertDialog().show();
     }
 
-    private void callDialogSuccess(String message) {
+    public void callDialogSuccess(String message) {
         SuccessAlertDialogCreator successADCr =
                 SuccessAlertDialogCreatorInit.successAlertDialogCreator(this, message);
         successADCr.createAlertDialog().show();
     }
 
-    private void callDialogNoResult() {
+    public void callDialogNoResult() {
         String message = "Запрос не дал результата.";
         NoResultAlertDialogCreator noResADCr =
                 NoResultAlertDialogCreatorInit.noResultAlertDialogCreator(this, message);
         noResADCr.createAlertDialog().show();
     }
 
-    private void callDialogOneResult(SearchRecordDTO searchRecord) {
+    public void callDialogOneResult(SearchRecordDTO searchRecord) {
         OneResultAlertDialogCreator oneResADCr =
                 OneResultAlertDialogCreatorInit.oneResultAlertDialogCreator(this, searchRecord);
         oneResADCr.createAlertDialog().show();
     }
 
-    private IContainerFragment getContainerFragment() {
+    public IContainerFragment getContainerFragment() {
         IContainerFragmentImplFinder containerFragmentImplFinder =
                 IContainerFragmentImplFinderInit.containerFragmentImplFinder(this);
         return containerFragmentImplFinder.findImpl();
@@ -230,59 +239,7 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
 
     @Override
     public void handleResult(CommandResult commandResult) {
-        if(commandResult instanceof AuthorizationCommandResult) {
-            AuthorizationCommandResult authCmdRes = (AuthorizationCommandResult)commandResult;
-            if(authCmdRes.isDone()) {
-                callDialogSuccess(authCmdRes.message());
-                doContainerFragmentTransaction(authCmdRes.skladList(), authCmdRes.TKList());
-            }
-            else {
-                callDialogError(authCmdRes.message());
-            }
-        }
-        else if(commandResult instanceof SearchCommandResult) {
-            SearchCommandResult searchCmdRes = (SearchCommandResult)commandResult;
-            if (searchCmdRes.records().size() != 0) {
-                SearchResultTitleCreator searchResTitleCr =
-                        SearchResultTitleCreatorInit.searchResultTitleCreator(searchCmdRes.subdivision(),
-                                searchCmdRes.records().get(0).id());
-                String title = searchResTitleCr.createTitle();
-                if (searchCmdRes.records().size() == 1)
-                    callDialogOneResult(searchCmdRes.records().get(0));
-                else
-                    doResultSearchFragmentTransaction(title, searchCmdRes.records());
-            } else
-                callDialogNoResult();
-        }
-        else if(commandResult instanceof OpenSoftCheckCommandResult) {
-            OpenSoftCheckCommandResult openSCCmdRes = (OpenSoftCheckCommandResult)commandResult;
-            if(openSCCmdRes.isDone()) {
-                callDialogSuccess(openSCCmdRes.message());
-                IContainerFragment containerFragment = getContainerFragment();
-
-                if(containerFragment != null)
-                    containerFragment.switchToSoftCheckFragment();
-            }
-            else {
-                callDialogError(openSCCmdRes.message());
-                IContainerFragment containerFragment = getContainerFragment();
-
-                if(containerFragment != null)
-                    containerFragment.switchToSoftCheckFragment();
-            }
-        }
-        else if(commandResult instanceof CancelSoftCheckCommandResult) {
-            CancelSoftCheckCommandResult cancelSCCmdRes = (CancelSoftCheckCommandResult)commandResult;
-            if(cancelSCCmdRes.isDone()) {
-                callDialogSuccess(cancelSCCmdRes.message());
-                IContainerFragment containerFragment = getContainerFragment();
-
-                if(containerFragment != null)
-                    containerFragment.switchToOpenSoftCheckFragment();
-            }
-            else {
-                callDialogError(cancelSCCmdRes.message());
-            }
-        }
+        if(commandHolderUI.get(commandResult) != null)
+            commandHolderUI.get(commandResult).apply(commandResult);
     }
 }

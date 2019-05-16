@@ -61,8 +61,8 @@ public class CommandSearchDTOCreatorDefaultImpl implements CommandSearchDTOCreat
                 sklad = NULL;
                 break;
             case ALL:
-                sklad = NULL;
-                TK = NULL;
+                sklad = ALL;
+                TK = ALL;
                 subdivStr = "Все";
                 break;
         }

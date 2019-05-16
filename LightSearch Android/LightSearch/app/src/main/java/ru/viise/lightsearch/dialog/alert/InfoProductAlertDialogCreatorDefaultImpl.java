@@ -20,16 +20,16 @@ import android.app.Activity;
 import android.support.v7.app.AlertDialog;
 
 import ru.viise.lightsearch.data.ButtonContentEnum;
-import ru.viise.lightsearch.data.CartRecord;
+import ru.viise.lightsearch.data.SoftCheckRecord;
 
 public class InfoProductAlertDialogCreatorDefaultImpl implements InfoProductAlertDialogCreator {
 
     private final String OK = ButtonContentEnum.POSITIVE_BUTTON.stringValue();
 
     private final Activity activity;
-    private final CartRecord record;
+    private final SoftCheckRecord record;
 
-    public InfoProductAlertDialogCreatorDefaultImpl(Activity activity, CartRecord record) {
+    public InfoProductAlertDialogCreatorDefaultImpl(Activity activity, SoftCheckRecord record) {
         this.record = record;
         this.activity = activity;
     }

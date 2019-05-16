@@ -32,7 +32,7 @@ public class IOpenSoftCheckFragmentImplFinderDefaultImpl implements IOpenSoftChe
     @Override
     public IOpenSoftCheckFragment findImpl() {
         FragmentManager fragmentManager = fragment.getChildFragmentManager();
-        for(Fragment fragment :fragmentManager.getFragments()) {
+        for(Fragment fragment : fragmentManager.getFragments()) {
             if(fragment instanceof IOpenSoftCheckFragment)
                 return (IOpenSoftCheckFragment) fragment;
         }
