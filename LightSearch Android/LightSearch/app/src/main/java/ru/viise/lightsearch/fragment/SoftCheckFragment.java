@@ -137,7 +137,7 @@ public class SoftCheckFragment extends Fragment implements ISoftCheckFragment {
     }
 
     private void initRecyclerView(TextView tvTotalCost) {
-        adapter = new RecyclerViewAdapter(softCheckRecords, tvTotalCost, "руб.");
+        adapter = new RecyclerViewAdapter(this.getContext(), softCheckRecords, tvTotalCost, "руб.");
         recyclerView.setAdapter(adapter);
         cartButton.setText(toCart +  " (" + adapter.getItemCount() + ")");
     }
