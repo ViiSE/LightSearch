@@ -88,10 +88,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
                 @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    if(charSequence.length() < prevString.length())
-                        delAction = true;
-                    else
-                        delAction = false;
+                    delAction = charSequence.length() < prevString.length();
                 }
 
                 @Override

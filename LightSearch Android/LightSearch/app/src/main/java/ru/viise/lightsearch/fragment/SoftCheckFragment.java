@@ -57,6 +57,8 @@ public class SoftCheckFragment extends Fragment implements ISoftCheckFragment {
     private RecyclerView recyclerView;
     private RecyclerViewAdapter adapter;
     private CoordinatorLayout coordinatorLayout;
+    private Button cartButton;
+    private String toCart;
 
     private AlertDialog queryDialog;
 
@@ -65,12 +67,13 @@ public class SoftCheckFragment extends Fragment implements ISoftCheckFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_soft_check, container, false);
 
+        cartButton = view.findViewById(R.id.buttonCart);
+        toCart = cartButton.getText().toString();
+        queryDialog = new SpotsDialog.Builder().setContext(this.getActivity()).setMessage("Выполнение").setCancelable(false).build();
+
         AppCompatImageButton searchButton = view.findViewById(R.id.imageButtonSearch);
         AppCompatImageButton barcodeButton = view.findViewById(R.id.imageButtonBarcode);
-        Button cartButton = view.findViewById(R.id.buttonCart);
         EditText editTextSearch = view.findViewById(R.id.editTextSearchSC);
-
-        queryDialog = new SpotsDialog.Builder().setContext(this.getActivity()).setMessage("Выполнение").setCancelable(false).build();
 
         Animation animAlpha = AnimationUtils.loadAnimation(this.getActivity(), R.anim.alpha);
 
@@ -136,6 +139,7 @@ public class SoftCheckFragment extends Fragment implements ISoftCheckFragment {
     private void initRecyclerView(TextView tvTotalCost) {
         adapter = new RecyclerViewAdapter(softCheckRecords, tvTotalCost, "руб.");
         recyclerView.setAdapter(adapter);
+        cartButton.setText(toCart +  " (" + adapter.getItemCount() + ")");
     }
 
     private void initSwipeToDeleteAndUndo() {
@@ -145,12 +149,14 @@ public class SoftCheckFragment extends Fragment implements ISoftCheckFragment {
                 final int position = viewHolder.getAdapterPosition();
                 final SoftCheckRecord item = adapter.getData().get(position);
                 adapter.removeItem(position);
+                cartButton.setText(toCart +  " (" + adapter.getItemCount() + ")");
 
                 SnackbarSoftCheckCreator snackbarCr = SnackbarSoftCheckCreatorInit.snackbarSoftCheckCreator(
                         SoftCheckFragment.this, coordinatorLayout, "  Товар удален.");
                 Snackbar snackbar = snackbarCr.createSnackbar().setAction("Отмена   ", view -> {
                     adapter.restoreItem(item, position);
                     recyclerView.scrollToPosition(position);
+                    cartButton.setText(toCart +  " (" + adapter.getItemCount() + ")");
                 });
                 snackbar.show();
             }
@@ -193,6 +199,7 @@ public class SoftCheckFragment extends Fragment implements ISoftCheckFragment {
     @Override
     public void addSoftCheckRecord(SoftCheckRecord record) {
         adapter.addItem(record);
+        cartButton.setText(toCart +  " (" + adapter.getItemCount() + ")");
         SnackbarSoftCheckCreator snackbarCr = SnackbarSoftCheckCreatorInit.snackbarSoftCheckCreator(
                 SoftCheckFragment.this, coordinatorLayout, "  Товар добавлен.");
         Snackbar snackbar = snackbarCr.createSnackbar();
