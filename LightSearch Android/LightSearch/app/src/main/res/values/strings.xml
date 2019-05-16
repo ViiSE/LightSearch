@@ -10,6 +10,8 @@
     <string name="openSC_label">Мягкий чек не открыт.</string>
     <string name="userIdent_label">Идентификатор пользователя:</string>
     <string name="softCheckTotalCost">Итого:</string>
+    <string name="cartTotalCost">Сумма:</string>
+    <string name="cartTotalAmount">Количество:</string>
     <!-- ======== -->
 
     <!-- CheckBox -->
@@ -29,6 +31,7 @@
     <string name="buttonChPass_label">Изменить пароль администратора</string>
     <string name="buttonOpenSC_label">Открыть мягкий чек</string>
     <string name="buttonCart_label">В корзину</string>
+    <string name="buttonCloseSC_label">Закрыть мягкий чек</string>
     <!-- ====== -->
 
     <!-- Spinner -->
