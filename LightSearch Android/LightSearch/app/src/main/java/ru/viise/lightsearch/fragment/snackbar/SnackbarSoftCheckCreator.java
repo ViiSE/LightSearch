@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.data;
+package ru.viise.lightsearch.fragment.snackbar;
 
-import android.os.Parcelable;
+import android.support.design.widget.Snackbar;
 
-public interface Subdivision extends Parcelable {
-    String name();
-    float productAmount();
+public interface SnackbarSoftCheckCreator {
+    Snackbar createSnackbar();
 }

@@ -16,9 +16,10 @@
 
 package ru.viise.lightsearch.data;
 
-import android.os.Parcelable;
+public class SoftCheckRecordInit {
 
-public interface Subdivision extends Parcelable {
-    String name();
-    float productAmount();
+    public static SoftCheckRecord softCheckRecord(String name, String barcode, String price, String unitAmount,
+                                                  SubdivisionList subdivisions) {
+        return new SoftCheckRecordDefaultImpl(name, barcode, price, unitAmount, subdivisions);
+    }
 }

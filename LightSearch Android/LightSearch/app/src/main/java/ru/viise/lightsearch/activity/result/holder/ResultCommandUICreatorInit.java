@@ -14,11 +14,15 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.data;
+package ru.viise.lightsearch.activity.result.holder;
 
-import android.os.Parcelable;
+import android.app.Activity;
 
-public interface Subdivision extends Parcelable {
-    String name();
-    float productAmount();
+import ru.viise.lightsearch.activity.ManagerActivity;
+
+public class ResultCommandUICreatorInit {
+
+    public static ResultCommandUICreator resultCommandUICreator(ManagerActivity activity) {
+        return new ResultCommandUICreatorDefaultImpl(activity);
+    }
 }

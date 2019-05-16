@@ -14,11 +14,18 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.data;
+package ru.viise.lightsearch.activity.result.holder;
 
-import android.os.Parcelable;
+import java.util.Map;
+import java.util.function.Function;
 
-public interface Subdivision extends Parcelable {
-    String name();
-    float productAmount();
+import ru.viise.lightsearch.cmd.CommandTypeEnum;
+import ru.viise.lightsearch.cmd.result.CommandResult;
+
+public class ResultCommandHolderUIInit {
+
+    public static ResultCommandHolderUI resultCommandHolderUI(
+            Map<CommandTypeEnum, Function<CommandResult, Void>> commandHolderUI) {
+        return new ResultCommandHolderUIDefaultImpl(commandHolderUI);
+    }
 }

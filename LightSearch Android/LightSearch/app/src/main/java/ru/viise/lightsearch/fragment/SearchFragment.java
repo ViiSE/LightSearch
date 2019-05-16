@@ -206,8 +206,13 @@ public class SearchFragment extends Fragment implements View.OnClickListener, IS
                             managerActivityHandler, queryDialog);
                     cmdManagerAT.execute(cmdManagerATDTO);
                 }
+                searchEditText.clearFocus();
+                v.requestFocus();
                 break;
             case R.id.buttonBarcode:
+                searchEditText.clearFocus();
+                v.requestFocus();
+
                 v.startAnimation(animAlpha);
                 managerActivityUI.setScanType(ScanType.SEARCH);
                 ScannerInit.scanner(this.getActivity()).scan();

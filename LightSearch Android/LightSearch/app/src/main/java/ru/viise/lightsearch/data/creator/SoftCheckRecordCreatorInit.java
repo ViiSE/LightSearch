@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.data;
+package ru.viise.lightsearch.data.creator;
 
-import android.os.Parcelable;
+public class SoftCheckRecordCreatorInit {
 
-public interface Subdivision extends Parcelable {
-    String name();
-    float productAmount();
+    public static SoftCheckRecordCreator softCheckRecordCreator(Object data) {
+        return new SoftCheckRecordCreatorJSONDefaultImpl(data);
+    }
 }

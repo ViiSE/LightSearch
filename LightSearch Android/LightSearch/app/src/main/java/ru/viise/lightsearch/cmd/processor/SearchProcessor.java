@@ -24,6 +24,7 @@ import ru.viise.lightsearch.cmd.result.CommandResultCreatorInit;
 import ru.viise.lightsearch.data.ClientCommandDTO;
 import ru.viise.lightsearch.data.CommandDTO;
 import ru.viise.lightsearch.data.CommandSearchDTO;
+import ru.viise.lightsearch.data.CommandSearchSoftCheckDTO;
 import ru.viise.lightsearch.exception.MessageRecipientException;
 import ru.viise.lightsearch.exception.MessageSenderException;
 import ru.viise.lightsearch.message.MessageRecipient;
@@ -51,9 +52,14 @@ public class SearchProcessor implements Function<CommandDTO, CommandResult> {
             String message = msgSearch.message();
             msgSender.sendMessage(message);
             String rawMessage = msgRecipient.acceptMessage();
-            String subdivision = cmdSearchDTO.subdivision();
-            CommandResultCreator cmdResCr =
-                    CommandResultCreatorInit.commandResultSearchCreator(rawMessage, IMEI, subdivision);
+            CommandResultCreator cmdResCr;
+            if(cmdSearchDTO instanceof CommandSearchSoftCheckDTO) {
+                cmdResCr = CommandResultCreatorInit.commandResultSearchSoftCheckCreator(rawMessage, IMEI);
+            }
+            else {
+                String subdivision = cmdSearchDTO.subdivision();
+                cmdResCr = CommandResultCreatorInit.commandResultSearchCreator(rawMessage, IMEI, subdivision);
+            }
             CommandResult cmdRes = cmdResCr.createCommandResult();
             if(cmdRes != null)
                 return cmdRes;
@@ -61,26 +67,30 @@ public class SearchProcessor implements Function<CommandDTO, CommandResult> {
                 String messageErr = "Произошла ошибка при обработке сообщения. " +
                         "Для устранения проблемы обратитесь к администратору." +
                         "Вы отключены от сервера";
-                return errorCommandResult(messageErr);
+                return errorCommandResult(messageErr, (CommandSearchDTO)commandDTO);
             }
         }
         catch(MessageSenderException ex) {
             String message = "Произошла ошибка при отправки сообщения. " +
                     "Для устранения проблемы обратитесь к администратору." +
                     "Вы отключены от сервера";
-            return errorCommandResult(message);
+            return errorCommandResult(message, (CommandSearchDTO)commandDTO);
         }
         catch(MessageRecipientException ex) {
             String message = "Произошла ошибка при принятии сообщения. " +
                     "Для устранения проблемы обратитесь к администратору." +
                     "Вы отключены от сервера";
-            return errorCommandResult(message);
+            return errorCommandResult(message, (CommandSearchDTO)commandDTO);
         }
     }
 
-    private CommandResult errorCommandResult(String message) {
-        CommandResultCreator cmdResCr =
-                CommandResultCreatorInit.commandResultSearchCreator(false, message);
+    private CommandResult errorCommandResult(String message, CommandSearchDTO cmdSearchDTO) {
+        CommandResultCreator cmdResCr;
+        if(cmdSearchDTO instanceof CommandSearchSoftCheckDTO)
+            cmdResCr = CommandResultCreatorInit.commandResultSearchSoftCheckCreator(false, message);
+        else
+            cmdResCr = CommandResultCreatorInit.commandResultSearchCreator(false, message);
+
         return cmdResCr.createCommandResult();
     }
 }

@@ -16,16 +16,22 @@
 
 package ru.viise.lightsearch.data.creator;
 
+import ru.viise.lightsearch.data.CommandSearchDTO;
+import ru.viise.lightsearch.data.CommandSearchSoftCheckDTOInit;
 import ru.viise.lightsearch.data.SearchFragmentContentEnum;
 
-public class CommandSearchDTOCreatorInit {
+public class CommandSearchDTOCreatorSoftCheckImpl implements CommandSearchDTOCreator {
 
-    public static CommandSearchDTOCreator commandSearchDTOCreator(
-            String barcode, SearchFragmentContentEnum subdivision, String sklad, String TK) {
-        return new CommandSearchDTOCreatorDefaultImpl(barcode, subdivision, sklad, TK);
+    private final String ALL = SearchFragmentContentEnum.ALL.stringValue();
+
+    private String barcode;
+
+    public CommandSearchDTOCreatorSoftCheckImpl(String barcode) {
+        this.barcode = barcode;
     }
 
-    public static CommandSearchDTOCreator commandSearchDTOCreator(String barcode) {
-        return new CommandSearchDTOCreatorSoftCheckImpl(barcode);
+    @Override
+    public CommandSearchDTO createCommandSearchDTO() {
+        return CommandSearchSoftCheckDTOInit.commandSearchSoftCheckDTO(barcode, ALL, ALL);
     }
 }

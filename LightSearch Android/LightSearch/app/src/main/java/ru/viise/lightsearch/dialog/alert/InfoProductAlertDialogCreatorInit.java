@@ -18,12 +18,12 @@ package ru.viise.lightsearch.dialog.alert;
 
 import android.app.Activity;
 
-import ru.viise.lightsearch.data.CartRecord;
+import ru.viise.lightsearch.data.SoftCheckRecord;
 
 public class InfoProductAlertDialogCreatorInit {
 
     public static InfoProductAlertDialogCreator infoProductAlertDialogCreator(Activity activity,
-                      CartRecord record) {
+                      SoftCheckRecord record) {
         return new InfoProductAlertDialogCreatorDefaultImpl(activity, record);
     }
 }

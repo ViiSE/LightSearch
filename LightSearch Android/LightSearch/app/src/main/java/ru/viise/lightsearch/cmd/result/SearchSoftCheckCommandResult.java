@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.data;
+package ru.viise.lightsearch.cmd.result;
 
-import android.os.Parcelable;
+import ru.viise.lightsearch.data.SoftCheckRecord;
 
-public interface Subdivision extends Parcelable {
-    String name();
-    float productAmount();
+public interface SearchSoftCheckCommandResult extends CommandResult {
+    SoftCheckRecord record();
 }

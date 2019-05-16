@@ -49,7 +49,8 @@ public class ResultSearchArrayAdapter extends ArrayAdapter<SearchRecordDTO> {
         ((TextView) convertView.findViewById(R.id.textViewCardAmountRS)).setText(
                 String.format("%s %s", record.amount(), record.unit()));
         ((TextView) convertView.findViewById(R.id.textViewCardSubdivRS)).setText(record.subdivision());
-        ((TextView) convertView.findViewById(R.id.textViewCardPriceRS)).setText(record.price());
+        ((TextView) convertView.findViewById(R.id.textViewCardPriceRS)).setText(
+                String.format("%s руб.", record.price()));
 
         return convertView;
     }

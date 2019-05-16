@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.data;
+package ru.viise.lightsearch.data.creator;
 
-public class CartRecordInit {
+import ru.viise.lightsearch.data.SoftCheckRecord;
 
-    public static CartRecord cartRecord(String name, String barcode, float price, String unitAmount,
-                                        SubdivisionList subdivisions) {
-        return new CartRecordDefaultImpl(name, barcode, price, unitAmount, subdivisions);
-    }
+public interface SoftCheckRecordCreator {
+    SoftCheckRecord createSoftCheckRecord();
 }

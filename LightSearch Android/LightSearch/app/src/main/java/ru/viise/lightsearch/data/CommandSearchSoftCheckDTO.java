@@ -16,9 +16,4 @@
 
 package ru.viise.lightsearch.data;
 
-import android.os.Parcelable;
-
-public interface Subdivision extends Parcelable {
-    String name();
-    float productAmount();
-}
+public interface CommandSearchSoftCheckDTO extends CommandSearchDTO { }

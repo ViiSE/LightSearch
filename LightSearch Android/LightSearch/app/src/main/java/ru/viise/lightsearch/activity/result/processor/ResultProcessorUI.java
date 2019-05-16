@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.data;
+package ru.viise.lightsearch.activity.result.processor;
 
-import android.os.Parcelable;
+import ru.viise.lightsearch.cmd.result.CommandResult;
 
-public interface Subdivision extends Parcelable {
-    String name();
-    float productAmount();
+public interface ResultProcessorUI {
+    Void apply(CommandResult cmdRes);
 }

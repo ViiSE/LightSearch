@@ -19,22 +19,22 @@ package ru.viise.lightsearch.find;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
-import ru.viise.lightsearch.fragment.IOpenSoftCheckFragment;
+import ru.viise.lightsearch.fragment.ISoftCheckFragment;
 
-public class IOpenSoftCheckFragmentImplFinderDefaultImpl implements IOpenSoftCheckFragmentImplFinder {
+public class ISoftCheckFragmentImplFinderDefaultImpl implements ISoftCheckFragmentImplFinder {
 
-    private final Fragment fragment;
+    Fragment fragment;
 
-    public IOpenSoftCheckFragmentImplFinderDefaultImpl(Fragment fragment) {
+    public ISoftCheckFragmentImplFinderDefaultImpl(Fragment fragment) {
         this.fragment = fragment;
     }
 
     @Override
-    public IOpenSoftCheckFragment findImpl() {
+    public ISoftCheckFragment findImpl() {
         FragmentManager fragmentManager = fragment.getChildFragmentManager();
         for(Fragment fragment : fragmentManager.getFragments()) {
-            if(fragment instanceof IOpenSoftCheckFragment)
-                return (IOpenSoftCheckFragment) fragment;
+            if(fragment instanceof ISoftCheckFragment)
+                return (ISoftCheckFragment) fragment;
         }
         return null;
     }

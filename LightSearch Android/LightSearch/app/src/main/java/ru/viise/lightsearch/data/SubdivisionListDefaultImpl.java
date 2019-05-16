@@ -16,6 +16,8 @@
 
 package ru.viise.lightsearch.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
@@ -24,11 +26,10 @@ import java.util.List;
 
 public class SubdivisionListDefaultImpl implements SubdivisionList {
 
-    private final List<Subdivision> subdivisions;
+    private final List<Subdivision> subdivisions = new ArrayList<>();
     private final String unitAmount;
 
     public SubdivisionListDefaultImpl(String unitAmount) {
-        this.subdivisions = new ArrayList<>();
         this.unitAmount = unitAmount;
     }
 
@@ -57,4 +58,34 @@ public class SubdivisionListDefaultImpl implements SubdivisionList {
         }
         return res.toString();
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(unitAmount);
+        parcel.writeTypedList(subdivisions);
+    }
+
+    private SubdivisionListDefaultImpl(Parcel in) {
+        unitAmount = in.readString();
+        in.readTypedList(subdivisions, SubdivisionDefaultImpl.CREATOR);
+    }
+
+    public static final Parcelable.Creator<SubdivisionList> CREATOR
+            = new Parcelable.Creator<SubdivisionList>() {
+
+        @Override
+        public SubdivisionList createFromParcel(Parcel in) {
+            return new SubdivisionListDefaultImpl(in);
+        }
+
+        @Override
+        public SubdivisionList[] newArray(int size) {
+            return new SubdivisionList[size];
+        }
+    };
 }

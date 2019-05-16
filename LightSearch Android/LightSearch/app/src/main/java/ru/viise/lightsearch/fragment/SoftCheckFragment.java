@@ -1,44 +1,64 @@
 package ru.viise.lightsearch.fragment;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageButton;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import dmax.dialog.SpotsDialog;
 import ru.viise.lightsearch.R;
-import ru.viise.lightsearch.data.CartRecord;
-import ru.viise.lightsearch.data.CartRecordInit;
-import ru.viise.lightsearch.data.SubdivisionInit;
-import ru.viise.lightsearch.data.SubdivisionList;
-import ru.viise.lightsearch.data.SubdivisionListInit;
+import ru.viise.lightsearch.activity.ManagerActivityHandler;
+import ru.viise.lightsearch.activity.ManagerActivityUI;
+import ru.viise.lightsearch.activity.scan.ScannerInit;
+import ru.viise.lightsearch.cmd.CommandTypeEnum;
+import ru.viise.lightsearch.cmd.manager.CommandManager;
+import ru.viise.lightsearch.cmd.manager.task.CommandManagerAsyncTask;
+import ru.viise.lightsearch.data.SoftCheckRecord;
+import ru.viise.lightsearch.data.CommandManagerAsyncTaskDTO;
+import ru.viise.lightsearch.data.CommandManagerAsyncTaskDTOInit;
+import ru.viise.lightsearch.data.CommandSearchDTO;
+import ru.viise.lightsearch.data.ScanType;
+import ru.viise.lightsearch.data.creator.CommandSearchDTOCreator;
+import ru.viise.lightsearch.data.creator.CommandSearchDTOCreatorInit;
 import ru.viise.lightsearch.dialog.alert.InfoProductAlertDialogCreator;
 import ru.viise.lightsearch.dialog.alert.InfoProductAlertDialogCreatorInit;
 import ru.viise.lightsearch.fragment.adapter.RecyclerViewAdapter;
 import ru.viise.lightsearch.fragment.adapter.SwipeToInfoCallback;
 import ru.viise.lightsearch.fragment.adapter.SwipeToDeleteCallback;
+import ru.viise.lightsearch.fragment.snackbar.SnackbarSoftCheckCreator;
+import ru.viise.lightsearch.fragment.snackbar.SnackbarSoftCheckCreatorInit;
 
+public class SoftCheckFragment extends Fragment implements ISoftCheckFragment {
 
-public class SoftCheckFragment extends Fragment {
+    private ManagerActivityUI managerActivityUI;
+    private ManagerActivityHandler managerActivityHandler;
+    private CommandManager commandManager;
 
-    RecyclerView recyclerView;
-    RecyclerViewAdapter adapter;
-    List<CartRecord> stringArrayList = new ArrayList<>();
-    CoordinatorLayout coordinatorLayout;
+    private List<SoftCheckRecord> softCheckRecords;
+    private RecyclerView recyclerView;
+    private RecyclerViewAdapter adapter;
+    private CoordinatorLayout coordinatorLayout;
+
+    private AlertDialog queryDialog;
 
     @Nullable
     @Override
@@ -48,15 +68,35 @@ public class SoftCheckFragment extends Fragment {
         AppCompatImageButton searchButton = view.findViewById(R.id.imageButtonSearch);
         AppCompatImageButton barcodeButton = view.findViewById(R.id.imageButtonBarcode);
         Button cartButton = view.findViewById(R.id.buttonCart);
+        EditText editTextSearch = view.findViewById(R.id.editTextSearchSC);
+
+        queryDialog = new SpotsDialog.Builder().setContext(this.getActivity()).setMessage("Выполнение").setCancelable(false).build();
+
+        Animation animAlpha = AnimationUtils.loadAnimation(this.getActivity(), R.anim.alpha);
 
         searchButton.setOnClickListener(view1 -> {
-            Toast t = Toast.makeText(this.getActivity().getApplicationContext(), "search", Toast.LENGTH_LONG);
-            t.show();
+            view1.startAnimation(animAlpha);
+            String barcode = editTextSearch.getText().toString();
+
+            if(barcode.length() < 5) {
+                Toast t = Toast.makeText(this.getActivity().getApplicationContext(), "Введите не менее пяти символов!", Toast.LENGTH_LONG);
+                t.show();
+            }
+            else
+                setSoftCheckBarcode(barcode);
+
+            editTextSearch.clearFocus();
+            searchButton.requestFocus();
         });
 
         barcodeButton.setOnClickListener(view2 -> {
-            Toast t = Toast.makeText(this.getActivity().getApplicationContext(), "barcode", Toast.LENGTH_LONG);
-            t.show();
+            view2.startAnimation(animAlpha);
+
+            managerActivityUI.setScanType(ScanType.SEARCH_SOFT_CHECK);
+            ScannerInit.scanner(this.getActivity()).scan();
+
+            editTextSearch.clearFocus();
+            searchButton.requestFocus();
         });
 
         cartButton.setOnClickListener(view3 -> {
@@ -67,6 +107,11 @@ public class SoftCheckFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerViewSoftCheck);
         coordinatorLayout = view.findViewById(R.id.coordinatorLayoutSoftCheck);
 
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this.getContext());
+        mLayoutManager.setReverseLayout(true);
+        mLayoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(mLayoutManager);
+
         TextView tvTotalCost = view.findViewById(R.id.textViewSoftCheckTotalCost);
 
         initRecyclerView(tvTotalCost);
@@ -76,77 +121,20 @@ public class SoftCheckFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        managerActivityUI = (ManagerActivityUI) this.getActivity();
+        managerActivityHandler = (ManagerActivityHandler) this.getActivity();
+        commandManager = managerActivityUI.commandManager();
+    }
+
+    public void init(List<SoftCheckRecord> softCheckRecords) {
+        this.softCheckRecords = softCheckRecords;
+    }
+
     private void initRecyclerView(TextView tvTotalCost) {
-        SubdivisionList subdivisions1 = SubdivisionListInit.subdivisionList("шт.");
-        subdivisions1.addSubdivision(SubdivisionInit.subdivision("Склад 1", "40"));
-        subdivisions1.addSubdivision(SubdivisionInit.subdivision("Склад 2", "50"));
-        subdivisions1.addSubdivision(SubdivisionInit.subdivision("ТК 1", "90"));
-
-        SubdivisionList subdivisions2 = SubdivisionListInit.subdivisionList("шт.");
-        subdivisions2.addSubdivision(SubdivisionInit.subdivision("Склад 1", "70"));
-
-        stringArrayList.add(CartRecordInit.cartRecord(
-                "Пена монтажная МОМЕНТ быт. 500мл",
-                "2200000738592",
-                276,
-                "шт.",
-                 subdivisions1));
-        stringArrayList.add(CartRecordInit.cartRecord(
-                "Герметик силиконовый ГЕРМЕНТ Санитарный белый 280мл",
-                "609878",
-                116,
-                "шт.",
-                subdivisions2));
-        stringArrayList.add(CartRecordInit.cartRecord(
-                "Кран шаровый ш/ш баб. 1/2\" л/н",
-                "725646",
-                250,
-                "шт.",
-                subdivisions2));
-        stringArrayList.add(CartRecordInit.cartRecord(
-                "Товар 1",
-                "1307469",
-                250,
-                "шт.",
-                subdivisions2));
-        stringArrayList.add(CartRecordInit.cartRecord(
-                "Товар 2",
-                "1307469",
-                13654,
-                "шт.",
-                subdivisions2));
-        stringArrayList.add(CartRecordInit.cartRecord(
-                "Товар 3",
-                "1307469",
-                136,
-                "шт.",
-                subdivisions2));
-        stringArrayList.add(CartRecordInit.cartRecord(
-                "Товар 4",
-                "1307469",
-                654,
-                "шт.",
-                subdivisions2));
-        stringArrayList.add(CartRecordInit.cartRecord(
-                "Товар 5",
-                "1307469",
-                32,
-                "шт.",
-                subdivisions2));
-        stringArrayList.add(CartRecordInit.cartRecord(
-                "Товар 6",
-                "1307469",
-                74,
-                "шт.",
-                subdivisions1));
-        stringArrayList.add(CartRecordInit.cartRecord(
-                "Товар 7",
-                "1307469",
-                47568,
-                "шт.",
-                subdivisions1));
-
-        adapter = new RecyclerViewAdapter(stringArrayList, tvTotalCost, "руб.");
+        adapter = new RecyclerViewAdapter(softCheckRecords, tvTotalCost, "руб.");
         recyclerView.setAdapter(adapter);
     }
 
@@ -155,17 +143,15 @@ public class SoftCheckFragment extends Fragment {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
                 final int position = viewHolder.getAdapterPosition();
-                final CartRecord item = adapter.getData().get(position);
+                final SoftCheckRecord item = adapter.getData().get(position);
                 adapter.removeItem(position);
 
-                Snackbar snackbar = Snackbar.make(
-                        coordinatorLayout, "  Товар удален.", Snackbar.LENGTH_LONG);
-                snackbar.setAction("Отмена   ", view -> {
+                SnackbarSoftCheckCreator snackbarCr = SnackbarSoftCheckCreatorInit.snackbarSoftCheckCreator(
+                        SoftCheckFragment.this, coordinatorLayout, "  Товар удален.");
+                Snackbar snackbar = snackbarCr.createSnackbar().setAction("Отмена   ", view -> {
                     adapter.restoreItem(item, position);
                     recyclerView.scrollToPosition(position);
                 });
-                snackbar.getView().setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.colorSnackbar));
-                snackbar.setActionTextColor(ContextCompat.getColor(getContext(), R.color.colorUndo));
                 snackbar.show();
             }
         };
@@ -189,5 +175,27 @@ public class SoftCheckFragment extends Fragment {
 
         ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeToInfoCallback);
         itemTouchhelper.attachToRecyclerView(recyclerView);
+    }
+
+    @Override
+    public void setSoftCheckBarcode(String barcode) {
+        CommandSearchDTOCreator cmdSearchDTOCr =
+                CommandSearchDTOCreatorInit.commandSearchDTOCreator(barcode);
+        CommandSearchDTO cmdSearchDTO = cmdSearchDTOCr.createCommandSearchDTO();
+        CommandManagerAsyncTaskDTO cmdManagerATDTO =
+                CommandManagerAsyncTaskDTOInit.commandManagerAsyncTaskDTO(commandManager,
+                        CommandTypeEnum.SEARCH, cmdSearchDTO);
+        CommandManagerAsyncTask cmdManagerAT = new CommandManagerAsyncTask(
+                managerActivityHandler, queryDialog);
+        cmdManagerAT.execute(cmdManagerATDTO);
+    }
+
+    @Override
+    public void addSoftCheckRecord(SoftCheckRecord record) {
+        adapter.addItem(record);
+        SnackbarSoftCheckCreator snackbarCr = SnackbarSoftCheckCreatorInit.snackbarSoftCheckCreator(
+                SoftCheckFragment.this, coordinatorLayout, "  Товар добавлен.");
+        Snackbar snackbar = snackbarCr.createSnackbar();
+        snackbar.show();
     }
 }

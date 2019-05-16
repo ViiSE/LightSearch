@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.data;
+package ru.viise.lightsearch.find;
 
-import android.os.Parcelable;
+import android.support.v4.app.Fragment;
 
-public interface Subdivision extends Parcelable {
-    String name();
-    float productAmount();
+public class ISoftCheckFragmentImplFinderInit {
+
+    public static ISoftCheckFragmentImplFinder softCheckFragmentImplFinder(Fragment fragment) {
+        return new ISoftCheckFragmentImplFinderDefaultImpl(fragment);
+    }
 }

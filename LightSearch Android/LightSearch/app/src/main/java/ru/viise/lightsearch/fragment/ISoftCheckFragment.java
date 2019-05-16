@@ -14,16 +14,11 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.data;
+package ru.viise.lightsearch.fragment;
 
-public interface CartRecord {
-    String name();
-    String barcode();
-    String priceWithUnit();
-    float currentAmount();
-    String totalCostWithUnit();
-    float totalCost();
-    String maxAmountWithUnit();
-    void setProductsCount(float count);
-    SubdivisionList subdivisions();
+import ru.viise.lightsearch.data.SoftCheckRecord;
+
+public interface ISoftCheckFragment {
+    void setSoftCheckBarcode(String barcode);
+    void addSoftCheckRecord(SoftCheckRecord record);
 }

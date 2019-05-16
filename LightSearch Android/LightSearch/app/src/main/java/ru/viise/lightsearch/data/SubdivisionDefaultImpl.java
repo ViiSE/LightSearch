@@ -16,6 +16,9 @@
 
 package ru.viise.lightsearch.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class SubdivisionDefaultImpl implements Subdivision {
 
     private final String name;
@@ -35,4 +38,34 @@ public class SubdivisionDefaultImpl implements Subdivision {
     public float productAmount() {
         return productAmount;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(name);
+        parcel.writeFloat(productAmount);
+    }
+
+    private SubdivisionDefaultImpl(Parcel in) {
+        name = in.readString();
+        productAmount = in.readFloat();
+    }
+
+    public static final Parcelable.Creator<Subdivision> CREATOR
+            = new Parcelable.Creator<Subdivision>() {
+
+        @Override
+        public Subdivision createFromParcel(Parcel in) {
+            return new SubdivisionDefaultImpl(in);
+        }
+
+        @Override
+        public Subdivision[] newArray(int size) {
+            return new SubdivisionDefaultImpl[size];
+        }
+    };
 }

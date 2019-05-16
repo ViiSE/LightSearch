@@ -16,9 +16,9 @@
 
 package ru.viise.lightsearch.data;
 
-import android.os.Parcelable;
+public class CommandSearchSoftCheckDTOInit {
 
-public interface Subdivision extends Parcelable {
-    String name();
-    float productAmount();
+    public static CommandSearchSoftCheckDTO commandSearchSoftCheckDTO(String barcode, String sklad, String TK) {
+        return new CommandSearchSoftCheckDTODefaultImpl(barcode, sklad, TK);
+    }
 }

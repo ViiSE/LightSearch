@@ -14,11 +14,20 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.data;
+package ru.viise.lightsearch.cmd.result;
 
-import android.os.Parcelable;
+public class CommandResultSearchSoftCheckCreatorErrorDefaultImpl implements CommandResultCreator {
 
-public interface Subdivision extends Parcelable {
-    String name();
-    float productAmount();
+    private final boolean isDone;
+    private final String message;
+
+    public CommandResultSearchSoftCheckCreatorErrorDefaultImpl(boolean isDone, String message) {
+        this.isDone = isDone;
+        this.message = message;
+    }
+
+    @Override
+    public CommandResult createCommandResult() {
+        return SearchSoftCheckCommandResultInit.searchSoftCheckCommandResult(isDone, message, null);
+    }
 }

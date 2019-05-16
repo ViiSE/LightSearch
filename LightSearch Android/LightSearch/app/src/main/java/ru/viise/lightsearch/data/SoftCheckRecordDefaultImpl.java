@@ -16,7 +16,10 @@
 
 package ru.viise.lightsearch.data;
 
-public class CartRecordDefaultImpl implements CartRecord {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class SoftCheckRecordDefaultImpl implements SoftCheckRecord {
 
     private final String name;
     private final String barcode;
@@ -29,11 +32,11 @@ public class CartRecordDefaultImpl implements CartRecord {
     private float currentAmount;
     private float totalCost;
 
-    public CartRecordDefaultImpl(String name, String barcode, float price, String unitAmount,
-                                 SubdivisionList subdivisions) {
+    public SoftCheckRecordDefaultImpl(String name, String barcode, String price, String unitAmount,
+                                      SubdivisionList subdivisions) {
         this.name = name;
         this.barcode = barcode;
-        this.price = price;
+        this.price = Float.parseFloat(price);
         this.unitAmount = unitAmount;
         this.subdivisions = subdivisions;
 
@@ -44,7 +47,7 @@ public class CartRecordDefaultImpl implements CartRecord {
         maxAmount = tempMaxAmount;
 
         currentAmount = 1;
-        totalCost = price;
+        totalCost = this.price;
     }
 
     @Override
@@ -96,4 +99,42 @@ public class CartRecordDefaultImpl implements CartRecord {
     public SubdivisionList subdivisions() {
         return subdivisions;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(name);
+        parcel.writeString(barcode);
+        parcel.writeFloat(price);
+        parcel.writeFloat(maxAmount);
+        parcel.writeString(unitAmount);
+        parcel.writeParcelable(subdivisions, i);
+    }
+
+    private SoftCheckRecordDefaultImpl(Parcel in) {
+        name = in.readString();
+        barcode = in.readString();
+        price = in.readFloat();
+        maxAmount = in.readFloat();
+        unitAmount = in.readString();
+        subdivisions = in.readParcelable(SubdivisionListDefaultImpl.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<SoftCheckRecord> CREATOR
+            = new Parcelable.Creator<SoftCheckRecord>() {
+
+        @Override
+        public SoftCheckRecord createFromParcel(Parcel in) {
+            return new SoftCheckRecordDefaultImpl(in);
+        }
+
+        @Override
+        public SoftCheckRecord[] newArray(int size) {
+            return new SoftCheckRecordDefaultImpl[size];
+        }
+    };
 }
