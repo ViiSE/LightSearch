@@ -71,9 +71,8 @@ public class ContainerFragment extends Fragment implements OnBackPressedListener
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (savedInstanceState != null){
+        if (savedInstanceState != null)
             selected = savedInstanceState.getInt(ON_BACK_TYPE);
-        }
     }
 
     @Nullable
@@ -180,6 +179,7 @@ public class ContainerFragment extends Fragment implements OnBackPressedListener
         if(softCheckContainerFragment != null)
             softCheckContainerFragment.switchToSoftCheckFragment();
         onBackPressedListenerType = OnBackPressedListenerType.SOFT_CHECK_FRAGMENT;
+        selected = 1;
     }
 
     @Override
@@ -188,6 +188,7 @@ public class ContainerFragment extends Fragment implements OnBackPressedListener
         if(softCheckContainerFragment != null)
             softCheckContainerFragment.switchToOpenSoftCheckFragment();
         onBackPressedListenerType = OnBackPressedListenerType.CONTAINER_FRAGMENT;
+        selected = 1;
     }
 
     @Override

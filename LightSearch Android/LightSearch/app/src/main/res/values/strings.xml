@@ -10,8 +10,8 @@
     <string name="openSC_label">Мягкий чек не открыт.</string>
     <string name="userIdent_label">Идентификатор пользователя:</string>
     <string name="softCheckTotalCost">Итого:</string>
-    <string name="cartTotalCost">Сумма:</string>
-    <string name="cartTotalAmount">Количество:</string>
+    <string name="cartTotalCost">Итого:</string>
+    <string name="cartTotalAmount">Товаров:</string>
     <!-- ======== -->
 
     <!-- CheckBox -->
@@ -64,6 +64,7 @@
     <string name="fragment_soft_check">Мягкий чек</string>
     <string name="fragment_container">LightSearch</string>
     <string name="fragment_result_search">Результат</string>
+    <string name="fragment_cart">Корзина</string>
     <!-- ============ -->
 
     <!-- TODO: Remove or change this placeholder text -->

@@ -168,7 +168,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public void removeItem(int position) {
         data.remove(position);
-        lastPosition = position;
+        if(data.size() == 0)
+            lastPosition = -1;
+        else
+            lastPosition = position;
         getTotalCost();
         notifyItemRemoved(position);
     }
