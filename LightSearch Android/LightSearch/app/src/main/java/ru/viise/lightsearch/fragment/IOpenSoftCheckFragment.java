@@ -16,6 +16,8 @@
 
 package ru.viise.lightsearch.fragment;
 
-public interface IOpenSoftCheckFragment {
+import ru.viise.lightsearch.find.Findable;
+
+public interface IOpenSoftCheckFragment extends Findable {
     void setCardCode(String cardCode);
 }

@@ -41,14 +41,9 @@ import ru.viise.lightsearch.dialog.alert.CancelSoftCheckAlertDialogCreator;
 import ru.viise.lightsearch.dialog.alert.CancelSoftCheckAlertDialogCreatorInit;
 import ru.viise.lightsearch.dialog.alert.ExitToAuthorizationAlertDialogCreator;
 import ru.viise.lightsearch.dialog.alert.ExitToAuthorizationAlertDialogCreatorInit;
-import ru.viise.lightsearch.find.IOpenSoftCheckFragmentImplFinder;
-import ru.viise.lightsearch.find.IOpenSoftCheckFragmentImplFinderInit;
-import ru.viise.lightsearch.find.ISearchFragmentImplFinder;
-import ru.viise.lightsearch.find.ISearchFragmentImplFinderInit;
-import ru.viise.lightsearch.find.ISoftCheckContainerFragmentImplFinder;
-import ru.viise.lightsearch.find.ISoftCheckContainerFragmentImplFinderInit;
-import ru.viise.lightsearch.find.ISoftCheckFragmentImplFinder;
-import ru.viise.lightsearch.find.ISoftCheckFragmentImplFinderInit;
+import ru.viise.lightsearch.exception.FindableException;
+import ru.viise.lightsearch.find.ImplFinder;
+import ru.viise.lightsearch.find.ImplFinderFragmentFromFragmentDefaultImpl;
 
 
 public class ContainerFragment extends Fragment implements OnBackPressedListener, IContainerFragment {
@@ -124,9 +119,15 @@ public class ContainerFragment extends Fragment implements OnBackPressedListener
     }
 
     private ISoftCheckContainerFragment getSoftCheckContainerFragment() {
-        ISoftCheckContainerFragmentImplFinder softCheckContainerFragmentImplFinder =
-                ISoftCheckContainerFragmentImplFinderInit.softISoftCheckContainerFragmentImplFinder(this);
-        return softCheckContainerFragmentImplFinder.findImpl();
+        ImplFinder<ISoftCheckContainerFragment> finder = new ImplFinderFragmentFromFragmentDefaultImpl<>(this);
+        try { return finder.findImpl(ISoftCheckContainerFragment.class); }
+        catch(FindableException ignore) { return null; }
+    }
+
+    private ISoftCheckFragment getSoftCheckFragment() {
+        ImplFinder<ISoftCheckFragment> finder = new ImplFinderFragmentFromFragmentDefaultImpl<>(this);
+        try { return finder.findImpl(ISoftCheckFragment.class); }
+        catch(FindableException ignore) { return null; }
     }
 
     @Override
@@ -147,28 +148,27 @@ public class ContainerFragment extends Fragment implements OnBackPressedListener
 
     @Override
     public void setSearchBarcode(String barcode) {
-        ISearchFragmentImplFinder searchFragmentImplFinder =
-                ISearchFragmentImplFinderInit.searchFragmentImplFinder(this);
-        ISearchFragment searchFragment = searchFragmentImplFinder.findImpl();
-
-        if(searchFragment != null)
+        try {
+            ImplFinder<ISearchFragment> finder = new ImplFinderFragmentFromFragmentDefaultImpl<>(this);
+            ISearchFragment searchFragment = finder.findImpl(ISearchFragment.class);
             searchFragment.setSearchBarcode(barcode);
+        }
+        catch(FindableException ignore) {}
     }
 
     @Override
     public void setCardCode(String cardCode) {
-        IOpenSoftCheckFragmentImplFinder openSoftCheckFragmentImplFinder =
-                IOpenSoftCheckFragmentImplFinderInit.openSoftCheckFragmentImplFinder(this);
-        IOpenSoftCheckFragment openSoftCheckFragment = openSoftCheckFragmentImplFinder.findImpl();
-        if(openSoftCheckFragment != null)
+        try {
+            ImplFinder<IOpenSoftCheckFragment> finder = new ImplFinderFragmentFromFragmentDefaultImpl<>(this);
+            IOpenSoftCheckFragment openSoftCheckFragment = finder.findImpl(IOpenSoftCheckFragment.class);
             openSoftCheckFragment.setCardCode(cardCode);
+        }
+        catch(FindableException ignore) {}
     }
 
     @Override
     public void setSoftCheckBarcode(String barcode) {
-        ISoftCheckFragmentImplFinder softCheckFragmentImplFinder =
-                ISoftCheckFragmentImplFinderInit.softCheckFragmentImplFinder(this);
-        ISoftCheckFragment softCheckFragment = softCheckFragmentImplFinder.findImpl();
+        ISoftCheckFragment softCheckFragment = getSoftCheckFragment();
         if(softCheckFragment != null)
             softCheckFragment.setSoftCheckBarcode(barcode);
     }
@@ -176,26 +176,26 @@ public class ContainerFragment extends Fragment implements OnBackPressedListener
     @Override
     public void switchToSoftCheckFragment() {
         ISoftCheckContainerFragment softCheckContainerFragment = getSoftCheckContainerFragment();
-        if(softCheckContainerFragment != null)
+        if(softCheckContainerFragment != null) {
             softCheckContainerFragment.switchToSoftCheckFragment();
-        onBackPressedListenerType = OnBackPressedListenerType.SOFT_CHECK_FRAGMENT;
-        selected = 1;
+            onBackPressedListenerType = OnBackPressedListenerType.SOFT_CHECK_FRAGMENT;
+            selected = 1;
+        }
     }
 
     @Override
     public void switchToOpenSoftCheckFragment() {
         ISoftCheckContainerFragment softCheckContainerFragment = getSoftCheckContainerFragment();
-        if(softCheckContainerFragment != null)
+        if(softCheckContainerFragment != null) {
             softCheckContainerFragment.switchToOpenSoftCheckFragment();
-        onBackPressedListenerType = OnBackPressedListenerType.CONTAINER_FRAGMENT;
-        selected = 1;
+            onBackPressedListenerType = OnBackPressedListenerType.CONTAINER_FRAGMENT;
+            selected = 1;
+        }
     }
 
     @Override
     public void addSoftCheckRecord(SoftCheckRecord record) {
-        ISoftCheckFragmentImplFinder softCheckFragmentImplFinder =
-                ISoftCheckFragmentImplFinderInit.softCheckFragmentImplFinder(this);
-        ISoftCheckFragment softCheckFragment = softCheckFragmentImplFinder.findImpl();
+        ISoftCheckFragment softCheckFragment = getSoftCheckFragment();
         if(softCheckFragment != null)
             softCheckFragment.addSoftCheckRecord(record);
     }

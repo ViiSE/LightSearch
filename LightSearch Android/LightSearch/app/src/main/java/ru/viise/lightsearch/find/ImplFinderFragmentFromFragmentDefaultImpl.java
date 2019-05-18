@@ -17,26 +17,31 @@
 package ru.viise.lightsearch.find;
 
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 
-import ru.viise.lightsearch.fragment.IContainerFragment;
+import ru.viise.lightsearch.exception.FindableException;
 
-public class IContainerFragmentImplFinderDefaultImpl implements IContainerFragmentImplFinder {
+public class ImplFinderFragmentFromFragmentDefaultImpl<T extends Findable> implements ImplFinder<T>  {
 
-    private final FragmentActivity activity;
+    private final Fragment fragment;
 
-    public IContainerFragmentImplFinderDefaultImpl(FragmentActivity activity) {
-        this.activity = activity;
+    public ImplFinderFragmentFromFragmentDefaultImpl(Fragment fragment) {
+        this.fragment = fragment;
     }
 
     @Override
-    public IContainerFragment findImpl() {
-        FragmentManager fragmentManager = activity.getSupportFragmentManager();
+    public T findImpl(Class<T> type) throws FindableException {
+        Class<T> typeT = type;
+        FragmentManager fragmentManager = fragment.getChildFragmentManager();
         for(Fragment fragment : fragmentManager.getFragments()) {
-            if(fragment instanceof IContainerFragment)
-                return (IContainerFragment) fragment;
+            if(typeT.isInstance(fragment)) {
+                try {
+                    return typeT.cast(fragment);
+                } catch (ClassCastException ex) {
+                    throw new FindableException(ex.getMessage());
+                }
+            }
         }
-        return null;
+        throw new FindableException("Cannot find implements for " + type);
     }
 }

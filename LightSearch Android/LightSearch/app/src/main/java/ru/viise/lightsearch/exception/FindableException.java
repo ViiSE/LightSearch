@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.find;
+package ru.viise.lightsearch.exception;
 
-import ru.viise.lightsearch.fragment.IOpenSoftCheckFragment;
+public class FindableException extends Exception {
 
-public interface IOpenSoftCheckFragmentImplFinder {
-    IOpenSoftCheckFragment findImpl();
+    public FindableException(String message) {
+        super(message);
+    }
 }

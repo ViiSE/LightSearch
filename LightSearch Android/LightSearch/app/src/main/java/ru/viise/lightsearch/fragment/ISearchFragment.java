@@ -16,6 +16,8 @@
 
 package ru.viise.lightsearch.fragment;
 
-public interface ISearchFragment {
+import ru.viise.lightsearch.find.Findable;
+
+public interface ISearchFragment extends Findable {
     void setSearchBarcode(String barcode);
 }

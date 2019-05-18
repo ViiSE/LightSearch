@@ -63,12 +63,9 @@ import ru.viise.lightsearch.dialog.alert.OneResultAlertDialogCreator;
 import ru.viise.lightsearch.dialog.alert.OneResultAlertDialogCreatorInit;
 import ru.viise.lightsearch.dialog.alert.SuccessAlertDialogCreator;
 import ru.viise.lightsearch.dialog.alert.SuccessAlertDialogCreatorInit;
-import ru.viise.lightsearch.find.IAuthorizationFragmentImplFinder;
-import ru.viise.lightsearch.find.IAuthorizationFragmentImplFinderInit;
-import ru.viise.lightsearch.find.IContainerFragmentImplFinder;
-import ru.viise.lightsearch.find.IContainerFragmentImplFinderInit;
-import ru.viise.lightsearch.find.OnBackPressedListenerImplFinder;
-import ru.viise.lightsearch.find.OnBackPressedListenerImplFinderInit;
+import ru.viise.lightsearch.exception.FindableException;
+import ru.viise.lightsearch.find.ImplFinder;
+import ru.viise.lightsearch.find.ImplFinderFragmentFromActivityDefaultImpl;
 import ru.viise.lightsearch.fragment.IAuthorizationFragment;
 import ru.viise.lightsearch.fragment.IContainerFragment;
 import ru.viise.lightsearch.fragment.transaction.FragmentTransactionManager;
@@ -108,14 +105,12 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
 
     @Override
     public void onBackPressed() {
-        OnBackPressedListenerImplFinder onBackPressedImplFinder =
-                OnBackPressedListenerImplFinderInit.onBackPressedListenerImplFinder(this);
-        OnBackPressedListener backPressedListener = onBackPressedImplFinder.findImpl();
-
-        if (backPressedListener != null)
+        try {
+            ImplFinder<OnBackPressedListener> finder = new ImplFinderFragmentFromActivityDefaultImpl<>(this);
+            OnBackPressedListener backPressedListener = finder.findImpl(OnBackPressedListener.class);
             backPressedListener.onBackPressed();
-        else
-            super.onBackPressed();
+        }
+        catch(FindableException ex) { super.onBackPressed(); }
     }
 
     @Override
@@ -190,9 +185,9 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
     }
 
     public IContainerFragment getContainerFragment() {
-        IContainerFragmentImplFinder containerFragmentImplFinder =
-                IContainerFragmentImplFinderInit.containerFragmentImplFinder(this);
-        return containerFragmentImplFinder.findImpl();
+        ImplFinder<IContainerFragment> finder = new ImplFinderFragmentFromActivityDefaultImpl<>(this);
+        try { return finder.findImpl(IContainerFragment.class); }
+        catch(FindableException ignore) { return null; }
     }
 
     @Override
@@ -212,24 +207,24 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
     @Override
     public void handleConnectionResult(String message) {
         if(message == null) {
-            IAuthorizationFragmentImplFinder authFragmentFinder =
-                    IAuthorizationFragmentImplFinderInit.authorizationFragmentImplFinder(this);
-            IAuthorizationFragment authFragment = authFragmentFinder.findImpl();
+            try {
+                ImplFinder<IAuthorizationFragment> finder = new ImplFinderFragmentFromActivityDefaultImpl<>(this);
+                IAuthorizationFragment authFragment = finder.findImpl(IAuthorizationFragment.class);
+                AuthorizationDTO authDTO = authFragment.authorizationData();
 
-            AuthorizationDTO authDTO = authFragment.authorizationData();
-
-            CommandAuthorizationDTOCreator cmdAuthDTOCreator =
-                    CommandAuthorizationDTOCreatorInit.commandAuthorizationDTOCreator(IMEI, authDTO);
-            CommandAuthorizationDTO cmdAuthDTO = cmdAuthDTOCreator.createCommandDTO();
-            CommandManagerAsyncTaskDTO cmdManagerATDTO =
-                    CommandManagerAsyncTaskDTOInit.commandManagerAsyncTaskDTO(commandManager,
-                            CommandTypeEnum.AUTHORIZATION, cmdAuthDTO);
-            CommandManagerAsyncTask cmdManagerAT = new CommandManagerAsyncTask(this, authDialog);
-            cmdManagerAT.execute(cmdManagerATDTO);
+                CommandAuthorizationDTOCreator cmdAuthDTOCreator =
+                        CommandAuthorizationDTOCreatorInit.commandAuthorizationDTOCreator(IMEI, authDTO);
+                CommandAuthorizationDTO cmdAuthDTO = cmdAuthDTOCreator.createCommandDTO();
+                CommandManagerAsyncTaskDTO cmdManagerATDTO =
+                        CommandManagerAsyncTaskDTOInit.commandManagerAsyncTaskDTO(commandManager,
+                                CommandTypeEnum.AUTHORIZATION, cmdAuthDTO);
+                CommandManagerAsyncTask cmdManagerAT = new CommandManagerAsyncTask(this, authDialog);
+                cmdManagerAT.execute(cmdManagerATDTO);
+            }
+            catch(FindableException ignore) {}
         }
-        else {
+        else
             callDialogError(message);
-        }
     }
 
     @Override

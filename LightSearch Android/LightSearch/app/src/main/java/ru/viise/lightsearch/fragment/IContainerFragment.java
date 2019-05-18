@@ -17,8 +17,9 @@
 package ru.viise.lightsearch.fragment;
 
 import ru.viise.lightsearch.data.SoftCheckRecord;
+import ru.viise.lightsearch.find.Findable;
 
-public interface IContainerFragment {
+public interface IContainerFragment extends Findable {
     void setSearchBarcode(String barcode);
     void setCardCode(String cardCode);
     void setSoftCheckBarcode(String barcode);

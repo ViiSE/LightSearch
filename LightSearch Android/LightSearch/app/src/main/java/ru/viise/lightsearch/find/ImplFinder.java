@@ -16,8 +16,8 @@
 
 package ru.viise.lightsearch.find;
 
-import ru.viise.lightsearch.fragment.IAuthorizationFragment;
+import ru.viise.lightsearch.exception.FindableException;
 
-public interface IAuthorizationFragmentImplFinder {
-    IAuthorizationFragment findImpl();
+public interface ImplFinder<T extends Findable> {
+    T findImpl(Class<T> type) throws FindableException;
 }

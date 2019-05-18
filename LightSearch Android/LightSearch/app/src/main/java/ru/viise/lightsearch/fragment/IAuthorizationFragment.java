@@ -17,7 +17,8 @@
 package ru.viise.lightsearch.fragment;
 
 import ru.viise.lightsearch.data.AuthorizationDTO;
+import ru.viise.lightsearch.find.Findable;
 
-public interface IAuthorizationFragment {
+public interface IAuthorizationFragment extends Findable {
     AuthorizationDTO authorizationData();
 }

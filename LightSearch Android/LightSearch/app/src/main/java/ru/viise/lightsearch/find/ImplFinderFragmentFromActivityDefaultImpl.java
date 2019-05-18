@@ -20,23 +20,31 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 
-import ru.viise.lightsearch.activity.OnBackPressedListener;
+import ru.viise.lightsearch.exception.FindableException;
 
-public class OnBackPressedListenerImplFinderDefaultImpl implements OnBackPressedListenerImplFinder {
+public class ImplFinderFragmentFromActivityDefaultImpl<T extends Findable> implements ImplFinder<T> {
 
     private final FragmentActivity activity;
 
-    public OnBackPressedListenerImplFinderDefaultImpl(FragmentActivity activity) {
+    public ImplFinderFragmentFromActivityDefaultImpl(FragmentActivity activity) {
         this.activity = activity;
     }
 
+
     @Override
-    public OnBackPressedListener findImpl() {
-        FragmentManager fm = activity.getSupportFragmentManager();
-        for(Fragment fragment : fm.getFragments()) {
-            if(fragment instanceof OnBackPressedListener)
-                return (OnBackPressedListener) fragment;
+    public T findImpl(Class type) throws FindableException {
+        Class<T> typeT = type;
+        FragmentManager fragmentManager = activity.getSupportFragmentManager();
+        for(Fragment fragment : fragmentManager.getFragments()) {
+            if(typeT.isInstance(fragment)) {
+                try {
+                    return typeT.cast(fragment);
+                }
+                catch(ClassCastException ex) {
+                    throw new FindableException(ex.getMessage());
+                }
+            }
         }
-        return null;
+        throw new FindableException("Cannot find implements for " + type);
     }
 }

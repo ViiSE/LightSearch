@@ -16,8 +16,4 @@
 
 package ru.viise.lightsearch.find;
 
-import ru.viise.lightsearch.fragment.ISoftCheckContainerFragment;
-
-public interface ISoftCheckContainerFragmentImplFinder {
-    ISoftCheckContainerFragment findImpl();
-}
+public interface Findable { }

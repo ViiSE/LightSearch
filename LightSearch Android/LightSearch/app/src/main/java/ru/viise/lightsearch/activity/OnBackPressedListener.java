@@ -16,6 +16,8 @@
 
 package ru.viise.lightsearch.activity;
 
-public interface OnBackPressedListener {
+import ru.viise.lightsearch.find.Findable;
+
+public interface OnBackPressedListener extends Findable {
     void onBackPressed();
 }

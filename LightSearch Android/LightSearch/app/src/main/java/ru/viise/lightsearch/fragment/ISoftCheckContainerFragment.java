@@ -16,7 +16,9 @@
 
 package ru.viise.lightsearch.fragment;
 
-public interface ISoftCheckContainerFragment {
+import ru.viise.lightsearch.find.Findable;
+
+public interface ISoftCheckContainerFragment extends Findable {
     void switchToSoftCheckFragment();
     void switchToOpenSoftCheckFragment();
 }
