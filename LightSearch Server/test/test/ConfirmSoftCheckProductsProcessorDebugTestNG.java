@@ -153,7 +153,7 @@ public class ConfirmSoftCheckProductsProcessorDebugTestNG {
             String message = "{"
                               + "\"command\": \"confirm_prod_sf\","
                               + "\"IMEI\": \"12346789123456\","
-                              + "\"user_ident\": \"111\","
+                              + "\"ident\": \"111\","
                               + "\"card_code\": \"123456\","
                               + "\"data\":" 
                               + "["

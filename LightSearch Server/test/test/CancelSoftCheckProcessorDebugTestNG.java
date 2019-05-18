@@ -153,7 +153,7 @@ public class CancelSoftCheckProcessorDebugTestNG {
             String message = "{"
                               + "\"command\":\"cancel_soft_check\","
                               + "\"IMEI\":\"12346789123456\","
-                              + "\"user_ident\":\"111\","
+                              + "\"ident\":\"111\","
                               + "\"card_code\":\"123456\""
                             + "}";
             ClientCommandConverter clientCmdConverter = ClientCommandConverterInit.clientCommandConverter();
