@@ -16,8 +16,6 @@
 
 package ru.viise.lightsearch.activity.result.holder;
 
-import android.app.Activity;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;

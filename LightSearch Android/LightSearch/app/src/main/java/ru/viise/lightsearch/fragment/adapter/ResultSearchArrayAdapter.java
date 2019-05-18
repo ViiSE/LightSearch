@@ -27,8 +27,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import ru.viise.lightsearch.R;
-import ru.viise.lightsearch.data.UnitsEnum;
 import ru.viise.lightsearch.data.SearchRecordDTO;
+import ru.viise.lightsearch.data.UnitsEnum;
 
 public class ResultSearchArrayAdapter extends ArrayAdapter<SearchRecordDTO> {
 

@@ -18,11 +18,9 @@ package ru.viise.lightsearch.cmd.result;
 
 import org.json.simple.JSONObject;
 
-import java.util.List;
 import java.util.Objects;
 
 import ru.viise.lightsearch.cmd.ClientCommandContentEnum;
-import ru.viise.lightsearch.data.SearchRecordDTO;
 import ru.viise.lightsearch.data.SoftCheckRecord;
 import ru.viise.lightsearch.data.creator.SoftCheckRecordCreator;
 import ru.viise.lightsearch.data.creator.SoftCheckRecordCreatorInit;

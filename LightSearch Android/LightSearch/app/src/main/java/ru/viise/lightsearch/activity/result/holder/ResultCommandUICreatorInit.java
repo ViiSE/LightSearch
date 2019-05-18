@@ -16,8 +16,6 @@
 
 package ru.viise.lightsearch.activity.result.holder;
 
-import android.app.Activity;
-
 import ru.viise.lightsearch.activity.ManagerActivity;
 
 public class ResultCommandUICreatorInit {

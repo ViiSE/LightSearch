@@ -16,7 +16,6 @@
 
 package ru.viise.lightsearch.fragment;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -46,8 +45,8 @@ import ru.viise.lightsearch.activity.ManagerActivityHandler;
 import ru.viise.lightsearch.activity.ManagerActivityUI;
 import ru.viise.lightsearch.cmd.manager.CommandManager;
 import ru.viise.lightsearch.data.CartRecord;
-import ru.viise.lightsearch.data.UnitsEnum;
 import ru.viise.lightsearch.data.SoftCheckRecord;
+import ru.viise.lightsearch.data.UnitsEnum;
 import ru.viise.lightsearch.dialog.alert.CancelSoftCheckFromCartAlertDialogCreator;
 import ru.viise.lightsearch.dialog.alert.CancelSoftCheckFromCartAlertDialogCreatorInit;
 import ru.viise.lightsearch.dialog.alert.InfoProductAlertDialogCreator;

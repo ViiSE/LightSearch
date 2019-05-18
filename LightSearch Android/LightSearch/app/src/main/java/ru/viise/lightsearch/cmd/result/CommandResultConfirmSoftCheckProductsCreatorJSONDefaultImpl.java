@@ -22,8 +22,6 @@ import java.util.List;
 import java.util.Objects;
 
 import ru.viise.lightsearch.cmd.ClientCommandContentEnum;
-import ru.viise.lightsearch.cmd.processor.ConfirmSoftCheckProductsProcessor;
-import ru.viise.lightsearch.data.CartRecord;
 import ru.viise.lightsearch.data.SoftCheckRecord;
 import ru.viise.lightsearch.data.creator.CartRecordsCreator;
 import ru.viise.lightsearch.data.creator.CartRecordsCreatorInit;
