@@ -19,7 +19,7 @@ public class ProductDebugDefaultImpl implements ProductDebug {
     private final String id;
     private final String name;
     private final String price;
-    private final String amount;
+    private String amount;
     private final String unit;
 
     public ProductDebugDefaultImpl(String subdivision, String id, 
@@ -60,5 +60,12 @@ public class ProductDebugDefaultImpl implements ProductDebug {
     @Override
     public String unit() {
         return unit;
+    }
+
+    @Override
+    public void delMaxAmount(float value) {
+        float amountFloat = Float.parseFloat(amount);
+        float newAmount = amountFloat - value;
+        amount = String.valueOf(newAmount);
     }
 }

@@ -20,4 +20,5 @@ public interface ProductDebug {
     String price();
     String amount();
     String unit();
+    void delMaxAmount(float value);
 }

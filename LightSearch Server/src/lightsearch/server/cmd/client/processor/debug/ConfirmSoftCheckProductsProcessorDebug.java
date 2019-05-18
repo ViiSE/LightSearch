@@ -59,18 +59,27 @@ public class ConfirmSoftCheckProductsProcessorDebug extends AbstractProcessorCli
                     for(Object product : data) {
                         JSONObject productJSON = (JSONObject)product;
                         String id = productJSON.get("ID").toString();
-                        int amount = Integer.parseInt(productJSON.get("amount").toString());
-                        if(products.map().get(id) != null) {
-                            int maxAmountProduct = 
-                                    Integer.parseInt(products.map().get(id).amount().replace(" шт.", ""));
-                            
-                            if(maxAmountProduct < amount) {
-                                JSONObject newProd = new JSONObject();
-                                newProd.put("ID", id);
-                                newProd.put("amount", maxAmountProduct);
+                        float amount = Float.parseFloat(productJSON.get("amount").toString());
+                        
+                        final MaxAmount maxAmount = new MaxAmount();
+                        
+                        products.map().forEach((ignore, productM) -> {
+                            if(productM.id().equals("2200000738592"))
+                                productM.delMaxAmount(1.f);
+                            else if(productM.id().equals("111111"))
+                                productM.delMaxAmount(1.f);
                                 
-                                newData.add(newProd);
-                            }
+                            if(productM.id().equals(id))
+                                maxAmount.add(Float.parseFloat(productM.amount()));
+                        });
+                        
+                        float maxAmountProduct = maxAmount.get();
+                        
+                        if(maxAmountProduct < amount) {
+                            JSONObject newProd = new JSONObject();
+                            newProd.put("ID", id);
+                            newProd.put("amount", maxAmountProduct);
+                            newData.add(newProd);
                         }
                     }
 
@@ -101,5 +110,18 @@ public class ConfirmSoftCheckProductsProcessorDebug extends AbstractProcessorCli
         else
             return super.commandResult("Unknown", LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE,
                     "Неверный формат команды. Обратитесь к администратору для устранения ошибки. Вы были отключены от сервера", null);
+    }
+    
+    private class MaxAmount {
+        
+        private float maxAmount = 0.f;
+        
+        public void add(float value) {
+            maxAmount += value;
+        }
+        
+        public float get() {
+            return maxAmount;
+        }
     }
 }

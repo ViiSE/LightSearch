@@ -30,8 +30,10 @@ public class ProductsMapDebugDefaultImpl implements ProductsMapDebug {
         ProductDebug pr2 = createProduct("Склад 1", "222222", "Товар 2", "1500.0", "10", "шт.");
         ProductDebug pr3 = createProduct("Склад 2", "111111", "Товар 1", "100.0", "100", "шт.");
         ProductDebug pr4 = createProduct("Склад 2", "444444", "Товар 4", "65.0", "7", "шт.");
-        ProductDebug pr5 = createProduct("ТК 1", "111111", "Товар 1", "100.0", "7", "шт.");
-        ProductDebug pr6 = createProduct("ТК 2", "444444", "Товар 4", "65.0", "12", "шт.");
+        ProductDebug pr5 = createProduct("Склад 2", "2200000738592", "Товар 5", "70.0", "10", "шт.");
+        ProductDebug pr6 = createProduct("ТК 1", "111111", "Товар 1", "100.0", "7", "шт.");
+        ProductDebug pr7 = createProduct("ТК 2", "444444", "Товар 4", "65.0", "12", "шт.");
+        ProductDebug pr8 = createProduct("ТК 2", "2200000738592", "Товар 5", "70.0", "20", "шт.");
         
         products.put("1", pr1);
         products.put("2", pr2);
@@ -39,6 +41,8 @@ public class ProductsMapDebugDefaultImpl implements ProductsMapDebug {
         products.put("4", pr4);
         products.put("5", pr5);
         products.put("6", pr6);
+        products.put("7", pr7);
+        products.put("8", pr8);
     }
     
     private ProductDebug createProduct(String subdiv, String id, String name, 
