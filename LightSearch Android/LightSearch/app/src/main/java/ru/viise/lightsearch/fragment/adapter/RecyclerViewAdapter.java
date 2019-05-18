@@ -16,29 +16,40 @@
 
 package ru.viise.lightsearch.fragment.adapter;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.List;
 
 import ru.viise.lightsearch.R;
+import ru.viise.lightsearch.data.CartRecord;
 import ru.viise.lightsearch.data.SoftCheckRecord;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.DefaultViewHolder> {
 
+    private final String priceUnit;
+    private final List<SoftCheckRecord> data;
     private final TextView twTotalCost;
     private final String total;
-    private List<SoftCheckRecord> data;
-    private final String priceUnit;
+    private final Context context;
 
-    public RecyclerViewAdapter(List<SoftCheckRecord> data, TextView twTotalCost, String priceUnit) {
+    private int lastPosition = -1;
+
+
+    public RecyclerViewAdapter(Context context, List<SoftCheckRecord> data, TextView twTotalCost,
+               String priceUnit) {
+        this.context = context;
         this.data = data;
         this.twTotalCost = twTotalCost;
         total = twTotalCost.getText().toString() + " ";
@@ -88,10 +99,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
                 @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    if(charSequence.length() < prevString.length())
-                        delAction = true;
-                    else
-                        delAction = false;
+                    delAction = charSequence.length() < prevString.length();
                 }
 
                 @Override
@@ -135,14 +143,31 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull DefaultViewHolder holder, int position) {
-        holder.twCardName.setText(data.get(position).name());
-        holder.twCardBarcode.setText(data.get(position).barcode());
-        holder.twCardMaxAmount.setText(data.get(position).maxAmountWithUnit());
-        holder.twCardPrice.setText(data.get(position).priceWithUnit());
+        SoftCheckRecord record = data.get(position);
+        holder.twCardName.setText(record.name());
+        holder.twCardBarcode.setText(record.barcode());
+        holder.twCardMaxAmount.setText(record.maxAmountWithUnit());
+        holder.twCardPrice.setText(record.priceWithUnit());
         holder.ignore = true;
-        holder.etCardCurrentAmount.setText(String.valueOf(data.get(position).currentAmount()));
+        holder.etCardCurrentAmount.setText(String.valueOf(record.currentAmount()));
         holder.ignore = false;
         holder.twCardTotalCost.setText(data.get(position).totalCostWithUnit());
+
+        if(record instanceof CartRecord) {
+            CartRecord cartRecord = (CartRecord) record;
+            if(!cartRecord.isConfirmed())
+                holder.twCardName.setTextColor(ContextCompat.getColor(context, R.color.colorDelete));
+        }
+
+        setAnimation(holder.itemView, position);
+    }
+
+    private void setAnimation(View viewToAnimate, int position) {
+        if (position > lastPosition) {
+            Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
+            viewToAnimate.startAnimation(animation);
+            lastPosition = position;
+        }
     }
 
     @Override
@@ -152,12 +177,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public void removeItem(int position) {
         data.remove(position);
+        if(data.size() == 0)
+            lastPosition = -1;
+        else
+            lastPosition = position;
         getTotalCost();
         notifyItemRemoved(position);
     }
 
     public void restoreItem(SoftCheckRecord record, int position) {
         data.add(position, record);
+        lastPosition = position;
         getTotalCost();
         notifyItemInserted(position);
     }
@@ -167,6 +197,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         for(int pos = 0; pos < data.size(); pos++) {
             SoftCheckRecord rec = data.get(pos);
             if(rec.barcode().equals(record.barcode())) {
+                rec.setMaxAmount(rec.maxAmount());
                 rec.setProductsCount(rec.currentAmount() + 1);
                 isFound = true;
                 break;

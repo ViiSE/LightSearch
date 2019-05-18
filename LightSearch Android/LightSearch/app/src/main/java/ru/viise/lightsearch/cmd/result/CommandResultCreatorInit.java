@@ -16,6 +16,10 @@
 
 package ru.viise.lightsearch.cmd.result;
 
+import java.util.List;
+
+import ru.viise.lightsearch.data.SoftCheckRecord;
+
 public class CommandResultCreatorInit {
 
     public static CommandResultCreator commandResultAuthorizationCreator(String rawMessage, String IMEI) {
@@ -44,7 +48,7 @@ public class CommandResultCreatorInit {
     }
 
     public static CommandResultCreator commandResultOpenSoftCheckCreator(String rawMessage, String IMEI) {
-        return new CommandResultOpenSoftCheckCreatorDefaultImpl(rawMessage, IMEI);
+        return new CommandResultOpenSoftCheckCreatorJSONDefaultImpl(rawMessage, IMEI);
     }
 
     public static CommandResultCreator commandResultOpenSoftCheckCreator(boolean isDone, String message) {
@@ -52,10 +56,20 @@ public class CommandResultCreatorInit {
     }
 
     public static CommandResultCreator commandResultCancelSoftCheckCreator(String rawMessage, String IMEI) {
-        return new CommandResultCancelSoftCheckCreatorDefaultImpl(rawMessage, IMEI);
+        return new CommandResultCancelSoftCheckCreatorJSONDefaultImpl(rawMessage, IMEI);
     }
 
     public static CommandResultCreator commandResultCancelSoftCheckCreator(boolean isDone, String message) {
         return new CommandResultCancelSoftCheckCreatorErrorDefaultImpl(isDone, message);
+    }
+
+    public static CommandResultCreator commandResultConfirmSoftCheckProductsCreator(String rawMessage,
+                        String IMEI, List<SoftCheckRecord> softCheckRecords) {
+        return new CommandResultConfirmSoftCheckProductsCreatorJSONDefaultImpl(rawMessage, IMEI,
+                softCheckRecords);
+    }
+
+    public static CommandResultCreator commandResultConfirmSoftCheckProductsCreator(boolean isDone, String message) {
+        return new CommandResultConfirmSoftCheckProductsCreatorErrorDefaultImpl(isDone, message);
     }
 }

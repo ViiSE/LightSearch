@@ -21,10 +21,14 @@ import android.os.Parcelable;
 public interface SoftCheckRecord extends Parcelable {
     String name();
     String barcode();
+    float price();
     String priceWithUnit();
+    String amountUnit();
     float currentAmount();
     String totalCostWithUnit();
     float totalCost();
+    float maxAmount();
+    void setMaxAmount(float maxAmount);
     String maxAmountWithUnit();
     void setProductsCount(float count);
     SubdivisionList subdivisions();

@@ -18,25 +18,35 @@ package ru.viise.lightsearch.cmd.result;
 
 import org.json.simple.JSONObject;
 
+import java.util.List;
 import java.util.Objects;
 
 import ru.viise.lightsearch.cmd.ClientCommandContentEnum;
+import ru.viise.lightsearch.cmd.processor.ConfirmSoftCheckProductsProcessor;
+import ru.viise.lightsearch.data.CartRecord;
+import ru.viise.lightsearch.data.SoftCheckRecord;
+import ru.viise.lightsearch.data.creator.CartRecordsCreator;
+import ru.viise.lightsearch.data.creator.CartRecordsCreatorInit;
 import ru.viise.lightsearch.exception.MessageParserException;
 import ru.viise.lightsearch.message.parser.MessageParser;
 import ru.viise.lightsearch.message.parser.MessageParserInit;
 
-public class CommandResultOpenSoftCheckCreatorDefaultImpl implements CommandResultCreator {
+public class CommandResultConfirmSoftCheckProductsCreatorJSONDefaultImpl implements CommandResultCreator {
 
     private final String IS_DONE    = ClientCommandContentEnum.IS_DONE.stringValue();
     private final String IMEI_FIELD = ClientCommandContentEnum.IMEI.stringValue();
-    private final String MESSAGE    = ClientCommandContentEnum.MESSAGE.stringValue();
+    private final String DATA       = ClientCommandContentEnum.DATA.stringValue();
 
     private final String rawMessage;
     private final String IMEI;
+    private final List<SoftCheckRecord> softCheckRecords;
 
-    public CommandResultOpenSoftCheckCreatorDefaultImpl(String rawMessage, String IMEI) {
+
+    public CommandResultConfirmSoftCheckProductsCreatorJSONDefaultImpl(String rawMessage,
+               String IMEI, List<SoftCheckRecord> softCheckRecords) {
         this.rawMessage = rawMessage;
         this.IMEI = IMEI;
+        this.softCheckRecords = softCheckRecords;
     }
 
     @Override
@@ -45,16 +55,21 @@ public class CommandResultOpenSoftCheckCreatorDefaultImpl implements CommandResu
             MessageParser msgParser = MessageParserInit.messageParser();
             JSONObject objMsg = (JSONObject)msgParser.parse(rawMessage);
             String incomingIMEI = Objects.requireNonNull(objMsg.get(IMEI_FIELD)).toString();
+
             String incomingIsDone = Objects.requireNonNull(objMsg.get(IS_DONE)).toString();
             ResultCommandVerifier resCmdVerifier =
                     ResultCommandVerifierInit.resultCommandVerifier(incomingIMEI, IMEI, incomingIsDone);
 
-            boolean isDone = resCmdVerifier.verify();
-            String message = Objects.requireNonNull(objMsg.get(MESSAGE)).toString();
 
-            OpenSoftCheckCommandResult openSCCmdRes =
-                    OpenSoftCheckCommandResultInit.openSoftCheckCommandResult(isDone, message);
-            return openSCCmdRes;
+            boolean isDone = resCmdVerifier.verify();
+            CartRecordsCreator cartRecCr =
+                    CartRecordsCreatorInit.cartRecordsCreator(softCheckRecords, objMsg.get(DATA));
+            List<SoftCheckRecord> cartRecords = cartRecCr.createCartRecords();
+
+            ConfirmSoftCheckProductsResult confirmSCProdRes =
+                    ConfirmSoftCheckProductsResultInit.confirmSoftCheckProductsResult(isDone, null,
+                            cartRecords);
+            return confirmSCProdRes;
         }
         catch(MessageParserException | NullPointerException ex) {
             return null;

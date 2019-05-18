@@ -16,12 +16,12 @@
 
 package ru.viise.lightsearch.data;
 
-public interface SearchRecordDTO {
-    String subdivision();
-    String id();
-    String name();
-    String price();
-    String amount();
-    String amountUnit();
-    String priceUnit();
+public class CartRecordInit {
+
+    public static CartRecord cartRecord(String name, String barcode, float price, String amountUnit,
+                        SubdivisionList subdivisions, float currentAmount, float oldMaxAmount,
+                        float newMaxAmount) {
+        return new CartRecordDefaultImpl(name, barcode, price, amountUnit, subdivisions,
+                currentAmount, oldMaxAmount, newMaxAmount);
+    }
 }

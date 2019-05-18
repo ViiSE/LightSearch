@@ -14,14 +14,16 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.data;
+package ru.viise.lightsearch.cmd.result;
 
-public interface SearchRecordDTO {
-    String subdivision();
-    String id();
-    String name();
-    String price();
-    String amount();
-    String amountUnit();
-    String priceUnit();
+import java.util.List;
+
+import ru.viise.lightsearch.data.SoftCheckRecord;
+
+public class ConfirmSoftCheckProductsResultInit {
+
+    public static ConfirmSoftCheckProductsResult confirmSoftCheckProductsResult(boolean isDone,
+                    String message, List<SoftCheckRecord> cartRecords) {
+        return new ConfirmSoftCheckProductsResultDefaultImpl(isDone, message, cartRecords);
+    }
 }

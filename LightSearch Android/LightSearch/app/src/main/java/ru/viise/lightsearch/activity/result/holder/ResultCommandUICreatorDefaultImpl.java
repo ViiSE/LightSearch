@@ -25,6 +25,7 @@ import java.util.function.Function;
 import ru.viise.lightsearch.activity.ManagerActivity;
 import ru.viise.lightsearch.activity.result.processor.AuthorizationResultUIProcessor;
 import ru.viise.lightsearch.activity.result.processor.CancelSoftCheckResultUIProcessor;
+import ru.viise.lightsearch.activity.result.processor.ConfirmSoftCheckProductsResultUIProcessor;
 import ru.viise.lightsearch.activity.result.processor.OpenSoftCheckResultUIProcessor;
 import ru.viise.lightsearch.activity.result.processor.SearchResultSoftCheckUIProcessor;
 import ru.viise.lightsearch.activity.result.processor.SearchResultUIProcessor;
@@ -33,11 +34,12 @@ import ru.viise.lightsearch.cmd.result.CommandResult;
 
 public class ResultCommandUICreatorDefaultImpl implements ResultCommandUICreator {
 
-    private final CommandTypeEnum AUTHORIZATION     = CommandTypeEnum.AUTHORIZATION;
-    private final CommandTypeEnum SEARCH            = CommandTypeEnum.SEARCH;
-    private final CommandTypeEnum SEARCH_SC         = CommandTypeEnum.SEARCH_SC;
-    private final CommandTypeEnum OPEN_SOFT_CHECK   = CommandTypeEnum.OPEN_SOFT_CHECK;
-    private final CommandTypeEnum CANCEL_SOFT_CHECK = CommandTypeEnum.CANCEL_SOFT_CHECK;
+    private final CommandTypeEnum AUTHORIZATION               = CommandTypeEnum.AUTHORIZATION;
+    private final CommandTypeEnum SEARCH                      = CommandTypeEnum.SEARCH;
+    private final CommandTypeEnum SEARCH_SC                   = CommandTypeEnum.SEARCH_SC;
+    private final CommandTypeEnum OPEN_SOFT_CHECK             = CommandTypeEnum.OPEN_SOFT_CHECK;
+    private final CommandTypeEnum CANCEL_SOFT_CHECK           = CommandTypeEnum.CANCEL_SOFT_CHECK;
+    private final CommandTypeEnum CONFIRM_SOFT_CHECK_PRODUCTS = CommandTypeEnum.CONFIRM_SOFT_CHECK_PRODUCTS;
 
     private final ManagerActivity activity;
 
@@ -53,6 +55,7 @@ public class ResultCommandUICreatorDefaultImpl implements ResultCommandUICreator
         cmdHolder.put(SEARCH_SC, new SearchResultSoftCheckUIProcessor(activity));
         cmdHolder.put(OPEN_SOFT_CHECK, new OpenSoftCheckResultUIProcessor(activity));
         cmdHolder.put(CANCEL_SOFT_CHECK, new CancelSoftCheckResultUIProcessor(activity));
+        cmdHolder.put(CONFIRM_SOFT_CHECK_PRODUCTS, new ConfirmSoftCheckProductsResultUIProcessor(activity));
 
         return ResultCommandHolderUIInit.resultCommandHolderUI(cmdHolder);
     }

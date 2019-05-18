@@ -20,28 +20,22 @@ import android.app.Activity;
 import android.support.v7.app.AlertDialog;
 
 import ru.viise.lightsearch.data.ButtonContentEnum;
-import ru.viise.lightsearch.data.SoftCheckRecord;
 
-public class InfoProductAlertDialogCreatorDefaultImpl implements InfoProductAlertDialogCreator {
+public class UnconfirmedRecordAlertDialogCreatorDefaultImpl implements UnconfirmedRecordAlertDialogCreator {
 
     private final String OK = ButtonContentEnum.POSITIVE_BUTTON.stringValue();
 
     private final Activity activity;
-    private final SoftCheckRecord record;
 
-    public InfoProductAlertDialogCreatorDefaultImpl(Activity activity, SoftCheckRecord record) {
-        this.record = record;
+    public UnconfirmedRecordAlertDialogCreatorDefaultImpl(Activity activity) {
         this.activity = activity;
     }
 
     @Override
     public AlertDialog createAlertDialog() {
         return new android.support.v7.app.AlertDialog.Builder(activity).setTitle("").setMessage(
-                "ИД: " + record.barcode() + "\n" +
-                        "Наименование: " + record.name() + "\n" +
-                        "Цена: " + record.priceWithUnit() + "\n" +
-                        "Общее кол-во: " + record.maxAmountWithUnit() + "\n" +
-                        "Подразделения: \n" + record.subdivisions().toString())
+                "Количество некоторых товаров, указанных в мягком чеке, больше, " +
+                        "чем свободное количество данных товаров на складах. Данные товары выделены красным.")
                 .setPositiveButton(OK, (dialogInterface, i) -> dialogInterface.dismiss()).create();
     }
 }

@@ -2,6 +2,7 @@ package ru.viise.lightsearch.fragment;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -32,6 +33,9 @@ import ru.viise.lightsearch.activity.scan.ScannerInit;
 import ru.viise.lightsearch.cmd.CommandTypeEnum;
 import ru.viise.lightsearch.cmd.manager.CommandManager;
 import ru.viise.lightsearch.cmd.manager.task.CommandManagerAsyncTask;
+import ru.viise.lightsearch.data.CommandConfirmSoftCheckRecordsDTO;
+import ru.viise.lightsearch.data.CommandConfirmSoftCheckRecordsDTOInit;
+import ru.viise.lightsearch.data.UnitsEnum;
 import ru.viise.lightsearch.data.SoftCheckRecord;
 import ru.viise.lightsearch.data.CommandManagerAsyncTaskDTO;
 import ru.viise.lightsearch.data.CommandManagerAsyncTaskDTOInit;
@@ -46,8 +50,13 @@ import ru.viise.lightsearch.fragment.adapter.SwipeToInfoCallback;
 import ru.viise.lightsearch.fragment.adapter.SwipeToDeleteCallback;
 import ru.viise.lightsearch.fragment.snackbar.SnackbarSoftCheckCreator;
 import ru.viise.lightsearch.fragment.snackbar.SnackbarSoftCheckCreatorInit;
+import ru.viise.lightsearch.pref.PreferencesManager;
+import ru.viise.lightsearch.pref.PreferencesManagerInit;
+import ru.viise.lightsearch.pref.PreferencesManagerType;
 
 public class SoftCheckFragment extends Fragment implements ISoftCheckFragment {
+
+    private final String PREF = "pref";
 
     private ManagerActivityUI managerActivityUI;
     private ManagerActivityHandler managerActivityHandler;
@@ -57,6 +66,8 @@ public class SoftCheckFragment extends Fragment implements ISoftCheckFragment {
     private RecyclerView recyclerView;
     private RecyclerViewAdapter adapter;
     private CoordinatorLayout coordinatorLayout;
+    private Button cartButton;
+    private String toCart;
 
     private AlertDialog queryDialog;
 
@@ -65,14 +76,29 @@ public class SoftCheckFragment extends Fragment implements ISoftCheckFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_soft_check, container, false);
 
-        AppCompatImageButton searchButton = view.findViewById(R.id.imageButtonSearch);
-        AppCompatImageButton barcodeButton = view.findViewById(R.id.imageButtonBarcode);
-        Button cartButton = view.findViewById(R.id.buttonCart);
-        EditText editTextSearch = view.findViewById(R.id.editTextSearchSC);
-
+        cartButton = view.findViewById(R.id.buttonCart);
+        toCart = cartButton.getText().toString();
         queryDialog = new SpotsDialog.Builder().setContext(this.getActivity()).setMessage("Выполнение").setCancelable(false).build();
 
+        AppCompatImageButton searchButton = view.findViewById(R.id.imageButtonSearch);
+        AppCompatImageButton barcodeButton = view.findViewById(R.id.imageButtonBarcode);
+        EditText editTextSearch = view.findViewById(R.id.editTextSearchSC);
+
         Animation animAlpha = AnimationUtils.loadAnimation(this.getActivity(), R.anim.alpha);
+
+        recyclerView = view.findViewById(R.id.recyclerViewSoftCheck);
+        coordinatorLayout = view.findViewById(R.id.coordinatorLayoutSoftCheck);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext());
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(layoutManager);
+
+        TextView tvTotalCost = view.findViewById(R.id.textViewSoftCheckTotalCost);
+
+        initRecyclerView(tvTotalCost);
+        initSwipeToDeleteAndUndo();
+        initSwipeToInfo();
 
         searchButton.setOnClickListener(view1 -> {
             view1.startAnimation(animAlpha);
@@ -100,23 +126,29 @@ public class SoftCheckFragment extends Fragment implements ISoftCheckFragment {
         });
 
         cartButton.setOnClickListener(view3 -> {
-            Toast t = Toast.makeText(this.getActivity().getApplicationContext(), "cart", Toast.LENGTH_LONG);
-            t.show();
+            view3.startAnimation(animAlpha);
+            if(adapter.getItemCount() == 0) {
+                Toast t = Toast.makeText(this.getActivity().getApplicationContext(), "Мягкий чек пуст!", Toast.LENGTH_LONG);
+                t.show();
+            }
+            else {
+                SharedPreferences sPref = this.getActivity().getSharedPreferences(PREF, Context.MODE_PRIVATE);
+                PreferencesManager prefManager = PreferencesManagerInit.preferencesManager(sPref);
+                CommandConfirmSoftCheckRecordsDTO cmdConSCResDTO =
+                        CommandConfirmSoftCheckRecordsDTOInit.commandConfirmSoftCheckRecordsDTO(
+                                prefManager.load(PreferencesManagerType.USER_IDENT_MANAGER),
+                                prefManager.load(PreferencesManagerType.CARD_CODE_MANAGER),
+                                adapter.getData());
+
+                CommandManagerAsyncTaskDTO cmdManagerATDTO =
+                        CommandManagerAsyncTaskDTOInit.commandManagerAsyncTaskDTO(commandManager,
+                                CommandTypeEnum.CONFIRM_SOFT_CHECK_PRODUCTS, cmdConSCResDTO);
+                CommandManagerAsyncTask cmdManagerAT = new CommandManagerAsyncTask(managerActivityHandler,
+                        queryDialog);
+                cmdManagerAT.execute(cmdManagerATDTO);
+            }
+
         });
-
-        recyclerView = view.findViewById(R.id.recyclerViewSoftCheck);
-        coordinatorLayout = view.findViewById(R.id.coordinatorLayoutSoftCheck);
-
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this.getContext());
-        mLayoutManager.setReverseLayout(true);
-        mLayoutManager.setStackFromEnd(true);
-        recyclerView.setLayoutManager(mLayoutManager);
-
-        TextView tvTotalCost = view.findViewById(R.id.textViewSoftCheckTotalCost);
-
-        initRecyclerView(tvTotalCost);
-        initSwipeToDeleteAndUndo();
-        initSwipeToInfo();
 
         return view;
     }
@@ -134,8 +166,10 @@ public class SoftCheckFragment extends Fragment implements ISoftCheckFragment {
     }
 
     private void initRecyclerView(TextView tvTotalCost) {
-        adapter = new RecyclerViewAdapter(softCheckRecords, tvTotalCost, "руб.");
+        adapter = new RecyclerViewAdapter(this.getContext(), softCheckRecords, tvTotalCost,
+                UnitsEnum.CURRENT_PRICE_UNIT.stringValue());
         recyclerView.setAdapter(adapter);
+        cartButton.setText(toCart +  " (" + adapter.getItemCount() + ")");
     }
 
     private void initSwipeToDeleteAndUndo() {
@@ -145,12 +179,14 @@ public class SoftCheckFragment extends Fragment implements ISoftCheckFragment {
                 final int position = viewHolder.getAdapterPosition();
                 final SoftCheckRecord item = adapter.getData().get(position);
                 adapter.removeItem(position);
+                cartButton.setText(toCart +  " (" + adapter.getItemCount() + ")");
 
                 SnackbarSoftCheckCreator snackbarCr = SnackbarSoftCheckCreatorInit.snackbarSoftCheckCreator(
                         SoftCheckFragment.this, coordinatorLayout, "  Товар удален.");
                 Snackbar snackbar = snackbarCr.createSnackbar().setAction("Отмена   ", view -> {
                     adapter.restoreItem(item, position);
                     recyclerView.scrollToPosition(position);
+                    cartButton.setText(toCart +  " (" + adapter.getItemCount() + ")");
                 });
                 snackbar.show();
             }
@@ -193,6 +229,7 @@ public class SoftCheckFragment extends Fragment implements ISoftCheckFragment {
     @Override
     public void addSoftCheckRecord(SoftCheckRecord record) {
         adapter.addItem(record);
+        cartButton.setText(toCart +  " (" + adapter.getItemCount() + ")");
         SnackbarSoftCheckCreator snackbarCr = SnackbarSoftCheckCreatorInit.snackbarSoftCheckCreator(
                 SoftCheckFragment.this, coordinatorLayout, "  Товар добавлен.");
         Snackbar snackbar = snackbarCr.createSnackbar();

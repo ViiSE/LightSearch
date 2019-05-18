@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.data;
+package ru.viise.lightsearch.dialog.alert;
 
-public interface SearchRecordDTO {
-    String subdivision();
-    String id();
-    String name();
-    String price();
-    String amount();
-    String amountUnit();
-    String priceUnit();
+import android.app.Activity;
+
+public class UnconfirmedRecordAlertDialogCreatorInit {
+
+    public static UnconfirmedRecordAlertDialogCreator unconfirmedRecordAlertDialogCreator(Activity activity) {
+        return  new UnconfirmedRecordAlertDialogCreatorDefaultImpl(activity);
+    }
 }

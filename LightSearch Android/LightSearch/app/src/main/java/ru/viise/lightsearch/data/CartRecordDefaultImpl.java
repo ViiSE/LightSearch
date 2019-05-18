@@ -19,35 +19,52 @@ package ru.viise.lightsearch.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class SoftCheckRecordDefaultImpl implements SoftCheckRecord {
+public class CartRecordDefaultImpl implements CartRecord {
 
     private final String name;
     private final String barcode;
+    private final float oldMaxAmount;
     private final float price;
     private final String amountUnit;
     private final String priceUnit = UnitsEnum.CURRENT_PRICE_UNIT.stringValue();
     private final SubdivisionList subdivisions;
+    private boolean isConfirmed;
 
-    private float maxAmount;
+    private float newMaxAmount;
     private float currentAmount;
     private float totalCost;
 
-    public SoftCheckRecordDefaultImpl(String name, String barcode, String price, String amountUnit,
-                                      SubdivisionList subdivisions) {
+    public CartRecordDefaultImpl(String name, String barcode, float price, String amountUnit,
+                SubdivisionList subdivisions, float currentAmount, float oldMaxAmount, float newMaxAmount) {
         this.name = name;
         this.barcode = barcode;
-        this.price = Float.parseFloat(price);
+        this.price = price;
         this.amountUnit = amountUnit;
         this.subdivisions = subdivisions;
 
-        int tempMaxAmount = 0;
-        for(Subdivision subdivision : subdivisions.collection())
-            tempMaxAmount += subdivision.productAmount();
+        this.oldMaxAmount = oldMaxAmount;
+        this.newMaxAmount = newMaxAmount;
 
-        maxAmount = tempMaxAmount;
+        if(currentAmount <= this.newMaxAmount) {
+            this.currentAmount = currentAmount;
+            isConfirmed = true;
+        }
+        else {
+            this.currentAmount = this.newMaxAmount;
+            isConfirmed = false;
+        }
 
-        currentAmount = 1;
-        totalCost = this.price;
+        totalCost = this.currentAmount * this.price;
+    }
+
+    @Override
+    public boolean isConfirmed() {
+        return isConfirmed;
+    }
+
+    @Override
+    public String oldMaxAmountWithUnit() {
+        return oldMaxAmount + " " + amountUnit;
     }
 
     @Override
@@ -66,36 +83,6 @@ public class SoftCheckRecordDefaultImpl implements SoftCheckRecord {
     }
 
     @Override
-    public void setProductsCount(float count) {
-        currentAmount = count;
-        if(currentAmount > maxAmount)
-            currentAmount = maxAmount;
-        if(currentAmount < 0)
-            currentAmount = 0;
-        totalCost = price * currentAmount;
-    }
-
-    @Override
-    public String totalCostWithUnit() {
-        return totalCost + " " + priceUnit;
-    }
-
-    @Override
-    public float totalCost() {
-        return totalCost;
-    }
-
-    @Override
-    public float maxAmount() {
-        return maxAmount;
-    }
-
-    @Override
-    public void setMaxAmount(float maxAmount) {
-        this.maxAmount = maxAmount;
-    }
-
-    @Override
     public String priceWithUnit() {
         return price + " " + priceUnit;
     }
@@ -111,8 +98,38 @@ public class SoftCheckRecordDefaultImpl implements SoftCheckRecord {
     }
 
     @Override
+    public String totalCostWithUnit() {
+        return totalCost + " " + priceUnit;
+    }
+
+    @Override
+    public float totalCost() {
+        return totalCost;
+    }
+
+    @Override
+    public float maxAmount() {
+        return newMaxAmount;
+    }
+
+    @Override
+    public void setMaxAmount(float maxAmount) {
+        newMaxAmount = maxAmount;
+    }
+
+    @Override
     public String maxAmountWithUnit() {
-        return maxAmount + " " + amountUnit;
+        return newMaxAmount + " " + amountUnit;
+    }
+
+    @Override
+    public void setProductsCount(float count) {
+        currentAmount = count;
+        if(currentAmount > newMaxAmount)
+            currentAmount = newMaxAmount;
+        if(currentAmount < 0)
+            currentAmount = 0;
+        totalCost = price * currentAmount;
     }
 
     @Override
@@ -130,18 +147,20 @@ public class SoftCheckRecordDefaultImpl implements SoftCheckRecord {
         parcel.writeString(name);
         parcel.writeString(barcode);
         parcel.writeFloat(price);
-        parcel.writeFloat(maxAmount);
+        parcel.writeFloat(newMaxAmount);
         parcel.writeString(amountUnit);
         parcel.writeParcelable(subdivisions, i);
+        parcel.writeFloat(oldMaxAmount);
     }
 
-    private SoftCheckRecordDefaultImpl(Parcel in) {
+    private CartRecordDefaultImpl(Parcel in) {
         name = in.readString();
         barcode = in.readString();
         price = in.readFloat();
-        maxAmount = in.readFloat();
+        newMaxAmount = in.readFloat();
         amountUnit = in.readString();
         subdivisions = in.readParcelable(SubdivisionListDefaultImpl.class.getClassLoader());
+        oldMaxAmount = in.readFloat();
     }
 
     public static final Parcelable.Creator<SoftCheckRecord> CREATOR
@@ -149,12 +168,12 @@ public class SoftCheckRecordDefaultImpl implements SoftCheckRecord {
 
         @Override
         public SoftCheckRecord createFromParcel(Parcel in) {
-            return new SoftCheckRecordDefaultImpl(in);
+            return new CartRecordDefaultImpl(in);
         }
 
         @Override
         public SoftCheckRecord[] newArray(int size) {
-            return new SoftCheckRecordDefaultImpl[size];
+            return new CartRecordDefaultImpl[size];
         }
     };
 }

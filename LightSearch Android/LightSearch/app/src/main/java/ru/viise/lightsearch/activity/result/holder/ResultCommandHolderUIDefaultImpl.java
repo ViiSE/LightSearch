@@ -25,17 +25,19 @@ import ru.viise.lightsearch.cmd.CommandTypeEnum;
 import ru.viise.lightsearch.cmd.result.AuthorizationCommandResult;
 import ru.viise.lightsearch.cmd.result.CancelSoftCheckCommandResult;
 import ru.viise.lightsearch.cmd.result.CommandResult;
+import ru.viise.lightsearch.cmd.result.ConfirmSoftCheckProductsResult;
 import ru.viise.lightsearch.cmd.result.OpenSoftCheckCommandResult;
 import ru.viise.lightsearch.cmd.result.SearchCommandResult;
 import ru.viise.lightsearch.cmd.result.SearchSoftCheckCommandResult;
 
 public class ResultCommandHolderUIDefaultImpl implements ResultCommandHolderUI {
 
-    private final CommandTypeEnum AUTHORIZATION     = CommandTypeEnum.AUTHORIZATION;
-    private final CommandTypeEnum SEARCH            = CommandTypeEnum.SEARCH;
-    private final CommandTypeEnum SEARCH_SC         = CommandTypeEnum.SEARCH_SC;
-    private final CommandTypeEnum OPEN_SOFT_CHECK   = CommandTypeEnum.OPEN_SOFT_CHECK;
-    private final CommandTypeEnum CANCEL_SOFT_CHECK = CommandTypeEnum.CANCEL_SOFT_CHECK;
+    private final CommandTypeEnum AUTHORIZATION               = CommandTypeEnum.AUTHORIZATION;
+    private final CommandTypeEnum SEARCH                      = CommandTypeEnum.SEARCH;
+    private final CommandTypeEnum SEARCH_SC                   = CommandTypeEnum.SEARCH_SC;
+    private final CommandTypeEnum OPEN_SOFT_CHECK             = CommandTypeEnum.OPEN_SOFT_CHECK;
+    private final CommandTypeEnum CANCEL_SOFT_CHECK           = CommandTypeEnum.CANCEL_SOFT_CHECK;
+    private final CommandTypeEnum CONFIRM_SOFT_CHECK_PRODUCTS = CommandTypeEnum.CONFIRM_SOFT_CHECK_PRODUCTS;
 
     private final Map<CommandTypeEnum, Function<CommandResult, Void>> commandHolderUI;
 
@@ -55,6 +57,8 @@ public class ResultCommandHolderUIDefaultImpl implements ResultCommandHolderUI {
             return ResultProcessorUIInit.resultProcessorUI(commandHolderUI.get(OPEN_SOFT_CHECK));
         else if(cmdRes instanceof CancelSoftCheckCommandResult)
             return ResultProcessorUIInit.resultProcessorUI(commandHolderUI.get(CANCEL_SOFT_CHECK));
+        else if(cmdRes instanceof ConfirmSoftCheckProductsResult)
+            return ResultProcessorUIInit.resultProcessorUI(commandHolderUI.get(CONFIRM_SOFT_CHECK_PRODUCTS));
 
         return null;
     }

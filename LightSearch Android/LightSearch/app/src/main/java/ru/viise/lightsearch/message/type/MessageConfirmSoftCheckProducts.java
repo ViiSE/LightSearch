@@ -14,14 +14,6 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.data;
+package ru.viise.lightsearch.message.type;
 
-public interface SearchRecordDTO {
-    String subdivision();
-    String id();
-    String name();
-    String price();
-    String amount();
-    String amountUnit();
-    String priceUnit();
-}
+public interface MessageConfirmSoftCheckProducts extends Message { }

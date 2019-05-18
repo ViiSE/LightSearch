@@ -20,28 +20,32 @@ import android.app.Activity;
 import android.support.v7.app.AlertDialog;
 
 import ru.viise.lightsearch.data.ButtonContentEnum;
-import ru.viise.lightsearch.data.SearchRecordDTO;
+import ru.viise.lightsearch.data.CartRecord;
 
-public class OneResultAlertDialogCreatorDefaultImpl implements OneResultAlertDialogCreator {
+public class InfoProductAlertDialogCreatorCartDefaultImpl implements InfoProductAlertDialogCreator {
 
     private final String OK = ButtonContentEnum.POSITIVE_BUTTON.stringValue();
 
     private final Activity activity;
-    private final SearchRecordDTO searchRecord;
+    private final CartRecord record;
 
-    public OneResultAlertDialogCreatorDefaultImpl(Activity activity, SearchRecordDTO searchRecord) {
+    public InfoProductAlertDialogCreatorCartDefaultImpl(Activity activity, CartRecord record) {
+        this.record = record;
         this.activity = activity;
-        this.searchRecord = searchRecord;
     }
 
     @Override
     public AlertDialog createAlertDialog() {
-        return new android.support.v7.app.AlertDialog.Builder(activity).setTitle("").setMessage(
-                "Подразделение: " + searchRecord.subdivision() + "\n" +
-                        "ИД: " + searchRecord.id() + "\n" +
-                        "Наименование: " + searchRecord.name() + "\n" +
-                        "Цена: " + searchRecord.price() + " " + searchRecord.priceUnit() + "\n" +
-                        "Кол-во: " + searchRecord.amount() + " " + searchRecord.amountUnit() + "\n")
+        String message = "ИД: " + record.barcode() + "\n" +
+                "Наименование: " + record.name() + "\n" +
+                "Цена: " + record.priceWithUnit() + "\n";
+        if(record.isConfirmed())
+            message += "Общее кол-во: " + record.maxAmountWithUnit();
+        else
+            message += "Общее кол-во ДО: " + record.oldMaxAmountWithUnit() + "\n" +
+                    "Общее кол-во ПОСЛЕ: " + record.maxAmountWithUnit();
+
+        return new android.support.v7.app.AlertDialog.Builder(activity).setTitle("").setMessage(message)
                 .setPositiveButton(OK, (dialogInterface, i) -> dialogInterface.dismiss()).create();
     }
 }

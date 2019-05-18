@@ -16,12 +16,12 @@
 
 package ru.viise.lightsearch.data;
 
-public interface SearchRecordDTO {
-    String subdivision();
-    String id();
-    String name();
-    String price();
-    String amount();
-    String amountUnit();
-    String priceUnit();
+import java.util.List;
+
+public class CommandConfirmSoftCheckRecordsDTOInit {
+
+    public static CommandConfirmSoftCheckRecordsDTO commandConfirmSoftCheckRecordsDTO(
+            String userIdent, String cardCode, List<SoftCheckRecord> softCheckRecords) {
+        return new CommandConfirmSoftCheckRecordsDTODefaultImpl(userIdent, cardCode, softCheckRecords);
+    }
 }
