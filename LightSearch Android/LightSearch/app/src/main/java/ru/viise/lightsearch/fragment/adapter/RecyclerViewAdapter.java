@@ -18,6 +18,7 @@ package ru.viise.lightsearch.fragment.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -32,6 +33,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import ru.viise.lightsearch.R;
+import ru.viise.lightsearch.data.CartRecord;
 import ru.viise.lightsearch.data.SoftCheckRecord;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.DefaultViewHolder> {
@@ -141,14 +143,21 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull DefaultViewHolder holder, int position) {
-        holder.twCardName.setText(data.get(position).name());
-        holder.twCardBarcode.setText(data.get(position).barcode());
-        holder.twCardMaxAmount.setText(data.get(position).maxAmountWithUnit());
-        holder.twCardPrice.setText(data.get(position).priceWithUnit());
+        SoftCheckRecord record = data.get(position);
+        holder.twCardName.setText(record.name());
+        holder.twCardBarcode.setText(record.barcode());
+        holder.twCardMaxAmount.setText(record.maxAmountWithUnit());
+        holder.twCardPrice.setText(record.priceWithUnit());
         holder.ignore = true;
-        holder.etCardCurrentAmount.setText(String.valueOf(data.get(position).currentAmount()));
+        holder.etCardCurrentAmount.setText(String.valueOf(record.currentAmount()));
         holder.ignore = false;
         holder.twCardTotalCost.setText(data.get(position).totalCostWithUnit());
+
+        if(record instanceof CartRecord) {
+            CartRecord cartRecord = (CartRecord) record;
+            if(!cartRecord.isConfirmed())
+                holder.twCardName.setTextColor(ContextCompat.getColor(context, R.color.colorDelete));
+        }
 
         setAnimation(holder.itemView, position);
     }
@@ -188,6 +197,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         for(int pos = 0; pos < data.size(); pos++) {
             SoftCheckRecord rec = data.get(pos);
             if(rec.barcode().equals(record.barcode())) {
+                rec.setMaxAmount(rec.maxAmount());
                 rec.setProductsCount(rec.currentAmount() + 1);
                 isFound = true;
                 break;

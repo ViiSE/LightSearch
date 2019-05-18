@@ -16,12 +16,23 @@
 
 package ru.viise.lightsearch.data;
 
-public interface SearchRecordDTO {
-    String subdivision();
-    String id();
-    String name();
-    String price();
-    String amount();
-    String amountUnit();
-    String priceUnit();
+public class UnconfirmedRecordDefaultImpl implements UnconfirmedRecord {
+
+    private final String barcode;
+    private final float amount;
+
+    public UnconfirmedRecordDefaultImpl(String barcode, String amount) {
+        this.barcode = barcode;
+        this.amount = Float.parseFloat(amount);
+    }
+
+    @Override
+    public String barcode() {
+        return barcode;
+    }
+
+    @Override
+    public float amount() {
+        return amount;
+    }
 }

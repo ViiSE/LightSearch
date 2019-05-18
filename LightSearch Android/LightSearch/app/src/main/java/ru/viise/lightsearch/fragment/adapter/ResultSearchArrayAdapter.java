@@ -27,6 +27,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import ru.viise.lightsearch.R;
+import ru.viise.lightsearch.data.UnitsEnum;
 import ru.viise.lightsearch.data.SearchRecordDTO;
 
 public class ResultSearchArrayAdapter extends ArrayAdapter<SearchRecordDTO> {
@@ -47,10 +48,10 @@ public class ResultSearchArrayAdapter extends ArrayAdapter<SearchRecordDTO> {
         ((TextView) convertView.findViewById(R.id.textViewCardNameRS)).setText(record.name());
         ((TextView) convertView.findViewById(R.id.textViewCardIDRS)).setText(record.id());
         ((TextView) convertView.findViewById(R.id.textViewCardAmountRS)).setText(
-                String.format("%s %s", record.amount(), record.unit()));
+                String.format("%s %s", record.amount(), record.amountUnit()));
         ((TextView) convertView.findViewById(R.id.textViewCardSubdivRS)).setText(record.subdivision());
         ((TextView) convertView.findViewById(R.id.textViewCardPriceRS)).setText(
-                String.format("%s руб.", record.price()));
+                String.format("%s %s", record.price(), UnitsEnum.CURRENT_PRICE_UNIT.stringValue()));
 
         return convertView;
     }

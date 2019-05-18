@@ -16,12 +16,15 @@
 
 package ru.viise.lightsearch.data;
 
-public interface SearchRecordDTO {
-    String subdivision();
-    String id();
-    String name();
-    String price();
-    String amount();
-    String amountUnit();
-    String priceUnit();
+public enum UnitsEnum {
+    CURRENT_PRICE_UNIT {
+        @Override
+        public String stringValue() { return "руб."; }
+    },
+    CURRENT_AMOUNT_CART_UNIT {
+        @Override
+        public String stringValue() { return "ед."; }
+    },;
+
+    public abstract String stringValue();
 }

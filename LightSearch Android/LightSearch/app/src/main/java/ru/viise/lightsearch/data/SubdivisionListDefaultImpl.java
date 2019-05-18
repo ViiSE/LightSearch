@@ -27,10 +27,10 @@ import java.util.List;
 public class SubdivisionListDefaultImpl implements SubdivisionList {
 
     private final List<Subdivision> subdivisions = new ArrayList<>();
-    private final String unitAmount;
+    private final String amountUnit;
 
-    public SubdivisionListDefaultImpl(String unitAmount) {
-        this.unitAmount = unitAmount;
+    public SubdivisionListDefaultImpl(String amountUnit) {
+        this.amountUnit = amountUnit;
     }
 
     @Override
@@ -53,7 +53,7 @@ public class SubdivisionListDefaultImpl implements SubdivisionList {
                     .append(" - ")
                     .append(subdivision.productAmount())
                     .append(" ")
-                    .append(unitAmount)
+                    .append(amountUnit)
                     .append("\n");
         }
         return res.toString();
@@ -66,12 +66,12 @@ public class SubdivisionListDefaultImpl implements SubdivisionList {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(unitAmount);
+        parcel.writeString(amountUnit);
         parcel.writeTypedList(subdivisions);
     }
 
     private SubdivisionListDefaultImpl(Parcel in) {
-        unitAmount = in.readString();
+        amountUnit = in.readString();
         in.readTypedList(subdivisions, SubdivisionDefaultImpl.CREATOR);
     }
 

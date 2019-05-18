@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.data;
+package ru.viise.lightsearch.message.type;
 
-public interface SearchRecordDTO {
-    String subdivision();
-    String id();
-    String name();
-    String price();
-    String amount();
-    String amountUnit();
-    String priceUnit();
+import ru.viise.lightsearch.data.CommandConfirmSoftCheckRecordsDTO;
+
+public class MessageConfirmSoftCheckProductsInit {
+
+    public static MessageConfirmSoftCheckProducts messageConfirmSoftCheckProducts(String IMEI,
+                      CommandConfirmSoftCheckRecordsDTO cmdConSCRecDTO) {
+        return new MessageConfirmSoftCheckProductsJSONDefaultImpl(IMEI, cmdConSCRecDTO);
+    }
 }

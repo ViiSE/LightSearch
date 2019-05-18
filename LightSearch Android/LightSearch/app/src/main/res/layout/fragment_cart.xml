@@ -18,7 +18,7 @@
 
         <TextView
             android:id="@+id/textViewCartTotalCost"
-            android:layout_width="60dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
@@ -30,9 +30,8 @@
             android:id="@+id/textViewCartTotalCostDynamic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="65dp"
+            android:layout_marginStart="62dp"
             android:layout_marginTop="5dp"
-            android:text="2700000 руб."
             android:textColor="@color/design_default_color_primary_dark"
             android:textSize="17sp" />
 
@@ -52,7 +51,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="270dp"
             android:layout_marginTop="5dp"
-            android:text="9999 ед."
             android:textColor="@color/colorChange"
             android:textSize="17sp" />
     </FrameLayout>

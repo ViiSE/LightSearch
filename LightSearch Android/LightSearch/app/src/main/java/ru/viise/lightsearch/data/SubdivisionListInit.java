@@ -18,7 +18,7 @@ package ru.viise.lightsearch.data;
 
 public class SubdivisionListInit {
 
-    public static SubdivisionList subdivisionList(String unitAmount) {
-        return new SubdivisionListDefaultImpl(unitAmount);
+    public static SubdivisionList subdivisionList(String amountUnit) {
+        return new SubdivisionListDefaultImpl(amountUnit);
     }
 }

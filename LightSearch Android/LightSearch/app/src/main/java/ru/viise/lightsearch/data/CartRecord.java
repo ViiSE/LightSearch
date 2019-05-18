@@ -16,12 +16,7 @@
 
 package ru.viise.lightsearch.data;
 
-public interface SearchRecordDTO {
-    String subdivision();
-    String id();
-    String name();
-    String price();
-    String amount();
-    String amountUnit();
-    String priceUnit();
+public interface CartRecord extends SoftCheckRecord {
+    boolean isConfirmed();
+    String oldMaxAmountWithUnit();
 }

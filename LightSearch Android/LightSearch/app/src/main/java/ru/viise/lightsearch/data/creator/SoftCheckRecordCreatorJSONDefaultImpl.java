@@ -52,9 +52,9 @@ public class SoftCheckRecordCreatorJSONDefaultImpl implements SoftCheckRecordCre
             String barcode = Objects.requireNonNull(recJOne.get(ID)).toString();
             String name = Objects.requireNonNull(recJOne.get(NAME)).toString();
             String price = Objects.requireNonNull(recJOne.get(PRICE)).toString();
-            String unitAmount = Objects.requireNonNull(recJOne.get(UNIT)).toString();
+            String amountUnit = Objects.requireNonNull(recJOne.get(UNIT)).toString();
 
-            SubdivisionList subdivisions = SubdivisionListInit.subdivisionList(unitAmount);
+            SubdivisionList subdivisions = SubdivisionListInit.subdivisionList(amountUnit);
 
             for (Object rec : data) {
                 JSONObject recJ = (JSONObject) rec;
@@ -63,7 +63,7 @@ public class SoftCheckRecordCreatorJSONDefaultImpl implements SoftCheckRecordCre
                         Objects.requireNonNull(recJ.get(AMOUNT)).toString());
                 subdivisions.addSubdivision(subdivision);
             }
-            return SoftCheckRecordInit.softCheckRecord(name, barcode, price, unitAmount, subdivisions);
+            return SoftCheckRecordInit.softCheckRecord(name, barcode, price, amountUnit, subdivisions);
         }
         catch (NullPointerException | IndexOutOfBoundsException ex) {
             return null;

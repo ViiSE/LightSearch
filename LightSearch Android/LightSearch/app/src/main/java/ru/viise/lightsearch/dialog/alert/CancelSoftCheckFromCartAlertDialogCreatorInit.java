@@ -16,20 +16,17 @@
 
 package ru.viise.lightsearch.dialog.alert;
 
-import android.app.Activity;
+import android.support.v4.app.Fragment;
 
-import ru.viise.lightsearch.data.CartRecord;
-import ru.viise.lightsearch.data.SoftCheckRecord;
+import ru.viise.lightsearch.activity.ManagerActivityHandler;
+import ru.viise.lightsearch.cmd.manager.CommandManager;
 
-public class InfoProductAlertDialogCreatorInit {
+public class CancelSoftCheckFromCartAlertDialogCreatorInit {
 
-    public static InfoProductAlertDialogCreator infoProductAlertDialogCreator(Activity activity,
-                      SoftCheckRecord record) {
-        return new InfoProductAlertDialogCreatorSoftCheckDefaultImpl(activity, record);
-    }
-
-    public static InfoProductAlertDialogCreator infoProductAlertDialogCreator(Activity activity,
-                      CartRecord record) {
-        return new InfoProductAlertDialogCreatorCartDefaultImpl(activity, record);
+    public static CancelSoftCheckFromCartAlertDialogCreator cancelSoftCheckFromCartAlertDialogCreator(
+            Fragment fragment, ManagerActivityHandler managerActivityHandler,
+            CommandManager commandManager, android.app.AlertDialog queryDialog) {
+        return new CancelSoftCheckFromCartAlertDialogCreatorDefaultImpl(fragment,
+                managerActivityHandler, commandManager, queryDialog);
     }
 }

@@ -52,6 +52,7 @@ import ru.viise.lightsearch.data.CommandManagerAsyncTaskDTOInit;
 import ru.viise.lightsearch.data.ConnectionDTO;
 import ru.viise.lightsearch.data.ScanType;
 import ru.viise.lightsearch.data.SearchRecordDTO;
+import ru.viise.lightsearch.data.SoftCheckRecord;
 import ru.viise.lightsearch.data.creator.CommandAuthorizationDTOCreator;
 import ru.viise.lightsearch.data.creator.CommandAuthorizationDTOCreatorInit;
 import ru.viise.lightsearch.dialog.alert.ErrorAlertDialogCreator;
@@ -155,6 +156,12 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
         FragmentTransactionManager fragmentTransactionManager =
                 FragmentTransactionManagerInit.fragmentTransactionManager(this);
         fragmentTransactionManager.doResultSearchFragmentTransaction(title, searchRecords);
+    }
+
+    public void doCartFragmentTransaction(List<SoftCheckRecord> cartRecords) {
+        FragmentTransactionManager fragmentTransactionManager =
+                FragmentTransactionManagerInit.fragmentTransactionManager(this);
+        fragmentTransactionManager.doCartFragmentTransaction(cartRecords);
     }
 
     public void callDialogError(String errorMessage) {

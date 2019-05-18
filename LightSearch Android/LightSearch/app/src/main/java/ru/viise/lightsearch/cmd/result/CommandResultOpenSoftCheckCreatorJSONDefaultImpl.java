@@ -25,7 +25,7 @@ import ru.viise.lightsearch.exception.MessageParserException;
 import ru.viise.lightsearch.message.parser.MessageParser;
 import ru.viise.lightsearch.message.parser.MessageParserInit;
 
-public class CommandResultCancelSoftCheckCreatorDefaultImpl implements CommandResultCreator {
+public class CommandResultOpenSoftCheckCreatorJSONDefaultImpl implements CommandResultCreator {
 
     private final String IS_DONE    = ClientCommandContentEnum.IS_DONE.stringValue();
     private final String IMEI_FIELD = ClientCommandContentEnum.IMEI.stringValue();
@@ -34,7 +34,7 @@ public class CommandResultCancelSoftCheckCreatorDefaultImpl implements CommandRe
     private final String rawMessage;
     private final String IMEI;
 
-    public CommandResultCancelSoftCheckCreatorDefaultImpl(String rawMessage, String IMEI) {
+    public CommandResultOpenSoftCheckCreatorJSONDefaultImpl(String rawMessage, String IMEI) {
         this.rawMessage = rawMessage;
         this.IMEI = IMEI;
     }
@@ -52,9 +52,9 @@ public class CommandResultCancelSoftCheckCreatorDefaultImpl implements CommandRe
             boolean isDone = resCmdVerifier.verify();
             String message = Objects.requireNonNull(objMsg.get(MESSAGE)).toString();
 
-            CancelSoftCheckCommandResult cancelSCCmdRes =
-                    CancelSoftCheckCommandResultInit.cancelSoftCheckCommandResult(isDone, message);
-            return cancelSCCmdRes;
+            OpenSoftCheckCommandResult openSCCmdRes =
+                    OpenSoftCheckCommandResultInit.openSoftCheckCommandResult(isDone, message);
+            return openSCCmdRes;
         }
         catch(MessageParserException | NullPointerException ex) {
             return null;

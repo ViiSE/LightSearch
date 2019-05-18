@@ -14,14 +14,12 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.data;
+package ru.viise.lightsearch.data.creator;
 
-public interface SearchRecordDTO {
-    String subdivision();
-    String id();
-    String name();
-    String price();
-    String amount();
-    String amountUnit();
-    String priceUnit();
+import java.util.List;
+
+import ru.viise.lightsearch.data.SoftCheckRecord;
+
+public interface CartRecordsCreator {
+    List<SoftCheckRecord> createCartRecords();
 }

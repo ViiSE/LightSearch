@@ -23,7 +23,9 @@ import java.util.List;
 
 import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.data.SearchRecordDTO;
+import ru.viise.lightsearch.data.SoftCheckRecord;
 import ru.viise.lightsearch.fragment.AuthorizationFragment;
+import ru.viise.lightsearch.fragment.CartFragment;
 import ru.viise.lightsearch.fragment.ContainerFragment;
 import ru.viise.lightsearch.fragment.ResultSearchFragment;
 import ru.viise.lightsearch.fragment.StackFragmentTitle;
@@ -40,8 +42,7 @@ public class FragmentTransactionManagerDefaultImpl implements FragmentTransactio
     public void doAuthorizationFragmentTransaction() {
         AuthorizationFragment authorizationFragment = new AuthorizationFragment();
         FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.FrameLayoutManager, authorizationFragment,
-                activity.getString(R.string.fragment_authorization));
+        transaction.replace(R.id.FrameLayoutManager, authorizationFragment, activity.getString(R.string.fragment_authorization));
         transaction.commit();
         activity.setTitle(activity.getString(R.string.fragment_authorization));
     }
@@ -69,6 +70,19 @@ public class FragmentTransactionManagerDefaultImpl implements FragmentTransactio
         transaction.addToBackStack(activity.getString(R.string.fragment_result_search));
         transaction.commit();
         activity.setTitle(title);
+        StackFragmentTitle.push(activity.getString(R.string.fragment_container));
+    }
+
+    @Override
+    public void doCartFragmentTransaction(List<SoftCheckRecord> cartRecords) {
+        CartFragment cartFragment = new CartFragment();
+        cartFragment.init(cartRecords);
+        FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
+        transaction.replace(R.id.FrameLayoutManager, cartFragment, activity.getString(R.string.fragment_cart));
+        transaction.addToBackStack(activity.getString(R.string.fragment_cart));
+        transaction.commit();
+        activity.setTitle(activity.getString(R.string.fragment_cart));
         StackFragmentTitle.push(activity.getString(R.string.fragment_container));
     }
 }

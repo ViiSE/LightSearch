@@ -18,8 +18,8 @@ package ru.viise.lightsearch.data;
 
 public class SoftCheckRecordInit {
 
-    public static SoftCheckRecord softCheckRecord(String name, String barcode, String price, String unitAmount,
-                                                  SubdivisionList subdivisions) {
-        return new SoftCheckRecordDefaultImpl(name, barcode, price, unitAmount, subdivisions);
+    public static SoftCheckRecord softCheckRecord(String name, String barcode, String price,
+                      String amountUnit, SubdivisionList subdivisions) {
+        return new SoftCheckRecordDefaultImpl(name, barcode, price, amountUnit, subdivisions);
     }
 }
