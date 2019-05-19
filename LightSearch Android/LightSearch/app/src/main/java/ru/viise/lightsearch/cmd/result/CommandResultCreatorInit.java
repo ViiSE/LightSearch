@@ -82,4 +82,12 @@ public class CommandResultCreatorInit {
     public static CommandResultCreator commandResultConfirmCartProductsCreator(boolean isDone, String message) {
         return new CommandResultConfirmCartProductsCreatorErrorDefaultImpl(isDone, message);
     }
+
+    public static CommandResultCreator commandResultCloseSoftCheckCreator(String rawMessage, String IMEI) {
+        return new CommandResultCloseSoftCheckCreatorJSONDefaultImpl(rawMessage, IMEI);
+    }
+
+    public static CommandResultCreator commandResultCloseSoftCheckCreator(boolean isDone, String message) {
+        return new CommandResultCloseSoftCheckCreatorErrorDefaultImpl(isDone, message);
+    }
 }
