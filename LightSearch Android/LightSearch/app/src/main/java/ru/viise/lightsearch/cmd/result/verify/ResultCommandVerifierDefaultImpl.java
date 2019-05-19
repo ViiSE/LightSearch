@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.cmd.result;
+package ru.viise.lightsearch.cmd.result.verify;
 
 import ru.viise.lightsearch.cmd.ClientCommandContentEnum;
 

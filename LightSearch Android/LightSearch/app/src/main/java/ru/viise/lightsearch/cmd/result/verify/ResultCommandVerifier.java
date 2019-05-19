@@ -14,20 +14,8 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.cmd.result;
+package ru.viise.lightsearch.cmd.result.verify;
 
-public class CommandResultCancelSoftCheckCreatorErrorDefaultImpl implements CommandResultCreator {
-
-    private final boolean isDone;
-    private final String message;
-
-    public CommandResultCancelSoftCheckCreatorErrorDefaultImpl(boolean isDone, String message) {
-        this.isDone = isDone;
-        this.message = message;
-    }
-
-    @Override
-    public CommandResult createCommandResult() {
-        return CancelSoftCheckCommandResultInit.cancelSoftCheckCommandResult(isDone, message);
-    }
+public interface ResultCommandVerifier {
+    boolean verify();
 }

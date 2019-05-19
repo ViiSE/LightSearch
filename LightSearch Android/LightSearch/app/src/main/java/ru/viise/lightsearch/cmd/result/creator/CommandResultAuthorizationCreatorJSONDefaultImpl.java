@@ -14,27 +14,36 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.cmd.result;
+package ru.viise.lightsearch.cmd.result.creator;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 import ru.viise.lightsearch.cmd.ClientCommandContentEnum;
+import ru.viise.lightsearch.cmd.result.AuthorizationCommandResult;
+import ru.viise.lightsearch.cmd.result.AuthorizationCommandResultInit;
+import ru.viise.lightsearch.cmd.result.CommandResult;
+import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifier;
+import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifierInit;
 import ru.viise.lightsearch.exception.MessageParserException;
 import ru.viise.lightsearch.message.parser.MessageParser;
 import ru.viise.lightsearch.message.parser.MessageParserInit;
 
-public class CommandResultCloseSoftCheckCreatorJSONDefaultImpl implements CommandResultCreator {
+public class CommandResultAuthorizationCreatorJSONDefaultImpl implements CommandResultCreator {
 
     private final String IS_DONE    = ClientCommandContentEnum.IS_DONE.stringValue();
     private final String IMEI_FIELD = ClientCommandContentEnum.IMEI.stringValue();
     private final String MESSAGE    = ClientCommandContentEnum.MESSAGE.stringValue();
+    private final String SKLAD_LIST = ClientCommandContentEnum.SKLAD_LIST.stringValue();
+    private final String TK_LIST    = ClientCommandContentEnum.TK_LIST.stringValue();
 
     private final String rawMessage;
     private final String IMEI;
 
-    public CommandResultCloseSoftCheckCreatorJSONDefaultImpl(String rawMessage, String IMEI) {
+    public CommandResultAuthorizationCreatorJSONDefaultImpl(String rawMessage, String IMEI) {
         this.rawMessage = rawMessage;
         this.IMEI = IMEI;
     }
@@ -52,9 +61,20 @@ public class CommandResultCloseSoftCheckCreatorJSONDefaultImpl implements Comman
             boolean isDone = resCmdVerifier.verify();
             String message = Objects.requireNonNull(objMsg.get(MESSAGE)).toString();
 
-            CloseSoftCheckCommandResult closeSCCmdRes =
-                    CloseSoftCheckCommandResultInit.closeSoftCheckCommandResult(isDone, message);
-            return closeSCCmdRes;
+            JSONArray skladListJ = (JSONArray) objMsg.get(SKLAD_LIST);
+            if(skladListJ.size() == 0)
+                return null;
+            String[] skladList = Arrays.stream(skladListJ.toArray()).toArray(String[]::new);
+
+            JSONArray TKListJ = (JSONArray) objMsg.get(TK_LIST);
+            if(TKListJ.size() == 0)
+                return null;
+            String[] TKList = Arrays.stream(TKListJ.toArray()).toArray(String[]::new);
+
+            AuthorizationCommandResult authCmdRes =
+                    AuthorizationCommandResultInit.authorizationCommandResult(
+                            isDone, message, skladList, TKList);
+            return authCmdRes;
         }
         catch(MessageParserException | NullPointerException ex) {
             return null;

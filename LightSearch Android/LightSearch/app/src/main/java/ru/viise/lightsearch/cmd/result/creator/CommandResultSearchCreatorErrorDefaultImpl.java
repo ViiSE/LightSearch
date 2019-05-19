@@ -14,22 +14,26 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.cmd.result;
+package ru.viise.lightsearch.cmd.result.creator;
 
-public class CommandResultConfirmCartProductsCreatorErrorDefaultImpl implements CommandResultCreator {
+import ru.viise.lightsearch.cmd.result.CommandResult;
+import ru.viise.lightsearch.cmd.result.SearchCommandResult;
+import ru.viise.lightsearch.cmd.result.SearchCommandResultInit;
+
+public class CommandResultSearchCreatorErrorDefaultImpl implements CommandResultCreator {
 
     private final boolean isDone;
     private final String message;
 
-    public CommandResultConfirmCartProductsCreatorErrorDefaultImpl(boolean isDone, String message) {
+    public CommandResultSearchCreatorErrorDefaultImpl(boolean isDone, String message) {
         this.isDone = isDone;
         this.message = message;
     }
 
     @Override
     public CommandResult createCommandResult() {
-        ConfirmCartProductsResult conCProdRes =
-                ConfirmCartProductsResultInit.confirmCartProductsResult(isDone, message, null);
-        return conCProdRes;
+        SearchCommandResult searchCmdRes =
+                SearchCommandResultInit.searchCommandResult(isDone, message, null, null);
+        return searchCmdRes;
     }
 }

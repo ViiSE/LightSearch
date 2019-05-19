@@ -14,30 +14,32 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.cmd.result;
+package ru.viise.lightsearch.cmd.result.creator;
 
 import org.json.simple.JSONObject;
 
 import java.util.Objects;
 
 import ru.viise.lightsearch.cmd.ClientCommandContentEnum;
-import ru.viise.lightsearch.data.SoftCheckRecord;
-import ru.viise.lightsearch.data.creator.SoftCheckRecordCreator;
-import ru.viise.lightsearch.data.creator.SoftCheckRecordCreatorInit;
+import ru.viise.lightsearch.cmd.result.CancelSoftCheckCommandResult;
+import ru.viise.lightsearch.cmd.result.CancelSoftCheckCommandResultInit;
+import ru.viise.lightsearch.cmd.result.CommandResult;
+import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifier;
+import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifierInit;
 import ru.viise.lightsearch.exception.MessageParserException;
 import ru.viise.lightsearch.message.parser.MessageParser;
 import ru.viise.lightsearch.message.parser.MessageParserInit;
 
-public class CommandResultSearchSoftCheckCreatorJSONDefaultImpl implements CommandResultCreator {
+public class CommandResultCancelSoftCheckCreatorJSONDefaultImpl implements CommandResultCreator {
 
     private final String IS_DONE    = ClientCommandContentEnum.IS_DONE.stringValue();
     private final String IMEI_FIELD = ClientCommandContentEnum.IMEI.stringValue();
-    private final String DATA       = ClientCommandContentEnum.DATA.stringValue();
+    private final String MESSAGE    = ClientCommandContentEnum.MESSAGE.stringValue();
 
     private final String rawMessage;
     private final String IMEI;
 
-    public CommandResultSearchSoftCheckCreatorJSONDefaultImpl(String rawMessage, String IMEI) {
+    public CommandResultCancelSoftCheckCreatorJSONDefaultImpl(String rawMessage, String IMEI) {
         this.rawMessage = rawMessage;
         this.IMEI = IMEI;
     }
@@ -48,20 +50,16 @@ public class CommandResultSearchSoftCheckCreatorJSONDefaultImpl implements Comma
             MessageParser msgParser = MessageParserInit.messageParser();
             JSONObject objMsg = (JSONObject)msgParser.parse(rawMessage);
             String incomingIMEI = Objects.requireNonNull(objMsg.get(IMEI_FIELD)).toString();
-
             String incomingIsDone = Objects.requireNonNull(objMsg.get(IS_DONE)).toString();
             ResultCommandVerifier resCmdVerifier =
                     ResultCommandVerifierInit.resultCommandVerifier(incomingIMEI, IMEI, incomingIsDone);
 
             boolean isDone = resCmdVerifier.verify();
-            SoftCheckRecordCreator recordCreator =
-                    SoftCheckRecordCreatorInit.softCheckRecordCreator(objMsg.get(DATA));
-            SoftCheckRecord record = recordCreator.createSoftCheckRecord();
+            String message = Objects.requireNonNull(objMsg.get(MESSAGE)).toString();
 
-            SearchSoftCheckCommandResult result =
-                    SearchSoftCheckCommandResultInit.searchSoftCheckCommandResult(isDone,
-                            null, record);
-            return result;
+            CancelSoftCheckCommandResult cancelSCCmdRes =
+                    CancelSoftCheckCommandResultInit.cancelSoftCheckCommandResult(isDone, message);
+            return cancelSCCmdRes;
         }
         catch(MessageParserException | NullPointerException ex) {
             return null;

@@ -14,22 +14,23 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.cmd.result;
+package ru.viise.lightsearch.cmd.result.creator;
 
-public class CommandResultOpenSoftCheckCreatorErrorDefaultImpl implements CommandResultCreator {
+import ru.viise.lightsearch.cmd.result.CloseSoftCheckCommandResultInit;
+import ru.viise.lightsearch.cmd.result.CommandResult;
+
+public class CommandResultCloseSoftCheckCreatorErrorDefaultImpl implements CommandResultCreator {
 
     private final boolean isDone;
     private final String message;
 
-    public CommandResultOpenSoftCheckCreatorErrorDefaultImpl(boolean isDone, String message) {
+    public CommandResultCloseSoftCheckCreatorErrorDefaultImpl(boolean isDone, String message) {
         this.isDone = isDone;
         this.message = message;
     }
 
     @Override
     public CommandResult createCommandResult() {
-        OpenSoftCheckCommandResult openSCCmdRes =
-                OpenSoftCheckCommandResultInit.openSoftCheckCommandResult(isDone, message);
-        return openSCCmdRes;
+        return CloseSoftCheckCommandResultInit.closeSoftCheckCommandResult(isDone, message);
     }
 }

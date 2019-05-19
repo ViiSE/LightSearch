@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.cmd.result;
+package ru.viise.lightsearch.cmd.result.creator;
 
 import org.json.simple.JSONObject;
 
@@ -22,6 +22,11 @@ import java.util.List;
 import java.util.Objects;
 
 import ru.viise.lightsearch.cmd.ClientCommandContentEnum;
+import ru.viise.lightsearch.cmd.result.CommandResult;
+import ru.viise.lightsearch.cmd.result.ConfirmSoftCheckProductsResult;
+import ru.viise.lightsearch.cmd.result.ConfirmSoftCheckProductsResultInit;
+import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifier;
+import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifierInit;
 import ru.viise.lightsearch.data.SoftCheckRecord;
 import ru.viise.lightsearch.data.creator.CartRecordsCreator;
 import ru.viise.lightsearch.data.creator.CartRecordsCreatorInit;
@@ -29,7 +34,7 @@ import ru.viise.lightsearch.exception.MessageParserException;
 import ru.viise.lightsearch.message.parser.MessageParser;
 import ru.viise.lightsearch.message.parser.MessageParserInit;
 
-public class CommandResultConfirmCartProductsCreatorJSONDefaultImpl implements CommandResultCreator {
+public class CommandResultConfirmSoftCheckProductsCreatorJSONDefaultImpl implements CommandResultCreator {
 
     private final String IS_DONE    = ClientCommandContentEnum.IS_DONE.stringValue();
     private final String IMEI_FIELD = ClientCommandContentEnum.IMEI.stringValue();
@@ -39,8 +44,9 @@ public class CommandResultConfirmCartProductsCreatorJSONDefaultImpl implements C
     private final String IMEI;
     private final List<SoftCheckRecord> softCheckRecords;
 
-    public CommandResultConfirmCartProductsCreatorJSONDefaultImpl(String rawMessage, String IMEI,
-                List<SoftCheckRecord> softCheckRecords) {
+
+    public CommandResultConfirmSoftCheckProductsCreatorJSONDefaultImpl(String rawMessage,
+               String IMEI, List<SoftCheckRecord> softCheckRecords) {
         this.rawMessage = rawMessage;
         this.IMEI = IMEI;
         this.softCheckRecords = softCheckRecords;
@@ -62,7 +68,9 @@ public class CommandResultConfirmCartProductsCreatorJSONDefaultImpl implements C
                     CartRecordsCreatorInit.cartRecordsCreator(softCheckRecords, objMsg.get(DATA));
             List<SoftCheckRecord> cartRecords = cartRecCr.createCartRecords();
 
-            return ConfirmCartProductsResultInit.confirmCartProductsResult(isDone, null, cartRecords);
+            ConfirmSoftCheckProductsResult confirmSCProdRes =
+                    ConfirmSoftCheckProductsResultInit.confirmSoftCheckProductsResult(isDone, null, cartRecords);
+            return confirmSCProdRes;
         }
         catch(MessageParserException | NullPointerException ex) {
             return null;

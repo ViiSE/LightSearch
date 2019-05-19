@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.cmd.result;
+package ru.viise.lightsearch.cmd.result.creator;
 
 import org.json.simple.JSONObject;
 
@@ -22,14 +22,18 @@ import java.util.List;
 import java.util.Objects;
 
 import ru.viise.lightsearch.cmd.ClientCommandContentEnum;
-import ru.viise.lightsearch.data.SearchRecordDTO;
-import ru.viise.lightsearch.data.creator.SearchRecordsDTOCreator;
-import ru.viise.lightsearch.data.creator.SearchRecordsDTOCreatorInit;
+import ru.viise.lightsearch.cmd.result.CommandResult;
+import ru.viise.lightsearch.cmd.result.ConfirmCartProductsResultInit;
+import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifier;
+import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifierInit;
+import ru.viise.lightsearch.data.SoftCheckRecord;
+import ru.viise.lightsearch.data.creator.CartRecordsCreator;
+import ru.viise.lightsearch.data.creator.CartRecordsCreatorInit;
 import ru.viise.lightsearch.exception.MessageParserException;
 import ru.viise.lightsearch.message.parser.MessageParser;
 import ru.viise.lightsearch.message.parser.MessageParserInit;
 
-public class CommandResultSearchCreatorJSONDefaultImpl implements CommandResultCreator {
+public class CommandResultConfirmCartProductsCreatorJSONDefaultImpl implements CommandResultCreator {
 
     private final String IS_DONE    = ClientCommandContentEnum.IS_DONE.stringValue();
     private final String IMEI_FIELD = ClientCommandContentEnum.IMEI.stringValue();
@@ -37,12 +41,13 @@ public class CommandResultSearchCreatorJSONDefaultImpl implements CommandResultC
 
     private final String rawMessage;
     private final String IMEI;
-    private final String subdivision;
+    private final List<SoftCheckRecord> softCheckRecords;
 
-    public CommandResultSearchCreatorJSONDefaultImpl(String rawMessage, String IMEI, String subdivision) {
+    public CommandResultConfirmCartProductsCreatorJSONDefaultImpl(String rawMessage, String IMEI,
+                List<SoftCheckRecord> softCheckRecords) {
         this.rawMessage = rawMessage;
         this.IMEI = IMEI;
-        this.subdivision = subdivision;
+        this.softCheckRecords = softCheckRecords;
     }
 
     @Override
@@ -57,13 +62,11 @@ public class CommandResultSearchCreatorJSONDefaultImpl implements CommandResultC
                     ResultCommandVerifierInit.resultCommandVerifier(incomingIMEI, IMEI, incomingIsDone);
 
             boolean isDone = resCmdVerifier.verify();
-            SearchRecordsDTOCreator searchRecsDTOCr =
-                    SearchRecordsDTOCreatorInit.searchRecordsDTOCreator(objMsg.get(DATA));
-            List<SearchRecordDTO> searchRecords = searchRecsDTOCr.createSearchRecordsDTO();
+            CartRecordsCreator cartRecCr =
+                    CartRecordsCreatorInit.cartRecordsCreator(softCheckRecords, objMsg.get(DATA));
+            List<SoftCheckRecord> cartRecords = cartRecCr.createCartRecords();
 
-            SearchCommandResult searchCmdRes = SearchCommandResultInit.searchCommandResult(isDone,
-                    null, searchRecords, subdivision);
-            return searchCmdRes;
+            return ConfirmCartProductsResultInit.confirmCartProductsResult(isDone, null, cartRecords);
         }
         catch(MessageParserException | NullPointerException ex) {
             return null;

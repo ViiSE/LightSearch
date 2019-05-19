@@ -14,20 +14,23 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.cmd.result;
+package ru.viise.lightsearch.cmd.result.creator;
 
-public class CommandResultAuthorizationCreatorErrorDefaultImpl implements CommandResultCreator {
+import ru.viise.lightsearch.cmd.result.CancelSoftCheckCommandResultInit;
+import ru.viise.lightsearch.cmd.result.CommandResult;
+
+public class CommandResultCancelSoftCheckCreatorErrorDefaultImpl implements CommandResultCreator {
 
     private final boolean isDone;
     private final String message;
 
-    public CommandResultAuthorizationCreatorErrorDefaultImpl(boolean isDone, String message) {
+    public CommandResultCancelSoftCheckCreatorErrorDefaultImpl(boolean isDone, String message) {
         this.isDone = isDone;
         this.message = message;
     }
 
     @Override
     public CommandResult createCommandResult() {
-        return AuthorizationCommandResultInit.authorizationCommandResult(isDone, message, null, null);
+        return CancelSoftCheckCommandResultInit.cancelSoftCheckCommandResult(isDone, message);
     }
 }

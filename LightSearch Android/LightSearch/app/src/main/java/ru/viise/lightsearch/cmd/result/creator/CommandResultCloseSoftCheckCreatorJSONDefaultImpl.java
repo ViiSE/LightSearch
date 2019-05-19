@@ -14,18 +14,23 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.cmd.result;
+package ru.viise.lightsearch.cmd.result.creator;
 
 import org.json.simple.JSONObject;
 
 import java.util.Objects;
 
 import ru.viise.lightsearch.cmd.ClientCommandContentEnum;
+import ru.viise.lightsearch.cmd.result.CloseSoftCheckCommandResult;
+import ru.viise.lightsearch.cmd.result.CloseSoftCheckCommandResultInit;
+import ru.viise.lightsearch.cmd.result.CommandResult;
+import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifier;
+import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifierInit;
 import ru.viise.lightsearch.exception.MessageParserException;
 import ru.viise.lightsearch.message.parser.MessageParser;
 import ru.viise.lightsearch.message.parser.MessageParserInit;
 
-public class CommandResultCancelSoftCheckCreatorJSONDefaultImpl implements CommandResultCreator {
+public class CommandResultCloseSoftCheckCreatorJSONDefaultImpl implements CommandResultCreator {
 
     private final String IS_DONE    = ClientCommandContentEnum.IS_DONE.stringValue();
     private final String IMEI_FIELD = ClientCommandContentEnum.IMEI.stringValue();
@@ -34,7 +39,7 @@ public class CommandResultCancelSoftCheckCreatorJSONDefaultImpl implements Comma
     private final String rawMessage;
     private final String IMEI;
 
-    public CommandResultCancelSoftCheckCreatorJSONDefaultImpl(String rawMessage, String IMEI) {
+    public CommandResultCloseSoftCheckCreatorJSONDefaultImpl(String rawMessage, String IMEI) {
         this.rawMessage = rawMessage;
         this.IMEI = IMEI;
     }
@@ -52,9 +57,9 @@ public class CommandResultCancelSoftCheckCreatorJSONDefaultImpl implements Comma
             boolean isDone = resCmdVerifier.verify();
             String message = Objects.requireNonNull(objMsg.get(MESSAGE)).toString();
 
-            CancelSoftCheckCommandResult cancelSCCmdRes =
-                    CancelSoftCheckCommandResultInit.cancelSoftCheckCommandResult(isDone, message);
-            return cancelSCCmdRes;
+            CloseSoftCheckCommandResult closeSCCmdRes =
+                    CloseSoftCheckCommandResultInit.closeSoftCheckCommandResult(isDone, message);
+            return closeSCCmdRes;
         }
         catch(MessageParserException | NullPointerException ex) {
             return null;

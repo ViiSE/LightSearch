@@ -14,7 +14,11 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.cmd.result;
+package ru.viise.lightsearch.cmd.result.creator;
+
+import ru.viise.lightsearch.cmd.result.CommandResult;
+import ru.viise.lightsearch.cmd.result.ConfirmSoftCheckProductsResult;
+import ru.viise.lightsearch.cmd.result.ConfirmSoftCheckProductsResultInit;
 
 public class CommandResultConfirmSoftCheckProductsCreatorErrorDefaultImpl implements CommandResultCreator {
 

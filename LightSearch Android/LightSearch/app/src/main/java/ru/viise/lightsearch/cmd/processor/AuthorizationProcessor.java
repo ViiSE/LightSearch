@@ -19,8 +19,8 @@ package ru.viise.lightsearch.cmd.processor;
 import java.util.function.Function;
 
 import ru.viise.lightsearch.cmd.result.CommandResult;
-import ru.viise.lightsearch.cmd.result.CommandResultCreator;
-import ru.viise.lightsearch.cmd.result.CommandResultCreatorInit;
+import ru.viise.lightsearch.cmd.result.creator.CommandResultCreator;
+import ru.viise.lightsearch.cmd.result.creator.CommandResultCreatorInit;
 import ru.viise.lightsearch.data.ClientCommandDTO;
 import ru.viise.lightsearch.data.CommandAuthorizationDTO;
 import ru.viise.lightsearch.data.CommandDTO;

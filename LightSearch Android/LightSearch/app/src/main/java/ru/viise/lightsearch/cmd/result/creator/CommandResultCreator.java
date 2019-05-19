@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.cmd.result;
+package ru.viise.lightsearch.cmd.result.creator;
+
+import ru.viise.lightsearch.cmd.result.CommandResult;
 
 public interface CommandResultCreator {
     CommandResult createCommandResult();
