@@ -249,7 +249,7 @@ public class DatabaseCommandMessageTestNG {
         DatabaseCommandMessage dbMessageConn = DatabaseCommandMessageInit.databaseCommandMessageCloseSoftCheck(
                 clientCmdCloseSoftCheck.command(), clientCmdCloseSoftCheck.IMEI(), 
                 clientCmdCloseSoftCheck.userIdentifier(), clientCmdCloseSoftCheck.cardCode(),
-                clientCmdCloseSoftCheck.data(), clientCmdCloseSoftCheck.delivery(),
+                clientCmdCloseSoftCheck.delivery(),
                 clientCmdCloseSoftCheck.dateTime());
         assertNotNull(dbMessageConn, "Database command message is null!");
         

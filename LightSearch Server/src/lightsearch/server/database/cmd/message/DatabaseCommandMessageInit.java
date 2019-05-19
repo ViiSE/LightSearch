@@ -42,10 +42,10 @@ public class DatabaseCommandMessageInit {
     }
     
     public static DatabaseCommandMessage databaseCommandMessageCloseSoftCheck(String command, 
-            String IMEI, String userIdent, String cardCode, String data, 
-            String delivery, String dateTime) {
+            String IMEI, String userIdent, String cardCode, String delivery, 
+            String dateTime) {
         return new DatabaseCommandMessageCloseSoftCheckDefaultWindowsJSONImpl(command, 
-                IMEI, userIdent, cardCode, data, delivery, dateTime);
+                IMEI, userIdent, cardCode, delivery, dateTime);
     }
     
     public static DatabaseCommandMessage databaseCommandMessageConfirmSoftCheckProducts(String command, 
