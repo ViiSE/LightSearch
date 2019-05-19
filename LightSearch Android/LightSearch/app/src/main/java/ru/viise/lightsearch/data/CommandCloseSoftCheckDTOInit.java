@@ -18,7 +18,8 @@ package ru.viise.lightsearch.data;
 
 public class CommandCloseSoftCheckDTOInit {
 
-    public static CommandCloseSoftCheckDTO commandCloseSoftCheckDTO(String userIdent, String cardCode) {
-        return new CommandCloseSoftCheckDTODefaultImpl(userIdent, cardCode);
+    public static CommandCloseSoftCheckDTO commandCloseSoftCheckDTO(String userIdent, String cardCode,
+                    DeliveryTypeEnum deliveryType) {
+        return new CommandCloseSoftCheckDTODefaultImpl(userIdent, cardCode, deliveryType);
     }
 }

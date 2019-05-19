@@ -30,6 +30,9 @@ import java.util.List;
 
 import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.data.SoftCheckRecord;
+import ru.viise.lightsearch.exception.FindableException;
+import ru.viise.lightsearch.find.ImplFinder;
+import ru.viise.lightsearch.find.ImplFinderFragmentFromFragmentDefaultImpl;
 
 public class SoftCheckContainerFragment extends Fragment implements ISoftCheckContainerFragment {
 
@@ -89,13 +92,15 @@ public class SoftCheckContainerFragment extends Fragment implements ISoftCheckCo
 
     @Override
     public void switchToOpenSoftCheckFragment() {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(R.anim.enter_from_up, R.anim.exit_to_down, R.anim.enter_from_down, R.anim.exit_to_up);
-        transaction.replace(R.id.fragment_sc_container, new OpenSoftCheckFragment());
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        transaction.addToBackStack(null);
-        transaction.commit();
-        softCheckRecords.clear();
-        selected = 0;
+        if (selected != 0) {
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.setCustomAnimations(R.anim.enter_from_up, R.anim.exit_to_down, R.anim.enter_from_down, R.anim.exit_to_up);
+            transaction.replace(R.id.fragment_sc_container, new OpenSoftCheckFragment());
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            transaction.addToBackStack(null);
+            transaction.commit();
+            softCheckRecords.clear();
+            selected = 0;
+        }
     }
 }
