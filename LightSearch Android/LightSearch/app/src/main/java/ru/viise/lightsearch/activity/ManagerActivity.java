@@ -147,6 +147,12 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
         fragmentTransactionManager.doContainerFragmentTransaction(skladArr, TKArr);
     }
 
+    public void doContainerFragmentTransactionFromCart() {
+        FragmentTransactionManager fragmentTransactionManager =
+                FragmentTransactionManagerInit.fragmentTransactionManager(this);
+        fragmentTransactionManager.doContainerFragmentTransactionFromCart();
+    }
+
     public void doResultSearchFragmentTransaction(String title, List<SearchRecordDTO> searchRecords) {
         FragmentTransactionManager fragmentTransactionManager =
                 FragmentTransactionManagerInit.fragmentTransactionManager(this);
@@ -154,6 +160,8 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
     }
 
     public void doCartFragmentTransaction(List<SoftCheckRecord> cartRecords) {
+        IContainerFragment containerFragment = getContainerFragment();
+        containerFragment.switchToOpenSoftCheckFragment();
         FragmentTransactionManager fragmentTransactionManager =
                 FragmentTransactionManagerInit.fragmentTransactionManager(this);
         fragmentTransactionManager.doCartFragmentTransaction(cartRecords);

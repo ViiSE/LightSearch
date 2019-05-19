@@ -51,6 +51,8 @@ import ru.viise.lightsearch.cmd.CommandTypeEnum;
 import ru.viise.lightsearch.cmd.manager.CommandManager;
 import ru.viise.lightsearch.cmd.manager.task.CommandManagerAsyncTask;
 import ru.viise.lightsearch.data.CartRecord;
+import ru.viise.lightsearch.data.CommandCloseSoftCheckDTO;
+import ru.viise.lightsearch.data.CommandCloseSoftCheckDTOInit;
 import ru.viise.lightsearch.data.CommandConfirmCartRecordsDTO;
 import ru.viise.lightsearch.data.CommandConfirmCartRecordsDTOInit;
 import ru.viise.lightsearch.data.CommandManagerAsyncTaskDTO;
@@ -75,10 +77,10 @@ import ru.viise.lightsearch.pref.PreferencesManagerType;
 
 public class CartFragment extends Fragment implements ICartFragment, OnBackPressedListener {
 
-    private final DeliveryTypeEnum NO                   = DeliveryTypeEnum.NO;
-    private final DeliveryTypeEnum DOSTAVKA_SO_SKLADOV  = DeliveryTypeEnum.DOSTAVKA_SO_SKLADOV;
-    private final DeliveryTypeEnum SAMOVYVOZ_SO_SKLADOV = DeliveryTypeEnum.SAMOVYVOZ_SO_SKLADOV;
-    private final DeliveryTypeEnum SAMOVYVOZ_S_TK       = DeliveryTypeEnum.SAMOVYVOZ_S_TK;
+    private final String NO                   = DeliveryTypeEnum.NO.stringUIValue();
+    private final String DOSTAVKA_SO_SKLADOV  = DeliveryTypeEnum.DOSTAVKA_SO_SKLADOV.stringUIValue();
+    private final String SAMOVYVOZ_SO_SKLADOV = DeliveryTypeEnum.SAMOVYVOZ_SO_SKLADOV.stringUIValue();
+    private final String SAMOVYVOZ_S_TK       = DeliveryTypeEnum.SAMOVYVOZ_S_TK.stringUIValue();
 
     private final String PREF = "pref";
 
@@ -127,6 +129,10 @@ public class CartFragment extends Fragment implements ICartFragment, OnBackPress
                 Toast t = Toast.makeText(this.getActivity().getApplicationContext(), "Корзина пуста!", Toast.LENGTH_LONG);
                 t.show();
             }
+            else if(spinnerDeliveryType.getSelectedItem().toString().equals(NO)) {
+                Toast t = Toast.makeText(this.getActivity().getApplicationContext(), "Выберите способ доставки!", Toast.LENGTH_LONG);
+                t.show();
+            }
             else {
                 SharedPreferences sPref = this.getActivity().getSharedPreferences(PREF, Context.MODE_PRIVATE);
                 PreferencesManager prefManager = PreferencesManagerInit.preferencesManager(sPref);
@@ -160,10 +166,10 @@ public class CartFragment extends Fragment implements ICartFragment, OnBackPress
 
     private void fillSpinnerDeliveryType() {
         String[] data = new String[4];
-        data[0] = NO.stringUIValue();
-        data[1] = DOSTAVKA_SO_SKLADOV.stringUIValue();
-        data[2] = SAMOVYVOZ_SO_SKLADOV.stringUIValue();
-        data[3] = SAMOVYVOZ_S_TK.stringUIValue();
+        data[0] = NO;
+        data[1] = DOSTAVKA_SO_SKLADOV;
+        data[2] = SAMOVYVOZ_SO_SKLADOV;
+        data[3] = SAMOVYVOZ_S_TK;
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getContext(),
                 R.layout.spinner_cart_delivery_type, data);
@@ -225,7 +231,21 @@ public class CartFragment extends Fragment implements ICartFragment, OnBackPress
 
     private void tryToCloseSoftCheck() {
         if(checkUnconfirmedRecord()) {
-            // CloseSoftCheck
+            DeliveryTypeEnum deliveryType = getDeliveryType();
+            SharedPreferences sPref = this.getActivity().getSharedPreferences(PREF, Context.MODE_PRIVATE);
+            PreferencesManager prefManager = PreferencesManagerInit.preferencesManager(sPref);
+            CommandCloseSoftCheckDTO cmdCloseSCDTO =
+                    CommandCloseSoftCheckDTOInit.commandCloseSoftCheckDTO(
+                            prefManager.load(PreferencesManagerType.USER_IDENT_MANAGER),
+                            prefManager.load(PreferencesManagerType.CARD_CODE_MANAGER),
+                            deliveryType);
+
+            CommandManagerAsyncTaskDTO cmdManagerATDTO =
+                    CommandManagerAsyncTaskDTOInit.commandManagerAsyncTaskDTO(commandManager,
+                            CommandTypeEnum.CLOSE_SOFT_CHECK, cmdCloseSCDTO);
+            CommandManagerAsyncTask cmdManagerAT = new CommandManagerAsyncTask(managerActivityHandler,
+                    queryDialog);
+            cmdManagerAT.execute(cmdManagerATDTO);
         }
     }
 
@@ -244,6 +264,16 @@ public class CartFragment extends Fragment implements ICartFragment, OnBackPress
         UnconfirmedRecordAlertDialogCreator unconRecADCr =
                 UnconfirmedRecordAlertDialogCreatorInit.unconfirmedRecordAlertDialogCreator(this.getActivity());
         unconRecADCr.createAlertDialog().show();
+    }
+
+    private DeliveryTypeEnum getDeliveryType() {
+        String delivery = spinnerDeliveryType.getSelectedItem().toString();
+        if(delivery.equals(DOSTAVKA_SO_SKLADOV))
+            return DeliveryTypeEnum.DOSTAVKA_SO_SKLADOV;
+        else if(delivery.equals(SAMOVYVOZ_SO_SKLADOV))
+            return DeliveryTypeEnum.SAMOVYVOZ_SO_SKLADOV;
+        else
+            return DeliveryTypeEnum.SAMOVYVOZ_S_TK;
     }
 
     @Override

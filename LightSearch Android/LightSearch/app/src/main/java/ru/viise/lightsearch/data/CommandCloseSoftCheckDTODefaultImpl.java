@@ -20,10 +20,12 @@ public class CommandCloseSoftCheckDTODefaultImpl implements CommandCloseSoftChec
 
     private final String userIdent;
     private final String cardCode;
+    private final DeliveryTypeEnum deliveryType;
 
-    public CommandCloseSoftCheckDTODefaultImpl(String userIdent, String cardCode) {
+    public CommandCloseSoftCheckDTODefaultImpl(String userIdent, String cardCode, DeliveryTypeEnum deliveryType) {
         this.userIdent = userIdent;
         this.cardCode = cardCode;
+        this.deliveryType = deliveryType;
     }
 
     @Override
@@ -34,5 +36,10 @@ public class CommandCloseSoftCheckDTODefaultImpl implements CommandCloseSoftChec
     @Override
     public String cardCode() {
         return cardCode;
+    }
+
+    @Override
+    public DeliveryTypeEnum deliveryType() {
+        return deliveryType;
     }
 }

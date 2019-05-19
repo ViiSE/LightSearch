@@ -38,6 +38,8 @@ import ru.viise.lightsearch.data.SoftCheckRecord;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.DefaultViewHolder> {
 
+    private static int defaultColor = -1;
+
     private final String priceUnit;
     private final List<SoftCheckRecord> data;
     private final TextView twTotalCost;
@@ -85,6 +87,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             twCardPrice         = itemView.findViewById(R.id.textViewCardPriceSC);
             twCardTotalCost     = itemView.findViewById(R.id.textViewCardTotalCostSC);
             etCardCurrentAmount = itemView.findViewById(R.id.editTextCardCurrentAmountSC);
+
+            if(defaultColor == -1)
+                defaultColor = twCardName.getCurrentTextColor();
 
             etCardCurrentAmount.addTextChangedListener(new TextWatcher() {
 
@@ -157,6 +162,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             CartRecord cartRecord = (CartRecord) record;
             if(!cartRecord.isConfirmed())
                 holder.twCardName.setTextColor(ContextCompat.getColor(context, R.color.colorDelete));
+            else
+                holder.twCardName.setTextColor(defaultColor);
         }
 
         setAnimation(holder.itemView, position);

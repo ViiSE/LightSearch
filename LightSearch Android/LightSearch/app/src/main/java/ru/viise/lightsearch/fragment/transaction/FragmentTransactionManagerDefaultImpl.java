@@ -24,9 +24,13 @@ import java.util.List;
 import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.data.SearchRecordDTO;
 import ru.viise.lightsearch.data.SoftCheckRecord;
+import ru.viise.lightsearch.exception.FindableException;
+import ru.viise.lightsearch.find.ImplFinder;
+import ru.viise.lightsearch.find.ImplFinderFragmentFromActivityDefaultImpl;
 import ru.viise.lightsearch.fragment.AuthorizationFragment;
 import ru.viise.lightsearch.fragment.CartFragment;
 import ru.viise.lightsearch.fragment.ContainerFragment;
+import ru.viise.lightsearch.fragment.ICartFragment;
 import ru.viise.lightsearch.fragment.ResultSearchFragment;
 import ru.viise.lightsearch.fragment.StackFragmentTitle;
 
@@ -84,5 +88,12 @@ public class FragmentTransactionManagerDefaultImpl implements FragmentTransactio
         transaction.commit();
         activity.setTitle(activity.getString(R.string.fragment_cart));
         StackFragmentTitle.push(activity.getString(R.string.fragment_container));
+    }
+
+    @Override
+    public void doContainerFragmentTransactionFromCart() {
+        activity.getSupportFragmentManager().popBackStack();
+        activity.setTitle(activity.getString(R.string.fragment_container));
+        StackFragmentTitle.pop();
     }
 }

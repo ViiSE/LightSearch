@@ -19,4 +19,5 @@ package ru.viise.lightsearch.data;
 public interface CommandCloseSoftCheckDTO extends CommandDTO {
     String userIdentifier();
     String cardCode();
+    DeliveryTypeEnum deliveryType();
 }

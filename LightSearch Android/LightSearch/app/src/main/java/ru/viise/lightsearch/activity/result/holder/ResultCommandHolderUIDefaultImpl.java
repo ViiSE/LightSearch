@@ -24,6 +24,7 @@ import ru.viise.lightsearch.activity.result.processor.ResultProcessorUIInit;
 import ru.viise.lightsearch.cmd.CommandTypeEnum;
 import ru.viise.lightsearch.cmd.result.AuthorizationCommandResult;
 import ru.viise.lightsearch.cmd.result.CancelSoftCheckCommandResult;
+import ru.viise.lightsearch.cmd.result.CloseSoftCheckCommandResult;
 import ru.viise.lightsearch.cmd.result.CommandResult;
 import ru.viise.lightsearch.cmd.result.ConfirmCartProductsResult;
 import ru.viise.lightsearch.cmd.result.ConfirmSoftCheckProductsResult;
@@ -40,6 +41,7 @@ public class ResultCommandHolderUIDefaultImpl implements ResultCommandHolderUI {
     private final CommandTypeEnum CANCEL_SOFT_CHECK           = CommandTypeEnum.CANCEL_SOFT_CHECK;
     private final CommandTypeEnum CONFIRM_SOFT_CHECK_PRODUCTS = CommandTypeEnum.CONFIRM_SOFT_CHECK_PRODUCTS;
     private final CommandTypeEnum CONFIRM_CART_PRODUCTS       = CommandTypeEnum.CONFIRM_CART_PRODUCTS;
+    private final CommandTypeEnum CLOSE_SOFT_CHECK            = CommandTypeEnum.CLOSE_SOFT_CHECK;
 
     private final Map<CommandTypeEnum, Function<CommandResult, Void>> commandHolderUI;
 
@@ -63,6 +65,8 @@ public class ResultCommandHolderUIDefaultImpl implements ResultCommandHolderUI {
             return ResultProcessorUIInit.resultProcessorUI(commandHolderUI.get(CONFIRM_CART_PRODUCTS));
         else if(cmdRes instanceof ConfirmSoftCheckProductsResult)
             return ResultProcessorUIInit.resultProcessorUI(commandHolderUI.get(CONFIRM_SOFT_CHECK_PRODUCTS));
+        else if(cmdRes instanceof CloseSoftCheckCommandResult)
+            return ResultProcessorUIInit.resultProcessorUI(commandHolderUI.get(CLOSE_SOFT_CHECK));
 
         return null;
     }

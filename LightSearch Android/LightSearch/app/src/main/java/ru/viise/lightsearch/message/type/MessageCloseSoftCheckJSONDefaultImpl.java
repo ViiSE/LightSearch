@@ -29,13 +29,19 @@ public class MessageCloseSoftCheckJSONDefaultImpl implements MessageCloseSoftChe
     private final String IMEI_FIELD       = ClientCommandContentEnum.IMEI.stringValue();
     private final String USER_IDENT       = ClientCommandContentEnum.USER_IDENT.stringValue();
     private final String CARD_CODE        = ClientCommandContentEnum.CARD_CODE.stringValue();
+    private final String DELIVERY         = ClientCommandContentEnum.DELIVERY.stringValue();
+
+    // FIXME: 20.05.2019 Уточнить, нужно ли передавать время.
+    private final String DATE_TIME = "date_time";
 
     private final String IMEI;
+    private final String delivery;
     private final CommandCloseSoftCheckDTO cmdCSCDTO;
 
     public MessageCloseSoftCheckJSONDefaultImpl(String IMEI, CommandCloseSoftCheckDTO cmdCSCDTO) {
         this.IMEI = IMEI;
         this.cmdCSCDTO = cmdCSCDTO;
+        this.delivery = this.cmdCSCDTO.deliveryType().stringCommandValue();
     }
 
     @Override
@@ -45,6 +51,8 @@ public class MessageCloseSoftCheckJSONDefaultImpl implements MessageCloseSoftChe
         msgOSCObj.put(IMEI_FIELD, IMEI);
         msgOSCObj.put(USER_IDENT, cmdCSCDTO.userIdentifier());
         msgOSCObj.put(CARD_CODE, cmdCSCDTO.cardCode());
+        msgOSCObj.put(DELIVERY, delivery);
+        msgOSCObj.put(DATE_TIME, "\"сегодня\"");
         return msgOSCObj.toJSONString();
     }
 }

@@ -26,4 +26,5 @@ public interface FragmentTransactionManager {
     void doContainerFragmentTransaction(String[] skladArray, String[] TKArray);
     void doResultSearchFragmentTransaction(String title, List<SearchRecordDTO> searchRecords);
     void doCartFragmentTransaction(List<SoftCheckRecord> cartRecords);
+    void doContainerFragmentTransactionFromCart();
 }
