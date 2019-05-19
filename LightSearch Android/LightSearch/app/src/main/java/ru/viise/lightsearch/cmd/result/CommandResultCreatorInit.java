@@ -72,4 +72,14 @@ public class CommandResultCreatorInit {
     public static CommandResultCreator commandResultConfirmSoftCheckProductsCreator(boolean isDone, String message) {
         return new CommandResultConfirmSoftCheckProductsCreatorErrorDefaultImpl(isDone, message);
     }
+
+    public static CommandResultCreator commandResultConfirmCartProductsCreator(String rawMessage,
+                        String IMEI, List<SoftCheckRecord> softCheckRecords) {
+        return new CommandResultConfirmCartProductsCreatorJSONDefaultImpl(rawMessage, IMEI,
+                softCheckRecords);
+    }
+
+    public static CommandResultCreator commandResultConfirmCartProductsCreator(boolean isDone, String message) {
+        return new CommandResultConfirmCartProductsCreatorErrorDefaultImpl(isDone, message);
+    }
 }

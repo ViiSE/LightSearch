@@ -33,9 +33,8 @@ public class ConfirmSoftCheckProductsResultUIProcessor implements Function<Comma
     @Override
     public Void apply(CommandResult commandResult) {
         ConfirmSoftCheckProductsResult conSCProdRes = (ConfirmSoftCheckProductsResult) commandResult;
-        if(conSCProdRes.isDone()) {
+        if(conSCProdRes.isDone())
             activity.doCartFragmentTransaction(conSCProdRes.cartRecords());
-        }
         else
             activity.callDialogError(conSCProdRes.message());
 

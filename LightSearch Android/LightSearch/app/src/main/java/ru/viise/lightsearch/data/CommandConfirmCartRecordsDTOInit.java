@@ -14,15 +14,14 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.cmd;
+package ru.viise.lightsearch.data;
 
-public enum CommandTypeEnum {
-    AUTHORIZATION,
-    SEARCH,
-    SEARCH_SC,
-    OPEN_SOFT_CHECK,
-    CANCEL_SOFT_CHECK,
-    CONFIRM_SOFT_CHECK_PRODUCTS,
-    CONFIRM_CART_PRODUCTS,
-    CLOSE_SOFT_CHECK
+import java.util.List;
+
+public class CommandConfirmCartRecordsDTOInit {
+
+    public static CommandConfirmCartRecordsDTO commandConfirmCartRecordsDTO(
+            String userIdent, String cardCode, List<SoftCheckRecord> softCheckRecords) {
+        return new CommandConfirmCartRecordsDTODefaultImpl(userIdent, cardCode, softCheckRecords);
+    }
 }

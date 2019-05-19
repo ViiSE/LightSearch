@@ -94,6 +94,10 @@ public class CartRecordDefaultImpl implements CartRecord {
 
     @Override
     public float currentAmount() {
+        if(currentAmount > newMaxAmount) {
+            currentAmount = newMaxAmount;
+            totalCost = currentAmount * price;
+        }
         return currentAmount;
     }
 

@@ -29,7 +29,7 @@ import ru.viise.lightsearch.exception.MessageParserException;
 import ru.viise.lightsearch.message.parser.MessageParser;
 import ru.viise.lightsearch.message.parser.MessageParserInit;
 
-public class CommandResultConfirmSoftCheckProductsCreatorJSONDefaultImpl implements CommandResultCreator {
+public class CommandResultConfirmCartProductsCreatorJSONDefaultImpl implements CommandResultCreator {
 
     private final String IS_DONE    = ClientCommandContentEnum.IS_DONE.stringValue();
     private final String IMEI_FIELD = ClientCommandContentEnum.IMEI.stringValue();
@@ -39,9 +39,8 @@ public class CommandResultConfirmSoftCheckProductsCreatorJSONDefaultImpl impleme
     private final String IMEI;
     private final List<SoftCheckRecord> softCheckRecords;
 
-
-    public CommandResultConfirmSoftCheckProductsCreatorJSONDefaultImpl(String rawMessage,
-               String IMEI, List<SoftCheckRecord> softCheckRecords) {
+    public CommandResultConfirmCartProductsCreatorJSONDefaultImpl(String rawMessage, String IMEI,
+                List<SoftCheckRecord> softCheckRecords) {
         this.rawMessage = rawMessage;
         this.IMEI = IMEI;
         this.softCheckRecords = softCheckRecords;
@@ -63,9 +62,7 @@ public class CommandResultConfirmSoftCheckProductsCreatorJSONDefaultImpl impleme
                     CartRecordsCreatorInit.cartRecordsCreator(softCheckRecords, objMsg.get(DATA));
             List<SoftCheckRecord> cartRecords = cartRecCr.createCartRecords();
 
-            ConfirmSoftCheckProductsResult confirmSCProdRes =
-                    ConfirmSoftCheckProductsResultInit.confirmSoftCheckProductsResult(isDone, null, cartRecords);
-            return confirmSCProdRes;
+            return ConfirmCartProductsResultInit.confirmCartProductsResult(isDone, null, cartRecords);
         }
         catch(MessageParserException | NullPointerException ex) {
             return null;

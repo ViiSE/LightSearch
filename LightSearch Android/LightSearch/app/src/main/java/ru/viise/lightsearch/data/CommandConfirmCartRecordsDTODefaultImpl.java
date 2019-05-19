@@ -18,14 +18,13 @@ package ru.viise.lightsearch.data;
 
 import java.util.List;
 
-public class CommandConfirmSoftCheckRecordsDTODefaultImpl implements CommandConfirmSoftCheckRecordsDTO {
+public class CommandConfirmCartRecordsDTODefaultImpl implements CommandConfirmCartRecordsDTO {
 
     private final String userIdent;
     private final String cardCode;
     private final List<SoftCheckRecord> softCheckRecords;
 
-    public CommandConfirmSoftCheckRecordsDTODefaultImpl(String userIdent, String cardCode,
-                List<SoftCheckRecord> softCheckRecords) {
+    public CommandConfirmCartRecordsDTODefaultImpl(String userIdent, String cardCode, List<SoftCheckRecord> softCheckRecords) {
         this.userIdent = userIdent;
         this.cardCode = cardCode;
         this.softCheckRecords = softCheckRecords;

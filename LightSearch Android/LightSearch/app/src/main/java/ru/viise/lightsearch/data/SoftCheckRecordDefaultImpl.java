@@ -107,6 +107,10 @@ public class SoftCheckRecordDefaultImpl implements SoftCheckRecord {
 
     @Override
     public float currentAmount() {
+        if(currentAmount > maxAmount) {
+            currentAmount = maxAmount;
+            totalCost = currentAmount * price;
+        }
         return currentAmount;
     }
 

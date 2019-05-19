@@ -14,15 +14,13 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.cmd;
+package ru.viise.lightsearch.fragment;
 
-public enum CommandTypeEnum {
-    AUTHORIZATION,
-    SEARCH,
-    SEARCH_SC,
-    OPEN_SOFT_CHECK,
-    CANCEL_SOFT_CHECK,
-    CONFIRM_SOFT_CHECK_PRODUCTS,
-    CONFIRM_CART_PRODUCTS,
-    CLOSE_SOFT_CHECK
+import java.util.List;
+
+import ru.viise.lightsearch.data.SoftCheckRecord;
+import ru.viise.lightsearch.find.Findable;
+
+public interface ICartFragment extends Findable {
+    void refreshCartRecords(List<SoftCheckRecord> cartRecords);
 }

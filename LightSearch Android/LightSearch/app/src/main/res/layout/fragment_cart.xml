@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
-            android:text="@string/cartTotalCost"
+            android:text="@string/cartTotalCost_label"
             android:textColor="@color/design_default_color_primary_dark"
             android:textSize="17sp" />
 
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="190dp"
             android:layout_marginTop="5dp"
-            android:text="@string/cartTotalAmount"
+            android:text="@string/cartTotalAmount_label"
             android:textColor="@color/colorChange"
             android:textSize="17sp" />
 
@@ -58,13 +58,13 @@
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayoutCart"
         android:layout_width="400dp"
-        android:layout_height="505dp"
+        android:layout_height="470dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="9dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/frameLayoutCart"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayoutCart">
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCartDeliveryType">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerViewCart"
@@ -91,5 +91,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewCartDeliveryType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/cartDeliveryType_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayoutCart" />
+
+    <Spinner
+        android:id="@+id/spinnerCartDeliveryType"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewCartDeliveryType"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayoutCart" />
 
 </android.support.constraint.ConstraintLayout>

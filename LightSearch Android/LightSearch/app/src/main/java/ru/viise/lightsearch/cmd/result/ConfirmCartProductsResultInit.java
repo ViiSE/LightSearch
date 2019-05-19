@@ -14,15 +14,16 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.cmd;
+package ru.viise.lightsearch.cmd.result;
 
-public enum CommandTypeEnum {
-    AUTHORIZATION,
-    SEARCH,
-    SEARCH_SC,
-    OPEN_SOFT_CHECK,
-    CANCEL_SOFT_CHECK,
-    CONFIRM_SOFT_CHECK_PRODUCTS,
-    CONFIRM_CART_PRODUCTS,
-    CLOSE_SOFT_CHECK
+import java.util.List;
+
+import ru.viise.lightsearch.data.SoftCheckRecord;
+
+public class ConfirmCartProductsResultInit {
+
+    public static ConfirmCartProductsResult confirmCartProductsResult(boolean isDone,
+                    String message, List<SoftCheckRecord> cartRecords) {
+        return new ConfirmCartProductsResultDefaultImpl(isDone, message, cartRecords);
+    }
 }

@@ -76,7 +76,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="15dp"
         android:gravity="center"
-        android:text="@string/softCheckTotalCost"
+        android:text="@string/softCheckTotalCost_label"
         android:textColor="@color/design_default_color_primary_dark"
         android:textSize="17sp"
         app:layout_constraintBottom_toTopOf="@+id/coordinatorLayoutSoftCheck"

@@ -22,6 +22,7 @@ import ru.viise.lightsearch.cmd.result.CommandResult;
 import ru.viise.lightsearch.cmd.result.CommandResultCreator;
 import ru.viise.lightsearch.cmd.result.CommandResultCreatorInit;
 import ru.viise.lightsearch.data.ClientCommandDTO;
+import ru.viise.lightsearch.data.CommandConfirmCartRecordsDTO;
 import ru.viise.lightsearch.data.CommandConfirmSoftCheckRecordsDTO;
 import ru.viise.lightsearch.data.CommandDTO;
 import ru.viise.lightsearch.exception.MessageRecipientException;
@@ -55,8 +56,14 @@ public class ConfirmSoftCheckProductsProcessor implements Function<CommandDTO, C
             msgSender.sendMessage(message);
             String rawMessage = msgRecipient.acceptMessage();
             CommandResultCreator cmdResCr;
-            cmdResCr = CommandResultCreatorInit.commandResultConfirmSoftCheckProductsCreator(
-                    rawMessage, IMEI, cmdConSCRecDTO.softCheckRecords());
+            if(cmdConSCRecDTO instanceof CommandConfirmCartRecordsDTO) {
+                cmdResCr = CommandResultCreatorInit.commandResultConfirmCartProductsCreator(
+                        rawMessage, IMEI, cmdConSCRecDTO.softCheckRecords());
+            }
+            else {
+                cmdResCr = CommandResultCreatorInit.commandResultConfirmSoftCheckProductsCreator(
+                        rawMessage, IMEI, cmdConSCRecDTO.softCheckRecords());
+            }
             CommandResult cmdRes = cmdResCr.createCommandResult();
             if(cmdRes != null)
                 return cmdRes;
@@ -64,26 +71,29 @@ public class ConfirmSoftCheckProductsProcessor implements Function<CommandDTO, C
                 String messageErr = "Произошла ошибка при обработке сообщения. " +
                         "Для устранения проблемы обратитесь к администратору." +
                         "Вы отключены от сервера";
-                return errorCommandResult(messageErr);
+                return errorCommandResult(messageErr, (CommandConfirmCartRecordsDTO)commandDTO);
             }
         }
         catch(MessageSenderException ex) {
             String message = "Произошла ошибка при отправки сообщения. " +
                     "Для устранения проблемы обратитесь к администратору." +
                     "Вы отключены от сервера";
-            return errorCommandResult(message);
+            return errorCommandResult(message, (CommandConfirmCartRecordsDTO)commandDTO);
         }
         catch(MessageRecipientException ex) {
             String message = "Произошла ошибка при принятии сообщения. " +
                     "Для устранения проблемы обратитесь к администратору." +
                     "Вы отключены от сервера";
-            return errorCommandResult(message);
+            return errorCommandResult(message, (CommandConfirmCartRecordsDTO)commandDTO);
         }
     }
 
-    private CommandResult errorCommandResult(String message) {
+    private CommandResult errorCommandResult(String message, CommandConfirmCartRecordsDTO cmdConCRecDTO) {
         CommandResultCreator cmdResCr;
-        cmdResCr = CommandResultCreatorInit.commandResultConfirmSoftCheckProductsCreator(false, message);
+        if(cmdConCRecDTO instanceof CommandConfirmCartRecordsDTO)
+            cmdResCr = CommandResultCreatorInit.commandResultConfirmCartProductsCreator(false, message);
+        else
+            cmdResCr = CommandResultCreatorInit.commandResultConfirmSoftCheckProductsCreator(false, message);
 
         return cmdResCr.createCommandResult();
     }

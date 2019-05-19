@@ -18,6 +18,7 @@ package ru.viise.lightsearch.fragment;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -33,7 +34,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,8 +46,16 @@ import dmax.dialog.SpotsDialog;
 import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.activity.ManagerActivityHandler;
 import ru.viise.lightsearch.activity.ManagerActivityUI;
+import ru.viise.lightsearch.activity.OnBackPressedListener;
+import ru.viise.lightsearch.cmd.CommandTypeEnum;
 import ru.viise.lightsearch.cmd.manager.CommandManager;
+import ru.viise.lightsearch.cmd.manager.task.CommandManagerAsyncTask;
 import ru.viise.lightsearch.data.CartRecord;
+import ru.viise.lightsearch.data.CommandConfirmCartRecordsDTO;
+import ru.viise.lightsearch.data.CommandConfirmCartRecordsDTOInit;
+import ru.viise.lightsearch.data.CommandManagerAsyncTaskDTO;
+import ru.viise.lightsearch.data.CommandManagerAsyncTaskDTOInit;
+import ru.viise.lightsearch.data.DeliveryTypeEnum;
 import ru.viise.lightsearch.data.SoftCheckRecord;
 import ru.viise.lightsearch.data.UnitsEnum;
 import ru.viise.lightsearch.dialog.alert.CancelSoftCheckFromCartAlertDialogCreator;
@@ -58,8 +69,16 @@ import ru.viise.lightsearch.fragment.adapter.SwipeToDeleteCallback;
 import ru.viise.lightsearch.fragment.adapter.SwipeToInfoCallback;
 import ru.viise.lightsearch.fragment.snackbar.SnackbarSoftCheckCreator;
 import ru.viise.lightsearch.fragment.snackbar.SnackbarSoftCheckCreatorInit;
+import ru.viise.lightsearch.pref.PreferencesManager;
+import ru.viise.lightsearch.pref.PreferencesManagerInit;
+import ru.viise.lightsearch.pref.PreferencesManagerType;
 
-public class CartFragment extends Fragment {
+public class CartFragment extends Fragment implements ICartFragment, OnBackPressedListener {
+
+    private final DeliveryTypeEnum NO                   = DeliveryTypeEnum.NO;
+    private final DeliveryTypeEnum DOSTAVKA_SO_SKLADOV  = DeliveryTypeEnum.DOSTAVKA_SO_SKLADOV;
+    private final DeliveryTypeEnum SAMOVYVOZ_SO_SKLADOV = DeliveryTypeEnum.SAMOVYVOZ_SO_SKLADOV;
+    private final DeliveryTypeEnum SAMOVYVOZ_S_TK       = DeliveryTypeEnum.SAMOVYVOZ_S_TK;
 
     private final String PREF = "pref";
 
@@ -71,6 +90,7 @@ public class CartFragment extends Fragment {
     private RecyclerViewAdapter adapter;
     private CoordinatorLayout coordinatorLayout;
     private TextView tvTotalAmount;
+    private Spinner spinnerDeliveryType;
     private AlertDialog queryDialog;
 
     @Nullable
@@ -94,19 +114,35 @@ public class CartFragment extends Fragment {
         TextView tvTotalCost = view.findViewById(R.id.textViewCartTotalCostDynamic);
         tvTotalAmount = view.findViewById(R.id.textViewCartTotalAmountDynamic);
 
+        spinnerDeliveryType = view.findViewById(R.id.spinnerCartDeliveryType);
+        fillSpinnerDeliveryType();
+
         initRecycleView(tvTotalCost);
         initSwipeToDeleteAndUndo();
         initSwipeToInfo();
 
         closeSoftCheckButton.setOnClickListener((view1) -> {
             view1.startAnimation(animAlpha);
-            if(adapter.getData().isEmpty()) {
+            if(adapter.getItemCount() == 0) {
                 Toast t = Toast.makeText(this.getActivity().getApplicationContext(), "Корзина пуста!", Toast.LENGTH_LONG);
                 t.show();
             }
-//            else {
-//
-//            }
+            else {
+                SharedPreferences sPref = this.getActivity().getSharedPreferences(PREF, Context.MODE_PRIVATE);
+                PreferencesManager prefManager = PreferencesManagerInit.preferencesManager(sPref);
+                CommandConfirmCartRecordsDTO cmdConCRecDTO =
+                        CommandConfirmCartRecordsDTOInit.commandConfirmCartRecordsDTO(
+                                prefManager.load(PreferencesManagerType.USER_IDENT_MANAGER),
+                                prefManager.load(PreferencesManagerType.CARD_CODE_MANAGER),
+                                adapter.getData());
+
+                CommandManagerAsyncTaskDTO cmdManagerATDTO =
+                        CommandManagerAsyncTaskDTOInit.commandManagerAsyncTaskDTO(commandManager,
+                                CommandTypeEnum.CONFIRM_SOFT_CHECK_PRODUCTS, cmdConCRecDTO);
+                CommandManagerAsyncTask cmdManagerAT = new CommandManagerAsyncTask(managerActivityHandler,
+                        queryDialog);
+                cmdManagerAT.execute(cmdManagerATDTO);
+            }
         });
 
         checkUnconfirmedRecord();
@@ -120,6 +156,19 @@ public class CartFragment extends Fragment {
         ManagerActivityUI managerActivityUI = (ManagerActivityUI) this.getActivity();
         managerActivityHandler = (ManagerActivityHandler) this.getActivity();
         commandManager = managerActivityUI.commandManager();
+    }
+
+    private void fillSpinnerDeliveryType() {
+        String[] data = new String[4];
+        data[0] = NO.stringUIValue();
+        data[1] = DOSTAVKA_SO_SKLADOV.stringUIValue();
+        data[2] = SAMOVYVOZ_SO_SKLADOV.stringUIValue();
+        data[3] = SAMOVYVOZ_S_TK.stringUIValue();
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getContext(),
+                R.layout.spinner_cart_delivery_type, data);
+        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        spinnerDeliveryType.setAdapter(adapter);
     }
 
     public void init(List<SoftCheckRecord> cartRecords) {
@@ -174,14 +223,21 @@ public class CartFragment extends Fragment {
         itemTouchhelper.attachToRecyclerView(recyclerView);
     }
 
-    private void checkUnconfirmedRecord() {
+    private void tryToCloseSoftCheck() {
+        if(checkUnconfirmedRecord()) {
+            // CloseSoftCheck
+        }
+    }
+
+    private boolean checkUnconfirmedRecord() {
         for(SoftCheckRecord record : cartRecords) {
             CartRecord cartRecord = (CartRecord) record;
             if(!cartRecord.isConfirmed()) {
                 callDialogUnconfirmed();
-                break;
+                return false;
             }
         }
+        return true;
     }
 
     private void callDialogUnconfirmed() {
@@ -191,24 +247,17 @@ public class CartFragment extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void refreshCartRecords(List<SoftCheckRecord> cartRecords) {
+        this.cartRecords = cartRecords;
+        adapter.notifyDataSetChanged();
+        tryToCloseSoftCheck();
+    }
 
-        if(getView() == null)
-            return;
-
-        getView().setFocusableInTouchMode(true);
-        getView().requestFocus();
-        getView().setOnKeyListener((v, keyCode, event) -> {
-            if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
-
-                CancelSoftCheckFromCartAlertDialogCreator cancelSCFCADCr =
-                        CancelSoftCheckFromCartAlertDialogCreatorInit.cancelSoftCheckFromCartAlertDialogCreator(
-                                this, managerActivityHandler, commandManager, queryDialog);
-                cancelSCFCADCr.createAlertDialog().show();
-                return true;
-            }
-            return false;
-        });
+    @Override
+    public void onBackPressed() {
+        CancelSoftCheckFromCartAlertDialogCreator cancelSCFCADCr =
+                CancelSoftCheckFromCartAlertDialogCreatorInit.cancelSoftCheckFromCartAlertDialogCreator(
+                        this, managerActivityHandler, commandManager, queryDialog);
+        cancelSCFCADCr.createAlertDialog().show();
     }
 }
