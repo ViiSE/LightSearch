@@ -64,10 +64,10 @@ public class ClientHandlerDefaultImpl extends Handler {
                 CommandResult result = processor.apply(clientCommand);
                 try {
                     messageSender.sendMessage(result.message());
-                    if(result.logMessage().isEmpty())
-                        return;
                     if(result.logMessage() != null)
                             super.logger().log(result.type(), super.currentDateTime(), result.logMessage());
+                    if(result.logMessage().isEmpty())
+                        return;
                     else
                         exit = true;
                 } catch (MessageSenderException ex) {
