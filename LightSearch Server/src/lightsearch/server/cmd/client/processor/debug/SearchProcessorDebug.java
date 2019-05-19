@@ -58,7 +58,7 @@ public class SearchProcessorDebug extends AbstractProcessorClient {
                             }
                         }
                         else if(clientCommand.TK().equals("all")) {
-                            if(product.subdivision().contains("Склад")) {
+                            if(product.subdivision().contains("ТК")) {
                                 addProductJSONtoData(jData, product);
                             }
                         }
