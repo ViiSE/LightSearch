@@ -108,10 +108,6 @@ public enum ClientCommandContentEnum {
         @Override
         public String stringValue() { return "card_code"; }
     },
-    DATE_TIME {
-        @Override
-        public String stringValue() { return "date_time"; }
-    },
     IS_DONE {
         @Override
         public String stringValue() { return "is_done"; }

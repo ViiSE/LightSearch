@@ -44,7 +44,7 @@ public enum DeliveryTypeEnum {
         public String stringUIValue() { return "Самовывоз с ТК"; }
 
         @Override
-        public String stringCommandValue() { return "1"; }
+        public String stringCommandValue() { return "2"; }
     };
 
     public abstract String stringUIValue();
