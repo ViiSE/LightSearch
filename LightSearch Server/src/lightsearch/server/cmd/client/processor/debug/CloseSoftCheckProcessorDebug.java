@@ -40,8 +40,7 @@ public class CloseSoftCheckProcessorDebug extends AbstractProcessorClient {
     @Override
     public CommandResult apply(ClientCommand clientCommand) {
         if(!super.checker.isNull(clientCommand.IMEI(), clientCommand.userIdentifier(), 
-                clientCommand.cardCode(), clientCommand.delivery(), 
-                clientCommand.dateTime())) {
+                clientCommand.cardCode(), clientCommand.delivery())) {
             if(!serverDTO.blacklist().contains(clientCommand.IMEI())) {
                 if(softCheck.closeSoftCheck()) {
                    
@@ -49,8 +48,7 @@ public class CloseSoftCheckProcessorDebug extends AbstractProcessorClient {
                             " close SoftCheck," +
                             " user ident - " + clientCommand.userIdentifier()+ "," +
                             " card code - " + clientCommand.cardCode() + "," +
-                            " delivery type - " + clientCommand.delivery() + "," + 
-                            " date time - " + clientCommand.dateTime();
+                            " delivery type - " + clientCommand.delivery(); 
                 
                     String result = 
                             "{\n"
@@ -68,7 +66,7 @@ public class CloseSoftCheckProcessorDebug extends AbstractProcessorClient {
                             LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE, 
                             "Невозможно закрыть мягкий чек. Скорее всего, он не был открыт. Попробуйте открыть его.", 
                             "Client " + clientCommand.IMEI() + " cannot close SoftCheck, "
-                                    + "username - " + clientCommand.username()
+                                    + "user_ident - " + clientCommand.userIdentifier()
                                     + "card code - " + clientCommand.cardCode());
                 }
             }

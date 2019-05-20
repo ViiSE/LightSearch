@@ -63,7 +63,7 @@ public class OpenSoftCheckProcessorDebug extends AbstractProcessorClient {
                             LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE, 
                             "Невозможно открыть мягкий чек. Скорее всего, он уже открыт. Попробуйте отменить или закрыть мягкий чек.", 
                             "Client " + clientCommand.IMEI() + " cannot open SoftCheck, "
-                                    + "username - " + clientCommand.username() + ","
+                                    + "user ident - " + clientCommand.userIdentifier()+ ","
                                     + "card code - " + clientCommand.cardCode());
                 }
             }

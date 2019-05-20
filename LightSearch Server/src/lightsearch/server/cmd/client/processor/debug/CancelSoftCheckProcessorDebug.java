@@ -61,7 +61,7 @@ public class CancelSoftCheckProcessorDebug extends AbstractProcessorClient {
                 else
                     return super.commandResult(clientCommand.IMEI(), LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE,
                             "Невозможно отменить мягкий чек. Попробуйте позже.", 
-                            "Client " + clientCommand.IMEI() + " - cannot cancel SoftCheck, username - " + clientCommand.username()
+                            "Client " + clientCommand.IMEI() + " - cannot cancel SoftCheck, user_ident - " + clientCommand.userIdentifier()
                                     + ", card code - " + clientCommand.cardCode());
             }
             else
