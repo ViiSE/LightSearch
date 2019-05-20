@@ -110,14 +110,7 @@ public class DatabaseCommandMessageTestNG {
                               + "\"IMEI\": \"12346789123456\","
                               + "\"user_ident\": \"111\","
                               + "\"card_code\": \"123456\","
-                              + "\"data\":" 
-                              + "["
-                              +     "{ \"ID\": \"511354\", \"amount\": \"4\"},"
-                              +     "{ \"ID\": \"248462\", \"amount\": \"10\"},"
-                              +     "{ \"ID\": \"741265\", \"amount\": \"1\"}"
-                              + "],"
-                              + "\"delivery\": \"1\","
-                              + "\"date_time\": \"2019-05-11 12:00:00\""
+                              + "\"delivery\": \"1\""
                             + "}";
             ClientCommandConverter clientCmdConverter = ClientCommandConverterInit.clientCommandConverter();
             ClientCommand clientCmd;
@@ -249,8 +242,7 @@ public class DatabaseCommandMessageTestNG {
         DatabaseCommandMessage dbMessageConn = DatabaseCommandMessageInit.databaseCommandMessageCloseSoftCheck(
                 clientCmdCloseSoftCheck.command(), clientCmdCloseSoftCheck.IMEI(), 
                 clientCmdCloseSoftCheck.userIdentifier(), clientCmdCloseSoftCheck.cardCode(),
-                clientCmdCloseSoftCheck.delivery(),
-                clientCmdCloseSoftCheck.dateTime());
+                clientCmdCloseSoftCheck.delivery());
         assertNotNull(dbMessageConn, "Database command message is null!");
         
         System.out.println("DatabaseCommandMessageConnection.message(): " + dbMessageConn.message());

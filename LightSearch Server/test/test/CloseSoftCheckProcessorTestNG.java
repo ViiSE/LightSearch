@@ -167,8 +167,7 @@ public class CloseSoftCheckProcessorTestNG {
                               + "\"IMEI\": \"12346789123456\","
                               + "\"ident\": \"111\","
                               + "\"card_code\": \"123456\","
-                              + "\"delivery\": \"1\","
-                              + "\"date_time\": \"2019-05-11 12:00:00\""
+                              + "\"delivery\": \"1\""
                             + "}";
             ClientCommandConverter clientCmdConverter = ClientCommandConverterInit.clientCommandConverter();
             ClientCommand clientCmd;

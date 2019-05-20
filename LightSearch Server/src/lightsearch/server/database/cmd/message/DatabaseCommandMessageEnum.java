@@ -59,10 +59,6 @@ public enum DatabaseCommandMessageEnum {
     CARD_CODE {
         @Override
         public String stringValue() { return "card_code"; }
-    },
-    DATE_TIME {
-        @Override
-        public String stringValue() { return "date_plan"; }
     };
     
     public abstract String stringValue();
