@@ -19,6 +19,9 @@ package ru.viise.lightsearch.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import ru.viise.lightsearch.util.CostFormat;
+import ru.viise.lightsearch.util.CostFormatInit;
+
 public class CartRecordDefaultImpl implements CartRecord {
 
     private final String name;
@@ -54,7 +57,12 @@ public class CartRecordDefaultImpl implements CartRecord {
             isConfirmed = false;
         }
 
-        totalCost = this.currentAmount * this.price;
+        totalCost = calculateTotalCost();
+    }
+
+    private float calculateTotalCost() {
+        CostFormat cFormat = CostFormatInit.costFormat();
+        return cFormat.format(this.currentAmount * this.price);
     }
 
     @Override
@@ -96,7 +104,7 @@ public class CartRecordDefaultImpl implements CartRecord {
     public float currentAmount() {
         if(currentAmount > newMaxAmount) {
             currentAmount = newMaxAmount;
-            totalCost = currentAmount * price;
+            totalCost = calculateTotalCost();
         }
         return currentAmount;
     }
@@ -133,7 +141,7 @@ public class CartRecordDefaultImpl implements CartRecord {
             currentAmount = newMaxAmount;
         if(currentAmount < 0)
             currentAmount = 0;
-        totalCost = price * currentAmount;
+        totalCost = calculateTotalCost();
     }
 
     @Override
