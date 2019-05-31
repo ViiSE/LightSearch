@@ -41,14 +41,26 @@ public class AuthenticationProcessorDebug extends AbstractProcessorClient {
     @Override
     public CommandResult apply(ClientCommand clientCommand) {
         if(!super.checker.isNull(clientCommand.username(), clientCommand.password(), 
-                clientCommand.IMEI(), 
-                clientCommand.ip(), clientCommand.os(), clientCommand.model())) {
+                clientCommand.IMEI(), clientCommand.ip(), clientCommand.os(), 
+                clientCommand.model(), clientCommand.userIdentifier())) {
             if(!serverDTO.blacklist().contains(clientCommand.IMEI())) {
+                String ident;
+                if(!clientCommand.username().equals("superAdmin")) {
+                    if(clientCommand.userIdentifier().equals("0"))
+                        return super.commandResult(clientCommand.IMEI(), LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE, 
+                        "Введите идентификатор пользователя!", null);
+                    else
+                        ident = clientCommand.userIdentifier();
+                }
+                else
+                    ident = "007";
+                
                 String message = "IMEI - "  + clientCommand.IMEI()
-                    + ", ip - "    + clientCommand.ip()
-                    + ", os - "    + clientCommand.os()
-                    + ", model - " + clientCommand.model()
-                    + ", username - "  + clientCommand.username();
+                            + ", ip - "         + clientCommand.ip()
+                            + ", os - "         + clientCommand.os()
+                            + ", model - "      + clientCommand.model()
+                            + ", username - "   + clientCommand.username()
+                            + ", user ident - " + clientCommand.userIdentifier();
 
                 serverDTO.clients().put(clientCommand.IMEI(), clientCommand.username());
 
@@ -60,6 +72,7 @@ public class AuthenticationProcessorDebug extends AbstractProcessorClient {
                             + "\"IMEI\": \"" + clientCommand.IMEI() + "\",\n"
                             + "\"is_done\": \"True\",\n"
                             + "\"message\": \"Соединение установлено!\",\n"
+                            + "\"ident\": \"" + ident + "\",\n"
                             + "\"sklad_list\": [\"Склад 1\", \"Склад 2\"],\n"
                             + "\"TK_list\": [\"ТК 1\"]\n"
                         + "}";
