@@ -179,7 +179,6 @@ public class CloseSoftCheckProcessorTestNG {
             assertNotNull(clientCmd.cardCode(), "Client card code is null!");
             assertNotNull(clientCmd.data(), "Client data is null!");
             assertNotNull(clientCmd.delivery(), "Client delivery is null!");
-            assertNotNull(clientCmd.dateTime(), "Client date time is null!");
             
             return clientCmd;
         } catch (CommandConverterException ex) {

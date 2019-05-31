@@ -21,22 +21,31 @@ package lightsearch.server.database.cmd.message;
  */
 public class DatabaseCommandMessageConnectionDefaultWindowsJSONImpl implements DatabaseCommandMessage {
 
-    private final String CMD_FIELD = DatabaseCommandMessageEnum.COMMAND.stringValue();
-    private final String IMEI_FIELD = DatabaseCommandMessageEnum.IMEI.stringValue();
+    private final String CMD_FIELD        = DatabaseCommandMessageEnum.COMMAND.stringValue();
+    private final String IMEI_FIELD       = DatabaseCommandMessageEnum.IMEI.stringValue();
+    private final String USERNAME_FIELD   = DatabaseCommandMessageEnum.USERNAME.stringValue();
+    private final String USER_IDENT_FIELD = DatabaseCommandMessageEnum.USER_IDENT.stringValue();
     
     private final String command;
     private final String IMEI;
+    private final String username;
+    private final String userIdent;
     
-    public DatabaseCommandMessageConnectionDefaultWindowsJSONImpl(String command, String IMEI) {
+    public DatabaseCommandMessageConnectionDefaultWindowsJSONImpl(String command, 
+            String IMEI, String username, String userIdent) {
         this.command = command;
         this.IMEI = IMEI;
+        this.username = username;
+        this.userIdent = userIdent;
     }
     
     @Override
     public String message() {
         String message = "{\r\n"
                 + "\"" + CMD_FIELD + "\":\""  + command + "\",\r\n"
-                + "\"" + IMEI_FIELD + "\":\"" + IMEI + "\"\r\n"
+                + "\"" + IMEI_FIELD + "\":\"" + IMEI + "\",\r\n"
+                + "\"" + USERNAME_FIELD + "\":\"" + username + "\",\r\n"
+                + "\"" + USER_IDENT_FIELD + "\":\"" + userIdent + "\"\r\n"
                 + "}";
         return message;
     }

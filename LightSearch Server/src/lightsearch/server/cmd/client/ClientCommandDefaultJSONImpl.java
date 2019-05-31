@@ -39,7 +39,6 @@ public class ClientCommandDefaultJSONImpl implements ClientCommand {
     private final String DELIVERY   = ClientCommandContentEnum.DELIVERY.stringValue();
     private final String USER_IDENT = ClientCommandContentEnum.USER_IDENT.stringValue();
     private final String CARD_CODE  = ClientCommandContentEnum.CARD_CODE.stringValue();
-    private final String DATE_TIME  = ClientCommandContentEnum.DATE_TIME.stringValue();
     
     public ClientCommandDefaultJSONImpl(Object clientInfoObj) {
         this.clientInfoObj = (JSONObject)clientInfoObj;
@@ -179,16 +178,6 @@ public class ClientCommandDefaultJSONImpl implements ClientCommand {
     public String cardCode() {
         try {
             return clientInfoObj.get(CARD_CODE).toString();
-        }
-        catch(NullPointerException ignore) {
-            return null;
-        }
-    }
-
-    @Override
-    public String dateTime() {
-        try {
-            return clientInfoObj.get(DATE_TIME).toString();
         }
         catch(NullPointerException ignore) {
             return null;

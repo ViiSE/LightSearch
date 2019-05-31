@@ -21,8 +21,10 @@ package lightsearch.server.database.cmd.message;
  */
 public class DatabaseCommandMessageInit {
     
-    public static DatabaseCommandMessage databaseCommandMessageConnection(String command, String IMEI) {
-        return new DatabaseCommandMessageConnectionDefaultWindowsJSONImpl(command, IMEI);
+    public static DatabaseCommandMessage databaseCommandMessageConnection(String command, 
+            String IMEI, String username, String userIdentifier) {
+        return new DatabaseCommandMessageConnectionDefaultWindowsJSONImpl(command, 
+                IMEI, username, userIdentifier);
     }
     
     public static DatabaseCommandMessage databaseCommandMessageSearch(String command, String IMEI, 

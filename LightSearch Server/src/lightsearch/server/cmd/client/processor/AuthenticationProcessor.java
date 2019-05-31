@@ -58,14 +58,17 @@ public class AuthenticationProcessor extends AbstractProcessorClient {
     public CommandResult apply(ClientCommand clientCommand) {
         if(!super.checker.isNull(clientCommand.username(), clientCommand.password(), 
                 clientCommand.IMEI(), clientCommand.ip(), clientCommand.os(), 
-                clientCommand.model())) {
+                clientCommand.model(), clientCommand.userIdentifier())) {
             if(!serverDTO.blacklist().contains(clientCommand.IMEI())) {
                 try {
                     DatabaseConnectionCreator dbConnCreator = DatabaseConnectionCreatorInit.databaseConnectionCreator(
                             serverDTO.databaseDTO(), clientCommand.username(), clientCommand.password());
                     DatabaseConnection databaseConnection = dbConnCreator.createFirebirdConnection();
 
-                    DatabaseCommandMessage dbCmdMessage = DatabaseCommandMessageInit.databaseCommandMessageConnection(clientCommand.command(), clientCommand.IMEI());
+                    DatabaseCommandMessage dbCmdMessage = 
+                            DatabaseCommandMessageInit.databaseCommandMessageConnection(
+                                    clientCommand.command(), clientCommand.IMEI(),
+                                    clientCommand.username(), clientCommand.userIdentifier());
                     
                     DatabaseStatementExecutor dbStatementExecutor = DatabaseStatementExecutorInit.databaseStatementExecutor(
                             databaseConnection, iteratorDatabaseRecord.next(),
@@ -74,10 +77,11 @@ public class AuthenticationProcessor extends AbstractProcessorClient {
                     DatabaseStatementResult dbStatRes = dbStatementExecutor.exec();
 
                     String message = "IMEI - "  + clientCommand.IMEI()
-                        + ", ip - "    + clientCommand.ip()
-                        + ", os - "    + clientCommand.os()
-                        + ", model - " + clientCommand.model()
-                        + ", username - "  + clientCommand.username();
+                        + ", ip - "          + clientCommand.ip()
+                        + ", os - "          + clientCommand.os()
+                        + ", model - "       + clientCommand.model()
+                        + ", username - "    + clientCommand.username()
+                        + ", user ident - "  + clientCommand.userIdentifier();
 
                     serverDTO.clients().put(clientCommand.IMEI(), clientCommand.username());
 
