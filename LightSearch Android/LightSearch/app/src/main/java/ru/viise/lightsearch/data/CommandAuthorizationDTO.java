@@ -23,4 +23,5 @@ public interface CommandAuthorizationDTO extends CommandDTO {
     String model();
     String username();
     String password();
+    String userIdent();
 }

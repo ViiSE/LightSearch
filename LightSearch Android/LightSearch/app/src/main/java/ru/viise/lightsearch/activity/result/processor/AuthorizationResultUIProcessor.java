@@ -16,11 +16,17 @@
 
 package ru.viise.lightsearch.activity.result.processor;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import java.util.function.Function;
 
 import ru.viise.lightsearch.activity.ManagerActivity;
 import ru.viise.lightsearch.cmd.result.AuthorizationCommandResult;
 import ru.viise.lightsearch.cmd.result.CommandResult;
+import ru.viise.lightsearch.pref.PreferencesManager;
+import ru.viise.lightsearch.pref.PreferencesManagerInit;
+import ru.viise.lightsearch.pref.PreferencesManagerType;
 
 public class AuthorizationResultUIProcessor implements Function<CommandResult, Void> {
 
@@ -34,6 +40,10 @@ public class AuthorizationResultUIProcessor implements Function<CommandResult, V
     public Void apply(CommandResult commandResult) {
         AuthorizationCommandResult authCmdRes = (AuthorizationCommandResult)commandResult;
         if(authCmdRes.isDone()) {
+            String pref = "pref";
+            SharedPreferences sPref = activity.getSharedPreferences(pref, Context.MODE_PRIVATE);
+            PreferencesManager prefManager = PreferencesManagerInit.preferencesManager(sPref);
+            prefManager.save(PreferencesManagerType.USER_IDENT_MANAGER, authCmdRes.userIdent());
             activity.callDialogSuccess(authCmdRes.message());
             activity.doContainerFragmentTransaction(authCmdRes.skladList(), authCmdRes.TKList());
         }

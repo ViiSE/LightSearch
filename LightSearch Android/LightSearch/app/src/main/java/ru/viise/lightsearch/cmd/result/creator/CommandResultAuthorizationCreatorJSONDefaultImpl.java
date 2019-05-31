@@ -37,6 +37,7 @@ public class CommandResultAuthorizationCreatorJSONDefaultImpl implements Command
     private final String IS_DONE    = ClientCommandContentEnum.IS_DONE.stringValue();
     private final String IMEI_FIELD = ClientCommandContentEnum.IMEI.stringValue();
     private final String MESSAGE    = ClientCommandContentEnum.MESSAGE.stringValue();
+    private final String USER_IDENT = ClientCommandContentEnum.USER_IDENT.stringValue();
     private final String SKLAD_LIST = ClientCommandContentEnum.SKLAD_LIST.stringValue();
     private final String TK_LIST    = ClientCommandContentEnum.TK_LIST.stringValue();
 
@@ -61,6 +62,13 @@ public class CommandResultAuthorizationCreatorJSONDefaultImpl implements Command
             boolean isDone = resCmdVerifier.verify();
             String message = Objects.requireNonNull(objMsg.get(MESSAGE)).toString();
 
+            String userIdent;
+            if(objMsg.get(USER_IDENT) != null)
+                userIdent = Objects.requireNonNull(objMsg.get(USER_IDENT)).toString();
+            else
+                return AuthorizationCommandResultInit.authorizationCommandResult(
+                        isDone, message, null, null, null);
+
             JSONArray skladListJ = (JSONArray) objMsg.get(SKLAD_LIST);
             if(skladListJ.size() == 0)
                 return null;
@@ -73,7 +81,7 @@ public class CommandResultAuthorizationCreatorJSONDefaultImpl implements Command
 
             AuthorizationCommandResult authCmdRes =
                     AuthorizationCommandResultInit.authorizationCommandResult(
-                            isDone, message, skladList, TKList);
+                            isDone, message, userIdent, skladList, TKList);
             return authCmdRes;
         }
         catch(MessageParserException | NullPointerException ex) {

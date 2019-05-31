@@ -18,7 +18,7 @@ package ru.viise.lightsearch.data;
 
 public class AuthorizationDTOInit {
 
-    public static AuthorizationDTO authorizationDTO(String username, String password) {
-        return new AuthorizationDTODefaultImpl(username, password);
+    public static AuthorizationDTO authorizationDTO(String username, String password, String userIdent) {
+        return new AuthorizationDTODefaultImpl(username, password, userIdent);
     }
 }

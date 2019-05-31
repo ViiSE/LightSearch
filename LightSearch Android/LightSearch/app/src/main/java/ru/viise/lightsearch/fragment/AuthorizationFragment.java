@@ -162,8 +162,7 @@ public class AuthorizationFragment extends Fragment implements IAuthorizationFra
         switch(v.getId()) {
             case R.id.buttonConnect:
                 if(editTextUsername.getText().toString().isEmpty()  ||
-                    editTextPassword.getText().toString().isEmpty() ||
-                    editTextUserIdent.getText().toString().isEmpty()) {
+                    editTextPassword.getText().toString().isEmpty()) {
                     Toast t = Toast.makeText(this.getActivity().getApplicationContext(), "Заполните все поля, необходимые для регистрации!", Toast.LENGTH_LONG);
                     t.show();
                 }
@@ -172,7 +171,10 @@ public class AuthorizationFragment extends Fragment implements IAuthorizationFra
                     prefManager.save(PreferencesManagerType.USERNAME_MANAGER, editTextUsername.getText().toString());
                     prefManager.save(PreferencesManagerType.HOST_MANAGER, editTextHost.getText().toString());
                     prefManager.save(PreferencesManagerType.PORT_MANAGER, editTextPort.getText().toString());
-                    prefManager.save(PreferencesManagerType.USER_IDENT_MANAGER, editTextUserIdent.getText().toString());
+                    if(editTextUserIdent.getText().toString().isEmpty())
+                        prefManager.save(PreferencesManagerType.USER_IDENT_MANAGER, "0");
+                    else
+                        prefManager.save(PreferencesManagerType.USER_IDENT_MANAGER, editTextUserIdent.getText().toString());
                     ConnectionDTO connDTO = ConnectionDTOInit.connectionDTO(editTextHost.getText().toString(),
                             editTextPort.getText().toString());
                     mIManagerActivity.connect(connDTO);
@@ -234,7 +236,8 @@ public class AuthorizationFragment extends Fragment implements IAuthorizationFra
     public AuthorizationDTO authorizationData() {
         AuthorizationDTO authDTO = AuthorizationDTOInit.authorizationDTO(
                 editTextUsername.getText().toString(),
-                editTextPassword.getText().toString());
+                editTextPassword.getText().toString(),
+                prefManager.load(PreferencesManagerType.USER_IDENT_MANAGER));
         return authDTO;
     }
 }

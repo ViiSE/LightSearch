@@ -19,4 +19,5 @@ package ru.viise.lightsearch.data;
 public interface AuthorizationDTO {
     String username();
     String password();
+    String userIdent();
 }

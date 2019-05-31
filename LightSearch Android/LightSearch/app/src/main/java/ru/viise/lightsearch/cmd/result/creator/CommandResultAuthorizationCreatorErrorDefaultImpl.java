@@ -31,6 +31,7 @@ public class CommandResultAuthorizationCreatorErrorDefaultImpl implements Comman
 
     @Override
     public CommandResult createCommandResult() {
-        return AuthorizationCommandResultInit.authorizationCommandResult(isDone, message, null, null);
+        return AuthorizationCommandResultInit.authorizationCommandResult(isDone, message,
+                null, null, null);
     }
 }

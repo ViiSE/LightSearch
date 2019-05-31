@@ -19,7 +19,7 @@ package ru.viise.lightsearch.cmd.result;
 public class AuthorizationCommandResultInit {
 
     public static AuthorizationCommandResult authorizationCommandResult(boolean isDone,
-                    String message, String[] skladList, String[] TKList) {
-        return new AuthorizationCommandResultDefaultImpl(isDone, message, skladList, TKList);
+                    String message, String userIdent, String[] skladList, String[] TKList) {
+        return new AuthorizationCommandResultDefaultImpl(isDone, message, userIdent, skladList, TKList);
     }
 }

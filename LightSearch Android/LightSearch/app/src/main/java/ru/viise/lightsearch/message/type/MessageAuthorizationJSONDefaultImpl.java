@@ -24,14 +24,15 @@ import ru.viise.lightsearch.data.CommandAuthorizationDTO;
 
 public class MessageAuthorizationJSONDefaultImpl implements MessageAuthorization {
 
-    private final String CONNECT  = ClientCommandEnum.CONNECT.stringValue();
-    private final String COMMAND  = ClientCommandContentEnum.COMMAND.stringValue();
-    private final String IMEI     = ClientCommandContentEnum.IMEI.stringValue();
-    private final String IP       = ClientCommandContentEnum.IP.stringValue();
-    private final String OS       = ClientCommandContentEnum.OS.stringValue();
-    private final String MODEL    = ClientCommandContentEnum.MODEL.stringValue();
-    private final String USERNAME = ClientCommandContentEnum.USERNAME.stringValue();
-    private final String PASSWORD = ClientCommandContentEnum.PASSWORD.stringValue();
+    private final String CONNECT    = ClientCommandEnum.CONNECT.stringValue();
+    private final String COMMAND    = ClientCommandContentEnum.COMMAND.stringValue();
+    private final String IMEI       = ClientCommandContentEnum.IMEI.stringValue();
+    private final String IP         = ClientCommandContentEnum.IP.stringValue();
+    private final String OS         = ClientCommandContentEnum.OS.stringValue();
+    private final String MODEL      = ClientCommandContentEnum.MODEL.stringValue();
+    private final String USERNAME   = ClientCommandContentEnum.USERNAME.stringValue();
+    private final String PASSWORD   = ClientCommandContentEnum.PASSWORD.stringValue();
+    private final String USER_IDENT = ClientCommandContentEnum.USER_IDENT.stringValue();
 
     private final CommandAuthorizationDTO cmdAuthDTO;
 
@@ -49,6 +50,7 @@ public class MessageAuthorizationJSONDefaultImpl implements MessageAuthorization
         msgAuthObj.put(MODEL, cmdAuthDTO.model());
         msgAuthObj.put(USERNAME, cmdAuthDTO.username());
         msgAuthObj.put(PASSWORD, cmdAuthDTO.password());
+        msgAuthObj.put(USER_IDENT, cmdAuthDTO.userIdent());
         return msgAuthObj.toJSONString();
     }
 }

@@ -20,10 +20,12 @@ public class AuthorizationDTODefaultImpl implements AuthorizationDTO {
 
     private final String username;
     private final String password;
+    private final String userIdent;
 
-    public AuthorizationDTODefaultImpl(String username, String password) {
+    public AuthorizationDTODefaultImpl(String username, String password, String userIdent) {
         this.username = username;
         this.password = password;
+        this.userIdent = userIdent;
     }
 
     @Override
@@ -34,5 +36,10 @@ public class AuthorizationDTODefaultImpl implements AuthorizationDTO {
     @Override
     public String password() {
         return password;
+    }
+
+    @Override
+    public String userIdent() {
+        return userIdent;
     }
 }

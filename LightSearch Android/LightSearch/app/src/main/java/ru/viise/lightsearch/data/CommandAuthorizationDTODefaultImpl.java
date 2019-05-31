@@ -24,15 +24,17 @@ public class CommandAuthorizationDTODefaultImpl implements CommandAuthorizationD
     private final String model;
     private final String username;
     private final String password;
+    private final String userIdent;
 
     public CommandAuthorizationDTODefaultImpl(String IMEI, String ip, String os, String model,
-                  String username, String password) {
+                  String username, String password, String userIdent) {
         this.IMEI = IMEI;
         this.ip = ip;
         this.os = os;
         this.model = model;
         this.username = username;
         this.password = password;
+        this.userIdent = userIdent;
     }
 
     @Override
@@ -63,5 +65,10 @@ public class CommandAuthorizationDTODefaultImpl implements CommandAuthorizationD
     @Override
     public String password() {
         return password;
+    }
+
+    @Override
+    public String userIdent() {
+        return userIdent;
     }
 }

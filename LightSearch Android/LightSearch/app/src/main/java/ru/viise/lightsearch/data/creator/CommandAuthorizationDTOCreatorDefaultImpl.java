@@ -29,14 +29,16 @@ public class CommandAuthorizationDTOCreatorDefaultImpl implements CommandAuthori
     private final String IMEI;
     private final String username;
     private final String password;
+    private final String userIdent;
     private final String ip;
     private final String os;
     private final String model;
 
     public CommandAuthorizationDTOCreatorDefaultImpl(String IMEI, AuthorizationDTO authDTO) {
         this.IMEI = IMEI;
-        this.username = authDTO.username();
-        this.password = authDTO.password();
+        this.username  = authDTO.username();
+        this.password  = authDTO.password();
+        this.userIdent = authDTO.userIdent();
 
         IPAddressProvider ipAddrProvider = IPAddressProviderInit.ipAddressProvider();
         ip = ipAddrProvider.ipAddress(true);
@@ -46,6 +48,6 @@ public class CommandAuthorizationDTOCreatorDefaultImpl implements CommandAuthori
 
     @Override
     public CommandAuthorizationDTO createCommandDTO() {
-        return CommandAuthorizationDTOInit.commandAuthorizationDTO(IMEI, ip, os, model, username, password);
+        return CommandAuthorizationDTOInit.commandAuthorizationDTO(IMEI, ip, os, model, username, password, userIdent);
     }
 }

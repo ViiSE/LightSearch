@@ -20,13 +20,15 @@ public class AuthorizationCommandResultDefaultImpl implements AuthorizationComma
 
     private final boolean isDone;
     private final String message;
+    private final String userIdent;
     private final String[] skladList;
     private final String[] TKList;
 
-    public AuthorizationCommandResultDefaultImpl(boolean isDone, String message,
+    public AuthorizationCommandResultDefaultImpl(boolean isDone, String message, String userIdent,
              String[] skladList, String[] TKList) {
         this.isDone = isDone;
         this.message = message;
+        this.userIdent = userIdent;
         this.skladList = skladList;
         this.TKList = TKList;
     }
@@ -39,6 +41,11 @@ public class AuthorizationCommandResultDefaultImpl implements AuthorizationComma
     @Override
     public String message() {
         return message;
+    }
+
+    @Override
+    public String userIdent() {
+        return userIdent;
     }
 
     @Override

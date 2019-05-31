@@ -17,6 +17,7 @@
 package ru.viise.lightsearch.cmd.result;
 
 public interface AuthorizationCommandResult extends CommandResult {
+    String userIdent();
     String[] skladList();
     String[] TKList();
 }
