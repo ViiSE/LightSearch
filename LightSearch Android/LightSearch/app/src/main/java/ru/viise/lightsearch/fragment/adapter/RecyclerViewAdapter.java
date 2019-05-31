@@ -35,6 +35,10 @@ import java.util.List;
 import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.data.CartRecord;
 import ru.viise.lightsearch.data.SoftCheckRecord;
+import ru.viise.lightsearch.util.ProductAmountFormat;
+import ru.viise.lightsearch.util.ProductAmountFormatInit;
+import ru.viise.lightsearch.util.CostFormat;
+import ru.viise.lightsearch.util.CostFormatInit;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.DefaultViewHolder> {
 
@@ -64,6 +68,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         for(SoftCheckRecord record : data) {
             totalCost += record.totalCost();
         }
+        CostFormat tCFormat = CostFormatInit.costFormat();
+        totalCost = tCFormat.format(totalCost);
         String res = total + totalCost + " " + priceUnit;
         twTotalCost.setText(res);
     }
@@ -110,29 +116,34 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 @Override
                 public void afterTextChanged(Editable editable) {
                     if (!ignore) {
-                        if (etCardCurrentAmount.getText().toString().isEmpty()) {
-                            int pos = getAdapterPosition();
-                            data.get(pos).setProductsCount(0);
-                            twCardTotalCost.setText(data.get(pos).totalCostWithUnit());
+                        ProductAmountFormat prAmountFormat = ProductAmountFormatInit.productAmountFormat();
+                        float curAmount = prAmountFormat.format(etCardCurrentAmount.getText().toString());
+
+                        int pos = getAdapterPosition();
+                        data.get(pos).setProductsCount(curAmount);
+
+                        ignore = true;
+
+                        twCardTotalCost.setText(data.get(pos).totalCostWithUnit());
+                        if(!delAction) {
+                            prevString = editable.toString().toLowerCase();
+                            etCardCurrentAmount.removeTextChangedListener(this);
+                            etCardCurrentAmount.setText(String.valueOf(data.get(pos).currentAmount()));
+                            etCardCurrentAmount.addTextChangedListener(this);
+                            try { etCardCurrentAmount.setSelection(caretPos + 1); }
+                            catch(IndexOutOfBoundsException ignore) {}
                         } else {
-                            int pos = getAdapterPosition();
-                            float curAmount = Float.parseFloat(etCardCurrentAmount.getText().toString());
-                            data.get(pos).setProductsCount(curAmount);
-                            twCardTotalCost.setText(data.get(pos).totalCostWithUnit());
-                            ignore = true;
-                            if(!delAction) {
-                                prevString = editable.toString().toLowerCase();
+                            if(etCardCurrentAmount.getText().toString().isEmpty()) {
                                 etCardCurrentAmount.removeTextChangedListener(this);
                                 etCardCurrentAmount.setText(String.valueOf(data.get(pos).currentAmount()));
                                 etCardCurrentAmount.addTextChangedListener(this);
-                                etCardCurrentAmount.setSelection(caretPos + 1);
-                            } else {
-                                etCardCurrentAmount.setSelection(caretPos - 1);
-                                prevString = editable.toString();
                             }
-                            getTotalCost();
-                            ignore = false;
+                            try { etCardCurrentAmount.setSelection(caretPos - 1); }
+                            catch(IndexOutOfBoundsException ignore) {}
+                            prevString = editable.toString();
                         }
+                        getTotalCost();
+                        ignore = false;
                     }
                 }
             });

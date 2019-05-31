@@ -19,6 +19,9 @@ package ru.viise.lightsearch.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import ru.viise.lightsearch.util.CostFormat;
+import ru.viise.lightsearch.util.CostFormatInit;
+
 public class SoftCheckRecordDefaultImpl implements SoftCheckRecord {
 
     private final String name;
@@ -47,7 +50,12 @@ public class SoftCheckRecordDefaultImpl implements SoftCheckRecord {
         maxAmount = tempMaxAmount;
 
         currentAmount = 1;
-        totalCost = this.price;
+        totalCost = calculateTotalCost();
+    }
+
+    private float calculateTotalCost() {
+        CostFormat cFormat = CostFormatInit.costFormat();
+        return cFormat.format(this.currentAmount * this.price);
     }
 
     @Override
@@ -72,7 +80,7 @@ public class SoftCheckRecordDefaultImpl implements SoftCheckRecord {
             currentAmount = maxAmount;
         if(currentAmount < 0)
             currentAmount = 0;
-        totalCost = price * currentAmount;
+        totalCost = calculateTotalCost();
     }
 
     @Override
@@ -109,7 +117,7 @@ public class SoftCheckRecordDefaultImpl implements SoftCheckRecord {
     public float currentAmount() {
         if(currentAmount > maxAmount) {
             currentAmount = maxAmount;
-            totalCost = currentAmount * price;
+            totalCost = calculateTotalCost();
         }
         return currentAmount;
     }

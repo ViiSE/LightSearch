@@ -189,7 +189,7 @@ public class ContainerFragment extends Fragment implements OnBackPressedListener
         if(softCheckContainerFragment != null) {
             softCheckContainerFragment.switchToOpenSoftCheckFragment();
             onBackPressedListenerType = OnBackPressedListenerType.CONTAINER_FRAGMENT;
-            selected = 1;
+            selected = 0;
         }
     }
 
