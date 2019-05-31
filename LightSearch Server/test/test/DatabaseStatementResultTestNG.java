@@ -198,8 +198,9 @@ public class DatabaseStatementResultTestNG {
     
     private DatabaseCommandMessage initDatabaseCommandMessage() {
         ClientCommand clientCommand = initClientCommand();
-        DatabaseCommandMessage dbCmdMessage = DatabaseCommandMessageInit.databaseCommandMessageConnection(
-                clientCommand.command(), clientCommand.IMEI());
+        DatabaseCommandMessage dbCmdMessage = DatabaseCommandMessageInit.databaseCommandMessageSearch(
+                clientCommand.command(), clientCommand.IMEI(), clientCommand.barcode(),
+                clientCommand.sklad(), clientCommand.TK());
         assertNotNull(dbCmdMessage, "DatabaseCommandMessage is null!");
         
         return dbCmdMessage;

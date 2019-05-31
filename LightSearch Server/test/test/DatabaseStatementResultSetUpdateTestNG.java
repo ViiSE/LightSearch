@@ -57,7 +57,9 @@ public class DatabaseStatementResultSetUpdateTestNG {
         try {
             String message = "{"
                             + "\"command\":\"connect\","
-                            + "\"IMEI\":\"123456789123456\""
+                            + "\"IMEI\":\"123456789123456\","
+                            + "\"username\":\"user\","
+                            + "\"ident\":\"007\""
 //                            + "\"barcode\":\"5421354\""
 //                            + "\"sklad\":\"null\""
 //                            + "\"TK\":\"null\""
@@ -68,6 +70,8 @@ public class DatabaseStatementResultSetUpdateTestNG {
             assertNotNull(clientCmd, "Client Command is null!");
             assertNotNull(clientCmd.command(), "Client command is null!");
             assertNotNull(clientCmd.IMEI(), "Client IMEI is null!");
+            assertNotNull(clientCmd.username(), "Client username is null!");
+            assertNotNull(clientCmd.userIdentifier(), "Client user identifier is null!");
 //            assertNotNull(clientCmd.barcode(), "Client barcode is null!");
 //            assertNotNull(clientCmd.sklad(), "Client sklad is null!");
 //            assertNotNull(clientCmd.TK(), "Client TK is null!");
@@ -84,8 +88,10 @@ public class DatabaseStatementResultSetUpdateTestNG {
     
     private String initCommandConnection() {
         ClientCommand clientCommand = initClientCommandConnection();
-        DatabaseCommandMessage dbCmdMessage = DatabaseCommandMessageInit.databaseCommandMessageConnection(
-                clientCommand.command(), clientCommand.IMEI());
+        DatabaseCommandMessage dbCmdMessage = 
+                DatabaseCommandMessageInit.databaseCommandMessageConnection(
+                clientCommand.command(), clientCommand.IMEI(), clientCommand.username(),
+                clientCommand.userIdentifier());
         
         String command = dbCmdMessage.message();
         assertNotNull(command, "Command message is null!");

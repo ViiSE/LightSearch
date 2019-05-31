@@ -177,8 +177,9 @@ public class DatabasePreparedStatementTestNG {
     
     private String initCommand() {
         ClientCommand clientCommand = initClientCommand();
-        DatabaseCommandMessage dbCmdMessage = DatabaseCommandMessageInit.databaseCommandMessageConnection(
-                clientCommand.command(), clientCommand.IMEI());
+        DatabaseCommandMessage dbCmdMessage = DatabaseCommandMessageInit.databaseCommandMessageSearch(
+                clientCommand.command(), clientCommand.IMEI(), clientCommand.barcode(),
+                clientCommand.sklad(), clientCommand.TK());
         
         String command = dbCmdMessage.message();
         assertNotNull(command, "COmmand message is null!");
