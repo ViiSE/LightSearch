@@ -7,7 +7,7 @@ LightSearch - комплекс программ, не зависимый от б
 ------------------------------------------
 LightSearch состоит из четырех программ:
 
-1) [LightSearchPC](https://github.com/ViiSE/LightSearch/blob/master/Documents/Project%20history/LightSearchPC.pdf) - работает под операционными системами GNU/Linux и Windows. Обеспечивает оперативный поиск по базе данных. 
+1) [LightSearch PC](https://github.com/ViiSE/LightSearch/blob/master/Documents/Project%20history/LightSearchPC.pdf) - работает под операционными системами GNU/Linux и Windows. Обеспечивает оперативный поиск по базе данных. 
  * Реализованы следующие функции:
    - Поиск по наименованию, по части наименования, или по штрих-коду;
    - Режим сканера и автоматического поиска;
@@ -19,7 +19,7 @@ LightSearch состоит из четырех программ:
    - Полная кросс-платформенность;
    - Улучшенная защита ini-файла.
   
-2) [LightSearchAndroid](https://github.com/ViiSE/LightSearch/blob/master/Documents/Project%20history/LightSearchAndroid.pdf) - работает под операционной системой Android версии 7.0 и выше. Обеспечивает оперативный поиск по базе данных.
+2) [LightSearch Android](https://github.com/ViiSE/LightSearch/blob/master/Documents/Project%20history/LightSearchAndroid.pdf) - работает под операционной системой Android версии 7.0 и выше. Обеспечивает оперативный поиск по базе данных.
  * Реализованы следующие функции:
    -  Поиск по штрих-коду;
    -  Считывание штрих-кода через камеру смартфона;
@@ -27,7 +27,7 @@ LightSearch состоит из четырех программ:
    -  Сохранение параметров подключения.
    - Создание мягкого чека.
 
-3) [LightSearchServer](https://github.com/ViiSE/LightSearch/blob/master/Documents/Project%20history/LightSearchServer.pdf) - работает под операционными системами GNU/Linux и Windows. Обеспечивает связь между LightSearchAndroid и базой данных.
+3) [LightSearch Server](https://github.com/ViiSE/LightSearch/blob/master/Documents/Project%20history/LightSearchServer.pdf) - работает под операционными системами GNU/Linux и Windows. Обеспечивает связь между LightSearchAndroid и базой данных.
  * Реализованы следующие функции:
    - Общение между клиентом и сервером через JSON по принципу "команда-ответ";
    - Сохранение настроек, параметров базы данных и списка администраторов;
@@ -37,7 +37,7 @@ LightSearch состоит из четырех программ:
  * Что будет добавлено и изменено:
    - Полная кросс-платформенность.
 
-4) [LightSearchAdminPanel](https://github.com/ViiSE/LightSearch/blob/master/Documents/Project%20history/LightSearchAdminPanel.pdf) - работает под операционными системами GNU/Linux и Windows. Обеспечивает настройку и администрирование LightSearchServer.
+4) [LightSearch Admin Panel](https://github.com/ViiSE/LightSearch/blob/master/Documents/Project%20history/LightSearchAdminPanel.pdf) - работает под операционными системами GNU/Linux и Windows. Обеспечивает настройку и администрирование LightSearchServer.
  * Реализованы следующие функции:
    - Подключение к любому серверу LightSearchServer;
    - Установка таймаута клиента на сервере;
