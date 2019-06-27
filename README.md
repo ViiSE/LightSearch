@@ -1,3 +1,7 @@
+<p align="center"> 
+<img src="https://user-images.githubusercontent.com/43209824/60258828-45746980-9919-11e9-8428-f06504d36f51.png">
+</p>
+
 LightSearch
 ===========
 
