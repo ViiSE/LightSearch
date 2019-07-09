@@ -210,6 +210,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         notifyItemInserted(position);
     }
 
+    public void refreshItem(int position, SoftCheckRecord record) {
+        data.set(position, record);
+        getTotalCost();
+        notifyItemChanged(position);
+    }
+
     public void addItem(SoftCheckRecord record) {
         boolean isFound = false;
         for(int pos = 0; pos < data.size(); pos++) {

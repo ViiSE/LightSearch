@@ -28,7 +28,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -250,12 +249,15 @@ public class CartFragment extends Fragment implements ICartFragment, OnBackPress
     }
 
     private boolean checkUnconfirmedRecord() {
+        int position = 0;
         for(SoftCheckRecord record : cartRecords) {
             CartRecord cartRecord = (CartRecord) record;
             if(!cartRecord.isConfirmed()) {
+                adapter.refreshItem(position, cartRecord);
                 callDialogUnconfirmed();
                 return false;
             }
+            position++;
         }
         return true;
     }
