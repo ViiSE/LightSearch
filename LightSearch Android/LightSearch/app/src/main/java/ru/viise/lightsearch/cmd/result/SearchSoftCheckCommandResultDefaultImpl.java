@@ -21,11 +21,14 @@ import ru.viise.lightsearch.data.SoftCheckRecord;
 public class SearchSoftCheckCommandResultDefaultImpl implements SearchSoftCheckCommandResult {
 
     private final boolean isDone;
+    private final boolean isReconnect;
     private final String message;
     private final SoftCheckRecord record;
 
-    public SearchSoftCheckCommandResultDefaultImpl(boolean isDone, String message, SoftCheckRecord record) {
+    public SearchSoftCheckCommandResultDefaultImpl(boolean isDone, boolean isReconnect, String message,
+               SoftCheckRecord record) {
         this.isDone = isDone;
+        this.isReconnect = isReconnect;
         this.message = message;
         this.record = record;
     }
@@ -38,6 +41,11 @@ public class SearchSoftCheckCommandResultDefaultImpl implements SearchSoftCheckC
     @Override
     public boolean isDone() {
         return isDone;
+    }
+
+    @Override
+    public boolean isReconnect() {
+        return isReconnect;
     }
 
     @Override

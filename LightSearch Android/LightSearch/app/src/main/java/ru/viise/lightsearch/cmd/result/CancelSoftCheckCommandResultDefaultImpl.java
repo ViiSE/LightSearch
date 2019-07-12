@@ -19,16 +19,23 @@ package ru.viise.lightsearch.cmd.result;
 public class CancelSoftCheckCommandResultDefaultImpl implements CancelSoftCheckCommandResult {
 
     private final boolean isDone;
+    private final boolean isReconnect;
     private final String message;
 
-    public CancelSoftCheckCommandResultDefaultImpl(boolean isDone, String message) {
+    public CancelSoftCheckCommandResultDefaultImpl(boolean isDone, boolean isReconnect, String message) {
         this.isDone = isDone;
+        this.isReconnect = isReconnect;
         this.message = message;
     }
 
     @Override
     public boolean isDone() {
         return isDone;
+    }
+
+    @Override
+    public boolean isReconnect() {
+        return isReconnect;
     }
 
     @Override

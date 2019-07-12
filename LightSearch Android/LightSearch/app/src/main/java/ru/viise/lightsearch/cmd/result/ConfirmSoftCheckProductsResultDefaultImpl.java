@@ -23,12 +23,14 @@ import ru.viise.lightsearch.data.SoftCheckRecord;
 public class ConfirmSoftCheckProductsResultDefaultImpl implements ConfirmSoftCheckProductsResult {
 
     private final boolean isDone;
+    private final boolean isReconnect;
     private final String message;
     private final List<SoftCheckRecord> cartRecords;
 
-    public ConfirmSoftCheckProductsResultDefaultImpl(boolean isDone, String message,
+    public ConfirmSoftCheckProductsResultDefaultImpl(boolean isDone, boolean isReconnect, String message,
                  List<SoftCheckRecord> cartRecords) {
         this.isDone = isDone;
+        this.isReconnect = isReconnect;
         this.message = message;
         this.cartRecords = cartRecords;
     }
@@ -41,6 +43,11 @@ public class ConfirmSoftCheckProductsResultDefaultImpl implements ConfirmSoftChe
     @Override
     public boolean isDone() {
         return isDone;
+    }
+
+    @Override
+    public boolean isReconnect() {
+        return isReconnect;
     }
 
     @Override

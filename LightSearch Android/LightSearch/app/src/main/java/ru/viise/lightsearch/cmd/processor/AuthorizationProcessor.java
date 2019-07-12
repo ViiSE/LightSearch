@@ -57,16 +57,19 @@ public class AuthorizationProcessor implements Function<CommandDTO, CommandResul
             CommandResult cmdRes = cmdResCr.createCommandResult();
             return cmdRes;
         }
-
+        catch(CommandResultCreatorException ex) {
+            return errorCommandResult(ex.getMessageRU(), false);
+        }
         catch(MessageSenderException | MessageRecipientException ex) {
-            return errorCommandResult(ex.getMessageRU());
+            return errorCommandResult(ex.getMessageRU(), true);
         }
     }
 
-    private CommandResult errorCommandResult(String message) {
+    private CommandResult errorCommandResult(String message, boolean isReconnect) {
         try {
             CommandResultCreator cmdResCr =
-                    CommandResultCreatorInit.commandResultAuthorizationCreator(false, message);
+                    CommandResultCreatorInit.commandResultAuthorizationCreator(false,
+                            isReconnect, message);
             return cmdResCr.createCommandResult();
         }
         catch(CommandResultCreatorException ignore) { return null; /* never happen */ }

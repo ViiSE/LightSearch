@@ -37,6 +37,8 @@ public class CommandResultOpenSoftCheckCreatorJSONDefaultImpl implements Command
     private final String IMEI_FIELD = ClientCommandContentEnum.IMEI.stringValue();
     private final String MESSAGE    = ClientCommandContentEnum.MESSAGE.stringValue();
 
+    private final boolean isReconnect = false;
+
     private final String rawMessage;
     private final String IMEI;
 
@@ -59,7 +61,8 @@ public class CommandResultOpenSoftCheckCreatorJSONDefaultImpl implements Command
             String message = Objects.requireNonNull(objMsg.get(MESSAGE)).toString();
 
             OpenSoftCheckCommandResult openSCCmdRes =
-                    OpenSoftCheckCommandResultInit.openSoftCheckCommandResult(isDone, message);
+                    OpenSoftCheckCommandResultInit.openSoftCheckCommandResult(isDone, isReconnect,
+                            message);
             return openSCCmdRes;
         }
         catch(MessageParserException | NullPointerException ex) {

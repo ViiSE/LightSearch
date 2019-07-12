@@ -63,19 +63,22 @@ public class SearchProcessor implements Function<CommandDTO, CommandResult> {
             }
             return cmdResCr.createCommandResult();
         }
-        catch(CommandResultCreatorException |
-                MessageSenderException |
-                MessageRecipientException ex) {
-            return errorCommandResult(ex.getMessageRU(), (CommandSearchDTO)commandDTO);
+        catch (CommandResultCreatorException ex) {
+            return errorCommandResult(ex.getMessageRU(), false, (CommandSearchDTO)commandDTO);
+        }
+        catch(MessageSenderException | MessageRecipientException ex) {
+            return errorCommandResult(ex.getMessageRU(), true, (CommandSearchDTO)commandDTO);
         }
     }
 
-    private CommandResult errorCommandResult(String message, CommandSearchDTO cmdSearchDTO) {
+    private CommandResult errorCommandResult(String message, boolean isReconnect, CommandSearchDTO cmdSearchDTO) {
         CommandResultCreator cmdResCr;
         if(cmdSearchDTO instanceof CommandSearchSoftCheckDTO)
-            cmdResCr = CommandResultCreatorInit.commandResultSearchSoftCheckCreator(false, message);
+            cmdResCr = CommandResultCreatorInit.commandResultSearchSoftCheckCreator(false,
+                    isReconnect ,message);
         else
-            cmdResCr = CommandResultCreatorInit.commandResultSearchCreator(false, message);
+            cmdResCr = CommandResultCreatorInit.commandResultSearchCreator(false, isReconnect,
+                    message);
 
         try { return cmdResCr.createCommandResult(); }
         catch(CommandResultCreatorException ignore) { return null; /* never happen */ }

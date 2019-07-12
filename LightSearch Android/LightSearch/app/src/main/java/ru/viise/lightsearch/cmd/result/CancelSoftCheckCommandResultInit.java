@@ -18,7 +18,8 @@ package ru.viise.lightsearch.cmd.result;
 
 public class CancelSoftCheckCommandResultInit {
 
-    public static CancelSoftCheckCommandResult cancelSoftCheckCommandResult(boolean isDone, String message) {
-        return new CancelSoftCheckCommandResultDefaultImpl(isDone, message);
+    public static CancelSoftCheckCommandResult cancelSoftCheckCommandResult(boolean isDone, boolean isReconnect,
+                     String message) {
+        return new CancelSoftCheckCommandResultDefaultImpl(isDone, isReconnect, message);
     }
 }

@@ -22,15 +22,18 @@ import ru.viise.lightsearch.cmd.result.CommandResult;
 public class CommandResultCancelSoftCheckCreatorErrorDefaultImpl implements CommandResultCreator {
 
     private final boolean isDone;
+    private final boolean isReconnect;
     private final String message;
 
-    public CommandResultCancelSoftCheckCreatorErrorDefaultImpl(boolean isDone, String message) {
+    public CommandResultCancelSoftCheckCreatorErrorDefaultImpl(boolean isDone, boolean isReconnect,
+               String message) {
         this.isDone = isDone;
+        this.isReconnect = isReconnect;
         this.message = message;
     }
 
     @Override
     public CommandResult createCommandResult() {
-        return CancelSoftCheckCommandResultInit.cancelSoftCheckCommandResult(isDone, message);
+        return CancelSoftCheckCommandResultInit.cancelSoftCheckCommandResult(isDone, isReconnect, message);
     }
 }

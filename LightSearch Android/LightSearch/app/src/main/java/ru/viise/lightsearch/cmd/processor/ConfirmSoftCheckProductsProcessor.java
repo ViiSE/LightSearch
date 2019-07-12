@@ -68,19 +68,23 @@ public class ConfirmSoftCheckProductsProcessor implements Function<CommandDTO, C
             CommandResult cmdRes = cmdResCr.createCommandResult();
             return cmdRes;
         }
-        catch(CommandResultCreatorException |
-                MessageSenderException |
-                MessageRecipientException ex) {
-            return errorCommandResult(ex.getMessageRU(), (CommandConfirmCartRecordsDTO)commandDTO);
+        catch(CommandResultCreatorException ex) {
+            return errorCommandResult(ex.getMessageRU(), false, (CommandConfirmCartRecordsDTO)commandDTO);
+        }
+        catch(MessageSenderException | MessageRecipientException ex) {
+            return errorCommandResult(ex.getMessageRU(), true, (CommandConfirmCartRecordsDTO)commandDTO);
         }
     }
 
-    private CommandResult errorCommandResult(String message, CommandConfirmCartRecordsDTO cmdConCRecDTO) {
+    private CommandResult errorCommandResult(String message, boolean isReconnect,
+                                CommandConfirmCartRecordsDTO cmdConCRecDTO) {
         CommandResultCreator cmdResCr;
         if(cmdConCRecDTO instanceof CommandConfirmCartRecordsDTO)
-            cmdResCr = CommandResultCreatorInit.commandResultConfirmCartProductsCreator(false, message);
+            cmdResCr = CommandResultCreatorInit.commandResultConfirmCartProductsCreator(false,
+                    isReconnect, message);
         else
-            cmdResCr = CommandResultCreatorInit.commandResultConfirmSoftCheckProductsCreator(false, message);
+            cmdResCr = CommandResultCreatorInit.commandResultConfirmSoftCheckProductsCreator(false,
+                    isReconnect, message);
 
         try { return cmdResCr.createCommandResult(); }
         catch(CommandResultCreatorException ignore) { return null; /* never happen */ }

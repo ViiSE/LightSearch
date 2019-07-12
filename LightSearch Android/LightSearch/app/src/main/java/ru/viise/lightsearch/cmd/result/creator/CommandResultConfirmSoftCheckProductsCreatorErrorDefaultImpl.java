@@ -23,17 +23,21 @@ import ru.viise.lightsearch.cmd.result.ConfirmSoftCheckProductsResultInit;
 public class CommandResultConfirmSoftCheckProductsCreatorErrorDefaultImpl implements CommandResultCreator {
 
     private final boolean isDone;
+    private final boolean isReconnect;
     private final String message;
 
-    public CommandResultConfirmSoftCheckProductsCreatorErrorDefaultImpl(boolean isDone, String message) {
+    public CommandResultConfirmSoftCheckProductsCreatorErrorDefaultImpl(boolean isDone, boolean isReconnect,
+                String message) {
         this.isDone = isDone;
+        this.isReconnect = isReconnect;
         this.message = message;
     }
 
     @Override
     public CommandResult createCommandResult() {
         ConfirmSoftCheckProductsResult conSCProdRes =
-                ConfirmSoftCheckProductsResultInit.confirmSoftCheckProductsResult(isDone, message, null);
+                ConfirmSoftCheckProductsResultInit.confirmSoftCheckProductsResult(isDone, isReconnect,
+                        message, null);
         return conSCProdRes;
     }
 }

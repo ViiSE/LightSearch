@@ -23,17 +23,20 @@ import ru.viise.lightsearch.cmd.result.OpenSoftCheckCommandResultInit;
 public class CommandResultOpenSoftCheckCreatorErrorDefaultImpl implements CommandResultCreator {
 
     private final boolean isDone;
+    private final boolean isReconnect;
     private final String message;
 
-    public CommandResultOpenSoftCheckCreatorErrorDefaultImpl(boolean isDone, String message) {
+    public CommandResultOpenSoftCheckCreatorErrorDefaultImpl(boolean isDone, boolean isReconnect,
+                 String message) {
         this.isDone = isDone;
+        this.isReconnect = isReconnect;
         this.message = message;
     }
 
     @Override
     public CommandResult createCommandResult() {
         OpenSoftCheckCommandResult openSCCmdRes =
-                OpenSoftCheckCommandResultInit.openSoftCheckCommandResult(isDone, message);
+                OpenSoftCheckCommandResultInit.openSoftCheckCommandResult(isDone, isReconnect, message);
         return openSCCmdRes;
     }
 }

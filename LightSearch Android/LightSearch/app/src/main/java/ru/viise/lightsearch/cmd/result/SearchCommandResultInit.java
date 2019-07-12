@@ -22,8 +22,8 @@ import ru.viise.lightsearch.data.SearchRecordDTO;
 
 public class SearchCommandResultInit {
 
-    public static SearchCommandResult searchCommandResult(boolean isDone, String message,
-                      List<SearchRecordDTO> records, String subdivision) {
-        return new SearchCommandResultDefaultImpl(isDone, message, records, subdivision);
+    public static SearchCommandResult searchCommandResult(boolean isDone, boolean isReconnect,
+                      String message, List<SearchRecordDTO> records, String subdivision) {
+        return new SearchCommandResultDefaultImpl(isDone, isReconnect, message, records, subdivision);
     }
 }

@@ -23,17 +23,21 @@ import ru.viise.lightsearch.cmd.result.ConfirmCartProductsResultInit;
 public class CommandResultConfirmCartProductsCreatorErrorDefaultImpl implements CommandResultCreator {
 
     private final boolean isDone;
+    private final boolean isReconnect;
     private final String message;
 
-    public CommandResultConfirmCartProductsCreatorErrorDefaultImpl(boolean isDone, String message) {
+    public CommandResultConfirmCartProductsCreatorErrorDefaultImpl(boolean isDone, boolean isReconnect,
+               String message) {
         this.isDone = isDone;
+        this.isReconnect = isReconnect;
         this.message = message;
     }
 
     @Override
     public CommandResult createCommandResult() {
         ConfirmCartProductsResult conCProdRes =
-                ConfirmCartProductsResultInit.confirmCartProductsResult(isDone, message, null);
+                ConfirmCartProductsResultInit.confirmCartProductsResult(isDone, isReconnect, message,
+                    null);
         return conCProdRes;
     }
 }

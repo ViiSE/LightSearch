@@ -41,6 +41,8 @@ public class CommandResultConfirmSoftCheckProductsCreatorJSONDefaultImpl impleme
     private final String IMEI_FIELD = ClientCommandContentEnum.IMEI.stringValue();
     private final String DATA       = ClientCommandContentEnum.DATA.stringValue();
 
+    private final boolean isReconnect = false;
+
     private final String rawMessage;
     private final String IMEI;
     private final List<SoftCheckRecord> softCheckRecords;
@@ -70,7 +72,8 @@ public class CommandResultConfirmSoftCheckProductsCreatorJSONDefaultImpl impleme
             List<SoftCheckRecord> cartRecords = cartRecCr.createCartRecords();
 
             ConfirmSoftCheckProductsResult confirmSCProdRes =
-                    ConfirmSoftCheckProductsResultInit.confirmSoftCheckProductsResult(isDone, null, cartRecords);
+                    ConfirmSoftCheckProductsResultInit.confirmSoftCheckProductsResult(isDone, isReconnect,
+                        null, cartRecords);
             return confirmSCProdRes;
         }
         catch(MessageParserException | NullPointerException ex) {

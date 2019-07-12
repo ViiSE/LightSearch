@@ -57,17 +57,19 @@ public class OpenSoftCheckProcessor implements Function<CommandDTO, CommandResul
             CommandResult cmdRes = cmdResCr.createCommandResult();
             return cmdRes;
         }
-        catch(CommandResultCreatorException |
-                MessageSenderException |
-                MessageRecipientException ex) {
-            return errorCommandResult(ex.getMessageRU());
+        catch(CommandResultCreatorException ex) {
+            return errorCommandResult(ex.getMessageRU(), false);
+        }
+        catch(MessageSenderException | MessageRecipientException ex) {
+            return errorCommandResult(ex.getMessageRU(), true);
         }
     }
 
-    private CommandResult errorCommandResult(String message) {
+    private CommandResult errorCommandResult(String message, boolean isReconnect) {
         try {
             CommandResultCreator cmdResCr =
-                    CommandResultCreatorInit.commandResultOpenSoftCheckCreator(false, message);
+                    CommandResultCreatorInit.commandResultOpenSoftCheckCreator(false,
+                            isReconnect, message);
             return cmdResCr.createCommandResult();
         }
         catch(CommandResultCreatorException ignore) { return null; /* never happen*/ }

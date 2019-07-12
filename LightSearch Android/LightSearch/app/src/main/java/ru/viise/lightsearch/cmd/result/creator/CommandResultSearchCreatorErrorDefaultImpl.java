@@ -23,17 +23,21 @@ import ru.viise.lightsearch.cmd.result.SearchCommandResultInit;
 public class CommandResultSearchCreatorErrorDefaultImpl implements CommandResultCreator {
 
     private final boolean isDone;
+    private final boolean isReconnect;
     private final String message;
 
-    public CommandResultSearchCreatorErrorDefaultImpl(boolean isDone, String message) {
+    public CommandResultSearchCreatorErrorDefaultImpl(boolean isDone, boolean isReconnect,
+                String message) {
         this.isDone = isDone;
+        this.isReconnect = isReconnect;
         this.message = message;
     }
 
     @Override
     public CommandResult createCommandResult() {
         SearchCommandResult searchCmdRes =
-                SearchCommandResultInit.searchCommandResult(isDone, message, null, null);
+                SearchCommandResultInit.searchCommandResult(isDone, isReconnect, message,
+                    null, null);
         return searchCmdRes;
     }
 }

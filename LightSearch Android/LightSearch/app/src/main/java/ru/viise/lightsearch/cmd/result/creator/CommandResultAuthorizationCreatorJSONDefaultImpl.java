@@ -42,6 +42,8 @@ public class CommandResultAuthorizationCreatorJSONDefaultImpl implements Command
     private final String SKLAD_LIST = ClientCommandContentEnum.SKLAD_LIST.stringValue();
     private final String TK_LIST    = ClientCommandContentEnum.TK_LIST.stringValue();
 
+    private final boolean isReconnect = false;
+
     private final String rawMessage;
     private final String IMEI;
 
@@ -68,7 +70,7 @@ public class CommandResultAuthorizationCreatorJSONDefaultImpl implements Command
                 userIdent = Objects.requireNonNull(objMsg.get(USER_IDENT)).toString();
             else
                 return AuthorizationCommandResultInit.authorizationCommandResult(
-                        isDone, message, null, null, null);
+                        isDone, isReconnect, message, null, null, null);
 
             JSONArray skladListJ = (JSONArray) objMsg.get(SKLAD_LIST);
             if(skladListJ.size() == 0)
@@ -82,7 +84,7 @@ public class CommandResultAuthorizationCreatorJSONDefaultImpl implements Command
 
             AuthorizationCommandResult authCmdRes =
                     AuthorizationCommandResultInit.authorizationCommandResult(
-                            isDone, message, userIdent, skladList, TKList);
+                            isDone, isReconnect, message, userIdent, skladList, TKList);
             return authCmdRes;
         }
         catch(MessageParserException | NullPointerException ex) {

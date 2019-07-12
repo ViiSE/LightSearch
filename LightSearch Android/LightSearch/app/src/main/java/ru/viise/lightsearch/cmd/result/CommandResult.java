@@ -18,5 +18,6 @@ package ru.viise.lightsearch.cmd.result;
 
 public interface CommandResult {
     boolean isDone();
+    boolean isReconnect();
     String message();
 }

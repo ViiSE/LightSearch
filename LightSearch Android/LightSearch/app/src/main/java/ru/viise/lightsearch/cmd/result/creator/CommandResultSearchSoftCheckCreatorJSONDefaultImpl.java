@@ -40,6 +40,8 @@ public class CommandResultSearchSoftCheckCreatorJSONDefaultImpl implements Comma
     private final String IMEI_FIELD = ClientCommandContentEnum.IMEI.stringValue();
     private final String DATA       = ClientCommandContentEnum.DATA.stringValue();
 
+    private final boolean isReconnect = false;
+
     private final String rawMessage;
     private final String IMEI;
 
@@ -65,8 +67,8 @@ public class CommandResultSearchSoftCheckCreatorJSONDefaultImpl implements Comma
             SoftCheckRecord record = recordCreator.createSoftCheckRecord();
 
             SearchSoftCheckCommandResult result =
-                    SearchSoftCheckCommandResultInit.searchSoftCheckCommandResult(isDone,
-                            null, record);
+                    SearchSoftCheckCommandResultInit.searchSoftCheckCommandResult(isDone, isReconnect,
+                        null, record);
             return result;
         }
         catch(MessageParserException | NullPointerException ex) {

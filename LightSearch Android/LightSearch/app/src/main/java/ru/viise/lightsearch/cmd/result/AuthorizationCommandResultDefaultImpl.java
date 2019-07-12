@@ -19,14 +19,16 @@ package ru.viise.lightsearch.cmd.result;
 public class AuthorizationCommandResultDefaultImpl implements AuthorizationCommandResult {
 
     private final boolean isDone;
+    private final boolean isReconnect;
     private final String message;
     private final String userIdent;
     private final String[] skladList;
     private final String[] TKList;
 
-    public AuthorizationCommandResultDefaultImpl(boolean isDone, String message, String userIdent,
-             String[] skladList, String[] TKList) {
+    public AuthorizationCommandResultDefaultImpl(boolean isDone, boolean isReconnect, String message,
+             String userIdent, String[] skladList, String[] TKList) {
         this.isDone = isDone;
+        this.isReconnect = isReconnect;
         this.message = message;
         this.userIdent = userIdent;
         this.skladList = skladList;
@@ -36,6 +38,11 @@ public class AuthorizationCommandResultDefaultImpl implements AuthorizationComma
     @Override
     public boolean isDone() {
         return isDone;
+    }
+
+    @Override
+    public boolean isReconnect() {
+        return isReconnect;
     }
 
     @Override

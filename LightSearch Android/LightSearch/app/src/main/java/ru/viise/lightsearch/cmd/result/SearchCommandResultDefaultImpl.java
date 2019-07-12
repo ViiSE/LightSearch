@@ -23,13 +23,15 @@ import ru.viise.lightsearch.data.SearchRecordDTO;
 public class SearchCommandResultDefaultImpl implements SearchCommandResult {
 
     private final boolean isDone;
+    private final boolean isReconnect;
     private final String message;
     private final List<SearchRecordDTO> records;
     private final String subdivision;
 
-    public SearchCommandResultDefaultImpl(boolean isDone, String message,
+    public SearchCommandResultDefaultImpl(boolean isDone, boolean isReconnect, String message,
               List<SearchRecordDTO> records, String subdivision) {
         this.isDone = isDone;
+        this.isReconnect = isReconnect;
         this.message = message;
         this.records = records;
         this.subdivision = subdivision;
@@ -48,6 +50,11 @@ public class SearchCommandResultDefaultImpl implements SearchCommandResult {
     @Override
     public boolean isDone() {
         return isDone;
+    }
+
+    @Override
+    public boolean isReconnect() {
+        return isReconnect;
     }
 
     @Override

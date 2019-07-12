@@ -18,7 +18,8 @@ package ru.viise.lightsearch.cmd.result;
 
 public class CloseSoftCheckCommandResultInit {
 
-    public static CloseSoftCheckCommandResult closeSoftCheckCommandResult(boolean isDone, String message) {
-        return new CloseSoftCheckCommandResultDefaultImpl(isDone, message);
+    public static CloseSoftCheckCommandResult closeSoftCheckCommandResult(boolean isDone, boolean isReconnect,
+                      String message) {
+        return new CloseSoftCheckCommandResultDefaultImpl(isDone, isReconnect, message);
     }
 }
