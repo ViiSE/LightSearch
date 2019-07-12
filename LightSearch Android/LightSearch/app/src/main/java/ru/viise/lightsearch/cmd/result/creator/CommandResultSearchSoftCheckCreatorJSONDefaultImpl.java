@@ -29,6 +29,7 @@ import ru.viise.lightsearch.cmd.result.SearchSoftCheckCommandResultInit;
 import ru.viise.lightsearch.data.SoftCheckRecord;
 import ru.viise.lightsearch.data.creator.SoftCheckRecordCreator;
 import ru.viise.lightsearch.data.creator.SoftCheckRecordCreatorInit;
+import ru.viise.lightsearch.exception.CommandResultCreatorException;
 import ru.viise.lightsearch.exception.MessageParserException;
 import ru.viise.lightsearch.message.parser.MessageParser;
 import ru.viise.lightsearch.message.parser.MessageParserInit;
@@ -48,7 +49,7 @@ public class CommandResultSearchSoftCheckCreatorJSONDefaultImpl implements Comma
     }
 
     @Override
-    public CommandResult createCommandResult() {
+    public CommandResult createCommandResult() throws CommandResultCreatorException {
         try {
             MessageParser msgParser = MessageParserInit.messageParser();
             JSONObject objMsg = (JSONObject)msgParser.parse(rawMessage);
@@ -69,7 +70,7 @@ public class CommandResultSearchSoftCheckCreatorJSONDefaultImpl implements Comma
             return result;
         }
         catch(MessageParserException | NullPointerException ex) {
-            return null;
+            throw new CommandResultCreatorException(ex.getMessage());
         }
     }
 }

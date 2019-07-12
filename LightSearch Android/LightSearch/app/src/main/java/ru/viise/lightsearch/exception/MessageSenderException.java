@@ -19,9 +19,19 @@ package ru.viise.lightsearch.exception;
  *
  * @author ViiSE
  */
-public class MessageSenderException extends Exception {
-    
+public class MessageSenderException extends Exception implements ExceptionWithMessage {
+
+    private final String messageRU;
+
     public MessageSenderException(String message) {
         super(message);
+        this.messageRU = "Произошла ошибка при отправки сообщения. " +
+                "Для устранения проблемы обратитесь к администратору." +
+                "Вы отключены от сервера.";
+    }
+
+    @Override
+    public String getMessageRU() {
+        return messageRU;
     }
 }

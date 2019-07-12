@@ -24,6 +24,7 @@ import ru.viise.lightsearch.cmd.result.creator.CommandResultCreatorInit;
 import ru.viise.lightsearch.data.ClientCommandDTO;
 import ru.viise.lightsearch.data.CommandCancelSoftCheckDTO;
 import ru.viise.lightsearch.data.CommandDTO;
+import ru.viise.lightsearch.exception.CommandResultCreatorException;
 import ru.viise.lightsearch.exception.MessageRecipientException;
 import ru.viise.lightsearch.exception.MessageSenderException;
 import ru.viise.lightsearch.message.MessageRecipient;
@@ -55,32 +56,21 @@ public class CancelSoftCheckProcessor implements Function<CommandDTO, CommandRes
             CommandResultCreator cmdResCr =
                     CommandResultCreatorInit.commandResultCancelSoftCheckCreator(rawMessage, IMEI);
             CommandResult cmdRes = cmdResCr.createCommandResult();
-            if (cmdRes != null)
-                return cmdRes;
-            else {
-                String messageErr = "Произошла ошибка при обработке сообщения. " +
-                        "Для устранения проблемы обратитесь к администратору." +
-                        "Вы отключены от сервера";
-                return errorCommandResult(messageErr);
-            }
+            return cmdRes;
         }
-        catch(MessageSenderException ex) {
-            String message = "Произошла ошибка при отправки сообщения. " +
-                    "Для устранения проблемы обратитесь к администратору." +
-                    "Вы отключены от сервера";
-            return errorCommandResult(message);
-        }
-        catch(MessageRecipientException ex) {
-            String message = "Произошла ошибка при принятии сообщения. " +
-                    "Для устранения проблемы обратитесь к администратору." +
-                    "Вы отключены от сервера";
-            return errorCommandResult(message);
+        catch(CommandResultCreatorException |
+               MessageSenderException |
+               MessageRecipientException ex) {
+            return errorCommandResult(ex.getMessageRU());
         }
     }
 
     private CommandResult errorCommandResult(String message) {
-        CommandResultCreator cmdResCr =
-                CommandResultCreatorInit.commandResultCancelSoftCheckCreator(false, message);
-        return cmdResCr.createCommandResult();
+        try {
+            CommandResultCreator cmdResCr =
+                    CommandResultCreatorInit.commandResultCancelSoftCheckCreator(false, message);
+            return cmdResCr.createCommandResult();
+        }
+        catch(CommandResultCreatorException ignore) { return null; /* never happen */ }
     }
 }

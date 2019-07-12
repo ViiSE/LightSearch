@@ -30,6 +30,7 @@ import ru.viise.lightsearch.cmd.result.SearchCommandResultInit;
 import ru.viise.lightsearch.data.SearchRecordDTO;
 import ru.viise.lightsearch.data.creator.SearchRecordsDTOCreator;
 import ru.viise.lightsearch.data.creator.SearchRecordsDTOCreatorInit;
+import ru.viise.lightsearch.exception.CommandResultCreatorException;
 import ru.viise.lightsearch.exception.MessageParserException;
 import ru.viise.lightsearch.message.parser.MessageParser;
 import ru.viise.lightsearch.message.parser.MessageParserInit;
@@ -51,7 +52,7 @@ public class CommandResultSearchCreatorJSONDefaultImpl implements CommandResultC
     }
 
     @Override
-    public CommandResult createCommandResult() {
+    public CommandResult createCommandResult() throws CommandResultCreatorException {
         try {
             MessageParser msgParser = MessageParserInit.messageParser();
             JSONObject objMsg = (JSONObject)msgParser.parse(rawMessage);
@@ -71,7 +72,7 @@ public class CommandResultSearchCreatorJSONDefaultImpl implements CommandResultC
             return searchCmdRes;
         }
         catch(MessageParserException | NullPointerException ex) {
-            return null;
+            throw new CommandResultCreatorException(ex.getMessage());
         }
     }
 }

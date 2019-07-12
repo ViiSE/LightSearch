@@ -29,6 +29,7 @@ import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifierInit;
 import ru.viise.lightsearch.data.SoftCheckRecord;
 import ru.viise.lightsearch.data.creator.CartRecordsCreator;
 import ru.viise.lightsearch.data.creator.CartRecordsCreatorInit;
+import ru.viise.lightsearch.exception.CommandResultCreatorException;
 import ru.viise.lightsearch.exception.MessageParserException;
 import ru.viise.lightsearch.message.parser.MessageParser;
 import ru.viise.lightsearch.message.parser.MessageParserInit;
@@ -51,7 +52,7 @@ public class CommandResultConfirmCartProductsCreatorJSONDefaultImpl implements C
     }
 
     @Override
-    public CommandResult createCommandResult() {
+    public CommandResult createCommandResult() throws CommandResultCreatorException {
         try {
             MessageParser msgParser = MessageParserInit.messageParser();
             JSONObject objMsg = (JSONObject)msgParser.parse(rawMessage);
@@ -69,7 +70,7 @@ public class CommandResultConfirmCartProductsCreatorJSONDefaultImpl implements C
             return ConfirmCartProductsResultInit.confirmCartProductsResult(isDone, null, cartRecords);
         }
         catch(MessageParserException | NullPointerException ex) {
-            return null;
+            throw new CommandResultCreatorException(ex.getMessage());
         }
     }
 }

@@ -25,6 +25,7 @@ import ru.viise.lightsearch.data.ClientCommandDTO;
 import ru.viise.lightsearch.data.CommandConfirmCartRecordsDTO;
 import ru.viise.lightsearch.data.CommandConfirmSoftCheckRecordsDTO;
 import ru.viise.lightsearch.data.CommandDTO;
+import ru.viise.lightsearch.exception.CommandResultCreatorException;
 import ru.viise.lightsearch.exception.MessageRecipientException;
 import ru.viise.lightsearch.exception.MessageSenderException;
 import ru.viise.lightsearch.message.MessageRecipient;
@@ -65,26 +66,12 @@ public class ConfirmSoftCheckProductsProcessor implements Function<CommandDTO, C
                         rawMessage, IMEI, cmdConSCRecDTO.softCheckRecords());
             }
             CommandResult cmdRes = cmdResCr.createCommandResult();
-            if(cmdRes != null)
-                return cmdRes;
-            else {
-                String messageErr = "Произошла ошибка при обработке сообщения. " +
-                        "Для устранения проблемы обратитесь к администратору." +
-                        "Вы отключены от сервера";
-                return errorCommandResult(messageErr, (CommandConfirmCartRecordsDTO)commandDTO);
-            }
+            return cmdRes;
         }
-        catch(MessageSenderException ex) {
-            String message = "Произошла ошибка при отправки сообщения. " +
-                    "Для устранения проблемы обратитесь к администратору." +
-                    "Вы отключены от сервера";
-            return errorCommandResult(message, (CommandConfirmCartRecordsDTO)commandDTO);
-        }
-        catch(MessageRecipientException ex) {
-            String message = "Произошла ошибка при принятии сообщения. " +
-                    "Для устранения проблемы обратитесь к администратору." +
-                    "Вы отключены от сервера";
-            return errorCommandResult(message, (CommandConfirmCartRecordsDTO)commandDTO);
+        catch(CommandResultCreatorException |
+                MessageSenderException |
+                MessageRecipientException ex) {
+            return errorCommandResult(ex.getMessageRU(), (CommandConfirmCartRecordsDTO)commandDTO);
         }
     }
 
@@ -95,6 +82,7 @@ public class ConfirmSoftCheckProductsProcessor implements Function<CommandDTO, C
         else
             cmdResCr = CommandResultCreatorInit.commandResultConfirmSoftCheckProductsCreator(false, message);
 
-        return cmdResCr.createCommandResult();
+        try { return cmdResCr.createCommandResult(); }
+        catch(CommandResultCreatorException ignore) { return null; /* never happen */ }
     }
 }

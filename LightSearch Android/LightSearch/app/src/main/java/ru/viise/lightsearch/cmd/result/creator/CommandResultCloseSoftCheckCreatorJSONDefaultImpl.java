@@ -26,6 +26,7 @@ import ru.viise.lightsearch.cmd.result.CloseSoftCheckCommandResultInit;
 import ru.viise.lightsearch.cmd.result.CommandResult;
 import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifier;
 import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifierInit;
+import ru.viise.lightsearch.exception.CommandResultCreatorException;
 import ru.viise.lightsearch.exception.MessageParserException;
 import ru.viise.lightsearch.message.parser.MessageParser;
 import ru.viise.lightsearch.message.parser.MessageParserInit;
@@ -45,7 +46,7 @@ public class CommandResultCloseSoftCheckCreatorJSONDefaultImpl implements Comman
     }
 
     @Override
-    public CommandResult createCommandResult() {
+    public CommandResult createCommandResult() throws CommandResultCreatorException {
         try {
             MessageParser msgParser = MessageParserInit.messageParser();
             JSONObject objMsg = (JSONObject)msgParser.parse(rawMessage);
@@ -62,7 +63,7 @@ public class CommandResultCloseSoftCheckCreatorJSONDefaultImpl implements Comman
             return closeSCCmdRes;
         }
         catch(MessageParserException | NullPointerException ex) {
-            return null;
+            throw new CommandResultCreatorException(ex.getMessage());
         }
     }
 }

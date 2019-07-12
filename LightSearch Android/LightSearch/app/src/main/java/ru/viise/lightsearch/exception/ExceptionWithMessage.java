@@ -14,11 +14,8 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.cmd.result.creator;
+package ru.viise.lightsearch.exception;
 
-import ru.viise.lightsearch.cmd.result.CommandResult;
-import ru.viise.lightsearch.exception.CommandResultCreatorException;
-
-public interface CommandResultCreator {
-    CommandResult createCommandResult() throws CommandResultCreatorException;
+public interface ExceptionWithMessage {
+    String getMessageRU();
 }

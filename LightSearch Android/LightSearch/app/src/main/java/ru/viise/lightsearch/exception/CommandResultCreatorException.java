@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2019 ViiSE.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,19 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package ru.viise.lightsearch.exception;
 
-/**
- *
- * @author ViiSE
- */
-public class MessageRecipientException extends Exception implements ExceptionWithMessage {
+public class CommandResultCreatorException extends Exception implements ExceptionWithMessage {
 
     private final String messageRU;
 
-    public MessageRecipientException(String message) {
+    public CommandResultCreatorException(String message) {
         super(message);
-        this.messageRU = "Произошла ошибка при принятии сообщения. " +
+        this.messageRU = "Произошла ошибка при обработке сообщения. " +
                 "Для устранения проблемы обратитесь к администратору." +
                 "Вы отключены от сервера.";
     }

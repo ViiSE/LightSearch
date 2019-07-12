@@ -25,6 +25,7 @@ import ru.viise.lightsearch.data.ClientCommandDTO;
 import ru.viise.lightsearch.data.CommandDTO;
 import ru.viise.lightsearch.data.CommandSearchDTO;
 import ru.viise.lightsearch.data.CommandSearchSoftCheckDTO;
+import ru.viise.lightsearch.exception.CommandResultCreatorException;
 import ru.viise.lightsearch.exception.MessageRecipientException;
 import ru.viise.lightsearch.exception.MessageSenderException;
 import ru.viise.lightsearch.message.MessageRecipient;
@@ -60,27 +61,12 @@ public class SearchProcessor implements Function<CommandDTO, CommandResult> {
                 String subdivision = cmdSearchDTO.subdivision();
                 cmdResCr = CommandResultCreatorInit.commandResultSearchCreator(rawMessage, IMEI, subdivision);
             }
-            CommandResult cmdRes = cmdResCr.createCommandResult();
-            if(cmdRes != null)
-                return cmdRes;
-            else {
-                String messageErr = "Произошла ошибка при обработке сообщения. " +
-                        "Для устранения проблемы обратитесь к администратору." +
-                        "Вы отключены от сервера";
-                return errorCommandResult(messageErr, (CommandSearchDTO)commandDTO);
-            }
+            return cmdResCr.createCommandResult();
         }
-        catch(MessageSenderException ex) {
-            String message = "Произошла ошибка при отправки сообщения. " +
-                    "Для устранения проблемы обратитесь к администратору." +
-                    "Вы отключены от сервера";
-            return errorCommandResult(message, (CommandSearchDTO)commandDTO);
-        }
-        catch(MessageRecipientException ex) {
-            String message = "Произошла ошибка при принятии сообщения. " +
-                    "Для устранения проблемы обратитесь к администратору." +
-                    "Вы отключены от сервера";
-            return errorCommandResult(message, (CommandSearchDTO)commandDTO);
+        catch(CommandResultCreatorException |
+                MessageSenderException |
+                MessageRecipientException ex) {
+            return errorCommandResult(ex.getMessageRU(), (CommandSearchDTO)commandDTO);
         }
     }
 
@@ -91,6 +77,7 @@ public class SearchProcessor implements Function<CommandDTO, CommandResult> {
         else
             cmdResCr = CommandResultCreatorInit.commandResultSearchCreator(false, message);
 
-        return cmdResCr.createCommandResult();
+        try { return cmdResCr.createCommandResult(); }
+        catch(CommandResultCreatorException ignore) { return null; /* never happen */ }
     }
 }
