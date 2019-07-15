@@ -26,6 +26,7 @@ import ru.viise.lightsearch.cmd.processor.CancelSoftCheckProcessor;
 import ru.viise.lightsearch.cmd.processor.CloseSoftCheckProcessor;
 import ru.viise.lightsearch.cmd.processor.ConfirmSoftCheckProductsProcessor;
 import ru.viise.lightsearch.cmd.processor.OpenSoftCheckProcessor;
+import ru.viise.lightsearch.cmd.processor.ReconnectProcessor;
 import ru.viise.lightsearch.cmd.processor.SearchProcessor;
 import ru.viise.lightsearch.cmd.result.CommandResult;
 import ru.viise.lightsearch.data.ClientCommandDTO;
@@ -42,6 +43,7 @@ public class ClientCommandCreatorDefaultImpl implements ClientCommandCreator {
     private final CommandTypeEnum CANCEL_SOFT_CHECK           = CommandTypeEnum.CANCEL_SOFT_CHECK;
     private final CommandTypeEnum CONFIRM_SOFT_CHECK_PRODUCTS = CommandTypeEnum.CONFIRM_SOFT_CHECK_PRODUCTS;
     private final CommandTypeEnum CLOSE_SOFT_CHECK            = CommandTypeEnum.CLOSE_SOFT_CHECK;
+    private final CommandTypeEnum RECONNECT                   = CommandTypeEnum.RECONNECT;
 
     private final String IMEI;
     private final MessageSender msgSender;
@@ -65,6 +67,7 @@ public class ClientCommandCreatorDefaultImpl implements ClientCommandCreator {
         cmdHolder.put(CANCEL_SOFT_CHECK, new CancelSoftCheckProcessor(clCmdDTO));
         cmdHolder.put(CONFIRM_SOFT_CHECK_PRODUCTS, new ConfirmSoftCheckProductsProcessor(clCmdDTO));
         cmdHolder.put(CLOSE_SOFT_CHECK, new CloseSoftCheckProcessor(clCmdDTO));
+        cmdHolder.put(RECONNECT, new ReconnectProcessor(clCmdDTO));
 
         return ClientCommandHolderInit.clientCommandHolder(cmdHolder);
     }

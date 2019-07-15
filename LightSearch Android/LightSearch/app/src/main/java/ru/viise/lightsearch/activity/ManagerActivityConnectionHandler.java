@@ -17,5 +17,5 @@
 package ru.viise.lightsearch.activity;
 
 public interface ManagerActivityConnectionHandler {
-    void handleConnectionResult(String message);
+    void handleConnectionResult(String message, boolean isReconnect);
 }

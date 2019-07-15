@@ -20,6 +20,7 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -44,6 +45,7 @@ import ru.viise.lightsearch.cmd.manager.task.CommandManagerAsyncTask;
 import ru.viise.lightsearch.cmd.manager.task.ConnectionAsyncTask;
 import ru.viise.lightsearch.cmd.result.CommandResult;
 import ru.viise.lightsearch.data.AuthorizationDTO;
+import ru.viise.lightsearch.data.AuthorizationDTOInit;
 import ru.viise.lightsearch.data.ClientHandlerCreatorDTO;
 import ru.viise.lightsearch.data.ClientHandlerCreatorDTOInit;
 import ru.viise.lightsearch.data.CommandAuthorizationDTO;
@@ -70,6 +72,9 @@ import ru.viise.lightsearch.fragment.IAuthorizationFragment;
 import ru.viise.lightsearch.fragment.IContainerFragment;
 import ru.viise.lightsearch.fragment.transaction.FragmentTransactionManager;
 import ru.viise.lightsearch.fragment.transaction.FragmentTransactionManagerInit;
+import ru.viise.lightsearch.pref.PreferencesManager;
+import ru.viise.lightsearch.pref.PreferencesManagerInit;
+import ru.viise.lightsearch.pref.PreferencesManagerType;
 import ru.viise.lightsearch.request.PhonePermission;
 import ru.viise.lightsearch.request.PhonePermissionInit;
 
@@ -203,7 +208,16 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
         ClientHandlerCreatorDTO clHandlerCrDTO =
                 ClientHandlerCreatorDTOInit.clientHandlerCreatorDTO(IMEI, connDTO);
         commandManager = CommandManagerInit.commandManager(clHandlerCrDTO);
-        ConnectionAsyncTask connAT = new ConnectionAsyncTask(this, commandManager, connectDialog);
+        ConnectionAsyncTask connAT = new ConnectionAsyncTask(this,
+                commandManager, connectDialog, false);
+        connAT.execute();
+    }
+
+    @Override
+    public void reconnect(ConnectionDTO connDTO) {
+        commandManager.closeConnection();
+        ConnectionAsyncTask connAT = new ConnectionAsyncTask(this,
+                commandManager, connectDialog, true);
         connAT.execute();
     }
 
@@ -213,23 +227,39 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
     }
 
     @Override
-    public void handleConnectionResult(String message) {
+    public void handleConnectionResult(String message, boolean isReconnect) {
         if(message == null) {
+            AuthorizationDTO authDTO;
             try {
                 ImplFinder<IAuthorizationFragment> finder = new ImplFinderFragmentFromActivityDefaultImpl<>(this);
                 IAuthorizationFragment authFragment = finder.findImpl(IAuthorizationFragment.class);
-                AuthorizationDTO authDTO = authFragment.authorizationData();
-
-                CommandAuthorizationDTOCreator cmdAuthDTOCreator =
-                        CommandAuthorizationDTOCreatorInit.commandAuthorizationDTOCreator(IMEI, authDTO);
-                CommandAuthorizationDTO cmdAuthDTO = cmdAuthDTOCreator.createCommandDTO();
-                CommandManagerAsyncTaskDTO cmdManagerATDTO =
-                        CommandManagerAsyncTaskDTOInit.commandManagerAsyncTaskDTO(commandManager,
-                                CommandTypeEnum.AUTHORIZATION, cmdAuthDTO);
-                CommandManagerAsyncTask cmdManagerAT = new CommandManagerAsyncTask(this, authDialog);
-                cmdManagerAT.execute(cmdManagerATDTO);
+                authDTO = authFragment.authorizationData();
             }
-            catch(FindableException ignore) {}
+            catch(FindableException ignore) {
+                SharedPreferences sPref = this.getSharedPreferences("pref", Context.MODE_PRIVATE);
+                PreferencesManager prefManager = PreferencesManagerInit.preferencesManager(sPref);
+                authDTO = AuthorizationDTOInit.authorizationDTO(
+                        prefManager.load(PreferencesManagerType.USERNAME_MANAGER),
+                        prefManager.load(PreferencesManagerType.PASS_MANAGER),
+                        prefManager.load(PreferencesManagerType.USER_IDENT_MANAGER));
+
+            }
+            CommandAuthorizationDTOCreator cmdAuthDTOCreator =
+                    CommandAuthorizationDTOCreatorInit.commandAuthorizationDTOCreator(IMEI, authDTO);
+            CommandAuthorizationDTO cmdAuthDTO = cmdAuthDTOCreator.createCommandDTO();
+
+            CommandTypeEnum cmdTypeEnum;
+            if(isReconnect)
+                cmdTypeEnum = CommandTypeEnum.RECONNECT;
+            else
+                cmdTypeEnum = CommandTypeEnum.AUTHORIZATION;
+
+            CommandManagerAsyncTaskDTO cmdManagerATDTO =
+                    CommandManagerAsyncTaskDTOInit.commandManagerAsyncTaskDTO(commandManager,
+                            cmdTypeEnum, cmdAuthDTO);
+
+            CommandManagerAsyncTask cmdManagerAT = new CommandManagerAsyncTask(this, authDialog);
+            cmdManagerAT.execute(cmdManagerATDTO);
         }
         else
             callDialogError(message);

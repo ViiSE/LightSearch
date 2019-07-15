@@ -22,6 +22,7 @@ import ru.viise.lightsearch.data.ScanType;
 
 public interface ManagerActivityUI {
     void connect(ConnectionDTO connDTO);
+    void reconnect(ConnectionDTO connDTO);
     void setScanType(ScanType type);
     CommandManager commandManager();
 }

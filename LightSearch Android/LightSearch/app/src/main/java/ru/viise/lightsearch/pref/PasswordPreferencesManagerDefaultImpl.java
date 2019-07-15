@@ -16,11 +16,25 @@
 
 package ru.viise.lightsearch.pref;
 
-public enum PreferencesManagerType {
-    USERNAME_MANAGER,
-    HOST_MANAGER,
-    PORT_MANAGER,
-    USER_IDENT_MANAGER,
-    PASS_MANAGER,
-    CARD_CODE_MANAGER
+import android.content.SharedPreferences;
+
+public class PasswordPreferencesManagerDefaultImpl implements PasswordPreferencesManager {
+
+    private final SharedPreferences sPref;
+
+    public PasswordPreferencesManagerDefaultImpl(SharedPreferences sPref) {
+        this.sPref = sPref;
+    }
+
+    @Override
+    public String loadPassword() {
+        return sPref.getString("password", "");
+    }
+
+    @Override
+    public void savePassword(String password) {
+        SharedPreferences.Editor ed = sPref.edit();
+        ed.putString("password", password);
+        ed.apply();
+    }
 }

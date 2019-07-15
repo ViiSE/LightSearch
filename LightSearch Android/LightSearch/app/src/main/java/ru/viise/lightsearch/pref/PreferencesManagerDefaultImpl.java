@@ -24,6 +24,7 @@ public class PreferencesManagerDefaultImpl implements PreferencesManager {
     private final HostPreferencesManager hostPrefManager;
     private final PortPreferencesManager portPrefManager;
     private final UserIdentifierPreferencesManager userIdentManager;
+    private final PasswordPreferencesManager passPrefManager;
     private final CardCodePreferencesManager cardCodeManager;
 
     public PreferencesManagerDefaultImpl(SharedPreferences sPref) {
@@ -31,6 +32,7 @@ public class PreferencesManagerDefaultImpl implements PreferencesManager {
         portPrefManager     = PortReferencesManagerInit.portPreferencesManager(sPref);
         hostPrefManager     = HostPreferencesManagerInit.hostPreferencesManager(sPref);
         userIdentManager    = UserIdentifierPreferencesManagerInit.userIdentifierPreferencesManager(sPref);
+        passPrefManager     = PasswordPreferencesManagerInit.passwordPreferencesManager(sPref);
         cardCodeManager     = CardCodePreferencesManagerInit.cardCodePreferencesManager(sPref);
     }
 
@@ -45,6 +47,8 @@ public class PreferencesManagerDefaultImpl implements PreferencesManager {
                 return portPrefManager.loadPort();
             case USER_IDENT_MANAGER:
                 return userIdentManager.loadUserIdentifier();
+            case PASS_MANAGER:
+                return passPrefManager.loadPassword();
             case CARD_CODE_MANAGER:
                 return cardCodeManager.loadCardCode();
             default:
@@ -57,14 +61,22 @@ public class PreferencesManagerDefaultImpl implements PreferencesManager {
         switch (type) {
             case USERNAME_MANAGER:
                 usernamePrefManager.saveUsername(value);
+                break;
             case HOST_MANAGER:
                 hostPrefManager.saveHost(value);
+                break;
             case PORT_MANAGER:
                 portPrefManager.savePort(value);
+                break;
             case USER_IDENT_MANAGER:
                 userIdentManager.saveUserIdentifier(value);
+                break;
+            case PASS_MANAGER:
+                passPrefManager.savePassword(value);
+                break;
             case CARD_CODE_MANAGER:
                 cardCodeManager.saveCardCode(value);
+                break;
         }
     }
 }

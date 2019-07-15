@@ -99,4 +99,13 @@ public class CommandResultCreatorInit {
                       boolean isReconnect, String message) {
         return new CommandResultCloseSoftCheckCreatorErrorDefaultImpl(isDone, isReconnect, message);
     }
+
+    public static CommandResultCreator commandResultReconnectCreator(String rawMessage, String IMEI) {
+        return new CommandResultReconnectCreatorJSONDefaultImpl(rawMessage, IMEI);
+    }
+
+    public static CommandResultCreator commandResultReconnectCreator(boolean isDone,
+                     boolean isReconnect, String message) {
+        return new CommandResultReconnectCreatorErrorDefaultImpl(isDone, isReconnect, message);
+    }
 }

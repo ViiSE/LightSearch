@@ -169,6 +169,7 @@ public class AuthorizationFragment extends Fragment implements IAuthorizationFra
                 else {
                     v.startAnimation(animAlpha);
                     prefManager.save(PreferencesManagerType.USERNAME_MANAGER, editTextUsername.getText().toString());
+                    prefManager.save(PreferencesManagerType.PASS_MANAGER, editTextPassword.getText().toString());
                     prefManager.save(PreferencesManagerType.HOST_MANAGER, editTextHost.getText().toString());
                     prefManager.save(PreferencesManagerType.PORT_MANAGER, editTextPort.getText().toString());
                     if(editTextUserIdent.getText().toString().isEmpty())
@@ -235,8 +236,8 @@ public class AuthorizationFragment extends Fragment implements IAuthorizationFra
     @Override
     public AuthorizationDTO authorizationData() {
         AuthorizationDTO authDTO = AuthorizationDTOInit.authorizationDTO(
-                editTextUsername.getText().toString(),
-                editTextPassword.getText().toString(),
+                prefManager.load(PreferencesManagerType.USERNAME_MANAGER),
+                prefManager.load(PreferencesManagerType.PASS_MANAGER),
                 prefManager.load(PreferencesManagerType.USER_IDENT_MANAGER));
         return authDTO;
     }

@@ -27,6 +27,7 @@ import ru.viise.lightsearch.activity.result.processor.CloseSoftCheckResultUIProc
 import ru.viise.lightsearch.activity.result.processor.ConfirmCartProductsResultUIProcessor;
 import ru.viise.lightsearch.activity.result.processor.ConfirmSoftCheckProductsResultUIProcessor;
 import ru.viise.lightsearch.activity.result.processor.OpenSoftCheckResultUIProcessor;
+import ru.viise.lightsearch.activity.result.processor.ReconnectResultUIProcessor;
 import ru.viise.lightsearch.activity.result.processor.SearchResultSoftCheckUIProcessor;
 import ru.viise.lightsearch.activity.result.processor.SearchResultUIProcessor;
 import ru.viise.lightsearch.cmd.CommandTypeEnum;
@@ -42,6 +43,7 @@ public class ResultCommandUICreatorDefaultImpl implements ResultCommandUICreator
     private final CommandTypeEnum CONFIRM_SOFT_CHECK_PRODUCTS = CommandTypeEnum.CONFIRM_SOFT_CHECK_PRODUCTS;
     private final CommandTypeEnum CONFIRM_CART_PRODUCTS       = CommandTypeEnum.CONFIRM_CART_PRODUCTS;
     private final CommandTypeEnum CLOSE_SOFT_CHECK            = CommandTypeEnum.CLOSE_SOFT_CHECK;
+    private final CommandTypeEnum RECONNECT                   = CommandTypeEnum.RECONNECT;
 
     private final ManagerActivity activity;
 
@@ -60,6 +62,7 @@ public class ResultCommandUICreatorDefaultImpl implements ResultCommandUICreator
         cmdHolder.put(CONFIRM_SOFT_CHECK_PRODUCTS, new ConfirmSoftCheckProductsResultUIProcessor(activity));
         cmdHolder.put(CONFIRM_CART_PRODUCTS, new ConfirmCartProductsResultUIProcessor(activity));
         cmdHolder.put(CLOSE_SOFT_CHECK, new CloseSoftCheckResultUIProcessor(activity));
+        cmdHolder.put(RECONNECT, new ReconnectResultUIProcessor(activity));
 
         return ResultCommandHolderUIInit.resultCommandHolderUI(cmdHolder);
     }

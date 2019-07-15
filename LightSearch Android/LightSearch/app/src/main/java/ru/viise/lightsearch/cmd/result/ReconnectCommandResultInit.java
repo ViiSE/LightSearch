@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.pref;
+package ru.viise.lightsearch.cmd.result;
 
-public enum PreferencesManagerType {
-    USERNAME_MANAGER,
-    HOST_MANAGER,
-    PORT_MANAGER,
-    USER_IDENT_MANAGER,
-    PASS_MANAGER,
-    CARD_CODE_MANAGER
+public class ReconnectCommandResultInit {
+
+    public static ReconnectCommandResult reconnectCommandResult(boolean isDone, boolean isReconnect,
+                String message) {
+        return new ReconnectCommandResultDefaultImpl(isDone, isReconnect, message);
+    }
 }

@@ -27,12 +27,14 @@ public class ConnectionAsyncTask extends AsyncTask<Void, Void, String> {
     private final ManagerActivityConnectionHandler managerActivityConnectionHandler;
     private final CommandManager commandManager;
     private final AlertDialog spotsDialog;
+    private final boolean isReconnect;
 
     public ConnectionAsyncTask(ManagerActivityConnectionHandler managerActivityConnectionHandler,
-               CommandManager commandManager, AlertDialog spotsDialog) {
+               CommandManager commandManager, AlertDialog spotsDialog, boolean isReconnect) {
         this.managerActivityConnectionHandler = managerActivityConnectionHandler;
         this.commandManager = commandManager;
         this.spotsDialog = spotsDialog;
+        this.isReconnect = isReconnect;
     }
 
     @Override
@@ -50,6 +52,6 @@ public class ConnectionAsyncTask extends AsyncTask<Void, Void, String> {
     protected void onPostExecute(String message) {
         super.onPostExecute(message);
         spotsDialog.dismiss();
-        managerActivityConnectionHandler.handleConnectionResult(message);
+        managerActivityConnectionHandler.handleConnectionResult(message, isReconnect);
     }
 }

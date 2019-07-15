@@ -32,13 +32,13 @@ import ru.viise.lightsearch.message.MessageSender;
 import ru.viise.lightsearch.message.type.MessageAuthorization;
 import ru.viise.lightsearch.message.type.MessageAuthorizationInit;
 
-public class AuthorizationProcessor implements Function<CommandDTO, CommandResult> {
+public class ReconnectProcessor implements Function<CommandDTO, CommandResult> {
 
     private final String IMEI;
     private final MessageSender msgSender;
     private final MessageRecipient msgRecipient;
 
-    public AuthorizationProcessor(ClientCommandDTO clCmdDTO) {
+    public ReconnectProcessor(ClientCommandDTO clCmdDTO) {
         IMEI = clCmdDTO.IMEI();
         msgSender = clCmdDTO.messageSender();
         msgRecipient = clCmdDTO.messageRecipient();
@@ -53,7 +53,7 @@ public class AuthorizationProcessor implements Function<CommandDTO, CommandResul
             msgSender.sendMessage(message);
             String rawMessage = msgRecipient.acceptMessage();
             CommandResultCreator cmdResCr =
-                    CommandResultCreatorInit.commandResultAuthorizationCreator(rawMessage, IMEI);
+                    CommandResultCreatorInit.commandResultReconnectCreator(rawMessage, IMEI);
             CommandResult cmdRes = cmdResCr.createCommandResult();
             return cmdRes;
         }
@@ -65,8 +65,8 @@ public class AuthorizationProcessor implements Function<CommandDTO, CommandResul
     private CommandResult errorCommandResult(String message, boolean isReconnect) {
         try {
             CommandResultCreator cmdResCr =
-                    CommandResultCreatorInit.commandResultAuthorizationCreator(false,
-                            isReconnect, message);
+                    CommandResultCreatorInit.commandResultReconnectCreator(false, isReconnect,
+                            message);
             return cmdResCr.createCommandResult();
         }
         catch(CommandResultCreatorException ignore) { return null; /* never happen */ }

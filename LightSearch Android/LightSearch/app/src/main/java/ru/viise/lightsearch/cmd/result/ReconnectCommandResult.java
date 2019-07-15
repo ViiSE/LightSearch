@@ -14,13 +14,6 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.pref;
+package ru.viise.lightsearch.cmd.result;
 
-public enum PreferencesManagerType {
-    USERNAME_MANAGER,
-    HOST_MANAGER,
-    PORT_MANAGER,
-    USER_IDENT_MANAGER,
-    PASS_MANAGER,
-    CARD_CODE_MANAGER
-}
+public interface ReconnectCommandResult extends CommandResult { }

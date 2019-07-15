@@ -16,11 +16,7 @@
 
 package ru.viise.lightsearch.pref;
 
-public enum PreferencesManagerType {
-    USERNAME_MANAGER,
-    HOST_MANAGER,
-    PORT_MANAGER,
-    USER_IDENT_MANAGER,
-    PASS_MANAGER,
-    CARD_CODE_MANAGER
+public interface PasswordPreferencesManager {
+    String loadPassword();
+    void savePassword(String password);
 }
