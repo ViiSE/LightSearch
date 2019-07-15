@@ -18,22 +18,22 @@ package ru.viise.lightsearch.cmd.result.creator;
 
 import ru.viise.lightsearch.cmd.result.CommandResult;
 import ru.viise.lightsearch.cmd.result.ReconnectCommandResultInit;
-import ru.viise.lightsearch.exception.CommandResultCreatorException;
+import ru.viise.lightsearch.data.ReconnectDTO;
 
 public class CommandResultReconnectCreatorErrorDefaultImpl implements CommandResultCreator {
 
     private final boolean isDone;
-    private final boolean isReconnect;
     private final String message;
+    private final ReconnectDTO reconnectDTO;
 
-    public CommandResultReconnectCreatorErrorDefaultImpl(boolean isDone, boolean isReconnect, String message) {
+    public CommandResultReconnectCreatorErrorDefaultImpl(boolean isDone, String message, ReconnectDTO reconnectDTO) {
         this.isDone = isDone;
-        this.isReconnect = isReconnect;
         this.message = message;
+        this.reconnectDTO = reconnectDTO;
     }
 
     @Override
-    public CommandResult createCommandResult() throws CommandResultCreatorException {
-        return ReconnectCommandResultInit.reconnectCommandResult(isDone, isReconnect, message);
+    public CommandResult createCommandResult() {
+        return ReconnectCommandResultInit.reconnectCommandResult(isDone, message, reconnectDTO);
     }
 }

@@ -25,6 +25,7 @@ import ru.viise.lightsearch.cmd.result.CommandResult;
 import ru.viise.lightsearch.cmd.result.ReconnectCommandResultInit;
 import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifier;
 import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifierInit;
+import ru.viise.lightsearch.data.ReconnectDTO;
 import ru.viise.lightsearch.exception.CommandResultCreatorException;
 import ru.viise.lightsearch.exception.MessageParserException;
 import ru.viise.lightsearch.message.parser.MessageParser;
@@ -38,12 +39,12 @@ public class CommandResultReconnectCreatorJSONDefaultImpl implements CommandResu
 
     private final String rawMessage;
     private final String IMEI;
+    private final ReconnectDTO reconnectDTO;
 
-    private final boolean isReconnect = false;
-
-    public CommandResultReconnectCreatorJSONDefaultImpl(String rawMessage, String IMEI) {
+    public CommandResultReconnectCreatorJSONDefaultImpl(String rawMessage, String IMEI, ReconnectDTO reconnectDTO) {
         this.rawMessage = rawMessage;
         this.IMEI = IMEI;
+        this.reconnectDTO = reconnectDTO;
     }
 
     @Override
@@ -59,7 +60,7 @@ public class CommandResultReconnectCreatorJSONDefaultImpl implements CommandResu
             boolean isDone = resCmdVerifier.verify();
             String message = Objects.requireNonNull(objMsg.get(MESSAGE)).toString();
 
-            return ReconnectCommandResultInit.reconnectCommandResult(isDone, isReconnect, message);
+            return ReconnectCommandResultInit.reconnectCommandResult(isDone, message, reconnectDTO);
         }
         catch(MessageParserException | NullPointerException ex) {
             throw new CommandResultCreatorException(ex.getMessage());

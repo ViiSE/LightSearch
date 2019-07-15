@@ -56,7 +56,7 @@ public class SearchResultSoftCheckUIProcessor implements Function<CommandResult,
             String ip = prefManager.load(PreferencesManagerType.HOST_MANAGER);
             String port = prefManager.load(PreferencesManagerType.PORT_MANAGER);
             ConnectionDTO connDTO = ConnectionDTOInit.connectionDTO(ip, port);
-            activity.reconnect(connDTO);
+            activity.reconnect(connDTO, searchSCCmdRes.reconnectDTO());
         }
         else
             activity.callDialogError(searchSCCmdRes.message());

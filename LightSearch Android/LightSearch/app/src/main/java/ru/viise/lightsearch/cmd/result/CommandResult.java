@@ -16,8 +16,11 @@
 
 package ru.viise.lightsearch.cmd.result;
 
+import ru.viise.lightsearch.data.ReconnectDTO;
+
 public interface CommandResult {
     boolean isDone();
     boolean isReconnect();
+    ReconnectDTO reconnectDTO();
     String message();
 }

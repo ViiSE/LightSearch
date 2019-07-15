@@ -18,6 +18,7 @@ package ru.viise.lightsearch.cmd.processor;
 
 import java.util.function.Function;
 
+import ru.viise.lightsearch.cmd.CommandTypeEnum;
 import ru.viise.lightsearch.cmd.result.CommandResult;
 import ru.viise.lightsearch.cmd.result.creator.CommandResultCreator;
 import ru.viise.lightsearch.cmd.result.creator.CommandResultCreatorInit;
@@ -25,6 +26,8 @@ import ru.viise.lightsearch.data.ClientCommandDTO;
 import ru.viise.lightsearch.data.CommandConfirmCartRecordsDTO;
 import ru.viise.lightsearch.data.CommandConfirmSoftCheckRecordsDTO;
 import ru.viise.lightsearch.data.CommandDTO;
+import ru.viise.lightsearch.data.ReconnectDTO;
+import ru.viise.lightsearch.data.ReconnectDTOInit;
 import ru.viise.lightsearch.exception.CommandResultCreatorException;
 import ru.viise.lightsearch.exception.MessageRecipientException;
 import ru.viise.lightsearch.exception.MessageSenderException;
@@ -47,9 +50,8 @@ public class ConfirmSoftCheckProductsProcessor implements Function<CommandDTO, C
 
     @Override
     public CommandResult apply(CommandDTO commandDTO) {
+        CommandConfirmSoftCheckRecordsDTO cmdConSCRecDTO = (CommandConfirmSoftCheckRecordsDTO) commandDTO;
         try {
-            CommandConfirmSoftCheckRecordsDTO cmdConSCRecDTO =
-                    (CommandConfirmSoftCheckRecordsDTO) commandDTO;
             MessageConfirmSoftCheckProducts msgConSCProd
                     = MessageConfirmSoftCheckProductsInit.messageConfirmSoftCheckProducts(IMEI,
                         cmdConSCRecDTO);
@@ -69,22 +71,22 @@ public class ConfirmSoftCheckProductsProcessor implements Function<CommandDTO, C
             return cmdRes;
         }
         catch(CommandResultCreatorException ex) {
-            return errorCommandResult(ex.getMessageRU(), false, (CommandConfirmCartRecordsDTO)commandDTO);
+            return errorCommandResult(ex.getMessageRU(), cmdConSCRecDTO);
         }
         catch(MessageSenderException | MessageRecipientException ex) {
-            return errorCommandResult(ex.getMessageRU(), true, (CommandConfirmCartRecordsDTO)commandDTO);
+            return errorCommandResult(ex.getMessageRU(), cmdConSCRecDTO);
         }
     }
 
-    private CommandResult errorCommandResult(String message, boolean isReconnect,
-                                CommandConfirmCartRecordsDTO cmdConCRecDTO) {
+    private CommandResult errorCommandResult(String message, CommandDTO cmdConCRecDTO) {
+        ReconnectDTO recDTO = ReconnectDTOInit.reconnectDTO(cmdConCRecDTO, CommandTypeEnum.CONFIRM_SOFT_CHECK_PRODUCTS);
         CommandResultCreator cmdResCr;
         if(cmdConCRecDTO instanceof CommandConfirmCartRecordsDTO)
-            cmdResCr = CommandResultCreatorInit.commandResultConfirmCartProductsCreator(false,
-                    isReconnect, message);
+            cmdResCr = CommandResultCreatorInit.commandResultConfirmCartProductsCreator(false, message,
+                    recDTO);
         else
             cmdResCr = CommandResultCreatorInit.commandResultConfirmSoftCheckProductsCreator(false,
-                    isReconnect, message);
+                    message, recDTO);
 
         try { return cmdResCr.createCommandResult(); }
         catch(CommandResultCreatorException ignore) { return null; /* never happen */ }

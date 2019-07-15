@@ -21,20 +21,21 @@ import android.os.AsyncTask;
 
 import ru.viise.lightsearch.activity.ManagerActivityConnectionHandler;
 import ru.viise.lightsearch.cmd.manager.CommandManager;
+import ru.viise.lightsearch.data.ReconnectDTO;
 
 public class ConnectionAsyncTask extends AsyncTask<Void, Void, String> {
 
     private final ManagerActivityConnectionHandler managerActivityConnectionHandler;
     private final CommandManager commandManager;
     private final AlertDialog spotsDialog;
-    private final boolean isReconnect;
+    private final ReconnectDTO reconnectDTO;
 
     public ConnectionAsyncTask(ManagerActivityConnectionHandler managerActivityConnectionHandler,
-               CommandManager commandManager, AlertDialog spotsDialog, boolean isReconnect) {
+               CommandManager commandManager, AlertDialog spotsDialog, ReconnectDTO reconnectDTO) {
         this.managerActivityConnectionHandler = managerActivityConnectionHandler;
         this.commandManager = commandManager;
         this.spotsDialog = spotsDialog;
-        this.isReconnect = isReconnect;
+        this.reconnectDTO = reconnectDTO;
     }
 
     @Override
@@ -52,6 +53,6 @@ public class ConnectionAsyncTask extends AsyncTask<Void, Void, String> {
     protected void onPostExecute(String message) {
         super.onPostExecute(message);
         spotsDialog.dismiss();
-        managerActivityConnectionHandler.handleConnectionResult(message, isReconnect);
+        managerActivityConnectionHandler.handleConnectionResult(message, reconnectDTO);
     }
 }

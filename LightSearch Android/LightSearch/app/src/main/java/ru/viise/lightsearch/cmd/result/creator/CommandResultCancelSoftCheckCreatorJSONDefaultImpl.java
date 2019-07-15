@@ -37,8 +37,6 @@ public class CommandResultCancelSoftCheckCreatorJSONDefaultImpl implements Comma
     private final String IMEI_FIELD = ClientCommandContentEnum.IMEI.stringValue();
     private final String MESSAGE    = ClientCommandContentEnum.MESSAGE.stringValue();
 
-    private final boolean isReconnect = false;
-
     private final String rawMessage;
     private final String IMEI;
 
@@ -61,7 +59,7 @@ public class CommandResultCancelSoftCheckCreatorJSONDefaultImpl implements Comma
             String message = Objects.requireNonNull(objMsg.get(MESSAGE)).toString();
 
             CancelSoftCheckCommandResult cancelSCCmdRes =
-                    CancelSoftCheckCommandResultInit.cancelSoftCheckCommandResult(isDone, isReconnect, message);
+                    CancelSoftCheckCommandResultInit.cancelSoftCheckCommandResult(isDone, message, null);
             return cancelSCCmdRes;
         }
         catch(MessageParserException | NullPointerException ex) {

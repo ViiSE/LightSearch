@@ -52,6 +52,7 @@ import ru.viise.lightsearch.data.CommandAuthorizationDTO;
 import ru.viise.lightsearch.data.CommandManagerAsyncTaskDTO;
 import ru.viise.lightsearch.data.CommandManagerAsyncTaskDTOInit;
 import ru.viise.lightsearch.data.ConnectionDTO;
+import ru.viise.lightsearch.data.ReconnectDTO;
 import ru.viise.lightsearch.data.ScanType;
 import ru.viise.lightsearch.data.SearchRecordDTO;
 import ru.viise.lightsearch.data.SoftCheckRecord;
@@ -209,15 +210,15 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
                 ClientHandlerCreatorDTOInit.clientHandlerCreatorDTO(IMEI, connDTO);
         commandManager = CommandManagerInit.commandManager(clHandlerCrDTO);
         ConnectionAsyncTask connAT = new ConnectionAsyncTask(this,
-                commandManager, connectDialog, false);
+                commandManager, connectDialog, null);
         connAT.execute();
     }
 
     @Override
-    public void reconnect(ConnectionDTO connDTO) {
+    public void reconnect(ConnectionDTO connDTO, ReconnectDTO reconnectDTO) {
         commandManager.closeConnection();
         ConnectionAsyncTask connAT = new ConnectionAsyncTask(this,
-                commandManager, connectDialog, true);
+                commandManager, connectDialog, reconnectDTO);
         connAT.execute();
     }
 
@@ -227,7 +228,7 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
     }
 
     @Override
-    public void handleConnectionResult(String message, boolean isReconnect) {
+    public void handleConnectionResult(String message, ReconnectDTO reconnectDTO) {
         if(message == null) {
             AuthorizationDTO authDTO;
             try {
@@ -245,11 +246,11 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
 
             }
             CommandAuthorizationDTOCreator cmdAuthDTOCreator =
-                    CommandAuthorizationDTOCreatorInit.commandAuthorizationDTOCreator(IMEI, authDTO);
+                    CommandAuthorizationDTOCreatorInit.commandAuthorizationDTOCreator(IMEI, authDTO, reconnectDTO);
             CommandAuthorizationDTO cmdAuthDTO = cmdAuthDTOCreator.createCommandDTO();
 
             CommandTypeEnum cmdTypeEnum;
-            if(isReconnect)
+            if(reconnectDTO != null)
                 cmdTypeEnum = CommandTypeEnum.RECONNECT;
             else
                 cmdTypeEnum = CommandTypeEnum.AUTHORIZATION;

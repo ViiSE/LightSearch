@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.cmd.result;
+package ru.viise.lightsearch.data;
 
-import ru.viise.lightsearch.data.ReconnectDTO;
+import ru.viise.lightsearch.cmd.CommandTypeEnum;
 
-public class CloseSoftCheckCommandResultInit {
+public class ReconnectDTOInit {
 
-    public static CloseSoftCheckCommandResult closeSoftCheckCommandResult(boolean isDone, String message,
-                      ReconnectDTO reconnectDTO) {
-        return new CloseSoftCheckCommandResultDefaultImpl(isDone, message, reconnectDTO);
+    public static ReconnectDTO reconnectDTO(CommandDTO lastCommand, CommandTypeEnum lastCommandType) {
+        return new ReconnectDTODefaultImpl(lastCommand, lastCommandType);
     }
 }

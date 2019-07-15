@@ -16,16 +16,18 @@
 
 package ru.viise.lightsearch.cmd.result;
 
+import ru.viise.lightsearch.data.ReconnectDTO;
+
 public class ReconnectCommandResultDefaultImpl implements ReconnectCommandResult {
 
     private final boolean isDone;
-    private final boolean isReconnect;
     private final String message;
+    private final ReconnectDTO reconnectDTO;
 
-    public ReconnectCommandResultDefaultImpl(boolean isDone, boolean isReconnect, String message) {
+    public ReconnectCommandResultDefaultImpl(boolean isDone, String message, ReconnectDTO reconnectDTO) {
         this.isDone = isDone;
-        this.isReconnect = isReconnect;
         this.message = message;
+        this.reconnectDTO = reconnectDTO;
     }
 
     @Override
@@ -35,7 +37,12 @@ public class ReconnectCommandResultDefaultImpl implements ReconnectCommandResult
 
     @Override
     public boolean isReconnect() {
-        return isReconnect;
+        return reconnectDTO != null;
+    }
+
+    @Override
+    public ReconnectDTO reconnectDTO() {
+        return reconnectDTO;
     }
 
     @Override

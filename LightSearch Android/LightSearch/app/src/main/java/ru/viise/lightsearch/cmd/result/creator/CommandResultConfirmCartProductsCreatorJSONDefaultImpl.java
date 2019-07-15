@@ -40,8 +40,6 @@ public class CommandResultConfirmCartProductsCreatorJSONDefaultImpl implements C
     private final String IMEI_FIELD = ClientCommandContentEnum.IMEI.stringValue();
     private final String DATA       = ClientCommandContentEnum.DATA.stringValue();
 
-    private final boolean isReconnect = false;
-
     private final String rawMessage;
     private final String IMEI;
     private final List<SoftCheckRecord> softCheckRecords;
@@ -69,8 +67,8 @@ public class CommandResultConfirmCartProductsCreatorJSONDefaultImpl implements C
                     CartRecordsCreatorInit.cartRecordsCreator(softCheckRecords, objMsg.get(DATA));
             List<SoftCheckRecord> cartRecords = cartRecCr.createCartRecords();
 
-            return ConfirmCartProductsResultInit.confirmCartProductsResult(isDone, isReconnect,
-                    null, cartRecords);
+            return ConfirmCartProductsResultInit.confirmCartProductsResult(isDone, null,
+                    cartRecords, null);
         }
         catch(MessageParserException | NullPointerException ex) {
             throw new CommandResultCreatorException(ex.getMessage());

@@ -16,10 +16,12 @@
 
 package ru.viise.lightsearch.cmd.result;
 
+import ru.viise.lightsearch.data.ReconnectDTO;
+
 public class ReconnectCommandResultInit {
 
-    public static ReconnectCommandResult reconnectCommandResult(boolean isDone, boolean isReconnect,
-                String message) {
-        return new ReconnectCommandResultDefaultImpl(isDone, isReconnect, message);
+    public static ReconnectCommandResult reconnectCommandResult(boolean isDone, String message,
+                        ReconnectDTO reconnectDTO) {
+        return new ReconnectCommandResultDefaultImpl(isDone, message, reconnectDTO);
     }
 }

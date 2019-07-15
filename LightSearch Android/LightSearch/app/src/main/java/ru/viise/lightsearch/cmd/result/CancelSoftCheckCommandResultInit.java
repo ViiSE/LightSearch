@@ -16,10 +16,12 @@
 
 package ru.viise.lightsearch.cmd.result;
 
+import ru.viise.lightsearch.data.ReconnectDTO;
+
 public class CancelSoftCheckCommandResultInit {
 
-    public static CancelSoftCheckCommandResult cancelSoftCheckCommandResult(boolean isDone, boolean isReconnect,
-                     String message) {
-        return new CancelSoftCheckCommandResultDefaultImpl(isDone, isReconnect, message);
+    public static CancelSoftCheckCommandResult cancelSoftCheckCommandResult(boolean isDone, String message,
+                        ReconnectDTO reconnectDTO) {
+        return new CancelSoftCheckCommandResultDefaultImpl(isDone, message, reconnectDTO);
     }
 }

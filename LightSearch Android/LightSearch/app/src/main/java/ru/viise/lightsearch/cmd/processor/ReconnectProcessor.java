@@ -24,6 +24,7 @@ import ru.viise.lightsearch.cmd.result.creator.CommandResultCreatorInit;
 import ru.viise.lightsearch.data.ClientCommandDTO;
 import ru.viise.lightsearch.data.CommandAuthorizationDTO;
 import ru.viise.lightsearch.data.CommandDTO;
+import ru.viise.lightsearch.data.ReconnectDTO;
 import ru.viise.lightsearch.exception.CommandResultCreatorException;
 import ru.viise.lightsearch.exception.MessageRecipientException;
 import ru.viise.lightsearch.exception.MessageSenderException;
@@ -46,27 +47,26 @@ public class ReconnectProcessor implements Function<CommandDTO, CommandResult> {
 
     @Override
     public CommandResult apply(CommandDTO commandDTO) {
+        CommandAuthorizationDTO cmdAuthDTO = (CommandAuthorizationDTO) commandDTO;
         try {
-            CommandAuthorizationDTO cmdAuthDTO = (CommandAuthorizationDTO) commandDTO;
             MessageAuthorization msgAuth = MessageAuthorizationInit.messageAuthorization(cmdAuthDTO);
             String message = msgAuth.message();
             msgSender.sendMessage(message);
             String rawMessage = msgRecipient.acceptMessage();
             CommandResultCreator cmdResCr =
-                    CommandResultCreatorInit.commandResultReconnectCreator(rawMessage, IMEI);
+                    CommandResultCreatorInit.commandResultReconnectCreator(rawMessage, IMEI, cmdAuthDTO.reconnectDTO());
             CommandResult cmdRes = cmdResCr.createCommandResult();
             return cmdRes;
         }
         catch(CommandResultCreatorException | MessageSenderException | MessageRecipientException ex) {
-            return errorCommandResult(ex.getMessageRU(), false);
+            return errorCommandResult(ex.getMessageRU(), cmdAuthDTO.reconnectDTO());
         }
     }
 
-    private CommandResult errorCommandResult(String message, boolean isReconnect) {
+    private CommandResult errorCommandResult(String message, ReconnectDTO reconnectDTO) {
         try {
             CommandResultCreator cmdResCr =
-                    CommandResultCreatorInit.commandResultReconnectCreator(false, isReconnect,
-                            message);
+                    CommandResultCreatorInit.commandResultReconnectCreator(false, message, reconnectDTO);
             return cmdResCr.createCommandResult();
         }
         catch(CommandResultCreatorException ignore) { return null; /* never happen */ }

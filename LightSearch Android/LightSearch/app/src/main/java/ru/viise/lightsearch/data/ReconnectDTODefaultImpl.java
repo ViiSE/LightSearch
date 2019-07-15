@@ -16,13 +16,25 @@
 
 package ru.viise.lightsearch.data;
 
-public interface CommandAuthorizationDTO extends CommandDTO {
-    String IMEI();
-    String ip();
-    String os();
-    String model();
-    String username();
-    String password();
-    String userIdent();
-    ReconnectDTO reconnectDTO();
+import ru.viise.lightsearch.cmd.CommandTypeEnum;
+
+public class ReconnectDTODefaultImpl implements ReconnectDTO {
+
+    private final CommandDTO lastCommand;
+    private final CommandTypeEnum lastCommandType;
+
+    public ReconnectDTODefaultImpl(CommandDTO lastCommand, CommandTypeEnum lastCommandType) {
+        this.lastCommand = lastCommand;
+        this.lastCommandType = lastCommandType;
+    }
+
+    @Override
+    public CommandDTO lastCommand() {
+        return lastCommand;
+    }
+
+    @Override
+    public CommandTypeEnum lastCommandType() {
+        return lastCommandType;
+    }
 }

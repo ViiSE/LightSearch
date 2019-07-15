@@ -18,12 +18,15 @@ package ru.viise.lightsearch.cmd.processor;
 
 import java.util.function.Function;
 
+import ru.viise.lightsearch.cmd.CommandTypeEnum;
 import ru.viise.lightsearch.cmd.result.CommandResult;
 import ru.viise.lightsearch.cmd.result.creator.CommandResultCreator;
 import ru.viise.lightsearch.cmd.result.creator.CommandResultCreatorInit;
 import ru.viise.lightsearch.data.ClientCommandDTO;
 import ru.viise.lightsearch.data.CommandCloseSoftCheckDTO;
 import ru.viise.lightsearch.data.CommandDTO;
+import ru.viise.lightsearch.data.ReconnectDTO;
+import ru.viise.lightsearch.data.ReconnectDTOInit;
 import ru.viise.lightsearch.exception.CommandResultCreatorException;
 import ru.viise.lightsearch.exception.MessageRecipientException;
 import ru.viise.lightsearch.exception.MessageSenderException;
@@ -46,8 +49,8 @@ public class CloseSoftCheckProcessor implements Function<CommandDTO, CommandResu
 
     @Override
     public CommandResult apply(CommandDTO commandDTO) {
+        CommandCloseSoftCheckDTO cmdCloseSCDTO = (CommandCloseSoftCheckDTO) commandDTO;
         try {
-            CommandCloseSoftCheckDTO cmdCloseSCDTO = (CommandCloseSoftCheckDTO) commandDTO;
             MessageCloseSoftCheck msgCloseSC = MessageCloseSoftCheckInit.messageCloseSoftCheck(
                     IMEI, cmdCloseSCDTO);
             String message = msgCloseSC.message();
@@ -59,18 +62,19 @@ public class CloseSoftCheckProcessor implements Function<CommandDTO, CommandResu
             return cmdRes;
         }
         catch(CommandResultCreatorException ex) {
-            return errorCommandResult(ex.getMessageRU(), false);
+            return errorCommandResult(ex.getMessageRU(), null);
         }
         catch (MessageSenderException | MessageRecipientException ex) {
-            return errorCommandResult(ex.getMessageRU(), true);
+            ReconnectDTO recDTO = ReconnectDTOInit.reconnectDTO(cmdCloseSCDTO, CommandTypeEnum.CLOSE_SOFT_CHECK);
+            return errorCommandResult(ex.getMessageRU(), recDTO);
         }
     }
 
-    private CommandResult errorCommandResult(String message, boolean isReconnect) {
+    private CommandResult errorCommandResult(String message, ReconnectDTO reconnectDTO) {
         try {
             CommandResultCreator cmdResCr =
                     CommandResultCreatorInit.commandResultCloseSoftCheckCreator(false,
-                            isReconnect, message);
+                            reconnectDTO, message);
             return cmdResCr.createCommandResult();
         }
         catch(CommandResultCreatorException ignore) { return null; /* never happen */ }

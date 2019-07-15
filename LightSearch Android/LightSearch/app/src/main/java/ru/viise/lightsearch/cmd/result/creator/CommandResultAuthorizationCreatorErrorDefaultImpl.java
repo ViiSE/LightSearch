@@ -18,23 +18,21 @@ package ru.viise.lightsearch.cmd.result.creator;
 
 import ru.viise.lightsearch.cmd.result.AuthorizationCommandResultInit;
 import ru.viise.lightsearch.cmd.result.CommandResult;
+import ru.viise.lightsearch.data.ReconnectDTO;
 
 public class CommandResultAuthorizationCreatorErrorDefaultImpl implements CommandResultCreator {
 
     private final boolean isDone;
-    private final boolean isReconnect;
     private final String message;
 
-    public CommandResultAuthorizationCreatorErrorDefaultImpl(boolean isDone, boolean isReconnect,
-                String message) {
+    public CommandResultAuthorizationCreatorErrorDefaultImpl(boolean isDone, String message) {
         this.isDone = isDone;
-        this.isReconnect = isReconnect;
         this.message = message;
     }
 
     @Override
     public CommandResult createCommandResult() {
-        return AuthorizationCommandResultInit.authorizationCommandResult(isDone, isReconnect, message,
+        return AuthorizationCommandResultInit.authorizationCommandResult(isDone, message,
                 null, null, null);
     }
 }

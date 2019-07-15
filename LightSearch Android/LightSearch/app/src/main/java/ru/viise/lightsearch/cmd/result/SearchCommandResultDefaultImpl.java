@@ -18,23 +18,24 @@ package ru.viise.lightsearch.cmd.result;
 
 import java.util.List;
 
+import ru.viise.lightsearch.data.ReconnectDTO;
 import ru.viise.lightsearch.data.SearchRecordDTO;
 
 public class SearchCommandResultDefaultImpl implements SearchCommandResult {
 
     private final boolean isDone;
-    private final boolean isReconnect;
     private final String message;
     private final List<SearchRecordDTO> records;
     private final String subdivision;
+    private final ReconnectDTO reconnectDTO;
 
-    public SearchCommandResultDefaultImpl(boolean isDone, boolean isReconnect, String message,
-              List<SearchRecordDTO> records, String subdivision) {
+    public SearchCommandResultDefaultImpl(boolean isDone, String message, List<SearchRecordDTO> records,
+              String subdivision, ReconnectDTO reconnectDTO) {
         this.isDone = isDone;
-        this.isReconnect = isReconnect;
         this.message = message;
         this.records = records;
         this.subdivision = subdivision;
+        this.reconnectDTO = reconnectDTO;
     }
 
     @Override
@@ -54,7 +55,12 @@ public class SearchCommandResultDefaultImpl implements SearchCommandResult {
 
     @Override
     public boolean isReconnect() {
-        return isReconnect;
+        return reconnectDTO != null;
+    }
+
+    @Override
+    public ReconnectDTO reconnectDTO() {
+        return reconnectDTO;
     }
 
     @Override

@@ -17,11 +17,12 @@
 package ru.viise.lightsearch.data.creator;
 
 import ru.viise.lightsearch.data.AuthorizationDTO;
+import ru.viise.lightsearch.data.ReconnectDTO;
 
 public class CommandAuthorizationDTOCreatorInit {
 
     public static CommandAuthorizationDTOCreator commandAuthorizationDTOCreator(String IMEI,
-                        AuthorizationDTO authDTO) {
-        return new CommandAuthorizationDTOCreatorDefaultImpl(IMEI, authDTO);
+                        AuthorizationDTO authDTO, ReconnectDTO reconnectDTO) {
+        return new CommandAuthorizationDTOCreatorDefaultImpl(IMEI, authDTO, reconnectDTO);
     }
 }

@@ -16,21 +16,22 @@
 
 package ru.viise.lightsearch.cmd.result;
 
+import ru.viise.lightsearch.data.ReconnectDTO;
 import ru.viise.lightsearch.data.SoftCheckRecord;
 
 public class SearchSoftCheckCommandResultDefaultImpl implements SearchSoftCheckCommandResult {
 
     private final boolean isDone;
-    private final boolean isReconnect;
     private final String message;
     private final SoftCheckRecord record;
+    private final ReconnectDTO reconnectDTO;
 
-    public SearchSoftCheckCommandResultDefaultImpl(boolean isDone, boolean isReconnect, String message,
-               SoftCheckRecord record) {
+    public SearchSoftCheckCommandResultDefaultImpl(boolean isDone, String message, SoftCheckRecord record,
+                ReconnectDTO reconnectDTO) {
         this.isDone = isDone;
-        this.isReconnect = isReconnect;
         this.message = message;
         this.record = record;
+        this.reconnectDTO = reconnectDTO;
     }
 
     @Override
@@ -45,7 +46,12 @@ public class SearchSoftCheckCommandResultDefaultImpl implements SearchSoftCheckC
 
     @Override
     public boolean isReconnect() {
-        return isReconnect;
+        return reconnectDTO != null;
+    }
+
+    @Override
+    public ReconnectDTO reconnectDTO() {
+        return reconnectDTO;
     }
 
     @Override

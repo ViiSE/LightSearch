@@ -16,10 +16,12 @@
 
 package ru.viise.lightsearch.cmd.result;
 
+import ru.viise.lightsearch.data.ReconnectDTO;
+
 public class OpenSoftCheckCommandResultInit {
 
-    public static OpenSoftCheckCommandResult openSoftCheckCommandResult(boolean isDone, boolean isReconnect,
-                        String message) {
-        return new OpenSoftCheckCommandResultDefaultImpl(isDone, isReconnect, message);
+    public static OpenSoftCheckCommandResult openSoftCheckCommandResult(boolean isDone, String message,
+                        ReconnectDTO reconnectDTO) {
+        return new OpenSoftCheckCommandResultDefaultImpl(isDone, message, reconnectDTO);
     }
 }

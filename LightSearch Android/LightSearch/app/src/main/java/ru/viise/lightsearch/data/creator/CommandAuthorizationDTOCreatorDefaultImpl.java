@@ -21,6 +21,7 @@ import android.os.Build;
 import ru.viise.lightsearch.data.AuthorizationDTO;
 import ru.viise.lightsearch.data.CommandAuthorizationDTO;
 import ru.viise.lightsearch.data.CommandAuthorizationDTOInit;
+import ru.viise.lightsearch.data.ReconnectDTO;
 import ru.viise.lightsearch.util.IPAddressProvider;
 import ru.viise.lightsearch.util.IPAddressProviderInit;
 
@@ -33,12 +34,15 @@ public class CommandAuthorizationDTOCreatorDefaultImpl implements CommandAuthori
     private final String ip;
     private final String os;
     private final String model;
+    private final ReconnectDTO reconnectDTO;
 
-    public CommandAuthorizationDTOCreatorDefaultImpl(String IMEI, AuthorizationDTO authDTO) {
+    public CommandAuthorizationDTOCreatorDefaultImpl(String IMEI, AuthorizationDTO authDTO,
+                ReconnectDTO reconnectDTO) {
         this.IMEI = IMEI;
         this.username  = authDTO.username();
         this.password  = authDTO.password();
         this.userIdent = authDTO.userIdent();
+        this.reconnectDTO = reconnectDTO;
 
         IPAddressProvider ipAddrProvider = IPAddressProviderInit.ipAddressProvider();
         ip = ipAddrProvider.ipAddress(true);
@@ -48,6 +52,6 @@ public class CommandAuthorizationDTOCreatorDefaultImpl implements CommandAuthori
 
     @Override
     public CommandAuthorizationDTO createCommandDTO() {
-        return CommandAuthorizationDTOInit.commandAuthorizationDTO(IMEI, ip, os, model, username, password, userIdent);
+        return CommandAuthorizationDTOInit.commandAuthorizationDTO(IMEI, ip, os, model, username, password, userIdent, reconnectDTO);
     }
 }

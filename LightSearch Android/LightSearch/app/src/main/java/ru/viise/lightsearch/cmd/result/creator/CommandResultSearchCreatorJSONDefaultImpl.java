@@ -41,8 +41,6 @@ public class CommandResultSearchCreatorJSONDefaultImpl implements CommandResultC
     private final String IMEI_FIELD = ClientCommandContentEnum.IMEI.stringValue();
     private final String DATA       = ClientCommandContentEnum.DATA.stringValue();
 
-    private final boolean isReconnect = false;
-
     private final String rawMessage;
     private final String IMEI;
     private final String subdivision;
@@ -70,7 +68,7 @@ public class CommandResultSearchCreatorJSONDefaultImpl implements CommandResultC
             List<SearchRecordDTO> searchRecords = searchRecsDTOCr.createSearchRecordsDTO();
 
             SearchCommandResult searchCmdRes = SearchCommandResultInit.searchCommandResult(isDone,
-                    isReconnect, null, searchRecords, subdivision);
+                    null, searchRecords, subdivision, null);
             return searchCmdRes;
         }
         catch(MessageParserException | NullPointerException ex) {

@@ -18,6 +18,7 @@ package ru.viise.lightsearch.cmd.result.creator;
 
 import java.util.List;
 
+import ru.viise.lightsearch.data.ReconnectDTO;
 import ru.viise.lightsearch.data.SoftCheckRecord;
 
 public class CommandResultCreatorInit {
@@ -26,9 +27,8 @@ public class CommandResultCreatorInit {
         return new CommandResultAuthorizationCreatorJSONDefaultImpl(rawMessage, IMEI);
     }
 
-    public static CommandResultCreator commandResultAuthorizationCreator(boolean isDone,
-                     boolean isReconnect, String message) {
-        return new CommandResultAuthorizationCreatorErrorDefaultImpl(isDone, isReconnect, message);
+    public static CommandResultCreator commandResultAuthorizationCreator(boolean isDone, String message) {
+        return new CommandResultAuthorizationCreatorErrorDefaultImpl(isDone, message);
     }
 
     public static CommandResultCreator commandResultSearchCreator(String rawMessage, String IMEI,
@@ -36,27 +36,27 @@ public class CommandResultCreatorInit {
         return new CommandResultSearchCreatorJSONDefaultImpl(rawMessage, IMEI, subdivision);
     }
 
-    public static CommandResultCreator commandResultSearchCreator(boolean isDone, boolean isReconnect,
-                      String message) {
-        return new CommandResultSearchCreatorErrorDefaultImpl(isDone, isReconnect, message);
+    public static CommandResultCreator commandResultSearchCreator(boolean isDone, String message,
+                        ReconnectDTO reconnectDTO) {
+        return new CommandResultSearchCreatorErrorDefaultImpl(isDone, message, reconnectDTO);
     }
 
     public static CommandResultCreator commandResultSearchSoftCheckCreator(String rawMessage, String IMEI) {
         return new CommandResultSearchSoftCheckCreatorJSONDefaultImpl(rawMessage, IMEI);
     }
 
-    public static CommandResultCreator commandResultSearchSoftCheckCreator(boolean isDone,
-                       boolean isReconnect, String message) {
-        return new CommandResultSearchSoftCheckCreatorErrorDefaultImpl(isDone, isReconnect, message);
+    public static CommandResultCreator commandResultSearchSoftCheckCreator(boolean isDone, String message,
+                       ReconnectDTO reconnectDTO) {
+        return new CommandResultSearchSoftCheckCreatorErrorDefaultImpl(isDone, message, reconnectDTO);
     }
 
     public static CommandResultCreator commandResultOpenSoftCheckCreator(String rawMessage, String IMEI) {
         return new CommandResultOpenSoftCheckCreatorJSONDefaultImpl(rawMessage, IMEI);
     }
 
-    public static CommandResultCreator commandResultOpenSoftCheckCreator(boolean isDone,
-                     boolean isReconnect, String message) {
-        return new CommandResultOpenSoftCheckCreatorErrorDefaultImpl(isDone, isReconnect, message);
+    public static CommandResultCreator commandResultOpenSoftCheckCreator(boolean isDone, String message,
+                        ReconnectDTO reconnectDTO) {
+        return new CommandResultOpenSoftCheckCreatorErrorDefaultImpl(isDone, message, reconnectDTO);
     }
 
     public static CommandResultCreator commandResultCancelSoftCheckCreator(String rawMessage, String IMEI) {
@@ -64,8 +64,8 @@ public class CommandResultCreatorInit {
     }
 
     public static CommandResultCreator commandResultCancelSoftCheckCreator(boolean isDone,
-                   boolean isReconnect, String message) {
-        return new CommandResultCancelSoftCheckCreatorErrorDefaultImpl(isDone, isReconnect, message);
+                   String message, ReconnectDTO reconnectDTO) {
+        return new CommandResultCancelSoftCheckCreatorErrorDefaultImpl(isDone, message, reconnectDTO);
     }
 
     public static CommandResultCreator commandResultConfirmSoftCheckProductsCreator(String rawMessage,
@@ -75,9 +75,9 @@ public class CommandResultCreatorInit {
     }
 
     public static CommandResultCreator commandResultConfirmSoftCheckProductsCreator(boolean isDone,
-                        boolean isReconnect, String message) {
-        return new CommandResultConfirmSoftCheckProductsCreatorErrorDefaultImpl(isDone, isReconnect,
-                message);
+                        String message, ReconnectDTO reconnectDTO) {
+        return new CommandResultConfirmSoftCheckProductsCreatorErrorDefaultImpl(isDone, message,
+                reconnectDTO);
     }
 
     public static CommandResultCreator commandResultConfirmCartProductsCreator(String rawMessage,
@@ -87,8 +87,8 @@ public class CommandResultCreatorInit {
     }
 
     public static CommandResultCreator commandResultConfirmCartProductsCreator(boolean isDone,
-                        boolean isReconnect, String message) {
-        return new CommandResultConfirmCartProductsCreatorErrorDefaultImpl(isDone, isReconnect, message);
+                       String message, ReconnectDTO reconnectDTO) {
+        return new CommandResultConfirmCartProductsCreatorErrorDefaultImpl(isDone, message, reconnectDTO);
     }
 
     public static CommandResultCreator commandResultCloseSoftCheckCreator(String rawMessage, String IMEI) {
@@ -96,16 +96,17 @@ public class CommandResultCreatorInit {
     }
 
     public static CommandResultCreator commandResultCloseSoftCheckCreator(boolean isDone,
-                      boolean isReconnect, String message) {
-        return new CommandResultCloseSoftCheckCreatorErrorDefaultImpl(isDone, isReconnect, message);
+                      ReconnectDTO reconnectDTO, String message) {
+        return new CommandResultCloseSoftCheckCreatorErrorDefaultImpl(isDone, message, reconnectDTO);
     }
 
-    public static CommandResultCreator commandResultReconnectCreator(String rawMessage, String IMEI) {
-        return new CommandResultReconnectCreatorJSONDefaultImpl(rawMessage, IMEI);
+    public static CommandResultCreator commandResultReconnectCreator(String rawMessage, String IMEI,
+                        ReconnectDTO reconnectDTO) {
+        return new CommandResultReconnectCreatorJSONDefaultImpl(rawMessage, IMEI, reconnectDTO);
     }
 
-    public static CommandResultCreator commandResultReconnectCreator(boolean isDone,
-                     boolean isReconnect, String message) {
-        return new CommandResultReconnectCreatorErrorDefaultImpl(isDone, isReconnect, message);
+    public static CommandResultCreator commandResultReconnectCreator(boolean isDone, String message,
+                         ReconnectDTO reconnectDTO) {
+        return new CommandResultReconnectCreatorErrorDefaultImpl(isDone, message, reconnectDTO);
     }
 }

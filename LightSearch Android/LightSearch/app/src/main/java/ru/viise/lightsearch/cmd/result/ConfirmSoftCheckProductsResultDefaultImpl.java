@@ -18,21 +18,22 @@ package ru.viise.lightsearch.cmd.result;
 
 import java.util.List;
 
+import ru.viise.lightsearch.data.ReconnectDTO;
 import ru.viise.lightsearch.data.SoftCheckRecord;
 
 public class ConfirmSoftCheckProductsResultDefaultImpl implements ConfirmSoftCheckProductsResult {
 
     private final boolean isDone;
-    private final boolean isReconnect;
     private final String message;
     private final List<SoftCheckRecord> cartRecords;
+    private final ReconnectDTO reconnectDTO;
 
-    public ConfirmSoftCheckProductsResultDefaultImpl(boolean isDone, boolean isReconnect, String message,
-                 List<SoftCheckRecord> cartRecords) {
+    public ConfirmSoftCheckProductsResultDefaultImpl(boolean isDone, String message,
+                 List<SoftCheckRecord> cartRecords, ReconnectDTO reconnectDTO) {
         this.isDone = isDone;
-        this.isReconnect = isReconnect;
         this.message = message;
         this.cartRecords = cartRecords;
+        this.reconnectDTO = reconnectDTO;
     }
 
     @Override
@@ -47,7 +48,12 @@ public class ConfirmSoftCheckProductsResultDefaultImpl implements ConfirmSoftChe
 
     @Override
     public boolean isReconnect() {
-        return isReconnect;
+        return reconnectDTO != null;
+    }
+
+    @Override
+    public ReconnectDTO reconnectDTO() {
+        return reconnectDTO;
     }
 
     @Override

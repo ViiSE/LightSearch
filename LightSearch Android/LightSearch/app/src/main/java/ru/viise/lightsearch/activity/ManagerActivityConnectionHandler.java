@@ -16,6 +16,8 @@
 
 package ru.viise.lightsearch.activity;
 
+import ru.viise.lightsearch.data.ReconnectDTO;
+
 public interface ManagerActivityConnectionHandler {
-    void handleConnectionResult(String message, boolean isReconnect);
+    void handleConnectionResult(String message, ReconnectDTO reconnectDTO);
 }

@@ -19,7 +19,7 @@ package ru.viise.lightsearch.data;
 public class CommandAuthorizationDTOInit {
 
     public static CommandAuthorizationDTO commandAuthorizationDTO(String IMEI, String ip, String os,
-                      String model, String username, String password, String userIdent) {
-        return new CommandAuthorizationDTODefaultImpl(IMEI, ip, os, model, username, password, userIdent);
+                      String model, String username, String password, String userIdent, ReconnectDTO reconnectDTO) {
+        return new CommandAuthorizationDTODefaultImpl(IMEI, ip, os, model, username, password, userIdent, reconnectDTO);
     }
 }

@@ -19,25 +19,26 @@ package ru.viise.lightsearch.cmd.result.creator;
 import ru.viise.lightsearch.cmd.result.CommandResult;
 import ru.viise.lightsearch.cmd.result.ConfirmCartProductsResult;
 import ru.viise.lightsearch.cmd.result.ConfirmCartProductsResultInit;
+import ru.viise.lightsearch.data.ReconnectDTO;
 
 public class CommandResultConfirmCartProductsCreatorErrorDefaultImpl implements CommandResultCreator {
 
     private final boolean isDone;
-    private final boolean isReconnect;
     private final String message;
+    private final ReconnectDTO reconnectDTO;
 
-    public CommandResultConfirmCartProductsCreatorErrorDefaultImpl(boolean isDone, boolean isReconnect,
-               String message) {
+    public CommandResultConfirmCartProductsCreatorErrorDefaultImpl(boolean isDone,
+               String message, ReconnectDTO reconnectDTO) {
         this.isDone = isDone;
-        this.isReconnect = isReconnect;
         this.message = message;
+        this.reconnectDTO = reconnectDTO;
     }
 
     @Override
     public CommandResult createCommandResult() {
         ConfirmCartProductsResult conCProdRes =
-                ConfirmCartProductsResultInit.confirmCartProductsResult(isDone, isReconnect, message,
-                    null);
+                ConfirmCartProductsResultInit.confirmCartProductsResult(isDone, message,
+                    null, reconnectDTO);
         return conCProdRes;
     }
 }

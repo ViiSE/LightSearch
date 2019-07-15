@@ -18,12 +18,13 @@ package ru.viise.lightsearch.cmd.result;
 
 import java.util.List;
 
+import ru.viise.lightsearch.data.ReconnectDTO;
 import ru.viise.lightsearch.data.SoftCheckRecord;
 
 public class ConfirmSoftCheckProductsResultInit {
 
     public static ConfirmSoftCheckProductsResult confirmSoftCheckProductsResult(boolean isDone,
-                    boolean isReconnect, String message, List<SoftCheckRecord> cartRecords) {
-        return new ConfirmSoftCheckProductsResultDefaultImpl(isDone, isReconnect, message, cartRecords);
+                    String message, List<SoftCheckRecord> cartRecords, ReconnectDTO reconnectDTO) {
+        return new ConfirmSoftCheckProductsResultDefaultImpl(isDone, message, cartRecords, reconnectDTO);
     }
 }

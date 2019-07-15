@@ -26,6 +26,7 @@ import ru.viise.lightsearch.cmd.result.CancelSoftCheckCommandResult;
 import ru.viise.lightsearch.cmd.result.CommandResult;
 import ru.viise.lightsearch.data.ConnectionDTO;
 import ru.viise.lightsearch.data.ConnectionDTOInit;
+import ru.viise.lightsearch.data.ReconnectDTO;
 import ru.viise.lightsearch.fragment.IContainerFragment;
 import ru.viise.lightsearch.pref.PreferencesManager;
 import ru.viise.lightsearch.pref.PreferencesManagerInit;
@@ -55,7 +56,8 @@ public class CancelSoftCheckResultUIProcessor implements Function<CommandResult,
             String ip = prefManager.load(PreferencesManagerType.HOST_MANAGER);
             String port = prefManager.load(PreferencesManagerType.PORT_MANAGER);
             ConnectionDTO connDTO = ConnectionDTOInit.connectionDTO(ip, port);
-            activity.reconnect(connDTO);
+            ReconnectDTO recDTO = cancelSCCmdRes.reconnectDTO();
+            activity.reconnect(connDTO, recDTO);
         }
         else
             activity.callDialogError(cancelSCCmdRes.message());

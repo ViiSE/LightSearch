@@ -18,22 +18,24 @@ package ru.viise.lightsearch.cmd.result.creator;
 
 import ru.viise.lightsearch.cmd.result.CommandResult;
 import ru.viise.lightsearch.cmd.result.SearchSoftCheckCommandResultInit;
+import ru.viise.lightsearch.data.ReconnectDTO;
 
 public class CommandResultSearchSoftCheckCreatorErrorDefaultImpl implements CommandResultCreator {
 
     private final boolean isDone;
-    private final boolean isReconnect;
     private final String message;
+    private final ReconnectDTO reconnectDTO;
 
-    public CommandResultSearchSoftCheckCreatorErrorDefaultImpl(boolean isDone, boolean isReconnect,
-                String message) {
+    public CommandResultSearchSoftCheckCreatorErrorDefaultImpl(boolean isDone, String message,
+               ReconnectDTO reconnectDTO) {
         this.isDone = isDone;
-        this.isReconnect = isReconnect;
+        this.reconnectDTO = reconnectDTO;
         this.message = message;
     }
 
     @Override
     public CommandResult createCommandResult() {
-        return SearchSoftCheckCommandResultInit.searchSoftCheckCommandResult(isDone, isReconnect, message, null);
+        return SearchSoftCheckCommandResultInit.searchSoftCheckCommandResult(isDone, message,
+                null, reconnectDTO);
     }
 }

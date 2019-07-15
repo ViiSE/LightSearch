@@ -51,7 +51,7 @@ public class CloseSoftCheckResultUIProcessor implements Function<CommandResult, 
             String ip = prefManager.load(PreferencesManagerType.HOST_MANAGER);
             String port = prefManager.load(PreferencesManagerType.PORT_MANAGER);
             ConnectionDTO connDTO = ConnectionDTOInit.connectionDTO(ip, port);
-            activity.reconnect(connDTO);
+            activity.reconnect(connDTO, closeSCCmdRes.reconnectDTO());
         }
         else
             activity.callDialogError(closeSCCmdRes.message());

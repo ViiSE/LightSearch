@@ -18,11 +18,12 @@ package ru.viise.lightsearch.activity;
 
 import ru.viise.lightsearch.cmd.manager.CommandManager;
 import ru.viise.lightsearch.data.ConnectionDTO;
+import ru.viise.lightsearch.data.ReconnectDTO;
 import ru.viise.lightsearch.data.ScanType;
 
 public interface ManagerActivityUI {
     void connect(ConnectionDTO connDTO);
-    void reconnect(ConnectionDTO connDTO);
+    void reconnect(ConnectionDTO connDTO, ReconnectDTO reconnectDTO);
     void setScanType(ScanType type);
     CommandManager commandManager();
 }

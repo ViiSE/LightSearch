@@ -25,9 +25,10 @@ public class CommandAuthorizationDTODefaultImpl implements CommandAuthorizationD
     private final String username;
     private final String password;
     private final String userIdent;
+    private final ReconnectDTO reconnectDTO;
 
     public CommandAuthorizationDTODefaultImpl(String IMEI, String ip, String os, String model,
-                  String username, String password, String userIdent) {
+                  String username, String password, String userIdent, ReconnectDTO reconnectDTO) {
         this.IMEI = IMEI;
         this.ip = ip;
         this.os = os;
@@ -35,6 +36,7 @@ public class CommandAuthorizationDTODefaultImpl implements CommandAuthorizationD
         this.username = username;
         this.password = password;
         this.userIdent = userIdent;
+        this.reconnectDTO = reconnectDTO;
     }
 
     @Override
@@ -70,5 +72,10 @@ public class CommandAuthorizationDTODefaultImpl implements CommandAuthorizationD
     @Override
     public String userIdent() {
         return userIdent;
+    }
+
+    @Override
+    public ReconnectDTO reconnectDTO() {
+        return reconnectDTO;
     }
 }

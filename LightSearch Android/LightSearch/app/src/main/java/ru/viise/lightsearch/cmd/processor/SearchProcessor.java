@@ -18,6 +18,7 @@ package ru.viise.lightsearch.cmd.processor;
 
 import java.util.function.Function;
 
+import ru.viise.lightsearch.cmd.CommandTypeEnum;
 import ru.viise.lightsearch.cmd.result.CommandResult;
 import ru.viise.lightsearch.cmd.result.creator.CommandResultCreator;
 import ru.viise.lightsearch.cmd.result.creator.CommandResultCreatorInit;
@@ -25,6 +26,8 @@ import ru.viise.lightsearch.data.ClientCommandDTO;
 import ru.viise.lightsearch.data.CommandDTO;
 import ru.viise.lightsearch.data.CommandSearchDTO;
 import ru.viise.lightsearch.data.CommandSearchSoftCheckDTO;
+import ru.viise.lightsearch.data.ReconnectDTO;
+import ru.viise.lightsearch.data.ReconnectDTOInit;
 import ru.viise.lightsearch.exception.CommandResultCreatorException;
 import ru.viise.lightsearch.exception.MessageRecipientException;
 import ru.viise.lightsearch.exception.MessageSenderException;
@@ -47,8 +50,8 @@ public class SearchProcessor implements Function<CommandDTO, CommandResult> {
 
     @Override
     public CommandResult apply(CommandDTO commandDTO) {
+        CommandSearchDTO cmdSearchDTO = (CommandSearchDTO) commandDTO;
         try {
-            CommandSearchDTO cmdSearchDTO = (CommandSearchDTO) commandDTO;
             MessageSearch msgSearch = MessageSearchInit.messageSearch(IMEI, cmdSearchDTO);
             String message = msgSearch.message();
             msgSender.sendMessage(message);
@@ -64,21 +67,21 @@ public class SearchProcessor implements Function<CommandDTO, CommandResult> {
             return cmdResCr.createCommandResult();
         }
         catch (CommandResultCreatorException ex) {
-            return errorCommandResult(ex.getMessageRU(), false, (CommandSearchDTO)commandDTO);
+            return errorCommandResult(ex.getMessageRU(), commandDTO);
         }
         catch(MessageSenderException | MessageRecipientException ex) {
-            return errorCommandResult(ex.getMessageRU(), true, (CommandSearchDTO)commandDTO);
+            return errorCommandResult(ex.getMessageRU(), commandDTO);
         }
     }
 
-    private CommandResult errorCommandResult(String message, boolean isReconnect, CommandSearchDTO cmdSearchDTO) {
+    private CommandResult errorCommandResult(String message, CommandDTO cmdSearchDTO) {
+        ReconnectDTO recDTO = ReconnectDTOInit.reconnectDTO(cmdSearchDTO, CommandTypeEnum.SEARCH);
         CommandResultCreator cmdResCr;
         if(cmdSearchDTO instanceof CommandSearchSoftCheckDTO)
             cmdResCr = CommandResultCreatorInit.commandResultSearchSoftCheckCreator(false,
-                    isReconnect ,message);
+                    message, recDTO);
         else
-            cmdResCr = CommandResultCreatorInit.commandResultSearchCreator(false, isReconnect,
-                    message);
+            cmdResCr = CommandResultCreatorInit.commandResultSearchCreator(false, message, recDTO);
 
         try { return cmdResCr.createCommandResult(); }
         catch(CommandResultCreatorException ignore) { return null; /* never happen */ }

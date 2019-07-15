@@ -16,16 +16,18 @@
 
 package ru.viise.lightsearch.cmd.result;
 
+import ru.viise.lightsearch.data.ReconnectDTO;
+
 public class CancelSoftCheckCommandResultDefaultImpl implements CancelSoftCheckCommandResult {
 
     private final boolean isDone;
-    private final boolean isReconnect;
     private final String message;
+    private final ReconnectDTO reconnectDTO;
 
-    public CancelSoftCheckCommandResultDefaultImpl(boolean isDone, boolean isReconnect, String message) {
+    public CancelSoftCheckCommandResultDefaultImpl(boolean isDone, String message, ReconnectDTO reconnectDTO) {
         this.isDone = isDone;
-        this.isReconnect = isReconnect;
         this.message = message;
+        this.reconnectDTO = reconnectDTO;
     }
 
     @Override
@@ -35,7 +37,12 @@ public class CancelSoftCheckCommandResultDefaultImpl implements CancelSoftCheckC
 
     @Override
     public boolean isReconnect() {
-        return isReconnect;
+        return reconnectDTO != null;
+    }
+
+    @Override
+    public ReconnectDTO reconnectDTO() {
+        return reconnectDTO;
     }
 
     @Override

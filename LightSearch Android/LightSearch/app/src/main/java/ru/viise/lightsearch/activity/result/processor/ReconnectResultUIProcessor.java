@@ -16,11 +16,17 @@
 
 package ru.viise.lightsearch.activity.result.processor;
 
+import android.app.AlertDialog;
+
 import java.util.function.Function;
 
+import dmax.dialog.SpotsDialog;
 import ru.viise.lightsearch.activity.ManagerActivity;
+import ru.viise.lightsearch.cmd.manager.task.CommandManagerAsyncTask;
 import ru.viise.lightsearch.cmd.result.CommandResult;
 import ru.viise.lightsearch.cmd.result.ReconnectCommandResult;
+import ru.viise.lightsearch.data.CommandManagerAsyncTaskDTO;
+import ru.viise.lightsearch.data.CommandManagerAsyncTaskDTOInit;
 
 public class ReconnectResultUIProcessor implements Function<CommandResult, Void> {
 
@@ -35,6 +41,14 @@ public class ReconnectResultUIProcessor implements Function<CommandResult, Void>
         ReconnectCommandResult recCmdRes = (ReconnectCommandResult)commandResult;
         if(!recCmdRes.isDone())
             activity.callDialogError(recCmdRes.message());
+        else {
+            AlertDialog queryDialog = new SpotsDialog.Builder().setContext(activity).setMessage("Выполнение").setCancelable(false).build();
+            CommandManagerAsyncTaskDTO cmdManagerATDTO =
+                    CommandManagerAsyncTaskDTOInit.commandManagerAsyncTaskDTO(activity.commandManager(),
+                            recCmdRes.reconnectDTO().lastCommandType(), recCmdRes.reconnectDTO().lastCommand());
+            CommandManagerAsyncTask cmdManagerAT = new CommandManagerAsyncTask(activity, queryDialog);
+            cmdManagerAT.execute(cmdManagerATDTO);
+        }
 
         return null;
     }

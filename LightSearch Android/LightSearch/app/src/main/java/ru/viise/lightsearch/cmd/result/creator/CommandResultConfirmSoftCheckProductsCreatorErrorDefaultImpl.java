@@ -19,25 +19,25 @@ package ru.viise.lightsearch.cmd.result.creator;
 import ru.viise.lightsearch.cmd.result.CommandResult;
 import ru.viise.lightsearch.cmd.result.ConfirmSoftCheckProductsResult;
 import ru.viise.lightsearch.cmd.result.ConfirmSoftCheckProductsResultInit;
+import ru.viise.lightsearch.data.ReconnectDTO;
 
 public class CommandResultConfirmSoftCheckProductsCreatorErrorDefaultImpl implements CommandResultCreator {
 
     private final boolean isDone;
-    private final boolean isReconnect;
     private final String message;
+    private final ReconnectDTO reconnectDTO;
 
-    public CommandResultConfirmSoftCheckProductsCreatorErrorDefaultImpl(boolean isDone, boolean isReconnect,
-                String message) {
+    public CommandResultConfirmSoftCheckProductsCreatorErrorDefaultImpl(boolean isDone, String message,
+                ReconnectDTO reconnectDTO) {
         this.isDone = isDone;
-        this.isReconnect = isReconnect;
         this.message = message;
+        this.reconnectDTO = reconnectDTO;
     }
 
     @Override
     public CommandResult createCommandResult() {
         ConfirmSoftCheckProductsResult conSCProdRes =
-                ConfirmSoftCheckProductsResultInit.confirmSoftCheckProductsResult(isDone, isReconnect,
-                        message, null);
+                ConfirmSoftCheckProductsResultInit.confirmSoftCheckProductsResult(isDone, message, null, reconnectDTO);
         return conSCProdRes;
     }
 }
