@@ -1,13 +1,17 @@
+<p align="center"> 
+<img src="https://user-images.githubusercontent.com/43209824/60258828-45746980-9919-11e9-8428-f06504d36f51.png">
+</p>
+
 LightSearch
 ===========
 
-LightSearch - комплекс программ, не зависимый от бизнес-логики предприятия, решающий задачи, необходимые для данного предприятия. На данный момент комплекс разрабатывается для предприятия, которому необходимы две функции: поиск товара по штрих-коду и создание мягкого чека.
+LightSearch - комплекс программ, не зависимый от бизнес-логики предприятия. На данный момент комплекс разрабатывается для предприятия, которому необходимы две функции: поиск товара по штрих-коду и создание мягкого чека.
 
 Из каких программ состоит данный комплекс?
 ------------------------------------------
 LightSearch состоит из четырех программ:
 
-1) [LightSearchPC](https://github.com/ViiSE/LightSearch/blob/master/Documents/Project%20history/LightSearchPC.pdf) - работает под операционными системами GNU/Linux и Windows. Обеспечивает оперативный поиск по базе данных. 
+1) [LightSearch PC](https://github.com/ViiSE/LightSearch/blob/master/Documents/Project%20history/LightSearchPC.pdf) - работает под операционными системами GNU/Linux и Windows. Обеспечивает оперативный поиск по базе данных. 
  * Реализованы следующие функции:
    - Поиск по наименованию, по части наименования, или по штрих-коду;
    - Режим сканера и автоматического поиска;
@@ -19,26 +23,25 @@ LightSearch состоит из четырех программ:
    - Полная кросс-платформенность;
    - Улучшенная защита ini-файла.
   
-2) [LightSearchAndroid](https://github.com/ViiSE/LightSearch/blob/master/Documents/Project%20history/LightSearchAndroid.pdf) - работает под операционной системой Android версии 7.0 и выше. Обеспечивает оперативный поиск по базе данных.
+2) [LightSearch Android](https://github.com/ViiSE/LightSearch/blob/master/Documents/Project%20history/LightSearchAndroid.pdf) - работает под операционной системой Android версии 7.0 и выше. Обеспечивает оперативный поиск по базе данных.
  * Реализованы следующие функции:
    -  Поиск по штрих-коду;
    -  Считывание штрих-кода через камеру смартфона;
    -  Выбор поиска по подразделению;
    -  Сохранение параметров подключения.
- * Что будет добавлено и изменено:
    - Создание мягкого чека.
 
-3) [LightSearchServer](https://github.com/ViiSE/LightSearch/blob/master/Documents/Project%20history/LightSearchServer.pdf) - работает под операционными системами GNU/Linux и Windows. Обеспечивает связь между LightSearchAndroid и базой данных.
+3) [LightSearch Server](https://github.com/ViiSE/LightSearch/blob/master/Documents/Project%20history/LightSearchServer.pdf) - работает под операционными системами GNU/Linux и Windows. Обеспечивает связь между LightSearchAndroid и базой данных.
  * Реализованы следующие функции:
    - Общение между клиентом и сервером через JSON по принципу "команда-ответ";
    - Сохранение настроек, параметров базы данных и списка администраторов;
    - Логирование;
+   - Создание обработчика мягкого чека;
    - Черный список.
  * Что будет добавлено и изменено:
-   - Создание обработчика мягкого чека;
    - Полная кросс-платформенность.
 
-4) [LightSearchAdminPanel](https://github.com/ViiSE/LightSearch/blob/master/Documents/Project%20history/LightSearchAdminPanel.pdf) - работает под операционными системами GNU/Linux и Windows. Обеспечивает настройку и администрирование LightSearchServer.
+4) [LightSearch Admin Panel](https://github.com/ViiSE/LightSearch/blob/master/Documents/Project%20history/LightSearchAdminPanel.pdf) - работает под операционными системами GNU/Linux и Windows. Обеспечивает настройку и администрирование LightSearchServer.
  * Реализованы следующие функции:
    - Подключение к любому серверу LightSearchServer;
    - Установка таймаута клиента на сервере;
