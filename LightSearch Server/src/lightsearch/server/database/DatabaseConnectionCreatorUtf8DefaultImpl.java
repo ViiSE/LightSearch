@@ -25,13 +25,13 @@ import lightsearch.server.exception.DatabaseConnectionCreatorException;
  *
  * @author ViiSE
  */
-public class DatabaseConnectionCreatorDefaultImpl implements DatabaseConnectionCreator {
+public class DatabaseConnectionCreatorUtf8DefaultImpl implements DatabaseConnectionCreator {
 
     private final LightSearchServerDatabaseDTO databaseDTO;
     private final String username;
     private final String password;
     
-    public DatabaseConnectionCreatorDefaultImpl(LightSearchServerDatabaseDTO databaseDTO, String username, String password) {
+    public DatabaseConnectionCreatorUtf8DefaultImpl(LightSearchServerDatabaseDTO databaseDTO, String username, String password) {
         this.databaseDTO = databaseDTO;
         this.username = username;
         this.password = password;
@@ -39,7 +39,7 @@ public class DatabaseConnectionCreatorDefaultImpl implements DatabaseConnectionC
  
     @Override
     public DatabaseConnection createFirebirdConnection() throws DatabaseConnectionCreatorException {
-        try {
+        try {           
             Class.forName("org.firebirdsql.jdbc.FBDriver");
             Connection connection = DriverManager.getConnection("jdbc:firebirdsql://" 
                 + databaseDTO.dbIP() + ":" + databaseDTO.dbPort() + "/" + databaseDTO.dbName() + 
