@@ -32,6 +32,14 @@ public enum DatabaseCommandMessageEnum {
         @Override
         public String stringValue() { return "data"; }
     },
+    ID {
+        @Override
+        public String stringValue() { return "ID"; }
+    },
+    AMOUNT {
+        @Override
+        public String stringValue() { return "amount"; }
+    },
     USERNAME {
         @Override
         public String stringValue() { return "username"; }

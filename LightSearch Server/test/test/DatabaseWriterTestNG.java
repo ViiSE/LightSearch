@@ -57,6 +57,8 @@ import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 import lightsearch.server.data.LightSearchServerDTO;
 import lightsearch.server.data.LightSearchServerSettingsDAO;
+import lightsearch.server.database.cmd.message.DatabaseCommandMessage;
+import lightsearch.server.database.cmd.message.DatabaseCommandMessageInit;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 
@@ -143,23 +145,67 @@ public class DatabaseWriterTestNG {
         return iterator;
     }
     
-    public String initMessage() {
-        String message = "{"
-                            + "\"command\":\"search\","
-                            + "\"IMEI\":\"123456789123456\","
-                            + "\"barcode\":\"5421354\","
-                            + "\"sklad\":\"null\","
-                            + "\"TK\":\"null\""
-                        + "}";
-        return message;
+    public String initMessageConnect() {
+        String command        = "connect";
+        String IMEI           = "123456789123456";
+        String username       = "user";
+        String userIdentifier = "007";
+        DatabaseCommandMessage dbCmdMsg = DatabaseCommandMessageInit.databaseCommandMessageConnection(command, IMEI, username, userIdentifier);
+        
+        return dbCmdMsg.message();
     }
     
-    public String initMessageConnect() {
-        String message = "{"
-                            + "\"command\":\"connect\""
-                            + "\"IMEI\":\"123456789123456\""
-                        + "}";
-        return message;
+    public String initMessageSearch() {
+        String command = "search";
+        String IMEI    = "123456789123456";
+        String barcode = "738592";
+        String sklad   = "Склад 1";
+        String TK      = "null";
+        DatabaseCommandMessage dbCmdMsg = DatabaseCommandMessageInit.databaseCommandMessageSearch(command, IMEI, barcode, sklad, TK);
+        
+        return dbCmdMsg.message();
+    }
+    
+    public String initMessageOpenSoftCheck() {
+        String command  = "open_soft_check";
+        String IMEI     = "123456789123456";
+        String ident    = "007";
+        String cardCode = "777";
+        DatabaseCommandMessage dbCmdMsg = DatabaseCommandMessageInit.databaseCommandMessageOpenSoftCheck(command, IMEI, ident, cardCode);
+        
+        return dbCmdMsg.message();
+    }
+    
+    public String initMessageCancelSoftCheck() {
+        String command  = "cancel_soft_check";
+        String IMEI     = "123456789123456";
+        String ident    = "007";
+        String cardCode = "777";
+        DatabaseCommandMessage dbCmdMsg = DatabaseCommandMessageInit.databaseCommandMessageCancelSoftCheck(command, IMEI, ident, cardCode);
+        
+        return dbCmdMsg.message();
+    }
+    
+    public String initMessageConfirmSoftCheckProducts() {
+        String command  = "confirm_prod_sf";
+        String IMEI     = "123456789123456";
+        String ident    = "007";
+        String cardCode = "777";
+        String data     = "[{\"ID\":\"111111\",\"amount\":\"10\"},{\"ID\":\"222222\",\"amount\":\"20\"}]";
+        DatabaseCommandMessage dbCmdMsg = DatabaseCommandMessageInit.databaseCommandMessageConfirmSoftCheckProducts(command, IMEI, ident, cardCode, data);
+        
+        return dbCmdMsg.message();
+    }
+    
+    public String initMessageCloseSoftCheck() {
+        String command  = "close_soft_check";
+        String IMEI     = "123456789123456";
+        String ident    = "007";
+        String cardCode = "777";
+        String delivery = "1";
+        DatabaseCommandMessage dbCmdMsg = DatabaseCommandMessageInit.databaseCommandMessageCloseSoftCheck(command, IMEI, ident, cardCode, delivery);
+        
+        return dbCmdMsg.message();
     }
     
     @Test
@@ -179,8 +225,12 @@ public class DatabaseWriterTestNG {
             CurrentDateTime currentDateTime = CurrentDateTimeInit.currentDateTime();
             String dateTime = currentDateTime.dateTimeInStandartFormat();
             
-            String message = initMessage();
-            
+//            String message = initMessageConnect();
+//            String message = initMessageSearch();
+//            String message = initMessageOpenSoftCheck();
+//            String message = initMessageCancelSoftCheck();
+//            String message = initMessageCloseSoftCheck();
+            String message = initMessageConfirmSoftCheckProducts();
             DatabaseWriter writer = DatabaseWriterInit.databaseWriter(databaseConnection, iterator.next(), dateTime, message);
             
             writer.write();

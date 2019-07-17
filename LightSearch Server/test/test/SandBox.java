@@ -1,5 +1,5 @@
-/* 
- * Copyright 2019 ViiSE.
+/*
+ * Copyright 2019 User.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,18 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lightsearch.server.database;
+package test;
 
-import lightsearch.server.data.LightSearchServerDatabaseDTO;
+import static org.testng.Assert.*;
+import org.testng.annotations.Test;
 
 /**
  *
- * @author ViiSE
+ * @author User
  */
-public class DatabaseConnectionCreatorInit {
+public class SandBox {
     
-    public static DatabaseConnectionCreator databaseConnectionCreator(LightSearchServerDatabaseDTO databaseDTO, 
-            String username, String password) {
-        return new DatabaseConnectionCreatorWin1251DefaultImpl(databaseDTO, username, password);
+    @Test
+    public void sandBox() {
+        String example = "[{hi},{hi},{hi},";
+        example = example.substring(0, example.lastIndexOf("},")) + "}";
+        System.out.println(example);
+        System.out.println("length: " + example.length());
+        //System.out.println(example.lastIndexOf("},"));
     }
 }
