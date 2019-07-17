@@ -57,7 +57,7 @@ public class DatabaseStatementResultSetSelectDefaultImpl implements DatabaseStat
                     LocalDateTime nowMin = LocalDateTime.now().with(LocalTime.MIN);
                     if(dateTimeComparator.isBefore(dateDoc, nowMax)
                         && dateTimeComparator.isAfter(dateDoc, nowMin)) {
-                        result = rs.getString("CMDIN");
+                        result = rs.getString("CMDOUT");
                         code = rs.getString("KOD");
                         return;
                     }

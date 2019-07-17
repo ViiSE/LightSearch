@@ -41,14 +41,16 @@ public class DatabasePreparedStatementUpdateDefaultImpl implements DatabasePrepa
     
     private String query() {
         return "UPDATE " + tableName +  
-               " SET STATE = " + state +
-               " WHERE LSCODE = " + lsCode;
+               " SET STATE = ?" +
+               " WHERE LSCODE = ?";
     }
     
     @Override
     public PreparedStatement preparedStatement() throws DatabasePreparedStatementException {
         try {
             PreparedStatement ps = databaseConnection.connection().prepareStatement(query());
+            ps.setBoolean(1, state);
+            ps.setLong(2, lsCode);
             return ps;
         } catch (SQLException ex) {
             throw new DatabasePreparedStatementException(ex.getMessage());
