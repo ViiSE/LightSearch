@@ -39,6 +39,7 @@ public class MessageSearchJSONDefaultImpl implements MessageSearch {
         this.cmdSearchDTO = cmdSearchDTO;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public String message() {
         JSONObject msgSearchObj = new JSONObject();

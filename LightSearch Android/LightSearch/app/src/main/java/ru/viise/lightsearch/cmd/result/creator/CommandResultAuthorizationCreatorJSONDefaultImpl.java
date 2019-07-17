@@ -23,7 +23,6 @@ import java.util.Arrays;
 import java.util.Objects;
 
 import ru.viise.lightsearch.cmd.ClientCommandContentEnum;
-import ru.viise.lightsearch.cmd.result.AuthorizationCommandResult;
 import ru.viise.lightsearch.cmd.result.AuthorizationCommandResultInit;
 import ru.viise.lightsearch.cmd.result.CommandResult;
 import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifier;
@@ -71,19 +70,17 @@ public class CommandResultAuthorizationCreatorJSONDefaultImpl implements Command
                         isDone, message,null, null, null);
 
             JSONArray skladListJ = (JSONArray) objMsg.get(SKLAD_LIST);
-            if(skladListJ.size() == 0)
+            if(skladListJ != null && skladListJ.size() == 0)
                 return null;
             String[] skladList = Arrays.stream(skladListJ.toArray()).toArray(String[]::new);
 
             JSONArray TKListJ = (JSONArray) objMsg.get(TK_LIST);
-            if(TKListJ.size() == 0)
+            if(TKListJ != null && TKListJ.size() == 0)
                 return null;
             String[] TKList = Arrays.stream(TKListJ.toArray()).toArray(String[]::new);
 
-            AuthorizationCommandResult authCmdRes =
-                    AuthorizationCommandResultInit.authorizationCommandResult(
-                            isDone, message, userIdent, skladList, TKList);
-            return authCmdRes;
+            return AuthorizationCommandResultInit.authorizationCommandResult(isDone, message,
+                    userIdent, skladList, TKList);
         }
         catch(MessageParserException | NullPointerException ex) {
             throw new CommandResultCreatorException(ex.getMessage());

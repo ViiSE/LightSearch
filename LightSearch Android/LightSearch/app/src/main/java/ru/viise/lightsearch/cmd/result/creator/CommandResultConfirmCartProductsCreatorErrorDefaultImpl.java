@@ -17,7 +17,6 @@
 package ru.viise.lightsearch.cmd.result.creator;
 
 import ru.viise.lightsearch.cmd.result.CommandResult;
-import ru.viise.lightsearch.cmd.result.ConfirmCartProductsResult;
 import ru.viise.lightsearch.cmd.result.ConfirmCartProductsResultInit;
 import ru.viise.lightsearch.data.ReconnectDTO;
 
@@ -36,9 +35,7 @@ public class CommandResultConfirmCartProductsCreatorErrorDefaultImpl implements 
 
     @Override
     public CommandResult createCommandResult() {
-        ConfirmCartProductsResult conCProdRes =
-                ConfirmCartProductsResultInit.confirmCartProductsResult(isDone, message,
+        return ConfirmCartProductsResultInit.confirmCartProductsResult(isDone, message,
                     null, reconnectDTO);
-        return conCProdRes;
     }
 }

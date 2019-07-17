@@ -21,7 +21,6 @@ import org.json.simple.JSONObject;
 import java.util.Objects;
 
 import ru.viise.lightsearch.cmd.ClientCommandContentEnum;
-import ru.viise.lightsearch.cmd.result.CloseSoftCheckCommandResult;
 import ru.viise.lightsearch.cmd.result.CloseSoftCheckCommandResultInit;
 import ru.viise.lightsearch.cmd.result.CommandResult;
 import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifier;
@@ -58,10 +57,8 @@ public class CommandResultCloseSoftCheckCreatorJSONDefaultImpl implements Comman
             boolean isDone = resCmdVerifier.verify();
             String message = Objects.requireNonNull(objMsg.get(MESSAGE)).toString();
 
-            CloseSoftCheckCommandResult closeSCCmdRes =
-                    CloseSoftCheckCommandResultInit.closeSoftCheckCommandResult(isDone, message,
+            return CloseSoftCheckCommandResultInit.closeSoftCheckCommandResult(isDone, message,
                         null);
-            return closeSCCmdRes;
         }
         catch(MessageParserException | NullPointerException ex) {
             throw new CommandResultCreatorException(ex.getMessage());

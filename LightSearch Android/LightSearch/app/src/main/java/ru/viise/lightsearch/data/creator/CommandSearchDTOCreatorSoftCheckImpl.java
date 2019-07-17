@@ -24,7 +24,7 @@ public class CommandSearchDTOCreatorSoftCheckImpl implements CommandSearchDTOCre
 
     private final String ALL = SearchFragmentContentEnum.ALL.stringValue();
 
-    private String barcode;
+    private final String barcode;
 
     public CommandSearchDTOCreatorSoftCheckImpl(String barcode) {
         this.barcode = barcode;

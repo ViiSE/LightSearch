@@ -25,16 +25,18 @@ public class CommandResultCancelSoftCheckCreatorErrorDefaultImpl implements Comm
     private final boolean isDone;
     private final String message;
     private final ReconnectDTO reconnectDTO;
+    private final boolean isCart;
 
     public CommandResultCancelSoftCheckCreatorErrorDefaultImpl(boolean isDone, String message,
-               ReconnectDTO reconnectDTO) {
+               ReconnectDTO reconnectDTO, boolean isCart) {
         this.isDone = isDone;
         this.message = message;
         this.reconnectDTO = reconnectDTO;
+        this.isCart = isCart;
     }
 
     @Override
     public CommandResult createCommandResult() {
-        return CancelSoftCheckCommandResultInit.cancelSoftCheckCommandResult(isDone, message, reconnectDTO);
+        return CancelSoftCheckCommandResultInit.cancelSoftCheckCommandResult(isDone, message, reconnectDTO, isCart);
     }
 }

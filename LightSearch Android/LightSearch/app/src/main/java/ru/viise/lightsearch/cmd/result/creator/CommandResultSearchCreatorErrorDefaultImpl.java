@@ -17,7 +17,6 @@
 package ru.viise.lightsearch.cmd.result.creator;
 
 import ru.viise.lightsearch.cmd.result.CommandResult;
-import ru.viise.lightsearch.cmd.result.SearchCommandResult;
 import ru.viise.lightsearch.cmd.result.SearchCommandResultInit;
 import ru.viise.lightsearch.data.ReconnectDTO;
 
@@ -35,9 +34,7 @@ public class CommandResultSearchCreatorErrorDefaultImpl implements CommandResult
 
     @Override
     public CommandResult createCommandResult() {
-        SearchCommandResult searchCmdRes =
-                SearchCommandResultInit.searchCommandResult(isDone, message,
-                    null, null, reconnectDTO);
-        return searchCmdRes;
+        return SearchCommandResultInit.searchCommandResult(isDone, message, null,
+                null, reconnectDTO);
     }
 }

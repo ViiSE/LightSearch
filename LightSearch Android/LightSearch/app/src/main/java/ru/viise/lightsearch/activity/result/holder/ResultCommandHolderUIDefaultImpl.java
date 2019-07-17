@@ -22,7 +22,6 @@ import java.util.function.Function;
 import ru.viise.lightsearch.activity.result.processor.ResultProcessorUI;
 import ru.viise.lightsearch.activity.result.processor.ResultProcessorUIInit;
 import ru.viise.lightsearch.cmd.CommandTypeEnum;
-import ru.viise.lightsearch.cmd.processor.ReconnectProcessor;
 import ru.viise.lightsearch.cmd.result.AuthorizationCommandResult;
 import ru.viise.lightsearch.cmd.result.CancelSoftCheckCommandResult;
 import ru.viise.lightsearch.cmd.result.CloseSoftCheckCommandResult;

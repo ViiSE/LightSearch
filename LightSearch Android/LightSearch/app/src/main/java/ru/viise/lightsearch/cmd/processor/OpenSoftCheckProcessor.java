@@ -57,8 +57,7 @@ public class OpenSoftCheckProcessor implements Function<CommandDTO, CommandResul
             String rawMessage = msgRecipient.acceptMessage();
             CommandResultCreator cmdResCr =
                     CommandResultCreatorInit.commandResultOpenSoftCheckCreator(rawMessage, IMEI);
-            CommandResult cmdRes = cmdResCr.createCommandResult();
-            return cmdRes;
+            return cmdResCr.createCommandResult();
         }
         catch(CommandResultCreatorException ex) {
             return errorCommandResult(ex.getMessageRU(), null);

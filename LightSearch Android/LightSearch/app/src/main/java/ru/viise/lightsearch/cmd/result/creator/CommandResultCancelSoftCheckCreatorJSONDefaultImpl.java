@@ -21,7 +21,6 @@ import org.json.simple.JSONObject;
 import java.util.Objects;
 
 import ru.viise.lightsearch.cmd.ClientCommandContentEnum;
-import ru.viise.lightsearch.cmd.result.CancelSoftCheckCommandResult;
 import ru.viise.lightsearch.cmd.result.CancelSoftCheckCommandResultInit;
 import ru.viise.lightsearch.cmd.result.CommandResult;
 import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifier;
@@ -39,10 +38,12 @@ public class CommandResultCancelSoftCheckCreatorJSONDefaultImpl implements Comma
 
     private final String rawMessage;
     private final String IMEI;
+    private final boolean isCart;
 
-    public CommandResultCancelSoftCheckCreatorJSONDefaultImpl(String rawMessage, String IMEI) {
+    public CommandResultCancelSoftCheckCreatorJSONDefaultImpl(String rawMessage, String IMEI, boolean isCart) {
         this.rawMessage = rawMessage;
         this.IMEI = IMEI;
+        this.isCart = isCart;
     }
 
     @Override
@@ -58,9 +59,8 @@ public class CommandResultCancelSoftCheckCreatorJSONDefaultImpl implements Comma
             boolean isDone = resCmdVerifier.verify();
             String message = Objects.requireNonNull(objMsg.get(MESSAGE)).toString();
 
-            CancelSoftCheckCommandResult cancelSCCmdRes =
-                    CancelSoftCheckCommandResultInit.cancelSoftCheckCommandResult(isDone, message, null);
-            return cancelSCCmdRes;
+            return CancelSoftCheckCommandResultInit.cancelSoftCheckCommandResult(isDone, message,
+                    null, isCart);
         }
         catch(MessageParserException | NullPointerException ex) {
             throw new CommandResultCreatorException(ex.getMessage());

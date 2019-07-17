@@ -38,6 +38,7 @@ public class MessageOpenSoftCheckJSONDefaultImpl implements MessageOpenSoftCheck
         this.cmdOSCDTO = cmdOSCDTO;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public String message() {
         JSONObject msgOSCObj = new JSONObject();

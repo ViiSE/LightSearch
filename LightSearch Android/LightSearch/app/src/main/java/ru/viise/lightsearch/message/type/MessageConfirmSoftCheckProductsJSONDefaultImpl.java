@@ -44,6 +44,7 @@ public class MessageConfirmSoftCheckProductsJSONDefaultImpl implements MessageCo
         this.cmdConSCRecDTO = cmdConSCRecDTO;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public String message() {
         JSONArray jData = new JSONArray();

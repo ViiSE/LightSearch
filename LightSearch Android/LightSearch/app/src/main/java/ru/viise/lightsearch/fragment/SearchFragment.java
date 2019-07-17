@@ -40,6 +40,8 @@ import android.widget.Space;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.Objects;
+
 import dmax.dialog.SpotsDialog;
 import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.activity.ManagerActivityHandler;
@@ -108,7 +110,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener, IS
 
         Space space1 = view.findViewById(R.id.spaceSearch1);
         Space space4 = view.findViewById(R.id.spaceSearch4);
-        Display display = this.getActivity().getWindowManager().getDefaultDisplay();
+        Display display = Objects.requireNonNull(this.getActivity()).getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
         int height = size.y;
@@ -175,7 +177,8 @@ public class SearchFragment extends Fragment implements View.OnClickListener, IS
         super.onAttach(context);
         managerActivityHandler = (ManagerActivityHandler) this.getActivity();
         managerActivityUI = (ManagerActivityUI) this.getActivity();
-        commandManager = managerActivityUI.commandManager();
+        if (managerActivityUI != null)
+            commandManager = managerActivityUI.commandManager();
     }
 
     public void init(String[] skladArray, String[] TKArray) {
@@ -191,7 +194,8 @@ public class SearchFragment extends Fragment implements View.OnClickListener, IS
                 String barcode = searchEditText.getText().toString();
 
                 if(barcode.length() < 5) {
-                    Toast t = Toast.makeText(this.getActivity().getApplicationContext(), "Введите не менее пяти символов!", Toast.LENGTH_LONG);
+                    Toast t = Toast.makeText(Objects.requireNonNull(this.getActivity()).getApplicationContext(),
+                            "Введите не менее пяти символов!", Toast.LENGTH_LONG);
                     t.show();
                 }
                 else {
@@ -229,10 +233,13 @@ public class SearchFragment extends Fragment implements View.OnClickListener, IS
         String[] data = new String[dataArray.length + 1];
         data[0] = ALL_UI;
         System.arraycopy(dataArray, 0, data, 1, dataArray.length);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getParentFragment().getContext(),
-                R.layout.support_simple_spinner_dropdown_item, data);
-        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        ArrayAdapter<String> adapter;
+        if (this.getParentFragment() != null) {
+            adapter = new ArrayAdapter<>(Objects.requireNonNull(this.getParentFragment().getContext()),
+                    R.layout.support_simple_spinner_dropdown_item, data);
+            adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner.setAdapter(adapter);
+        }
     }
 
     private SearchFragmentContentEnum getSubdivision() {

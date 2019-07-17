@@ -21,7 +21,7 @@ import ru.viise.lightsearch.data.ReconnectDTO;
 public class CancelSoftCheckCommandResultInit {
 
     public static CancelSoftCheckCommandResult cancelSoftCheckCommandResult(boolean isDone, String message,
-                        ReconnectDTO reconnectDTO) {
-        return new CancelSoftCheckCommandResultDefaultImpl(isDone, message, reconnectDTO);
+                        ReconnectDTO reconnectDTO, boolean isCart) {
+        return new CancelSoftCheckCommandResultDefaultImpl(isDone, message, reconnectDTO, isCart);
     }
 }

@@ -163,7 +163,8 @@ public class AuthorizationFragment extends Fragment implements IAuthorizationFra
             case R.id.buttonConnect:
                 if(editTextUsername.getText().toString().isEmpty()  ||
                     editTextPassword.getText().toString().isEmpty()) {
-                    Toast t = Toast.makeText(this.getActivity().getApplicationContext(), "Заполните все поля, необходимые для регистрации!", Toast.LENGTH_LONG);
+                    Toast t = Toast.makeText(this.getActivity().getApplicationContext(),
+                            "Заполните все поля, необходимые для регистрации!", Toast.LENGTH_LONG);
                     t.show();
                 }
                 else {
@@ -235,10 +236,9 @@ public class AuthorizationFragment extends Fragment implements IAuthorizationFra
 
     @Override
     public AuthorizationDTO authorizationData() {
-        AuthorizationDTO authDTO = AuthorizationDTOInit.authorizationDTO(
+        return AuthorizationDTOInit.authorizationDTO(
                 prefManager.load(PreferencesManagerType.USERNAME_MANAGER),
                 prefManager.load(PreferencesManagerType.PASS_MANAGER),
                 prefManager.load(PreferencesManagerType.USER_IDENT_MANAGER));
-        return authDTO;
     }
 }

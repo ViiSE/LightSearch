@@ -64,7 +64,8 @@ public class CancelSoftCheckAlertDialogCreatorDefaultImpl implements CancelSoftC
 
                     CommandCancelSoftCheckDTO cmdCancelSCDTO = CommandCancelSoftCheckDTOInit.commandCancelSoftCheckDTO(
                             prefManager.load(PreferencesManagerType.USER_IDENT_MANAGER),
-                            prefManager.load(PreferencesManagerType.CARD_CODE_MANAGER));
+                            prefManager.load(PreferencesManagerType.CARD_CODE_MANAGER),
+                            false);
                     CommandManagerAsyncTaskDTO cmdManagerATDTO =
                             CommandManagerAsyncTaskDTOInit.commandManagerAsyncTaskDTO(commandManager,
                                     CommandTypeEnum.CANCEL_SOFT_CHECK, cmdCancelSCDTO);

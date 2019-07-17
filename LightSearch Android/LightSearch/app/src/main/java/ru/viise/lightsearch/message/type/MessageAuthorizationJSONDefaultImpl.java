@@ -40,6 +40,7 @@ public class MessageAuthorizationJSONDefaultImpl implements MessageAuthorization
         this.cmdAuthDTO = cmdAuthDTO;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public String message() {
         JSONObject msgAuthObj = new JSONObject();

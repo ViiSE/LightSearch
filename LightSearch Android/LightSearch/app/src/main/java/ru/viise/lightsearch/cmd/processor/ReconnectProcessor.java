@@ -55,8 +55,7 @@ public class ReconnectProcessor implements Function<CommandDTO, CommandResult> {
             String rawMessage = msgRecipient.acceptMessage();
             CommandResultCreator cmdResCr =
                     CommandResultCreatorInit.commandResultReconnectCreator(rawMessage, IMEI, cmdAuthDTO.reconnectDTO());
-            CommandResult cmdRes = cmdResCr.createCommandResult();
-            return cmdRes;
+            return cmdResCr.createCommandResult();
         }
         catch(CommandResultCreatorException | MessageSenderException | MessageRecipientException ex) {
             return errorCommandResult(ex.getMessageRU(), cmdAuthDTO.reconnectDTO());

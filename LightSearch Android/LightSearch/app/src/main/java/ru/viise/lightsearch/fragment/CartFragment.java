@@ -16,6 +16,7 @@
 
 package ru.viise.lightsearch.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -160,7 +161,8 @@ public class CartFragment extends Fragment implements ICartFragment, OnBackPress
         super.onAttach(context);
         ManagerActivityUI managerActivityUI = (ManagerActivityUI) this.getActivity();
         managerActivityHandler = (ManagerActivityHandler) this.getActivity();
-        commandManager = managerActivityUI.commandManager();
+        if (managerActivityUI != null)
+            commandManager = managerActivityUI.commandManager();
     }
 
     private void fillSpinnerDeliveryType() {
@@ -180,6 +182,7 @@ public class CartFragment extends Fragment implements ICartFragment, OnBackPress
         this.cartRecords = cartRecords;
     }
 
+    @SuppressLint("SetTextI18n")
     private void initRecycleView(TextView tvTotalCost) {
         adapter = new RecyclerViewAdapter(this.getContext(), cartRecords, tvTotalCost,
                 UnitsEnum.CURRENT_PRICE_UNIT.stringValue());

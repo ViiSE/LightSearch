@@ -35,10 +35,10 @@ import java.util.List;
 import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.data.CartRecord;
 import ru.viise.lightsearch.data.SoftCheckRecord;
-import ru.viise.lightsearch.util.ProductAmountFormat;
-import ru.viise.lightsearch.util.ProductAmountFormatInit;
 import ru.viise.lightsearch.util.CostFormat;
 import ru.viise.lightsearch.util.CostFormatInit;
+import ru.viise.lightsearch.util.ProductAmountFormat;
+import ru.viise.lightsearch.util.ProductAmountFormatInit;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.DefaultViewHolder> {
 
@@ -76,12 +76,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     class DefaultViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView twCardName;
-        private TextView twCardBarcode;
-        private TextView twCardMaxAmount;
-        private TextView twCardPrice;
-        private TextView twCardTotalCost;
-        private EditText etCardCurrentAmount;
+        private final TextView twCardName;
+        private final TextView twCardBarcode;
+        private final TextView twCardMaxAmount;
+        private final TextView twCardPrice;
+        private final TextView twCardTotalCost;
+        private final EditText etCardCurrentAmount;
 
         private boolean ignore = false;
 

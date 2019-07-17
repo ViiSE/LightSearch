@@ -24,7 +24,6 @@ import ru.viise.lightsearch.cmd.result.creator.CommandResultCreatorInit;
 import ru.viise.lightsearch.data.ClientCommandDTO;
 import ru.viise.lightsearch.data.CommandAuthorizationDTO;
 import ru.viise.lightsearch.data.CommandDTO;
-import ru.viise.lightsearch.data.ReconnectDTO;
 import ru.viise.lightsearch.exception.CommandResultCreatorException;
 import ru.viise.lightsearch.exception.MessageRecipientException;
 import ru.viise.lightsearch.exception.MessageSenderException;
@@ -55,8 +54,7 @@ public class AuthorizationProcessor implements Function<CommandDTO, CommandResul
             String rawMessage = msgRecipient.acceptMessage();
             CommandResultCreator cmdResCr =
                     CommandResultCreatorInit.commandResultAuthorizationCreator(rawMessage, IMEI);
-            CommandResult cmdRes = cmdResCr.createCommandResult();
-            return cmdRes;
+            return cmdResCr.createCommandResult();
         }
         catch(CommandResultCreatorException | MessageSenderException | MessageRecipientException ex) {
             return errorCommandResult(ex.getMessageRU());

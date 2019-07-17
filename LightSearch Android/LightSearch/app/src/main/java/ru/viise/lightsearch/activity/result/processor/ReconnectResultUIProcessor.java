@@ -39,8 +39,10 @@ public class ReconnectResultUIProcessor implements Function<CommandResult, Void>
     @Override
     public Void apply(CommandResult commandResult) {
         ReconnectCommandResult recCmdRes = (ReconnectCommandResult)commandResult;
-        if(!recCmdRes.isDone())
+        if(!recCmdRes.isDone()) {
             activity.callDialogError(recCmdRes.message());
+            // Выйти в главное меню?
+        }
         else {
             AlertDialog queryDialog = new SpotsDialog.Builder().setContext(activity).setMessage("Выполнение").setCancelable(false).build();
             CommandManagerAsyncTaskDTO cmdManagerATDTO =

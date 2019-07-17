@@ -20,10 +20,12 @@ public class CommandCancelSoftCheckDTODefaultImpl implements CommandCancelSoftCh
 
     private final String userIdent;
     private final String cardCode;
+    private final boolean isCart;
 
-    public CommandCancelSoftCheckDTODefaultImpl(String userIdent, String cardCode) {
+    public CommandCancelSoftCheckDTODefaultImpl(String userIdent, String cardCode, boolean isCart) {
         this.userIdent = userIdent;
         this.cardCode = cardCode;
+        this.isCart = isCart;
     }
 
     @Override
@@ -34,5 +36,10 @@ public class CommandCancelSoftCheckDTODefaultImpl implements CommandCancelSoftCh
     @Override
     public String cardCode() {
         return cardCode;
+    }
+
+    @Override
+    public boolean isCart() {
+        return isCart;
     }
 }

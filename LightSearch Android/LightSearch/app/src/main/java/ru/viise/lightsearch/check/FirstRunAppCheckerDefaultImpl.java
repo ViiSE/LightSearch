@@ -18,6 +18,8 @@ package ru.viise.lightsearch.check;
 
 import android.content.SharedPreferences;
 
+import java.util.Objects;
+
 import ru.viise.lightsearch.data.AuthorizationPreferenceEnum;
 
 class FirstRunAppCheckerDefaultImpl implements FirstRunAppChecker {
@@ -32,6 +34,6 @@ class FirstRunAppCheckerDefaultImpl implements FirstRunAppChecker {
 
     @Override
     public boolean check() {
-        return sPref.getString(FIRST_TIME, "").equals("");
+        return Objects.equals(sPref.getString(FIRST_TIME, ""), "");
     }
 }

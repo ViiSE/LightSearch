@@ -57,9 +57,9 @@ public class CancelSoftCheckProcessor implements Function<CommandDTO, CommandRes
             msgSender.sendMessage(message);
             String rawMessage = msgRecipient.acceptMessage();
             CommandResultCreator cmdResCr =
-                    CommandResultCreatorInit.commandResultCancelSoftCheckCreator(rawMessage, IMEI);
-            CommandResult cmdRes = cmdResCr.createCommandResult();
-            return cmdRes;
+                    CommandResultCreatorInit.commandResultCancelSoftCheckCreator(rawMessage, IMEI,
+                            cmdCancelSCDTO.isCart());
+            return cmdResCr.createCommandResult();
         }
         catch(CommandResultCreatorException ex) {
             return errorCommandResult(ex.getMessageRU(), null);
@@ -74,7 +74,7 @@ public class CancelSoftCheckProcessor implements Function<CommandDTO, CommandRes
         try {
             CommandResultCreator cmdResCr =
                     CommandResultCreatorInit.commandResultCancelSoftCheckCreator(false, message,
-                            reconnectDTO);
+                            reconnectDTO, false);
             return cmdResCr.createCommandResult();
         }
         catch(CommandResultCreatorException ignore) { return null; /* never happen */ }

@@ -23,11 +23,14 @@ public class CancelSoftCheckCommandResultDefaultImpl implements CancelSoftCheckC
     private final boolean isDone;
     private final String message;
     private final ReconnectDTO reconnectDTO;
+    private final boolean isCart;
 
-    public CancelSoftCheckCommandResultDefaultImpl(boolean isDone, String message, ReconnectDTO reconnectDTO) {
+    public CancelSoftCheckCommandResultDefaultImpl(boolean isDone, String message, ReconnectDTO reconnectDTO,
+               boolean isCart) {
         this.isDone = isDone;
         this.message = message;
         this.reconnectDTO = reconnectDTO;
+        this.isCart = isCart;
     }
 
     @Override
@@ -48,5 +51,10 @@ public class CancelSoftCheckCommandResultDefaultImpl implements CancelSoftCheckC
     @Override
     public String message() {
         return message;
+    }
+
+    @Override
+    public boolean isCart() {
+        return isCart;
     }
 }

@@ -19,4 +19,5 @@ package ru.viise.lightsearch.data;
 public interface CommandCancelSoftCheckDTO extends CommandDTO {
     String userIdentifier();
     String cardCode();
+    boolean isCart();
 }

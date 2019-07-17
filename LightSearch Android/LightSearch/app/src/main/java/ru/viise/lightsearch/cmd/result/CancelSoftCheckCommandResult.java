@@ -16,4 +16,6 @@
 
 package ru.viise.lightsearch.cmd.result;
 
-public interface CancelSoftCheckCommandResult extends CommandResult { }
+public interface CancelSoftCheckCommandResult extends CommandResult {
+    boolean isCart();
+}

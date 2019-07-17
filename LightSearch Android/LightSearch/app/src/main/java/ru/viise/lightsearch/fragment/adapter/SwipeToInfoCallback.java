@@ -33,13 +33,13 @@ import ru.viise.lightsearch.R;
 
 abstract public class SwipeToInfoCallback extends ItemTouchHelper.Callback {
 
-    private Paint clearPaint;
-    private ColorDrawable background;
-    private int backgroundColor;
-    private Drawable changeDrawable;
+    private final Paint clearPaint;
+    private final ColorDrawable background;
+    private final int backgroundColor;
+    private final Drawable changeDrawable;
 
-    private int intrinsicWidth;
-    private int intrinsicHeight;
+    private final int intrinsicWidth;
+    private final int intrinsicHeight;
 
 
     public SwipeToInfoCallback(Context context) {
