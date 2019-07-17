@@ -41,11 +41,11 @@ public class MessageOpenSoftCheckJSONDefaultImpl implements MessageOpenSoftCheck
     @SuppressWarnings("unchecked")
     @Override
     public String message() {
-            JSONObject msgOSCObj = new JSONObject();
-            msgOSCObj.put(COMMAND, OPEN_SOFT_CHECK);
-            msgOSCObj.put(IMEI_FIELD, IMEI);
-            msgOSCObj.put(USER_IDENT, cmdOSCDTO.userIdentifier());
-            msgOSCObj.put(CARD_CODE, cmdOSCDTO.cardCode());
+        JSONObject msgOSCObj = new JSONObject();
+        msgOSCObj.put(COMMAND, OPEN_SOFT_CHECK);
+        msgOSCObj.put(IMEI_FIELD, IMEI);
+        msgOSCObj.put(USER_IDENT, cmdOSCDTO.userIdentifier());
+        msgOSCObj.put(CARD_CODE, cmdOSCDTO.cardCode());
         return msgOSCObj.toJSONString();
     }
 }
