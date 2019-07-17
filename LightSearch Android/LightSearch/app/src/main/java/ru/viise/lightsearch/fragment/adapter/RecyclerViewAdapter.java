@@ -35,10 +35,10 @@ import java.util.List;
 import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.data.CartRecord;
 import ru.viise.lightsearch.data.SoftCheckRecord;
-import ru.viise.lightsearch.util.ProductAmountFormat;
-import ru.viise.lightsearch.util.ProductAmountFormatInit;
 import ru.viise.lightsearch.util.CostFormat;
 import ru.viise.lightsearch.util.CostFormatInit;
+import ru.viise.lightsearch.util.ProductAmountFormat;
+import ru.viise.lightsearch.util.ProductAmountFormatInit;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.DefaultViewHolder> {
 

@@ -23,10 +23,10 @@ import java.util.Objects;
 
 import ru.viise.lightsearch.cmd.ClientCommandContentEnum;
 import ru.viise.lightsearch.cmd.result.CommandResult;
-import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifier;
-import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifierInit;
 import ru.viise.lightsearch.cmd.result.SearchCommandResult;
 import ru.viise.lightsearch.cmd.result.SearchCommandResultInit;
+import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifier;
+import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifierInit;
 import ru.viise.lightsearch.data.SearchRecordDTO;
 import ru.viise.lightsearch.data.creator.SearchRecordsDTOCreator;
 import ru.viise.lightsearch.data.creator.SearchRecordsDTOCreatorInit;

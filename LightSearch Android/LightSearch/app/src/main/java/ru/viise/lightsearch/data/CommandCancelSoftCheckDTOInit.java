@@ -18,7 +18,8 @@ package ru.viise.lightsearch.data;
 
 public class CommandCancelSoftCheckDTOInit {
 
-    public static CommandCancelSoftCheckDTO commandCancelSoftCheckDTO(String userIdent, String cardCode) {
-        return new CommandCancelSoftCheckDTODefaultImpl(userIdent, cardCode);
+    public static CommandCancelSoftCheckDTO commandCancelSoftCheckDTO(String userIdent, String cardCode,
+                      boolean isCart) {
+        return new CommandCancelSoftCheckDTODefaultImpl(userIdent, cardCode, isCart);
     }
 }

@@ -22,10 +22,10 @@ import java.util.Objects;
 
 import ru.viise.lightsearch.cmd.ClientCommandContentEnum;
 import ru.viise.lightsearch.cmd.result.CommandResult;
-import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifier;
-import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifierInit;
 import ru.viise.lightsearch.cmd.result.SearchSoftCheckCommandResult;
 import ru.viise.lightsearch.cmd.result.SearchSoftCheckCommandResultInit;
+import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifier;
+import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifierInit;
 import ru.viise.lightsearch.data.SoftCheckRecord;
 import ru.viise.lightsearch.data.creator.SoftCheckRecordCreator;
 import ru.viise.lightsearch.data.creator.SoftCheckRecordCreatorInit;

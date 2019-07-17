@@ -31,7 +31,6 @@ import ru.viise.lightsearch.data.CommandCancelSoftCheckDTO;
 import ru.viise.lightsearch.data.CommandCancelSoftCheckDTOInit;
 import ru.viise.lightsearch.data.CommandManagerAsyncTaskDTO;
 import ru.viise.lightsearch.data.CommandManagerAsyncTaskDTOInit;
-import ru.viise.lightsearch.fragment.StackFragmentTitle;
 import ru.viise.lightsearch.pref.PreferencesManager;
 import ru.viise.lightsearch.pref.PreferencesManagerInit;
 import ru.viise.lightsearch.pref.PreferencesManagerType;
@@ -69,7 +68,8 @@ public class CancelSoftCheckFromCartAlertDialogCreatorDefaultImpl implements Can
 
                     CommandCancelSoftCheckDTO cmdCancelSCDTO = CommandCancelSoftCheckDTOInit.commandCancelSoftCheckDTO(
                             prefManager.load(PreferencesManagerType.USER_IDENT_MANAGER),
-                            prefManager.load(PreferencesManagerType.CARD_CODE_MANAGER));
+                            prefManager.load(PreferencesManagerType.CARD_CODE_MANAGER),
+                            true);
                     CommandManagerAsyncTaskDTO cmdManagerATDTO =
                             CommandManagerAsyncTaskDTOInit.commandManagerAsyncTaskDTO(commandManager,
                                     CommandTypeEnum.CANCEL_SOFT_CHECK, cmdCancelSCDTO);
@@ -78,8 +78,6 @@ public class CancelSoftCheckFromCartAlertDialogCreatorDefaultImpl implements Can
                     cmdManagerAT.execute(cmdManagerATDTO);
 
                     dialogInterface.dismiss();
-                    activity.setTitle(StackFragmentTitle.pop());
-                    activity.getSupportFragmentManager().popBackStack();
                 })
                 .setNegativeButton(NEGATIVE, (dialogInterface, i) -> dialogInterface.dismiss())
                 .create();

@@ -30,9 +30,6 @@ import java.util.List;
 
 import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.data.SoftCheckRecord;
-import ru.viise.lightsearch.exception.FindableException;
-import ru.viise.lightsearch.find.ImplFinder;
-import ru.viise.lightsearch.find.ImplFinderFragmentFromFragmentDefaultImpl;
 
 public class SoftCheckContainerFragment extends Fragment implements ISoftCheckContainerFragment {
 

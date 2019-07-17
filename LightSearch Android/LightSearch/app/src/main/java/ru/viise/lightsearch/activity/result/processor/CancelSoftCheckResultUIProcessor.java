@@ -28,6 +28,7 @@ import ru.viise.lightsearch.data.ConnectionDTO;
 import ru.viise.lightsearch.data.ConnectionDTOInit;
 import ru.viise.lightsearch.data.ReconnectDTO;
 import ru.viise.lightsearch.fragment.IContainerFragment;
+import ru.viise.lightsearch.fragment.StackFragmentTitle;
 import ru.viise.lightsearch.pref.PreferencesManager;
 import ru.viise.lightsearch.pref.PreferencesManagerInit;
 import ru.viise.lightsearch.pref.PreferencesManagerType;
@@ -44,6 +45,11 @@ public class CancelSoftCheckResultUIProcessor implements Function<CommandResult,
     public Void apply(CommandResult commandResult) {
         CancelSoftCheckCommandResult cancelSCCmdRes = (CancelSoftCheckCommandResult)commandResult;
         if(cancelSCCmdRes.isDone()) {
+            if(cancelSCCmdRes.isCart()) {
+                activity.setTitle(StackFragmentTitle.pop());
+                activity.getSupportFragmentManager().popBackStack();
+            }
+
             activity.callDialogSuccess(cancelSCCmdRes.message());
             IContainerFragment containerFragment = activity.getContainerFragment();
 

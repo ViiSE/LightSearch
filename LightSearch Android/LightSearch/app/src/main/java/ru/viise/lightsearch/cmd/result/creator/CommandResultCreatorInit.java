@@ -59,13 +59,14 @@ public class CommandResultCreatorInit {
         return new CommandResultOpenSoftCheckCreatorErrorDefaultImpl(isDone, message, reconnectDTO);
     }
 
-    public static CommandResultCreator commandResultCancelSoftCheckCreator(String rawMessage, String IMEI) {
-        return new CommandResultCancelSoftCheckCreatorJSONDefaultImpl(rawMessage, IMEI);
+    public static CommandResultCreator commandResultCancelSoftCheckCreator(String rawMessage, String IMEI,
+                        boolean isCart) {
+        return new CommandResultCancelSoftCheckCreatorJSONDefaultImpl(rawMessage, IMEI, isCart);
     }
 
     public static CommandResultCreator commandResultCancelSoftCheckCreator(boolean isDone,
-                   String message, ReconnectDTO reconnectDTO) {
-        return new CommandResultCancelSoftCheckCreatorErrorDefaultImpl(isDone, message, reconnectDTO);
+                   String message, ReconnectDTO reconnectDTO, boolean isCart) {
+        return new CommandResultCancelSoftCheckCreatorErrorDefaultImpl(isDone, message, reconnectDTO, isCart);
     }
 
     public static CommandResultCreator commandResultConfirmSoftCheckProductsCreator(String rawMessage,

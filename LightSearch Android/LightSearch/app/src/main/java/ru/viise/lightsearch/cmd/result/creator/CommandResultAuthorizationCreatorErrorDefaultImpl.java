@@ -18,7 +18,6 @@ package ru.viise.lightsearch.cmd.result.creator;
 
 import ru.viise.lightsearch.cmd.result.AuthorizationCommandResultInit;
 import ru.viise.lightsearch.cmd.result.CommandResult;
-import ru.viise.lightsearch.data.ReconnectDTO;
 
 public class CommandResultAuthorizationCreatorErrorDefaultImpl implements CommandResultCreator {
 

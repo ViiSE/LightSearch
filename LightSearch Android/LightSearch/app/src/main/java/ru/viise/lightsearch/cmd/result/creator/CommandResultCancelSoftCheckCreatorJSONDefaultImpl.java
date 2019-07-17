@@ -39,10 +39,12 @@ public class CommandResultCancelSoftCheckCreatorJSONDefaultImpl implements Comma
 
     private final String rawMessage;
     private final String IMEI;
+    private final boolean isCart;
 
-    public CommandResultCancelSoftCheckCreatorJSONDefaultImpl(String rawMessage, String IMEI) {
+    public CommandResultCancelSoftCheckCreatorJSONDefaultImpl(String rawMessage, String IMEI, boolean isCart) {
         this.rawMessage = rawMessage;
         this.IMEI = IMEI;
+        this.isCart = isCart;
     }
 
     @Override
@@ -59,7 +61,7 @@ public class CommandResultCancelSoftCheckCreatorJSONDefaultImpl implements Comma
             String message = Objects.requireNonNull(objMsg.get(MESSAGE)).toString();
 
             CancelSoftCheckCommandResult cancelSCCmdRes =
-                    CancelSoftCheckCommandResultInit.cancelSoftCheckCommandResult(isDone, message, null);
+                    CancelSoftCheckCommandResultInit.cancelSoftCheckCommandResult(isDone, message, null, isCart);
             return cancelSCCmdRes;
         }
         catch(MessageParserException | NullPointerException ex) {
