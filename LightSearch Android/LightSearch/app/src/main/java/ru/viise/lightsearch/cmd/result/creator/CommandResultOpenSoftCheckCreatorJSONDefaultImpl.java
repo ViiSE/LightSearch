@@ -22,7 +22,6 @@ import java.util.Objects;
 
 import ru.viise.lightsearch.cmd.ClientCommandContentEnum;
 import ru.viise.lightsearch.cmd.result.CommandResult;
-import ru.viise.lightsearch.cmd.result.OpenSoftCheckCommandResult;
 import ru.viise.lightsearch.cmd.result.OpenSoftCheckCommandResultInit;
 import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifier;
 import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifierInit;
@@ -58,9 +57,7 @@ public class CommandResultOpenSoftCheckCreatorJSONDefaultImpl implements Command
             boolean isDone = resCmdVerifier.verify();
             String message = Objects.requireNonNull(objMsg.get(MESSAGE)).toString();
 
-            OpenSoftCheckCommandResult openSCCmdRes =
-                    OpenSoftCheckCommandResultInit.openSoftCheckCommandResult(isDone, message, null);
-            return openSCCmdRes;
+            return OpenSoftCheckCommandResultInit.openSoftCheckCommandResult(isDone, message, null);
         }
         catch(MessageParserException | NullPointerException ex) {
             throw new CommandResultCreatorException(ex.getMessage());

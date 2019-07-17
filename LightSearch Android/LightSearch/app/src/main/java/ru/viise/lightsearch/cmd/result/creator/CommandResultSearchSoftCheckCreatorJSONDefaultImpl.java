@@ -22,7 +22,6 @@ import java.util.Objects;
 
 import ru.viise.lightsearch.cmd.ClientCommandContentEnum;
 import ru.viise.lightsearch.cmd.result.CommandResult;
-import ru.viise.lightsearch.cmd.result.SearchSoftCheckCommandResult;
 import ru.viise.lightsearch.cmd.result.SearchSoftCheckCommandResultInit;
 import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifier;
 import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifierInit;
@@ -64,10 +63,8 @@ public class CommandResultSearchSoftCheckCreatorJSONDefaultImpl implements Comma
                     SoftCheckRecordCreatorInit.softCheckRecordCreator(objMsg.get(DATA));
             SoftCheckRecord record = recordCreator.createSoftCheckRecord();
 
-            SearchSoftCheckCommandResult result =
-                    SearchSoftCheckCommandResultInit.searchSoftCheckCommandResult(isDone, null,
+            return SearchSoftCheckCommandResultInit.searchSoftCheckCommandResult(isDone, null,
                             record, null);
-            return result;
         }
         catch(MessageParserException | NullPointerException ex) {
             throw new CommandResultCreatorException(ex.getMessage());

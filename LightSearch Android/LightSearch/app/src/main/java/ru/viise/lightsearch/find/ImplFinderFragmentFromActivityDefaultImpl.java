@@ -31,14 +31,14 @@ public class ImplFinderFragmentFromActivityDefaultImpl<T extends Findable> imple
     }
 
 
+    @SuppressWarnings("unchecked")
     @Override
     public T findImpl(Class type) throws FindableException {
-        Class<T> typeT = type;
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
         for(Fragment fragment : fragmentManager.getFragments()) {
-            if(typeT.isInstance(fragment)) {
+            if(((Class<T>) type).isInstance(fragment)) {
                 try {
-                    return typeT.cast(fragment);
+                    return ((Class<T>) type).cast(fragment);
                 }
                 catch(ClassCastException ex) {
                     throw new FindableException(ex.getMessage());

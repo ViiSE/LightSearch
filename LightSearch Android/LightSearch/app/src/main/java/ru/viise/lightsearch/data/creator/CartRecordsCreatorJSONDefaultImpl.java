@@ -21,6 +21,7 @@ import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import ru.viise.lightsearch.cmd.ClientCommandContentEnum;
 import ru.viise.lightsearch.data.CartRecord;
@@ -50,8 +51,8 @@ public class CartRecordsCreatorJSONDefaultImpl implements CartRecordsCreator {
         List<UnconfirmedRecord> unconfirmedRecords = new ArrayList<>();
         for(Object unconfirmedRecObj : unconfirmedRecordsJ) {
             JSONObject unconfirmedRecJ = (JSONObject) unconfirmedRecObj;
-            String barcode = unconfirmedRecJ.get(ID).toString();
-            String amount = unconfirmedRecJ.get(AMOUNT).toString();
+            String barcode = Objects.requireNonNull(unconfirmedRecJ.get(ID)).toString();
+            String amount  = Objects.requireNonNull(unconfirmedRecJ.get(AMOUNT)).toString();
             UnconfirmedRecord unconfirmedRecord =
                     UnconfirmedRecordInit.unconfirmedRecord(barcode, amount);
             unconfirmedRecords.add(unconfirmedRecord);

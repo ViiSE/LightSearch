@@ -28,8 +28,7 @@ public class CostFormatDefaultImpl implements CostFormat {
         DecimalFormatSymbols formatSymbols = new DecimalFormatSymbols(currentLocale);
         formatSymbols.setDecimalSeparator('.');
         DecimalFormat decimalFormat = new DecimalFormat("#.##", formatSymbols);
-        float totalCostFormat = Float.parseFloat(decimalFormat.format(totalCost));
 
-        return totalCostFormat;
+        return Float.parseFloat(decimalFormat.format(totalCost));
     }
 }

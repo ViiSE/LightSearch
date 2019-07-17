@@ -17,7 +17,6 @@
 package ru.viise.lightsearch.cmd.result.creator;
 
 import ru.viise.lightsearch.cmd.result.CommandResult;
-import ru.viise.lightsearch.cmd.result.OpenSoftCheckCommandResult;
 import ru.viise.lightsearch.cmd.result.OpenSoftCheckCommandResultInit;
 import ru.viise.lightsearch.data.ReconnectDTO;
 
@@ -36,8 +35,6 @@ public class CommandResultOpenSoftCheckCreatorErrorDefaultImpl implements Comman
 
     @Override
     public CommandResult createCommandResult() {
-        OpenSoftCheckCommandResult openSCCmdRes =
-                OpenSoftCheckCommandResultInit.openSoftCheckCommandResult(isDone, message, reconnectDTO);
-        return openSCCmdRes;
+        return OpenSoftCheckCommandResultInit.openSoftCheckCommandResult(isDone, message, reconnectDTO);
     }
 }

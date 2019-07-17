@@ -76,12 +76,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     class DefaultViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView twCardName;
-        private TextView twCardBarcode;
-        private TextView twCardMaxAmount;
-        private TextView twCardPrice;
-        private TextView twCardTotalCost;
-        private EditText etCardCurrentAmount;
+        private final TextView twCardName;
+        private final TextView twCardBarcode;
+        private final TextView twCardMaxAmount;
+        private final TextView twCardPrice;
+        private final TextView twCardTotalCost;
+        private final EditText etCardCurrentAmount;
 
         private boolean ignore = false;
 

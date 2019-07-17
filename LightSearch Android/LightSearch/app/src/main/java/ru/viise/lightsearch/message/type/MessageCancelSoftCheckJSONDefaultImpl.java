@@ -38,6 +38,7 @@ public class MessageCancelSoftCheckJSONDefaultImpl implements MessageCancelSoftC
         this.cmdCSCDTO = cmdCSCDTO;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public String message() {
         JSONObject msgOSCObj = new JSONObject();

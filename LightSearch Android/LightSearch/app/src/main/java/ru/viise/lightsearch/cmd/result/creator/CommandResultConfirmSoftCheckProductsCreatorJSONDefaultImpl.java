@@ -23,7 +23,6 @@ import java.util.Objects;
 
 import ru.viise.lightsearch.cmd.ClientCommandContentEnum;
 import ru.viise.lightsearch.cmd.result.CommandResult;
-import ru.viise.lightsearch.cmd.result.ConfirmSoftCheckProductsResult;
 import ru.viise.lightsearch.cmd.result.ConfirmSoftCheckProductsResultInit;
 import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifier;
 import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifierInit;
@@ -69,10 +68,8 @@ public class CommandResultConfirmSoftCheckProductsCreatorJSONDefaultImpl impleme
                     CartRecordsCreatorInit.cartRecordsCreator(softCheckRecords, objMsg.get(DATA));
             List<SoftCheckRecord> cartRecords = cartRecCr.createCartRecords();
 
-            ConfirmSoftCheckProductsResult confirmSCProdRes =
-                    ConfirmSoftCheckProductsResultInit.confirmSoftCheckProductsResult(isDone,
+            return ConfirmSoftCheckProductsResultInit.confirmSoftCheckProductsResult(isDone,
                         null, cartRecords, null);
-            return confirmSCProdRes;
         }
         catch(MessageParserException | NullPointerException ex) {
             throw new CommandResultCreatorException(ex.getMessage());

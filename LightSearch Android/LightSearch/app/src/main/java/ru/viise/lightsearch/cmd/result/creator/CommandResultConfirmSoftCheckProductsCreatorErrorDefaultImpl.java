@@ -17,7 +17,6 @@
 package ru.viise.lightsearch.cmd.result.creator;
 
 import ru.viise.lightsearch.cmd.result.CommandResult;
-import ru.viise.lightsearch.cmd.result.ConfirmSoftCheckProductsResult;
 import ru.viise.lightsearch.cmd.result.ConfirmSoftCheckProductsResultInit;
 import ru.viise.lightsearch.data.ReconnectDTO;
 
@@ -36,8 +35,6 @@ public class CommandResultConfirmSoftCheckProductsCreatorErrorDefaultImpl implem
 
     @Override
     public CommandResult createCommandResult() {
-        ConfirmSoftCheckProductsResult conSCProdRes =
-                ConfirmSoftCheckProductsResultInit.confirmSoftCheckProductsResult(isDone, message, null, reconnectDTO);
-        return conSCProdRes;
+        return ConfirmSoftCheckProductsResultInit.confirmSoftCheckProductsResult(isDone, message, null, reconnectDTO);
     }
 }

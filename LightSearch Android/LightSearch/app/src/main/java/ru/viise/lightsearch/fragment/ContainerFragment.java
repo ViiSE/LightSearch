@@ -96,7 +96,8 @@ public class ContainerFragment extends Fragment implements OnBackPressedListener
         super.onAttach(context);
         managerActivityHandler = (ManagerActivityHandler) this.getActivity();
         ManagerActivityUI managerActivityUI = (ManagerActivityUI) this.getActivity();
-        commandManager = managerActivityUI.commandManager();
+        if (managerActivityUI != null)
+            commandManager = managerActivityUI.commandManager();
     }
 
     @Override

@@ -41,6 +41,7 @@ public class MessageCloseSoftCheckJSONDefaultImpl implements MessageCloseSoftChe
         this.delivery = this.cmdCSCDTO.deliveryType().stringCommandValue();
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public String message() {
         JSONObject msgOSCObj = new JSONObject();

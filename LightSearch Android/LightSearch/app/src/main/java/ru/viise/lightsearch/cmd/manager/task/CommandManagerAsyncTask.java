@@ -42,9 +42,7 @@ public class CommandManagerAsyncTask extends AsyncTask<CommandManagerAsyncTaskDT
     @Override
     protected CommandResult doInBackground(CommandManagerAsyncTaskDTO... commandManagerAsyncTaskDTOS) {
         CommandManagerAsyncTaskDTO cmdMATDTO = commandManagerAsyncTaskDTOS[0];
-        CommandResult cmdRes = cmdMATDTO.commandManager().doCommand(cmdMATDTO.type(),
-                cmdMATDTO.commandDTO());
-        return cmdRes;
+        return cmdMATDTO.commandManager().doCommand(cmdMATDTO.type(), cmdMATDTO.commandDTO());
     }
 
     @Override

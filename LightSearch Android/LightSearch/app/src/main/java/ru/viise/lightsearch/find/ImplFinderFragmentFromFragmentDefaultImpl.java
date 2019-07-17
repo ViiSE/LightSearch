@@ -31,12 +31,11 @@ public class ImplFinderFragmentFromFragmentDefaultImpl<T extends Findable> imple
 
     @Override
     public T findImpl(Class<T> type) throws FindableException {
-        Class<T> typeT = type;
         FragmentManager fragmentManager = fragment.getChildFragmentManager();
         for(Fragment fragment : fragmentManager.getFragments()) {
-            if(typeT.isInstance(fragment)) {
+            if(type.isInstance(fragment)) {
                 try {
-                    return typeT.cast(fragment);
+                    return type.cast(fragment);
                 } catch (ClassCastException ex) {
                     throw new FindableException(ex.getMessage());
                 }

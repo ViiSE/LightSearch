@@ -59,8 +59,7 @@ public class CancelSoftCheckProcessor implements Function<CommandDTO, CommandRes
             CommandResultCreator cmdResCr =
                     CommandResultCreatorInit.commandResultCancelSoftCheckCreator(rawMessage, IMEI,
                             cmdCancelSCDTO.isCart());
-            CommandResult cmdRes = cmdResCr.createCommandResult();
-            return cmdRes;
+            return cmdResCr.createCommandResult();
         }
         catch(CommandResultCreatorException ex) {
             return errorCommandResult(ex.getMessageRU(), null);

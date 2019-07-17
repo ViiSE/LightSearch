@@ -58,8 +58,7 @@ public class CloseSoftCheckProcessor implements Function<CommandDTO, CommandResu
             String rawMessage = msgRecipient.acceptMessage();
             CommandResultCreator cmdResCr =
                     CommandResultCreatorInit.commandResultCloseSoftCheckCreator(rawMessage, IMEI);
-            CommandResult cmdRes = cmdResCr.createCommandResult();
-            return cmdRes;
+            return cmdResCr.createCommandResult();
         }
         catch(CommandResultCreatorException ex) {
             return errorCommandResult(ex.getMessageRU(), null);

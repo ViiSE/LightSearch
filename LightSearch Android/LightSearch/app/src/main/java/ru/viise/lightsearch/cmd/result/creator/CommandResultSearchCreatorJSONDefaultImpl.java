@@ -23,7 +23,6 @@ import java.util.Objects;
 
 import ru.viise.lightsearch.cmd.ClientCommandContentEnum;
 import ru.viise.lightsearch.cmd.result.CommandResult;
-import ru.viise.lightsearch.cmd.result.SearchCommandResult;
 import ru.viise.lightsearch.cmd.result.SearchCommandResultInit;
 import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifier;
 import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifierInit;
@@ -67,9 +66,8 @@ public class CommandResultSearchCreatorJSONDefaultImpl implements CommandResultC
                     SearchRecordsDTOCreatorInit.searchRecordsDTOCreator(objMsg.get(DATA));
             List<SearchRecordDTO> searchRecords = searchRecsDTOCr.createSearchRecordsDTO();
 
-            SearchCommandResult searchCmdRes = SearchCommandResultInit.searchCommandResult(isDone,
+            return SearchCommandResultInit.searchCommandResult(isDone,
                     null, searchRecords, subdivision, null);
-            return searchCmdRes;
         }
         catch(MessageParserException | NullPointerException ex) {
             throw new CommandResultCreatorException(ex.getMessage());

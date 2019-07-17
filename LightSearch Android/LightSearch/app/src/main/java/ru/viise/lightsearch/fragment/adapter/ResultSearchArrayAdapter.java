@@ -16,6 +16,7 @@
 
 package ru.viise.lightsearch.fragment.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
@@ -36,8 +37,10 @@ public class ResultSearchArrayAdapter extends ArrayAdapter<SearchRecordDTO> {
         super(context, resource, records);
     }
 
+    @NonNull
+    @SuppressLint("InflateParams")
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         SearchRecordDTO record = getItem(position);
 
         if (convertView == null) {
@@ -45,15 +48,16 @@ public class ResultSearchArrayAdapter extends ArrayAdapter<SearchRecordDTO> {
                     .inflate(R.layout.cardview_row_result_search, null);
         }
 
-        ((TextView) convertView.findViewById(R.id.textViewCardNameRS)).setText(record.name());
-        ((TextView) convertView.findViewById(R.id.textViewCardIDRS)).setText(record.id());
-        ((TextView) convertView.findViewById(R.id.textViewCardAmountRS)).setText(
-                String.format("%s %s", record.amount(), record.amountUnit()));
-        ((TextView) convertView.findViewById(R.id.textViewCardSubdivRS)).setText(record.subdivision());
-        ((TextView) convertView.findViewById(R.id.textViewCardPriceRS)).setText(
-                String.format("%s %s", record.price(), UnitsEnum.CURRENT_PRICE_UNIT.stringValue()));
+        if (record != null) {
+            ((TextView) convertView.findViewById(R.id.textViewCardNameRS)).setText(record.name());
+            ((TextView) convertView.findViewById(R.id.textViewCardIDRS)).setText(record.id());
+            ((TextView) convertView.findViewById(R.id.textViewCardAmountRS)).setText(
+                    String.format("%s %s", record.amount(), record.amountUnit()));
+            ((TextView) convertView.findViewById(R.id.textViewCardSubdivRS)).setText(record.subdivision());
+            ((TextView) convertView.findViewById(R.id.textViewCardPriceRS)).setText(
+                    String.format("%s %s", record.price(), UnitsEnum.CURRENT_PRICE_UNIT.stringValue()));
+        }
 
         return convertView;
     }
-
 }
