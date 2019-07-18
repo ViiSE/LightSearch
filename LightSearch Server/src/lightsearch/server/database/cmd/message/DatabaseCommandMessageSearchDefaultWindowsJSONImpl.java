@@ -53,5 +53,4 @@ public class DatabaseCommandMessageSearchDefaultWindowsJSONImpl implements Datab
                 + "}";
         return message;
     }
-    
 }

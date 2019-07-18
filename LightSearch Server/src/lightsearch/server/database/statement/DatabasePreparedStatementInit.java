@@ -25,7 +25,7 @@ public class DatabasePreparedStatementInit {
     
     public static DatabasePreparedStatement databasePreparedStatementInsert(DatabaseConnection databaseConnection, 
             String tableName, String command, String dateTime, long lsCode, boolean state) {
-        return new DatabasePreparedStatementInsertDefaultImpl(databaseConnection, tableName, command, dateTime, lsCode, state);
+        return new DatabasePreparedStatementInsertWin1251DefaultImpl(databaseConnection, tableName, command, dateTime, lsCode, state);
     }
     
     public static DatabasePreparedStatement databasePreparedStatementSelect(DatabaseConnection databaseConnection,

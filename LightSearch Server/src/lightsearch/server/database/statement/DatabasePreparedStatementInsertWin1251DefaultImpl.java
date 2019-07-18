@@ -15,6 +15,7 @@
  */
 package lightsearch.server.database.statement;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import lightsearch.server.database.DatabaseConnection;
@@ -24,7 +25,7 @@ import lightsearch.server.exception.DatabasePreparedStatementException;
  *
  * @author ViiSE
  */
-public class DatabasePreparedStatementInsertDefaultImpl implements DatabasePreparedStatement {
+public class DatabasePreparedStatementInsertWin1251DefaultImpl implements DatabasePreparedStatement {
 
     private final DatabaseConnection databaseConnection;
     private final String tableName;
@@ -33,7 +34,7 @@ public class DatabasePreparedStatementInsertDefaultImpl implements DatabasePrepa
     private final long lsCode;
     private final boolean state;
         
-    public DatabasePreparedStatementInsertDefaultImpl(DatabaseConnection databaseConnection, 
+    public DatabasePreparedStatementInsertWin1251DefaultImpl(DatabaseConnection databaseConnection, 
             String tableName, String command, String dateTime, long lsCode, boolean state) {
         this.databaseConnection = databaseConnection;
         this.tableName = tableName;
@@ -54,10 +55,10 @@ public class DatabasePreparedStatementInsertDefaultImpl implements DatabasePrepa
             PreparedStatement ps = databaseConnection.connection().prepareStatement(query());
             ps.setLong(1, lsCode);
             ps.setString(2, dateTime);
-            ps.setBytes(3, command.getBytes());
+            ps.setBytes(3, command.getBytes("windows-1251"));
             ps.setBoolean(4, state);
             return ps;
-        } catch (SQLException ex) {
+        } catch (SQLException | UnsupportedEncodingException ex) {
             throw new DatabasePreparedStatementException(ex.getMessage());
         }
     }
