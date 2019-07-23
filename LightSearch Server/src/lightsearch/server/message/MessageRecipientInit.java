@@ -24,6 +24,7 @@ import java.io.DataInputStream;
 public class MessageRecipientInit {
     
     public static MessageRecipient messageRecipient(DataInputStream dataInputStream) {
-        return new MessageRecipientDefaultImpl(dataInputStream);
+        //return new MessageRecipientDefaultImpl(dataInputStream);
+        return new MessageRecipientDebugImpl(dataInputStream);
     }
 }
