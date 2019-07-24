@@ -49,7 +49,7 @@ public class ClientBlacklistFromFileDefaultImpl implements ClientBlacklist {
         }
         catch(IOException ex) {
             System.out.println();
-            System.out.println("Error blaclist file: " + ex.getMessage());
+            System.out.println("Error blacklist file: " + ex.getMessage());
             System.out.println("Create new blacklist file...");
             try {
                 File blacklistFile = new File(currDir + "blacklist");

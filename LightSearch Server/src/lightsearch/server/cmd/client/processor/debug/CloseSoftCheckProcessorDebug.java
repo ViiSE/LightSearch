@@ -67,7 +67,7 @@ public class CloseSoftCheckProcessorDebug extends AbstractProcessorClient {
                             "Невозможно закрыть мягкий чек. Скорее всего, он не был открыт. Попробуйте открыть его.", 
                             "Client " + clientCommand.IMEI() + " cannot close SoftCheck, "
                                     + "user_ident - " + clientCommand.userIdentifier()
-                                    + "card code - " + clientCommand.cardCode());
+                                    + ", card code - " + clientCommand.cardCode());
                 }
             }
             else
