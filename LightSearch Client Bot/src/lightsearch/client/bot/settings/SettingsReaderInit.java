@@ -13,14 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lightsearch.client.bot.parser;
-
-import lightsearch.client.bot.exception.MessageParserException;
+package lightsearch.client.bot.settings;
 
 /**
  *
  * @author ViiSE
  */
-public interface MessageParser {
-    Object parse(String rawMessage) throws MessageParserException;
+public class SettingsReaderInit {
+    
+    public static SettingsReader settingsReader(String settingsName) {
+        return new SettingsReaderFileImpl(settingsName);
+    }
 }

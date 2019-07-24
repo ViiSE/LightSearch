@@ -1,6 +1,5 @@
 {
 	"server_ip": "127.0.0.1",
 	"server_port": "50000",
-	"delay_message_display": "1",
-	"bot_settings_type": "advanced",
+	"delay_message_display": "1"
 }

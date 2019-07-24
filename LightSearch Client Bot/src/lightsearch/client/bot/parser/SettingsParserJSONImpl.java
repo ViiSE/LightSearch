@@ -15,7 +15,7 @@
  */
 package lightsearch.client.bot.parser;
 
-import lightsearch.client.bot.exception.MessageParserException;
+import lightsearch.client.bot.exception.SettingsParserException;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -24,17 +24,17 @@ import org.json.simple.parser.ParseException;
  *
  * @author ViiSE
  */
-public class MessageParserJSONImpl implements MessageParser {
+public class SettingsParserJSONImpl implements SettingsParser {
 
     @Override
-    public Object parse(String rawMessage) throws MessageParserException {
+    public Object parse(String rawData) throws SettingsParserException {
         try {
             JSONParser parser = new JSONParser();
-            JSONObject devInfo = (JSONObject)parser.parse(rawMessage);
+            JSONObject devInfo = (JSONObject)parser.parse(rawData);
             return devInfo;
         }
         catch (ParseException | NullPointerException | ClassCastException ex) {
-            throw new MessageParserException(ex.getMessage());
+            throw new SettingsParserException(ex.getMessage());
         }
     }
     

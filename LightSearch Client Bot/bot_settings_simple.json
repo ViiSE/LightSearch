@@ -1,4 +1,5 @@
 {
+	"type": "simple",
 	"bot_amount": "10",
 	"bot_dto": {
 		"implementation": "lightsearch.client.bot.data.BotDTODefaultImpl",

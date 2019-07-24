@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2019 ViiSE.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,15 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lightsearch.client.bot.parser;
+package lightsearch.client.bot.settings;
 
 /**
  *
  * @author ViiSE
  */
-public class MessageParserInit {
+public class BotEntityCreatorHolderInit {
     
-    public static MessageParser messageParser() {
-        return new MessageParserJSONImpl();
+    public static BotEntityCreatorHolder botEntityCreatorHolder() {
+        return new BotEntityCreatorHolderMapDefaultImpl();
     }
+    
 }

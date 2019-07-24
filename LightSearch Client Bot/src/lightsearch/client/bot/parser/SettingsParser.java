@@ -13,15 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lightsearch.client.bot.exception;
+package lightsearch.client.bot.parser;
+
+import lightsearch.client.bot.exception.SettingsParserException;
 
 /**
  *
  * @author ViiSE
  */
-public class MessageParserException extends Exception {
-    
-    public MessageParserException(String message) {
-        super(message);
-    }
+public interface SettingsParser {
+    Object parse(String rawData) throws SettingsParserException;
 }

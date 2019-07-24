@@ -1,19 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/* 
+ * Copyright 2019 ViiSE.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package lightsearch.client.bot.settings;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.stream.Collectors;
-import lightsearch.client.bot.exception.MessageParserException;
-import lightsearch.client.bot.parser.MessageParser;
-import lightsearch.client.bot.parser.MessageParserInit;
+import lightsearch.client.bot.exception.SettingsParserException;
+import lightsearch.client.bot.parser.SettingsParserInit;
 import org.json.simple.JSONObject;
+import lightsearch.client.bot.parser.SettingsParser;
 
 /**
  *
@@ -21,47 +26,33 @@ import org.json.simple.JSONObject;
  */
 public class GlobalSettingsJSONFileImpl implements GlobalSettings {
 
-    private final String SERVER_IP                    = GlobalSettingsEnum.SERVER_IP.toString();
-    private final String SERVER_PORT                  = GlobalSettingsEnum.SERVER_PORT.toString();
-    private final String DELAY_BEFORE_SENDING_MESSAGE = GlobalSettingsEnum.DELAY_BEFORE_SENDING_MESSAGE.toString();
-    private final String CYCLE_AMOUNT                 = GlobalSettingsEnum.CYCLE_AMOUNT.toString();
-    private final String BOT_AMOUNT                   = GlobalSettingsEnum.BOT_AMOUNT.toString();
+    private final String SERVER_IP             = GlobalSettingsEnum.SERVER_IP.toString();
+    private final String SERVER_PORT           = GlobalSettingsEnum.SERVER_PORT.toString();
+    private final String DELAY_MESSAGE_DISPLAY = GlobalSettingsEnum.DELAY_MESSAGE_DISPLAY.toString();
     
     private final String serverIP;
     private final int serverPort;
-    private final long delay;
-    private final int cycleAmount;
-    private final int botAmount;
+    private final long delayMessageDisplay;
     
     public GlobalSettingsJSONFileImpl(String fileName) {
-        OsDetector osDetector = OsDetectorInit.osDetector();
-        CurrentDirectory currDir = CurrentDirectoryInit.currentDirectory(osDetector);
-        
-        try(FileInputStream fin = new FileInputStream(currDir.currentDirectory() + fileName); 
-                BufferedReader br = new BufferedReader(new InputStreamReader(fin))) {
-            String rawMessage = br.lines().collect(Collectors.joining());
-            MessageParser parser = MessageParserInit.messageParser();
-            JSONObject jObj = (JSONObject) parser.parse(rawMessage);
+        try {
+            SettingsReader reader = SettingsReaderInit.settingsReader(fileName);
             
-            serverIP    = jObj.get(SERVER_IP).toString();
-            serverPort  = Integer.parseInt(jObj.get(SERVER_PORT).toString());
-            delay       = Integer.parseInt(jObj.get(DELAY_BEFORE_SENDING_MESSAGE).toString());
-            cycleAmount = Integer.parseInt(jObj.get(CYCLE_AMOUNT).toString());
-            botAmount   = Integer.parseInt(jObj.get(BOT_AMOUNT).toString());
-        }
-        catch(IOException | MessageParserException ex) {
-            throw new RuntimeException("Error " + fileName + " file: " + ex.getMessage());
+            SettingsParser parser = SettingsParserInit.settingsParser();
+            JSONObject jObj = (JSONObject) parser.parse(reader.settingsContent());
+
+            serverIP            = jObj.get(SERVER_IP).toString();
+            serverPort          = Integer.parseInt(jObj.get(SERVER_PORT).toString());
+            delayMessageDisplay = Integer.parseInt(jObj.get(DELAY_MESSAGE_DISPLAY).toString());
+        } catch(SettingsParserException ex) {
+            throw new RuntimeException("Error in file " + fileName + ".json. "
+                    + "Exception: " + ex.getMessage());
         }
     }
 
     @Override
-    public long delayBeforeSendingMessage() {
-        return delay;
-    }
-
-    @Override
-    public int cycleAmount() {
-        return cycleAmount;
+    public long delayMessageDisplay() {
+        return delayMessageDisplay;
     }
 
     @Override
@@ -72,11 +63,5 @@ public class GlobalSettingsJSONFileImpl implements GlobalSettings {
     @Override
     public int serverPort() {
         return serverPort;
-    }
-
-    @Override
-    public int botAmount() {
-        return botAmount;
-    }
-    
+    }   
 }
