@@ -3,16 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lightsearch.client.bot.data;
+package lightsearch.client.bot.settings;
 
 /**
  *
  * @author ViiSE
  */
-public interface BotDTO {
-    String botName();
-    String username();
-    String IMEI();
-    String cardCode();
-    String userIdent();
+public class BotSettingsInit {
+    
+    public static BotSettings lightSearchClientBotSettings(String fileName) {
+        return new BotSettingsJSONFileImpl(fileName);
+    }
 }

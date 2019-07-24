@@ -11,7 +11,7 @@ import lightsearch.client.bot.TestCycle;
  *
  * @author ViiSE
  */
-public interface LightSearchClientBotSettings {
+public interface BotSettings {
     
     /*
         Задержка перед отправкой следующей команды

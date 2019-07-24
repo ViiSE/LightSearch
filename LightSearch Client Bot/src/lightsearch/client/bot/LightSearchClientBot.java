@@ -5,8 +5,10 @@
  */
 package lightsearch.client.bot;
 
-import lightsearch.client.bot.session.LightSearchClientBotSession;
-import lightsearch.client.bot.session.LightSearchClientBotSessionInit;
+import lightsearch.client.bot.session.BotSessionInit;
+import lightsearch.client.bot.settings.GlobalSettingsInit;
+import lightsearch.client.bot.session.BotSession;
+import lightsearch.client.bot.settings.GlobalSettings;
 
 /**
  *
@@ -18,10 +20,13 @@ public class LightSearchClientBot {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        LightSearchClientBotSession session = 
-                LightSearchClientBotSessionInit.lightSearchClientBotSession();
+        GlobalSettings globalSettings = 
+                GlobalSettingsInit.lightSearchGlobalSettingsCreator("gloabal_settings.json");
         
-        int amountBot = 10;
+        BotSession session = 
+                BotSessionInit.lightSearchClientBotSession(globalSettings);
+        
+        int amountBot = 3;
         
         session.createSession(amountBot);
     }

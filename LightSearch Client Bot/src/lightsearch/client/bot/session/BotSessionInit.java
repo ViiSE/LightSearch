@@ -5,14 +5,17 @@
  */
 package lightsearch.client.bot.session;
 
+import lightsearch.client.bot.settings.GlobalSettings;
+
 /**
  *
  * @author ViiSE
  */
-public class LightSearchClientBotSessionInit {
+public class BotSessionInit {
     
-    public static LightSearchClientBotSession lightSearchClientBotSession() {
-        return new LightSearchClientBotSessionDefaultImpl();
+    public static BotSession lightSearchClientBotSession(
+            GlobalSettings globalSettings) {
+        return new BotSessionDefaultImpl(globalSettings);
     }
     
 }

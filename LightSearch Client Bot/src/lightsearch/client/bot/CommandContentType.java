@@ -10,6 +10,11 @@ package lightsearch.client.bot;
  * @author ViiSE
  */
 public enum CommandContentType {
+    
+    CLIENT {
+        @Override
+        public String toString() { return "client"; }
+    },
     COMMAND {
         @Override
         public String toString() { return "command"; }
@@ -21,6 +26,22 @@ public enum CommandContentType {
     USERNAME {
         @Override
         public String toString() { return "username"; }
+    },
+    PASSWORD {
+        @Override
+        public String toString() { return "password"; }
+    },
+    IP {
+        @Override
+        public String toString() { return "ip"; }
+    },
+    OS {
+        @Override
+        public String toString() { return "os"; }
+    },
+    MODEL {
+        @Override
+        public String toString() { return "model"; }
     },
     IDENT {
         @Override

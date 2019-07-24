@@ -14,7 +14,7 @@ import lightsearch.client.bot.processor.Processor;
  */
 public class TestCycleInit {
     
-    private static TestCycle testCycle(List<Processor> processors) {
+    public static TestCycle testCycle(List<Processor> processors) {
         return new TestCycleDefaulImpl(processors);
     }
 }

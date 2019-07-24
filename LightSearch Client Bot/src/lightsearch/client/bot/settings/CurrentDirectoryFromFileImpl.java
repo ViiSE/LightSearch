@@ -13,22 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lightsearch.server.initialization;
+package lightsearch.client.bot.settings;
 
 import java.io.File;
 import java.net.URISyntaxException;
-
-import lightsearch.server.LightSearchServer;
+import lightsearch.client.bot.LightSearchClientBot;
 
 /**
  *
  * @author ViiSE
  */
-public class CurrentServerDirectoryFromFileImpl implements CurrentServerDirectory {
+public class CurrentDirectoryFromFileImpl implements CurrentDirectory {
 
     private final OsDetector osDetector;
     
-    public CurrentServerDirectoryFromFileImpl(OsDetector osDetector) {
+    public CurrentDirectoryFromFileImpl(OsDetector osDetector) {
         this.osDetector = osDetector;
     }
     
@@ -37,8 +36,8 @@ public class CurrentServerDirectoryFromFileImpl implements CurrentServerDirector
 
         String currentDirectory = null;
         try {
-            currentDirectory = new File(LightSearchServer.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath();
-            currentDirectory = currentDirectory.replaceAll("LightSearch_Server.jar", "");
+            currentDirectory = new File(LightSearchClientBot.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath();
+            currentDirectory = currentDirectory.replaceAll("LightSearch_Client_Bot.jar", "");
             currentDirectory = currentDirectory.substring(0, currentDirectory.length());
 
             if(osDetector.isWindows())

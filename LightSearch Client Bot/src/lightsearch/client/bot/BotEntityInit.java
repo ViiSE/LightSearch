@@ -6,16 +6,16 @@
 package lightsearch.client.bot;
 
 import java.net.Socket;
-import lightsearch.client.bot.settings.LightSearchClientBotSettings;
+import lightsearch.client.bot.settings.BotSettings;
 
 /**
  *
  * @author ViiSE
  */
-public class LightSearchClientBotEntityInit {
+public class BotEntityInit {
     
-    public static LightSearchClientBotEntity lightSearchClientBotEntity(Socket socket, 
-            LightSearchClientBotSettings settings) {
-        return new LightSearchClientBotEntityDefaultImpl(socket, settings);
+    public static BotEntity lightSearchClientBotEntity(Socket socket, 
+            BotSettings settings) {
+        return new BotEntityDefaultImpl(socket, settings);
     }
 }

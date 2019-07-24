@@ -7,12 +7,12 @@ package lightsearch.client.bot.processor;
 
 import lightsearch.client.bot.CommandContentType;
 import lightsearch.client.bot.CommandType;
-import lightsearch.client.bot.data.LightSearchClientBotDTO;
 import lightsearch.client.bot.exception.MessageRecipientException;
 import lightsearch.client.bot.exception.MessageSenderException;
 import lightsearch.client.bot.message.MessageRecipient;
 import lightsearch.client.bot.message.MessageSender;
 import org.json.simple.JSONObject;
+import lightsearch.client.bot.data.BotDTO;
 
 /**
  *
@@ -24,7 +24,11 @@ public class ProcessorAuthorizationDefaultImpl implements Processor {
     
     private final String COMMAND    = CommandContentType.COMMAND.toString();
     private final String IMEI_FIELD = CommandContentType.IMEI.toString();
+    private final String IP         = CommandContentType.IP.toString();
+    private final String OS         = CommandContentType.OS.toString();
+    private final String MODEL      = CommandContentType.MODEL.toString();
     private final String USERNAME   = CommandContentType.USERNAME.toString();
+    private final String PASSWORD   = CommandContentType.PASSWORD.toString();
     private final String IDENT      = CommandContentType.IDENT.toString();
     
     private final MessageSender messageSender;
@@ -35,7 +39,7 @@ public class ProcessorAuthorizationDefaultImpl implements Processor {
     private final String IMEI;
     private final String userIdent;
 
-    public ProcessorAuthorizationDefaultImpl(LightSearchClientBotDTO botDTO, 
+    public ProcessorAuthorizationDefaultImpl(BotDTO botDTO, 
             MessageSender messageSender, MessageRecipient messageRecipient) {
         this.botName   = botDTO.botName();
         this.username  = botDTO.username();
@@ -54,6 +58,7 @@ public class ProcessorAuthorizationDefaultImpl implements Processor {
             System.out.println("Bot " + botName + ": Authorization, RESPONSE: " + response);
         } catch (MessageSenderException | MessageRecipientException ex) {
             System.out.println("CATCH! Bot " + botName + ": Authorization, message - " + ex.getMessage());
+            try {Thread.sleep(1);} catch(InterruptedException ignore) {}
         }
     }
     
@@ -61,7 +66,11 @@ public class ProcessorAuthorizationDefaultImpl implements Processor {
         JSONObject jObj = new JSONObject();
         jObj.put(COMMAND, CONNECT);
         jObj.put(IMEI_FIELD, IMEI);
+        jObj.put(IP, "127.0.0.1");
+        jObj.put(OS, "Windows bots └[∵┌]└[ ∵ ]┘[┐∵]┘");
+        jObj.put(MODEL, "HAL 9000");
         jObj.put(USERNAME, username);
+        jObj.put(PASSWORD, "00000");
         jObj.put(IDENT, userIdent);
         
         return jObj.toJSONString();

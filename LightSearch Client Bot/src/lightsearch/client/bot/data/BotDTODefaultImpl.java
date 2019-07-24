@@ -9,7 +9,7 @@ package lightsearch.client.bot.data;
  *
  * @author ViiSE
  */
-public class LightSearchClientBotDTODefaultImpl implements LightSearchClientBotDTO {
+public class BotDTODefaultImpl implements BotDTO {
     
     private final String username;
     private final String IMEI;
@@ -17,7 +17,7 @@ public class LightSearchClientBotDTODefaultImpl implements LightSearchClientBotD
     private final String userIdent;
     private final String botName;
 
-    LightSearchClientBotDTODefaultImpl(String username, String IMEI, 
+    BotDTODefaultImpl(String username, String IMEI, 
             String cardCode, String userIdent, String botName) {
         this.username  = username;
         this.IMEI      = IMEI;

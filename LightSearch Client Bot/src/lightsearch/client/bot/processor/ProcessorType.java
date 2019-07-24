@@ -3,21 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lightsearch.client.bot;
+package lightsearch.client.bot.processor;
 
 /**
  *
  * @author ViiSE
  */
-public enum CommandType {
+public enum ProcessorType {
     
-    IDENTIFIER {
-        @Override
-        public String toString() { return "identifier"; }
-    },
     CONNECT {
         @Override
         public String toString() { return "connect"; }
+    },
+    AUTHORIZATION {
+        @Override
+        public String toString() { return "authorization"; }
     },
     SEARCH {
         @Override
@@ -37,6 +37,6 @@ public enum CommandType {
     },
     CONFIRM_SOFT_CHECK_PRODUCTS {
         @Override
-        public String toString() { return "confirm_prod_sf"; }
+        public String toString() { return "confirm_soft_check_products"; }
     }
 }

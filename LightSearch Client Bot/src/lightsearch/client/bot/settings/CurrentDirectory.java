@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lightsearch.server.initialization;
+package lightsearch.client.bot.settings;
 
 /**
  *
  * @author ViiSE
  */
-public interface CurrentServerDirectory {
+public interface CurrentDirectory {
     String currentDirectory();
 }

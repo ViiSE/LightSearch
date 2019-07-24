@@ -8,7 +8,6 @@ package lightsearch.client.bot.processor;
 import java.util.List;
 import lightsearch.client.bot.CommandContentType;
 import lightsearch.client.bot.CommandType;
-import lightsearch.client.bot.data.LightSearchClientBotDTO;
 import lightsearch.client.bot.data.ProductDTO;
 import lightsearch.client.bot.exception.MessageRecipientException;
 import lightsearch.client.bot.exception.MessageSenderException;
@@ -16,6 +15,7 @@ import lightsearch.client.bot.message.MessageRecipient;
 import lightsearch.client.bot.message.MessageSender;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import lightsearch.client.bot.data.BotDTO;
 
 /**
  *
@@ -42,7 +42,7 @@ public class ProcessorConfirmSoftCheckProductsDefaultImpl implements Processor {
     private final String cardCode;
     private final List<ProductDTO> products;
 
-    public ProcessorConfirmSoftCheckProductsDefaultImpl(LightSearchClientBotDTO botDTO, 
+    public ProcessorConfirmSoftCheckProductsDefaultImpl(BotDTO botDTO, 
             MessageSender messageSender, MessageRecipient messageRecipient, List<ProductDTO> products) {
         this.botName  = botDTO.botName();
         this.IMEI     = botDTO.IMEI();
@@ -62,6 +62,7 @@ public class ProcessorConfirmSoftCheckProductsDefaultImpl implements Processor {
             System.out.println("Bot " + botName + ": Authorization, RESPONSE: " + response);
         } catch (MessageSenderException | MessageRecipientException ex) {
             System.out.println("CATCH! Bot " + botName + ": Authorization, message - " + ex.getMessage());
+            try {Thread.sleep(1);} catch(InterruptedException ignore) {}
         }
     }
     

@@ -9,7 +9,6 @@ package lightsearch.client.bot;
  *
  * @author ViiSE
  */
-public interface LightSearchClientBotEntity {
-    void run();
+public interface BotEntity extends Runnable {
     void destroy();
 }

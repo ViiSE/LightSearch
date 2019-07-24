@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lightsearch.client.bot.data;
+package lightsearch.client.bot.settings;
 
 /**
  *
  * @author ViiSE
  */
-public interface BotDTO {
-    String botName();
-    String username();
-    String IMEI();
-    String cardCode();
-    String userIdent();
+public interface GlobalSettings {
+    String serverIP();
+    int serverPort();
+    long delayBeforeSendingMessage();
+    int cycleAmount();
+    int botAmount();
 }

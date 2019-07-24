@@ -13,18 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lightsearch.server.initialization;
+package lightsearch.client.bot.settings;
 
 /**
  *
  * @author ViiSE
  */
-public class CurrentServerDirectoryInit {
+public class CurrentDirectoryInit {
 
-    CurrentServerDirectory currentServerDirectory;
+    CurrentDirectory currentServerDirectory;
     
-    public static CurrentServerDirectory currentDirectory(OsDetector osDetector) {
-        return new CurrentServerDirectoryFromFileImpl(osDetector);
+    public static CurrentDirectory currentDirectory(OsDetector osDetector) {
+        return new CurrentDirectoryFromFileImpl(osDetector);
     }
     
 }

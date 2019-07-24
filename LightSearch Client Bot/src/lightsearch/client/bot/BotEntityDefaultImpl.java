@@ -8,13 +8,13 @@ package lightsearch.client.bot;
 import java.io.IOException;
 import java.net.Socket;
 import lightsearch.client.bot.exception.TestCycleOutOfBoundException;
-import lightsearch.client.bot.settings.LightSearchClientBotSettings;
+import lightsearch.client.bot.settings.BotSettings;
 
 /**
  *
  * @author ViiSE
  */
-public class LightSearchClientBotEntityDefaultImpl implements LightSearchClientBotEntity {
+public class BotEntityDefaultImpl implements BotEntity {
 
     private final Socket socket;
     private final TestCycle testCycle;
@@ -22,7 +22,7 @@ public class LightSearchClientBotEntityDefaultImpl implements LightSearchClientB
     private final long delayBeforeSendingMessage;
     private boolean isFinish = false;
     
-    public LightSearchClientBotEntityDefaultImpl(Socket socket, LightSearchClientBotSettings settings) {
+    public BotEntityDefaultImpl(Socket socket, BotSettings settings) {
         this.socket               = socket;
         testCycle                 = settings.testCycle();
         amountCycle               = settings.amountCycle();

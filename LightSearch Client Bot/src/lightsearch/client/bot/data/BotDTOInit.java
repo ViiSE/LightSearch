@@ -9,11 +9,11 @@ package lightsearch.client.bot.data;
  *
  * @author ViiSE
  */
-public class LightSearchClientBotDTOInit {
+public class BotDTOInit {
     
-    public static LightSearchClientBotDTO lightSearchClientBotDTO(String username,
+    public static BotDTO lightSearchClientBotDTO(String username,
             String IMEI, String cardCode, String userIdent, String botName) {
-        return new LightSearchClientBotDTODefaultImpl(username, IMEI, cardCode, 
+        return new BotDTODefaultImpl(username, IMEI, cardCode, 
                 userIdent, botName);
     }
 }

@@ -18,32 +18,19 @@ import lightsearch.client.bot.data.BotDTO;
  *
  * @author ViiSE
  */
-public class ProcessorCloseSoftCheckDefaultImpl implements Processor {
+public class ProcessorConnectionDefaultImpl implements Processor {
+
+    private final String IDENTIFIER = CommandType.IDENTIFIER.toString();
     
-    private final String CLOSE_SOFT_CHECK = CommandType.CLOSE_SOFT_CHECK.toString();
-    
-    private final String COMMAND    = CommandContentType.COMMAND.toString();
-    private final String IMEI_FIELD = CommandContentType.IMEI.toString();
-    private final String IDENT      = CommandContentType.IDENT.toString();
-    private final String CARD_CODE  = CommandContentType.CARD_CODE.toString();
-    private final String DELIVERY   = CommandContentType.DELIVERY.toString();
+    private final String CLIENT = CommandContentType.CLIENT.toString();
     
     private final MessageSender messageSender;
     private final MessageRecipient messageRecipient;
-    
     private final String botName;
-    private final String IMEI;
-    private final String ident;
-    private final String cardCode;
-    private final String delivery;
-
-    public ProcessorCloseSoftCheckDefaultImpl(BotDTO botDTO, 
-            String delivery, MessageSender messageSender, MessageRecipient messageRecipient) {
-        this.botName  = botDTO.botName();
-        this.IMEI     = botDTO.IMEI();
-        this.ident    = botDTO.userIdent();
-        this.cardCode = botDTO.cardCode();
-        this.delivery = delivery;
+    
+    public ProcessorConnectionDefaultImpl(BotDTO botDTO, 
+            MessageSender messageSender, MessageRecipient messageRecipient) {
+        this.botName = botDTO.botName();
         this.messageSender = messageSender;
         this.messageRecipient = messageRecipient;
     }
@@ -63,11 +50,7 @@ public class ProcessorCloseSoftCheckDefaultImpl implements Processor {
     
     private String generateJSONRequest() {
         JSONObject jObj = new JSONObject();
-        jObj.put(COMMAND, CLOSE_SOFT_CHECK);
-        jObj.put(IMEI_FIELD, IMEI);
-        jObj.put(IDENT, ident);
-        jObj.put(CARD_CODE, cardCode);
-        jObj.put(DELIVERY, delivery);
+        jObj.put(IDENTIFIER, CLIENT);
         
         return jObj.toJSONString();
     }
