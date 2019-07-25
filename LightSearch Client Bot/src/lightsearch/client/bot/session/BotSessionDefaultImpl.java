@@ -67,6 +67,8 @@ public class BotSessionDefaultImpl implements BotSession {
     public void createSession() {
         List<BotThread> bots = new ArrayList<>();
         
+        
+        
         for(int i = 0; i < botAmount; i++) {
             try {
                 ConnectionDTO connectionDTO = ConnectionDTOInit.connectDTO(serverIP, serverPort);

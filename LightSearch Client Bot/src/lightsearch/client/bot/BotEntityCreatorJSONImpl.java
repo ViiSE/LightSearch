@@ -31,8 +31,8 @@ public class BotEntityCreatorJSONImpl implements BotEntityCreator {
     private final String ADVANCED = BotSettingsType.ADVANCED.toString();
     
     private final String type;
-    private final int botAmount;
     private final JSONObject data;
+    private final 
     
     private final BotSettingsReader settingsReader;
     
