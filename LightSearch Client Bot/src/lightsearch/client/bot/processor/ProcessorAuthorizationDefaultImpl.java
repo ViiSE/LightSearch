@@ -22,7 +22,7 @@ import lightsearch.client.bot.exception.MessageSenderException;
 import lightsearch.client.bot.message.MessageRecipient;
 import lightsearch.client.bot.message.MessageSender;
 import org.json.simple.JSONObject;
-import lightsearch.client.bot.data.BotDTO;
+import lightsearch.client.bot.data.BotDAO;
 
 /**
  *
@@ -41,47 +41,30 @@ public class ProcessorAuthorizationDefaultImpl implements Processor {
     private final String PASSWORD   = CommandContentType.PASSWORD.toString();
     private final String IDENT      = CommandContentType.IDENT.toString();
     
-    private final MessageSender messageSender;
-    private final MessageRecipient messageRecipient;
-    
-    private final String botName;
-    private final String username;
-    private final String IMEI;
-    private final String userIdent;
-
-    public ProcessorAuthorizationDefaultImpl(BotDTO botDTO, 
-            MessageSender messageSender, MessageRecipient messageRecipient) {
-        this.botName   = botDTO.botName();
-        this.username  = botDTO.username();
-        this.IMEI      = botDTO.IMEI();
-        this.userIdent = botDTO.userIdent();
-        this.messageSender = messageSender;
-        this.messageRecipient = messageRecipient;
-    }
-    
     @Override
-    public void apply() {
+    public void apply(BotDAO botDAO, MessageSender messageSender, MessageRecipient messageRecipient, long delay) {
         try {
-            String request = generateJSONRequest();
+            String request = generateJSONRequest(botDAO);
             messageSender.sendMessage(request);
             String response = messageRecipient.acceptMessage();
-            System.out.println("Bot " + botName + ": Authorization, RESPONSE: " + response);
+            System.out.println("Bot " + botDAO.botName() + ": Authorization, RESPONSE: " + response);
+            try {Thread.sleep(delay);} catch(InterruptedException ignore) {}
         } catch (MessageSenderException | MessageRecipientException ex) {
-            System.out.println("CATCH! Bot " + botName + ": Authorization, message - " + ex.getMessage());
-            try {Thread.sleep(1);} catch(InterruptedException ignore) {}
+            System.out.println("CATCH! Bot " + botDAO.botName() + ": Authorization, message - " + ex.getMessage());
+            try {Thread.sleep(delay);} catch(InterruptedException ignore) {}
         }
     }
     
-    private String generateJSONRequest() {
+    private String generateJSONRequest(BotDAO botDAO) {
         JSONObject jObj = new JSONObject();
         jObj.put(COMMAND, CONNECT);
-        jObj.put(IMEI_FIELD, IMEI);
+        jObj.put(IMEI_FIELD, botDAO.IMEI());
         jObj.put(IP, "127.0.0.1");
-        jObj.put(OS, "Windows bots └[∵┌]└[ ∵ ]┘[┐∵]┘");
+        jObj.put(OS, "LS bots └[∵┌]└[ ∵ ]┘[┐∵]┘");
         jObj.put(MODEL, "HAL 9000");
-        jObj.put(USERNAME, username);
-        jObj.put(PASSWORD, "00000");
-        jObj.put(IDENT, userIdent);
+        jObj.put(USERNAME, botDAO.username());
+        jObj.put(PASSWORD, botDAO.userIdent());
+        jObj.put(IDENT, botDAO.userIdent());
         
         return jObj.toJSONString();
     }

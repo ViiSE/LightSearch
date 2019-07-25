@@ -15,13 +15,13 @@
  */
 package lightsearch.client.bot.settings;
 
-import lightsearch.client.bot.BotEntityCreator;
+import lightsearch.client.bot.processor.BotEntityProcessor;
 
 /**
  *
  * @author ViiSE
  */
 public interface BotEntityCreatorHolder {
-    void put(BotEntityCreator botEntityCreator);
-    BotEntityCreator get(String type);
+    void put(String type, BotEntityProcessor botEntityProcessor);
+    BotEntityProcessor get(String type);
 }

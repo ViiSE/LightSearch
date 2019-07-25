@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2019 ViiSE.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lightsearch.client.bot.processor;
+package lightsearch.client.bot.data;
 
-import lightsearch.client.bot.data.BotDAO;
+import java.net.Socket;
 import lightsearch.client.bot.message.MessageRecipient;
 import lightsearch.client.bot.message.MessageSender;
 
@@ -23,6 +23,12 @@ import lightsearch.client.bot.message.MessageSender;
  *
  * @author ViiSE
  */
-public interface Processor {
-    void apply(BotDAO botDAO, MessageSender messageSender, MessageRecipient messageRecipient, long delayMessageDisplay);
+public class BotEntityDTOInit {
+    
+    public static BotEntityDTO botEntityDTO(BotDAO botDAO, Socket socket, 
+            BotSettingsDTO botSettingsDTO, MessageSender messageSender, 
+            MessageRecipient messageRecipient, long delayMessageDisplay) {
+        return new BotEntityDTODefaultImpl(botDAO, socket, botSettingsDTO,
+            messageSender, messageRecipient, delayMessageDisplay);
+    }
 }

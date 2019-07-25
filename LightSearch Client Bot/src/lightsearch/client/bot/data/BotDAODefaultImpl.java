@@ -19,28 +19,25 @@ package lightsearch.client.bot.data;
  *
  * @author ViiSE
  */
-public class BotDTODefaultImpl implements BotDTO {
+public class BotDAODefaultImpl implements BotDAO {
     
-    private final String username;
-    private final String IMEI;
-    private final String cardCode;
-    private final String userIdent;
-    private final String botName;
-
-    BotDTODefaultImpl(String username, String IMEI, 
-            String cardCode, String userIdent, String botName) {
-        this.username  = username;
-        this.IMEI      = IMEI;
-        this.cardCode  = cardCode;
-        this.userIdent = userIdent;
-        this.botName   = botName;
-    }
-
+    private String username;
+    private String IMEI;
+    private String cardCode;
+    private String userIdent;
+    private String botName;
+    private String password;
+    
     @Override
     public String username() {
         return username;
     }
 
+    @Override
+    public String password() {
+        return password;
+    }
+    
     @Override
     public String IMEI() {
         return IMEI;
@@ -60,5 +57,34 @@ public class BotDTODefaultImpl implements BotDTO {
     public String botName() {
         return botName;
     }
+
+    @Override
+    public void setBotName(String botName) {
+        this.botName = botName;
+    }
+
+    @Override
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @Override
+    public void setPassword(String password) {
+        this.password = password;
+    }
     
+    @Override
+    public void setIMEI(String IMEI) {
+        this.IMEI = IMEI;
+    }
+
+    @Override
+    public void setCardCode(String cardCode) {
+        this.cardCode = cardCode;
+    }
+
+    @Override
+    public void setUserIdent(String userIdent) {
+        this.userIdent = userIdent;
+    }
 }

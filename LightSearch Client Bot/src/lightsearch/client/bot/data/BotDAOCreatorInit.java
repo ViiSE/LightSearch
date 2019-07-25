@@ -13,37 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lightsearch.client.bot.processor;
-
-import java.util.List;
-import java.util.function.Function;
-import lightsearch.client.bot.BotEntity;
+package lightsearch.client.bot.data;
 
 /**
  *
  * @author ViiSE
  */
-public abstract class BotEntityProcessor implements Function<Object, List<BotEntity>> {
+public class BotDAOCreatorInit {
     
-    private final int botAmount;
-    private final String ip;
-    private final int port;
-    
-    public BotEntityProcessor(int botAmount, String ip, int port) {
-        this.botAmount = botAmount;
-        this.ip = ip;
-        this.port = port;
+    public static BotDAOCreator botDAOCreator(Object data) {
+        return new BotDAOCreatorJSONImpl(data);
     }
     
-    public int botAmount() {
-        return botAmount;
+    public static BotDAOCreator botDAOCreatorSimple(Object data) {
+        return new BotDAOCreatorSimpleImpl(data);
     }
     
-    public String ip() {
-        return ip;
-    }
-    
-    public int port() {
-        return port;
-    }
 }

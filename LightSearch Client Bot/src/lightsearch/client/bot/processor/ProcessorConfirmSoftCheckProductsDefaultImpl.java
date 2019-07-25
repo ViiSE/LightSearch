@@ -25,13 +25,13 @@ import lightsearch.client.bot.message.MessageRecipient;
 import lightsearch.client.bot.message.MessageSender;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import lightsearch.client.bot.data.BotDTO;
+import lightsearch.client.bot.data.BotDAO;
 
 /**
  *
  * @author ViiSE
  */
-public class ProcessorConfirmSoftCheckProductsDefaultImpl implements Processor {
+public class ProcessorConfirmSoftCheckProductsDefaultImpl implements ProcessorConfirmSoftCheckProducts {
     
     private final String CONFIRM_SOFT_CHECK_PRODUCTS = CommandType.CONFIRM_SOFT_CHECK_PRODUCTS.toString();
     
@@ -43,40 +43,27 @@ public class ProcessorConfirmSoftCheckProductsDefaultImpl implements Processor {
     private final String ID         = CommandContentType.ID.toString();
     private final String AMOUNT     = CommandContentType.AMOUNT.toString();
     
-    private final MessageSender messageSender;
-    private final MessageRecipient messageRecipient;
-    
-    private final String botName;
-    private final String IMEI;
-    private final String ident;
-    private final String cardCode;
     private final List<ProductDTO> products;
 
-    public ProcessorConfirmSoftCheckProductsDefaultImpl(BotDTO botDTO, 
-            MessageSender messageSender, MessageRecipient messageRecipient, List<ProductDTO> products) {
-        this.botName  = botDTO.botName();
-        this.IMEI     = botDTO.IMEI();
-        this.ident    = botDTO.userIdent();
-        this.cardCode = botDTO.cardCode();
+    public ProcessorConfirmSoftCheckProductsDefaultImpl(List<ProductDTO> products) {
         this.products = products;
-        this.messageSender = messageSender;
-        this.messageRecipient = messageRecipient;
     }
     
     @Override
-    public void apply() {
+    public void apply(BotDAO botDAO, MessageSender messageSender, MessageRecipient messageRecipient, long delay) {
         try {
-            String request = generateJSONRequest();
+            String request = generateJSONRequest(botDAO);
             messageSender.sendMessage(request);
             String response = messageRecipient.acceptMessage();
-            System.out.println("Bot " + botName + ": Authorization, RESPONSE: " + response);
+            System.out.println("Bot " + botDAO.botName() + ": ConfirmSoftCheckProducts, RESPONSE: " + response);
+            try {Thread.sleep(delay);} catch(InterruptedException ignore) {}
         } catch (MessageSenderException | MessageRecipientException ex) {
-            System.out.println("CATCH! Bot " + botName + ": Authorization, message - " + ex.getMessage());
-            try {Thread.sleep(1);} catch(InterruptedException ignore) {}
+            System.out.println("CATCH! Bot " + botDAO.botName() + ": ConfirmSoftCheckProducts, message - " + ex.getMessage());
+            try {Thread.sleep(delay);} catch(InterruptedException ignore) {}
         }
     }
     
-    private String generateJSONRequest() {
+    private String generateJSONRequest(BotDAO botDAO) {
         JSONObject jObj = new JSONObject();
         JSONArray jData = new JSONArray();
         products.stream().map((product) -> {
@@ -86,9 +73,9 @@ public class ProcessorConfirmSoftCheckProductsDefaultImpl implements Processor {
             return jPr;
         }).forEachOrdered((jPr) -> { jData.add(jPr); });
         jObj.put(COMMAND, CONFIRM_SOFT_CHECK_PRODUCTS);
-        jObj.put(IMEI_FIELD, IMEI);
-        jObj.put(IDENT, ident);
-        jObj.put(CARD_CODE, cardCode);
+        jObj.put(IMEI_FIELD, botDAO.IMEI());
+        jObj.put(IDENT, botDAO.userIdent());
+        jObj.put(CARD_CODE, botDAO.cardCode());
         jObj.put(DATA, jData);
         
         return jObj.toJSONString();

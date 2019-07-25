@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2019 ViiSE.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,11 +19,6 @@ package lightsearch.client.bot.data;
  *
  * @author ViiSE
  */
-public class BotDTOInit {
-    
-    public static BotDTO lightSearchClientBotDTO(String username,
-            String IMEI, String cardCode, String userIdent, String botName) {
-        return new BotDTODefaultImpl(username, IMEI, cardCode, 
-                userIdent, botName);
-    }
+public interface SearchDTOCreator {
+    SearchDTO createSearchDTO();
 }

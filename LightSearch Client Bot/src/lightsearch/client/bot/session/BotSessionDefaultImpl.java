@@ -28,7 +28,7 @@ import lightsearch.client.bot.TestCycle;
 import lightsearch.client.bot.TestCycleInit;
 import lightsearch.client.bot.data.ConnectionDTO;
 import lightsearch.client.bot.data.ConnectionDTOInit;
-import lightsearch.client.bot.data.BotDTOInit;
+import lightsearch.client.bot.data.BotDAOInit;
 import lightsearch.client.bot.data.ProductDTO;
 import lightsearch.client.bot.data.ProductDTOInit;
 import lightsearch.client.bot.data.SearchDTO;
@@ -44,8 +44,8 @@ import lightsearch.client.bot.settings.BotSettingsReaderInit;
 import lightsearch.client.bot.socket.SocketCreatorInit;
 import lightsearch.client.bot.settings.GlobalSettings;
 import lightsearch.client.bot.BotEntity;
-import lightsearch.client.bot.data.BotDTO;
 import lightsearch.client.bot.settings.BotSettingsReader;
+import lightsearch.client.bot.data.BotDAO;
 
 /**
  *
@@ -56,15 +56,11 @@ public class BotSessionDefaultImpl implements BotSession {
     private final String serverIP;
     private final int serverPort;
     private final long delayMessageDisplay;
-    private final int cycleAmount;
-    private final int botAmount;
 
     public BotSessionDefaultImpl(GlobalSettings globalSettings) {
         this.serverIP = globalSettings.serverIP();
         this.serverPort = globalSettings.serverPort();
-        this.delayBeforeSendingMessage = globalSettings.delayMessageDisplay();
-        this.cycleAmount = globalSettings.cycleAmount();
-        this.botAmount = globalSettings.botAmount();
+        this.delayMessageDisplay = globalSettings.delayMessageDisplay();
     }
     
     @Override
@@ -83,8 +79,8 @@ public class BotSessionDefaultImpl implements BotSession {
                 MessageRecipient msgRecipient = 
                         MessageRecipientInit.messageRecipient(new DataInputStream(socket.getInputStream()));
                 
-                BotDTO botDTO = 
-                        BotDTOInit.lightSearchClientBotDTO(
+                BotDAO botDTO = 
+                        BotDAOInit.lightSearchClientBotDTO(
                                 "bot " + i, "11111111111111" + i, "00" + i, "11" + i, String.valueOf(i));
                 
                 SearchDTO searchDTO1 = SearchDTOInit.searchDTO("111111", "all", "all");
@@ -112,7 +108,7 @@ public class BotSessionDefaultImpl implements BotSession {
                 settings.setTestCycle(testCycle);
                 
                 BotEntity bot = 
-                        BotEntityInit.lightSearchClientBotEntity(socket, settings);
+                        BotEntityInit.botEntity(socket, settings);
                 
                 BotThread botThread = BotThreadInit.botThread(bot);
                 bots.add(botThread);

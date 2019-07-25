@@ -15,35 +15,8 @@
  */
 package lightsearch.client.bot.processor;
 
-import java.util.List;
-import java.util.function.Function;
-import lightsearch.client.bot.BotEntity;
-
 /**
  *
  * @author ViiSE
  */
-public abstract class BotEntityProcessor implements Function<Object, List<BotEntity>> {
-    
-    private final int botAmount;
-    private final String ip;
-    private final int port;
-    
-    public BotEntityProcessor(int botAmount, String ip, int port) {
-        this.botAmount = botAmount;
-        this.ip = ip;
-        this.port = port;
-    }
-    
-    public int botAmount() {
-        return botAmount;
-    }
-    
-    public String ip() {
-        return ip;
-    }
-    
-    public int port() {
-        return port;
-    }
-}
+public interface ProcessorConfirmSoftCheckProducts extends Processor {}

@@ -16,7 +16,7 @@
 package lightsearch.client.bot.settings;
 
 import java.util.Map;
-import lightsearch.client.bot.BotEntityCreator;
+import lightsearch.client.bot.processor.BotEntityProcessor;
 
 /**
  *
@@ -25,15 +25,14 @@ import lightsearch.client.bot.BotEntityCreator;
 public class BotEntityCreatorHolderMapDefaultImpl implements BotEntityCreatorHolder {
 
     Map<String, BotEntityProcessor> processorsMap;
-    
+
     @Override
-    public void put(BotEntityCreator botEntityCreator) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void put(String type, BotEntityProcessor botEntityProcessor) {
+        processorsMap.put(type, botEntityProcessor);
     }
 
     @Override
-    public BotEntityCreator get(String type) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public BotEntityProcessor get(String type) {
+        return processorsMap.get(type);
     }
-    
 }

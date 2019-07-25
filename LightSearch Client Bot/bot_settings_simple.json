@@ -1,7 +1,7 @@
 {
 	"type": "simple",
 	"bot_amount": "10",
-	"bot_dto": {
+	"bot_dao": {
 		"implementation": "lightsearch.client.bot.data.BotDTODefaultImpl",
 		"bot_name": "1",
 		"username": "user1",

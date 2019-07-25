@@ -43,7 +43,7 @@ public class LightSearchClientBot {
                         configuration.globalSettingsName());
         
         BotSession session =
-                BotSessionInit.lightSearchClientBotSession(globalSettings);
+                BotSessionInit.BotSession(globalSettings);
         
         int amountBot = 3;
         

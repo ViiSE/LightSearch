@@ -17,8 +17,11 @@ package lightsearch.client.bot;
 
 import java.io.IOException;
 import java.net.Socket;
+import lightsearch.client.bot.data.BotDAO;
+import lightsearch.client.bot.data.BotEntityDTO;
 import lightsearch.client.bot.exception.TestCycleOutOfBoundException;
-import lightsearch.client.bot.settings.BotSettingsReader;
+import lightsearch.client.bot.message.MessageRecipient;
+import lightsearch.client.bot.message.MessageSender;
 
 /**
  *
@@ -30,13 +33,24 @@ public class BotEntityDefaultImpl implements BotEntity {
     private final TestCycle testCycle;
     private final int amountCycle;
     private final long delayBeforeSendingMessage;
+    
+    private final BotDAO botDAO;
+    private final MessageSender messageSender;
+    private final MessageRecipient messageRecipient;
+    private final long delayMessageDisplay;
+    
     private boolean isFinish = false;
     
-    public BotEntityDefaultImpl(Socket socket, BotSettingsReader settings) {
-        this.socket               = socket;
-        testCycle                 = settings.testCycle();
-        amountCycle               = settings.amountCycle();
-        delayBeforeSendingMessage = settings.delayBeforeSendingMessage();
+    public BotEntityDefaultImpl(BotEntityDTO botEntityDTO) {
+        this.socket               = botEntityDTO.socket();
+        testCycle                 = botEntityDTO.botSettingsDTO().testCycle();
+        amountCycle               = botEntityDTO.botSettingsDTO().cycleAmount();
+        delayBeforeSendingMessage = botEntityDTO.botSettingsDTO().delayBeforeSendingMessage();
+        
+        botDAO                    = botEntityDTO.botDAO();
+        messageSender             = botEntityDTO.messageSender();
+        messageRecipient          = botEntityDTO.messageRecipient();
+        delayMessageDisplay       = botEntityDTO.delayMessageDisplay();        
     }
 
     @Override
@@ -45,7 +59,7 @@ public class BotEntityDefaultImpl implements BotEntity {
             boolean done = true;
             while(done) {
                 try {
-                    testCycle.next().apply();
+                    testCycle.next().apply(botDAO, messageSender, messageRecipient, delayBeforeSendingMessage);
                     if(amountCycle != 0) Thread.sleep(delayBeforeSendingMessage);
                 }
                 catch(InterruptedException ignore) {}

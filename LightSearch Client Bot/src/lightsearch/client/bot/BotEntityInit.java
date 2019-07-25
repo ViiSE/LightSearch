@@ -15,8 +15,7 @@
  */
 package lightsearch.client.bot;
 
-import java.net.Socket;
-import lightsearch.client.bot.settings.BotSettingsReader;
+import lightsearch.client.bot.data.BotEntityDTO;
 
 /**
  *
@@ -24,8 +23,7 @@ import lightsearch.client.bot.settings.BotSettingsReader;
  */
 public class BotEntityInit {
     
-    public static BotEntity lightSearchClientBotEntity(Socket socket, 
-            BotSettingsReader settings) {
-        return new BotEntityDefaultImpl(socket, settings);
+    public static BotEntity botEntity(BotEntityDTO botEntityDTO) {
+        return new BotEntityDefaultImpl(botEntityDTO);
     }
 }

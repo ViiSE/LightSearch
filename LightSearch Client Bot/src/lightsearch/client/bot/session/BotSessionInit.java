@@ -23,8 +23,7 @@ import lightsearch.client.bot.settings.GlobalSettings;
  */
 public class BotSessionInit {
     
-    public static BotSession lightSearchClientBotSession(
-            GlobalSettings globalSettings) {
+    public static BotSession BotSession(GlobalSettings globalSettings) {
         return new BotSessionDefaultImpl(globalSettings);
     }
     

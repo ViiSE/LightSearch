@@ -42,20 +42,22 @@ import lightsearch.client.bot.message.MessageSender;
 import lightsearch.client.bot.message.MessageSenderInit;
 import lightsearch.client.bot.settings.BotSettingsEnum;
 import lightsearch.client.bot.socket.SocketCreatorInit;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 /**
  *
  * @author ViiSE
  */
-public class BotEntityProcessorSimpleJSON extends BotEntityProcessor {
-
+public class BotEntityProcessorAdvancedJSON extends BotEntityProcessor {
+    
     private final String BOT_DAO                      = BotSettingsEnum.BOT_DAO.toString();
     private final String DELAY_BEFORE_SENDING_MESSAGE = BotSettingsEnum.DELAY_BEFORE_SENDING_MESSAGE.toString();
     private final String CYCLE_AMOUNT                 = BotSettingsEnum.CYCLE_AMOUNT.toString();
     private final String CYCLE_CONTENT                = BotSettingsEnum.CYCLE_CONTENT.toString();
+    private final String BOT_LIST                     = BotSettingsEnum.BOT_LIST.toString();
     
-    public BotEntityProcessorSimpleJSON(int botAmount, String ip, int port) {
+    public BotEntityProcessorAdvancedJSON(int botAmount, String ip, int port) {
         super(botAmount, ip, port);
     }
 
@@ -67,19 +69,24 @@ public class BotEntityProcessorSimpleJSON extends BotEntityProcessor {
         JSONObject jSettings = (JSONObject) data;
         List<BotEntity> bots = new ArrayList<>();
         
-        TestCycleCreator testCycleCreator = TestCycleCreatorInit.testCycleCreator(jSettings.get(CYCLE_CONTENT));
-        TestCycle testCycle = testCycleCreator.createCycle();
+        JSONArray botList = (JSONArray) jSettings.get(BOT_LIST);
         
-        long delayBeforeSendingMessage = Integer.parseInt(jSettings.get(DELAY_BEFORE_SENDING_MESSAGE).toString());
-        int cycleAmount = Integer.parseInt(jSettings.get(CYCLE_AMOUNT).toString());
-
-        BotSettingsDTO botSettings = BotSettingsDTOInit.botSettingsDTO(testCycle, cycleAmount, delayBeforeSendingMessage);
-        BotDAOCreator botDAOCreator = BotDAOCreatorInit.botDAOCreatorSimple(jSettings.get(BOT_DAO));
+        if(botList.size() != super.botAmount())
+            throw new RuntimeException("Bot amount is not equals than bot_amount field!");
         
         ConnectionDTO connDTO = ConnectionDTOInit.connectDTO(super.ip(), super.port());
         
         for(int i = 0; i < super.botAmount(); i++) {
             try {
+                TestCycleCreator testCycleCreator = TestCycleCreatorInit.testCycleCreator(jSettings.get(CYCLE_CONTENT));
+                TestCycle testCycle = testCycleCreator.createCycle();
+
+                long delayBeforeSendingMessage = Integer.parseInt(jSettings.get(DELAY_BEFORE_SENDING_MESSAGE).toString());
+                int cycleAmount = Integer.parseInt(jSettings.get(CYCLE_AMOUNT).toString());
+
+                BotSettingsDTO botSettings = BotSettingsDTOInit.botSettingsDTO(testCycle, cycleAmount, delayBeforeSendingMessage);
+                BotDAOCreator botDAOCreator = BotDAOCreatorInit.botDAOCreator(jSettings.get(BOT_DAO));
+        
                 Socket socket = SocketCreatorInit.socketCreator(connDTO).createSocket();
                 
                 MessageSender msgSender =
@@ -97,6 +104,15 @@ public class BotEntityProcessorSimpleJSON extends BotEntityProcessor {
                 throw new RuntimeException(ex.getMessage());
             }
         }
+        
+        TestCycleCreator testCycleCreator = TestCycleCreatorInit.testCycleCreator(jSettings.get(CYCLE_CONTENT));
+        TestCycle testCycle = testCycleCreator.createCycle();
+        
+        long delayBeforeSendingMessage = Integer.parseInt(jSettings.get(DELAY_BEFORE_SENDING_MESSAGE).toString());
+        int cycleAmount = Integer.parseInt(jSettings.get(CYCLE_AMOUNT).toString());
+
+        BotSettingsDTO botSettings = BotSettingsDTOInit.botSettingsDTO(testCycle, cycleAmount, delayBeforeSendingMessage);
+        BotDAOCreator botDAOCreator = BotDAOCreatorInit.botDAOCreatorSimple(jSettings.get(BOT_DAO));
         
         return bots;
     }

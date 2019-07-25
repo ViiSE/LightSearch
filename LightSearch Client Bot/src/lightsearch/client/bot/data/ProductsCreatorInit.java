@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2019 ViiSE.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,16 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lightsearch.client.bot.processor;
-
-import lightsearch.client.bot.data.BotDAO;
-import lightsearch.client.bot.message.MessageRecipient;
-import lightsearch.client.bot.message.MessageSender;
+package lightsearch.client.bot.data;
 
 /**
  *
  * @author ViiSE
  */
-public interface Processor {
-    void apply(BotDAO botDAO, MessageSender messageSender, MessageRecipient messageRecipient, long delayMessageDisplay);
+public class ProductsCreatorInit {
+    
+    public static ProductsCreator productsCreator(Object rawProductsData) {
+        return new ProductsCreatorJSONImpl(rawProductsData);
+    }
 }

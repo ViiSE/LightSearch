@@ -19,10 +19,18 @@ package lightsearch.client.bot.data;
  *
  * @author ViiSE
  */
-public interface BotDTO {
+public interface BotDAO {
     String botName();
     String username();
+    String password();
     String IMEI();
     String cardCode();
     String userIdent();
+    
+    void setBotName(String botName);
+    void setUsername(String username);
+    void setPassword(String password);
+    void setIMEI(String IMEI);
+    void setCardCode(String cardCode);
+    void setUserIdent(String userIdent);
 }
