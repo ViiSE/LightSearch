@@ -162,7 +162,7 @@ public class BotEntityDTOTestNG {
     
     private Socket getSocket() {
         try {
-            return new Socket("192.168.3.215", 50000);
+            return new Socket("127.0.0.1", 50000);
         } catch (IOException ex) {
             throw new RuntimeException("Cannot create client socket.");
         }
