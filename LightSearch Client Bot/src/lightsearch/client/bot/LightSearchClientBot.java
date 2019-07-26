@@ -32,7 +32,7 @@ public class LightSearchClientBot {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("LigthSearch Client Bot, version 1.0. Welcome!");
+        System.out.println("LightSearch Client Bot, version 1.0. Welcome!");
         
         Configuration configuration;
         if(args.length == 0)

@@ -15,6 +15,7 @@
  */
 package lightsearch.client.bot.data;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import lightsearch.client.bot.settings.BotSettingsEnum;
 import org.json.simple.JSONObject;
@@ -42,17 +43,15 @@ public class ProductDTOCreatorJSONImpl implements ProductDTOCreator {
             String id = data.get(ID).toString();
             String amount = data.get(AMOUNT).toString();
             
-            ProductDTO prodDTOInstance = (ProductDTO) Class.forName(impl).newInstance();
+            Class clazz = Class.forName(impl);
+            Constructor constructor = clazz.getConstructor(String.class, String.class);
             
-            return ProductDTO.class
-                    .getDeclaredConstructor(prodDTOInstance.getClass())
-                    .newInstance(id, amount);
+            return (ProductDTO) constructor.newInstance(id, amount);
         } catch (ClassNotFoundException | InstantiationException   |
                 IllegalAccessException  | NoSuchMethodException    |
                 SecurityException       | IllegalArgumentException |
                 InvocationTargetException ex) {
-            throw new RuntimeException(ex.getMessage());
+            throw new RuntimeException(ex.getClass() + ":" + ex.getMessage());
         }
-    }
-    
+    }   
 }

@@ -15,11 +15,14 @@
  */
 package lightsearch.client.bot;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+import lightsearch.client.bot.data.ProductDTO;
 import lightsearch.client.bot.data.ProductsCreator;
 import lightsearch.client.bot.data.ProductsCreatorInit;
+import lightsearch.client.bot.data.SearchDTO;
 import lightsearch.client.bot.data.SearchDTOCreator;
 import lightsearch.client.bot.data.SearchDTOCreatorInit;
 import lightsearch.client.bot.processor.Processor;
@@ -61,29 +64,34 @@ public class TestCycleCreatorJSONImpl implements TestCycleCreator {
                     JSONObject jSearchDTO = (JSONObject) jProc.get(SEARCH_DTO);
                     SearchDTOCreator searchDTOCreator = 
                             SearchDTOCreatorInit.searchDTOCreator(jSearchDTO);
-                    ProcessorSearch proc = ProcessorSearch.class
-                            .getDeclaredConstructor(procInstance.getClass())
-                            .newInstance(searchDTOCreator.createSearchDTO());
+                    
+                    Class clazz = Class.forName(impl);
+                    Constructor constructor = clazz.getConstructor(SearchDTO.class);
+                    ProcessorSearch proc = (ProcessorSearch) constructor.newInstance(
+                            searchDTOCreator.createSearchDTO());
+                    
                     procs.add(proc);
                 }
                 else if(procInstance instanceof ProcessorConfirmSoftCheckProducts) {
                     JSONObject jProdDTO = (JSONObject) jProc.get(PRODUCT_DTO);
-                    
                     ProductsCreator prodCr = ProductsCreatorInit.productsCreator(jProdDTO);
                     
+                    Class clazz = Class.forName(impl);
+                    Constructor constructor = clazz.getConstructor(ProductDTO.class);
                     ProcessorConfirmSoftCheckProducts proc = 
-                            ProcessorConfirmSoftCheckProducts.class
-                            .getDeclaredConstructor(procInstance.getClass())
-                            .newInstance(prodCr.createProducts());
+                            (ProcessorConfirmSoftCheckProducts) constructor.newInstance(
+                                    prodCr.createProducts());
+                    
                     procs.add(proc);
                 }
                 else if(procInstance instanceof ProcessorCloseSoftCheck) {
                     String delivery = jProc.get(DELIVERY).toString();
                     
+                    Class clazz = Class.forName(impl);
+                    Constructor constructor = clazz.getConstructor(String.class);
                     ProcessorCloseSoftCheck proc = 
-                            ProcessorCloseSoftCheck.class
-                            .getDeclaredConstructor(procInstance.getClass())
-                            .newInstance(delivery);
+                            (ProcessorCloseSoftCheck) constructor.newInstance(delivery);
+                    
                     procs.add(proc);
                 }
                 else
