@@ -26,7 +26,7 @@ public class BotDAOCreatorInit {
     }
     
     public static BotDAOCreator botDAOCreatorSimple(Object data) {
-        return new BotDAOCreatorSimpleImpl(data);
+        return new BotDAOCreatorSimpleJSONImpl(data);
     }
     
 }

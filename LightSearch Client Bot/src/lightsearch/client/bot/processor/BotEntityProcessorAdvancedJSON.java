@@ -57,8 +57,8 @@ public class BotEntityProcessorAdvancedJSON extends BotEntityProcessor {
     private final String CYCLE_CONTENT                = BotSettingsEnum.CYCLE_CONTENT.toString();
     private final String BOT_LIST                     = BotSettingsEnum.BOT_LIST.toString();
     
-    public BotEntityProcessorAdvancedJSON(int botAmount, String ip, int port) {
-        super(botAmount, ip, port);
+    public BotEntityProcessorAdvancedJSON(int botAmount, String ip, int port, long delayMessageDisplay) {
+        super(botAmount, ip, port, delayMessageDisplay);
     }
 
     @Override
@@ -97,22 +97,13 @@ public class BotEntityProcessorAdvancedJSON extends BotEntityProcessor {
                 BotDAO botDAO = botDAOCreator.createBotDAO();
                 
                 BotEntityDTO botEntityDTO = BotEntityDTOInit.botEntityDTO(botDAO, 
-                        socket, botSettings, msgSender, msgRecipient, delayBeforeSendingMessage);
+                        socket, botSettings, msgSender, msgRecipient, super.delayMessageDisplay());
                 
                 bots.add(BotEntityInit.botEntity(botEntityDTO));
             } catch (SocketException | IOException ex) {
                 throw new RuntimeException(ex.getMessage());
             }
         }
-        
-        TestCycleCreator testCycleCreator = TestCycleCreatorInit.testCycleCreator(jSettings.get(CYCLE_CONTENT));
-        TestCycle testCycle = testCycleCreator.createCycle();
-        
-        long delayBeforeSendingMessage = Integer.parseInt(jSettings.get(DELAY_BEFORE_SENDING_MESSAGE).toString());
-        int cycleAmount = Integer.parseInt(jSettings.get(CYCLE_AMOUNT).toString());
-
-        BotSettingsDTO botSettings = BotSettingsDTOInit.botSettingsDTO(testCycle, cycleAmount, delayBeforeSendingMessage);
-        BotDAOCreator botDAOCreator = BotDAOCreatorInit.botDAOCreatorSimple(jSettings.get(BOT_DAO));
         
         return bots;
     }

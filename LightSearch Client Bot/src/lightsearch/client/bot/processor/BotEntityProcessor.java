@@ -28,11 +28,13 @@ public abstract class BotEntityProcessor implements Function<Object, List<BotEnt
     private final int botAmount;
     private final String ip;
     private final int port;
+    private final long delayMessageDisplay;
     
-    public BotEntityProcessor(int botAmount, String ip, int port) {
+    public BotEntityProcessor(int botAmount, String ip, int port, long delayMessageDisplay) {
         this.botAmount = botAmount;
         this.ip = ip;
         this.port = port;
+        this.delayMessageDisplay = delayMessageDisplay;
     }
     
     public int botAmount() {
@@ -45,5 +47,9 @@ public abstract class BotEntityProcessor implements Function<Object, List<BotEnt
     
     public int port() {
         return port;
+    }
+    
+    public long delayMessageDisplay() {
+        return delayMessageDisplay;
     }
 }

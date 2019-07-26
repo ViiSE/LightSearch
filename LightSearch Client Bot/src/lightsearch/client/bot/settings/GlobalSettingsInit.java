@@ -21,7 +21,7 @@ package lightsearch.client.bot.settings;
  */
 public class GlobalSettingsInit {
 
-    public static GlobalSettings lightSearchGlobalSettingsCreator(String fileName) {
+    public static GlobalSettings globalSettingsCreator(String fileName) {
         return new GlobalSettingsJSONFileImpl(fileName);
     }
 }

@@ -15,8 +15,11 @@
  */
 package lightsearch.client.bot.settings;
 
+import java.util.HashMap;
 import java.util.Map;
 import lightsearch.client.bot.processor.BotEntityProcessor;
+import lightsearch.client.bot.processor.BotEntityProcessorAdvancedJSON;
+import lightsearch.client.bot.processor.BotEntityProcessorSimpleJSON;
 
 /**
  *
@@ -24,11 +27,18 @@ import lightsearch.client.bot.processor.BotEntityProcessor;
  */
 public class BotEntityCreatorHolderMapDefaultImpl implements BotEntityCreatorHolder {
 
+    private final String SIMPLE   = BotSettingsType.SIMPLE.toString();
+    private final String ADVANCED = BotSettingsType.ADVANCED.toString();
+    
     Map<String, BotEntityProcessor> processorsMap;
 
-    @Override
-    public void put(String type, BotEntityProcessor botEntityProcessor) {
-        processorsMap.put(type, botEntityProcessor);
+    public BotEntityCreatorHolderMapDefaultImpl(int botAmount, String ip, int port,
+            long delayMessageDisplay) {
+        processorsMap = new HashMap<>();
+        processorsMap.put(SIMPLE, new BotEntityProcessorSimpleJSON(
+                botAmount, ip, port, delayMessageDisplay));
+        processorsMap.put(ADVANCED, new BotEntityProcessorAdvancedJSON(
+                botAmount, ip, port, delayMessageDisplay));
     }
 
     @Override

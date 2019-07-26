@@ -55,8 +55,8 @@ public class BotEntityProcessorSimpleJSON extends BotEntityProcessor {
     private final String CYCLE_AMOUNT                 = BotSettingsEnum.CYCLE_AMOUNT.toString();
     private final String CYCLE_CONTENT                = BotSettingsEnum.CYCLE_CONTENT.toString();
     
-    public BotEntityProcessorSimpleJSON(int botAmount, String ip, int port) {
-        super(botAmount, ip, port);
+    public BotEntityProcessorSimpleJSON(int botAmount, String ip, int port, long delayMessageDisplay) {
+        super(botAmount, ip, port, delayMessageDisplay);
     }
 
     @Override
@@ -90,7 +90,7 @@ public class BotEntityProcessorSimpleJSON extends BotEntityProcessor {
                 BotDAO botDAO = botDAOCreator.createBotDAO();
                 
                 BotEntityDTO botEntityDTO = BotEntityDTOInit.botEntityDTO(botDAO, 
-                        socket, botSettings, msgSender, msgRecipient, delayBeforeSendingMessage);
+                        socket, botSettings, msgSender, msgRecipient, super.delayMessageDisplay());
                 
                 bots.add(BotEntityInit.botEntity(botEntityDTO));
             } catch (SocketException | IOException ex) {

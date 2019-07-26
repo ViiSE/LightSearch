@@ -32,7 +32,9 @@ public class BotEntityDTODefaultImpl implements BotEntityDTO {
     private final MessageRecipient messageRecipient;
     private final long delayMessageDisplay;
 
-    public BotEntityDTODefaultImpl(BotDAO botDAO, Socket socket, BotSettingsDTO botSettingsDTO, MessageSender messageSender, MessageRecipient messageRecipient, long delayMessageDisplay) {
+    public BotEntityDTODefaultImpl(BotDAO botDAO, Socket socket, 
+            BotSettingsDTO botSettingsDTO, MessageSender messageSender, 
+            MessageRecipient messageRecipient, long delayMessageDisplay) {
         this.botDAO = botDAO;
         this.socket = socket;
         this.botSettingsDTO = botSettingsDTO;

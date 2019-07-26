@@ -22,7 +22,7 @@ import org.json.simple.JSONObject;
  *
  * @author ViiSE
  */
-public class BotDAOCreatorSimpleImpl implements BotDAOCreator {
+public class BotDAOCreatorSimpleJSONImpl implements BotDAOCreator {
     
     private final static String BOT_NAME   = "1";
     private final static String USERNAME   = "user";
@@ -42,7 +42,7 @@ public class BotDAOCreatorSimpleImpl implements BotDAOCreator {
     
     private final JSONObject data;
 
-    public BotDAOCreatorSimpleImpl(Object data) {
+    public BotDAOCreatorSimpleJSONImpl(Object data) {
         this.data = (JSONObject) data;
     }
 

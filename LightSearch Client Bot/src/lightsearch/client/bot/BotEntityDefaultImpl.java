@@ -59,7 +59,7 @@ public class BotEntityDefaultImpl implements BotEntity {
             boolean done = true;
             while(done) {
                 try {
-                    testCycle.next().apply(botDAO, messageSender, messageRecipient, delayBeforeSendingMessage);
+                    testCycle.next().apply(botDAO, messageSender, messageRecipient, delayMessageDisplay);
                     if(amountCycle != 0) Thread.sleep(delayBeforeSendingMessage);
                 }
                 catch(InterruptedException ignore) {}

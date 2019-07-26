@@ -15,7 +15,6 @@
  */
 package lightsearch.client.bot.data;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import lightsearch.client.bot.settings.BotSettingsEnum;
