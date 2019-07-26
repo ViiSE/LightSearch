@@ -15,7 +15,6 @@
  */
 package test.bot.data;
 
-import com.sun.xml.internal.fastinfoset.util.CharArrayString;
 import java.util.List;
 import lightsearch.client.bot.data.ProductDTO;
 import lightsearch.client.bot.data.ProductsCreator;
