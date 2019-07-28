@@ -21,7 +21,7 @@ import lightsearch.client.bot.parser.SettingsParserInit;
 import lightsearch.client.bot.settings.GlobalSettingsEnum;
 import org.json.simple.JSONObject;
 import static org.testng.Assert.*;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
@@ -38,7 +38,7 @@ public class SettingsParserTestNG {
     
     private String glSettings;
     
-    @BeforeTest
+    @BeforeClass
     public void setUpMethod() {
         glSettings = getGlobalSettings();
     }

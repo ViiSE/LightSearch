@@ -38,8 +38,8 @@ import lightsearch.client.bot.processor.Processor;
 import lightsearch.client.bot.processor.ProcessorAuthorizationDefaultImpl;
 import lightsearch.client.bot.processor.ProcessorConnectionDefaultImpl;
 import static org.testng.Assert.*;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
@@ -53,7 +53,7 @@ public class BotEntityDTOTestNG {
     private BotEntityDTO botEntityDTO;
     private boolean isExit = true;
     
-    @BeforeTest
+    @BeforeClass
     public void setUpMethod() {
         Thread thread = new Thread(new TestServer());
         thread.start();
@@ -130,7 +130,7 @@ public class BotEntityDTOTestNG {
         testEnd("BotEntityDTO", "socket()");
     }
     
-    @AfterTest
+    @AfterClass
     public void tearDownMethod() {
         isExit = false;
     }

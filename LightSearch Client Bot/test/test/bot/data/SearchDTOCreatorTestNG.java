@@ -21,7 +21,7 @@ import lightsearch.client.bot.data.SearchDTOCreatorInit;
 import lightsearch.client.bot.settings.BotSettingsEnum;
 import org.json.simple.JSONObject;
 import static org.testng.Assert.*;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
@@ -39,7 +39,7 @@ public class SearchDTOCreatorTestNG {
     
     private SearchDTOCreator searchDTOCr;
     
-    @BeforeTest
+    @BeforeClass
     public void setUpMethod() {
         JSONObject data = getData();
         searchDTOCr = SearchDTOCreatorInit.searchDTOCreator(data);

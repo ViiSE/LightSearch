@@ -20,7 +20,7 @@ import lightsearch.client.bot.data.BotDAOCreator;
 import lightsearch.client.bot.data.BotDAOCreatorInit;
 import lightsearch.client.bot.settings.BotSettingsEnum;
 import org.json.simple.JSONObject;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 import static test.message.TestMessage.testBegin;
@@ -42,7 +42,7 @@ public class BotDAOCreatorTestNG {
     
     private BotDAOCreator botDAOCr;
     
-    @BeforeTest
+    @BeforeClass
     public void setUpMethod() {
         JSONObject data = getData();
         botDAOCr = BotDAOCreatorInit.botDAOCreator(data);

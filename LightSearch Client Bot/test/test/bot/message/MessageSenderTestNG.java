@@ -24,7 +24,7 @@ import lightsearch.client.bot.exception.MessageSenderException;
 import lightsearch.client.bot.message.MessageSender;
 import lightsearch.client.bot.message.MessageSenderInit;
 import static org.testng.Assert.*;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
@@ -37,7 +37,7 @@ public class MessageSenderTestNG {
     
     private Socket socket;
     
-    @BeforeTest
+    @BeforeClass
     public void setUpMethod() {
         Thread testServerTh = new Thread(new TestServer());
         testServerTh.start();

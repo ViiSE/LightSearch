@@ -19,7 +19,7 @@ import lightsearch.client.bot.data.ProductDTOCreator;
 import lightsearch.client.bot.data.ProductDTOCreatorInit;
 import org.json.simple.JSONObject;
 import static org.testng.Assert.*;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
@@ -32,7 +32,7 @@ public class ProductDTOCreatorTestNG {
     
     private ProductDTOCreator prodDTOCr;
     
-    @BeforeTest
+    @BeforeClass
     public void setUpMethod() {
         String impl = "lightsearch.client.bot.data.ProductDTODefaultImpl";
         JSONObject data = new JSONObject();

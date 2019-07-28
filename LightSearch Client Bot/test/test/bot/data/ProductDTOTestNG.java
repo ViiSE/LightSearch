@@ -17,7 +17,7 @@ package test.bot.data;
 
 import lightsearch.client.bot.data.ProductDTO;
 import lightsearch.client.bot.data.ProductDTOInit;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 import static test.message.TestMessage.testBegin;
@@ -31,7 +31,7 @@ public class ProductDTOTestNG {
     
     private ProductDTO productDTO;
     
-    @BeforeTest
+    @BeforeClass
     public void setUpMethod() {
         String id = "111111";
         String amount = "10";

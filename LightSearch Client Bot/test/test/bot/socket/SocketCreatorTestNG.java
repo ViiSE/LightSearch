@@ -24,8 +24,8 @@ import lightsearch.client.bot.exception.SocketException;
 import lightsearch.client.bot.socket.SocketCreator;
 import lightsearch.client.bot.socket.SocketCreatorInit;
 import static org.testng.Assert.*;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
@@ -39,7 +39,7 @@ public class SocketCreatorTestNG {
     private ConnectionDTO connDTO;
     private boolean isExit = true;
     
-    @BeforeTest
+    @BeforeClass
     public void setUpMethod() {
         Thread th = new Thread(new TestServer());
         th.start();
@@ -66,7 +66,7 @@ public class SocketCreatorTestNG {
         testEnd("SocketCreator", "createSocket()");
     }
     
-    @AfterTest
+    @AfterMethod
     public void tearDownMethod() {
         isExit = false;
     }

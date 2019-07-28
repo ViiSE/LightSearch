@@ -18,7 +18,7 @@ package test.bot.data;
 import lightsearch.client.bot.data.ConnectionDTO;
 import lightsearch.client.bot.data.ConnectionDTOInit;
 import static org.testng.Assert.*;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
@@ -31,7 +31,7 @@ public class ConnectionDTOTestNG {
     
     private ConnectionDTO connDTO;
     
-    @BeforeTest
+    @BeforeClass
     public void setUpMethod() {
         String ip = "127.0.0.1";
         int port = 50000;

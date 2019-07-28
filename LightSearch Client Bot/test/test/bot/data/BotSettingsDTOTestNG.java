@@ -25,7 +25,7 @@ import lightsearch.client.bot.processor.Processor;
 import lightsearch.client.bot.processor.ProcessorAuthorizationDefaultImpl;
 import lightsearch.client.bot.processor.ProcessorConnectionDefaultImpl;
 import static org.testng.Assert.*;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
@@ -38,7 +38,7 @@ public class BotSettingsDTOTestNG {
     
     private BotSettingsDTO botSettingsDTO;
     
-    @BeforeTest
+    @BeforeClass
     public void setUpMethod() {
         List<Processor> processors = new ArrayList<>();
         processors.add(new ProcessorConnectionDefaultImpl());

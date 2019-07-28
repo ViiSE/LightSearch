@@ -23,7 +23,7 @@ import lightsearch.client.bot.settings.BotSettingsEnum;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import static org.testng.Assert.*;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
@@ -41,7 +41,7 @@ public class ProductsCreatorTestNG {
     
     private ProductsCreator prodCr;
     
-    @BeforeTest
+    @BeforeClass
     public void setUpMethod() {
         JSONObject prodsData = getProductsData();
         prodCr = ProductsCreatorInit.productsCreator(prodsData);

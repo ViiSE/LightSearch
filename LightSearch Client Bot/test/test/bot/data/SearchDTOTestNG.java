@@ -18,7 +18,7 @@ package test.bot.data;
 import lightsearch.client.bot.data.SearchDTO;
 import lightsearch.client.bot.data.SearchDTOInit;
 import static org.testng.Assert.*;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
@@ -31,7 +31,7 @@ public class SearchDTOTestNG {
     
     private SearchDTO searchDTO;
     
-    @BeforeTest
+    @BeforeClass
     public void setUpMethod() {
         String barcode = "111111111";
         String sklad   = "sklad";
