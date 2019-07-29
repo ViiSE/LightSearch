@@ -45,7 +45,7 @@ public class BotSessionDefaultImpl implements BotSession {
     }
     
     @Override
-    public void createSession() {
+    public void startSession() {
         List<BotThread> bots = new ArrayList<>();
         
         BotSettingsReader botSettingsReader = BotSettingsReaderInit.botSettingsReader(botSettingsName);

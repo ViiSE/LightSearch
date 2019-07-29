@@ -45,7 +45,7 @@ public class LightSearchClientBot {
         
         BotSession session = BotSessionInit.BotSession(configuration.botSettingsName(), globalSettings);
         
-        session.createSession();
+        session.startSession();
     }
     
 }
