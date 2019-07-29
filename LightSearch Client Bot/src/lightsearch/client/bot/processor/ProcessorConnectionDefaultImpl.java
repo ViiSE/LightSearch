@@ -39,10 +39,10 @@ public class ProcessorConnectionDefaultImpl implements Processor {
             String request = generateJSONRequest();
             messageSender.sendMessage(request);
             String response = messageRecipient.acceptMessage();
-            System.out.println("Bot " + botDAO.botName() + ": Connection, RESPONSE: " + response);
+            System.out.println("[BOT] " + botDAO.botName() + " -> Connection, RESPONSE: " + response);
             try {Thread.sleep(delay);} catch(InterruptedException ignore) {}
         } catch (MessageSenderException | MessageRecipientException ex) {
-            System.out.println("CATCH! Bot " + botDAO.botName() + ": Connection, message - " + ex.getMessage());
+            System.out.println("CATCH! [BOT] " + botDAO.botName() + " -> Connection, message - " + ex.getMessage());
             try {Thread.sleep(delay);} catch(InterruptedException ignore) {}
         }
     }

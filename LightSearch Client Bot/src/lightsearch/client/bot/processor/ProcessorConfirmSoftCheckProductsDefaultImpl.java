@@ -55,10 +55,10 @@ public class ProcessorConfirmSoftCheckProductsDefaultImpl implements ProcessorCo
             String request = generateJSONRequest(botDAO);
             messageSender.sendMessage(request);
             String response = messageRecipient.acceptMessage();
-            System.out.println("Bot " + botDAO.botName() + ": ConfirmSoftCheckProducts, RESPONSE: " + response);
+            System.out.println("[BOT] " + botDAO.botName() + " -> ConfirmSoftCheckProducts, RESPONSE: " + response);
             try {Thread.sleep(delay);} catch(InterruptedException ignore) {}
         } catch (MessageSenderException | MessageRecipientException ex) {
-            System.out.println("CATCH! Bot " + botDAO.botName() + ": ConfirmSoftCheckProducts, message - " + ex.getMessage());
+            System.out.println("CATCH! [BOT] " + botDAO.botName() + " -> ConfirmSoftCheckProducts, message - " + ex.getMessage());
             try {Thread.sleep(delay);} catch(InterruptedException ignore) {}
         }
     }

@@ -50,10 +50,10 @@ public class ProcessorCloseSoftCheckDefaultImpl implements ProcessorCloseSoftChe
             String request = generateJSONRequest(botDAO);
             messageSender.sendMessage(request);
             String response = messageRecipient.acceptMessage();
-            System.out.println("Bot " + botDAO.botName() + ": CloseSoftCheck, RESPONSE: " + response);
+            System.out.println("[BOT] " + botDAO.botName() + " -> CloseSoftCheck, RESPONSE: " + response);
             try {Thread.sleep(delay);} catch(InterruptedException ignore) {}
         } catch (MessageSenderException | MessageRecipientException ex) {
-            System.out.println("CATCH! Bot " + botDAO.botName() + ": CloseSoftCheck, message - " + ex.getMessage());
+            System.out.println("CATCH! [BOT] " + botDAO.botName() + " -> CloseSoftCheck, message - " + ex.getMessage());
             try {Thread.sleep(delay);} catch(InterruptedException ignore) {}
         }
     }

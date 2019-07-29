@@ -43,10 +43,10 @@ public class ProcessorCancelSoftCheckDefaultImpl implements Processor {
             String request = generateJSONRequest(botDAO);
             messageSender.sendMessage(request);
             String response = messageRecipient.acceptMessage();
-            System.out.println("Bot " + botDAO.botName() + ": CancelSoftCheck, RESPONSE: " + response);
+            System.out.println("[BOT] " + botDAO.botName() + " -> CancelSoftCheck, RESPONSE: " + response);
             try {Thread.sleep(delay);} catch(InterruptedException ignore) {}
         } catch (MessageSenderException | MessageRecipientException ex) {
-            System.out.println("CATCH! Bot " + botDAO.botName() + ": CancelSoftCheck, message - " + ex.getMessage());
+            System.out.println("CATCH! [BOT] " + botDAO.botName() + " -> CancelSoftCheck, message - " + ex.getMessage());
             try {Thread.sleep(delay);} catch(InterruptedException ignore) {}
         }
     }

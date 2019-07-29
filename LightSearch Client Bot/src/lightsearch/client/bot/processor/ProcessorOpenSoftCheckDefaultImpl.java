@@ -43,10 +43,10 @@ public class ProcessorOpenSoftCheckDefaultImpl implements Processor {
             String request = generateJSONRequest(botDAO);
             messageSender.sendMessage(request);
             String response = messageRecipient.acceptMessage();
-            System.out.println("Bot " + botDAO.botName() + ": OpenSoftCheck, RESPONSE: " + response);
+            System.out.println("[BOT] " + botDAO.botName() + " -> OpenSoftCheck, RESPONSE: " + response);
             try {Thread.sleep(delay);} catch(InterruptedException ignore) {}
         } catch (MessageSenderException | MessageRecipientException ex) {
-            System.out.println("CATCH! Bot " + botDAO.botName() + ": OpenSoftCheck, message - " + ex.getMessage());
+            System.out.println("CATCH! [BOT] " + botDAO.botName() + " -> OpenSoftCheck, message - " + ex.getMessage());
             try {Thread.sleep(delay);} catch(InterruptedException ignore) {}
         }
     }

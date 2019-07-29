@@ -78,14 +78,15 @@ public class BotEntityProcessorAdvancedJSON extends BotEntityProcessor {
         
         for(int i = 0; i < super.botAmount(); i++) {
             try {
-                TestCycleCreator testCycleCreator = TestCycleCreatorInit.testCycleCreator(jSettings.get(CYCLE_CONTENT));
+                JSONObject jCycleContent = (JSONObject) botList.get(0);
+                TestCycleCreator testCycleCreator = TestCycleCreatorInit.testCycleCreator(jCycleContent.get(CYCLE_CONTENT));
                 TestCycle testCycle = testCycleCreator.createCycle();
 
-                long delayBeforeSendingMessage = Integer.parseInt(jSettings.get(DELAY_BEFORE_SENDING_MESSAGE).toString());
-                int cycleAmount = Integer.parseInt(jSettings.get(CYCLE_AMOUNT).toString());
+                long delayBeforeSendingMessage = Integer.parseInt(jCycleContent.get(DELAY_BEFORE_SENDING_MESSAGE).toString());
+                int cycleAmount = Integer.parseInt(jCycleContent.get(CYCLE_AMOUNT).toString());
 
                 BotSettingsDTO botSettings = BotSettingsDTOInit.botSettingsDTO(testCycle, cycleAmount, delayBeforeSendingMessage);
-                BotDAOCreator botDAOCreator = BotDAOCreatorInit.botDAOCreator(jSettings.get(BOT_DAO));
+                BotDAOCreator botDAOCreator = BotDAOCreatorInit.botDAOCreator(jCycleContent.get(BOT_DAO));
         
                 Socket socket = SocketCreatorInit.socketCreator(connDTO).createSocket();
                 

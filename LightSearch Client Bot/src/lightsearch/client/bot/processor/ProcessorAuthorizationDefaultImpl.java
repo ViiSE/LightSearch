@@ -47,10 +47,10 @@ public class ProcessorAuthorizationDefaultImpl implements Processor {
             String request = generateJSONRequest(botDAO);
             messageSender.sendMessage(request);
             String response = messageRecipient.acceptMessage();
-            System.out.println("Bot " + botDAO.botName() + ": Authorization, RESPONSE: " + response);
+            System.out.println("[BOT] " + botDAO.botName() + " -> Authorization, RESPONSE: " + response);
             try {Thread.sleep(delay);} catch(InterruptedException ignore) {}
         } catch (MessageSenderException | MessageRecipientException ex) {
-            System.out.println("CATCH! Bot " + botDAO.botName() + ": Authorization, message - " + ex.getMessage());
+            System.out.println("CATCH! [BOT] " + botDAO.botName() + " -> Authorization, message - " + ex.getMessage());
             try {Thread.sleep(delay);} catch(InterruptedException ignore) {}
         }
     }

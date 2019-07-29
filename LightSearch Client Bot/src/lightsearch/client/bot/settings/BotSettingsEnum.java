@@ -59,7 +59,7 @@ public enum BotSettingsEnum {
     },
     USER_IDENT {
         @Override
-        public String toString() { return "user_ident"; }
+        public String toString() { return "ident"; }
     },
     CYCLE_AMOUNT {
         @Override
