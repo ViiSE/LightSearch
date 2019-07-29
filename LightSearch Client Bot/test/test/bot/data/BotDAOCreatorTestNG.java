@@ -43,7 +43,7 @@ public class BotDAOCreatorTestNG {
     private BotDAOCreator botDAOCr;
     
     @BeforeClass
-    public void setUpMethod() {
+    public void setUpClass() {
         JSONObject data = getData();
         botDAOCr = BotDAOCreatorInit.botDAOCreator(data);
     }

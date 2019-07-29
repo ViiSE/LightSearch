@@ -24,12 +24,12 @@ import lightsearch.client.bot.TestCycle;
 public class BotSettingsDefaultImpl implements BotSettings {
 
     private final long delay;
-    private final int amountCycle;
+    private final int cycleAmount;
     private TestCycle testCycle;
     
-    public BotSettingsDefaultImpl(long delay, int amountCycle) {
+    public BotSettingsDefaultImpl(long delay, int cycleAmount) {
         this.delay = delay;
-        this.amountCycle = amountCycle;
+        this.cycleAmount = cycleAmount;
     }
 
     @Override
@@ -38,8 +38,8 @@ public class BotSettingsDefaultImpl implements BotSettings {
     }
 
     @Override
-    public int amountCycle() {
-        return amountCycle;
+    public int cycleAmount() {
+        return cycleAmount;
     }
 
     @Override

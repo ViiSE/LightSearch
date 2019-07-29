@@ -42,7 +42,7 @@ public class ProductsCreatorTestNG {
     private ProductsCreator prodCr;
     
     @BeforeClass
-    public void setUpMethod() {
+    public void setUpClass() {
         JSONObject prodsData = getProductsData();
         prodCr = ProductsCreatorInit.productsCreator(prodsData);
     }

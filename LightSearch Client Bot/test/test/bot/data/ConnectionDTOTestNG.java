@@ -32,7 +32,7 @@ public class ConnectionDTOTestNG {
     private ConnectionDTO connDTO;
     
     @BeforeClass
-    public void setUpMethod() {
+    public void setUpClass() {
         String ip = "127.0.0.1";
         int port = 50000;
         connDTO = ConnectionDTOInit.connectDTO(ip, port);

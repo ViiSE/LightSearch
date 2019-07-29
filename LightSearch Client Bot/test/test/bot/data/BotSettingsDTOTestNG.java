@@ -39,7 +39,7 @@ public class BotSettingsDTOTestNG {
     private BotSettingsDTO botSettingsDTO;
     
     @BeforeClass
-    public void setUpMethod() {
+    public void setUpClass() {
         List<Processor> processors = new ArrayList<>();
         processors.add(new ProcessorConnectionDefaultImpl());
         processors.add(new ProcessorAuthorizationDefaultImpl());

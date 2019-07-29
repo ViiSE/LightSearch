@@ -40,7 +40,7 @@ public class SearchDTOCreatorTestNG {
     private SearchDTOCreator searchDTOCr;
     
     @BeforeClass
-    public void setUpMethod() {
+    public void setUpClass() {
         JSONObject data = getData();
         searchDTOCr = SearchDTOCreatorInit.searchDTOCreator(data);
     }

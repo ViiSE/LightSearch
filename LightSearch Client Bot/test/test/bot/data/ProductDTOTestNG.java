@@ -32,7 +32,7 @@ public class ProductDTOTestNG {
     private ProductDTO productDTO;
     
     @BeforeClass
-    public void setUpMethod() {
+    public void setUpClass() {
         String id = "111111";
         String amount = "10";
         productDTO = ProductDTOInit.productDTO(id, amount);

@@ -32,7 +32,7 @@ public class SearchDTOTestNG {
     private SearchDTO searchDTO;
     
     @BeforeClass
-    public void setUpMethod() {
+    public void setUpClass() {
         String barcode = "111111111";
         String sklad   = "sklad";
         String TK      = "TK";

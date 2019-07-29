@@ -54,7 +54,7 @@ public class BotEntityDTOTestNG {
     private boolean isExit = true;
     
     @BeforeClass
-    public void setUpMethod() {
+    public void setUpClass() {
         Thread thread = new Thread(new TestServer());
         thread.start();
         
@@ -131,7 +131,7 @@ public class BotEntityDTOTestNG {
     }
     
     @AfterClass
-    public void tearDownMethod() {
+    public void tearDownClass() {
         isExit = false;
     }
     

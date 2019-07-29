@@ -22,8 +22,8 @@ import lightsearch.client.bot.TestCycle;
  * @author ViiSE
  */
 public interface BotSettings {
-    public long delayBeforeSendingMessage();
-    public int amountCycle();
-    public void setTestCycle(TestCycle testCycle);
-    public TestCycle testCycle();
+    long delayBeforeSendingMessage();
+    int cycleAmount();
+    void setTestCycle(TestCycle testCycle);
+    TestCycle testCycle();
 }

@@ -40,7 +40,7 @@ public class SocketCreatorTestNG {
     private boolean isExit = true;
     
     @BeforeClass
-    public void setUpMethod() {
+    public void setUpClass() {
         Thread th = new Thread(new TestServer());
         th.start();
         
@@ -67,7 +67,7 @@ public class SocketCreatorTestNG {
     }
     
     @AfterMethod
-    public void tearDownMethod() {
+    public void tearDownClass() {
         isExit = false;
     }
     

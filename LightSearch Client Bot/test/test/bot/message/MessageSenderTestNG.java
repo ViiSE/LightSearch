@@ -38,7 +38,7 @@ public class MessageSenderTestNG {
     private Socket socket;
     
     @BeforeClass
-    public void setUpMethod() {
+    public void setUpClass() {
         Thread testServerTh = new Thread(new TestServer());
         testServerTh.start();
         

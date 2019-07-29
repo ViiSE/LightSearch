@@ -37,7 +37,7 @@ public class BotDAOCreatorSimple {
     private BotDAOCreator botDAOCr;
     
     @BeforeClass
-    public void setUpMethod() {
+    public void setUpClass() {
         JSONObject data = getData();
         botDAOCr = BotDAOCreatorInit.botDAOCreatorSimple(data);
     }

@@ -33,7 +33,7 @@ public class ProductDTOCreatorTestNG {
     private ProductDTOCreator prodDTOCr;
     
     @BeforeClass
-    public void setUpMethod() {
+    public void setUpClass() {
         String impl = "lightsearch.client.bot.data.ProductDTODefaultImpl";
         JSONObject data = new JSONObject();
         data.put("id", "10");

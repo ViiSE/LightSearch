@@ -39,7 +39,7 @@ public class SettingsParserTestNG {
     private String glSettings;
     
     @BeforeClass
-    public void setUpMethod() {
+    public void setUpClass() {
         glSettings = getGlobalSettings();
     }
     
