@@ -60,7 +60,7 @@ public class ProcessorAuthorizationDefaultImpl implements Processor {
         jObj.put(COMMAND, CONNECT);
         jObj.put(IMEI_FIELD, botDAO.IMEI());
         jObj.put(IP, "127.0.0.1");
-        jObj.put(OS, "LS bots └[∵┌]└[ ∵ ]┘[┐∵]┘");
+        jObj.put(OS, "LS bots [-_-] [`_`] ['_']");
         jObj.put(MODEL, "HAL 9000");
         jObj.put(USERNAME, botDAO.username());
         jObj.put(PASSWORD, botDAO.userIdent());

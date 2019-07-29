@@ -19,7 +19,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
-import lightsearch.client.bot.data.ProductDTO;
 import lightsearch.client.bot.data.ProductsCreator;
 import lightsearch.client.bot.data.ProductsCreatorInit;
 import lightsearch.client.bot.data.SearchDTO;
@@ -39,7 +38,6 @@ import org.json.simple.JSONObject;
  */
 public class TestCycleCreatorJSONImpl implements TestCycleCreator {
     
-    private final String TYPE           = BotSettingsEnum.TYPE.toString();
     private final String IMPLEMENTATION = BotSettingsEnum.IMPLEMENTATION.toString();
     private final String SEARCH_DTO     = BotSettingsEnum.SEARCH_DTO.toString();
     private final String PRODUCT_DTO    = BotSettingsEnum.PRODUCT_DTO.toString();
@@ -56,46 +54,45 @@ public class TestCycleCreatorJSONImpl implements TestCycleCreator {
         List<Processor> procs = new ArrayList<>();
         cycleContent.forEach((Object objProc) -> {
             JSONObject jProc = (JSONObject) objProc;
-            String type = jProc.get(TYPE).toString();
             String impl = jProc.get(IMPLEMENTATION).toString();
             try {
-                Processor procInstance = (Processor) Class.forName(impl).newInstance();
-                if(procInstance instanceof ProcessorSearch) {
+                Class clazz = Class.forName(impl);
+                
+                if(ProcessorSearch.class.isAssignableFrom(clazz)) {
                     JSONObject jSearchDTO = (JSONObject) jProc.get(SEARCH_DTO);
                     SearchDTOCreator searchDTOCreator = 
                             SearchDTOCreatorInit.searchDTOCreator(jSearchDTO);
                     
-                    Class clazz = Class.forName(impl);
                     Constructor constructor = clazz.getConstructor(SearchDTO.class);
                     ProcessorSearch proc = (ProcessorSearch) constructor.newInstance(
                             searchDTOCreator.createSearchDTO());
                     
                     procs.add(proc);
                 }
-                else if(procInstance instanceof ProcessorConfirmSoftCheckProducts) {
+                else if(ProcessorConfirmSoftCheckProducts.class.isAssignableFrom(clazz)) {
                     JSONObject jProdDTO = (JSONObject) jProc.get(PRODUCT_DTO);
                     ProductsCreator prodCr = ProductsCreatorInit.productsCreator(jProdDTO);
                     
-                    Class clazz = Class.forName(impl);
-                    Constructor constructor = clazz.getConstructor(ProductDTO.class);
+                    Constructor constructor = clazz.getConstructor(List.class);
                     ProcessorConfirmSoftCheckProducts proc = 
                             (ProcessorConfirmSoftCheckProducts) constructor.newInstance(
                                     prodCr.createProducts());
                     
                     procs.add(proc);
                 }
-                else if(procInstance instanceof ProcessorCloseSoftCheck) {
+                else if(ProcessorCloseSoftCheck.class.isAssignableFrom(clazz)) {
                     String delivery = jProc.get(DELIVERY).toString();
                     
-                    Class clazz = Class.forName(impl);
                     Constructor constructor = clazz.getConstructor(String.class);
                     ProcessorCloseSoftCheck proc = 
                             (ProcessorCloseSoftCheck) constructor.newInstance(delivery);
                     
                     procs.add(proc);
                 }
-                else
+                else {
+                    Processor procInstance = (Processor) Class.forName(impl).newInstance();
                     procs.add(procInstance);
+                }
             } catch (ClassNotFoundException | InstantiationException   | 
                      IllegalAccessException | NoSuchMethodException    | 
                      SecurityException      | IllegalArgumentException | 

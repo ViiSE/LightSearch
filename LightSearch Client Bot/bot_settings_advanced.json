@@ -4,7 +4,7 @@
 	"bot_list": [
 		{
 			"bot_dao": {
-				"implementation": "lightsearch.client.bot.data.BotDTODefaultImpl",
+				"implementation": "lightsearch.client.bot.data.BotDAODefaultImpl",
 				"bot_name": "1",
 				"username": "user1",
 				"IMEI": "111111111111111",
@@ -15,79 +15,69 @@
 			"cycle_amount": "1",
 			"cycle_content": [
 				{
-					"type": "connect",
 					"implementation": "lightsearch.client.bot.processor.ProcessorConnectionDefaultImpl"
 				},
 				{
-					"type": "authorization",
 					"implementation": "lightsearch.client.bot.processor.ProcessorAuthorizationDefaultImpl"
 				},
 				{
-					"type": "search",
 					"implementation": "lightsearch.client.bot.processor.ProcessorSearchDefaultImpl",
 					"search_dto": {
 						"implementation": "lightsearch.client.bot.data.SearchDTODefaultImpl",
 						"barcode": "111111",
 						"sklad": "all",
-						"TK": "all",
+						"TK": "all"
 					}
 				},
 				{
-					"type": "search",
 					"implementation": "lightsearch.client.bot.processor.ProcessorSearchDefaultImpl",
 					"search_dto": {
 						"implementation": "lightsearch.client.bot.data.SearchDTODefaultImpl",
 						"barcode": "222222",
 						"sklad": "all",
-						"TK":"null",
+						"TK": "null"
 					}
 				},
 				{
-					"type": "search",
 					"implementation": "lightsearch.client.bot.processor.ProcessorSearchDefaultImpl",
 					"search_dto": {
 						"implementation": "lightsearch.client.bot.data.SearchDTODefaultImpl",
 						"barcode": "444444",
 						"sklad": "null",
-						"TK": "all",
+						"TK": "all"
 					}
 				},
 				{
-					"type": "open_soft_check",
-					"implementation": "lightsearch.client.bot.processor.ProcessorOpenSoftCheckDefaultImpl",
+					"implementation": "lightsearch.client.bot.processor.ProcessorOpenSoftCheckDefaultImpl"
 				},
 				{
-					"type": "search",
 					"implementation": "lightsearch.client.bot.processor.ProcessorSearchDefaultImpl",
 					"search_dto": {
 						"implementation": "lightsearch.client.bot.data.SearchDTODefaultImpl",
 						"barcode": "111111",
 						"sklad": "all",
-						"TK": "all",
+						"TK": "all"
 					}
 				},
 				{
-					"type": "search",
 					"implementation": "lightsearch.client.bot.processor.ProcessorSearchDefaultImpl",
 					"search_dto": {
 						"implementation": "lightsearch.client.bot.data.SearchDTODefaultImpl",
 						"barcode": "222222",
 						"sklad": "all",
-						"TK":"null",
+						"TK": "null"
 					}
 				},
 				{
-					"type": "search",
 					"implementation": "lightsearch.client.bot.processor.ProcessorSearchDefaultImpl",
 					"search_dto": {
 						"implementation": "lightsearch.client.bot.data.SearchDTODefaultImpl",
 						"barcode": "444444",
 						"sklad": "null",
-						"TK": "all",
+						"TK": "all"
 					}
 				},
 				{
-					"type": "confirm_soft_check_products",
 					"implementation": "lightsearch.client.bot.processor.ProcessorConfirmSoftCheckProductsDefaultImpl",
 					"product_dto": {
 						"implementation": "lightsearch.client.bot.data.ProductDTODefaultImpl",
@@ -107,18 +97,18 @@
 						],
 						"barcode": "444444",
 						"sklad": "null",
-						"TK": "all",
+						"TK": "all"
 					}
 				},
 				{
-					"type": "close_soft_check",
 					"implementation": "lightsearch.client.bot.processor.ProcessorCloseSoftCheckDefaultImpl",
+					"delivery": "1"
 				}
 			]
 		},
 		{
 			"bot_dao": {
-				"implementation": "lightsearch.client.bot.data.BotDTODefaultImpl",
+				"implementation": "lightsearch.client.bot.data.BotDAODefaultImpl",
 				"bot_name": "2",
 				"username": "user2",
 				"IMEI": "222222222222222",
@@ -129,86 +119,76 @@
 			"cycle_amount": "5",
 			"cycle_content": [
 				{
-					"type": "connect",
 					"implementation": "lightsearch.client.bot.processor.ProcessorConnectionDefaultImpl"
 				},
 				{
-					"type": "authorization",
 					"implementation": "lightsearch.client.bot.processor.ProcessorAuthorizationDefaultImpl"
 				},
 				{
-					"type": "search",
 					"implementation": "lightsearch.client.bot.processor.ProcessorSearchDefaultImpl",
 					"search_dto": {
 						"implementation": "lightsearch.client.bot.data.SearchDTODefaultImpl",
 						"barcode": "111111",
 						"sklad": "all",
-						"TK": "all",
+						"TK": "all"
 					}
 				},
 				{
-					"type": "search",
 					"implementation": "lightsearch.client.bot.processor.ProcessorSearchDefaultImpl",
 					"search_dto": {
 						"implementation": "lightsearch.client.bot.data.SearchDTODefaultImpl",
 						"barcode": "222222",
 						"sklad": "all",
-						"TK":"null",
+						"TK": "null"
 					}
 				},
 				{
-					"type": "search",
 					"implementation": "lightsearch.client.bot.processor.ProcessorSearchDefaultImpl",
 					"search_dto": {
 						"implementation": "lightsearch.client.bot.data.SearchDTODefaultImpl",
 						"barcode": "444444",
 						"sklad": "null",
-						"TK": "all",
+						"TK": "all"
 					}
 				},
 				{
-					"type": "search",
 					"implementation": "lightsearch.client.bot.processor.ProcessorSearchDefaultImpl",
 					"search_dto": {
 						"implementation": "lightsearch.client.bot.data.SearchDTODefaultImpl",
 						"barcode": "111111",
 						"sklad": "all",
-						"TK": "all",
+						"TK": "all"
 					}
 				},
 				{
-					"type": "search",
 					"implementation": "lightsearch.client.bot.processor.ProcessorSearchDefaultImpl",
 					"search_dto": {
 						"implementation": "lightsearch.client.bot.data.SearchDTODefaultImpl",
 						"barcode": "222222",
 						"sklad": "all",
-						"TK":"null",
+						"TK": "null"
 					}
 				},
 				{
-					"type": "search",
 					"implementation": "lightsearch.client.bot.processor.ProcessorSearchDefaultImpl",
 					"search_dto": {
 						"implementation": "lightsearch.client.bot.data.SearchDTODefaultImpl",
 						"barcode": "444444",
 						"sklad": "null",
-						"TK": "all",
+						"TK": "all"
 					}
 				},
 				{
-					"type": "open_soft_check",
-					"implementation": "lightsearch.client.bot.processor.ProcessorOpenSoftCheckDefaultImpl",
+					"implementation": "lightsearch.client.bot.processor.ProcessorOpenSoftCheckDefaultImpl"
 				},
 				{
-					"type": "cancel_soft_check",
-					"implementation": "lightsearch.client.bot.processor.ProcessorCancelSoftCheckDefaultImpl",
+					"implementation": "lightsearch.client.bot.processor.ProcessorCancelSoftCheckDefaultImpl"
 				}
 			]
 		},
 		{
 			"bot_dao": {
-				"implementation": "lightsearch.client.bot.data.BotDTODefaultImpl",
+				"implementation": "lightsearch.client.bot.data.BotDAODefaultImpl",
 				"bot_name": "3",
 				"username": "user3",
 				"IMEI": "333333333333333",
@@ -219,68 +199,61 @@
 			"cycle_amount": "10",
 			"cycle_content": [
 				{
-					"type": "connect",
 					"implementation": "lightsearch.client.bot.processor.ProcessorConnectionDefaultImpl"
 				},
 				{
-					"type": "authorization",
 					"implementation": "lightsearch.client.bot.processor.ProcessorAuthorizationDefaultImpl"
 				},
 				{
-					"type": "search",
 					"implementation": "lightsearch.client.bot.processor.ProcessorSearchDefaultImpl",
 					"search_dto": {
 						"implementation": "lightsearch.client.bot.data.SearchDTODefaultImpl",
 						"barcode": "111111",
 						"sklad": "all",
-						"TK": "all",
+						"TK": "all"
 					}
 				},
 				{
-					"type": "search",
 					"implementation": "lightsearch.client.bot.processor.ProcessorSearchDefaultImpl",
 					"search_dto": {
 						"implementation": "lightsearch.client.bot.data.SearchDTODefaultImpl",
 						"barcode": "111111",
 						"sklad": "all",
-						"TK": "all",
+						"TK": "all"
 					}
 				},
 				{
-					"type": "search",
 					"implementation": "lightsearch.client.bot.processor.ProcessorSearchDefaultImpl",
 					"search_dto": {
 						"implementation": "lightsearch.client.bot.data.SearchDTODefaultImpl",
 						"barcode": "111111",
 						"sklad": "all",
-						"TK": "all",
+						"TK": "all"
 					}
 				},
 				{
-					"type": "search",
 					"implementation": "lightsearch.client.bot.processor.ProcessorSearchDefaultImpl",
 					"search_dto": {
 						"implementation": "lightsearch.client.bot.data.SearchDTODefaultImpl",
 						"barcode": "111111",
 						"sklad": "all",
-						"TK": "all",
+						"TK": "all"
 					}
 				},
 				{
-					"type": "search",
 					"implementation": "lightsearch.client.bot.processor.ProcessorSearchDefaultImpl",
 					"search_dto": {
 						"implementation": "lightsearch.client.bot.data.SearchDTODefaultImpl",
 						"barcode": "111111",
 						"sklad": "all",
-						"TK": "all",
+						"TK": "all"
 					}
 				}
 			]
 		},
 		{
 			"bot_dao": {
-				"implementation": "lightsearch.client.bot.data.BotDTODefaultImpl",
+				"implementation": "lightsearch.client.bot.data.BotDAODefaultImpl",
 				"bot_name": "4",
 				"username": "user4",
 				"IMEI": "444444444444444",
@@ -291,18 +264,16 @@
 			"cycle_amount": "3",
 			"cycle_content": [
 				{
-					"type": "open_soft_check",
-					"implementation": "lightsearch.client.bot.processor.ProcessorOpenSoftCheckDefaultImpl",
+					"implementation": "lightsearch.client.bot.processor.ProcessorOpenSoftCheckDefaultImpl"
 				},
 				{
-					"type": "cancel_soft_check",
-					"implementation": "lightsearch.client.bot.processor.ProcessorCancelSoftCheckDefaultImpl",
+					"implementation": "lightsearch.client.bot.processor.ProcessorCancelSoftCheckDefaultImpl"
 				}
 			]
 		},
 		{
 			"bot_dao": {
-				"implementation": "lightsearch.client.bot.data.BotDTODefaultImpl",
+				"implementation": "lightsearch.client.bot.data.BotDAODefaultImpl",
 				"bot_name": "5",
 				"username": "user5",
 				"IMEI": "555555555555555",
@@ -313,13 +284,12 @@
 			"cycle_amount": "6",
 			"cycle_content": [
 				{
-					"type": "search",
 					"implementation": "lightsearch.client.bot.processor.ProcessorSearchDefaultImpl",
 					"search_dto": {
 						"implementation": "lightsearch.client.bot.data.SearchDTODefaultImpl",
 						"barcode": "111111",
 						"sklad": "all",
-						"TK": "all",
+						"TK": "all"
 					}
 				}
 			]

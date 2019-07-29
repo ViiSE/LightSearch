@@ -1,91 +1,76 @@
 {
 	"type": "simple",
-	"bot_amount": "10",
+	"bot_amount": "1",
 	"bot_dao": {
-		"implementation": "lightsearch.client.bot.data.BotDTODefaultImpl",
-		"bot_name": "1",
-		"username": "user1",
-		"IMEI": "111111111111111",
-		"card_code": "111",
-		"user_ident": "001"
+		"implementation": "lightsearch.client.bot.data.BotDAODefaultImpl"
 	},
 	"delay_before_sending_message": "10",
 	"cycle_amount": "1",
 	"cycle_content": [
 		{
-			"type": "connect",
 			"implementation": "lightsearch.client.bot.processor.ProcessorConnectionDefaultImpl"
 		},
 		{
-			"type": "authorization",
 			"implementation": "lightsearch.client.bot.processor.ProcessorAuthorizationDefaultImpl"
 		},
 		{
-			"type": "search",
 			"implementation": "lightsearch.client.bot.processor.ProcessorSearchDefaultImpl",
 			"search_dto": {
 				"implementation": "lightsearch.client.bot.data.SearchDTODefaultImpl",
 				"barcode": "111111",
 				"sklad": "all",
-				"TK": "all",
+				"TK": "all"
 			}
 		},
 		{
-			"type": "search",
 			"implementation": "lightsearch.client.bot.processor.ProcessorSearchDefaultImpl",
 			"search_dto": {
 				"implementation": "lightsearch.client.bot.data.SearchDTODefaultImpl",
 				"barcode": "222222",
 				"sklad": "all",
-				"TK":"null",
+				"TK": "null"
 			}
 		},
 		{
-			"type": "search",
 			"implementation": "lightsearch.client.bot.processor.ProcessorSearchDefaultImpl",
 			"search_dto": {
 				"implementation": "lightsearch.client.bot.data.SearchDTODefaultImpl",
 				"barcode": "444444",
 				"sklad": "null",
-				"TK": "all",
+				"TK": "all"
 			}
 		},
 		{
-			"type": "open_soft_check",
-			"implementation": "lightsearch.client.bot.processor.ProcessorOpenSoftCheckDefaultImpl",
+			"implementation": "lightsearch.client.bot.processor.ProcessorOpenSoftCheckDefaultImpl"
 		},
 		{
-			"type": "search",
 			"implementation": "lightsearch.client.bot.processor.ProcessorSearchDefaultImpl",
 			"search_dto": {
 				"implementation": "lightsearch.client.bot.data.SearchDTODefaultImpl",
 				"barcode": "111111",
 				"sklad": "all",
-				"TK": "all",
+				"TK": "all"
 			}
 		},
 		{
-			"type": "search",
 			"implementation": "lightsearch.client.bot.processor.ProcessorSearchDefaultImpl",
 			"search_dto": {
 				"implementation": "lightsearch.client.bot.data.SearchDTODefaultImpl",
 				"barcode": "222222",
 				"sklad": "all",
-				"TK":"null",
+				"TK": "null"
 			}
 		},
 		{
-			"type": "search",
 			"implementation": "lightsearch.client.bot.processor.ProcessorSearchDefaultImpl",
 			"search_dto": {
 				"implementation": "lightsearch.client.bot.data.SearchDTODefaultImpl",
 				"barcode": "444444",
 				"sklad": "null",
-				"TK": "all",
+				"TK": "all"
 			}
 		},
 		{
-			"type": "confirm_soft_check_products",
 			"implementation": "lightsearch.client.bot.processor.ProcessorConfirmSoftCheckProductsDefaultImpl",
 			"product_dto": {
 				"implementation": "lightsearch.client.bot.data.ProductDTODefaultImpl",
@@ -105,12 +90,12 @@
 				],
 				"barcode": "444444",
 				"sklad": "null",
-				"TK": "all",
+				"TK": "all"
 			}
 		},
 		{
-			"type": "close_soft_check",
 			"implementation": "lightsearch.client.bot.processor.ProcessorCloseSoftCheckDefaultImpl",
+			"delivery": "1"
 		}
 	]
 }
