@@ -65,7 +65,8 @@ public class ConnectionIdentifierDefaultImpl implements ConnectionIdentifier {
         } catch(DataStreamCreatorException | 
                 MessageRecipientException  | 
                 MessageParserException     | 
-                MessageSenderException ex) {
+                MessageSenderException     |
+                NullPointerException ex) {
             throw new ConnectionIdentifierException(ex.getMessage());
         }
     }

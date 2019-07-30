@@ -15,6 +15,7 @@
  */
 package lightsearch.server.handler.client;
 
+import java.io.IOException;
 import java.util.function.Function;
 import lightsearch.server.cmd.client.ClientCommand;
 import lightsearch.server.cmd.client.ClientCommandConverter;
@@ -88,16 +89,19 @@ public class ClientHandlerDefaultImpl extends Handler {
         ReceivedClientCommandVerifier receivedCmdVerifier = ReceivedClientCommandVerifierInit.receivedCommandVerifier();
         
         try {
-            while(super.serverDTO().clients().containsKey(clientDAO.IMEI()) ||
-                    super.threadManager().holder().getThread(super.threadParametersHolder().id()).isWorked()) {
+            while(super.threadManager().holder().getThread(super.threadParametersHolder().id()).isWorked()) {
                 try {
                     message = messageRecipient.acceptMessage();
                     ClientCommand clientCommand = clientCmdConverter.convertToClientCommand(message);
                     if(clientDAO.isFirst())
                         doCommand(messageSender, clientCommand);
                     else {
-                        receivedCmdVerifier.verifyReceivedClientCommand(clientCommand, clientDAO.IMEI());
-                        doCommand(messageSender, clientCommand);
+                        if(super.serverDTO().clients().containsKey(clientDAO.IMEI())) {
+                            receivedCmdVerifier.verifyReceivedClientCommand(clientCommand, clientDAO.IMEI());
+                            doCommand(messageSender, clientCommand);
+                        }
+                        else
+                            exit = true;
                     }
                     
                     if(exit)
@@ -116,6 +120,11 @@ public class ClientHandlerDefaultImpl extends Handler {
                 }
             }
             super.threadManager().holder().getThread(super.threadParametersHolder().id()).setIsDone(true);
+            try { 
+                clientParametersHolder.clientSocket().close();
+            } 
+            catch(IOException ignore) {}
+            
             if(exit)
                 super.threadManager().interrupt(super.threadParametersHolder().id()); 
         }

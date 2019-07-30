@@ -59,8 +59,9 @@ public class LightSearchServerListenerSocketDefaultImpl implements LightSearchSe
             HandlerExecutor handlerExecutor = HandlerExecutorInit.handlerExecutor(listenerDTO.threadManager());
             
             while(true) {
+                Socket clientSocket = null;
                 try {
-                    Socket clientSocket = serverSocket.accept();
+                    clientSocket = serverSocket.accept();
                     clientSocket.setSoTimeout(serverDTO.settingsDAO().clientTimeoutValue());
                     ConnectionIdentifierResult connectionIdentifierResult = connectionIdentifier.identifyConnection(clientSocket);
                     
@@ -70,9 +71,14 @@ public class LightSearchServerListenerSocketDefaultImpl implements LightSearchSe
                 }
                 catch(IOException ex) {
                     loggerServer.log(LogMessageTypeEnum.ERROR, listenerDTO.currentDateTime(), "StartServer, acceptSocket, message - " + ex.getMessage());
+                    if(clientSocket != null)
+                        try { clientSocket.close(); } catch (IOException ignore) {}
                 }
                 catch(ConnectionIdentifierException ex) {
+                    if(ex.getMessage() != null)
                         loggerServer.log(LogMessageTypeEnum.ERROR, listenerDTO.currentDateTime(), "StartServer, connectionIdentifier, message - " + ex.getMessage());
+                    if(clientSocket != null)
+                    try { clientSocket.close(); } catch (IOException ignore) {}
                 }
             }
     }

@@ -1,6 +1,6 @@
 {
 	"type": "advanced",
-	"bot_amount": "5",
+	"bot_amount": "6",
 	"bot_list": [
 		{
 			"bot_dao": {
@@ -288,6 +288,42 @@
 			"delay_before_sending_message": "0",
 			"cycle_amount": "6",
 			"cycle_content": [
+				{
+					"implementation": "lightsearch.client.bot.processor.ProcessorSearchDefaultImpl",
+					"search_dto": {
+						"implementation": "lightsearch.client.bot.data.SearchDTODefaultImpl",
+						"barcode": "111111",
+						"sklad": "all",
+						"TK": "all"
+					}
+				}
+			]
+		},
+		{
+			"bot_dao": {
+				"implementation": "lightsearch.client.bot.data.BotDAODefaultImpl",
+				"bot_name": "6",
+				"username": "user6",
+				"password": "pass6",
+				"IMEI": "666666666666666",
+				"card_code": "666",
+				"ident": "006"
+			},
+			"delay_before_sending_message": "0",
+			"cycle_amount": "10",
+			"cycle_content": [
+				{
+					"implementation": "lightsearch.client.bot.processor.ProcessorConnectionDefaultImpl"
+				},
+				{
+					"implementation": "lightsearch.client.bot.processor.ProcessorSearchDefaultImpl",
+					"search_dto": {
+						"implementation": "lightsearch.client.bot.data.SearchDTODefaultImpl",
+						"barcode": "111111",
+						"sklad": "all",
+						"TK": "all"
+					}
+				},
 				{
 					"implementation": "lightsearch.client.bot.processor.ProcessorSearchDefaultImpl",
 					"search_dto": {

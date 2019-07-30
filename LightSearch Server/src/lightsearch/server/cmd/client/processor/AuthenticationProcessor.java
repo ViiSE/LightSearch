@@ -94,20 +94,26 @@ public class AuthenticationProcessor extends AbstractProcessorClient {
                     return super.commandResult(clientCommand.IMEI(), LogMessageTypeEnum.INFO, ResultTypeMessageEnum.TRUE, 
                             result, "Client " + clientCommand.IMEI() + " connected: " + message);        
                 } catch(DatabaseConnectionCreatorException ex) {
+                    clientDAO.setIsFirst(false);
                     return super.commandResult(clientCommand.IMEI(), LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE, 
                             ex.getMessageRU(), "Client " + clientCommand.IMEI() + " " + ex.getMessage());
                 } catch(DatabaseStatementExecutorException ex) {
+                    clientDAO.setIsFirst(false);
                     return super.commandResult(clientCommand.IMEI(), LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE,
                             ex.getMessageRU(), "Client " + clientCommand.IMEI() + " " + ex.getMessage());
                 }    
             }
-            else
+            else {
+                clientDAO.setIsFirst(false);
                 return super.commandResult(clientCommand.IMEI(), LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE, 
                         "Извините, но вы находитесь в черном списке. Отключение от сервера.", null);
+            }
         }
-        else
+        else {
+            clientDAO.setIsFirst(false);
             return super.commandResult("Unknown", LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE, 
                     "Неверный формат команды. Обратитесь к администратору для устранения ошибки. Вы были отключены от сервера", null);
+        }
     }
     
 }

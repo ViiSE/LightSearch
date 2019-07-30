@@ -78,7 +78,7 @@ public class BotEntityProcessorAdvancedJSON extends BotEntityProcessor {
         
         for(int i = 0; i < super.botAmount(); i++) {
             try {
-                JSONObject jCycleContent = (JSONObject) botList.get(0);
+                JSONObject jCycleContent = (JSONObject) botList.get(i);
                 TestCycleCreator testCycleCreator = TestCycleCreatorInit.testCycleCreator(jCycleContent.get(CYCLE_CONTENT));
                 TestCycle testCycle = testCycleCreator.createCycle();
 

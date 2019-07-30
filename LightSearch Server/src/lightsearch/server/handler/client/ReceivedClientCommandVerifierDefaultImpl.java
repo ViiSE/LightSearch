@@ -28,6 +28,8 @@ public class ReceivedClientCommandVerifierDefaultImpl implements ReceivedClientC
     public void verifyReceivedClientCommand(ClientCommand clientCommand, String IMEI) throws ReceivedCommandVerifierException {
         if(clientCommand == null)
             throw new ReceivedCommandVerifierException("ClientCommand is null");
+        if(clientCommand.IMEI() == null)
+            throw new ReceivedCommandVerifierException("ClientCommand: IMEI is null");
         if(IMEI == null)
             throw new ReceivedCommandVerifierException("Client IMEI is null");
         if(!clientCommand.IMEI().equals(IMEI))
