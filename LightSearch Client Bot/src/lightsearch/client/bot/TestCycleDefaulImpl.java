@@ -40,5 +40,4 @@ public class TestCycleDefaulImpl implements TestCycle {
             throw new TestCycleOutOfBoundException("Cycle done.");
         }
     }
-    
 }
