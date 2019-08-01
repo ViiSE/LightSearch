@@ -17,7 +17,6 @@ package lightsearch.server.message;
 
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.time.ZonedDateTime;
 import java.util.Calendar;
 import lightsearch.server.exception.MessageRecipientException;
 
@@ -28,9 +27,11 @@ import lightsearch.server.exception.MessageRecipientException;
 public class MessageRecipientDebugImpl implements MessageRecipient {
 
     private final DataInputStream dataInputStream;
+    private final MessageTimeAdder msgTimeAdder;
     
     public MessageRecipientDebugImpl(DataInputStream dataInputStream) {
         this.dataInputStream = dataInputStream;
+        msgTimeAdder = MessageTimeAdderInit.messageTimeAdder();
     }
 
     @Override
@@ -47,6 +48,8 @@ public class MessageRecipientDebugImpl implements MessageRecipient {
             long ms = end - start;
             
             System.out.println("ACCEPT: " + ms + " ms." );
+            msgTimeAdder.add(ms);
+            System.out.println("avg: " + msgTimeAdder.averageTime());
             
             return res;
         }

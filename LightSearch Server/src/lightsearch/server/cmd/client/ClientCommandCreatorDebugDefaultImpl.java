@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.function.Function;
 import lightsearch.server.cmd.client.processor.debug.AuthenticationProcessorDebug;
 import lightsearch.server.cmd.client.processor.debug.CancelSoftCheckProcessorDebug;
+import lightsearch.server.cmd.client.processor.debug.ClearAverageTimeProcessorDebug;
 import lightsearch.server.cmd.client.processor.debug.CloseSoftCheckProcessorDebug;
 import lightsearch.server.cmd.client.processor.debug.ConfirmSoftCheckProductsProcessorDebug;
 import lightsearch.server.cmd.client.processor.debug.OpenSoftCheckProcessorDebug;
@@ -36,6 +37,7 @@ public class ClientCommandCreatorDebugDefaultImpl implements ClientCommandCreato
     private final String CANCEL_SOFT_CHECK           = ClientCommandEnum.CANCEL_SOFT_CHECK.stringValue();
     private final String CONFIRM_SOFT_CHECK_PRODUCTS = ClientCommandEnum.CONFIRM_SOFT_CHECK_PRODUCTS.stringValue();
     private final String SEARCH                      = ClientCommandEnum.SEARCH.stringValue();
+    private final String CLEAR_AVERAGE_TIME          = ClientCommandEnum.CLEAR_AVERAGE_TIME.stringValue();
     
     private final LightSearchServerDTO serverDTO;
     private final LightSearchListenerDTO listenerDTO;
@@ -60,6 +62,8 @@ public class ClientCommandCreatorDebugDefaultImpl implements ClientCommandCreato
         result.put(CLOSE_SOFT_CHECK, new CloseSoftCheckProcessorDebug(serverDTO, listenerDTO.checker(), softCheckDebug));
         result.put(CANCEL_SOFT_CHECK, new CancelSoftCheckProcessorDebug(serverDTO, listenerDTO.checker(), softCheckDebug));
         result.put(CONFIRM_SOFT_CHECK_PRODUCTS, new ConfirmSoftCheckProductsProcessorDebug(serverDTO, 
+                listenerDTO.checker()));
+        result.put(CLEAR_AVERAGE_TIME, new ClearAverageTimeProcessorDebug(serverDTO, 
                 listenerDTO.checker()));
         
         return result;
