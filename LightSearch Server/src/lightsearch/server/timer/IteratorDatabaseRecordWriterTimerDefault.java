@@ -47,6 +47,7 @@ public class IteratorDatabaseRecordWriterTimerDefault extends SuperIteratorDatab
             LocalDateTime dateTimeToWrite = LocalDateTime.now().plusMinutes(super.minutesToWrite());
             boolean isDone = false;
             while(!isDone) {
+                try { Thread.sleep(1000); } catch(InterruptedException ignored) {}
                 if(super.dateTimeComparator().isBefore(dateTimeToWrite, LocalDateTime.now())) {
                     try {
                         //System.out.println("I AM WRITING NOW!");
@@ -57,6 +58,7 @@ public class IteratorDatabaseRecordWriterTimerDefault extends SuperIteratorDatab
                         isDone = true;
                     }
                 }
+                dateTimeToWrite = null;
             }
         }
         super.threadManager().holder().getThread(ID).setIsDone(true);

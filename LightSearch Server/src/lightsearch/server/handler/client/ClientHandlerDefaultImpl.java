@@ -16,10 +16,12 @@
 package lightsearch.server.handler.client;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.function.Function;
 import lightsearch.server.cmd.client.ClientCommand;
 import lightsearch.server.cmd.client.ClientCommandConverter;
 import lightsearch.server.cmd.client.ClientCommandConverterInit;
+import lightsearch.server.cmd.client.ClientCommandEnum;
 import lightsearch.server.exception.CommandConverterException;
 import lightsearch.server.cmd.result.CommandResult;
 import lightsearch.server.data.ClientDAO;
@@ -55,12 +57,15 @@ public class ClientHandlerDefaultImpl extends Handler {
         this.clientDAO = clientHandlerDTO.clientDAO();
     }
 
-    private void doCommand(MessageSender messageSender, ClientCommand clientCommand) {
+    private void doCommand(MessageSender messageSender, ClientCommand clientCommand, boolean isFirst) {
         String command = clientCommand.command();
         if(command != null) {
-            Function<ClientCommand, CommandResult> processor = 
-                    clientParametersHolder.commandHolder().get(command);
-
+            Function<ClientCommand, CommandResult> processor;
+            if(isFirst)
+                processor = clientParametersHolder.commandHolder().get(ClientCommandEnum.CONNECT.stringValue());
+            else
+                processor = clientParametersHolder.commandHolder().get(command);
+            
             if(processor != null) {
                 CommandResult result = processor.apply(clientCommand);
                 try {
@@ -94,11 +99,11 @@ public class ClientHandlerDefaultImpl extends Handler {
                     message = messageRecipient.acceptMessage();
                     ClientCommand clientCommand = clientCmdConverter.convertToClientCommand(message);
                     if(clientDAO.isFirst())
-                        doCommand(messageSender, clientCommand);
+                        doCommand(messageSender, clientCommand, clientDAO.isFirst());
                     else {
                         if(super.serverDTO().clients().containsKey(clientDAO.IMEI())) {
                             receivedCmdVerifier.verifyReceivedClientCommand(clientCommand, clientDAO.IMEI());
-                            doCommand(messageSender, clientCommand);
+                            doCommand(messageSender, clientCommand, clientDAO.isFirst());
                         }
                         else
                             exit = true;
@@ -120,10 +125,13 @@ public class ClientHandlerDefaultImpl extends Handler {
                 }
             }
             super.threadManager().holder().getThread(super.threadParametersHolder().id()).setIsDone(true);
-            try { 
+            try {
                 clientParametersHolder.clientSocket().close();
-            } 
-            catch(IOException ignore) {}
+                if(clientDAO.databaseConnection() != null)
+                    clientDAO.databaseConnection().connection().close();
+            }
+            catch(IOException  ignore) {}
+            catch(SQLException ex) { System.out.println("SQL! ::" + ex.getMessage()); }
             
             if(exit)
                 super.threadManager().interrupt(super.threadParametersHolder().id()); 
