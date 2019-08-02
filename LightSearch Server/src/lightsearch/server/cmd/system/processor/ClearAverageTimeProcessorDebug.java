@@ -13,13 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lightsearch.server.cmd.client.processor.debug;
+package lightsearch.server.cmd.system.processor;
 
 import lightsearch.server.checker.LightSearchChecker;
-import lightsearch.server.cmd.client.ClientCommand;
-import lightsearch.server.cmd.client.processor.AbstractProcessorClient;
 import lightsearch.server.cmd.result.CommandResult;
-import lightsearch.server.data.ClientDAO;
+import lightsearch.server.cmd.system.SystemCommand;
 import lightsearch.server.data.LightSearchServerDTO;
 import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.message.MessageTimeAdder;
@@ -30,7 +28,7 @@ import lightsearch.server.message.result.ResultTypeMessageEnum;
  *
  * @author ViiSE
  */
-public class ClearAverageTimeProcessorDebug extends AbstractProcessorClient {
+public class ClearAverageTimeProcessorDebug extends AbstractProcessorSystem {
     
     public ClearAverageTimeProcessorDebug(LightSearchServerDTO serverDTO, 
             LightSearchChecker checker) {
@@ -38,13 +36,12 @@ public class ClearAverageTimeProcessorDebug extends AbstractProcessorClient {
     }
 
     @Override
-    public CommandResult apply(ClientCommand clientCommand) {
+    public CommandResult apply(SystemCommand systemCommand) {
         
         MessageTimeAdder msgTimeAdder = MessageTimeAdderInit.messageTimeAdder();
         msgTimeAdder.clear();
 
-        return super.commandResult(clientCommand.IMEI(), LogMessageTypeEnum.INFO, 
-                ResultTypeMessageEnum.TRUE, "OK", "");
+        return super.commandResult("System", LogMessageTypeEnum.INFO, ResultTypeMessageEnum.TRUE, "OK", "");
     }
     
 }

@@ -132,10 +132,34 @@ public class HandlerCreatorTestNG {
                 long i = 0;
                 while(!close) {
                     if(i == 0) {
-                        String message = "{\"identifier\":\"android\"}";
+                        String message = "{\"identifier\":\"client\"}";
                         dataStream.dataOutputStream().writeUTF(message);
                         String getMessage = dataStream.dataInputStream().readUTF();
                         System.out.println("CLIENT GET MESSAGE: " + getMessage);
+                        i++;
+                    }
+                }
+            } 
+            catch (IOException | DataStreamCreatorException ignore) { }   
+        }   
+    }
+    
+    public class SystemBot implements Runnable {
+
+        @Override
+        public void run() {
+            try { 
+                Socket socket = new Socket("127.0.0.1", 49000);
+                DataStreamCreator dataStreamCreator = DataStreamCreatorInit.dataStreamCreator(socket);
+                dataStreamCreator.createDataStream();
+                DataStream dataStream = DataStreamInit.dataStream(dataStreamCreator);
+                long i = 0;
+                while(!close) {
+                    if(i == 0) {
+                        String message = "{\"identifier\":\"system\"}";
+                        dataStream.dataOutputStream().writeUTF(message);
+                        String getMessage = dataStream.dataInputStream().readUTF();
+                        System.out.println("SYSTEM BOT GET MESSAGE: " + getMessage);
                         i++;
                     }
                 }
@@ -277,6 +301,33 @@ public class HandlerCreatorTestNG {
         }
     }
     
+    private void systemTest(ServerSocket serverSocket) {
+        try {
+            LightSearchThread system = LightSearchThreadInit.lightSearchThread(new SystemBot());
+            system.start();
+            Socket clientSocket = serverSocket.accept();
+            
+            ConnectionIdentifier connectionIdentifier = ConnectionIdentifierInit.connectionIdentifier();
+            ConnectionIdentifierResult connectionIdentifierResult = connectionIdentifier.identifyConnection(clientSocket);
+            
+            LightSearchServerDTO serverDTO = initDTO();
+            assertNotNull(serverDTO, "ServerDTO is null!");
+            
+            LightSearchListenerDTO listenerDTO = initListenerDTO(serverDTO);
+            assertNotNull(listenerDTO, "ListenerDTO is null!");
+            
+            LoggerServer logger = initLoggerServer();
+            
+            HandlerCreator handlerCreator = HandlerCreatorInit.handlerCreator(
+                    connectionIdentifierResult, serverDTO, listenerDTO, logger);
+            
+            Handler handler = handlerCreator.getHandler();
+            System.out.println("HandlerCreator.getHandler(): " + handler);
+        } catch (IOException | ConnectionIdentifierException ex) {
+            System.out.println("CATCH! systemTest: " + ex.getMessage());
+        }
+    }
+    
     @Test
     public void getHandler() {
         testBegin("HandlerCreator", "getHandler()");
@@ -286,6 +337,7 @@ public class HandlerCreatorTestNG {
             
             adminTest(serverSocket);
             clientTest(serverSocket);
+            systemTest(serverSocket);
             
             close = true;
         }

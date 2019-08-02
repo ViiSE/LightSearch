@@ -35,6 +35,10 @@ public enum IdentifierEnum {
     CLIENT {
       @Override
       public String stringValue() {return "client";}  
+    },
+    SYSTEM {
+      @Override
+      public String stringValue() {return "system";}  
     };
     
     public abstract String stringValue();

@@ -27,6 +27,7 @@ import lightsearch.server.data.LightSearchServerDTO;
 import lightsearch.server.handler.processor.HandlerCreatorAdminProcessor;
 import lightsearch.server.identifier.IdentifierEnum;
 import lightsearch.server.handler.processor.HandlerCreatorClientProcessor;
+import lightsearch.server.handler.processor.HandlerCreatorSystemProcessor;
 
 /**
  *
@@ -36,6 +37,7 @@ public class HandlerCreatorDefaultImpl implements HandlerCreator {
     
     private final String ADMIN  = IdentifierEnum.ADMIN.stringValue();
     private final String CLIENT = IdentifierEnum.CLIENT.stringValue();
+    private final String SYSTEM = IdentifierEnum.SYSTEM.stringValue();
     
     private final ConnectionIdentifierResult identifierResult;
     private final LightSearchServerDTO serverDTO;
@@ -60,6 +62,8 @@ public class HandlerCreatorDefaultImpl implements HandlerCreator {
         handlerHolder.put(ADMIN, new HandlerCreatorAdminProcessor(identifierResult, serverDTO, 
                 listenerDTO, loggerServer, handlerIterator));
         handlerHolder.put(CLIENT, new HandlerCreatorClientProcessor(identifierResult, serverDTO,
+                listenerDTO, loggerServer, handlerIterator));
+        handlerHolder.put(SYSTEM, new HandlerCreatorSystemProcessor(identifierResult, serverDTO, 
                 listenerDTO, loggerServer, handlerIterator));
     }
     

@@ -13,23 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lightsearch.server.data;
-
-import java.net.Socket;
-import java.util.Map;
-import java.util.function.Function;
-import lightsearch.server.cmd.client.ClientCommand;
-import lightsearch.server.cmd.result.CommandResult;
-import lightsearch.server.data.stream.DataStream;
+package lightsearch.server.cmd.system;
 
 /**
  *
  * @author ViiSE
  */
-public class ClientParametersHolderInit {
+public enum SystemCommandEnum {
     
-    public static ClientParametersHolder clientParametersHolder(Socket clientSocket, DataStream dataStream,
-            Map<String, Function<ClientCommand, CommandResult>> commandHolder) {
-        return new ClientParametersHolderDefaultImpl(clientSocket, dataStream, commandHolder);
-    }
+    CLEAR_AVERAGE_TIME {
+        @Override
+        public String stringValue() {return "clear";}
+    };
+    
+    public abstract String stringValue();
 }

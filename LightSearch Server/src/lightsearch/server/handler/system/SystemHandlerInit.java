@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2019 ViiSE.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,23 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lightsearch.server.data;
+package lightsearch.server.handler.system;
 
-import java.net.Socket;
-import java.util.Map;
-import java.util.function.Function;
-import lightsearch.server.cmd.client.ClientCommand;
-import lightsearch.server.cmd.result.CommandResult;
-import lightsearch.server.data.stream.DataStream;
+import lightsearch.server.data.LightSearchServerDTO;
+import lightsearch.server.data.SystemHandlerDTO;
+import lightsearch.server.handler.Handler;
+import lightsearch.server.log.LoggerServer;
 
 /**
  *
  * @author ViiSE
  */
-public class ClientParametersHolderInit {
+public class SystemHandlerInit {
     
-    public static ClientParametersHolder clientParametersHolder(Socket clientSocket, DataStream dataStream,
-            Map<String, Function<ClientCommand, CommandResult>> commandHolder) {
-        return new ClientParametersHolderDefaultImpl(clientSocket, dataStream, commandHolder);
+    public static Handler systemHandler(SystemHandlerDTO systemHandlerDTO, 
+            LightSearchServerDTO serverDTO, LoggerServer loggerServer) {
+        return new SystemHandlerDefaultImpl(systemHandlerDTO, serverDTO, loggerServer);
     }
 }

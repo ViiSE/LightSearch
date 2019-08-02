@@ -21,25 +21,32 @@ package lightsearch.server.message;
  */
 public class MessageTimeAdderDefaultImpl implements MessageTimeAdder {
 
+    private static boolean isFirst = true;
     private static long count = 0;
     private static long sum = 0;
     
     @Override
     synchronized public void add(long time) {
         if(time >= 0) {
-            sum += time;
-            count++;
+            if(isFirst)
+                isFirst = false;
+            else {
+                count++;
+                sum += time;
+            }
         }
     }
 
     @Override
     public long averageTime() {
-        return (sum/count);
+        if(count == 0) return 0;
+        return (sum / count);
     }
 
     @Override
     synchronized public void clear() {
         count = 0;
         sum = 0;
+        isFirst = true;
     }
 }

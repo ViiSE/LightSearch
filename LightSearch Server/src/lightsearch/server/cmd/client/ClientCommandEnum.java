@@ -43,10 +43,6 @@ public enum ClientCommandEnum {
     SEARCH {
         @Override
         public String stringValue() {return "search";}
-    },
-    CLEAR_AVERAGE_TIME {
-        @Override
-        public String stringValue() {return "clear";}
     };
     
     public abstract String stringValue();

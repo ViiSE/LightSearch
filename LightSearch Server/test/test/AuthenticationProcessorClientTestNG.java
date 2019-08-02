@@ -207,7 +207,7 @@ public class AuthenticationProcessorClientTestNG {
         });
         
         ClientDAO clientDAO = ClientDAOInit.clientDAO();
-        System.out.println("adminDAO BEFORE: ");
+        System.out.println("clientDAO BEFORE: ");
         System.out.println("\t clientDAO.isFirst: " + clientDAO.isFirst());
         System.out.println("\t clientDAO.IMEI: " + clientDAO.IMEI());
         System.out.println("\t clientDAO.datanbaseConnection: " + clientDAO.databaseConnection());
@@ -230,7 +230,7 @@ public class AuthenticationProcessorClientTestNG {
             System.out.println("\t" + clientName + " " + serverDTO.clients().get(clientName));
         });
         
-        System.out.println("adminDAO: ");
+        System.out.println("clientDAO: ");
         System.out.println("\t clientDAO.isFirst: " + clientDAO.isFirst());
         System.out.println("\t clientDAO.IMEI: " + clientDAO.IMEI());
         System.out.println("\t clientDAO.databaseConnection: " + clientDAO.databaseConnection());

@@ -24,9 +24,6 @@ import lightsearch.server.time.CurrentDateTime;
  */
 public class ClientHandlerDTOInit {
     
-    /*ClientHandlerDTO clientHandlerDTO = ClientHandlerDTOInit.clientHandlerDTO(clientParamHolder,
-    threadParametersHolder, listenerDTO.currentDateTime(), listenerDTO.threadManager(), clientDAO);*/
-    
     public static ClientHandlerDTO clientHandlerDTO(ClientParametersHolder clientParametersHolder,
             ThreadParametersHolder threadParametersHolder, CurrentDateTime currentDateTime,
             ThreadManager threadManager, ClientDAO clientDAO) {
