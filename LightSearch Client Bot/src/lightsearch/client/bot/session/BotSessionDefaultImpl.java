@@ -24,6 +24,10 @@ import lightsearch.client.bot.settings.GlobalSettings;
 import lightsearch.client.bot.BotEntity;
 import lightsearch.client.bot.BotEntityCreator;
 import lightsearch.client.bot.BotEntityCreatorInit;
+import lightsearch.client.bot.BotsChecker;
+import lightsearch.client.bot.BotsCheckerInit;
+import lightsearch.client.bot.BotsDoneSwitcher;
+import lightsearch.client.bot.data.ConnectionDTOInit;
 import lightsearch.client.bot.settings.BotSettingsReader;
 
 /**
@@ -36,12 +40,15 @@ public class BotSessionDefaultImpl implements BotSession {
     private final String serverIP;
     private final int serverPort;
     private final long delayMessageDisplay;
+    private final boolean isPerfomance;
 
-    public BotSessionDefaultImpl(String botSettingsName, GlobalSettings globalSettings) {
+    public BotSessionDefaultImpl(String botSettingsName, GlobalSettings globalSettings, 
+            boolean isPerfomance) {
         this.botSettingsName = botSettingsName;
         this.serverIP = globalSettings.serverIP();
         this.serverPort = globalSettings.serverPort();
         this.delayMessageDisplay = globalSettings.delayMessageDisplay();
+        this.isPerfomance = isPerfomance;
     }
     
     @Override
@@ -59,5 +66,12 @@ public class BotSessionDefaultImpl implements BotSession {
         });
         
         bots.forEach((bot) -> { bot.start(); });
+        
+        if(isPerfomance) {
+            BotsDoneSwitcher.addBots(bots.size());
+            BotsChecker checker = BotsCheckerInit.botsChecker(
+                    ConnectionDTOInit.connectDTO(serverIP, serverPort));
+            checker.start();
+        }
     }
 }

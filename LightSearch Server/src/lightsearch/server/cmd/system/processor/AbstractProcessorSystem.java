@@ -38,6 +38,6 @@ public abstract class AbstractProcessorSystem extends SuperAbstractProcessor imp
     @Override
     protected CommandResult commandResult(String name, LogMessageTypeEnum type, 
             ResultTypeMessageEnum resultValue, Object message, String logMessage) {       
-        return CommandResultInit.commandResult(type, null, logMessage);
+        return CommandResultInit.commandResult(type, "OK", logMessage);
     }
 }

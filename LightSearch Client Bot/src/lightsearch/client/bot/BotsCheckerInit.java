@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2019 ViiSE.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,14 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lightsearch.client.bot.settings;
+package lightsearch.client.bot;
+
+import lightsearch.client.bot.data.ConnectionDTO;
 
 /**
  *
  * @author ViiSE
  */
-public interface Configuration {
-    String globalSettingsName();
-    String botSettingsName();
-    boolean isPerfomance();
+public class BotsCheckerInit {
+    
+    public static BotsChecker botsChecker(ConnectionDTO connDTO) {
+        return new BotsCheckerDefaultImpl(connDTO);
+    }
 }

@@ -28,9 +28,11 @@ public class ConfigurationJSONFileImpl implements Configuration {
     
     private final String GLOBAL_SETTINGS = ConfigurationEnum.GLOBAL_SETTINGS.toString();
     private final String BOT_SETTINGS    = ConfigurationEnum.BOT_SETTINGS.toString();
+    private final String PERFOMANCE      = ConfigurationEnum.PERFOMANCE.toString();
     
     private final String globalSettingsName;
     private final String botSettingsName;
+    private final boolean isPerfomance;
     
     public ConfigurationJSONFileImpl(String configurationName) {
         SettingsReader settingsReader = SettingsReaderInit.settingsReader(configurationName);
@@ -40,6 +42,7 @@ public class ConfigurationJSONFileImpl implements Configuration {
             JSONObject jObj = (JSONObject)parser.parse(content);
             globalSettingsName = jObj.get(GLOBAL_SETTINGS).toString();
             botSettingsName    = jObj.get(BOT_SETTINGS).toString();
+            isPerfomance       = Boolean.valueOf(jObj.get(PERFOMANCE).toString());
         }
         catch(SettingsParserException ex) {
             throw new RuntimeException("Error in file " + configurationName + ".json. "
@@ -55,6 +58,11 @@ public class ConfigurationJSONFileImpl implements Configuration {
     @Override
     public String botSettingsName() {
         return botSettingsName;
+    }
+
+    @Override
+    public boolean isPerfomance() {
+        return isPerfomance;
     }
     
 }

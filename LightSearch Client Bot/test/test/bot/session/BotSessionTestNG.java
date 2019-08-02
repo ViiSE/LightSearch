@@ -47,6 +47,7 @@ public class BotSessionTestNG {
     private final String configurationName = "configuration.json";
     private String botSettingsName;
     private GlobalSettings globalSettings;
+    private boolean isPerfomance;
     
     @BeforeClass
     public void setUpClass() {
@@ -56,6 +57,7 @@ public class BotSessionTestNG {
         Configuration configuration = ConfigurationInit.configuration(configurationName);
         globalSettings = GlobalSettingsInit.globalSettingsCreator(configuration.globalSettingsName());
         botSettingsName = configuration.botSettingsName();
+        isPerfomance = configuration.isPerfomance();
     }
     
     @Test
@@ -65,7 +67,8 @@ public class BotSessionTestNG {
         assertNotNull(globalSettings, "GlobalSettings is null!");
         assertNotNull(botSettingsName, "BotSettingsName is null!");
         
-        BotSession botSession = BotSessionInit.BotSession(botSettingsName, globalSettings);
+        BotSession botSession = BotSessionInit.BotSession(botSettingsName, 
+                globalSettings, isPerfomance);
         assertNotNull(botSession, "BotSession is null!");
         
         botSession.startSession();

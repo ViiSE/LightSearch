@@ -58,4 +58,14 @@ public class ConfigurationTestNG {
         
         testEnd("Configuration", "globalSettingsName()");
     }
+    
+    @Test
+    public void isPerfomance() {
+        testBegin("Configuration", "isPerfomance()");
+        
+        assertNotNull(configuration, "Configuration is null!");
+        System.out.println("isPerfomance(): " + configuration.isPerfomance());
+        
+        testEnd("Configuration", "isPerfomance()");
+    }
 }

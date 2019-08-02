@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2019 ViiSE.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,14 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lightsearch.client.bot.settings;
+package lightsearch.client.bot;
 
 /**
  *
  * @author ViiSE
  */
-public interface Configuration {
-    String globalSettingsName();
-    String botSettingsName();
-    boolean isPerfomance();
+public class BotsDoneSwitcher {
+    
+    private static int botsCount;
+    private static int botsDone = 0;
+    
+    public static void addBots(int botsCount) {
+        BotsDoneSwitcher.botsCount+=botsCount;
+    }
+    
+    synchronized public static void botDone() {
+        botsDone++;
+    }
+    
+    public static boolean isDone() {
+        return botsCount == botsDone;
+    }
 }

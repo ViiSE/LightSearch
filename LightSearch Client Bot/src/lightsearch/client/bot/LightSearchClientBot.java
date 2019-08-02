@@ -43,7 +43,7 @@ public class LightSearchClientBot {
         GlobalSettings globalSettings = 
                 GlobalSettingsInit.globalSettingsCreator(configuration.globalSettingsName());
         
-        BotSession session = BotSessionInit.BotSession(configuration.botSettingsName(), globalSettings);
+        BotSession session = BotSessionInit.BotSession(configuration.botSettingsName(), globalSettings, configuration.isPerfomance());
         
         session.startSession();
     }

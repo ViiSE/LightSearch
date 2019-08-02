@@ -90,6 +90,7 @@ public class BotEntityDefaultImpl implements BotEntity {
             }
         }
         destroy();
+        BotsDoneSwitcher.botDone();
     }
 
     @Override
