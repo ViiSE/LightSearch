@@ -32,6 +32,7 @@ public class IteratorDatabaseRecordWriterTimerExecutorDefaultImpl implements Ite
     @Override
     public void startIteratorDatabaseRecordWriterTimer() {
         LightSearchThread thread = new LightSearchThread(timer);
+        thread.setDaemon(true);
         thread.start();
         timer.threadManager().holder().add(timer.id().stringValue(), thread);
     }

@@ -31,12 +31,8 @@ import org.json.simple.JSONObject;
  */
 public class SearchProcessorDebug extends AbstractProcessorClient {
     
-    private final ProductsMapDebug products;
-    
     public SearchProcessorDebug(LightSearchServerDTO serverDTO, LightSearchChecker checker) {
         super(serverDTO, checker);
-    
-        products = ProductsMapDebugInit.productsMapDebug();
     }
     
     @Override
@@ -46,7 +42,7 @@ public class SearchProcessorDebug extends AbstractProcessorClient {
             if(!serverDTO.blacklist().contains(clientCommand.IMEI())) {
                 JSONArray jData = new JSONArray();
                 
-                products.map().forEach((id, product) -> {
+                ProductsMapDebug.PRODUCTS.forEach((id, product) -> {
                     if(product.id().equals(clientCommand.barcode()))
                         if(clientCommand.sklad().equals("all") &&
                                 clientCommand.TK().equals("all")) {

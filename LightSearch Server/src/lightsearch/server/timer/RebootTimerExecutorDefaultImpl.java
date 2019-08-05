@@ -32,6 +32,7 @@ public class RebootTimerExecutorDefaultImpl implements RebootTimerExecutor {
     @Override
     public void startRebootTimer() {
         LightSearchThread thread = new LightSearchThread(timer);
+        thread.setDaemon(true);
         thread.start();
         timer.threadManager().holder().add(timer.id().stringValue(), thread);
     }

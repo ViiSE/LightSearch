@@ -62,5 +62,4 @@ public class ThreadManagerDefaultImpl implements ThreadManager {
     public ThreadHolder holder() {
         return holder;
     }
-    
 }

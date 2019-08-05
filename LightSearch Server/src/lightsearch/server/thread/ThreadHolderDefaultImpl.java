@@ -34,7 +34,7 @@ public class ThreadHolderDefaultImpl implements ThreadHolder {
     public void add(String id, LightSearchThread thread) {
         threads.put(id, thread);
     }
-
+    
     @Override
     public void del(String id) {
         threads.remove(id);

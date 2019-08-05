@@ -34,12 +34,9 @@ import org.json.simple.JSONObject;
  */
 public class ConfirmSoftCheckProductsProcessorDebug extends AbstractProcessorClient {
     
-    private final ProductsMapDebug products;
-    
     public ConfirmSoftCheckProductsProcessorDebug(LightSearchServerDTO serverDTO, 
             LightSearchChecker checker) {
         super(serverDTO, checker);
-        this.products = ProductsMapDebugInit.productsMapDebug();
     }
     
     @Override
@@ -63,7 +60,7 @@ public class ConfirmSoftCheckProductsProcessorDebug extends AbstractProcessorCli
                         
                         final MaxAmount maxAmount = new MaxAmount();
                         
-                        products.map().forEach((ignore, productM) -> {
+                        ProductsMapDebug.PRODUCTS.forEach((ignore, productM) -> {
                             if(productM.id().equals("2200000738592"))
                                 productM.delMaxAmount(1.f);
                             else if(productM.id().equals("111111"))

@@ -15,7 +15,6 @@
  */
 package lightsearch.server.handler;
 
-import lightsearch.server.thread.LightSearchThread;
 import lightsearch.server.thread.LightSearchThreadInit;
 import lightsearch.server.thread.ThreadManager;
 
@@ -34,9 +33,8 @@ public class HandlerExecutorDefaultImpl implements HandlerExecutor {
     @Override
     public void executeHandler(Handler handler) {
         if(handler != null) {
-            LightSearchThread handlerThread = LightSearchThreadInit.lightSearchThread(handler);
-            handlerThread.start();
-            threadManager.holder().add(handler.threadParametersHolder().id(), handlerThread);
+            threadManager.holder().add(handler.threadParametersHolder().id(), LightSearchThreadInit.lightSearchThread(handler));
+            threadManager.holder().getThread(handler.threadParametersHolder().id()).start();
         }
     }
     

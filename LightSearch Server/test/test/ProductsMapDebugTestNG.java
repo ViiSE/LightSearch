@@ -9,9 +9,7 @@
  */
 package test;
 
-import java.util.Map;
 import lightsearch.server.cmd.client.processor.debug.ProductsMapDebug;
-import lightsearch.server.cmd.client.processor.debug.ProductsMapDebugInit;
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
@@ -24,17 +22,13 @@ import static test.message.TestMessage.testEnd;
 public class ProductsMapDebugTestNG {
     
     @Test
-    public void map() {
-        testBegin("ProductsMapDebug", "map()");
+    public void PRODUCTS() {
+        testBegin("ProductsMapDebug", "PRODUCTS");
         
-        ProductsMapDebug product = ProductsMapDebugInit.productsMapDebug();
-        assertNotNull(product, "ProductMapDebug is null!");
+        assertNotNull(ProductsMapDebug.PRODUCTS, "ProductMapDebug is null!");
         
-        Map map = product.map();
-        assertNotNull(map, "Map is null!");
+        System.out.println("ProductsMapDebug: products: " + ProductsMapDebug.PRODUCTS);
         
-        System.out.println("ProductsMapDebug: map: " + map);
-        
-        testEnd("ProductsMapDebug", "map()");
+        testEnd("ProductsMapDebug", "PRODUCTS");
     }
 }
