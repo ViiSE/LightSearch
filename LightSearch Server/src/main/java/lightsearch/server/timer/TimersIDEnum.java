@@ -27,6 +27,10 @@ public enum TimersIDEnum {
     ITERATOR_WRITER_TIMER_ID {
         @Override
         public String stringValue() {return "IteratorWriterTimer";}
+    },
+    GARBAGE_COLLECTOR_WRITER {
+        @Override
+        public String stringValue() {return "GarbageCollectorWriter";}
     };
     
     public abstract String stringValue();

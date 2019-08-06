@@ -142,7 +142,6 @@ public class ClientHandlerDefaultImpl extends Handler {
             super.threadManager().holder().getThread(super.threadParametersHolder().id()).setIsDone(true);
             super.threadManager().interrupt(super.threadParametersHolder().id());                    
         }
-        
     }
     
 }

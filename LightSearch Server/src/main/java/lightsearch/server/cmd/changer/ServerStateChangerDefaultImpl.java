@@ -31,6 +31,9 @@ import lightsearch.server.timer.RebootTimerExecutor;
 import lightsearch.server.timer.RebootTimerExecutorInit;
 import lightsearch.server.data.LightSearchServerDTO;
 import lightsearch.server.log.LogMessageTypeEnum;
+import lightsearch.server.timer.GarbageCollectorTimerCreator;
+import lightsearch.server.timer.GarbageCollectorTimerCreatorInit;
+import lightsearch.server.timer.GarbageCollectorTimerExecutorInit;
 import lightsearch.server.timer.TimersIDEnum;
 
 
@@ -85,6 +88,18 @@ public class ServerStateChangerDefaultImpl implements ServerStateChanger {
     public void destroyIteratorDatabaseRecordWriterTimer(TimersIDEnum id) {
         if(threadManager.interrupt(id.stringValue()))
             logger.log(LogMessageTypeEnum.INFO, currentDateTime, "Iterator database record writer timer was destroyed");
+    }
+
+    @Override
+    public void executeGarbageCollectorTimer(TimersIDEnum id) {
+        GarbageCollectorTimerCreator garbageTimerCreator = GarbageCollectorTimerCreatorInit.garbageCollectorTimerCreator(logger, currentDateTime, threadManager, id);
+        GarbageCollectorTimerExecutorInit.garbageCollectorTimerExecutor(garbageTimerCreator.getTimer())
+                        .startGarbageCollectorTimerExecutor();
+    }
+
+    @Override
+    public void destroyGarbageCollectorTimer(TimersIDEnum id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

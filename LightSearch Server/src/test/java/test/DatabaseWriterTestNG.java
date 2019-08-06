@@ -83,8 +83,8 @@ public class DatabaseWriterTestNG {
     private DatabaseConnection initDatabaseConnection() {
         try {
             LightSearchServerDatabaseDTO databaseDTO = initDatabaseDTO();
-            String username = "sysdba";
-            String password = "bazar";
+            String username = "user";
+            String password = "pass";
             
             DatabaseConnectionCreator connectionCreator = DatabaseConnectionCreatorInit.databaseConnectionCreator(databaseDTO,
                     username, password);

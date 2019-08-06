@@ -29,4 +29,6 @@ public interface ServerStateChanger {
     void executeIteratorDatabaseRecordWriterTimer( IteratorDatabaseRecord iterator, 
             IteratorDatabaseRecordWriter iteratorWriter, long minutesToWrite, TimersIDEnum timerId);
     void destroyIteratorDatabaseRecordWriterTimer(TimersIDEnum id);
+    void executeGarbageCollectorTimer(TimersIDEnum id);
+    void destroyGarbageCollectorTimer(TimersIDEnum id);
 }
