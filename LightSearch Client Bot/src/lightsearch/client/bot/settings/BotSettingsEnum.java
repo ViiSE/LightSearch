@@ -33,9 +33,9 @@ public enum BotSettingsEnum {
         @Override
         public String toString() { return "delay_before_sending_message"; }
     },
-    BOT_DTO {
+    BOT_DAO {
         @Override
-        public String toString() { return "bot_dto"; }
+        public String toString() { return "bot_dao"; }
     },
     BOT_NAME {
         @Override
@@ -44,6 +44,10 @@ public enum BotSettingsEnum {
     USERNAME {
         @Override
         public String toString() { return "username"; }
+    },
+    PASSWORD {
+        @Override
+        public String toString() { return "password"; }
     },
     IMEI {
         @Override

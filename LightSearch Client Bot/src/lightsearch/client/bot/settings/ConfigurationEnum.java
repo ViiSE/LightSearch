@@ -29,4 +29,8 @@ public enum ConfigurationEnum {
         @Override
         public String toString() { return "global_settings"; }
     },
+    PERFOMANCE {
+        @Override
+        public String toString() { return "perfomance"; }
+    }
 }

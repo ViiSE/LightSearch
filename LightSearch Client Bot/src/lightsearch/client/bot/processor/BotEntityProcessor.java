@@ -24,13 +24,32 @@ import lightsearch.client.bot.BotEntity;
  * @author ViiSE
  */
 public abstract class BotEntityProcessor implements Function<Object, List<BotEntity>> {
-    private final int botAmount;
     
-    public BotEntityProcessor(int botAmount) {
+    private final int botAmount;
+    private final String ip;
+    private final int port;
+    private final long delayMessageDisplay;
+    
+    public BotEntityProcessor(int botAmount, String ip, int port, long delayMessageDisplay) {
         this.botAmount = botAmount;
+        this.ip = ip;
+        this.port = port;
+        this.delayMessageDisplay = delayMessageDisplay;
     }
     
     public int botAmount() {
         return botAmount;
+    }
+    
+    public String ip() {
+        return ip;
+    }
+    
+    public int port() {
+        return port;
+    }
+    
+    public long delayMessageDisplay() {
+        return delayMessageDisplay;
     }
 }

@@ -27,3 +27,9 @@ LightSearch\ Android/LightSearch/.externalNativeBuild
 
 #Android: app
 LightSearch\ Android/LightSearch/app/build
+
+# Idea
+**/.idea/*
+
+# Maven target
+**/target/*

@@ -22,4 +22,5 @@ package lightsearch.client.bot.settings;
 public interface Configuration {
     String globalSettingsName();
     String botSettingsName();
+    boolean isPerfomance();
 }

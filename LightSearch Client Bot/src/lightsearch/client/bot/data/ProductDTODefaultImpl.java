@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2019 ViiSE.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,7 +23,7 @@ public class ProductDTODefaultImpl implements ProductDTO {
 
     private final String id;
     private final String amount;
-    
+
     public ProductDTODefaultImpl(String id, String amount) {
         this.id = id;
         this.amount = amount;
@@ -38,5 +38,4 @@ public class ProductDTODefaultImpl implements ProductDTO {
     public String amount() {
         return amount;
     }
-    
 }

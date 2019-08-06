@@ -15,10 +15,14 @@
  */
 package lightsearch.client.bot.processor;
 
+import lightsearch.client.bot.data.BotDAO;
+import lightsearch.client.bot.message.MessageRecipient;
+import lightsearch.client.bot.message.MessageSender;
+
 /**
  *
  * @author ViiSE
  */
 public interface Processor {
-    void apply();
+    void apply(BotDAO botDAO, MessageSender messageSender, MessageRecipient messageRecipient, long delayMessageDisplay);
 }

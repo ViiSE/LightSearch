@@ -22,7 +22,7 @@ import lightsearch.client.bot.exception.MessageSenderException;
 import lightsearch.client.bot.message.MessageRecipient;
 import lightsearch.client.bot.message.MessageSender;
 import org.json.simple.JSONObject;
-import lightsearch.client.bot.data.BotDTO;
+import lightsearch.client.bot.data.BotDAO;
 
 /**
  *
@@ -31,30 +31,19 @@ import lightsearch.client.bot.data.BotDTO;
 public class ProcessorConnectionDefaultImpl implements Processor {
 
     private final String IDENTIFIER = CommandType.IDENTIFIER.toString();
-    
-    private final String CLIENT = CommandContentType.CLIENT.toString();
-    
-    private final MessageSender messageSender;
-    private final MessageRecipient messageRecipient;
-    private final String botName;
-    
-    public ProcessorConnectionDefaultImpl(BotDTO botDTO, 
-            MessageSender messageSender, MessageRecipient messageRecipient) {
-        this.botName = botDTO.botName();
-        this.messageSender = messageSender;
-        this.messageRecipient = messageRecipient;
-    }
+    private final String CLIENT     = CommandContentType.CLIENT.toString();
     
     @Override
-    public void apply() {
+    public void apply(BotDAO botDAO, MessageSender messageSender, MessageRecipient messageRecipient, long delay) {
         try {
             String request = generateJSONRequest();
             messageSender.sendMessage(request);
             String response = messageRecipient.acceptMessage();
-            System.out.println("Bot " + botName + ": Authorization, RESPONSE: " + response);
+            System.out.println("[BOT] " + botDAO.botName() + " -> Connection, RESPONSE: " + response);
+            try {Thread.sleep(delay);} catch(InterruptedException ignore) {}
         } catch (MessageSenderException | MessageRecipientException ex) {
-            System.out.println("CATCH! Bot " + botName + ": Authorization, message - " + ex.getMessage());
-            try {Thread.sleep(1);} catch(InterruptedException ignore) {}
+            System.out.println("CATCH! [BOT] " + botDAO.botName() + " -> Connection, message - " + ex.getMessage());
+            try {Thread.sleep(delay);} catch(InterruptedException ignore) {}
         }
     }
     

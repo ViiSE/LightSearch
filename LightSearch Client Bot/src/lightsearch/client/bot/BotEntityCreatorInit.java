@@ -23,7 +23,8 @@ import lightsearch.client.bot.settings.BotSettingsReader;
  */
 public class BotEntityCreatorInit {
 
-    public static BotEntityCreator botEntityCreator(BotSettingsReader settingsReader) {
-        return new BotEntityCreatorJSONImpl(settingsReader);
+    public static BotEntityCreator botEntityCreator(BotSettingsReader settingsReader,
+            String serverIP, int serverPort, long delayMessageDisplay) {
+        return new BotEntityCreatorJSONImpl(settingsReader, serverIP, serverPort, delayMessageDisplay);
     }
 }

@@ -21,8 +21,9 @@ package lightsearch.client.bot.settings;
  */
 public class BotEntityCreatorHolderInit {
     
-    public static BotEntityCreatorHolder botEntityCreatorHolder() {
-        return new BotEntityCreatorHolderMapDefaultImpl();
+    public static BotEntityCreatorHolder botEntityCreatorHolder(int botAmount, 
+            String ip, int port, long delayMessageDisplay) {
+        return new BotEntityCreatorHolderMapDefaultImpl(botAmount, ip, port, delayMessageDisplay);
     }
     
 }

@@ -20,5 +20,5 @@ package lightsearch.client.bot.session;
  * @author ViiSE
  */
 public interface BotSession {
-    void createSession();
+    void startSession();
 }

@@ -25,6 +25,10 @@ public enum CommandContentType {
         @Override
         public String toString() { return "client"; }
     },
+    SYSTEM {
+        @Override
+        public String toString() { return "system"; }
+    },
     COMMAND {
         @Override
         public String toString() { return "command"; }

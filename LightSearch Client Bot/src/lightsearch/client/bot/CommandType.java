@@ -48,5 +48,9 @@ public enum CommandType {
     CONFIRM_SOFT_CHECK_PRODUCTS {
         @Override
         public String toString() { return "confirm_prod_sf"; }
+    },
+    CLEAR_AVERAGE_TIME {
+        @Override
+        public String toString() { return "clear"; }
     }
 }

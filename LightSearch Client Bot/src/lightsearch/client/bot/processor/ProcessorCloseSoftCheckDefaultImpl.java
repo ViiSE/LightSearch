@@ -22,13 +22,13 @@ import lightsearch.client.bot.exception.MessageSenderException;
 import lightsearch.client.bot.message.MessageRecipient;
 import lightsearch.client.bot.message.MessageSender;
 import org.json.simple.JSONObject;
-import lightsearch.client.bot.data.BotDTO;
+import lightsearch.client.bot.data.BotDAO;
 
 /**
  *
  * @author ViiSE
  */
-public class ProcessorCloseSoftCheckDefaultImpl implements Processor {
+public class ProcessorCloseSoftCheckDefaultImpl implements ProcessorCloseSoftCheck {
     
     private final String CLOSE_SOFT_CHECK = CommandType.CLOSE_SOFT_CHECK.toString();
     
@@ -38,45 +38,32 @@ public class ProcessorCloseSoftCheckDefaultImpl implements Processor {
     private final String CARD_CODE  = CommandContentType.CARD_CODE.toString();
     private final String DELIVERY   = CommandContentType.DELIVERY.toString();
     
-    private final MessageSender messageSender;
-    private final MessageRecipient messageRecipient;
-    
-    private final String botName;
-    private final String IMEI;
-    private final String ident;
-    private final String cardCode;
     private final String delivery;
 
-    public ProcessorCloseSoftCheckDefaultImpl(BotDTO botDTO, 
-            String delivery, MessageSender messageSender, MessageRecipient messageRecipient) {
-        this.botName  = botDTO.botName();
-        this.IMEI     = botDTO.IMEI();
-        this.ident    = botDTO.userIdent();
-        this.cardCode = botDTO.cardCode();
+    public ProcessorCloseSoftCheckDefaultImpl(String delivery) {
         this.delivery = delivery;
-        this.messageSender = messageSender;
-        this.messageRecipient = messageRecipient;
     }
     
     @Override
-    public void apply() {
+    public void apply(BotDAO botDAO, MessageSender messageSender, MessageRecipient messageRecipient, long delay) {
         try {
-            String request = generateJSONRequest();
+            String request = generateJSONRequest(botDAO);
             messageSender.sendMessage(request);
             String response = messageRecipient.acceptMessage();
-            System.out.println("Bot " + botName + ": Authorization, RESPONSE: " + response);
+            System.out.println("[BOT] " + botDAO.botName() + " -> CloseSoftCheck, RESPONSE: " + response);
+            try {Thread.sleep(delay);} catch(InterruptedException ignore) {}
         } catch (MessageSenderException | MessageRecipientException ex) {
-            System.out.println("CATCH! Bot " + botName + ": Authorization, message - " + ex.getMessage());
-            try {Thread.sleep(1);} catch(InterruptedException ignore) {}
+            System.out.println("CATCH! [BOT] " + botDAO.botName() + " -> CloseSoftCheck, message - " + ex.getMessage());
+            try {Thread.sleep(delay);} catch(InterruptedException ignore) {}
         }
     }
     
-    private String generateJSONRequest() {
+    private String generateJSONRequest(BotDAO botDAO) {
         JSONObject jObj = new JSONObject();
         jObj.put(COMMAND, CLOSE_SOFT_CHECK);
-        jObj.put(IMEI_FIELD, IMEI);
-        jObj.put(IDENT, ident);
-        jObj.put(CARD_CODE, cardCode);
+        jObj.put(IMEI_FIELD, botDAO.IMEI());
+        jObj.put(IDENT, botDAO.userIdent());
+        jObj.put(CARD_CODE, botDAO.cardCode());
         jObj.put(DELIVERY, delivery);
         
         return jObj.toJSONString();

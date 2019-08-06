@@ -32,6 +32,8 @@ public class LightSearchClientBot {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        System.out.println("LightSearch Client Bot, version 1.0. Welcome!");
+        
         Configuration configuration;
         if(args.length == 0)
             configuration = ConfigurationInit.configuration("configuration.json");
@@ -39,15 +41,11 @@ public class LightSearchClientBot {
             configuration = ConfigurationInit.configuration(args[0]);
         
         GlobalSettings globalSettings = 
-                GlobalSettingsInit.lightSearchGlobalSettingsCreator(
-                        configuration.globalSettingsName());
+                GlobalSettingsInit.globalSettingsCreator(configuration.globalSettingsName());
         
-        BotSession session =
-                BotSessionInit.lightSearchClientBotSession(globalSettings);
+        BotSession session = BotSessionInit.BotSession(configuration.botSettingsName(), globalSettings, configuration.isPerfomance());
         
-        int amountBot = 3;
-        
-        session.createSession(amountBot);
+        session.startSession();
     }
     
 }

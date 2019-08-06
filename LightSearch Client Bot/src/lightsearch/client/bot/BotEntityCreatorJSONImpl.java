@@ -15,10 +15,11 @@
  */
 package lightsearch.client.bot;
 
-import java.util.ArrayList;
 import java.util.List;
+import lightsearch.client.bot.processor.BotEntityProcessor;
+import lightsearch.client.bot.settings.BotEntityCreatorHolder;
+import lightsearch.client.bot.settings.BotEntityCreatorHolderInit;
 import lightsearch.client.bot.settings.BotSettingsReader;
-import lightsearch.client.bot.settings.BotSettingsType;
 import org.json.simple.JSONObject;
 
 /**
@@ -26,35 +27,37 @@ import org.json.simple.JSONObject;
  * @author ViiSE
  */
 public class BotEntityCreatorJSONImpl implements BotEntityCreator {
-
-    private final String SIMPLE   = BotSettingsType.SIMPLE.toString();
-    private final String ADVANCED = BotSettingsType.ADVANCED.toString();
     
     private final String type;
-    private final int botAmount;
     private final JSONObject data;
+    private final int botAmount;
+    private final String serverIP;
+    private final int serverPort;
+    private final long delayMessageDisplay;
     
-    private final BotSettingsReader settingsReader;
-    
-    public BotEntityCreatorJSONImpl(BotSettingsReader settingsReader) {
+    public BotEntityCreatorJSONImpl(BotSettingsReader settingsReader, 
+            String serverIP, int serverPort, long delayMessageDisplay) {
         type      = settingsReader.type();
         botAmount = settingsReader.botAmount();
         data      = (JSONObject) settingsReader.data();
+        
+        this.serverIP   = serverIP;
+        this.serverPort = serverPort;
+        this.delayMessageDisplay = delayMessageDisplay;
     }
 
     @Override
     public List<BotEntity> botList() {
-        if(type.equals(SIMPLE)) {
-            List<BotEntity> bots = new ArrayList<>();
-            for(int i = 0; i < botAmount; i++) {
-                
-            }
+        BotEntityCreatorHolder holder = 
+                BotEntityCreatorHolderInit.botEntityCreatorHolder(botAmount, 
+                        serverIP, serverPort, delayMessageDisplay);
+        
+        BotEntityProcessor proc = holder.get(type);
+        if(proc != null) {
+            return proc.apply(data);
         }
-        else if(type.equals(ADVANCED)) {
-            
+        else {
+            throw new RuntimeException("BotEntityProcessor is null!");
         }
-        else
-            throw new RuntimeException("Unknown type: " + type);
     }
-    
 }

@@ -23,13 +23,13 @@ import lightsearch.client.bot.exception.MessageSenderException;
 import lightsearch.client.bot.message.MessageRecipient;
 import lightsearch.client.bot.message.MessageSender;
 import org.json.simple.JSONObject;
-import lightsearch.client.bot.data.BotDTO;
+import lightsearch.client.bot.data.BotDAO;
 
 /**
  *
  * @author ViiSE
  */
-public class ProcessorSearchDefaultImpl implements Processor {
+public class ProcessorSearchDefaultImpl implements ProcessorSearch {
 
     private final String SEARCH     = CommandType.SEARCH.toString();
     
@@ -39,43 +39,34 @@ public class ProcessorSearchDefaultImpl implements Processor {
     private final String SKLAD      = CommandContentType.SKLAD.toString();
     private final String TK_FIELD   = CommandContentType.TK.toString();
     
-    private final MessageSender messageSender;
-    private final MessageRecipient messageRecipient;
-    
-    private final String botName;
-    private final String IMEI;
     private final String barcode;
     private final String sklad;
     private final String TK;
 
-    public ProcessorSearchDefaultImpl(BotDTO botDTO, SearchDTO searchDTO,
-            MessageSender messageSender, MessageRecipient messageRecipient) {
-        this.botName = botDTO.botName();
-        this.IMEI    = botDTO.IMEI();
+    public ProcessorSearchDefaultImpl(SearchDTO searchDTO) {
         this.barcode = searchDTO.barcode();
         this.sklad   = searchDTO.sklad();
         this.TK      = searchDTO.TK();
-        this.messageSender = messageSender;
-        this.messageRecipient = messageRecipient;
     }
     
     @Override
-    public void apply() {
+    public void apply(BotDAO botDAO, MessageSender messageSender, MessageRecipient messageRecipient, long delay) {
         try {
-            String request = generateJSONRequest();
+            String request = generateJSONRequest(botDAO);
             messageSender.sendMessage(request);
             String response = messageRecipient.acceptMessage();
-            System.out.println("Bot " + botName + ": Authorization, RESPONSE: " + response);
+            System.out.println("[BOT] " + botDAO.botName() + " -> Search, RESPONSE: " + response);
+            try {Thread.sleep(delay);} catch(InterruptedException ignore) {}
         } catch (MessageSenderException | MessageRecipientException ex) {
-            System.out.println("CATCH! Bot " + botName + ": Authorization, message - " + ex.getMessage());
-            try {Thread.sleep(1);} catch(InterruptedException ignore) {}
+            System.out.println("CATCH! [BOT] " + botDAO.botName() + " -> Search, message - " + ex.getMessage());
+            try {Thread.sleep(delay);} catch(InterruptedException ignore) {}
         }
     }
     
-    private String generateJSONRequest() {
+    private String generateJSONRequest(BotDAO botDAO) {
         JSONObject jObj = new JSONObject();
         jObj.put(COMMAND, SEARCH);
-        jObj.put(IMEI_FIELD, IMEI);
+        jObj.put(IMEI_FIELD, botDAO.IMEI());
         jObj.put(BARCODE, barcode);
         jObj.put(SKLAD, sklad);
         jObj.put(TK_FIELD, TK);

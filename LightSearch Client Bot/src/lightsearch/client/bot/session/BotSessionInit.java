@@ -23,9 +23,9 @@ import lightsearch.client.bot.settings.GlobalSettings;
  */
 public class BotSessionInit {
     
-    public static BotSession lightSearchClientBotSession(
-            GlobalSettings globalSettings) {
-        return new BotSessionDefaultImpl(globalSettings);
+    public static BotSession BotSession(String botSettingsName, GlobalSettings globalSettings,
+            boolean isPerfomance) {
+        return new BotSessionDefaultImpl(botSettingsName, globalSettings, isPerfomance);
     }
     
 }
