@@ -26,6 +26,7 @@ import lightsearch.server.cmd.admin.AdminCommandConverter;
 import lightsearch.server.cmd.admin.AdminCommandConverterInit;
 import lightsearch.server.exception.CommandConverterException;
 import static org.testng.Assert.*;
+
 import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;

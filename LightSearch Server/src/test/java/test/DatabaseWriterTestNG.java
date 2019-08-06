@@ -83,8 +83,8 @@ public class DatabaseWriterTestNG {
     private DatabaseConnection initDatabaseConnection() {
         try {
             LightSearchServerDatabaseDTO databaseDTO = initDatabaseDTO();
-            String username = "user";
-            String password = "password";
+            String username = "sysdba";
+            String password = "bazar";
             
             DatabaseConnectionCreator connectionCreator = DatabaseConnectionCreatorInit.databaseConnectionCreator(databaseDTO,
                     username, password);
@@ -148,7 +148,7 @@ public class DatabaseWriterTestNG {
     public String initMessageConnect() {
         String command        = "connect";
         String IMEI           = "123456789123456";
-        String username       = "user";
+        String username       = "test";
         String userIdentifier = "007";
         DatabaseCommandMessage dbCmdMsg = DatabaseCommandMessageInit.databaseCommandMessageConnection(command, IMEI, username, userIdentifier);
         
@@ -225,12 +225,12 @@ public class DatabaseWriterTestNG {
             CurrentDateTime currentDateTime = CurrentDateTimeInit.currentDateTime();
             String dateTime = currentDateTime.dateTimeInStandartFormat();
             
-//            String message = initMessageConnect();
+            String message = initMessageConnect();
 //            String message = initMessageSearch();
 //            String message = initMessageOpenSoftCheck();
 //            String message = initMessageCancelSoftCheck();
 //            String message = initMessageCloseSoftCheck();
-            String message = initMessageConfirmSoftCheckProducts();
+//            String message = initMessageConfirmSoftCheckProducts();
             DatabaseWriter writer = DatabaseWriterInit.databaseWriter(databaseConnection, iterator.next(), dateTime, message);
             
             writer.write();
