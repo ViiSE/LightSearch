@@ -23,7 +23,8 @@
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="lightsearch.client.bot.about"/>
+    <context:component-scan base-package="lightsearch.client.bot.*"/>
 
-    <bean id="message" class="java.lang.String" c:_0="LightSearch Client Bot, version 1.0. Welcome!"/>
+    <bean id="greetings" class="lightsearch.client.bot.about.AppGreetingsDefaultImpl"/>
+    <bean id="configurationName" class="java.lang.String" c:_0="configuration.json" />
 </beans>

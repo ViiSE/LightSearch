@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package lightsearch.client.bot.about;
+package lightsearch.client.bot.constants;
 
-public interface AppGreetings {
-    String greetings();
+public class ResourcesName {
+
+    public static final String LIGHTSEARCH_CLIENT_BOT_APP_CONTEXT = "lightsearch-client-bot-app-context.xml";
 }

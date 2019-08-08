@@ -14,24 +14,26 @@
  * limitations under the License.
  */
 
-package lightsearch.client.bot.about;
+package lightsearch.client.bot.settings;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import lightsearch.client.bot.constants.BeansName;
 import org.springframework.stereotype.Component;
 
-@Component("greetings")
-public class AppGreetingsDefaultImpl implements AppGreetings {
+@Component(BeansName.OS_DETECTOR)
+public class OsDetectorDefaultImpl implements OsDetector {
 
-    private final String greetingsMessage;
-
-    @Autowired
-    public AppGreetingsDefaultImpl(@Value("LightSearch Client Bot, version 1.0. Welcome!") String greetingsMessage) {
-        this.greetingsMessage = greetingsMessage;
+    @Override
+    public boolean isWindows() {
+        return System.getProperty("os.name").toLowerCase().contains("windows");
     }
 
     @Override
-    public String greetings() {
-        return greetingsMessage;
+    public boolean isLinux() {
+        return System.getProperty("os.name").toLowerCase().contains("linux");
+    }
+
+    @Override
+    public boolean isMacOS() {
+        return System.getProperty("os.name").toLowerCase().contains("mac");
     }
 }

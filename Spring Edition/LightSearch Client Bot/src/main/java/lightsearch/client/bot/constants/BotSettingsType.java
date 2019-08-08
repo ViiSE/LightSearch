@@ -13,9 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package lightsearch.client.bot.constants;
 
-package lightsearch.client.bot.about;
-
-public interface AppGreetings {
-    String greetings();
+/**
+ *
+ * @author ViiSE
+ */
+public enum BotSettingsType {
+    
+    SIMPLE {
+        @Override
+        public String toString() { return "simple"; }
+    },
+    ADVANCED {
+        @Override
+        public String toString() { return "advanced"; }
+    }
 }

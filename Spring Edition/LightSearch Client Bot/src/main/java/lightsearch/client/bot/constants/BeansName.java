@@ -14,8 +14,15 @@
  * limitations under the License.
  */
 
-package lightsearch.client.bot.about;
+package lightsearch.client.bot.constants;
 
-public interface AppGreetings {
-    String greetings();
+public class BeansName {
+
+    public static final String GREETINGS         = "greetings";
+    public static final String SETTINGS_PARSER   = "settingsParser";
+    public static final String SETTINGS_READER   = "settingsReader";
+    public static final String OS_DETECTOR       = "osDetector";
+    public static final String CURRENT_DIRECTORY = "currentDirectory";
+    public static final String CONFIGURATION     = "configuration";
+    public static final String GLOBAL_SETTINGS   = "globalSettings";
 }

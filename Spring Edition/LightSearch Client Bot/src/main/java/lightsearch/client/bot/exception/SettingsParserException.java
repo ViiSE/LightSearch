@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package lightsearch.client.bot.about;
+package lightsearch.client.bot.exception;
 
-public interface AppGreetings {
-    String greetings();
+public class SettingsParserException extends Exception {
+
+    public SettingsParserException(String message) { super(message); }
 }

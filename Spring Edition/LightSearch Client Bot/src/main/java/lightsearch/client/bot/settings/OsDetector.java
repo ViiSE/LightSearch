@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-package lightsearch.client.bot.about;
+package lightsearch.client.bot.settings;
 
-public interface AppGreetings {
-    String greetings();
+public interface OsDetector {
+    boolean isWindows();
+    boolean isLinux();
+    boolean isMacOS();
 }

@@ -13,9 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package lightsearch.client.bot.constants;
 
-package lightsearch.client.bot.about;
+/**
+ *
+ * @author ViiSE
+ */
+public class GlobalSettingsName {
 
-public interface AppGreetings {
-    String greetings();
+    public static final String SERVER_IP             = "server_ip";
+    public static final String SERVER_PORT           = "server_port";
+    public static final String DELAY_MESSAGE_DISPLAY = "delay_message_display";
 }
