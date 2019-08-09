@@ -16,21 +16,22 @@
 
 package lightsearch.client.bot.settings;
 
-import lightsearch.client.bot.constants.BeansName;
 import lightsearch.client.bot.constants.GlobalSettingsName;
 import lightsearch.client.bot.exception.SettingsParserException;
 import lightsearch.client.bot.parser.SettingsParser;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Scope;
 
-@Component(BeansName.GLOBAL_SETTINGS)
+import org.springframework.stereotype.Service;
+
+@Service("globalSettingsJSONFile")
+@Scope("prototype")
 public class GlobalSettingsJSONFileImpl implements GlobalSettings {
 
-    private final String SETTINGS_READER = BeansName.SETTINGS_READER;
-    private final String SETTINGS_PARSER = BeansName.SETTINGS_PARSER;
+    private final String SETTINGS_READER = "settingsReaderFile";
+    private final String SETTINGS_PARSER = "settingsParserJSON";
 
     private final String SERVER_IP             = GlobalSettingsName.SERVER_IP;
     private final String SERVER_PORT           = GlobalSettingsName.SERVER_PORT;
@@ -70,22 +71,19 @@ public class GlobalSettingsJSONFileImpl implements GlobalSettings {
 
     @Override
     public long delayMessageDisplay() {
-        if(!isRead)
-            read();
+        if(!isRead) read();
         return delayMessageDisplay;
     }
 
     @Override
     public String serverIP() {
-        if(!isRead)
-            read();
+        if(!isRead) read();
         return serverIP;
     }
 
     @Override
     public int serverPort() {
-        if(!isRead)
-            read();
+        if(!isRead) read();
         return serverPort;
     }
 }

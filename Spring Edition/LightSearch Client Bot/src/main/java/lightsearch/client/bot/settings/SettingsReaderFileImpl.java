@@ -16,11 +16,10 @@
 
 package lightsearch.client.bot.settings;
 
-import lightsearch.client.bot.constants.BeansName;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -28,11 +27,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.stream.Collectors;
 
-@Component(BeansName.SETTINGS_READER)
+@Service("settingsReaderFile")
+@Scope("prototype")
 public class SettingsReaderFileImpl implements SettingsReader {
 
-    private final String OS_DETECTOR       = BeansName.OS_DETECTOR;
-    private final String CURRENT_DIRECTORY = BeansName.CURRENT_DIRECTORY;
+    private final String OS_DETECTOR       = "osDetectorDefault";
+    private final String CURRENT_DIRECTORY = "currentDirectoryFromFile";
 
     private String settingsName;
 

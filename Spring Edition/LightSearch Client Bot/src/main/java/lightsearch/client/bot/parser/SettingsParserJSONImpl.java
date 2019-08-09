@@ -16,14 +16,13 @@
 
 package lightsearch.client.bot.parser;
 
-import lightsearch.client.bot.constants.BeansName;
 import lightsearch.client.bot.exception.SettingsParserException;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Component;
 
-@Component(BeansName.SETTINGS_PARSER)
+@Component("settingsParserJSON")
 public class SettingsParserJSONImpl implements SettingsParser {
 
     @Override

@@ -16,7 +16,6 @@
 
 package lightsearch.client.bot.settings;
 
-import lightsearch.client.bot.constants.BeansName;
 import lightsearch.client.bot.constants.ConfigurationName;
 import lightsearch.client.bot.exception.SettingsParserException;
 import lightsearch.client.bot.parser.SettingsParser;
@@ -24,13 +23,15 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
-@Component(BeansName.CONFIGURATION)
+@Service("configurationJSONFile")
+@Scope("prototype")
 public class ConfigurationJSONFileImpl implements Configuration {
 
-    private final String SETTINGS_READER = BeansName.SETTINGS_READER;
-    private final String SETTINGS_PARSER = BeansName.SETTINGS_PARSER;
+    private final String SETTINGS_READER = "settingsReaderFile";
+    private final String SETTINGS_PARSER = "settingsParserJSON";
 
     private final String GLOBAL_SETTINGS = ConfigurationName.GLOBAL_SETTINGS;
     private final String BOT_SETTINGS    = ConfigurationName.BOT_SETTINGS;
@@ -46,7 +47,6 @@ public class ConfigurationJSONFileImpl implements Configuration {
 
     private boolean isRead = false;
 
-    @Autowired
     public ConfigurationJSONFileImpl(@Value("configuration.json") String configurationName) {
         this.configurationName = configurationName;
     }
@@ -70,16 +70,19 @@ public class ConfigurationJSONFileImpl implements Configuration {
 
     @Override
     public String globalSettingsName() {
-         if(!isRead) read(); return globalSettingsName;
+         if(!isRead) read();
+         return globalSettingsName;
     }
 
     @Override
     public String botSettingsName() {
-        if(!isRead) read(); return botSettingsName;
+        if(!isRead) read();
+        return botSettingsName;
     }
 
     @Override
     public boolean isPerformance() {
-        if(!isRead) read(); return isPerformance;
+        if(!isRead) read();
+        return isPerformance;
     }
 }

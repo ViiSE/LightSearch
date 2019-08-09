@@ -64,18 +64,18 @@ public class BotSessionTestNG {
     
     @Test
     public void startSession() {
-        testBegin("BotSession", "startSession()");
+        testBegin("botSession", "startSession()");
         
         assertNotNull(globalSettings, "GlobalSettings is null!");
         assertNotNull(botSettingsName, "BotSettingsName is null!");
         
-        BotSession botSession = BotSessionInit.BotSession(botSettingsName, 
+        BotSession botSession = BotSessionInit.botSession(botSettingsName,
                 globalSettings, isPerformance);
-        assertNotNull(botSession, "BotSession is null!");
+        assertNotNull(botSession, "botSession is null!");
         
         botSession.startSession();
         
-        testEnd("BotSession", "startSession()");
+        testEnd("botSession", "startSession()");
     }
     
     private final class TestServer implements Runnable {

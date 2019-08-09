@@ -16,38 +16,9 @@
 
 package lightsearch.client.bot.configuration;
 
-import lightsearch.client.bot.settings.GlobalSettings;
-import lightsearch.client.bot.settings.GlobalSettingsJSONFileImpl;
-import lightsearch.client.bot.settings.SettingsReader;
-import lightsearch.client.bot.settings.SettingsReaderFileImpl;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
-
-import java.util.function.Function;
 
 @ComponentScan(basePackages = "lightsearch.client.bot.*")
 @Configuration
-public class LightSearchClientBotConfiguration {
-
-    @Bean
-    public Function<String, SettingsReader> settingsReaderFactory() {
-        return settingsName -> settingsReaderFileImpl(settingsName);
-    }
-    @Bean
-    @Scope(value = "prototype")
-    public SettingsReaderFileImpl settingsReaderFileImpl(String settingsName) {
-        return new SettingsReaderFileImpl(settingsName);
-    }
-
-    @Bean
-    public Function<String, GlobalSettings> globalSettingsFactory() {
-        return fileName -> globalSettingsJSONFileImpl(fileName);
-    }
-    @Bean
-    @Scope(value = "prototype")
-    public GlobalSettings globalSettingsJSONFileImpl(String fileName) {
-        return new GlobalSettingsJSONFileImpl(fileName);
-    }
-}
+public class LightSearchClientBotConfiguration { }

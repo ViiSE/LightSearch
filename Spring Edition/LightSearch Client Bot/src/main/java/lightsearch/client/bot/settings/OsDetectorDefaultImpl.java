@@ -16,10 +16,9 @@
 
 package lightsearch.client.bot.settings;
 
-import lightsearch.client.bot.constants.BeansName;
 import org.springframework.stereotype.Component;
 
-@Component(BeansName.OS_DETECTOR)
+@Component("osDetectorDefault")
 public class OsDetectorDefaultImpl implements OsDetector {
 
     @Override

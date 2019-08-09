@@ -40,15 +40,15 @@ public class BotSessionDefaultImpl implements BotSession {
     private final String serverIP;
     private final int serverPort;
     private final long delayMessageDisplay;
-    private final boolean isPerfomance;
+    private final boolean isPerformance;
 
     public BotSessionDefaultImpl(String botSettingsName, GlobalSettings globalSettings, 
-            boolean isPerfomance) {
+            boolean isPerformance) {
         this.botSettingsName = botSettingsName;
         this.serverIP = globalSettings.serverIP();
         this.serverPort = globalSettings.serverPort();
         this.delayMessageDisplay = globalSettings.delayMessageDisplay();
-        this.isPerfomance = isPerfomance;
+        this.isPerformance = isPerformance;
     }
     
     @Override
@@ -67,7 +67,7 @@ public class BotSessionDefaultImpl implements BotSession {
         
         bots.forEach((bot) -> { bot.start(); });
         
-        if(isPerfomance) {
+        if(isPerformance) {
             BotsDoneSwitcher.addBots(bots.size());
             BotsChecker checker = BotsCheckerInit.botsChecker(
                     ConnectionDTOInit.connectDTO(serverIP, serverPort));

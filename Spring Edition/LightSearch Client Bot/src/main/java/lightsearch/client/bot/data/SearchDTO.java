@@ -13,16 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package lightsearch.client.bot.data;
 
-package lightsearch.client.bot.constants;
-
-public class BeansName {
-
-    public static final String GREETINGS         = "greetings";
-    public static final String SETTINGS_PARSER   = "settingsParser";
-    public static final String SETTINGS_READER   = "settingsReader";
-    public static final String OS_DETECTOR       = "osDetector";
-    public static final String CURRENT_DIRECTORY = "currentDirectory";
-    public static final String CONFIGURATION     = "configuration";
-    public static final String GLOBAL_SETTINGS   = "globalSettings";
+public interface SearchDTO {
+    String barcode();
+    String sklad();
+    String TK();
 }

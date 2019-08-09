@@ -17,14 +17,13 @@
 package lightsearch.client.bot.settings;
 
 import lightsearch.client.bot.LightSearchClientBot;
-import lightsearch.client.bot.constants.BeansName;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.net.URISyntaxException;
 
-@Component(BeansName.CURRENT_DIRECTORY)
+@Service("currentDirectoryFromFile")
 public class CurrentDirectoryFromFileImpl implements CurrentDirectory {
 
     private final OsDetector osDetector;

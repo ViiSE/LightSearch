@@ -20,12 +20,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-@Component("greetings")
+@Component("appGreetingsDefault")
 public class AppGreetingsDefaultImpl implements AppGreetings {
 
     private final String greetingsMessage;
 
-    @Autowired
     public AppGreetingsDefaultImpl(@Value("LightSearch Client Bot, version 1.0. Welcome!") String greetingsMessage) {
         this.greetingsMessage = greetingsMessage;
     }
