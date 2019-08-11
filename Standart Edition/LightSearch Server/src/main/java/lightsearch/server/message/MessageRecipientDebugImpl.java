@@ -37,18 +37,17 @@ public class MessageRecipientDebugImpl implements MessageRecipient {
     @Override
     public String acceptMessage() throws MessageRecipientException {
         try {
-            //Calendar calendar = Calendar.getInstance();
-            long start = Calendar.getInstance().getTimeInMillis();
+            long start = System.nanoTime();
             String res = dataInputStream.readUTF();
-            long end   = Calendar.getInstance().getTimeInMillis();
+            long end   = System.nanoTime();
             
             System.out.println("Start: " + start);
             System.out.println("End: "   + end);
             
-            long ms = end - start;
+            long ns = end - start;
             
-            System.out.println("ACCEPT: " + ms + " ms." );
-            msgTimeAdder.add(ms);
+            System.out.println("ACCEPT: " + ns + " ns." );
+            msgTimeAdder.add(ns);
             System.out.println("avg: " + msgTimeAdder.averageTime());
             
             return res;
