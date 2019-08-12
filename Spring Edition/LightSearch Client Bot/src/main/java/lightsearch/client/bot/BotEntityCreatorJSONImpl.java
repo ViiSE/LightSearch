@@ -16,11 +16,11 @@
 package lightsearch.client.bot;
 
 import lightsearch.client.bot.processor.BotEntityProcessor;
+import lightsearch.client.bot.producer.BotEntityCreatorHolderProducer;
 import lightsearch.client.bot.settings.BotEntityCreatorHolder;
 import lightsearch.client.bot.settings.BotSettingsReader;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -37,10 +37,8 @@ public class BotEntityCreatorJSONImpl implements BotEntityCreator {
     private final int serverPort;
     private final long delayMessageDisplay;
 
-    private final String BOT_ENTITY_CREATOR_HOLDER = "botEntityCreatorHolderMapDefault";
-
     @Autowired
-    private ApplicationContext ctx;
+    private BotEntityCreatorHolderProducer producer;
 
     public BotEntityCreatorJSONImpl(BotSettingsReader settingsReader, String serverIP, int serverPort, long delayMessageDisplay) {
         type      = settingsReader.type();
@@ -54,8 +52,8 @@ public class BotEntityCreatorJSONImpl implements BotEntityCreator {
 
     @Override
     public List<BotEntity> botList() {
-        BotEntityCreatorHolder holder = (BotEntityCreatorHolder) ctx.getBean(BOT_ENTITY_CREATOR_HOLDER,
-                botAmount, serverIP, serverPort, delayMessageDisplay);
+        BotEntityCreatorHolder holder = producer.getBotEntityCreatorHolderMapDefaultInstance(botAmount, serverIP,
+                serverPort, delayMessageDisplay);
         
         BotEntityProcessor proc = holder.get(type);
         if(proc != null)

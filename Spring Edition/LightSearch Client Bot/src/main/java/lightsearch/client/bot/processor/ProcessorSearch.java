@@ -15,8 +15,4 @@
  */
 package lightsearch.client.bot.processor;
 
-/**
- *
- * @author ViiSE
- */
 public interface ProcessorSearch extends Processor { }

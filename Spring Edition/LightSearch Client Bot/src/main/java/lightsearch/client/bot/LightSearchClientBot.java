@@ -17,6 +17,7 @@
 package lightsearch.client.bot;
 
 import lightsearch.client.bot.about.AppGreetings;
+import lightsearch.client.bot.about.TimeoutStart;
 import lightsearch.client.bot.session.BotSession;
 import lightsearch.client.bot.settings.Configuration;
 import lightsearch.client.bot.settings.GlobalSettings;
@@ -31,12 +32,16 @@ public class LightSearchClientBot {
     private static final String CONFIGURATION   = "configurationJSONFile";
     private static final String GLOBAL_SETTINGS = "globalSettingsJSONFile";
     private static final String BOT_SESSION     = "botSessionDefault";
+    private static final String TIMEOUT_START   = "timeoutStartDefault";
 
     public static void main(String[] args) {
         ApplicationContext ctx = SpringApplication.run(LightSearchClientBot.class, args);
         AppGreetings greetings = ctx.getBean(GREETINGS, AppGreetings.class);
 
         System.out.println(greetings.greetings());
+
+        TimeoutStart toutStart = ctx.getBean(TIMEOUT_START, TimeoutStart.class);
+        toutStart.start();
 
         Configuration configuration;
         if(args.length == 0)

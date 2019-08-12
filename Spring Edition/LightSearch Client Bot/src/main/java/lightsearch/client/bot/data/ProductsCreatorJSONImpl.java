@@ -16,10 +16,10 @@
 package lightsearch.client.bot.data;
 
 import lightsearch.client.bot.constants.BotSettingsEnum;
+import lightsearch.client.bot.producer.ProductDTOCreatorProducer;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +36,7 @@ public class ProductsCreatorJSONImpl implements ProductsCreator {
     private final JSONObject jProductsData;
 
     @Autowired
-    private ApplicationContext ctx;
+    private ProductDTOCreatorProducer producer;
 
     public ProductsCreatorJSONImpl(Object rawProductsData) {
         jProductsData = (JSONObject) rawProductsData;
@@ -51,7 +51,7 @@ public class ProductsCreatorJSONImpl implements ProductsCreator {
             
         jProdList.forEach(prodObj -> {
             JSONObject jProd = (JSONObject) prodObj;
-            ProductDTOCreator prodDTOCr = (ProductDTOCreator) ctx.getBean(impl, jProd);
+            ProductDTOCreator prodDTOCr = producer.getProductDTOCreatorInstance(impl, jProd);
             ProductDTO prodDTO = prodDTOCr.createProductDTO();
             prods.add(prodDTO);
         });

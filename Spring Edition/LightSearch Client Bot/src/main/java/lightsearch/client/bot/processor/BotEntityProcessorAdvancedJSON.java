@@ -23,11 +23,10 @@ import lightsearch.client.bot.data.*;
 import lightsearch.client.bot.exception.SocketException;
 import lightsearch.client.bot.message.MessageRecipient;
 import lightsearch.client.bot.message.MessageSender;
-import lightsearch.client.bot.socket.SocketCreator;
+import lightsearch.client.bot.producer.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -48,18 +47,15 @@ public class BotEntityProcessorAdvancedJSON extends BotEntityProcessor {
     private final String CYCLE_CONTENT                = BotSettingsEnum.CYCLE_CONTENT.toString();
     private final String BOT_LIST                     = BotSettingsEnum.BOT_LIST.toString();
 
-    private final String CONNECTION_DTO          = "connectionDTODefault";
-    private final String TEST_CYCLE_CREATOR      = "testCycleCreatorJSON";
-    private final String BOT_SETTINGS_DTO        = "botSettingsDTODefault";
-    private final String SOCKET_CREATOR          = "socketCreatorDefault";
-    private final String BOT_DAO_CREATOR_ADVANCE = "botDAOCreatorAdvanceJSON";
-    private final String MESSAGE_SENDER          = "messageSenderDefault";
-    private final String MESSAGE_RECIPIENT       = "messageRecipient";
-    private final String BOT_ENTITY_DTO          = "botEntityDTODefault";
-    private final String BOT_ENTITY              = "botEntityDefault";
-
-    @Autowired
-    private ApplicationContext ctx;
+    @Autowired private ConnectionDTOProducer connDTOProducer;
+    @Autowired private TestCycleCreatorProducer testCycleCreatorProducer;
+    @Autowired private BotSettingsDTOProducer botSettingsDTOProducer;
+    @Autowired private BotDAOCreatorProducer botDAOCreatorProducer;
+    @Autowired private SocketCreatorProducer socketCreatorProducer;
+    @Autowired private MessageSenderProducer messageSenderProducer;
+    @Autowired private MessageRecipientProducer messageRecipientProducer;
+    @Autowired private BotEntityDTOProducer botEntityDTOProducer;
+    @Autowired private BotEntityProducer botEntityProducer;
 
     @Autowired
     public BotEntityProcessorAdvancedJSON(int botAmount, String ip, int port, long delayMessageDisplay) {
@@ -79,30 +75,31 @@ public class BotEntityProcessorAdvancedJSON extends BotEntityProcessor {
         if(botList.size() != super.botAmount())
             throw new RuntimeException("Bot amount is not equals than bot_amount field!");
         
-        ConnectionDTO connDTO = (ConnectionDTO) ctx.getBean(CONNECTION_DTO, super.ip(), super.port());
+        ConnectionDTO connDTO = connDTOProducer.getConnectionDTODefaultInstance(super.ip(), super.port());
         
         for(int i = 0; i < super.botAmount(); i++) {
             try {
                 JSONObject jCycleContent = (JSONObject) botList.get(i);
-                TestCycleCreator testCycleCreator = (TestCycleCreator) ctx.getBean(TEST_CYCLE_CREATOR, jCycleContent.get(CYCLE_CONTENT));
+                TestCycleCreator testCycleCreator = testCycleCreatorProducer.getTestCycleCreatorJSONInstance(jCycleContent.get(CYCLE_CONTENT));
                 TestCycle testCycle = testCycleCreator.createCycle();
 
                 long delayBeforeSendingMessage = Integer.parseInt(jCycleContent.get(DELAY_BEFORE_SENDING_MESSAGE).toString());
                 int cycleAmount = Integer.parseInt(jCycleContent.get(CYCLE_AMOUNT).toString());
 
-                BotSettingsDTO botSettings = (BotSettingsDTO) ctx.getBean(BOT_SETTINGS_DTO, testCycle, cycleAmount, delayBeforeSendingMessage);
-                BotDAOCreator botDAOCreator = (BotDAOCreator) ctx.getBean(BOT_DAO_CREATOR_ADVANCE, jCycleContent.get(BOT_DAO));
+                BotSettingsDTO botSettings = botSettingsDTOProducer.getBotSettingsDTODefaultInstance(testCycle, cycleAmount, delayBeforeSendingMessage);
+                BotDAOCreator botDAOCreator = botDAOCreatorProducer.getAdvanceJSONInstance(jCycleContent.get(BOT_DAO));
         
-                Socket socket = ((SocketCreator) ctx.getBean(SOCKET_CREATOR, connDTO)).createSocket();
+                Socket socket = socketCreatorProducer.getSocketCreatorDefaultInstance(connDTO).createSocket();
                 
-                MessageSender msgSender = (MessageSender) ctx.getBean(MESSAGE_SENDER, new DataOutputStream(socket.getOutputStream())) ;
-                MessageRecipient msgRecipient = (MessageRecipient) ctx.getBean(MESSAGE_RECIPIENT, new DataInputStream(socket.getInputStream()));
+                MessageSender msgSender = messageSenderProducer.getMessageSenderDefaultInstance(new DataOutputStream(socket.getOutputStream())) ;
+                MessageRecipient msgRecipient = messageRecipientProducer.getMessageRecipientDebugInstance(new DataInputStream(socket.getInputStream()));
 
                 BotDAO botDAO = botDAOCreator.createBotDAO();
                 
-                BotEntityDTO botEntityDTO = (BotEntityDTO) ctx.getBean(BOT_ENTITY_DTO, botDAO, socket, botSettings, msgSender, msgRecipient, super.delayMessageDisplay());
+                BotEntityDTO botEntityDTO = botEntityDTOProducer.getBotEntityDTODefaultInstance(botDAO, socket, botSettings,
+                        msgSender, msgRecipient, super.delayMessageDisplay());
                 
-                bots.add((BotEntity) ctx.getBean(BOT_ENTITY, botEntityDTO));
+                bots.add(botEntityProducer.getBotEntityDefaultInstance(botEntityDTO));
             } catch (SocketException | IOException ex) {
                 throw new RuntimeException(ex.getMessage());
             }

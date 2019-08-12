@@ -24,12 +24,12 @@ import java.util.List;
 
 @Component("testCycleDefault")
 @Scope("prototype")
-public class TestCycleDefaulImpl implements TestCycle {
+public class TestCycleDefaultImpl implements TestCycle {
 
     private final List<Processor> processors;
     private int index = 0;
     
-    public TestCycleDefaulImpl(List<Processor> processors) {
+    public TestCycleDefaultImpl(List<Processor> processors) {
         this.processors = processors;
     }
 

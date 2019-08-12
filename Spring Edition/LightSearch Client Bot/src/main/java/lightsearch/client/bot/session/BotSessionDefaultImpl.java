@@ -16,12 +16,19 @@
 
 package lightsearch.client.bot.session;
 
-import lightsearch.client.bot.*;
-import lightsearch.client.bot.data.ConnectionDTO;
+import lightsearch.client.bot.BotEntity;
+import lightsearch.client.bot.BotsDoneSwitcher;
+import lightsearch.client.bot.BotsChecker;
+import lightsearch.client.bot.BotThread;
+import lightsearch.client.bot.BotEntityCreator;
+import lightsearch.client.bot.producer.BotEntityCreatorProducer;
+import lightsearch.client.bot.producer.BotSettingsReaderProducer;
+import lightsearch.client.bot.producer.BotsCheckerProducer;
+import lightsearch.client.bot.producer.BotThreadProducer;
+import lightsearch.client.bot.producer.ConnectionDTOProducer;
 import lightsearch.client.bot.settings.BotSettingsReader;
 import lightsearch.client.bot.settings.GlobalSettings;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -38,14 +45,11 @@ public class BotSessionDefaultImpl implements BotSession {
     private final long delayMessageDisplay;
     private final boolean isPerformance;
 
-    private final String BOT_SETTINGS_READER = "botSettingsReaderJSONFile";
-    private final String BOT_ENTITY_CREATOR  = "botEntityCreatorJSON";
-    private final String BOT_THREAD          = "botThreadDefault";
-    private final String BOTS_CHECKER        = "botsCheckerDefault";
-    private final String CONNECTION_DTO      = "connectionDTODefault";
-
-    @Autowired
-    private ApplicationContext ctx;
+    @Autowired private BotSettingsReaderProducer botSettingsReaderProducer;
+    @Autowired private BotEntityCreatorProducer botEntityCreatorProducer;
+    @Autowired private BotsCheckerProducer botsCheckerProducer;
+    @Autowired private ConnectionDTOProducer connectionDTOProducer;
+    @Autowired private BotThreadProducer botThreadProducer;
 
     public BotSessionDefaultImpl(String botSettingsName, GlobalSettings globalSettings, boolean isPerformance) {
         this.botSettingsName = botSettingsName;
@@ -59,12 +63,13 @@ public class BotSessionDefaultImpl implements BotSession {
     public void startSession() {
         List<BotThread> bots = new ArrayList<>();
 
-        BotSettingsReader botSettingsReader = (BotSettingsReader) ctx.getBean(BOT_SETTINGS_READER, botSettingsName);
-        BotEntityCreator botEntityCreator = (BotEntityCreator) ctx.getBean(BOT_ENTITY_CREATOR, botSettingsReader, serverIP, serverPort, delayMessageDisplay);
+        BotSettingsReader botSettingsReader = botSettingsReaderProducer.getBotSettingsReaderJSONFileInstance(botSettingsName);
+        BotEntityCreator botEntityCreator = botEntityCreatorProducer.getBotEntityCreatorJSONInstance(botSettingsReader,
+                serverIP, serverPort, delayMessageDisplay);
 
         List<BotEntity> botsEntities = botEntityCreator.botList();
         botsEntities.forEach(botEntity -> {
-            BotThread bThread = (BotThread) ctx.getBean(BOT_THREAD, botEntity);
+            BotThread bThread = botThreadProducer.getBotThreadDefaultInstance(botEntity);
             bots.add(bThread);
         });
 
@@ -72,7 +77,8 @@ public class BotSessionDefaultImpl implements BotSession {
 
         if(isPerformance) {
             BotsDoneSwitcher.addBots(bots.size());
-            BotsChecker checker = (BotsChecker) ctx.getBean(BOTS_CHECKER, (ConnectionDTO) ctx.getBean(CONNECTION_DTO, serverIP, serverPort));
+            BotsChecker checker = botsCheckerProducer.getBotCheckerDefaultInstance(
+                    connectionDTOProducer.getConnectionDTODefaultInstance(serverIP, serverPort));
             checker.start();
         }
     }

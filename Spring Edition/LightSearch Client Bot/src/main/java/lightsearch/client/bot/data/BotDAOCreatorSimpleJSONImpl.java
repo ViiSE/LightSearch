@@ -17,9 +17,9 @@
 package lightsearch.client.bot.data;
 
 import lightsearch.client.bot.constants.BotSettingsEnum;
+import lightsearch.client.bot.producer.BotDAOProducer;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -46,7 +46,7 @@ public class BotDAOCreatorSimpleJSONImpl implements BotDAOCreator {
     private final JSONObject data;
 
     @Autowired
-    private ApplicationContext ctx;
+    private BotDAOProducer producer;
 
     public BotDAOCreatorSimpleJSONImpl(Object data) {
         this.data = (JSONObject) data;
@@ -62,7 +62,7 @@ public class BotDAOCreatorSimpleJSONImpl implements BotDAOCreator {
         String userIdent = String.format("%s%s", USER_IDENT, (userIdentCount++));
 
         String implementation = data.get(IMPLEMENTATION).toString();
-        BotDAO botDAO = ctx.getBean(implementation, BotDAO.class);
+        BotDAO botDAO = producer.getBotDAOInstance(implementation);
         botDAO.setBotName(botName);
         botDAO.setUsername(username);
         botDAO.setPassword(password);

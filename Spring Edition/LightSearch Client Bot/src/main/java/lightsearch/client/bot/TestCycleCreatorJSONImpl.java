@@ -21,15 +21,16 @@ import lightsearch.client.bot.processor.Processor;
 import lightsearch.client.bot.processor.ProcessorCloseSoftCheck;
 import lightsearch.client.bot.processor.ProcessorConfirmSoftCheckProducts;
 import lightsearch.client.bot.processor.ProcessorSearch;
+import lightsearch.client.bot.producer.ProcessorProducer;
+import lightsearch.client.bot.producer.ProductsCreatorProducer;
+import lightsearch.client.bot.producer.SearchDTOCreatorProducer;
+import lightsearch.client.bot.producer.TestCycleProducer;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,17 +43,16 @@ public class TestCycleCreatorJSONImpl implements TestCycleCreator {
     private final String PRODUCT_DTO    = BotSettingsEnum.PRODUCT_DTO.toString();
     private final String DELIVERY       = BotSettingsEnum.DELIVERY.toString();
 
-    private final String SEARCH_DTO_CREATOR        = "searchDTOCreatorJSON";
     private final String PROCESSOR_SEARCH          = "lightsearch.client.bot.processor.ProcessorSearchDefaultImpl";
-    private final String PRODUCTS_CREATOR          = "productsCreatorJSON";
     private final String PROCESSOR_CONFIRM_SF_PROD = "lightsearch.client.bot.processor.ProcessorConfirmSoftCheckProductsDefaultImpl";
     private final String PROCESSOR_CLOSE_SF        = "lightsearch.client.bot.processor.ProcessorCloseSoftCheckDefaultImpl";
-    private final String TEST_CYCLE                = "testCycleDefault";
 
     private final JSONArray cycleContent;
 
-    @Autowired
-    private ApplicationContext ctx;
+    @Autowired private SearchDTOCreatorProducer searchDTOCreatorProducer;
+    @Autowired private ProcessorProducer processorProducer;
+    @Autowired private ProductsCreatorProducer productsCreatorProducer;
+    @Autowired private TestCycleProducer testCycleProducer;
 
     public TestCycleCreatorJSONImpl(Object cycleContent) {
         this.cycleContent = (JSONArray) cycleContent;
@@ -69,24 +69,26 @@ public class TestCycleCreatorJSONImpl implements TestCycleCreator {
 
                 if(ProcessorSearch.class.isAssignableFrom(clazz)) {
                     JSONObject jSearchDTO = (JSONObject) jProc.get(SEARCH_DTO);
-                    SearchDTOCreator searchDTOCreator = (SearchDTOCreator) ctx.getBean(SEARCH_DTO_CREATOR, jSearchDTO);
-                    ProcessorSearch procSearch = (ProcessorSearch) ctx.getBean(PROCESSOR_SEARCH, searchDTOCreator.createSearchDTO());
+                    SearchDTOCreator searchDTOCreator = searchDTOCreatorProducer.getSearchDTOCreatorJSONInstance(jSearchDTO);
+                    ProcessorSearch procSearch =  processorProducer.getProcessorSearchDefaultInstance(PROCESSOR_SEARCH, searchDTOCreator.createSearchDTO());
                     procs.add(procSearch);
                 }
                 else if(ProcessorConfirmSoftCheckProducts.class.isAssignableFrom(clazz)) {
                     JSONObject jProdDTO = (JSONObject) jProc.get(PRODUCT_DTO);
-                    ProductsCreator prodCr = (ProductsCreator) ctx.getBean(PRODUCTS_CREATOR, jProdDTO);
+                    ProductsCreator prodCr = productsCreatorProducer.getProductsCreatorJSONInstance(jProdDTO);
                     ProcessorConfirmSoftCheckProducts procCSCProd =
-                            (ProcessorConfirmSoftCheckProducts) ctx.getBean(PROCESSOR_CONFIRM_SF_PROD, prodCr.createProducts());
+                            processorProducer.getProcessorConfirmSoftCheckProductsDefaultInstance(
+                                    PROCESSOR_CONFIRM_SF_PROD, prodCr.createProducts());
                     procs.add(procCSCProd);
                 }
                 else if(ProcessorCloseSoftCheck.class.isAssignableFrom(clazz)) {
                     String delivery = jProc.get(DELIVERY).toString();
-                    ProcessorCloseSoftCheck procCloseSF = (ProcessorCloseSoftCheck) ctx.getBean(PROCESSOR_CLOSE_SF, delivery);
+                    ProcessorCloseSoftCheck procCloseSF = processorProducer.getProcessorCloseSoftCheckDefaultInstance(
+                            PROCESSOR_CLOSE_SF, delivery);
                     procs.add(procCloseSF);
                 }
                 else {
-                    Processor procInstance = ctx.getBean(impl, Processor.class);
+                    Processor procInstance = processorProducer.getProcessorDefaultInstance(impl);
                     procs.add(procInstance);
                 }
             } catch (ClassNotFoundException | SecurityException | IllegalArgumentException ex) {
@@ -96,6 +98,6 @@ public class TestCycleCreatorJSONImpl implements TestCycleCreator {
         if(procs.isEmpty())
             throw new RuntimeException("Processors list is empty!");
         
-        return (TestCycle) ctx.getBean(TEST_CYCLE, procs);
+        return testCycleProducer.getTestCycleDefaultInstance(procs);
     }    
 }

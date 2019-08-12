@@ -21,8 +21,9 @@ import lightsearch.client.bot.data.BotEntityDTO;
 import lightsearch.client.bot.exception.TestCycleOutOfBoundException;
 import lightsearch.client.bot.message.MessageRecipient;
 import lightsearch.client.bot.message.MessageSender;
+import lightsearch.client.bot.producer.MessageRecipientProducer;
+import lightsearch.client.bot.producer.MessageSenderProducer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -46,13 +47,10 @@ public class BotEntityDefaultImpl implements BotEntity {
     private MessageRecipient messageRecipient;
     private final long delayMessageDisplay;
 
-    private final String MESSAGE_SENDER    = "messageSenderDefault";
-    private final String MESSAGE_RECIPIENT = "messageRecipientDebug";
-
     private boolean isFinish = false;
 
-    @Autowired
-    private ApplicationContext ctx;
+    @Autowired private MessageSenderProducer msgSenderProducer;
+    @Autowired private MessageRecipientProducer msgRecipientProducer;
 
     public BotEntityDefaultImpl(BotEntityDTO botEntityDTO) {
         this.socket               = botEntityDTO.socket();
@@ -85,8 +83,9 @@ public class BotEntityDefaultImpl implements BotEntity {
                     }
                     try {
                         socket = new Socket(address, port);
-                        messageSender    = (MessageSender) ctx.getBean(MESSAGE_SENDER, new DataOutputStream(socket.getOutputStream()));
-                        messageRecipient = (MessageRecipient) ctx.getBean(MESSAGE_RECIPIENT, new DataInputStream(socket.getInputStream()));
+                        messageSender    = msgSenderProducer.getMessageSenderDefaultInstance(new DataOutputStream(socket.getOutputStream()));
+                        messageRecipient = msgRecipientProducer.getMessageRecipientDebugInstance(
+                                new DataInputStream(socket.getInputStream()));
                     }
                     catch(IOException connectEx) {
                         throw new RuntimeException("Cannot connect socket. Exception: " + connectEx.getMessage());

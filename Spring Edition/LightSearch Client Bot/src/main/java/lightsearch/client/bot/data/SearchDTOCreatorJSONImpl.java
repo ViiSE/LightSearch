@@ -16,9 +16,9 @@
 package lightsearch.client.bot.data;
 
 import lightsearch.client.bot.constants.BotSettingsEnum;
+import lightsearch.client.bot.producer.SearchDTOProducer;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +34,7 @@ public class SearchDTOCreatorJSONImpl implements SearchDTOCreator {
     private final JSONObject data;
 
     @Autowired
-    private ApplicationContext ctx;
+    private SearchDTOProducer producer;
 
     public SearchDTOCreatorJSONImpl(Object data) {
         this.data = (JSONObject) data;
@@ -47,6 +47,6 @@ public class SearchDTOCreatorJSONImpl implements SearchDTOCreator {
         String sklad   = data.get(SKLAD).toString();
         String TK      = data.get(TK_FIELD).toString();
             
-        return (SearchDTO) ctx.getBean(impl, barcode, sklad, TK);
+        return producer.getSearchDTOInstance(impl, barcode, sklad, TK);
     }
 }
