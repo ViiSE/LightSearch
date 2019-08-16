@@ -16,6 +16,7 @@
 package lightsearch.server.data;
 
 import lightsearch.server.database.DatabaseConnection;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -26,6 +27,7 @@ import java.util.Map;
  * @author ViiSE
  */
 @Component("clientDAODefault")
+@Scope("prototype")
 public class ClientDAODefaultImpl implements ClientDAO {
 
     private String IMEI;

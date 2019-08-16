@@ -33,6 +33,7 @@ public class MessageParserJSONImpl implements MessageParser {
         try {
             JSONParser parser = new JSONParser();
             JSONObject devInfo = (JSONObject)parser.parse(rawMessage);
+            parser.reset();
             return devInfo;
         }
         catch (ParseException | NullPointerException | ClassCastException ex) {

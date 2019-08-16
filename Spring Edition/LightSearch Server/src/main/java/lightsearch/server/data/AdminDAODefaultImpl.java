@@ -15,6 +15,7 @@
  */
 package lightsearch.server.data;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Component;
  * @author ViiSE
  */
 @Component("adminDAODefault")
+@Scope("prototype")
 public class AdminDAODefaultImpl implements AdminDAO {
 
     private String name;

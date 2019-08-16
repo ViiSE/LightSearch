@@ -70,7 +70,7 @@ public class BotEntityProcessorSimpleJSON extends BotEntityProcessor {
         int cycleAmount = Integer.parseInt(jSettings.get(CYCLE_AMOUNT).toString());
 
         BotDAOCreator botDAOCreator = botDAOCreatorProducer.getSimpleJSONInstance(jSettings.get(BOT_DAO));
-        
+
         ConnectionDTO connDTO = connDTOProducer.getConnectionDTODefaultInstance(super.ip(), super.port());
         
         for(int i = 0; i < super.botAmount(); i++) {
@@ -83,7 +83,7 @@ public class BotEntityProcessorSimpleJSON extends BotEntityProcessor {
                 TestCycle testCycle = testCycleCreator.createCycle();
                 long delayBeforeSendingMessage = Integer.parseInt(jSettings.get(DELAY_BEFORE_SENDING_MESSAGE).toString());
                 BotSettingsDTO botSettings = botSettingsDTOProducer.getBotSettingsDTODefaultInstance(testCycle, cycleAmount, delayBeforeSendingMessage);
-                
+
                 BotDAO botDAO = botDAOCreator.createBotDAO();
                 
                 BotEntityDTO botEntityDTO = botEntityDTOProducer.getBotEntityDTODefaultInstance(botDAO, socket,

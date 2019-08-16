@@ -1,6 +1,6 @@
 {
 	"type": "simple",
-	"bot_amount": "5",
+	"bot_amount": "1",
 	"bot_dao": {
 		"implementation": "lightsearch.client.bot.data.BotDAODefaultImpl"
 	},

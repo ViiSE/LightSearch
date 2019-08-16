@@ -16,9 +16,11 @@
 
 package lightsearch.client.bot.data;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component("lightsearch.client.bot.data.BotDAODefaultImpl")
+@Scope("prototype")
 public class BotDAODefaultImpl implements BotDAO {
 
     private String username;
