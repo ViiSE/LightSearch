@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2019 ViiSE.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,18 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lightsearch.server.initialization;
 
-/**
- * Интерфейс, определяющий текущую операционную систему.
- * <p>
- * Данный интерфейс необходим для определения построения текущей директории, а также при вызове демона, который
- * перезагружает сервер.
- * @since 1.0
- * @author ViiSE
- */
-public interface OsDetector {
-    boolean isWindows();
-    boolean isLinux();
-    boolean isMacOS();
+package lightsearch.server.controller;
+
+import lightsearch.server.cmd.client.ClientCommand;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class LoginControllerImpl implements LoginController {
+
+    @Override
+    @GetMapping("")
+    public String login(ClientCommand clientCommand) {
+        return null;
+    }
 }

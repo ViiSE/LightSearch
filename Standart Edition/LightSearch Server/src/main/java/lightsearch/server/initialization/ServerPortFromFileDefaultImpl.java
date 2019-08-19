@@ -19,10 +19,18 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.initialization.ServerPort} по умолчанию.
+ * <p>
+ * Порт сервера считывается из файла {@code ini_port} в директории, в которой расположен исполняемый jar-файл
+ * LightSearch Server.
+ * <p>
+ * Если файл {@code ini_port} не был найден, то сгенерируется исключение {@link java.lang.RuntimeException}.
+ * <p>
+ * Для определения текущей директории используется интерфейс
+ * {@link lightsearch.server.initialization.CurrentServerDirectory}.
+ * @since 1.0
  * @author ViiSE
  */
-
 public class ServerPortFromFileDefaultImpl implements ServerPort {
 
     private final CurrentServerDirectory currentServerDirectory;
@@ -37,8 +45,8 @@ public class ServerPortFromFileDefaultImpl implements ServerPort {
         
         int port = 0;
         
-        try(FileInputStream fin = new FileInputStream(currentDirectory + "ini_port")) { // Если файл ini_port найден,
-            byte[] buffer = new byte[fin.available()]; // Считываем из него порт и включаем сервер
+        try(FileInputStream fin = new FileInputStream(currentDirectory + "ini_port")) {
+            byte[] buffer = new byte[fin.available()];
             fin.read(buffer, 0, fin.available());
             String portString = new String();
             for(int i = 0; i < buffer.length; i++)
@@ -49,7 +57,7 @@ public class ServerPortFromFileDefaultImpl implements ServerPort {
             if(port < 1023 || port > 65535)
                 throw new RuntimeException("Wrong port number!");
         }
-        catch(IOException ex) { // Иначе выводим приглашение на создание сервера
+        catch(IOException ex) {
             throw new RuntimeException("Error: " + ex.getMessage());
         }
         

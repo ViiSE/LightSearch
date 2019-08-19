@@ -29,10 +29,25 @@ import lightsearch.server.security.HashAlgorithms;
 import lightsearch.server.security.HashAlgorithmsInit;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.initialization.AdministratorsMap} по умолчанию.
+ * <p>
+ * Карта администраторов считывается из файла {@code admins} в директории, в которой расположен исполняемый jar-файл
+ * LightSearch Server. В файле {@code admins} разделителем ключа и значения является символ {@code ;}, а каждая пара
+ * ключ-значение пишется с новой строки.
+ * <p>
+ * Если файл {@code admins} не был найден, то произойдет попытка создания файла с именем {@code admins}. Затем будет
+ * предложено ввести пароль для администратора с именем {@code admin}.
+ * <p>
+ * Если файл {@code admins} пустой, то произойдет попытка создания администратора с именем {@code admin}, после чего
+ * будет предложено ввести пароль для этого администратора.
+ * <p>
+ * Если какой-либо из сценариев выше не сработает, то сгенерируется исключение {@link java.lang.RuntimeException}.
+ * <p>
+ * Для определения текущей директории используется интерфейс
+ * {@link lightsearch.server.initialization.CurrentServerDirectory}.
+ * @since 1.0
  * @author ViiSE
  */
-
 public class AdministratorsMapFromFileDefaultImpl implements AdministratorsMap {
 
     private final CurrentServerDirectory currentServerDirectory;

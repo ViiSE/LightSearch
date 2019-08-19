@@ -19,10 +19,22 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.initialization.ServerSettings} по умолчанию.
+ * <p>
+ * Настройки LightSearch Server считываются из файла {@code settings} в директории, в которой расположен исполняемый
+ * jar-файл LightSearch Server. В файле {@code settings} разделителем настроек является символ {@code ;}.
+ * <p>
+ * Если файл {@code settings} не был найден, если значение перезагрузки LightSearch Server или значение тайм-аута клиента
+ * со стороны сервера меньше нуля, то сгенерируется исключение {@link java.lang.RuntimeException}.
+ * Значение перезагрузки LightSearch Server равное нулю расценивается как работа LightSearch Server без перезагрузки.
+ * Значение тайм-аута клиента со стороны сервера равное нулю расценивается как работа LightSearch Server без тайм-аута
+ * клиента со стороны сервера.
+ * <p>
+ * Для определения текущей директории используется интерфейс
+ * {@link lightsearch.server.initialization.CurrentServerDirectory}.
+ * @since 1.0
  * @author ViiSE
  */
-
 public class ServerSettingsFromFileDefaultImpl implements ServerSettings{
 
     private final CurrentServerDirectory currentServerDirectory;

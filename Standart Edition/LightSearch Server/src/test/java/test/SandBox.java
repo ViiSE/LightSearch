@@ -23,13 +23,30 @@ import org.testng.annotations.Test;
  * @author User
  */
 public class SandBox {
-    
+
+    public enum Status {
+        OK("OK MAN"),
+        INVALID("INVALID MAN");
+
+        private final String message;
+
+        Status(String message) {
+            this.message = message;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+    }
+
     @Test
     public void sandBox() {
         String example = "[{hi},{hi},{hi},";
         example = example.substring(0, example.lastIndexOf("},")) + "}";
         System.out.println(example);
         System.out.println("length: " + example.length());
+        System.out.println(Status.OK.getMessage());
+        System.out.println(Status.INVALID.getMessage());
         //System.out.println(example.lastIndexOf("},"));
     }
 }
