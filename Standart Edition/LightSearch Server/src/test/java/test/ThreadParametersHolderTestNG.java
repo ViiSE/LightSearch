@@ -15,19 +15,12 @@
  */
 package test;
 
-
 import lightsearch.server.data.ThreadParametersHolder;
 import lightsearch.server.data.ThreadParametersHolderInit;
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  *
