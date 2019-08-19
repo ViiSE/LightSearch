@@ -18,9 +18,17 @@ package lightsearch.server.initialization;
 import java.util.Map;
 
 /**
- *
+ * Интерфейс, предоставляющий карту администраторов.
+ * <p>
+ * Ключом в данной карте является имя администратора, а значением - хэш пароля администратора. Данное соглашение
+ * является по-умолчанию, и разработчик может сам задать свое соглашение для пары ключ-значение.
+ * <p>
+ * Данный интерфейс необходим для считывания администраторов из стороннего источника. Используется для создания
+ * экземпляра реализации интерфейса {@link lightsearch.server.data.LightSearchServerDTO} по умолчанию:
+ * {@link lightsearch.server.data.LightSearchServerDTOImpl}.
+ * @since 1.0
  * @author ViiSE
  */
-public interface AdministratorsMap {   
+public interface AdministratorsMap {
     Map<String,String> administratorsMap();
 }

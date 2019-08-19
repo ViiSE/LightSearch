@@ -18,7 +18,16 @@ package lightsearch.server.initialization;
 import java.util.List;
 
 /**
- *
+ * Интерфейс, предоставляющий черный список.
+ * <p>
+ * Черным списком является список IMEI клиентов. Клиент не сможет подключиться к серверу, если его IMEI находится в
+ * черном списке. Данное соглашение является по-умолчанию, и разработчик может сам решить, каким образом идентифицировать
+ * клиента.
+ * <p>
+ * Данный интерфейс необходим для считывания черного списка из стороннего источника. Используется для создания
+ * экземпляра реализации интерфейса {@link lightsearch.server.data.LightSearchServerDTO} по умолчанию:
+ * {@link lightsearch.server.data.LightSearchServerDTOImpl}.
+ * @since 1.0
  * @author ViiSE
  */
 public interface ClientBlacklist {    

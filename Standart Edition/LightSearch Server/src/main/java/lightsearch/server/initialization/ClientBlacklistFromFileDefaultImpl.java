@@ -23,7 +23,18 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.initialization.ClientBlacklist} по умолчанию.
+ * <p>
+ * Черный список считывается из файла {@code blacklist} в директории, в которой расположен исполняемый jar-файл
+ * LightSearch Server. В файле {@code blacklist} каждое значение IMEI пишется с новой строки.
+ * <p>
+ * Если файл {@code blacklist} не был найден, то произойдет попытка создания файла с именем {@code blacklist}.
+ * <p>
+ * Если файл {@code blacklist} не будет создан, то сгенерируется исключение {@link java.lang.RuntimeException}.
+ * <p>
+ * Для определения текущей директории используется интерфейс
+ * {@link lightsearch.server.initialization.CurrentServerDirectory}.
+ * @since 1.0
  * @author ViiSE
  */
 public class ClientBlacklistFromFileDefaultImpl implements ClientBlacklist {

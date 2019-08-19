@@ -16,7 +16,14 @@
 package lightsearch.server.initialization;
 
 /**
- *
+ * Интерфейс, предоставляющий настройки LightSearch Server.
+ * <p>
+ * Настройками LightSearch Server является время перезагрузки сервера и тайм-аут клиента со стороны сервера.
+ * <p>
+ * Данный интерфейс необходим для настроек LightSearch Server из стороннего источника. Используется для создания
+ * экземпляра реализации интерфейса {@link lightsearch.server.data.LightSearchServerSettingsDAO} по умолчанию:
+ * {@link lightsearch.server.data.LightSearchServerSettingsDAOImpl}.
+ * @since 1.0
  * @author ViiSE
  */
 public interface ServerSettings {

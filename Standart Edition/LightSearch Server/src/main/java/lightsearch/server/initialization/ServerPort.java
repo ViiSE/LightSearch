@@ -16,7 +16,12 @@
 package lightsearch.server.initialization;
 
 /**
- *
+ * Интерфейс, предоставляющий порт, по которому будет работать LightSearch Server.
+ * <p>
+ * Данный интерфейс необходим для считывания порта из стороннего источника. Используется для создания
+ * экземпляра реализации интерфейса {@link lightsearch.server.data.LightSearchServerDTO} по умолчанию:
+ * {@link lightsearch.server.data.LightSearchServerDTOImpl}.
+ * @since 1.0
  * @author ViiSE
  */
 public interface ServerPort {

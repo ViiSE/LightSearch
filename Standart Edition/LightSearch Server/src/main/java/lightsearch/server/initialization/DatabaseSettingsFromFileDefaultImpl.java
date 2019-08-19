@@ -19,7 +19,16 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.initialization.DatabaseSettings} по умолчанию.
+ * <p>
+ * Настройки базы данных считываются из файла {@code db} в директории, в которой расположен исполняемый jar-файл
+ * LightSearch Server. В файле {@code admins} разделителем между настройками является символ {@code ;}.
+ * <p>
+ * Если файл {@code db} не был найден, то сгенерируется исключение {@link java.lang.RuntimeException}.
+ * <p>
+ * Для определения текущей директории используется интерфейс
+ * {@link lightsearch.server.initialization.CurrentServerDirectory}.
+ * @since 1.0
  * @author ViiSE
  */
 public class DatabaseSettingsFromFileDefaultImpl implements DatabaseSettings {

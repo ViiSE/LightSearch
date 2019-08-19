@@ -22,7 +22,7 @@ import java.util.Map;
  *
  * @author ViiSE
  */
-public class LightSearchServerDTOImpl implements LightSearchServerDTO{
+public class LightSearchServerDTOImpl implements LightSearchServerDTO {
 
     private final Map<String, String> admins;
     private final Map<String,String> clients;

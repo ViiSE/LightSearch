@@ -21,7 +21,13 @@ import java.net.URISyntaxException;
 import lightsearch.server.LightSearchServer;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.initialization.CurrentServerDirectory} по умолчанию.
+ * <p>
+ * Если не удастся получить текущую директорию, то сгенерируется исключение {@link java.lang.RuntimeException}.
+ * <p>
+ * Для определения текущей операционной системы используется интерфейс
+ * {@link lightsearch.server.initialization.OsDetector}.
+ * @since 1.0
  * @author ViiSE
  */
 public class CurrentServerDirectoryFromFileImpl implements CurrentServerDirectory {
