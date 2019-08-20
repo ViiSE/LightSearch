@@ -1,0 +1,101 @@
+{
+	"type": "simple",
+	"bot_amount": "1",
+	"bot_dao": {
+		"implementation": "lightsearch.client.bot.data.BotDAODefaultImpl"
+	},
+	"delay_before_sending_message": "10",
+	"cycle_amount": "1",
+	"cycle_content": [
+		{
+			"implementation": "lightsearch.client.bot.processor.ProcessorConnectionDefaultImpl"
+		},
+		{
+			"implementation": "lightsearch.client.bot.processor.ProcessorAuthorizationDefaultImpl"
+		},
+		{
+			"implementation": "lightsearch.client.bot.processor.ProcessorSearchDefaultImpl",
+			"search_dto": {
+				"implementation": "lightsearch.client.bot.data.SearchDTODefaultImpl",
+				"barcode": "111111",
+				"sklad": "all",
+				"TK": "all"
+			}
+		},
+		{
+			"implementation": "lightsearch.client.bot.processor.ProcessorSearchDefaultImpl",
+			"search_dto": {
+				"implementation": "lightsearch.client.bot.data.SearchDTODefaultImpl",
+				"barcode": "222222",
+				"sklad": "all",
+				"TK": "null"
+			}
+		},
+		{
+			"implementation": "lightsearch.client.bot.processor.ProcessorSearchDefaultImpl",
+			"search_dto": {
+				"implementation": "lightsearch.client.bot.data.SearchDTODefaultImpl",
+				"barcode": "444444",
+				"sklad": "null",
+				"TK": "all"
+			}
+		},
+		{
+			"implementation": "lightsearch.client.bot.processor.ProcessorOpenSoftCheckDefaultImpl"
+		},
+		{
+			"implementation": "lightsearch.client.bot.processor.ProcessorSearchDefaultImpl",
+			"search_dto": {
+				"implementation": "lightsearch.client.bot.data.SearchDTODefaultImpl",
+				"barcode": "111111",
+				"sklad": "all",
+				"TK": "all"
+			}
+		},
+		{
+			"implementation": "lightsearch.client.bot.processor.ProcessorSearchDefaultImpl",
+			"search_dto": {
+				"implementation": "lightsearch.client.bot.data.SearchDTODefaultImpl",
+				"barcode": "222222",
+				"sklad": "all",
+				"TK": "null"
+			}
+		},
+		{
+			"implementation": "lightsearch.client.bot.processor.ProcessorSearchDefaultImpl",
+			"search_dto": {
+				"implementation": "lightsearch.client.bot.data.SearchDTODefaultImpl",
+				"barcode": "444444",
+				"sklad": "null",
+				"TK": "all"
+			}
+		},
+		{
+			"implementation": "lightsearch.client.bot.processor.ProcessorConfirmSoftCheckProductsDefaultImpl",
+			"product_dto": {
+				"implementation": "lightsearch.client.bot.data.ProductDTODefaultImpl",
+				"product_list": [
+					{
+						"id":"111111",
+						"amount":"1"
+					},
+					{
+						"id":"222222",
+						"amount":"2"
+					},
+					{
+						"id":"444444",
+						"amount":"5"
+					}
+				],
+				"barcode": "444444",
+				"sklad": "null",
+				"TK": "all"
+			}
+		},
+		{
+			"implementation": "lightsearch.client.bot.processor.ProcessorCloseSoftCheckDefaultImpl",
+			"delivery": "1"
+		}
+	]
+}

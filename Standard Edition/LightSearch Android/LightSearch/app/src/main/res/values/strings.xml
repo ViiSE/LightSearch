@@ -1,0 +1,65 @@
+<resources>
+    <string name="app_name">LightSearch</string>
+
+    <!-- TextView -->
+    <string name="username_label">Имя пользователя:</string>
+    <string name="password_label">Пароль:</string>
+    <string name="search_label">Поиск:</string>
+    <string name="host_label">Хост сервера:</string>
+    <string name="port_label">Порт сервера:</string>
+    <string name="openSC_label">Мягкий чек не открыт.</string>
+    <string name="userIdent_label">Идентификатор пользователя:</string>
+    <string name="softCheckTotalCost_label">Итого:</string>
+    <string name="cartTotalCost_label">Итого:</string>
+    <string name="cartTotalAmount_label">Товаров:</string>
+    <string name="cartDeliveryType_label">Cпособ доставки:</string>
+    <!-- ======== -->
+
+    <!-- CheckBox -->
+    <string name="checkBox_settings">Расширенные настройки</string>
+    <!-- ======== -->
+
+    <!-- RadioButton -->
+    <string name="skladRB">Склады</string>
+    <string name="TKRB">ТК</string>
+    <string name="AllRB">Все</string>
+    <!-- ============ -->
+
+    <!-- Button -->
+    <string name="buttonSearch_label">Поиск</string>
+    <string name="buttonBarcode_label">Сканировать штрихкод</string>
+    <string name="buttonConnect_label">Подключиться</string>
+    <string name="buttonChPass_label">Изменить пароль администратора</string>
+    <string name="buttonOpenSC_label">Открыть мягкий чек</string>
+    <string name="buttonCart_label">В корзину</string>
+    <string name="buttonCloseSC_label">Закрыть мягкий чек</string>
+    <!-- ====== -->
+
+    <!-- Spinner -->
+    <string name="sklad_label">Выберите склад:</string>
+    <string name="TK_label">Выберите ТК:</string>
+    <!-- ======= -->
+
+    <!-- Dialog Window -->
+    <string name="dialog_error">Ошибка</string>
+    <string name="dialog_OK">OK</string>
+    <string name="dialog_cancel">Cancel</string>
+    <!-- ============= -->
+
+    <!-- TableResult -->
+    <string name="subdivColLabel">Подразделение</string>
+    <string name="idColLabel">ИД</string>
+    <string name="nameColLabel">Наим-ие</string>
+    <string name="priceColLabel">Цена</string>
+    <string name="amountColLabel">Кол-во</string>
+
+    <!-- Fragment Tag -->
+    <string name="fragment_authorization">Авторизация</string>
+    <string name="fragment_search">Поиск</string>
+    <string name="fragment_soft_check">Мягкий чек</string>
+    <string name="fragment_container">LightSearch</string>
+    <string name="fragment_result_search">Результат</string>
+    <string name="fragment_cart">Корзина</string>
+    <!-- ============ -->
+
+</resources>
