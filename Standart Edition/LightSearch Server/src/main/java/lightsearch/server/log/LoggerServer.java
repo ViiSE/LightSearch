@@ -18,9 +18,16 @@ package lightsearch.server.log;
 import lightsearch.server.time.CurrentDateTime;
 
 /**
- *
+ * Логирует LightSearch Server.
+ * @since 1.0
  * @author ViiSE
+ * @see lightsearch.server.log.LoggerFileDefaultImpl
  */
 public interface LoggerServer {
+    /**
+     * @param type Тип сообщения.
+     * @param currentDateTime Текущая дата.
+     * @param message Сообщение лога.
+     */
     void log(LogMessageTypeEnum type, CurrentDateTime currentDateTime, String message);
 }

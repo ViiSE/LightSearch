@@ -71,10 +71,9 @@ public class HandlerCreatorDefaultImpl implements HandlerCreator {
     public Handler getHandler() {
         Function<Void, Handler> processor = handlerHolder.get(identifierResult.identifier());
 
-        if(processor != null) {
-            Handler handler = processor.apply(null);
-            return handler;
-        }
+        if(processor != null)
+            return processor.apply(null);
+
         return null;
     }
     

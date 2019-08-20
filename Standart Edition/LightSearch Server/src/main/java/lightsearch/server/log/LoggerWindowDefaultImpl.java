@@ -18,7 +18,10 @@ package lightsearch.server.log;
 import lightsearch.server.time.CurrentDateTime;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.log.LoggerWindow} по умолчанию.
+ * <p>
+ * Записывает лог в стандартный поток ввода-вывода.
+ * @since 1.0
  * @author ViiSE
  */
 public class LoggerWindowDefaultImpl implements LoggerWindow {

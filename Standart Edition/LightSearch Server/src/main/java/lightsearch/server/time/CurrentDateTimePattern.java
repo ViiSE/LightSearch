@@ -21,11 +21,11 @@ package lightsearch.server.time;
  */
 public class CurrentDateTimePattern {
 
-    public static String dateTimeInStandartFormWithMs() {
+    public static String dateTimeInStandardFormWithMs() {
         return "yyyy-MM-dd HH:mm:ss.S";
     }
     
-    public static String dateTimeInStandartForm() {
+    public static String dateTimeInStandardForm() {
         return "yyyy-MM-dd HH:mm:ss";
     }
     

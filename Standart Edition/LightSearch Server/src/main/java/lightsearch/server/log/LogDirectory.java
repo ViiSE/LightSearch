@@ -16,8 +16,13 @@
 package lightsearch.server.log;
 
 /**
- *
+ * Предоставляет директорию, в которой будет записываться лог.
+ * <p>
+ * Данный интерфейс необходим для считывания директории логирования из стороннего источника. Используется для создания
+ * экземпляра реализации интерфейса {@link lightsearch.server.log.LoggerFile} по умолчанию.
+ * @since 1.0
  * @author ViiSE
+ * @see lightsearch.server.log.LoggerFileDefaultImpl
  */
 public interface LogDirectory {
     String logDirectory();

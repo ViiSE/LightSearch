@@ -18,7 +18,7 @@ import java.util.Map;
  */
 public interface ProductsMapDebug {
     
-    static final Map<String, ProductDebug> PRODUCTS = new HashMap<String, ProductDebug>() {{
+    Map<String, ProductDebug> PRODUCTS = new HashMap<String, ProductDebug>() {{
         put("1", ProductDebugInit.productDebug("Склад 1", "111111", "Товар 1", "100.0", "5", "шт."));
         put("2", ProductDebugInit.productDebug("Склад 1", "222222", "Товар 2", "1500.0", "10", "шт."));
         put("3", ProductDebugInit.productDebug("Склад 2", "111111", "Товар 1", "100.0", "100", "шт."));

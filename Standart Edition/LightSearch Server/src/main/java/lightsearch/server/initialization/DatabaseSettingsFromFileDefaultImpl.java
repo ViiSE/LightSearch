@@ -42,7 +42,7 @@ public class DatabaseSettingsFromFileDefaultImpl implements DatabaseSettings {
     @Override
     public String name() {
         String currentDirectory = currentServerDirectory.currentDirectory();
-        String dbName  = new String();
+        StringBuilder dbName = new StringBuilder();
         
         try(FileInputStream fin = new FileInputStream(currentDirectory + "db")) {
             byte[] buffer = new byte[fin.available()];
@@ -53,20 +53,20 @@ public class DatabaseSettingsFromFileDefaultImpl implements DatabaseSettings {
                     count++;
                     i++;
                 }
-                if(count == 2) dbName += (char)buffer[i];
+                if(count == 2) dbName.append((char) buffer[i]);
             }
         }
         catch(IOException ex) {
             throw new RuntimeException("Error: " + ex.getMessage());
         }
         
-        return dbName;
+        return dbName.toString();
     }
 
     @Override
     public String ip() {
         String currentDirectory = currentServerDirectory.currentDirectory();
-        String dbIP  = new String();
+        StringBuilder dbIP = new StringBuilder();
         
         try(FileInputStream fin = new FileInputStream(currentDirectory + "db")) {
             byte[] buffer = new byte[fin.available()];
@@ -77,23 +77,23 @@ public class DatabaseSettingsFromFileDefaultImpl implements DatabaseSettings {
                     count++;
                     i++;
                 }
-                if(count == 0) dbIP += (char)buffer[i];
+                if(count == 0) dbIP.append((char) buffer[i]);
             }
         }
         catch(IOException ex) {
             throw new RuntimeException("Error: " + ex.getMessage());
         }
         
-        return dbIP;
+        return dbIP.toString();
     }
 
     @Override
     public int port() {
         String currentDirectory = currentServerDirectory.currentDirectory();
-        int dbPort  = 0;
+        int dbPort;
         
         try(FileInputStream fin = new FileInputStream(currentDirectory + "db")) {
-            String dbPortStr = new String();
+            StringBuilder dbPortStr = new StringBuilder();
             byte[] buffer = new byte[fin.available()];
             fin.read(buffer, 0, fin.available());
             int count = 0;
@@ -102,9 +102,9 @@ public class DatabaseSettingsFromFileDefaultImpl implements DatabaseSettings {
                     count++;
                     i++;
                 }
-                if(count == 1) dbPortStr += (char)buffer[i];
+                if(count == 1) dbPortStr.append((char) buffer[i]);
             }
-            dbPort = Integer.parseInt(dbPortStr);
+            dbPort = Integer.parseInt(dbPortStr.toString());
         }
         catch(IOException ex) {
             throw new RuntimeException("Error: " + ex.getMessage());

@@ -50,9 +50,8 @@ public class IteratorDatabaseRecordWriterTimerCreatorDefaultImpl implements Iter
 
     @Override
     public SuperIteratorDatabaseRecordWriterTimer getTimer() {
-        SuperIteratorDatabaseRecordWriterTimer iteratorTimer = IteratorDatabaseRecordWriterTimerInit.iteratorDatabaseRecordWriterTimer(
-                loggerServer, currentDateTime, threadManager, 
+        return IteratorDatabaseRecordWriterTimerInit.iteratorDatabaseRecordWriterTimer(
+                loggerServer, currentDateTime, threadManager,
                 iteratorDatabaseRecordWriter, iteratorDatabaseRecord, minutesToWrite, id);
-        return iteratorTimer;
     }
 }

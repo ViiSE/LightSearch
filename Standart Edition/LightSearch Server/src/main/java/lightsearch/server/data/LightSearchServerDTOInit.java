@@ -17,11 +17,6 @@ package lightsearch.server.data;
 
 import java.util.List;
 import java.util.Map;
-import lightsearch.server.initialization.AdministratorsMap;
-import lightsearch.server.initialization.ClientBlacklist;
-import lightsearch.server.initialization.DatabaseSettings;
-import lightsearch.server.initialization.ServerPort;
-import lightsearch.server.initialization.ServerSettings;
 
 /**
  *

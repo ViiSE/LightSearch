@@ -45,22 +45,20 @@ public class ServerSettingsFromFileDefaultImpl implements ServerSettings{
     
     @Override
     public int rebootServerValue() {
-        int serverReboot = 0;
+        int serverReboot;
         String currentDirectory = currentServerDirectory.currentDirectory();
         
         try(FileInputStream fin = new FileInputStream(currentDirectory + "settings")) {
-            byte[] buffer = new byte[fin.available()]; // Считываем из него время ребута сервера и таймаут клиентов
+            byte[] buffer = new byte[fin.available()];
             fin.read(buffer, 0, fin.available());
-            String serverRebootString  = new String();
-            int count = 0;
-            for(int i = 0; i < buffer.length; i++) {
-                if((char)buffer[i] == ';') {
+            String serverRebootString = "";
+            for (int i = 0; i < buffer.length; i++) {
+                if ((char)buffer[i] == ';') {
                     break;
                 }
-                if(count == 0) serverRebootString    += (char)buffer[i];
+                if (i == 0) serverRebootString += (char)buffer[i];
             }
-
-            serverReboot  = Integer.parseInt(serverRebootString);
+            serverReboot = Integer.parseInt(serverRebootString);
             if(serverReboot < 0)
                 throw new RuntimeException("Server reboot value is less than 0!");
         }
@@ -73,23 +71,23 @@ public class ServerSettingsFromFileDefaultImpl implements ServerSettings{
 
     @Override
     public int timeoutClientValue() {
-        int clientTimeout = 0;
+        int clientTimeout;
         String currentDirectory = currentServerDirectory.currentDirectory();
         
         try(FileInputStream fin = new FileInputStream(currentDirectory + "settings")) {
-            byte[] buffer = new byte[fin.available()]; // Считываем из него время ребута сервера и таймаут клиентов
+            byte[] buffer = new byte[fin.available()];
             fin.read(buffer, 0, fin.available());
-            String clientTimeoutString = new String();
+            StringBuilder clientTimeoutString = new StringBuilder();
             int count = 0;
             for(int i = 0; i < buffer.length; i++) {
                 if((char)buffer[i] == ';') {
                     count++;
                     i++;
                 }
-                if(count == 1) clientTimeoutString   += (char)buffer[i];
+                if(count == 1) clientTimeoutString.append((char) buffer[i]);
             }
 
-            clientTimeout = Integer.parseInt(clientTimeoutString);
+            clientTimeout = Integer.parseInt(clientTimeoutString.toString());
             if(clientTimeout < 0)
                 throw new RuntimeException("Client timeout value is less than 0!");
         }

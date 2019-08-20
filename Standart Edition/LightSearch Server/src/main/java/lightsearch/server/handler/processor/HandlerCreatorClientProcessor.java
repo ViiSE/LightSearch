@@ -68,8 +68,6 @@ public class HandlerCreatorClientProcessor extends SuperHandlerCreatorProcessor 
                 threadParametersHolder, super.listenerDTO().currentDateTime(), 
                 super.listenerDTO().threadManager(), clientDAO);
 
-        Handler clientHandler = ClientHandlerInit.clientHandler(clientHandlerDTO, super.serverDTO(), super.loggerServer());
-
-        return clientHandler;
+        return ClientHandlerInit.clientHandler(clientHandlerDTO, super.serverDTO(), super.loggerServer());
     }
 }

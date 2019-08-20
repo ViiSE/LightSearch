@@ -10,8 +10,12 @@
 package lightsearch.server.security;
 
 /**
- *
+ * Генерирует хэш строки.
+ * <p>
+ * Используется для генерирования хэша пароля администратора.
+ * @since 1.0
  * @author ViiSE
+ * @see lightsearch.server.initialization.AdministratorsMap
  */
 public interface HashAlgorithms {
     String sha256(String message);

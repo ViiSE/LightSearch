@@ -17,7 +17,7 @@ package lightsearch.server.message;
 
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.util.Calendar;
+
 import lightsearch.server.exception.MessageRecipientException;
 
 /**

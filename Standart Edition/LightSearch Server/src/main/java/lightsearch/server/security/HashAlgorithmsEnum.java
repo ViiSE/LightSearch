@@ -10,7 +10,7 @@
 package lightsearch.server.security;
 
 /**
- *
+ * Константы для реализаций {@link lightsearch.server.security.HashAlgorithms}.
  * @author ViiSE
  */
 public enum HashAlgorithmsEnum {

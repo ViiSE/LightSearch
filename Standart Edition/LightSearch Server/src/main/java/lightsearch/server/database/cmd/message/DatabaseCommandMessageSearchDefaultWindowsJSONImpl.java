@@ -44,13 +44,12 @@ public class DatabaseCommandMessageSearchDefaultWindowsJSONImpl implements Datab
     
     @Override
     public String message() {
-        String message = "{\r\n"
+        return "{\r\n"
                 + "\"" + CMD_FIELD + "\":\""  + command + "\",\r\n"
                 + "\"" + IMEI_FIELD + "\":\"" + IMEI + "\",\r\n"
                 + "\"" + BARCODE_FIELD + "\":\"" + barcode + "\",\r\n"
                 + "\"" + SKLAD_FIELD + "\":\"" + sklad + "\",\r\n"
                 + "\"" + TK_FIELD + "\":\"" + TK + "\"\r\n"
                 + "}";
-        return message;
     }
 }

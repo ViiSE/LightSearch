@@ -44,8 +44,7 @@ public class DatabaseConnectionCreatorWin1251DefaultImpl implements DatabaseConn
             Connection connection = DriverManager.getConnection("jdbc:firebirdsql://" 
                 + databaseDTO.dbIP() + ":" + databaseDTO.dbPort() + "/" + databaseDTO.dbName() +
                 "?encoding=win1251&amp;useUnicode=true&amp;characterEncoding=win1251", username, password);
-            DatabaseConnection dbConn = DatabaseConnectionInit.databaseConnection(connection);
-            return dbConn;
+            return DatabaseConnectionInit.databaseConnection(connection);
         }
         catch(ClassNotFoundException ex) {
             throw new DatabaseConnectionCreatorException(ex.getMessage(), 

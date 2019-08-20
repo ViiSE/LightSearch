@@ -69,7 +69,7 @@ public class AdministratorsMapFromFileDefaultImpl implements AdministratorsMap {
             
             while ((strLine = br.readLine()) != null){
                 name = strLine.substring(0, strLine.indexOf(";"));
-                pass = strLine.substring(strLine.indexOf(";")+1, strLine.length());
+                pass = strLine.substring(strLine.indexOf(";") + 1);
                 adminMap.put(name, pass);
             }
             

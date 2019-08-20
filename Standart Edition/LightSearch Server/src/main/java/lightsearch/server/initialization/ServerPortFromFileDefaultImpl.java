@@ -43,16 +43,15 @@ public class ServerPortFromFileDefaultImpl implements ServerPort {
     public int port() {
         String currentDirectory = currentServerDirectory.currentDirectory();
         
-        int port = 0;
+        int port;
         
         try(FileInputStream fin = new FileInputStream(currentDirectory + "ini_port")) {
             byte[] buffer = new byte[fin.available()];
             fin.read(buffer, 0, fin.available());
-            String portString = new String();
-            for(int i = 0; i < buffer.length; i++)
-                portString += (char)buffer[i];
+            StringBuilder portString = new StringBuilder();
+            for (byte b : buffer) portString.append((char) b);
             
-            port = Integer.parseInt(portString);
+            port = Integer.parseInt(portString.toString());
             
             if(port < 1023 || port > 65535)
                 throw new RuntimeException("Wrong port number!");

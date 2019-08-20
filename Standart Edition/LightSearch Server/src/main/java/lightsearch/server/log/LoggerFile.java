@@ -18,9 +18,19 @@ package lightsearch.server.log;
 import lightsearch.server.time.CurrentDateTime;
 
 /**
- *
+ * Записывает лог в файл.
+ * Используется для создания экземпляра реализации интерфейса {@link lightsearch.server.log.LoggerServer} по умолчанию.
+ * @since 1.0
  * @author ViiSE
+ * @see lightsearch.server.log.LoggerServerDefaultImpl
  */
 public interface LoggerFile {
+
+    /**
+     * Лог собирается следующим образом: {@code [currentDateTime] type: message}
+     * @param type Тип сообщения.
+     * @param currentDateTime Текущая дата.
+     * @param message Сообщение лога.
+     */
     void writeLogFile(String type, CurrentDateTime currentDateTime, String message);
 }

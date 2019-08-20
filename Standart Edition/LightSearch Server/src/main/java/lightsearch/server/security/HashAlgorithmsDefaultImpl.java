@@ -14,7 +14,10 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.security.HashAlgorithms} по умолчанию.
+ * <p>
+ * Используемая кодировка - UTF8.
+ * @since 1.0
  * @author ViiSE
  */
 public class HashAlgorithmsDefaultImpl implements HashAlgorithms {

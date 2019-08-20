@@ -54,8 +54,7 @@ public class DatabaseStatementExecutorDefaultImpl implements DatabaseStatementEx
         try {
             dbWriter.write();
             String result = dbReader.read();
-            DatabaseStatementResult dbStatRes = DatabaseStatementResultInit.databaseStatementResult(result);
-            return dbStatRes;
+            return DatabaseStatementResultInit.databaseStatementResult(result);
         } catch (DatabaseWriterException ex) {
             throw new DatabaseStatementExecutorException(ex.getMessage(), ex.getMessageRU());
         } catch (DatabaseReaderException ex) {

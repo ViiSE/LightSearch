@@ -16,10 +16,12 @@
 package lightsearch.server.initialization;
 
 /**
- * Интерфейс, определяющий текущую операционную систему.
+ * Определяет текущую операционную систему.
  * <p>
  * Данный интерфейс необходим для определения построения текущей директории, а также при вызове демона, который
  * перезагружает сервер.
+ * @see lightsearch.server.initialization.CurrentServerDirectory
+ * @see lightsearch.server.daemon.DaemonServer
  * @since 1.0
  * @author ViiSE
  */

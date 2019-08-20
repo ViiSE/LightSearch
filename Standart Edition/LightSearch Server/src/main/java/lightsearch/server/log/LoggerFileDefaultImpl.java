@@ -25,7 +25,10 @@ import lightsearch.server.checker.LightSearchCheckerInit;
 import lightsearch.server.time.CurrentDateTime;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.log.LoggerFile} по умолчанию.
+ * <p>
+ * Записывает лог в файл {@code log_текущая_дата.txt}.
+ * @since 1.0
  * @author ViiSE
  */
 public class LoggerFileDefaultImpl implements LoggerFile {

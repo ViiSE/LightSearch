@@ -21,9 +21,9 @@ package lightsearch.server.data;
  */
 public class LightSearchServerDatabaseDTODefaultImpl implements LightSearchServerDatabaseDTO {
 
-    private String dbIP;
-    private String dbName;
-    private int dbPort;
+    private final String dbIP;
+    private final String dbName;
+    private final int dbPort;
     
     public LightSearchServerDatabaseDTODefaultImpl(String dbIP, String dbName, int dbPort) {
         this.dbIP = dbIP;

@@ -66,10 +66,8 @@ public class HandlerCreatorSystemProcessor extends SuperHandlerCreatorProcessor 
         SystemHandlerDTO systemHandlerDTO = SystemHandlerDTOInit.systemHandlerDTO(
                 sysParamHolder, threadParametersHolder, 
                 super.listenerDTO().threadManager(), super.listenerDTO().currentDateTime());
-        
-        Handler systemHandler = SystemHandlerInit.systemHandler(systemHandlerDTO, super.serverDTO(), super.loggerServer());
-        
-        return systemHandler;
+
+        return SystemHandlerInit.systemHandler(systemHandlerDTO, super.serverDTO(), super.loggerServer());
     }
     
 }

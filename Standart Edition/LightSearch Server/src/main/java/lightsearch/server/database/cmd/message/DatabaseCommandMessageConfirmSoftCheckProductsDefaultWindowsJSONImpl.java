@@ -48,7 +48,7 @@ public class DatabaseCommandMessageConfirmSoftCheckProductsDefaultWindowsJSONImp
     
     @Override
     public String message() {
-        String rawData = "[";
+        StringBuilder rawData = new StringBuilder("[");
         String jMsgStr = "{\"data\": " + data + "}";
         MessageParser msgParser = MessageParserInit.messageParser();
         try {
@@ -56,26 +56,25 @@ public class DatabaseCommandMessageConfirmSoftCheckProductsDefaultWindowsJSONImp
             JSONArray jData = (JSONArray)message.get("data");
 
             for(Object product : jData) {
-                rawData += "\r\n{\r\n";
+                rawData.append("\r\n{\r\n");
                 JSONObject productJSON = (JSONObject)product;
                 String id = productJSON.get(ID_FIELD).toString();
                 String amount = productJSON.get(AMOUNT_FIELD).toString();
-                rawData += "\"" + ID_FIELD     + "\"" + ":" + "\"" + id     + "\",\r\n" +
-                           "\"" + AMOUNT_FIELD + "\"" + ":" + "\"" + amount + "\"\r\n},";
+                rawData.append("\"").append(ID_FIELD).append("\"").append(":").append("\"").append(id).append("\",\r\n").
+                        append("\"").append(AMOUNT_FIELD).append("\"").append(":").append("\"").append(amount).append("\"\r\n},");
             }
         }
         catch(MessageParserException ignore) {}
         
-        rawData = rawData.substring(0, rawData.lastIndexOf("},")) + "}";
-        rawData += "\r\n]";
-        
-        String message = "{\r\n"
+        rawData = new StringBuilder(rawData.substring(0, rawData.lastIndexOf("},")) + "}");
+        rawData.append("\r\n]");
+
+        return "{\r\n"
                 + "\"" + CMD_FIELD + "\":\""  + command + "\",\r\n"
                 + "\"" + IMEI_FIELD + "\":\"" + IMEI + "\",\r\n"
                 + "\"" + USER_IDENT_FIELD + "\":\"" + userIdent + "\",\r\n"
                 + "\"" + CARD_CODE_FIELD + "\":\"" + cardCode + "\",\r\n"
                 + "\"" + DATA_FIELD + "\":" + rawData + "\r\n"
                 + "}";
-        return message;
     }
 }

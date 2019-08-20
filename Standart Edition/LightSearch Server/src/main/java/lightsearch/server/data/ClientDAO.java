@@ -24,14 +24,10 @@ import lightsearch.server.database.DatabaseConnection;
  */
 public interface ClientDAO {
     String IMEI();
-    Map<String, String> codesSklad();
-    Map<String, String> codesTK();
     DatabaseConnection databaseConnection();
     boolean isFirst();
     
     void setIMEI(String IMEI);
-    void setCodesSklad(Map<String, String> codesSklad);
-    void setCodesTK(Map<String, String> codesTK);
     void setDatabaseConnection(DatabaseConnection databaseConnection);
     void setIsFirst(boolean isFirst);
 }

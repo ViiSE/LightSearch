@@ -40,13 +40,12 @@ public class DatabaseCommandMessageCancelSoftCheckDefaultWindowsJSONImpl impleme
 
     @Override
     public String message() {
-        String message = "{\r\n"
+        return "{\r\n"
                 + "\"" + CMD_FIELD + "\":\""  + command + "\",\r\n"
                 + "\"" + IMEI_FIELD + "\":\"" + IMEI + "\",\r\n"
                 + "\"" + USER_IDENT_FIELD + "\":\"" + userIdent + "\",\r\n"
                 + "\"" + CARD_CODE_FIELD + "\":\"" + cardCode + "\"\r\n"
                 + "}";
-        return message;
     }
     
 }

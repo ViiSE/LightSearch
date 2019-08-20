@@ -34,7 +34,7 @@ public class DatabaseReaderDefaultImpl implements DatabaseReader {
     private final DatabaseConnection databaseConnection;
     private final long lsCode;
     private final String tableName = DatabaseTableEnum.LS_RESPONSE.stringValue();
-    private final String pattern = CurrentDateTimePattern.dateTimeInStandartFormWithMs();
+    private final String pattern = CurrentDateTimePattern.dateTimeInStandardFormWithMs();
     
     public DatabaseReaderDefaultImpl(DatabaseConnection databaseConnection, long lsCode) {
         this.databaseConnection = databaseConnection;

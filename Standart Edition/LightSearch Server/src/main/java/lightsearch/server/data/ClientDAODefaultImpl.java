@@ -15,8 +15,6 @@
  */
 package lightsearch.server.data;
 
-import java.util.HashMap;
-import java.util.Map;
 import lightsearch.server.database.DatabaseConnection;
 
 /**
@@ -26,8 +24,6 @@ import lightsearch.server.database.DatabaseConnection;
 public class ClientDAODefaultImpl implements ClientDAO {
 
     private String IMEI;
-    Map<String, String> codesSklad = new HashMap<>();
-    Map<String, String> codesTK = new HashMap<>();
     private DatabaseConnection databaseConnection;
     private boolean isFirst = true;
     
@@ -60,25 +56,4 @@ public class ClientDAODefaultImpl implements ClientDAO {
     public void setIsFirst(boolean isFirst) {
         this.isFirst = isFirst;
     }
-
-    @Override
-    public Map<String, String> codesSklad() {
-        return codesSklad;
-    }
-
-    @Override
-    public Map<String, String> codesTK() {
-        return codesTK;
-    }
-
-    @Override
-    public void setCodesSklad(Map<String, String> codesSklad) {
-        this.codesSklad = codesSklad;
-    }
-
-    @Override
-    public void setCodesTK(Map<String, String> codesTK) {
-        this.codesTK = codesTK;
-    }
-    
 }

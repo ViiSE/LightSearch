@@ -18,9 +18,18 @@ package lightsearch.server.log;
 import lightsearch.server.time.CurrentDateTime;
 
 /**
- *
+ * Выводит лог в окно, в котором запущен LightSearch Server.
+ * Используется для создания экземпляра реализации интерфейса {@link lightsearch.server.log.LoggerWindow} по умолчанию.
+ * @since 1.0
  * @author ViiSE
+ * @see lightsearch.server.log.LoggerWindowDefaultImpl
  */
 public interface LoggerWindow {
+    /**
+     * Лог собирается следующим образом: {@code [currentDateTime] type: message}
+     * @param type Тип сообщения.
+     * @param currentDateTime Текущая дата.
+     * @param message Сообщение лога.
+     */
     void printLog(String type, CurrentDateTime currentDateTime, String message);
 }

@@ -41,11 +41,10 @@ public class CurrentServerDirectoryFromFileImpl implements CurrentServerDirector
     @Override
     public String currentDirectory() {
 
-        String currentDirectory = null;
+        String currentDirectory;
         try {
             currentDirectory = new File(LightSearchServer.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath();
             currentDirectory = currentDirectory.replaceAll("LightSearch_Server.jar", "");
-            currentDirectory = currentDirectory.substring(0, currentDirectory.length());
 
             if(osDetector.isWindows())
                 currentDirectory = currentDirectory + "\\";

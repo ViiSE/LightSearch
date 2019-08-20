@@ -67,10 +67,8 @@ public class HandlerCreatorAdminProcessor extends SuperHandlerCreatorProcessor {
             
         AdminHandlerDTO admHandlerDTO = AdminHandlerDTOInit.adminHandlerDTO(admParamHolder, threadParametersHolder,
                     super.listenerDTO().currentDateTime(), super.listenerDTO().threadManager(), adminDAO);
-            
-        Handler adminHandler = AdminHandlerInit.adminHandler(admHandlerDTO, super.serverDTO(), super.loggerServer());
-            
-        return adminHandler;
+
+        return AdminHandlerInit.adminHandler(admHandlerDTO, super.serverDTO(), super.loggerServer());
     }
     
 }

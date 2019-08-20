@@ -45,9 +45,8 @@ public class RebootTimerCreatorDefaultImpl implements RebootTimerCreator {
 
     @Override
     public SuperRebootServerTimer getTimer() {
-        SuperRebootServerTimer serverTimer = RebootServerTimerInit.rebootServerTimer(serverDateRebootValue, currentDirectory, 
+        return RebootServerTimerInit.rebootServerTimer(serverDateRebootValue, currentDirectory,
                 loggerServer, currentDateTime, threadManager, id);
-        return serverTimer;
     }
     
 }

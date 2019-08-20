@@ -33,16 +33,15 @@ public class IteratorDatabaseRecordReaderDefaultImpl implements IteratorDatabase
 
     @Override
     public long read() {
-        long iteratorDatabaseRecord = 0;
+        long iteratorDatabaseRecord;
         
         try(FileInputStream fin = new FileInputStream(serverDTO.currentDirectory() + "iterator")) {
             byte[] buffer = new byte[fin.available()];
             fin.read(buffer, 0, fin.available());
-            String iteratorDatabaseRecordString = new String();
-            for(int i = 0; i < buffer.length; i++)
-                iteratorDatabaseRecordString += (char)buffer[i];
+            StringBuilder iteratorDatabaseRecordString = new StringBuilder();
+            for (byte b : buffer) iteratorDatabaseRecordString.append((char) b);
             
-            iteratorDatabaseRecord = Integer.parseInt(iteratorDatabaseRecordString);    
+            iteratorDatabaseRecord = Integer.parseInt(iteratorDatabaseRecordString.toString());
         }
         catch(IOException | NumberFormatException ex) {
             throw new RuntimeException("Error: " + ex.getMessage());

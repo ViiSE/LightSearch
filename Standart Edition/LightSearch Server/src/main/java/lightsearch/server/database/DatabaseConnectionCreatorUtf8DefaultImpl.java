@@ -45,8 +45,7 @@ public class DatabaseConnectionCreatorUtf8DefaultImpl implements DatabaseConnect
                 + databaseDTO.dbIP() + ":" + databaseDTO.dbPort() + "/" + databaseDTO.dbName() + 
                 "?encoding=utf8&amp;useUnicode=true&amp;characterEncoding=utf8", 
                 username, password);
-            DatabaseConnection dbConn = DatabaseConnectionInit.databaseConnection(connection);
-            return dbConn;
+            return DatabaseConnectionInit.databaseConnection(connection);
         }
         catch(ClassNotFoundException ex) {
             throw new DatabaseConnectionCreatorException(ex.getMessage(), 

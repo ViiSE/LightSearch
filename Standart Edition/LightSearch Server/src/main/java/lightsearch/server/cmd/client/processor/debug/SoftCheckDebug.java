@@ -9,8 +9,6 @@
  */
 package lightsearch.server.cmd.client.processor.debug;
 
-import java.util.List;
-
 /**
  *
  * @author ViiSE

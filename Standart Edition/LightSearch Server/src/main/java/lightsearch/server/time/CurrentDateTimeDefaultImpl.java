@@ -30,8 +30,7 @@ public class CurrentDateTimeDefaultImpl implements CurrentDateTime {
         GregorianCalendar cal = new GregorianCalendar();
         java.util.Date date = cal.getTime();
 
-        String dateStr = nice.format(date);
-        return dateStr;
+        return nice.format(date);
     }
 
     @Override
@@ -40,8 +39,7 @@ public class CurrentDateTimeDefaultImpl implements CurrentDateTime {
         GregorianCalendar cal = new GregorianCalendar();
         java.util.Date date = cal.getTime();
 
-        String dateStr = nice.format(date);
-        return dateStr;
+        return nice.format(date);
     }
 
     @Override
@@ -50,8 +48,7 @@ public class CurrentDateTimeDefaultImpl implements CurrentDateTime {
         GregorianCalendar cal = new GregorianCalendar();
         java.util.Date date = cal.getTime();
 
-        String dateStr = nice.format(date);
-        return dateStr;
+        return nice.format(date);
     }
     
 }

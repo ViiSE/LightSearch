@@ -18,7 +18,10 @@ package lightsearch.server.log;
 import lightsearch.server.time.CurrentDateTime;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.log.LoggerServer} по умолчанию.
+ * <p>
+ * Лог записывается в окно, в котором запущен LightSearch Server, и в файл лога.
+ * @since 1.0
  * @author ViiSE
  */
 public class LoggerServerDefaultImpl implements LoggerServer {

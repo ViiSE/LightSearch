@@ -41,13 +41,12 @@ public class DatabaseCommandMessageConnectionDefaultWindowsJSONImpl implements D
     
     @Override
     public String message() {
-        String message = "{\r\n"
+        return "{\r\n"
                 + "\"" + CMD_FIELD + "\":\""  + command + "\",\r\n"
                 + "\"" + IMEI_FIELD + "\":\"" + IMEI + "\",\r\n"
                 + "\"" + USERNAME_FIELD + "\":\"" + username + "\",\r\n"
                 + "\"" + USER_IDENT_FIELD + "\":\"" + userIdent + "\"\r\n"
                 + "}";
-        return message;
     }
     
 }

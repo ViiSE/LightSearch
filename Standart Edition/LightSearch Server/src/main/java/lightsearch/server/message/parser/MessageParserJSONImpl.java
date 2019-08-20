@@ -30,8 +30,7 @@ public class MessageParserJSONImpl implements MessageParser {
     public Object parse(String rawMessage) throws MessageParserException {
         try {
             JSONParser parser = new JSONParser();
-            JSONObject devInfo = (JSONObject)parser.parse(rawMessage);
-            return devInfo;
+            return parser.parse(rawMessage);
         }
         catch (ParseException | NullPointerException | ClassCastException ex) {
             throw new MessageParserException(ex.getMessage());

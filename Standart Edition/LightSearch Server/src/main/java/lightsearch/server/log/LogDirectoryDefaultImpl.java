@@ -21,7 +21,10 @@ import lightsearch.server.initialization.OsDetectorInit;
 import lightsearch.server.initialization.OsDetector;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.log.LogDirectory} по умолчанию.
+ * <p>
+ * Директория для логирования определяется как {@code текущая_директория/директория_лога}.
+ * @since 1.0
  * @author ViiSE
  */
 public class LogDirectoryDefaultImpl implements LogDirectory {

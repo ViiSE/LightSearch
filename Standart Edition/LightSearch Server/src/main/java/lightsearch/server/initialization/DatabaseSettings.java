@@ -16,15 +16,15 @@
 package lightsearch.server.initialization;
 
 /**
- * Интерфейс, предоставляющий настройки базы данных.
+ * Предоставляет настройки базы данных.
  * <p>
  * Настройки базы данных являются данными подключения к базе и состоят из имени, IP-адреса и порта базы данных.
  * <p>
  * Данный интерфейс необходим для считывания настроек базы данных из стороннего источника. Используется для создания
- * экземпляра реализации интерфейса {@link lightsearch.server.data.LightSearchServerDatabaseDTO} по умолчанию:
- * {@link lightsearch.server.data.LightSearchServerDatabaseDTODefaultImpl}.
+ * экземпляра реализации интерфейса {@link lightsearch.server.data.LightSearchServerDatabaseDTO} по умолчанию.
  * @since 1.0
  * @author ViiSE
+ * @see lightsearch.server.data.LightSearchServerDatabaseDTODefaultImpl
  */
 public interface DatabaseSettings {
     String name();
