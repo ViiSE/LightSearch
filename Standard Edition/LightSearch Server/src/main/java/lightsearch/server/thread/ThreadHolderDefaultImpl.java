@@ -16,17 +16,20 @@
 package lightsearch.server.thread;
 
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.Map;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.thread.ThreadHolder} по умолчанию.
+ * <p>
+ * Потоки хранятся в {@link java.util.Map}. Ключом является идентификатор потока, а значением сам поток.
  * @author ViiSE
+ * @since 1.0
  */
 public class ThreadHolderDefaultImpl implements ThreadHolder {
 
-    private final HashMap<String, LightSearchThread> threads;
+    private final Map<String, LightSearchThread> threads;
     
-    public ThreadHolderDefaultImpl(HashMap<String, LightSearchThread> holder) {
+    public ThreadHolderDefaultImpl(Map<String, LightSearchThread> holder) {
         this.threads = holder;
     }
 

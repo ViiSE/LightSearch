@@ -18,8 +18,10 @@ package lightsearch.server.thread;
 import java.util.Collection;
 
 /**
- *
+ * Контейнер для всех активных потоков LightSearch Server. Используется в интерфейсе
+ * {@link lightsearch.server.thread.ThreadManager}.
  * @author ViiSE
+ * @since 1.0
  */
 public interface ThreadHolder {
     void add(String id, LightSearchThread thread);

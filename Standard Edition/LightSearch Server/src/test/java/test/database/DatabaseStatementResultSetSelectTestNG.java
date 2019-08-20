@@ -57,7 +57,7 @@ public class DatabaseStatementResultSetSelectTestNG {
         DatabaseConnectionCreator dbConnCreator =
                 DatabaseConnectionCreatorInit.databaseConnectionCreator(databaseDTO,
                         username, password);
-        String pattern = CurrentDateTimePattern.dateTimeInStandardFormWithMs();
+        String pattern = CurrentDateTimePattern.DATE_TIME_IN_STANDARD_FORM_WITH_MS.getPattern();
         try {
             DatabaseConnection databaseConnection = dbConnCreator.createFirebirdConnection();
             String tableName = "LS_RESPONSE";

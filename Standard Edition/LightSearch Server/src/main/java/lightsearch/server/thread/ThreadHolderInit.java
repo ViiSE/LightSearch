@@ -15,8 +15,7 @@
  */
 package lightsearch.server.thread;
 
-
-import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -24,7 +23,7 @@ import java.util.HashMap;
  */
 public class ThreadHolderInit {
     
-    public static ThreadHolder threadHolder(HashMap<String, LightSearchThread> threads) {
+    public static ThreadHolder threadHolder(Map<String, LightSearchThread> threads) {
         return new ThreadHolderDefaultImpl(threads);
     }
 }

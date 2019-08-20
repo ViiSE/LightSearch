@@ -16,7 +16,12 @@
 package test;
 
 import static org.testng.Assert.*;
+
+import lightsearch.server.thread.*;
 import org.testng.annotations.Test;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -47,6 +52,34 @@ public class SandBox {
         System.out.println("length: " + example.length());
         System.out.println(Status.OK.getMessage());
         System.out.println(Status.INVALID.getMessage());
+
+        Target target = new Target();
+        LightSearchThread thread = new LightSearchThread(target);
+        target.setThread(thread);
+        System.out.println("1. thread.isWorked: " + thread.isWorked());
+        thread.start();
+        thread.setIsWorked(false);
+        while(!thread.isDone()) {}
+        System.out.println("4. thread.isDone: " + thread.isDone());
+        System.out.println("OK THREAD");
+
         //System.out.println(example.lastIndexOf("},"));
+    }
+
+    private class Target implements Runnable {
+
+        private LightSearchThread targetThread;
+
+        public void setThread(LightSearchThread targetThread) {
+            this.targetThread = targetThread;
+        }
+
+        @Override
+        public void run() {
+            System.out.println("2. thread.isWorked: " + targetThread.isWorked());
+            while(targetThread.isWorked()) {}
+            System.out.println("3. thread.isDone: " + targetThread.isDone());
+            targetThread.setIsDone(true);
+        }
     }
 }

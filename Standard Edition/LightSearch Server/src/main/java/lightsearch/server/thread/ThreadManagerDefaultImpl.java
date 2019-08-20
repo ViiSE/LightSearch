@@ -16,8 +16,14 @@
 package lightsearch.server.thread;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.thread.ThreadManagerDefaultImpl} по умолчанию.
+ * <p>
+ * Вызов метода {@code interrupt()} этого класса сделан с учетом возможностей
+ * {@link lightsearch.server.thread.LightSearchThread}.
+ * <p>
+ * Применяется повсеместно.
  * @author ViiSE
+ * @since 1.0
  */
 public class ThreadManagerDefaultImpl implements ThreadManager {
 
