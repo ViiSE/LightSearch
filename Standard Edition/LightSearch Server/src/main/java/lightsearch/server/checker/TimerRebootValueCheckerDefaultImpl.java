@@ -16,8 +16,11 @@
 package lightsearch.server.checker;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.checker.TimerRebootValueChecker} по умолчанию.
+ * <p>
+ * Если значение времени перезагрузки сервера равно нулю, то таймер перезагрузки LightSearch Server не запустится.
  * @author ViiSE
+ * @since 1.0
  */
 public class TimerRebootValueCheckerDefaultImpl implements TimerRebootValueChecker {
 

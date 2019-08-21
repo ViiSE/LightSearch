@@ -16,8 +16,12 @@
 package lightsearch.server.checker;
 
 /**
- *
+ * Проверяет, нужно ли запускать таймер перезагрузки LightSearch Server или нет.
+ * <p>
+ * Проверка проходит на основании проверки значения времени перезагрузки сервера.
  * @author ViiSE
+ * @see lightsearch.server.timer.SuperRebootServerTimer
+ * @since 2.0
  */
 public interface TimerRebootValueChecker {
     boolean check(int serverRebootValue);

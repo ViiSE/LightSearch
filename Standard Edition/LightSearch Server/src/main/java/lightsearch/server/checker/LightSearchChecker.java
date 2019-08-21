@@ -16,8 +16,11 @@
 package lightsearch.server.checker;
 
 /**
- *
+ * Проверяет строки на пустоту и обьекты на {@code null}.
+ * <p>
+ * Применяется повсеместно во всем проекте.
  * @author ViiSE
+ * @since 2.0
  */
 public interface LightSearchChecker {
     boolean isEmpty(String... strings);
