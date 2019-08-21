@@ -25,8 +25,17 @@ import lightsearch.server.thread.ThreadManager;
 import lightsearch.server.time.CurrentDateTime;
 
 /**
- *
+ * Таймер итератора записи базы данных LightSearch Server по умолчанию.
+ * <p>
+ * Таймер начинает свою работу с создания времени записи итератора в файл. Затем каждую секудну сравнивается это значение
+ * с значением текущего времени. Если время записи итератора до текущего времени, то происходит запись итератора в файл.
+ * Затем процесс повторяется вновь.
+ * <p>
+ * Каждую секунду проходит проверка значения времени перезагрузки LightSearch Server с значением текущего времени.
  * @author ViiSE
+ * @see lightsearch.server.thread.ThreadManager
+ * @see lightsearch.server.daemon.DaemonServer
+ * @since 2.0
  */
 public class IteratorDatabaseRecordWriterTimerDefault extends SuperIteratorDatabaseRecordWriterTimer {
     
@@ -50,7 +59,6 @@ public class IteratorDatabaseRecordWriterTimerDefault extends SuperIteratorDatab
                 try { Thread.sleep(1000); } catch(InterruptedException ignored) {}
                 if(super.dateTimeComparator().isBefore(dateTimeToWrite, LocalDateTime.now())) {
                     try {
-                        //System.out.println("I AM WRITING NOW!");
                         super.iteratorDatabaseRecordWriter().write(super.iteratorDatabaseRecord().iteratorDatabaseRecord());
                         isDone = true;
                     } catch (IteratorException ex) {

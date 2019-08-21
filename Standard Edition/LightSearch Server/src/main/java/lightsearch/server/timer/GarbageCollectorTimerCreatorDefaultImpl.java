@@ -10,8 +10,12 @@ import lightsearch.server.thread.ThreadManager;
 import lightsearch.server.time.CurrentDateTime;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.timer.GarbageCollectorTimerCreator} по умолчанию.
+ * <p>
+ * <b>Этот класс экспериментальный и не следует его использовать в релизе. Применяйте его для тестов и экспериментов.</b>
+ * Делает системный вызов сборщика мусора {@link System#gc()} каждую секунду через секунду после запуска.
  * @author ViiSE
+ * @since 2.0
  */
 public class GarbageCollectorTimerCreatorDefaultImpl implements GarbageCollectorTimerCreator {
 
@@ -31,7 +35,7 @@ public class GarbageCollectorTimerCreatorDefaultImpl implements GarbageCollector
 
     @Override
     public SuperGarbageCollectorTimer getTimer() {
-        return new GarbageCollectorAbstractDefault(
+        return new GarbageCollectorAbstractDefaultExt(
                 loggerServer, currentDateTime, threadManager, id);
     }
     

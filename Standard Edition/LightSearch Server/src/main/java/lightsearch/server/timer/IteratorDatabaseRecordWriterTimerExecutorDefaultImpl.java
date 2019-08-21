@@ -18,8 +18,14 @@ package lightsearch.server.timer;
 import lightsearch.server.thread.LightSearchThread;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.timer.IteratorDatabaseRecordWriterTimerExecutor} по умолчанию.
+ * <p>
+ * Запускает таймер сборщика мусора в отдельном потоке-демоне.
  * @author ViiSE
+ * @see lightsearch.server.timer.SuperIteratorDatabaseRecordWriterTimer
+ * @see lightsearch.server.thread.ThreadManager
+ * @see lightsearch.server.daemon.DaemonServer
+ * @since 2.0
  */
 public class IteratorDatabaseRecordWriterTimerExecutorDefaultImpl implements IteratorDatabaseRecordWriterTimerExecutor {
 

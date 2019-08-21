@@ -16,8 +16,10 @@
 package lightsearch.server.timer;
 
 /**
- *
+ * Запускает таймер перезагрузки LightSearch Server.
  * @author ViiSE
+ * @see lightsearch.server.timer.SuperRebootServerTimer
+ * @since 2.0
  */
 public interface RebootTimerExecutor {
     void startRebootTimer();

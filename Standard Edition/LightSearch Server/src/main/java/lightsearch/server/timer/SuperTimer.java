@@ -20,8 +20,12 @@ import lightsearch.server.thread.ThreadManager;
 import lightsearch.server.time.CurrentDateTime;
 
 /**
- *
+ * Абстрактный класс таймера.
+ * <p>
+ * Все таймеры LightSearch Server наследуются от данного класса. Каждый таймер имеет идентификатор, который используется
+ * при нахождении данного таймера в потоке, в котором он работает.
  * @author ViiSE
+ * @since 2.0
  */
 public abstract class SuperTimer implements Runnable {
     private final LoggerServer loggerServer;

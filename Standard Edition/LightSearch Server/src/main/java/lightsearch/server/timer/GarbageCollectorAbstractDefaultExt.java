@@ -10,15 +10,19 @@ import lightsearch.server.thread.ThreadManager;
 import lightsearch.server.time.CurrentDateTime;
 
 /**
- *
+ * Таймер сборщика мусора.
+ * <p>
+ * <b>Этот класс экспериментальный и не следует его использовать в релизе. Применяйте его для тестов и экспериментов.</b>
+ * <p>
+ * Вы
  * @author ViiSE
  */
-public class GarbageCollectorAbstractDefault extends SuperGarbageCollectorTimer {
+public class GarbageCollectorAbstractDefaultExt extends SuperGarbageCollectorTimer {
 
     private final String ID;
     
-    public GarbageCollectorAbstractDefault(LoggerServer loggerServer, 
-            CurrentDateTime currentDateTime, ThreadManager threadManager, TimersIDEnum id) {
+    public GarbageCollectorAbstractDefaultExt(LoggerServer loggerServer,
+                                              CurrentDateTime currentDateTime, ThreadManager threadManager, TimersIDEnum id) {
         super(loggerServer, currentDateTime, threadManager, id);
         ID = super.id().stringValue();
     }

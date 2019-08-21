@@ -20,10 +20,12 @@ import lightsearch.server.thread.ThreadManager;
 import lightsearch.server.log.LoggerServer;
 import lightsearch.server.time.CurrentDateTime;
 
-
 /**
- *
+ * Абстрактный класс таймера перезагрузки LightSearch Server.
+ * <p>
+ * Если необходимо создать таймер перезагрузки LightSearch Server, то надо наследоваться от данного класса.
  * @author ViiSE
+ * @since 2.0
  */
 public abstract class SuperRebootServerTimer extends SuperTimer {
     

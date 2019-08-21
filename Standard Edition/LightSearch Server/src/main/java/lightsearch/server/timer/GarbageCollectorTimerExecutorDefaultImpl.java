@@ -8,8 +8,16 @@ package lightsearch.server.timer;
 import lightsearch.server.thread.LightSearchThread;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.timer.GarbageCollectorTimerExecutor} по умолчанию.
+ * <p>
+ * <b>Этот класс экспериментальный и не следует его использовать в релизе. Применяйте его для тестов и экспериментов.</b>
+ * <p>
+ * Запускает таймер сборщика мусора в отдельном потоке-демоне.
  * @author ViiSE
+ * @see lightsearch.server.timer.SuperGarbageCollectorTimer
+ * @see lightsearch.server.thread.ThreadManager
+ * @see lightsearch.server.daemon.DaemonServer
+ * @since 2.0
  */
 public class GarbageCollectorTimerExecutorDefaultImpl implements GarbageCollectorTimerExecutor {
 

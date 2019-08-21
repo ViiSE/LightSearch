@@ -16,8 +16,9 @@
 package lightsearch.server.timer;
 
 /**
- *
+ * Константы для генерации идентификаторов таймеров LightSearch Server.
  * @author ViiSE
+ * @since 2.0
  */
 public enum TimersIDEnum {
     REBOOT_TIMER_ID {

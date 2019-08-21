@@ -27,8 +27,17 @@ import lightsearch.server.log.LoggerServer;
 import lightsearch.server.time.CurrentDateTime;
 
 /**
- *
+ * Таймер перезагрузки LightSearch Server по умолчанию.
+ * <p>
+ * Время перезагрузки является экземпляром класса {@link java.time.LocalDateTime}. Это время сравнивается с текущим,
+ * и если время перезагрузки до текущего времени, то таймер ждет секунду, завершает все активные потоки
+ * LightSearch Server, и вызывает демона, который перезагружает LightSearch Server.
+ * <p>
+ * Каждую секунду проходит проверка значения времени перезагрузки LightSearch Server с значением текущего времени.
  * @author ViiSE
+ * @see lightsearch.server.thread.ThreadManager
+ * @see lightsearch.server.daemon.DaemonServer
+ * @since 2.0
  */
 public class RebootServerTimerDefault extends SuperRebootServerTimer {
 
@@ -37,26 +46,17 @@ public class RebootServerTimerDefault extends SuperRebootServerTimer {
     public RebootServerTimerDefault(LocalDateTime rebootDateTime, String currentDirectory,
             LoggerServer loggerServer, CurrentDateTime currentDateTime,
             ThreadManager threadManager, TimersIDEnum id) {
-        super(rebootDateTime, currentDirectory, loggerServer, currentDateTime, 
-                threadManager, id);
+        super(rebootDateTime, currentDirectory, loggerServer, currentDateTime, threadManager, id);
         ID = super.id().stringValue();
     }
     
     @Override
     public void run() {
         while(super.threadManager().holder().getThread(ID).isWorked()) {
-            try { 
-                Thread.sleep(1000); 
-//                System.out.println("I am RebootTimer! My id: " + super.id() + 
-//                        " time is: " + LocalDateTime.now() + 
-//                        ". The time, when i must restart server: " + super.rebootDateTime());
-            }
-            catch(InterruptedException ignored) {}
+            try { Thread.sleep(1000); } catch(InterruptedException ignored) {}
 
             if(super.rebootDateTime().isBefore(LocalDateTime.now())) {
-                // ждем секунду
-                try { Thread.sleep(1000); }
-                catch(InterruptedException ignored) {}
+                try { Thread.sleep(1000); } catch(InterruptedException ignored) {}
                 
                 super.loggerServer().log(LogMessageTypeEnum.INFO, super.currentDateTime(), "Server restarted");
 
