@@ -36,7 +36,7 @@ import lightsearch.server.time.DateTimeComparatorInit;
  * затем снова итерируется при каждом обращении в базу.
  * <p>
  * Для задания времени записи итератора базы данных в файл в минутах предусмотрено поле {@link #minutesToWrite}. Через
- * каждое значение поля {@link #minutesToWrite} будет производиться запись значения итератора в файл.
+ * каждое значение поля {@link #minutesToWrite} будет производится запись значения итератора в файл.
  * @author ViiSE
  * @see lightsearch.server.iterator.IteratorDatabaseRecord
  * @since 2.0
