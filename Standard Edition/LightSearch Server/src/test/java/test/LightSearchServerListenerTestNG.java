@@ -49,12 +49,12 @@ import lightsearch.server.initialization.ServerPort;
 import lightsearch.server.initialization.ServerPortInit;
 import lightsearch.server.initialization.ServerSettings;
 import lightsearch.server.initialization.ServerSettingsInit;
-import lightsearch.server.iterator.IteratorDatabaseRecord;
-import lightsearch.server.iterator.IteratorDatabaseRecordInit;
-import lightsearch.server.iterator.IteratorDatabaseRecordReader;
-import lightsearch.server.iterator.IteratorDatabaseRecordReaderInit;
-import lightsearch.server.iterator.IteratorDatabaseRecordWriter;
-import lightsearch.server.iterator.IteratorDatabaseRecordWriterInit;
+import lightsearch.server.identifier.DatabaseRecordIdentifier;
+import lightsearch.server.identifier.DatabaseRecordIdentifierInit;
+import lightsearch.server.identifier.DatabaseRecordIdentifierReader;
+import lightsearch.server.identifier.DatabaseRecordIdentifierReaderInit;
+import lightsearch.server.identifier.DatabaseRecordIdentifierWriter;
+import lightsearch.server.identifier.DatabaseRecordIdentifierWriterInit;
 import lightsearch.server.listener.LightSearchServerListener;
 import lightsearch.server.listener.LightSearchServerListenerInit;
 import lightsearch.server.log.LogDirectory;
@@ -262,13 +262,13 @@ public class LightSearchServerListenerTestNG {
         ThreadManager threadManager = ThreadManagerInit.threadManager(threadHolder);
         assertNotNull(threadManager, "ThreadManager is null!");
         
-        IteratorDatabaseRecordReader iteratorReader = IteratorDatabaseRecordReaderInit.iteratorDatabaseRecordReader(serverDTO);
-        assertNotNull(iteratorReader, "IteratorReader is null!");
-        IteratorDatabaseRecordWriter iteratorWriter = IteratorDatabaseRecordWriterInit.iteratorDatabaseRecordWriter(serverDTO);
-        assertNotNull(iteratorWriter, "IteratorWriter is null!");
+        DatabaseRecordIdentifierReader identifierReader = DatabaseRecordIdentifierReaderInit.databaseRecordIdentifierReader(serverDTO);
+        assertNotNull(identifierReader, "IdentifierReader is null!");
+        DatabaseRecordIdentifierWriter identifierWriter = DatabaseRecordIdentifierWriterInit.databaseRecordIdentifierWriter(serverDTO);
+        assertNotNull(identifierWriter, "IdentifierWriter is null!");
         
-        IteratorDatabaseRecord iterator = IteratorDatabaseRecordInit.iteratorDatabaseRecord(iteratorReader.read());
-        assertNotNull(iterator, "Iterator is null!");
+        DatabaseRecordIdentifier identifier = DatabaseRecordIdentifierInit.databaseRecordIdentifier(identifierReader.read());
+        assertNotNull(identifier, "Identifier is null!");
         
         LightSearchChecker checker = LightSearchCheckerInit.lightSearchChecker();
         assertNotNull(checker, "Checker is null!");
@@ -278,7 +278,7 @@ public class LightSearchServerListenerTestNG {
         assertFalse(timerRebootId.stringValue().isEmpty(), "TimerRebootId is null!");
         
         LightSearchListenerDTO listenerDTO = LightSearchListenerDTOInit.lightSearchListenerDTO(
-                checker, currentDateTime, threadManager, iterator, iteratorWriter, timerRebootId);
+                checker, currentDateTime, threadManager, identifier, identifierWriter, timerRebootId);
         assertNotNull(listenerDTO, "ListenerDTO is null!");
         
         ServerStateChanger stateChanger = ServerStateChangerInit.serverStateChanger(serverDTO, 
@@ -288,14 +288,14 @@ public class LightSearchServerListenerTestNG {
         if(serverDTO.settingsDAO().serverRebootValue() != 0)
             stateChanger.executeRebootTimer(timerRebootId);
         
-        TimersIDEnum timerIteratorId = TimersIDEnum.ITERATOR_WRITER_TIMER_ID;
-        assertNotNull(timerIteratorId, "timerIteratorId is null!");
+        TimersIDEnum timerIdentifierId = TimersIDEnum.IDENTIFIER_WRITER_TIMER_ID;
+        assertNotNull(timerIdentifierId, "timerIdentifierId is null!");
         
         long minutesToWrite = 30;
         assertFalse(minutesToWrite < 0, "MinutesToWrite is null!");
         
-        stateChanger.executeIteratorDatabaseRecordWriterTimer(iterator, iteratorWriter, 
-                minutesToWrite, timerIteratorId);
+        stateChanger.executeDatabaseRecordIdentifierWriterTimer(identifier, identifierWriter,
+                minutesToWrite, timerIdentifierId);
         
         LightSearchServerListener serverListener = LightSearchServerListenerInit.lightSearchServerListener(
                 serverDTO,

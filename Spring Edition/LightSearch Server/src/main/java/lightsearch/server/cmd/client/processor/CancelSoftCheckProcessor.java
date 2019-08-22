@@ -24,7 +24,7 @@ import lightsearch.server.database.cmd.message.DatabaseCommandMessage;
 import lightsearch.server.database.statement.DatabaseStatementExecutor;
 import lightsearch.server.database.statement.result.DatabaseStatementResult;
 import lightsearch.server.exception.DatabaseStatementExecutorException;
-import lightsearch.server.iterator.IteratorDatabaseRecord;
+import lightsearch.server.identifier.DatabaseRecordIdentifier;
 import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.message.result.ResultTypeMessageEnum;
 import lightsearch.server.producer.cmd.client.CommandResultClientCreatorProducer;
@@ -50,7 +50,7 @@ public class CancelSoftCheckProcessor implements ProcessorClient {
     private final List<String> blacklist;
     private final ClientDAO clientDAO;
     private final CurrentDateTime currentDateTime;
-    private final IteratorDatabaseRecord iteratorDatabaseRecord;
+    private final DatabaseRecordIdentifier databaseRecordIdentifier;
 
     @Autowired private CommandResultClientCreatorProducer cmdResClCrProducer;
     @Autowired private DatabaseConnectionCreatorProducer dbConnCrProducer;
@@ -58,12 +58,12 @@ public class CancelSoftCheckProcessor implements ProcessorClient {
     @Autowired private DatabaseStatementExecutorProducer dbStateExecProducer;
 
     public CancelSoftCheckProcessor(LightSearchServerDTO serverDTO, LightSearchChecker checker, ClientDAO clientDAO,
-                                    CurrentDateTime currentDateTime, IteratorDatabaseRecord iteratorDatabaseRecord) {
+                                    CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier) {
         this.checker = checker;
         this.blacklist = serverDTO.blacklist();
         this.clientDAO = clientDAO;
         this.currentDateTime = currentDateTime;
-        this.iteratorDatabaseRecord = iteratorDatabaseRecord;
+        this.databaseRecordIdentifier = databaseRecordIdentifier;
     }
     
     @Override
@@ -76,7 +76,7 @@ public class CancelSoftCheckProcessor implements ProcessorClient {
                             clientCommand.command(), clientCommand.IMEI(), clientCommand.userIdentifier(), clientCommand.cardCode());
                     
                     DatabaseStatementExecutor dbStatementExecutor = dbStateExecProducer.getDatabaseStatementExecutorDefaultInstance(
-                            clientDAO.databaseConnection(), iteratorDatabaseRecord.next(),
+                            clientDAO.databaseConnection(), databaseRecordIdentifier.next(),
                             currentDateTime.dateTimeInStandartFormat(), dbCmdMessage);
                     DatabaseStatementResult dbStatRes = dbStatementExecutor.exec();
 

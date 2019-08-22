@@ -20,7 +20,7 @@ import lightsearch.server.data.LightSearchListenerDTO;
 import lightsearch.server.data.LightSearchServerDTO;
 import lightsearch.server.handler.HandlerCreator;
 import lightsearch.server.identifier.ConnectionIdentifierResult;
-import lightsearch.server.iterator.HandlerIterator;
+import lightsearch.server.identifier.HandlerIdentifier;
 import lightsearch.server.log.LoggerServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -37,8 +37,8 @@ public class HandlerCreatorProducerDefaultImpl implements HandlerCreatorProducer
     @Override
     public HandlerCreator getHandlerCreatorDefaultInstance(
             ConnectionIdentifierResult identifierResult, LightSearchServerDTO serverDTO,
-            LightSearchListenerDTO listenerDTO, LoggerServer loggerServer, HandlerIterator handlerIterator) {
+            LightSearchListenerDTO listenerDTO, LoggerServer loggerServer, HandlerIdentifier handlerIdentifier) {
         return (HandlerCreator) ctx.getBean(HANDLER_CREATOR, identifierResult, serverDTO, listenerDTO,
-                loggerServer, handlerIterator);
+                loggerServer, handlerIdentifier);
     }
 }

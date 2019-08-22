@@ -16,8 +16,8 @@
 package lightsearch.server.data;
 
 import lightsearch.server.checker.LightSearchChecker;
-import lightsearch.server.iterator.IteratorDatabaseRecord;
-import lightsearch.server.iterator.IteratorDatabaseRecordWriter;
+import lightsearch.server.identifier.DatabaseRecordIdentifier;
+import lightsearch.server.identifier.DatabaseRecordIdentifierWriter;
 import lightsearch.server.thread.ThreadManager;
 import lightsearch.server.time.CurrentDateTime;
 import lightsearch.server.timer.TimersIDEnum;
@@ -30,10 +30,10 @@ public class LightSearchListenerDTOInit {
     
     public static LightSearchListenerDTO lightSearchListenerDTO(LightSearchChecker checker,
             CurrentDateTime currentDateTime, ThreadManager threadManager, 
-            IteratorDatabaseRecord iteratorDatabaseRecord, 
-            IteratorDatabaseRecordWriter iteratorDatabaseRecordWriter,
+            DatabaseRecordIdentifier databaseRecordIdentifier,
+            DatabaseRecordIdentifierWriter databaseRecordIdentifierWriter,
             TimersIDEnum timerRebootId) {
         return new LightSearchListenerDTOdefaultImpl(checker, currentDateTime, threadManager,
-        iteratorDatabaseRecord, iteratorDatabaseRecordWriter, timerRebootId);
+                databaseRecordIdentifier, databaseRecordIdentifierWriter, timerRebootId);
     }
 }

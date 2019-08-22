@@ -32,8 +32,8 @@ import lightsearch.server.database.statement.DatabasePreparedStatementInit;
 import lightsearch.server.database.statement.result.DatabaseStatementResultSetUpdate;
 import lightsearch.server.database.statement.result.DatabaseStatementResultSetUpdateInit;
 import lightsearch.server.exception.DatabaseStatementResultSetException;
-import lightsearch.server.iterator.IteratorDatabaseRecord;
-import lightsearch.server.iterator.IteratorDatabaseRecordInit;
+import lightsearch.server.identifier.DatabaseRecordIdentifier;
+import lightsearch.server.identifier.DatabaseRecordIdentifierInit;
 import lightsearch.server.time.CurrentDateTime;
 import lightsearch.server.time.CurrentDateTimeInit;
 import static org.testng.Assert.*;
@@ -97,7 +97,7 @@ public class DatabaseStatementResultSetUpdateTestNG {
     public void exec() {
         testBegin("DatabaseStatementResultSetUpdate", "exec()");
         
-        IteratorDatabaseRecord iteratorDatabaseRecord = IteratorDatabaseRecordInit.iteratorDatabaseRecord(2);
+        DatabaseRecordIdentifier databaseRecordIdentifier = DatabaseRecordIdentifierInit.databaseRecordIdentifier(2);
         
         String dbIP = "127.0.0.1";
         String dbName = "/usr/db/db.fdb";
@@ -121,7 +121,7 @@ public class DatabaseStatementResultSetUpdateTestNG {
             String dateTime = currDateTime.dateTimeInStandardFormat();
 
             DatabasePreparedStatement dbPS = DatabasePreparedStatementInit.databasePreparedStatementInsert(databaseConnection, 
-                    tableName, command, dateTime, iteratorDatabaseRecord.next(), state);
+                    tableName, command, dateTime, databaseRecordIdentifier.next(), state);
             DatabaseStatementResultSetUpdate dbRSUpdate = DatabaseStatementResultSetUpdateInit.databaseStatementResultSetUpdate(dbPS);
             dbRSUpdate.exec();
         } catch(DatabaseConnectionCreatorException |

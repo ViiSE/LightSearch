@@ -35,8 +35,19 @@ import lightsearch.server.message.parser.MessageParser;
 import lightsearch.server.exception.MessageParserException;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.identifier.ConnectionIdentifier} по умолчанию.
+ * <p>
+ * Идентификация соединения начинается с создания {@code DataStream} клиентского сокета, затем создаются
+ * {@code MessageRecipient} и {@code MessageSender}, после этого сообщение, пришедшее от клиента, парсится при помощи
+ * {@code MessageParser}. Если идентификация прошла успешно, то LightSearch Server отправляет клиенту сообщение "OK", и
+ * создает соответствующий обработчик.
  * @author ViiSE
+ * @see lightsearch.server.data.stream.DataStream
+ * @see lightsearch.server.message.MessageRecipient
+ * @see lightsearch.server.message.MessageSender
+ * @see lightsearch.server.message.parser.MessageParser
+ * @see lightsearch.server.listener.LightSearchServerListenerSocketDefaultImpl
+ * @since 1.0
  */
 public class ConnectionIdentifierDefaultImpl implements ConnectionIdentifier {
     

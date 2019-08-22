@@ -32,6 +32,7 @@ import lightsearch.server.data.LightSearchServerDatabaseDTOInit;
 import lightsearch.server.data.LightSearchServerSettingsDAO;
 import lightsearch.server.data.LightSearchServerSettingsDAOInit;
 import lightsearch.server.exception.CommandConverterException;
+import lightsearch.server.identifier.*;
 import lightsearch.server.initialization.AdministratorsMapInit;
 import lightsearch.server.initialization.ClientBlacklistInit;
 import lightsearch.server.initialization.CurrentServerDirectory;
@@ -43,12 +44,6 @@ import lightsearch.server.initialization.ServerPort;
 import lightsearch.server.initialization.ServerPortInit;
 import lightsearch.server.initialization.ServerSettings;
 import lightsearch.server.initialization.ServerSettingsInit;
-import lightsearch.server.iterator.IteratorDatabaseRecord;
-import lightsearch.server.iterator.IteratorDatabaseRecordInit;
-import lightsearch.server.iterator.IteratorDatabaseRecordReader;
-import lightsearch.server.iterator.IteratorDatabaseRecordReaderInit;
-import lightsearch.server.iterator.IteratorDatabaseRecordWriter;
-import lightsearch.server.iterator.IteratorDatabaseRecordWriterInit;
 import lightsearch.server.thread.LightSearchThread;
 import lightsearch.server.thread.ThreadHolder;
 import lightsearch.server.thread.ThreadHolderInit;
@@ -111,10 +106,10 @@ public class SearchProcessorDebugTestNG {
         return serverDTO;
     }
     
-    private IteratorDatabaseRecord initIterator(LightSearchServerDTO serverDTO) {
-        IteratorDatabaseRecordReader iteratorReader = IteratorDatabaseRecordReaderInit.iteratorDatabaseRecordReader(serverDTO);
-        IteratorDatabaseRecord iterator = IteratorDatabaseRecordInit.iteratorDatabaseRecord(iteratorReader.read());
-        return iterator;
+    private DatabaseRecordIdentifier initIdentifier(LightSearchServerDTO serverDTO) {
+        DatabaseRecordIdentifierReader identifierReader = DatabaseRecordIdentifierReaderInit.databaseRecordIdentifierReader(serverDTO);
+        DatabaseRecordIdentifier identifier = DatabaseRecordIdentifierInit.databaseRecordIdentifier(identifierReader.read());
+        return identifier;
     }
     
     private ThreadManager initThreadManager() {
@@ -129,12 +124,12 @@ public class SearchProcessorDebugTestNG {
         ThreadManager threadManager = initThreadManager();
         TimersIDEnum timerRebootId = TimersIDEnum.REBOOT_TIMER_ID;
         LightSearchChecker checker = LightSearchCheckerInit.lightSearchChecker();
-        IteratorDatabaseRecord iteratorDatabaseRecord = initIterator(serverDTO);
-        IteratorDatabaseRecordWriter iteratorDatabaseRecordWriter = IteratorDatabaseRecordWriterInit.iteratorDatabaseRecordWriter(serverDTO);
+        DatabaseRecordIdentifier databaseRecordIdentifier = initIdentifier(serverDTO);
+        DatabaseRecordIdentifierWriter databaseRecordIdentifierWriter = DatabaseRecordIdentifierWriterInit.databaseRecordIdentifierWriter(serverDTO);
         
         LightSearchListenerDTO listenerDTO = LightSearchListenerDTOInit.lightSearchListenerDTO(
-                checker, currentDateTime, threadManager, iteratorDatabaseRecord, 
-                iteratorDatabaseRecordWriter, timerRebootId);
+                checker, currentDateTime, threadManager, databaseRecordIdentifier,
+                databaseRecordIdentifierWriter, timerRebootId);
         
         return listenerDTO;
     }

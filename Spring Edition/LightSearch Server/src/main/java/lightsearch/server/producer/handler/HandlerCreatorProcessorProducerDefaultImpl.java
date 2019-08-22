@@ -20,7 +20,7 @@ import lightsearch.server.data.LightSearchListenerDTO;
 import lightsearch.server.data.LightSearchServerDTO;
 import lightsearch.server.handler.processor.HandlerCreatorProcessor;
 import lightsearch.server.identifier.ConnectionIdentifierResult;
-import lightsearch.server.iterator.HandlerIterator;
+import lightsearch.server.identifier.HandlerIdentifier;
 import lightsearch.server.log.LoggerServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -39,24 +39,24 @@ public class HandlerCreatorProcessorProducerDefaultImpl implements HandlerCreato
     @Override
     public HandlerCreatorProcessor getHandlerCreatorAdminProcessorInstance(
             ConnectionIdentifierResult identifierResult, LightSearchServerDTO serverDTO, LightSearchListenerDTO listenerDTO,
-            LoggerServer loggerServer, HandlerIterator handlerIterator) {
+            LoggerServer loggerServer, HandlerIdentifier handlerIdentifier) {
         return (HandlerCreatorProcessor) ctx.getBean(HANDLER_CREATOR_ADMIN_PROCESSOR, identifierResult, serverDTO,
-                listenerDTO, loggerServer, handlerIterator);
+                listenerDTO, loggerServer, handlerIdentifier);
     }
 
     @Override
     public HandlerCreatorProcessor getHandlerCreatorClientProcessorInstance(
             ConnectionIdentifierResult identifierResult, LightSearchServerDTO serverDTO,
-            LightSearchListenerDTO listenerDTO, LoggerServer loggerServer, HandlerIterator handlerIterator) {
+            LightSearchListenerDTO listenerDTO, LoggerServer loggerServer, HandlerIdentifier handlerIdentifier) {
         return (HandlerCreatorProcessor) ctx.getBean(HANDLER_CREATOR_CLIENT_PROCESSOR, identifierResult, serverDTO,
-                listenerDTO, loggerServer, handlerIterator);
+                listenerDTO, loggerServer, handlerIdentifier);
     }
 
     @Override
     public HandlerCreatorProcessor getHandlerCreatorSystemProcessorInstance(
             ConnectionIdentifierResult identifierResult, LightSearchListenerDTO listenerDTO, LoggerServer loggerServer,
-            HandlerIterator handlerIterator) {
+            HandlerIdentifier handlerIdentifier) {
         return (HandlerCreatorProcessor) ctx.getBean(HANDLER_CREATOR_SYSTEM_PROCESSOR, identifierResult, listenerDTO,
-                loggerServer, handlerIterator);
+                loggerServer, handlerIdentifier);
     }
 }

@@ -18,7 +18,7 @@ package lightsearch.server.checker;
 /**
  * Реализация интерфейса {@link lightsearch.server.checker.LightSearchChecker} по умолчанию.
  * @author ViiSE
- * @since 1.0
+ * @since 2.0
  */
 public class LightSearchCheckerDefaultImpl implements LightSearchChecker {
 

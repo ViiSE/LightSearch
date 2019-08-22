@@ -20,7 +20,7 @@ import lightsearch.server.data.LightSearchServerDTO;
 import lightsearch.server.handler.processor.HandlerCreatorProcessor;
 import lightsearch.server.identifier.ConnectionIdentifierResult;
 import lightsearch.server.identifier.IdentifierEnum;
-import lightsearch.server.iterator.HandlerIterator;
+import lightsearch.server.identifier.HandlerIdentifier;
 import lightsearch.server.log.LoggerServer;
 import lightsearch.server.producer.handler.HandlerCreatorProcessorProducer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +47,7 @@ public class HandlerCreatorDefaultImpl implements HandlerCreator {
     private final LightSearchServerDTO serverDTO;
     private final LightSearchListenerDTO listenerDTO;
     private final LoggerServer loggerServer;
-    private final HandlerIterator handlerIterator;
+    private final HandlerIdentifier handlerIdentifier;
     private final Map<String, HandlerCreatorProcessor> handlerHolder = new HashMap<>();
 
     @Autowired
@@ -55,21 +55,21 @@ public class HandlerCreatorDefaultImpl implements HandlerCreator {
 
     public HandlerCreatorDefaultImpl(
             ConnectionIdentifierResult identifierResult, LightSearchServerDTO serverDTO, LightSearchListenerDTO listenerDTO,
-            LoggerServer loggerServer, HandlerIterator handlerIterator) {
+            LoggerServer loggerServer, HandlerIdentifier handlerIdentifier) {
         this.identifierResult = identifierResult;
         this.serverDTO = serverDTO;
         this.listenerDTO = listenerDTO;
         this.loggerServer = loggerServer;
-        this.handlerIterator = handlerIterator;
+        this.handlerIdentifier = handlerIdentifier;
     }
             
     private void initHandlerHolder() {
         handlerHolder.put(ADMIN, handlerCreatorProcessorProducer.getHandlerCreatorAdminProcessorInstance(
-                identifierResult, serverDTO, listenerDTO, loggerServer, handlerIterator));
+                identifierResult, serverDTO, listenerDTO, loggerServer, handlerIdentifier));
         handlerHolder.put(CLIENT, handlerCreatorProcessorProducer.getHandlerCreatorClientProcessorInstance(
-                identifierResult, serverDTO, listenerDTO, loggerServer, handlerIterator));
+                identifierResult, serverDTO, listenerDTO, loggerServer, handlerIdentifier));
         handlerHolder.put(SYSTEM, handlerCreatorProcessorProducer.getHandlerCreatorSystemProcessorInstance(
-                identifierResult, listenerDTO, loggerServer, handlerIterator));
+                identifierResult, listenerDTO, loggerServer, handlerIdentifier));
     }
     
     @Override

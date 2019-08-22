@@ -62,18 +62,18 @@ public class ClientCommandCreatorDefaultImpl implements ClientCommandCreator {
         Map<String, Function<ClientCommand, CommandResult>> result = new HashMap<>();
         
         result.put(CONNECT, producer.getAuthenticationProcessorInstance(serverDTO, listenerDTO.checker(), clientDAO,
-                listenerDTO.currentDateTime(), listenerDTO.iteratorDatabaseRecord()));
+                listenerDTO.currentDateTime(), listenerDTO.identifierDatabaseRecord()));
         result.put(SEARCH,  producer.getSearchProcessorInstance(serverDTO, listenerDTO.checker(), clientDAO,
-                listenerDTO.currentDateTime(), listenerDTO.iteratorDatabaseRecord()));
+                listenerDTO.currentDateTime(), listenerDTO.identifierDatabaseRecord()));
         result.put(OPEN_SOFT_CHECK, producer.getOpenSoftCheckProcessorInstance(serverDTO, listenerDTO.checker(), clientDAO,
-                listenerDTO.currentDateTime(), listenerDTO.iteratorDatabaseRecord()));
+                listenerDTO.currentDateTime(), listenerDTO.identifierDatabaseRecord()));
         result.put(CLOSE_SOFT_CHECK, producer.getCloseSoftCheckProcessorInstance(serverDTO, listenerDTO.checker(), clientDAO,
-                listenerDTO.currentDateTime(), listenerDTO.iteratorDatabaseRecord()));
+                listenerDTO.currentDateTime(), listenerDTO.identifierDatabaseRecord()));
         result.put(CANCEL_SOFT_CHECK, producer.getCancelSoftCheckProcessorInstance(serverDTO, listenerDTO.checker(),
-                clientDAO, listenerDTO.currentDateTime(), listenerDTO.iteratorDatabaseRecord()));
+                clientDAO, listenerDTO.currentDateTime(), listenerDTO.identifierDatabaseRecord()));
         result.put(CONFIRM_SOFT_CHECK_PRODUCTS, producer.getConfirmSoftCheckProductsProcessorInstance(serverDTO,
                 listenerDTO.checker(), clientDAO, listenerDTO.currentDateTime(), 
-                listenerDTO.iteratorDatabaseRecord()));
+                listenerDTO.identifierDatabaseRecord()));
         
         return result;
     }

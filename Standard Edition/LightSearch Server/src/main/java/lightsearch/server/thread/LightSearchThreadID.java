@@ -15,6 +15,8 @@
  */
 package lightsearch.server.thread;
 
+import lightsearch.server.identifier.HandlerIdentifier;
+
 /**
  * Генерирует идентификатор для потока.
  * <p>
@@ -24,12 +26,12 @@ package lightsearch.server.thread;
  * ( {@code 1, 2, 3, ...} ).
  * Идентификаторы потоков, в которых работают таймеры, состоят только из буквенной части.
  * @author ViiSE
- * @see lightsearch.server.iterator.HandlerIterator
+ * @see HandlerIdentifier
  * @since 1.0
  */
 public class LightSearchThreadID {
     
-    public static String createID(String identifier, long iteratorValue) {
-        return identifier + iteratorValue;
+    public static String createID(String identifier, long identifierValue) {
+        return identifier + identifierValue;
     }
 }

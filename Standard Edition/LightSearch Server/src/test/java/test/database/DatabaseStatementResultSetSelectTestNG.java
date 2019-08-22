@@ -26,8 +26,8 @@ import lightsearch.server.database.statement.DatabasePreparedStatementInit;
 import lightsearch.server.database.statement.result.DatabaseStatementResultSetSelect;
 import lightsearch.server.database.statement.result.DatabaseStatementResultSetSelectInit;
 import lightsearch.server.exception.DatabaseStatementResultSetException;
-import lightsearch.server.iterator.IteratorDatabaseRecord;
-import lightsearch.server.iterator.IteratorDatabaseRecordInit;
+import lightsearch.server.identifier.DatabaseRecordIdentifier;
+import lightsearch.server.identifier.DatabaseRecordIdentifierInit;
 import lightsearch.server.time.CurrentDateTimePattern;
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
@@ -44,7 +44,7 @@ public class DatabaseStatementResultSetSelectTestNG {
     public void exec() {
         testBegin("DatabaseStatementResultSetSelect", "exec()");
         
-        IteratorDatabaseRecord iterator = IteratorDatabaseRecordInit.iteratorDatabaseRecord(0);
+        DatabaseRecordIdentifier identifier = DatabaseRecordIdentifierInit.databaseRecordIdentifier(0);
         
         String dbIP = "127.0.0.1";
         String dbName = "dbName";
@@ -67,7 +67,7 @@ public class DatabaseStatementResultSetSelectTestNG {
             
             DatabasePreparedStatement dbPS = 
                     DatabasePreparedStatementInit.databasePreparedStatementSelect(databaseConnection,
-                            tableName, iterator.next(), state);
+                            tableName, identifier.next(), state);
             DatabaseStatementResultSetSelect dbRSSelect = 
                     DatabaseStatementResultSetSelectInit.databaseStatementResultSetSelect(dbPS,
                             pattern);

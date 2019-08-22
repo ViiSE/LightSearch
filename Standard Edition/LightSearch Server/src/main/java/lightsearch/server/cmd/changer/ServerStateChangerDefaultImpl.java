@@ -16,15 +16,16 @@
 package lightsearch.server.cmd.changer;
 
 import java.time.LocalDateTime;
-import lightsearch.server.iterator.IteratorDatabaseRecord;
-import lightsearch.server.iterator.IteratorDatabaseRecordWriter;
+
+import lightsearch.server.identifier.DatabaseRecordIdentifier;
+import lightsearch.server.identifier.DatabaseRecordIdentifierWriter;
 import lightsearch.server.log.LoggerServer;
 import lightsearch.server.thread.ThreadManager;
 import lightsearch.server.time.CurrentDateTime;
-import lightsearch.server.timer.IteratorDatabaseRecordWriterTimerCreator;
-import lightsearch.server.timer.IteratorDatabaseRecordWriterTimerCreatorInit;
-import lightsearch.server.timer.IteratorDatabaseRecordWriterTimerExecutor;
-import lightsearch.server.timer.IteratorDatabaseRecordWriterTimerExecutorInit;
+import lightsearch.server.timer.DatabaseRecordIdentifierWriterTimerCreator;
+import lightsearch.server.timer.DatabaseRecordIdentifierWriterTimerCreatorInit;
+import lightsearch.server.timer.DatabaseRecordIdentifierWriterTimerExecutor;
+import lightsearch.server.timer.DatabaseRecordIdentifierWriterTimerExecutorInit;
 import lightsearch.server.timer.RebootTimerCreator;
 import lightsearch.server.timer.RebootTimerCreatorInit;
 import lightsearch.server.timer.RebootTimerExecutor;
@@ -74,20 +75,20 @@ public class ServerStateChangerDefaultImpl implements ServerStateChanger {
     }
 
     @Override
-    public void executeIteratorDatabaseRecordWriterTimer(IteratorDatabaseRecord iterator,
-            IteratorDatabaseRecordWriter iteratorWriter, long minutesToWrite, TimersIDEnum timerId) {
-        IteratorDatabaseRecordWriterTimerCreator iteratorTimerCreator = IteratorDatabaseRecordWriterTimerCreatorInit.iteratorDatabaseRecordWriterTimerCreator(
-                logger, currentDateTime, threadManager, iteratorWriter, 
-                iterator, minutesToWrite, timerId);
-        IteratorDatabaseRecordWriterTimerExecutor iteratorTimerExec = 
-                IteratorDatabaseRecordWriterTimerExecutorInit.iteratorDatabaseRecordWriterTimerExecutor(iteratorTimerCreator.getTimer());
-        iteratorTimerExec.startIteratorDatabaseRecordWriterTimer();
+    public void executeDatabaseRecordIdentifierWriterTimer(DatabaseRecordIdentifier identifier,
+                                                           DatabaseRecordIdentifierWriter identifierWriter, long minutesToWrite, TimersIDEnum timerId) {
+        DatabaseRecordIdentifierWriterTimerCreator identifierTimerCreator = DatabaseRecordIdentifierWriterTimerCreatorInit.databaseRecordIdentifierWriterTimerCreator(
+                logger, currentDateTime, threadManager, identifierWriter,
+                identifier, minutesToWrite, timerId);
+        DatabaseRecordIdentifierWriterTimerExecutor identifierTimerExec =
+                DatabaseRecordIdentifierWriterTimerExecutorInit.databaseRecordIdentifierWriterTimerExecutor(identifierTimerCreator.getTimer());
+        identifierTimerExec.startDatabaseRecordIdentifierWriterTimer();
     }
 
     @Override
-    public void destroyIteratorDatabaseRecordWriterTimer(TimersIDEnum id) {
+    public void destroyDatabaseRecordIdentifierWriterTimer(TimersIDEnum id) {
         if(threadManager.interrupt(id.stringValue()))
-            logger.log(LogMessageTypeEnum.INFO, currentDateTime, "Iterator database record writer timer was destroyed");
+            logger.log(LogMessageTypeEnum.INFO, currentDateTime, "Identifier database record writer timer was destroyed");
     }
 
     @Override

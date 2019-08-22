@@ -25,9 +25,9 @@ public enum TimersIDEnum {
         @Override
         public String stringValue() {return "RebootTimer";}
     },
-    ITERATOR_WRITER_TIMER_ID {
+    IDENTIFIER_WRITER_TIMER_ID {
         @Override
-        public String stringValue() {return "IteratorWriterTimer";}
+        public String stringValue() {return "IdentifierWriterTimer";}
     },
     GARBAGE_COLLECTOR_WRITER {
         @Override

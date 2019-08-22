@@ -26,6 +26,7 @@ import lightsearch.server.cmd.changer.ServerStateChanger;
 import lightsearch.server.cmd.changer.ServerStateChangerInit;
 import lightsearch.server.data.LightSearchListenerDTO;
 import lightsearch.server.data.LightSearchListenerDTOInit;
+import lightsearch.server.identifier.*;
 import lightsearch.server.thread.ThreadHolder;
 import lightsearch.server.thread.ThreadManager;
 import lightsearch.server.thread.ThreadHolderInit;
@@ -37,12 +38,6 @@ import lightsearch.server.data.LightSearchServerDatabaseDTO;
 import lightsearch.server.data.LightSearchServerDatabaseDTOInit;
 import lightsearch.server.data.LightSearchServerSettingsDAOInit;
 import lightsearch.server.initialization.*;
-import lightsearch.server.iterator.IteratorDatabaseRecord;
-import lightsearch.server.iterator.IteratorDatabaseRecordInit;
-import lightsearch.server.iterator.IteratorDatabaseRecordReader;
-import lightsearch.server.iterator.IteratorDatabaseRecordReaderInit;
-import lightsearch.server.iterator.IteratorDatabaseRecordWriter;
-import lightsearch.server.iterator.IteratorDatabaseRecordWriterInit;
 import lightsearch.server.log.LogDirectory;
 import lightsearch.server.log.LogDirectoryInit;
 import lightsearch.server.log.LoggerFile;
@@ -135,20 +130,20 @@ public class LightSearchServer {
         ThreadHolder threadHolder = ThreadHolderInit.threadHolder(threads);
         ThreadManager threadManager = ThreadManagerInit.threadManager(threadHolder);
         
-        IteratorDatabaseRecordReader iteratorReader = 
-                IteratorDatabaseRecordReaderInit.iteratorDatabaseRecordReader(serverDTO);
-        IteratorDatabaseRecordWriter iteratorWriter = 
-                IteratorDatabaseRecordWriterInit.iteratorDatabaseRecordWriter(serverDTO);
+        DatabaseRecordIdentifierReader identifierReader =
+                DatabaseRecordIdentifierReaderInit.databaseRecordIdentifierReader(serverDTO);
+        DatabaseRecordIdentifierWriter identifierWriter =
+                DatabaseRecordIdentifierWriterInit.databaseRecordIdentifierWriter(serverDTO);
         
-        IteratorDatabaseRecord iterator = 
-                IteratorDatabaseRecordInit.iteratorDatabaseRecord(iteratorReader.read());
+        DatabaseRecordIdentifier identifier =
+                DatabaseRecordIdentifierInit.databaseRecordIdentifier(identifierReader.read());
         
         LightSearchChecker checker = LightSearchCheckerInit.lightSearchChecker();
         
         TimersIDEnum timerRebootId = TimersIDEnum.REBOOT_TIMER_ID;
         
         LightSearchListenerDTO listenerDTO = LightSearchListenerDTOInit.lightSearchListenerDTO(
-                checker, currentDateTime, threadManager, iterator, iteratorWriter, timerRebootId);
+                checker, currentDateTime, threadManager, identifier, identifierWriter, timerRebootId);
         
         System.out.println("Now Logging is in the folder logs and this window. "
                 + "For administration use LightSearch Server Admin Panel.");        
@@ -162,10 +157,10 @@ public class LightSearchServer {
         if(timerChecker.check(serverDTO.settingsDAO().serverRebootValue()))
             stateChanger.executeRebootTimer(timerRebootId);
         
-        TimersIDEnum timerIteratorId = TimersIDEnum.ITERATOR_WRITER_TIMER_ID;
+        TimersIDEnum timerIdentifierId = TimersIDEnum.IDENTIFIER_WRITER_TIMER_ID;
         long minutesToWrite = 30;
-        stateChanger.executeIteratorDatabaseRecordWriterTimer(iterator, iteratorWriter, 
-                minutesToWrite, timerIteratorId);
+        stateChanger.executeDatabaseRecordIdentifierWriterTimer(identifier, identifierWriter,
+                minutesToWrite, timerIdentifierId);
         
         LightSearchServerListener serverListener = 
                 LightSearchServerListenerInit.lightSearchServerListener(

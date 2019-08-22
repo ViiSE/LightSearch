@@ -22,12 +22,12 @@ import lightsearch.server.handler.HandlerCreator;
 import lightsearch.server.handler.HandlerExecutor;
 import lightsearch.server.identifier.ConnectionIdentifier;
 import lightsearch.server.identifier.ConnectionIdentifierResult;
-import lightsearch.server.iterator.HandlerIterator;
+import lightsearch.server.identifier.HandlerIdentifier;
 import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.log.LoggerServer;
 import lightsearch.server.producer.handler.HandlerCreatorProducer;
 import lightsearch.server.producer.handler.HandlerExecutorProducer;
-import lightsearch.server.producer.handler.HandlerIteratorProducer;
+import lightsearch.server.producer.handler.HandlerIdentifierProducer;
 import lightsearch.server.producer.identifier.ConnectionIdentifierProducer;
 import lightsearch.server.producer.socket.ServerSocketCreatorProducer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +54,7 @@ public class LightSearchServerListenerSocketDefaultImpl implements LightSearchSe
     @Autowired private ConnectionIdentifierProducer connIdentProducer;
     @Autowired private HandlerExecutorProducer handlerExecProd;
     @Autowired private HandlerCreatorProducer handlerCrProducer;
-    @Autowired private HandlerIteratorProducer handlerIteratorProducer;
+    @Autowired private HandlerIdentifierProducer handlerIdentifierProducer;
 
     public LightSearchServerListenerSocketDefaultImpl(LightSearchServerDTO serverDTO,
             LightSearchListenerDTO listenerDTO, LoggerServer loggerServer) {
@@ -72,7 +72,7 @@ public class LightSearchServerListenerSocketDefaultImpl implements LightSearchSe
             
             ConnectionIdentifier connectionIdentifier = connIdentProducer.getConnectionIdentifierDefaultInstance();
             HandlerExecutor handlerExecutor = handlerExecProd.getHandlerExecutorDefaultInstance(listenerDTO.threadManager());
-            HandlerIterator handlerIterator = handlerIteratorProducer.getHandlerIteratorDefaultInstance();
+            HandlerIdentifier handlerIdentifier = handlerIdentifierProducer.getHandlerIdentifierDefaultInstance();
 
             while(true) {
                 Socket clientSocket = null;
@@ -82,7 +82,7 @@ public class LightSearchServerListenerSocketDefaultImpl implements LightSearchSe
                     ConnectionIdentifierResult connectionIdentifierResult = connectionIdentifier.identifyConnection(clientSocket);
 
                     HandlerCreator handlerCreator = handlerCrProducer.getHandlerCreatorDefaultInstance(
-                            connectionIdentifierResult, serverDTO, listenerDTO, loggerServer, handlerIterator);
+                            connectionIdentifierResult, serverDTO, listenerDTO, loggerServer, handlerIdentifier);
                     handlerExecutor.executeHandler(handlerCreator.getHandler());
                 }
                 catch(IOException ex) {

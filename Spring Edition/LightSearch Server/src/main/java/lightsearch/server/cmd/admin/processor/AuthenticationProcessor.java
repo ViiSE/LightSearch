@@ -71,7 +71,7 @@ public class AuthenticationProcessor implements ProcessorAdmin {
                             "Administrator " + admCommand.name() + " - invalid login and/or password, or this user in the blacklist. Disconnect to lightsearch.server.",
                             null);
                 else {
-                    adminDAO.iterateTryNumber();
+                    adminDAO.incrementTryNumber();
                     return commandResult(admCommand.name(), LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE,
                             "Administrator " + admCommand.name() + " - invalid login and/or password, or this user in the blacklist. " + 
                             (adminDAO.maxTryNumber() - adminDAO.tryNumber()) + " tries left.", 

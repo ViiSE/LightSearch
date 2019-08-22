@@ -27,5 +27,5 @@ public interface AdminDAO {
     
     void setName(String name);
     void setIsFirst(boolean isFirst);
-    void iterateTryNumber();
+    void incrementTryNumber();
 }

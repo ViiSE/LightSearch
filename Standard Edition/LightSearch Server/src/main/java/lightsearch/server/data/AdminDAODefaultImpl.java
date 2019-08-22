@@ -52,7 +52,7 @@ public class AdminDAODefaultImpl implements AdminDAO {
     }
 
     @Override
-    public void iterateTryNumber() {
+    public void incrementTryNumber() {
         ++tryNumber;
     }
 

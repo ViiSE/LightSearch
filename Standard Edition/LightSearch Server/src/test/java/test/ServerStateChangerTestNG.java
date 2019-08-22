@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 import lightsearch.server.cmd.changer.ServerStateChanger;
 import lightsearch.server.cmd.changer.ServerStateChangerInit;
-import lightsearch.server.iterator.IteratorDatabaseRecord;
+import lightsearch.server.identifier.*;
 import lightsearch.server.data.LightSearchServerDTOInit;
 import lightsearch.server.data.LightSearchServerDatabaseDTO;
 import lightsearch.server.data.LightSearchServerDatabaseDTOInit;
@@ -36,11 +36,6 @@ import lightsearch.server.initialization.ServerPort;
 import lightsearch.server.initialization.ServerPortInit;
 import lightsearch.server.initialization.ServerSettings;
 import lightsearch.server.initialization.ServerSettingsInit;
-import lightsearch.server.iterator.IteratorDatabaseRecordInit;
-import lightsearch.server.iterator.IteratorDatabaseRecordReader;
-import lightsearch.server.iterator.IteratorDatabaseRecordReaderInit;
-import lightsearch.server.iterator.IteratorDatabaseRecordWriter;
-import lightsearch.server.iterator.IteratorDatabaseRecordWriterInit;
 import lightsearch.server.log.LogDirectory;
 import lightsearch.server.log.LogDirectoryInit;
 import lightsearch.server.log.LoggerFile;
@@ -128,10 +123,10 @@ public class ServerStateChangerTestNG {
         return threadManager;
     }
     
-    private IteratorDatabaseRecord initIterator(LightSearchServerDTO serverDTO) {
-        IteratorDatabaseRecordReader iteratorReader = IteratorDatabaseRecordReaderInit.iteratorDatabaseRecordReader(serverDTO);
-        IteratorDatabaseRecord iterator = IteratorDatabaseRecordInit.iteratorDatabaseRecord(iteratorReader.read());
-        return iterator;
+    private DatabaseRecordIdentifier initIdentifier(LightSearchServerDTO serverDTO) {
+        DatabaseRecordIdentifierReader identifierReader = DatabaseRecordIdentifierReaderInit.databaseRecordIdentifierReader(serverDTO);
+        DatabaseRecordIdentifier identifier = DatabaseRecordIdentifierInit.databaseRecordIdentifier(identifierReader.read());
+        return identifier;
     }
     
     @Test
@@ -205,8 +200,8 @@ public class ServerStateChangerTestNG {
     }
     
     @Test
-    public void executeIteratorDatabaseRecordWriterTimer() {
-        testBegin("ServerStateChanger", "executeIteratorDatabaseRecordWriterTimer()");
+    public void executeDatabaseRecordIdentifierWriterTimer() {
+        testBegin("ServerStateChanger", "executeDatabaseRecordIdentifierWriterTimer()");
         
         LightSearchServerDTO serverDTO = initDTO();
         LoggerServer logger = initLoggerServer();
@@ -215,24 +210,24 @@ public class ServerStateChangerTestNG {
         ServerStateChanger serverChanger = ServerStateChangerInit.serverStateChanger(serverDTO, logger, currentDateTime, threadManager);
         assertNotNull(serverChanger, "Server changer is null!");
         
-        IteratorDatabaseRecord iterator = initIterator(serverDTO);
-        IteratorDatabaseRecordWriter iteratorWriter = IteratorDatabaseRecordWriterInit.iteratorDatabaseRecordWriter(serverDTO);
-        TimersIDEnum timerId = TimersIDEnum.ITERATOR_WRITER_TIMER_ID;
+        DatabaseRecordIdentifier identifier = initIdentifier(serverDTO);
+        DatabaseRecordIdentifierWriter identifierWriter = DatabaseRecordIdentifierWriterInit.databaseRecordIdentifierWriter(serverDTO);
+        TimersIDEnum timerId = TimersIDEnum.IDENTIFIER_WRITER_TIMER_ID;
         long minutesToWrite = 1;
-        serverChanger.executeIteratorDatabaseRecordWriterTimer(iterator, iteratorWriter, minutesToWrite, timerId);
-        System.out.println("IteratorDatabaseRecordWriterTimer is start");
+        serverChanger.executeDatabaseRecordIdentifierWriterTimer(identifier, identifierWriter, minutesToWrite, timerId);
+        System.out.println("DatabaseRecordIdentifierWriterTimer is start");
         System.out.println("ThreadManager:threadHolder BEFORE: ");
-        System.out.println("Iterate iteratorDatabaseRecord value: ");
-        System.out.println("\t BEFORE iteration: " + iterator.iteratorDatabaseRecord());
-        System.out.println("\t AFTER iteration: " + iterator.next());
+        System.out.println("Increment databaseRecordIdentifier value: ");
+        System.out.println("\t BEFORE Incrementation: " + identifier.databaseRecordIdentifier());
+        System.out.println("\t AFTER Incrementation: " + identifier.next());
         threadManager.holder().getThreads().forEach((thread) -> {
             System.out.println("\t" + thread + ": id:" + threadManager.holder().getId(thread));
         });
         System.out.println("Wait for 1 minute BEFORE...");
         try { Thread.sleep(60000); } catch(InterruptedException ignore) {}
         
-        serverChanger.destroyIteratorDatabaseRecordWriterTimer(timerId);
-        System.out.println("IteratorDatabaseRecordWriterTimer is destroy");
+        serverChanger.destroyDatabaseRecordIdentifierWriterTimer(timerId);
+        System.out.println("DatabaseRecordIdentifierWriterTimer is destroy");
         System.out.println("ThreadManager:threadHolder AFTER: ");
         threadManager.holder().getThreads().forEach((thread) -> {
             System.out.println("\t" + thread + ": id:" + threadManager.holder().getId(thread));
@@ -241,12 +236,12 @@ public class ServerStateChangerTestNG {
         System.out.println("Wait for 1 minute AFTER...");
         try { Thread.sleep(60000); } catch(InterruptedException ignore) {}
     
-        testEnd("ServerStateChanger", "executeIteratorDatabaseRecordWriterTimer()");
+        testEnd("ServerStateChanger", "executeDatabaseRecordIdentifierWriterTimer()");
     }
     
     @Test
-    public void destroyIteratorDatabaseRecordWriterTimer() {
-        testBegin("ServerStateChanger", "destroyIteratorDatabaseRecordWriterTimer()");
+    public void destroyDatabaseRecordIdentifierWriterTimer() {
+        testBegin("ServerStateChanger", "destroyDatabaseRecordIdentifierWriterTimer()");
         
         LightSearchServerDTO serverDTO = initDTO();
         LoggerServer logger = initLoggerServer();
@@ -255,24 +250,24 @@ public class ServerStateChangerTestNG {
         ServerStateChanger serverChanger = ServerStateChangerInit.serverStateChanger(serverDTO, logger, currentDateTime, threadManager);
         assertNotNull(serverChanger, "Server changer is null!");
         
-        IteratorDatabaseRecord iterator = initIterator(serverDTO);
-        IteratorDatabaseRecordWriter iteratorWriter = IteratorDatabaseRecordWriterInit.iteratorDatabaseRecordWriter(serverDTO);
-        TimersIDEnum timerId = TimersIDEnum.ITERATOR_WRITER_TIMER_ID;
+        DatabaseRecordIdentifier identifier = initIdentifier(serverDTO);
+        DatabaseRecordIdentifierWriter identifierWriter = DatabaseRecordIdentifierWriterInit.databaseRecordIdentifierWriter(serverDTO);
+        TimersIDEnum timerId = TimersIDEnum.IDENTIFIER_WRITER_TIMER_ID;
         long minutesToWrite = 1;
-        serverChanger.executeIteratorDatabaseRecordWriterTimer(iterator, iteratorWriter, minutesToWrite, timerId);
-        System.out.println("IteratorDatabaseRecordWriterTimer is start");
+        serverChanger.executeDatabaseRecordIdentifierWriterTimer(identifier, identifierWriter, minutesToWrite, timerId);
+        System.out.println("DatabaseRecordIdentifierWriterTimer is start");
         System.out.println("ThreadManager:threadHolder BEFORE: ");
-        System.out.println("Iterate iteratorDatabaseRecord value: ");
-        System.out.println("\t BEFORE iteration: " + iterator.iteratorDatabaseRecord());
-        System.out.println("\t AFTER iteration: " + iterator.next());
+        System.out.println("Increment databaseRecordIdentifier value: ");
+        System.out.println("\t BEFORE Incrementation: " + identifier.databaseRecordIdentifier());
+        System.out.println("\t AFTER Incrementation: " + identifier.next());
         threadManager.holder().getThreads().forEach((thread) -> {
             System.out.println("\t" + thread + ": id:" + threadManager.holder().getId(thread));
         });
         System.out.println("Wait for 1 minute BEFORE...");
         try { Thread.sleep(60000); } catch(InterruptedException ignore) {}
         
-        serverChanger.destroyIteratorDatabaseRecordWriterTimer(timerId);
-        System.out.println("IteratorDatabaseRecordWriterTimer is destroy");
+        serverChanger.destroyDatabaseRecordIdentifierWriterTimer(timerId);
+        System.out.println("DatabaseRecordIdentifierWriterTimer is destroy");
         System.out.println("ThreadManager:threadHolder AFTER: ");
         threadManager.holder().getThreads().forEach((thread) -> {
             System.out.println("\t" + thread + ": id:" + threadManager.holder().getId(thread));
@@ -281,6 +276,6 @@ public class ServerStateChangerTestNG {
         System.out.println("Wait for 1 minute AFTER...");
         try { Thread.sleep(60000); } catch(InterruptedException ignore) {}
 
-        testEnd("ServerStateChanger", "destroyIteratorDatabaseRecordWriterTimer()");
+        testEnd("ServerStateChanger", "destroyDatabaseRecordIdentifierWriterTimer()");
     }
 }

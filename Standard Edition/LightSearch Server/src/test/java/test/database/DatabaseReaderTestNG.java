@@ -41,10 +41,10 @@ import lightsearch.server.initialization.ServerPort;
 import lightsearch.server.initialization.ServerPortInit;
 import lightsearch.server.initialization.ServerSettings;
 import lightsearch.server.initialization.ServerSettingsInit;
-import lightsearch.server.iterator.IteratorDatabaseRecord;
-import lightsearch.server.iterator.IteratorDatabaseRecordInit;
-import lightsearch.server.iterator.IteratorDatabaseRecordReader;
-import lightsearch.server.iterator.IteratorDatabaseRecordReaderInit;
+import lightsearch.server.identifier.DatabaseRecordIdentifier;
+import lightsearch.server.identifier.DatabaseRecordIdentifierInit;
+import lightsearch.server.identifier.DatabaseRecordIdentifierReader;
+import lightsearch.server.identifier.DatabaseRecordIdentifierReaderInit;
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 import lightsearch.server.data.LightSearchServerDTO;
@@ -130,10 +130,10 @@ public class DatabaseReaderTestNG {
         return serverDTO;
     }
     
-    private IteratorDatabaseRecord initIterator(LightSearchServerDTO serverDTO) {
-        IteratorDatabaseRecordReader iteratorReader = IteratorDatabaseRecordReaderInit.iteratorDatabaseRecordReader(serverDTO);
-        IteratorDatabaseRecord iterator = IteratorDatabaseRecordInit.iteratorDatabaseRecord(iteratorReader.read());
-        return iterator;
+    private DatabaseRecordIdentifier initIdentifier(LightSearchServerDTO serverDTO) {
+        DatabaseRecordIdentifierReader identifierReader = DatabaseRecordIdentifierReaderInit.databaseRecordIdentifierReader(serverDTO);
+        DatabaseRecordIdentifier identifier = DatabaseRecordIdentifierInit.databaseRecordIdentifier(identifierReader.read());
+        return identifier;
     }
     
     @Test
@@ -147,10 +147,10 @@ public class DatabaseReaderTestNG {
             LightSearchServerDTO serverDTO = initDTO();
             assertNotNull(serverDTO, "ServerDTO is null!");
             
-            IteratorDatabaseRecord iterator = initIterator(serverDTO);
-            assertNotNull(iterator, "Iterator is null!");
+            DatabaseRecordIdentifier identifier = initIdentifier(serverDTO);
+            assertNotNull(identifier, "Identifier is null!");
             
-            DatabaseReader reader = DatabaseReaderInit.databaseReader(databaseConnection, iterator.next());
+            DatabaseReader reader = DatabaseReaderInit.databaseReader(databaseConnection, identifier.next());
             
             String result = reader.read();
             

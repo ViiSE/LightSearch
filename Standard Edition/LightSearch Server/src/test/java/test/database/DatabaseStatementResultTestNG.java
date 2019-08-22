@@ -48,10 +48,10 @@ import lightsearch.server.initialization.ServerPort;
 import lightsearch.server.initialization.ServerPortInit;
 import lightsearch.server.initialization.ServerSettings;
 import lightsearch.server.initialization.ServerSettingsInit;
-import lightsearch.server.iterator.IteratorDatabaseRecord;
-import lightsearch.server.iterator.IteratorDatabaseRecordInit;
-import lightsearch.server.iterator.IteratorDatabaseRecordReader;
-import lightsearch.server.iterator.IteratorDatabaseRecordReaderInit;
+import lightsearch.server.identifier.DatabaseRecordIdentifier;
+import lightsearch.server.identifier.DatabaseRecordIdentifierInit;
+import lightsearch.server.identifier.DatabaseRecordIdentifierReader;
+import lightsearch.server.identifier.DatabaseRecordIdentifierReaderInit;
 import lightsearch.server.time.CurrentDateTime;
 import lightsearch.server.time.CurrentDateTimeInit;
 import static org.testng.Assert.*;
@@ -145,14 +145,14 @@ public class DatabaseStatementResultTestNG {
         return serverDTO;
     }
     
-    private IteratorDatabaseRecord initIterator() {
+    private DatabaseRecordIdentifier initIdentifier() {
         LightSearchServerDTO serverDTO = initDTO();
-        IteratorDatabaseRecordReader iteratorReader = 
-                IteratorDatabaseRecordReaderInit.iteratorDatabaseRecordReader(serverDTO);
-        IteratorDatabaseRecord iterator = 
-                IteratorDatabaseRecordInit.iteratorDatabaseRecord(iteratorReader.read());
+        DatabaseRecordIdentifierReader identifierReader =
+                DatabaseRecordIdentifierReaderInit.databaseRecordIdentifierReader(serverDTO);
+        DatabaseRecordIdentifier identifier =
+                DatabaseRecordIdentifierInit.databaseRecordIdentifier(identifierReader.read());
         
-        return iterator;
+        return identifier;
     }
     
     private String initDateTime() {
@@ -207,8 +207,8 @@ public class DatabaseStatementResultTestNG {
             DatabaseConnection connection = initConnection();
             assertNotNull(connection, "Database connection is null!");
             
-            IteratorDatabaseRecord iterator = initIterator();
-            assertNotNull(iterator, "IteratorDatabaseRecord is null!");
+            DatabaseRecordIdentifier identifier = initIdentifier();
+            assertNotNull(identifier, "DatabaseRecordIdentifier is null!");
             
             String dateTime = initDateTime();
             assertNotNull(dateTime, "DateTime is null!");
@@ -217,7 +217,7 @@ public class DatabaseStatementResultTestNG {
             DatabaseCommandMessage dbCmdMessage = initDatabaseCommandMessage();
             
             DatabaseStatementExecutor dbStExec = DatabaseStatementExecutorInit.databaseStatementExecutor(
-                    connection, iterator.next(), dateTime, dbCmdMessage);
+                    connection, identifier.next(), dateTime, dbCmdMessage);
             assertNotNull(dbStExec, "DatabaseStatementExecutor is null!");
             DatabaseStatementResult dbStRes = dbStExec.exec();
             

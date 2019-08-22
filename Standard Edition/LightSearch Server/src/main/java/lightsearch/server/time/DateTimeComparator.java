@@ -15,6 +15,8 @@
  */
 package lightsearch.server.time;
 
+import lightsearch.server.timer.SuperDatabaseRecordIdentifierWriterTimer;
+
 import java.time.LocalDateTime;
 
 /**
@@ -22,7 +24,7 @@ import java.time.LocalDateTime;
  * <p>
  * Этот интерфейс применяется в таймерах и в работе с базой данных.
  * @author ViiSE
- * @see lightsearch.server.timer.SuperIteratorDatabaseRecordWriterTimer
+ * @see SuperDatabaseRecordIdentifierWriterTimer
  * @see lightsearch.server.database.statement.result.DatabaseStatementResultSetSelect
  * @since 1.0
  */

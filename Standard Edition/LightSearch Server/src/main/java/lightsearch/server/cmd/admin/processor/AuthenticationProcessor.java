@@ -54,7 +54,7 @@ public class AuthenticationProcessor extends AbstractProcessorAdmin {
                             "Administrator " + admCommand.name() + " - invalid login and/or password, or this user in the blacklist. Disconnect to server.", 
                             null);
                 else {
-                    adminDAO.iterateTryNumber();
+                    adminDAO.incrementTryNumber();
                     return super.commandResult(admCommand.name(), LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE, 
                             "Administrator " + admCommand.name() + " - invalid login and/or password, or this user in the blacklist. " + 
                             (adminDAO.maxTryNumber() - adminDAO.tryNumber()) + " tries left.", 

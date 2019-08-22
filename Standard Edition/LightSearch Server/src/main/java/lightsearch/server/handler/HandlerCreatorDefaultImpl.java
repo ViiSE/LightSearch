@@ -19,8 +19,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 import lightsearch.server.data.LightSearchListenerDTO;
-import lightsearch.server.iterator.HandlerIterator;
-import lightsearch.server.iterator.HandlerIteratorInit;
+import lightsearch.server.identifier.HandlerIdentifier;
+import lightsearch.server.identifier.HandlerIdentifierInit;
 import lightsearch.server.identifier.ConnectionIdentifierResult;
 import lightsearch.server.log.LoggerServer;
 import lightsearch.server.data.LightSearchServerDTO;
@@ -43,7 +43,7 @@ public class HandlerCreatorDefaultImpl implements HandlerCreator {
     private final LightSearchServerDTO serverDTO;
     private final LightSearchListenerDTO listenerDTO;
     private final LoggerServer loggerServer;
-    private final HandlerIterator handlerIterator;
+    private final HandlerIdentifier handlerIdentifier;
     private final Map<String, Function<Void, Handler>> handlerHolder = new HashMap<>();
     
     HandlerCreatorDefaultImpl(ConnectionIdentifierResult identifierResult, 
@@ -53,18 +53,18 @@ public class HandlerCreatorDefaultImpl implements HandlerCreator {
         this.serverDTO = serverDTO;
         this.listenerDTO = listenerDTO;
         this.loggerServer = loggerServer;
-        this.handlerIterator = HandlerIteratorInit.handlerIterator();
+        this.handlerIdentifier = HandlerIdentifierInit.handlerIdentifier();
         
         initHandlerHolder();
     }
             
     private void initHandlerHolder() {
         handlerHolder.put(ADMIN, new HandlerCreatorAdminProcessor(identifierResult, serverDTO, 
-                listenerDTO, loggerServer, handlerIterator));
+                listenerDTO, loggerServer, handlerIdentifier));
         handlerHolder.put(CLIENT, new HandlerCreatorClientProcessor(identifierResult, serverDTO,
-                listenerDTO, loggerServer, handlerIterator));
+                listenerDTO, loggerServer, handlerIdentifier));
         handlerHolder.put(SYSTEM, new HandlerCreatorSystemProcessor(identifierResult, serverDTO, 
-                listenerDTO, loggerServer, handlerIterator));
+                listenerDTO, loggerServer, handlerIdentifier));
     }
     
     @Override

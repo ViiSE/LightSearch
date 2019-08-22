@@ -19,8 +19,13 @@ import java.net.Socket;
 import lightsearch.server.exception.ConnectionIdentifierException;
 
 /**
- *
+ * Идентифицирует соединение, пришедшее на сокет.
+ * <p>
+ * Применяется для идентификации клиента при создании клиентского сокета и определения соответствующего обработчика.
  * @author ViiSE
+ * @see java.net.Socket
+ * @see lightsearch.server.handler.HandlerCreator
+ * @since 1.0
  */
 public interface ConnectionIdentifier {
     ConnectionIdentifierResult identifyConnection(Socket clientSocket) throws ConnectionIdentifierException;

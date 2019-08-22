@@ -32,7 +32,7 @@ import lightsearch.server.data.ThreadParametersHolderInit;
 import lightsearch.server.handler.Handler;
 import lightsearch.server.handler.system.SystemHandlerInit;
 import lightsearch.server.identifier.ConnectionIdentifierResult;
-import lightsearch.server.iterator.HandlerIterator;
+import lightsearch.server.identifier.HandlerIdentifier;
 import lightsearch.server.log.LoggerServer;
 import lightsearch.server.thread.LightSearchThreadID;
 
@@ -44,8 +44,8 @@ public class HandlerCreatorSystemProcessor extends SuperHandlerCreatorProcessor 
     
     public HandlerCreatorSystemProcessor(ConnectionIdentifierResult identifierResult, 
             LightSearchServerDTO serverDTO, LightSearchListenerDTO listenerDTO, 
-            LoggerServer loggerServer, HandlerIterator handlerIterator) {
-        super(identifierResult, serverDTO, listenerDTO, loggerServer, handlerIterator);
+            LoggerServer loggerServer, HandlerIdentifier handlerIdentifier) {
+        super(identifierResult, serverDTO, listenerDTO, loggerServer, handlerIdentifier);
     }
     
     @Override
@@ -55,7 +55,7 @@ public class HandlerCreatorSystemProcessor extends SuperHandlerCreatorProcessor 
                 super.serverDTO(), super.listenerDTO());
         Map<String, Function<SystemCommand, CommandResult>> commandHolder = sysCmdCreator.createCommandHolder();
 
-        String id = LightSearchThreadID.createID(super.identifierResult().identifier(), super.handlerIterator().next());
+        String id = LightSearchThreadID.createID(super.identifierResult().identifier(), super.handlerIdentifier().next());
         ThreadParametersHolder threadParametersHolder = ThreadParametersHolderInit.threadParametersHolder(id);
         
         SystemParametersHolder sysParamHolder = 

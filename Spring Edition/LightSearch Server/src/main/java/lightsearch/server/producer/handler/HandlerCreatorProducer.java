@@ -20,11 +20,11 @@ import lightsearch.server.data.LightSearchListenerDTO;
 import lightsearch.server.data.LightSearchServerDTO;
 import lightsearch.server.handler.HandlerCreator;
 import lightsearch.server.identifier.ConnectionIdentifierResult;
-import lightsearch.server.iterator.HandlerIterator;
+import lightsearch.server.identifier.HandlerIdentifier;
 import lightsearch.server.log.LoggerServer;
 
 public interface HandlerCreatorProducer {
     HandlerCreator getHandlerCreatorDefaultInstance(
             ConnectionIdentifierResult identifierResult, LightSearchServerDTO serverDTO,
-            LightSearchListenerDTO listenerDTO, LoggerServer loggerServer, HandlerIterator handlerIterator);
+            LightSearchListenerDTO listenerDTO, LoggerServer loggerServer, HandlerIdentifier handlerIdentifier);
 }

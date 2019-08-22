@@ -21,7 +21,7 @@ import lightsearch.server.cmd.system.SystemCommandCreator;
 import lightsearch.server.data.*;
 import lightsearch.server.handler.Handler;
 import lightsearch.server.identifier.ConnectionIdentifierResult;
-import lightsearch.server.iterator.HandlerIterator;
+import lightsearch.server.identifier.HandlerIdentifier;
 import lightsearch.server.log.LoggerServer;
 import lightsearch.server.producer.cmd.system.SystemCommandCreatorProducer;
 import lightsearch.server.producer.data.SystemHandlerDTOProducer;
@@ -47,7 +47,7 @@ public class HandlerCreatorSystemProcessor implements HandlerCreatorProcessor {
     private final ConnectionIdentifierResult identifierResult;
     private final LightSearchListenerDTO listenerDTO;
     private final LoggerServer loggerServer;
-    private final HandlerIterator handlerIterator;
+    private final HandlerIdentifier handlerIdentifier;
 
     @Autowired private SystemCommandCreatorProducer sysCmdCrProducer;
     @Autowired private ThreadParametersHolderProducer threadParamsHolderProducer;
@@ -58,11 +58,11 @@ public class HandlerCreatorSystemProcessor implements HandlerCreatorProcessor {
     @Autowired
     public HandlerCreatorSystemProcessor(
             ConnectionIdentifierResult identifierResult, LightSearchListenerDTO listenerDTO, LoggerServer loggerServer,
-            HandlerIterator handlerIterator) {
+            HandlerIdentifier handlerIdentifier) {
         this.identifierResult = identifierResult;
         this.listenerDTO = listenerDTO;
         this.loggerServer = loggerServer;
-        this.handlerIterator = handlerIterator;
+        this.handlerIdentifier = handlerIdentifier;
     }
     
     @Override
@@ -71,7 +71,7 @@ public class HandlerCreatorSystemProcessor implements HandlerCreatorProcessor {
         SystemCommandCreator sysCmdCreator = sysCmdCrProducer.getSystemCommandCreatorDefaultInstance();
         Map<String, Function<SystemCommand, CommandResult>> commandHolder = sysCmdCreator.createCommandHolder();
 
-        String id = LightSearchThreadID.createID(identifierResult.identifier(), handlerIterator.next());
+        String id = LightSearchThreadID.createID(identifierResult.identifier(), handlerIdentifier.next());
         ThreadParametersHolder threadParametersHolder = threadParamsHolderProducer.getThreadParametersHolderDefaultInstance(id);
         
         SystemParametersHolder sysParamHolder = sysParamsHolderProducer.getSystemParametersHolderDefaultInstance(

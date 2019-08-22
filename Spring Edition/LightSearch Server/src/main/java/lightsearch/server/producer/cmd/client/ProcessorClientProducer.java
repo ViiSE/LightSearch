@@ -21,28 +21,28 @@ import lightsearch.server.cmd.client.processor.ProcessorClient;
 import lightsearch.server.cmd.client.processor.debug.SoftCheckDebug;
 import lightsearch.server.data.ClientDAO;
 import lightsearch.server.data.LightSearchServerDTO;
-import lightsearch.server.iterator.IteratorDatabaseRecord;
+import lightsearch.server.identifier.DatabaseRecordIdentifier;
 import lightsearch.server.time.CurrentDateTime;
 
 public interface ProcessorClientProducer {
     ProcessorClient getAuthenticationProcessorInstance(
             LightSearchServerDTO serverDTO, LightSearchChecker checker, ClientDAO clientDAO,
-            CurrentDateTime currentDateTime, IteratorDatabaseRecord iteratorDatabaseRecord);
+            CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier);
     ProcessorClient getSearchProcessorInstance(
             LightSearchServerDTO serverDTO, LightSearchChecker checker, ClientDAO clientDAO,
-            CurrentDateTime currentDateTime, IteratorDatabaseRecord iteratorDatabaseRecord);
+            CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier);
     ProcessorClient getCancelSoftCheckProcessorInstance(
             LightSearchServerDTO serverDTO, LightSearchChecker checker, ClientDAO clientDAO,
-            CurrentDateTime currentDateTime, IteratorDatabaseRecord iteratorDatabaseRecord);
+            CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier);
     ProcessorClient getCloseSoftCheckProcessorInstance(
             LightSearchServerDTO serverDTO, LightSearchChecker checker, ClientDAO clientDAO,
-            CurrentDateTime currentDateTime, IteratorDatabaseRecord iteratorDatabaseRecord);
+            CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier);
     ProcessorClient getConfirmSoftCheckProductsProcessorInstance(
             LightSearchServerDTO serverDTO, LightSearchChecker checker, ClientDAO clientDAO,
-            CurrentDateTime currentDateTime, IteratorDatabaseRecord iteratorDatabaseRecord);
+            CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier);
     ProcessorClient getOpenSoftCheckProcessorInstance(
             LightSearchServerDTO serverDTO, LightSearchChecker checker, ClientDAO clientDAO,
-            CurrentDateTime currentDateTime, IteratorDatabaseRecord iteratorDatabaseRecord);
+            CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier);
 
     ProcessorClient getAuthenticationProcessorDebugInstance(
             LightSearchServerDTO serverDTO, LightSearchChecker checker, ClientDAO clientDAO);

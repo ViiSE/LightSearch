@@ -34,7 +34,7 @@ import lightsearch.server.data.ThreadParametersHolderInit;
 import lightsearch.server.handler.Handler;
 import lightsearch.server.handler.client.ClientHandlerInit;
 import lightsearch.server.identifier.ConnectionIdentifierResult;
-import lightsearch.server.iterator.HandlerIterator;
+import lightsearch.server.identifier.HandlerIdentifier;
 import lightsearch.server.log.LoggerServer;
 import lightsearch.server.thread.LightSearchThreadID;
 
@@ -46,8 +46,8 @@ public class HandlerCreatorClientProcessor extends SuperHandlerCreatorProcessor 
     
     public HandlerCreatorClientProcessor(ConnectionIdentifierResult identifierResult, 
             LightSearchServerDTO serverDTO, LightSearchListenerDTO listenerDTO, 
-            LoggerServer loggerServer, HandlerIterator handlerIterator) {
-        super(identifierResult, serverDTO, listenerDTO, loggerServer, handlerIterator);
+            LoggerServer loggerServer, HandlerIdentifier handlerIdentifier) {
+        super(identifierResult, serverDTO, listenerDTO, loggerServer, handlerIdentifier);
     }
     
     @Override
@@ -58,7 +58,7 @@ public class HandlerCreatorClientProcessor extends SuperHandlerCreatorProcessor 
                 super.serverDTO(), super.listenerDTO(), clientDAO);
         Map<String, Function<ClientCommand, CommandResult>> commandHolder = clientCmdCreator.createCommandHolder();
 
-        String id = LightSearchThreadID.createID(super.identifierResult().identifier(), super.handlerIterator().next());
+        String id = LightSearchThreadID.createID(super.identifierResult().identifier(), super.handlerIdentifier().next());
         ThreadParametersHolder threadParametersHolder = ThreadParametersHolderInit.threadParametersHolder(id);
 
         ClientParametersHolder clientParamHolder = ClientParametersHolderInit.clientParametersHolder(

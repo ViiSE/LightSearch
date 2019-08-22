@@ -28,7 +28,7 @@ import lightsearch.server.database.statement.DatabaseStatementExecutor;
 import lightsearch.server.database.statement.result.DatabaseStatementResult;
 import lightsearch.server.exception.DatabaseConnectionCreatorException;
 import lightsearch.server.exception.DatabaseStatementExecutorException;
-import lightsearch.server.iterator.IteratorDatabaseRecord;
+import lightsearch.server.identifier.DatabaseRecordIdentifier;
 import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.message.result.ResultTypeMessageEnum;
 import lightsearch.server.producer.cmd.client.CommandResultClientCreatorProducer;
@@ -57,7 +57,7 @@ public class AuthenticationProcessor implements ProcessorClient {
     private final Map<String, String> clients;
     private final ClientDAO clientDAO;
     private final CurrentDateTime currentDateTime;
-    private final IteratorDatabaseRecord iteratorDatabaseRecord;
+    private final DatabaseRecordIdentifier databaseRecordIdentifier;
 
     @Autowired private CommandResultClientCreatorProducer cmdResClCrProducer;
     @Autowired private DatabaseConnectionCreatorProducer dbConnCrProducer;
@@ -65,7 +65,7 @@ public class AuthenticationProcessor implements ProcessorClient {
     @Autowired private DatabaseStatementExecutorProducer dbStateExecProducer;
 
     public AuthenticationProcessor(LightSearchServerDTO serverDTO, LightSearchChecker checker, ClientDAO clientDAO,
-                                   CurrentDateTime currentDateTime, IteratorDatabaseRecord iteratorDatabaseRecord) {
+                                   CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier) {
         this.checker = checker;
         this.blacklist = serverDTO.blacklist();
         this.databaseDTO = serverDTO.databaseDTO();
@@ -73,7 +73,7 @@ public class AuthenticationProcessor implements ProcessorClient {
 
         this.clientDAO = clientDAO;
         this.currentDateTime = currentDateTime;
-        this.iteratorDatabaseRecord = iteratorDatabaseRecord;
+        this.databaseRecordIdentifier = databaseRecordIdentifier;
     }
 
     @Override
@@ -91,7 +91,7 @@ public class AuthenticationProcessor implements ProcessorClient {
                                     clientCommand.command(), clientCommand.IMEI(), clientCommand.username(), clientCommand.userIdentifier());
                     
                     DatabaseStatementExecutor dbStatementExecutor = dbStateExecProducer.getDatabaseStatementExecutorDefaultInstance(
-                            databaseConnection, iteratorDatabaseRecord.next(), currentDateTime.dateTimeInStandartFormat(), dbCmdMessage);
+                            databaseConnection, databaseRecordIdentifier.next(), currentDateTime.dateTimeInStandartFormat(), dbCmdMessage);
                     
                     DatabaseStatementResult dbStatRes = dbStatementExecutor.exec();
 

@@ -39,16 +39,11 @@ import lightsearch.server.data.stream.DataStreamCreator;
 import lightsearch.server.data.stream.DataStreamCreatorInit;
 import lightsearch.server.data.stream.DataStreamInit;
 import lightsearch.server.exception.DataStreamCreatorException;
+import lightsearch.server.identifier.*;
 import lightsearch.server.initialization.CurrentServerDirectory;
 import lightsearch.server.initialization.CurrentServerDirectoryInit;
 import lightsearch.server.initialization.OsDetector;
 import lightsearch.server.initialization.OsDetectorInit;
-import lightsearch.server.iterator.IteratorDatabaseRecord;
-import lightsearch.server.iterator.IteratorDatabaseRecordInit;
-import lightsearch.server.iterator.IteratorDatabaseRecordReader;
-import lightsearch.server.iterator.IteratorDatabaseRecordReaderInit;
-import lightsearch.server.iterator.IteratorDatabaseRecordWriter;
-import lightsearch.server.iterator.IteratorDatabaseRecordWriterInit;
 import lightsearch.server.log.LogDirectory;
 import lightsearch.server.log.LogDirectoryInit;
 import lightsearch.server.log.LoggerFile;
@@ -85,10 +80,10 @@ public class AdminParametersHolderTestNG {
         return threadManager;
     }
     
-    private IteratorDatabaseRecord initIterator(LightSearchServerDTO serverDTO) {
-        IteratorDatabaseRecordReader iteratorReader = IteratorDatabaseRecordReaderInit.iteratorDatabaseRecordReader(serverDTO);
-        IteratorDatabaseRecord iterator = IteratorDatabaseRecordInit.iteratorDatabaseRecord(iteratorReader.read());
-        return iterator;
+    private DatabaseRecordIdentifier initIdentifier(LightSearchServerDTO serverDTO) {
+        DatabaseRecordIdentifierReader identifierReader = DatabaseRecordIdentifierReaderInit.databaseRecordIdentifierReader(serverDTO);
+        DatabaseRecordIdentifier identifier = DatabaseRecordIdentifierInit.databaseRecordIdentifier(identifierReader.read());
+        return identifier;
     }
     
     private LightSearchListenerDTO initListenerDTO(LightSearchServerDTO serverDTO) {
@@ -96,12 +91,12 @@ public class AdminParametersHolderTestNG {
         ThreadManager threadManager = initThreadManager();
         TimersIDEnum timerRebootId = TimersIDEnum.REBOOT_TIMER_ID;
         LightSearchChecker checker = LightSearchCheckerInit.lightSearchChecker();
-        IteratorDatabaseRecord iteratorDatabaseRecord = initIterator(serverDTO);
-        IteratorDatabaseRecordWriter iteratorDatabaseRecordWriter = IteratorDatabaseRecordWriterInit.iteratorDatabaseRecordWriter(serverDTO);
+        DatabaseRecordIdentifier databaseRecordIdentifier = initIdentifier(serverDTO);
+        DatabaseRecordIdentifierWriter databaseRecordIdentifierWriter = DatabaseRecordIdentifierWriterInit.databaseRecordIdentifierWriter(serverDTO);
         
         LightSearchListenerDTO listenerDTO = LightSearchListenerDTOInit.lightSearchListenerDTO(
-                checker, currentDateTime, threadManager, iteratorDatabaseRecord, 
-                iteratorDatabaseRecordWriter, timerRebootId);
+                checker, currentDateTime, threadManager, databaseRecordIdentifier,
+                databaseRecordIdentifierWriter, timerRebootId);
         
         return listenerDTO;
     }

@@ -19,8 +19,17 @@ import java.net.Socket;
 import lightsearch.server.data.stream.DataStream;
 
 /**
- *
+ * Результат идентификации соединения клиента.
+ * <p>
+ * Результат содержит в себе клиентский сокет, идентификатор клиента, и {@code DataStream}, готовый к обработке.
+ * <p>
+ * Применяется при создании обработчика клиента.
  * @author ViiSE
+ * @see java.net.Socket
+ * @see lightsearch.server.data.stream.DataStream
+ * @see lightsearch.server.handler.HandlerCreator
+ * @see lightsearch.server.handler.HandlerCreatorDefaultImpl
+ * @since 1.0
  */
 public class ConnectionIdentifierResult {
     
@@ -28,8 +37,8 @@ public class ConnectionIdentifierResult {
     private final String identifier;
     private final DataStream dataStream;
     
-    public ConnectionIdentifierResult(Socket clienSocket, String identifier, DataStream dataStream) {
-        this.clientSocket = clienSocket;
+    public ConnectionIdentifierResult(Socket clientSocket, String identifier, DataStream dataStream) {
+        this.clientSocket = clientSocket;
         this.identifier = identifier;
         this.dataStream = dataStream;
     }

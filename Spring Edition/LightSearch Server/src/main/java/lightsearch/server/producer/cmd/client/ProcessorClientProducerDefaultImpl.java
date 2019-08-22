@@ -21,7 +21,7 @@ import lightsearch.server.cmd.client.processor.ProcessorClient;
 import lightsearch.server.cmd.client.processor.debug.SoftCheckDebug;
 import lightsearch.server.data.ClientDAO;
 import lightsearch.server.data.LightSearchServerDTO;
-import lightsearch.server.iterator.IteratorDatabaseRecord;
+import lightsearch.server.identifier.DatabaseRecordIdentifier;
 import lightsearch.server.time.CurrentDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -50,49 +50,49 @@ public class ProcessorClientProducerDefaultImpl implements ProcessorClientProduc
     @Override
     public ProcessorClient getAuthenticationProcessorInstance(
             LightSearchServerDTO serverDTO, LightSearchChecker checker, ClientDAO clientDAO,
-            CurrentDateTime currentDateTime, IteratorDatabaseRecord iteratorDatabaseRecord) {
+            CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier) {
         return (ProcessorClient) ctx.getBean(AUTHENTICATION_PROCESSOR, serverDTO, checker, clientDAO, currentDateTime,
-                iteratorDatabaseRecord);
+                databaseRecordIdentifier);
     }
 
     @Override
     public ProcessorClient getSearchProcessorInstance(
             LightSearchServerDTO serverDTO, LightSearchChecker checker, ClientDAO clientDAO,
-            CurrentDateTime currentDateTime, IteratorDatabaseRecord iteratorDatabaseRecord) {
+            CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier) {
         return (ProcessorClient) ctx.getBean(SEARCH_PROCESSOR, serverDTO, checker, clientDAO, currentDateTime,
-                iteratorDatabaseRecord);
+                databaseRecordIdentifier);
     }
 
     @Override
     public ProcessorClient getCancelSoftCheckProcessorInstance(
             LightSearchServerDTO serverDTO, LightSearchChecker checker, ClientDAO clientDAO,
-            CurrentDateTime currentDateTime, IteratorDatabaseRecord iteratorDatabaseRecord) {
+            CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier) {
         return (ProcessorClient) ctx.getBean(CANCEL_SOFT_CHECK_PROCESSOR, serverDTO, checker, clientDAO, currentDateTime,
-                iteratorDatabaseRecord);
+                databaseRecordIdentifier);
     }
 
     @Override
     public ProcessorClient getCloseSoftCheckProcessorInstance(
             LightSearchServerDTO serverDTO, LightSearchChecker checker, ClientDAO clientDAO,
-            CurrentDateTime currentDateTime, IteratorDatabaseRecord iteratorDatabaseRecord) {
+            CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier) {
         return (ProcessorClient) ctx.getBean(CLOSE_SOFT_CHECK_PROCESSOR, serverDTO, checker, clientDAO, currentDateTime,
-                iteratorDatabaseRecord);
+                databaseRecordIdentifier);
     }
 
     @Override
     public ProcessorClient getConfirmSoftCheckProductsProcessorInstance(
             LightSearchServerDTO serverDTO, LightSearchChecker checker, ClientDAO clientDAO,
-            CurrentDateTime currentDateTime, IteratorDatabaseRecord iteratorDatabaseRecord) {
+            CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier) {
         return (ProcessorClient) ctx.getBean(CONFIRM_SOFT_CHECK_PRODUCTS_PROCESSOR, serverDTO, checker, clientDAO, currentDateTime,
-                iteratorDatabaseRecord);
+                databaseRecordIdentifier);
     }
 
     @Override
     public ProcessorClient getOpenSoftCheckProcessorInstance(
             LightSearchServerDTO serverDTO, LightSearchChecker checker, ClientDAO clientDAO,
-            CurrentDateTime currentDateTime, IteratorDatabaseRecord iteratorDatabaseRecord) {
+            CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier) {
         return (ProcessorClient) ctx.getBean(OPEN_SOFT_CHECK_PROCESSOR, serverDTO, checker, clientDAO, currentDateTime,
-                iteratorDatabaseRecord);
+                databaseRecordIdentifier);
     }
 
     @Override

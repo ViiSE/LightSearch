@@ -16,8 +16,8 @@
 package lightsearch.server.data;
 
 import lightsearch.server.checker.LightSearchChecker;
-import lightsearch.server.iterator.IteratorDatabaseRecord;
-import lightsearch.server.iterator.IteratorDatabaseRecordWriter;
+import lightsearch.server.identifier.DatabaseRecordIdentifier;
+import lightsearch.server.identifier.DatabaseRecordIdentifierWriter;
 import lightsearch.server.thread.ThreadManager;
 import lightsearch.server.time.CurrentDateTime;
 import lightsearch.server.timer.TimersIDEnum;
@@ -31,18 +31,18 @@ public class LightSearchListenerDTOdefaultImpl implements LightSearchListenerDTO
     private final LightSearchChecker checker;
     private final CurrentDateTime currentDateTime;
     private final ThreadManager threadManager;
-    private final IteratorDatabaseRecord iteratorDatabaseRecord;
-    private final IteratorDatabaseRecordWriter iteratorDatabaseRecordWriter;
+    private final DatabaseRecordIdentifier databaseRecordIdentifier;
+    private final DatabaseRecordIdentifierWriter databaseRecordIdentifierWriter;
     private final TimersIDEnum timerRebootId;
     
-    public LightSearchListenerDTOdefaultImpl(LightSearchChecker checker, CurrentDateTime currentDateTime, 
-            ThreadManager threadManager, IteratorDatabaseRecord iteratorDatabaseRecord, 
-            IteratorDatabaseRecordWriter iteratorDatabaseRecordWriter, TimersIDEnum timerRebootId) {
+    public LightSearchListenerDTOdefaultImpl(LightSearchChecker checker, CurrentDateTime currentDateTime,
+                                             ThreadManager threadManager, DatabaseRecordIdentifier databaseRecordIdentifier,
+                                             DatabaseRecordIdentifierWriter databaseRecordIdentifierWriter, TimersIDEnum timerRebootId) {
         this.checker = checker;
         this.currentDateTime = currentDateTime;
         this.threadManager = threadManager;
-        this.iteratorDatabaseRecord = iteratorDatabaseRecord;
-        this.iteratorDatabaseRecordWriter = iteratorDatabaseRecordWriter;
+        this.databaseRecordIdentifier = databaseRecordIdentifier;
+        this.databaseRecordIdentifierWriter = databaseRecordIdentifierWriter;
         this.timerRebootId = timerRebootId;
     }
 
@@ -62,13 +62,13 @@ public class LightSearchListenerDTOdefaultImpl implements LightSearchListenerDTO
     }
 
     @Override
-    public IteratorDatabaseRecord iteratorDatabaseRecord() {
-        return iteratorDatabaseRecord;
+    public DatabaseRecordIdentifier databaseRecordIdentifier() {
+        return databaseRecordIdentifier;
     }
 
     @Override
-    public IteratorDatabaseRecordWriter iteratorDatabaseRecordWriter() {
-        return iteratorDatabaseRecordWriter;
+    public DatabaseRecordIdentifierWriter databaseRecordIdentifierWriter() {
+        return databaseRecordIdentifierWriter;
     }
 
     @Override

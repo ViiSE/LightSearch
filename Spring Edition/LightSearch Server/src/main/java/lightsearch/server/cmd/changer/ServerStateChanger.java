@@ -15,9 +15,7 @@
  */
 package lightsearch.server.cmd.changer;
 
-import lightsearch.server.data.IteratorDatabaseRecordWriterTimerCreatorDTO;
-import lightsearch.server.iterator.IteratorDatabaseRecord;
-import lightsearch.server.iterator.IteratorDatabaseRecordWriter;
+import lightsearch.server.data.DatabaseRecordIdentifierWriterTimerCreatorDTO;
 import lightsearch.server.timer.TimersIDEnum;
 
 /**
@@ -27,8 +25,8 @@ import lightsearch.server.timer.TimersIDEnum;
 public interface ServerStateChanger {
     void executeRebootTimer(TimersIDEnum id);
     void destroyRebootTimer(TimersIDEnum id);
-    void executeIteratorDatabaseRecordWriterTimer(IteratorDatabaseRecordWriterTimerCreatorDTO iteratorDbRecWriterTimerCrDTO);
-    void destroyIteratorDatabaseRecordWriterTimer(TimersIDEnum id);
+    void executeDatabaseRecordIdentifierWriterTimer(DatabaseRecordIdentifierWriterTimerCreatorDTO identifierDbRecWriterTimerCrDTO);
+    void destroyDatabaseRecordIdentifierWriterTimer(TimersIDEnum id);
     @Deprecated
     void executeGarbageCollectorTimer(TimersIDEnum id);
     @Deprecated

@@ -29,7 +29,7 @@ import lightsearch.server.database.statement.DatabaseStatementExecutor;
 import lightsearch.server.database.statement.DatabaseStatementExecutorInit;
 import lightsearch.server.exception.DatabaseStatementExecutorException;
 import lightsearch.server.database.statement.result.DatabaseStatementResult;
-import lightsearch.server.iterator.IteratorDatabaseRecord;
+import lightsearch.server.identifier.DatabaseRecordIdentifier;
 import lightsearch.server.time.CurrentDateTime;
 import lightsearch.server.data.LightSearchServerDTO;
 import lightsearch.server.log.LogMessageTypeEnum;
@@ -43,15 +43,15 @@ public class AuthenticationProcessor extends AbstractProcessorClient {
     
     private final ClientDAO clientDAO;
     private final CurrentDateTime currentDateTime;
-    private final IteratorDatabaseRecord iteratorDatabaseRecord;
+    private final DatabaseRecordIdentifier databaseRecordIdentifier;
     
     public AuthenticationProcessor(LightSearchServerDTO serverDTO, LightSearchChecker checker, 
             ClientDAO clientDAO, CurrentDateTime currentDateTime, 
-            IteratorDatabaseRecord iteratorDatabaseRecord) {
+            DatabaseRecordIdentifier databaseRecordIdentifier) {
         super(serverDTO, checker);
         this.clientDAO = clientDAO;
         this.currentDateTime = currentDateTime;
-        this.iteratorDatabaseRecord = iteratorDatabaseRecord;
+        this.databaseRecordIdentifier = databaseRecordIdentifier;
     }
 
     @Override
@@ -71,7 +71,7 @@ public class AuthenticationProcessor extends AbstractProcessorClient {
                                     clientCommand.username(), clientCommand.userIdentifier());
                     
                     DatabaseStatementExecutor dbStatementExecutor = DatabaseStatementExecutorInit.databaseStatementExecutor(
-                            databaseConnection, iteratorDatabaseRecord.next(),
+                            databaseConnection, databaseRecordIdentifier.next(),
                             currentDateTime.dateTimeInStandardFormat(), dbCmdMessage);
                     
                     DatabaseStatementResult dbStatRes = dbStatementExecutor.exec();

@@ -15,7 +15,7 @@
  */
 package lightsearch.server.cmd.changer;
 
-import lightsearch.server.data.IteratorDatabaseRecordWriterTimerCreatorDTO;
+import lightsearch.server.data.DatabaseRecordIdentifierWriterTimerCreatorDTO;
 import lightsearch.server.data.LightSearchServerDTO;
 import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.log.LoggerServer;
@@ -44,8 +44,8 @@ public class ServerStateChangerDefaultImpl implements ServerStateChanger {
 
     @Autowired private RebootTimerCreatorProducer timerCrProducer;
     @Autowired private RebootTimerExecutorProducer timerExecProducer;
-    @Autowired private IteratorDatabaseRecordWriterTimerCreatorProducer iteratorDbRecWriterTimerCrProducer;
-    @Autowired private IteratorDatabaseRecordWriterTimerExecutorProducer iteratorDbRecWriterTimerExecProducer;
+    @Autowired private DatabaseRecordIdentifierWriterTimerCreatorProducer identifierDbRecWriterTimerCrProducer;
+    @Autowired private DatabaseRecordIdentifierWriterTimerExecutorProducer identifierDbRecWriterTimerExecProducer;
     @Autowired private GarbageCollectorTimerCreatorProducer gcTimerCrProducer;
     @Autowired private GarbageCollectorTimerExecutorProducer gcTimerExecProducer;
 
@@ -77,19 +77,19 @@ public class ServerStateChangerDefaultImpl implements ServerStateChanger {
     }
 
     @Override
-    public void executeIteratorDatabaseRecordWriterTimer(IteratorDatabaseRecordWriterTimerCreatorDTO iteratorDbRecWriterTimerCrDTO) {
-        IteratorDatabaseRecordWriterTimerCreator iteratorTimerCreator =
-                iteratorDbRecWriterTimerCrProducer.getIteratorDatabaseRecordWriterTimerCreatorDefaultInstance(
-                        logger, currentDateTime, threadManager, iteratorDbRecWriterTimerCrDTO);
-        IteratorDatabaseRecordWriterTimerExecutor iteratorTimerExec =
-                iteratorDbRecWriterTimerExecProducer.getIteratorDatabaseRecordWriterTimerExecutorDefaultInstance(iteratorTimerCreator.getTimer());
-        iteratorTimerExec.startIteratorDatabaseRecordWriterTimer();
+    public void executeDatabaseRecordIdentifierWriterTimer(DatabaseRecordIdentifierWriterTimerCreatorDTO identifierDbRecWriterTimerCrDTO) {
+        DatabaseRecordIdentifierWriterTimerCreator identifierTimerCreator =
+                identifierDbRecWriterTimerCrProducer.getDatabaseRecordIdentifierWriterTimerCreatorDefaultInstance(
+                        logger, currentDateTime, threadManager, identifierDbRecWriterTimerCrDTO);
+        DatabaseRecordIdentifierWriterTimerExecutor identifierTimerExec =
+                identifierDbRecWriterTimerExecProducer.getDatabaseRecordIdentifierWriterTimerExecutorDefaultInstance(identifierTimerCreator.getTimer());
+        identifierTimerExec.startDatabaseRecordIdentifierWriterTimer();
     }
 
     @Override
-    public void destroyIteratorDatabaseRecordWriterTimer(TimersIDEnum id) {
+    public void destroyDatabaseRecordIdentifierWriterTimer(TimersIDEnum id) {
         if(threadManager.interrupt(id.stringValue()))
-            logger.log(LogMessageTypeEnum.INFO, currentDateTime, "Iterator database record writer timer was destroyed");
+            logger.log(LogMessageTypeEnum.INFO, currentDateTime, "Identfier database record writer timer was destroyed");
     }
 
     @Override

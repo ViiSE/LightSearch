@@ -58,18 +58,18 @@ public class ClientCommandCreatorDefaultImpl implements ClientCommandCreator {
         Map<String, Function<ClientCommand, CommandResult>> result = new HashMap<>();
         
         result.put(CONNECT, new AuthenticationProcessor(serverDTO, listenerDTO.checker(), clientDAO, 
-                listenerDTO.currentDateTime(), listenerDTO.iteratorDatabaseRecord()));
+                listenerDTO.currentDateTime(), listenerDTO.databaseRecordIdentifier()));
         result.put(SEARCH,  new SearchProcessor(serverDTO, listenerDTO.checker(), clientDAO, 
-                listenerDTO.currentDateTime(), listenerDTO.iteratorDatabaseRecord()));
+                listenerDTO.currentDateTime(), listenerDTO.databaseRecordIdentifier()));
         result.put(OPEN_SOFT_CHECK, new OpenSoftCheckProcessor(serverDTO, listenerDTO.checker(), clientDAO, 
-                listenerDTO.currentDateTime(), listenerDTO.iteratorDatabaseRecord()));
+                listenerDTO.currentDateTime(), listenerDTO.databaseRecordIdentifier()));
         result.put(CLOSE_SOFT_CHECK, new CloseSoftCheckProcessor(serverDTO, listenerDTO.checker(), clientDAO, 
-                listenerDTO.currentDateTime(), listenerDTO.iteratorDatabaseRecord()));
+                listenerDTO.currentDateTime(), listenerDTO.databaseRecordIdentifier()));
         result.put(CANCEL_SOFT_CHECK, new CancelSoftCheckProcessor(serverDTO, listenerDTO.checker(), 
-                clientDAO, listenerDTO.currentDateTime(), listenerDTO.iteratorDatabaseRecord()));
+                clientDAO, listenerDTO.currentDateTime(), listenerDTO.databaseRecordIdentifier()));
         result.put(CONFIRM_SOFT_CHECK_PRODUCTS, new ConfirmSoftCheckProductsProcessor(serverDTO, 
                 listenerDTO.checker(), clientDAO, listenerDTO.currentDateTime(), 
-                listenerDTO.iteratorDatabaseRecord()));
+                listenerDTO.databaseRecordIdentifier()));
         
         return result;
     }

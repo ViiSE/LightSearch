@@ -21,7 +21,7 @@ import lightsearch.server.cmd.result.CommandResult;
 import lightsearch.server.data.*;
 import lightsearch.server.handler.Handler;
 import lightsearch.server.identifier.ConnectionIdentifierResult;
-import lightsearch.server.iterator.HandlerIterator;
+import lightsearch.server.identifier.HandlerIdentifier;
 import lightsearch.server.log.LoggerServer;
 import lightsearch.server.producer.cmd.client.ClientCommandCreatorProducer;
 import lightsearch.server.producer.data.ClientDAOProducer;
@@ -49,7 +49,7 @@ public class HandlerCreatorClientProcessor implements HandlerCreatorProcessor {
     private final LightSearchServerDTO serverDTO;
     private final LightSearchListenerDTO listenerDTO;
     private final LoggerServer loggerServer;
-    private final HandlerIterator handlerIterator;
+    private final HandlerIdentifier handlerIdentifier;
 
     @Autowired private ClientDAOProducer clDAOProducer;
     @Autowired private ClientCommandCreatorProducer clCmdCrProducer;
@@ -61,12 +61,12 @@ public class HandlerCreatorClientProcessor implements HandlerCreatorProcessor {
     @Autowired
     public HandlerCreatorClientProcessor(
             ConnectionIdentifierResult identifierResult, LightSearchServerDTO serverDTO, LightSearchListenerDTO listenerDTO,
-            LoggerServer loggerServer, HandlerIterator handlerIterator) {
+            LoggerServer loggerServer, HandlerIdentifier handlerIdentifier) {
         this.identifierResult = identifierResult;
         this.serverDTO = serverDTO;
         this.listenerDTO = listenerDTO;
         this.loggerServer = loggerServer;
-        this.handlerIterator = handlerIterator;
+        this.handlerIdentifier = handlerIdentifier;
     }
 
     @Override
@@ -77,7 +77,7 @@ public class HandlerCreatorClientProcessor implements HandlerCreatorProcessor {
                 serverDTO, listenerDTO, clientDAO);
         Map<String, Function<ClientCommand, CommandResult>> commandHolder = clientCmdCreator.createCommandHolder();
 
-        String id = LightSearchThreadID.createID(identifierResult.identifier(), handlerIterator.next());
+        String id = LightSearchThreadID.createID(identifierResult.identifier(), handlerIdentifier.next());
         ThreadParametersHolder threadParametersHolder = threadParamsHolderProducer.getThreadParametersHolderDefaultInstance(id);
 
         ClientParametersHolder clientParamHolder = clParamsHolderProducer.getClientParametersHolderDefaultInstance(

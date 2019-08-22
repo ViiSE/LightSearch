@@ -20,7 +20,7 @@ import lightsearch.server.data.LightSearchListenerDTO;
 import lightsearch.server.data.LightSearchServerDTO;
 import lightsearch.server.handler.Handler;
 import lightsearch.server.identifier.ConnectionIdentifierResult;
-import lightsearch.server.iterator.HandlerIterator;
+import lightsearch.server.identifier.HandlerIdentifier;
 import lightsearch.server.log.LoggerServer;
 
 /**
@@ -32,16 +32,16 @@ public abstract class SuperHandlerCreatorProcessor implements Function<Void, Han
     private final LightSearchServerDTO serverDTO;
     private final LightSearchListenerDTO listenerDTO;
     private final LoggerServer loggerServer;
-    private final HandlerIterator handlerIterator;
+    private final HandlerIdentifier handlerIdentifier;
     
     public SuperHandlerCreatorProcessor(ConnectionIdentifierResult identifierResult, 
             LightSearchServerDTO serverDTO, LightSearchListenerDTO listenerDTO, 
-            LoggerServer loggerServer, HandlerIterator handlerIterator) {
+            LoggerServer loggerServer, HandlerIdentifier handlerIdentifier) {
         this.identifierResult = identifierResult;
         this.serverDTO = serverDTO;
         this.listenerDTO = listenerDTO;
         this.loggerServer = loggerServer;
-        this.handlerIterator = handlerIterator;
+        this.handlerIdentifier = handlerIdentifier;
     }
     
     public ConnectionIdentifierResult identifierResult() {
@@ -60,7 +60,7 @@ public abstract class SuperHandlerCreatorProcessor implements Function<Void, Han
         return loggerServer;
     }
     
-    public HandlerIterator handlerIterator() {
-        return handlerIterator;
+    public HandlerIdentifier handlerIdentifier() {
+        return handlerIdentifier;
     }
 }

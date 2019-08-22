@@ -21,8 +21,10 @@ import lightsearch.server.checker.LightSearchChecker;
 import lightsearch.server.checker.TimerRebootValueChecker;
 import lightsearch.server.cmd.changer.ServerStateChanger;
 import lightsearch.server.data.*;
+import lightsearch.server.identifier.DatabaseRecordIdentifier;
+import lightsearch.server.identifier.DatabaseRecordIdentifierReader;
+import lightsearch.server.identifier.DatabaseRecordIdentifierWriter;
 import lightsearch.server.initialization.*;
-import lightsearch.server.iterator.*;
 import lightsearch.server.listener.LightSearchServerListener;
 import lightsearch.server.log.*;
 import lightsearch.server.thread.*;
@@ -43,34 +45,34 @@ import java.util.Map;
 @SpringBootApplication
 public class LightSearchServer {
 
-    private static final String GREETINGS                       = "appGreetingsDefault";
-    private static final String OS_DETECTOR                     = "osDetectorDefault";
-    private static final String CURRENT_SERVER_DIRECTORY        = "currentServerDirectoryFromFileDefault";
-    private static final String SERVER_PORT                     = "serverPortFromFileDefault";
-    private static final String SERVER_SETTINGS                 = "serverSettingsFromFileDefault";
-    private static final String ADMINISTRATORS_MAP              = "administratorsMapFromFileDefault";
-    private static final String CLIENT_BLACKLIST                = "clientBlacklistFromFileDefault";
-    private static final String DATABASE_SETTINGS               = "databaseSettingsFromFileDefault";
-    private static final String LIGHTSEARCH_SERVER_SETTINGS_DAO = "lightSearchServerSettingsDAODefault";
-    private static final String LIGHTSEARCH_SERVER_DATABASE_DTO = "lightSearchServerDatabaseDTODefault";
-    private static final String LIGHTSEARCH_SERVER_DTO          = "lightSearchServerDTODefault";
-    private static final String LOG_DIRECTORY                   = "logDirectoryDefault";
-    private static final String LOGGER_FILE                     = "loggerFileDefault";
-    private static final String LOGGER_WINDOW                   = "loggerWindowDefault";
-    private static final String LOGGER_SERVER                   = "loggerServerDefault";
-    private static final String CURRENT_DATE_TIME               = "currentDateTimeDefault";
-    private static final String THREAD_HOLDER                   = "threadHolderDefault";
-    private static final String THREAD_MANAGER                  = "threadManagerDefault";
-    private static final String ITERATOR_DATABASE_RECORD_READER = "iteratorDatabaseRecordReaderDefault";
-    private static final String ITERATOR_DATABASE_RECORD_WRITER = "iteratorDatabaseRecordWriterDefault";
-    private static final String ITERATOR_DATABASE_RECORD        = "iteratorDatabaseRecordDefault";
-    private static final String LIGHTSEARCH_CHECKER             = "lightSearchCheckerDefault";
-    private static final String LIGHTSEARCH_LISTENER_DTO        = "lightSearchListenerDTODefault";
-    private static final String END_STARTUP_MESSAGE             = "endStartUpMessageDefault";
-    private static final String SERVER_STATE_CHANGER            = "serverStateChangerDefault";
-    private static final String TIMER_REBOOT_VALUE_CHECKER      = "timerRebootValueCheckerDefault";
-    private static final String LIGHTSEARCH_LISTENER            = "lightSearchServerListenerSocketDefault";
-    private static final String ITERATOR_DATABASE_RECORD_WRITER_TIMER_CREATOR_DTO = "iteratorDatabaseRecordWriterTimerCreatorDTODefault";
+    private static final String GREETINGS                         = "appGreetingsDefault";
+    private static final String OS_DETECTOR                       = "osDetectorDefault";
+    private static final String CURRENT_SERVER_DIRECTORY          = "currentServerDirectoryFromFileDefault";
+    private static final String SERVER_PORT                       = "serverPortFromFileDefault";
+    private static final String SERVER_SETTINGS                   = "serverSettingsFromFileDefault";
+    private static final String ADMINISTRATORS_MAP                = "administratorsMapFromFileDefault";
+    private static final String CLIENT_BLACKLIST                  = "clientBlacklistFromFileDefault";
+    private static final String DATABASE_SETTINGS                 = "databaseSettingsFromFileDefault";
+    private static final String LIGHTSEARCH_SERVER_SETTINGS_DAO   = "lightSearchServerSettingsDAODefault";
+    private static final String LIGHTSEARCH_SERVER_DATABASE_DTO   = "lightSearchServerDatabaseDTODefault";
+    private static final String LIGHTSEARCH_SERVER_DTO            = "lightSearchServerDTODefault";
+    private static final String LOG_DIRECTORY                     = "logDirectoryDefault";
+    private static final String LOGGER_FILE                       = "loggerFileDefault";
+    private static final String LOGGER_WINDOW                     = "loggerWindowDefault";
+    private static final String LOGGER_SERVER                     = "loggerServerDefault";
+    private static final String CURRENT_DATE_TIME                 = "currentDateTimeDefault";
+    private static final String THREAD_HOLDER                     = "threadHolderDefault";
+    private static final String THREAD_MANAGER                    = "threadManagerDefault";
+    private static final String DATABASE_RECORD_IDENTIFIER_READER = "databaseRecordIdentifierReaderDefault";
+    private static final String DATABASE_RECORD_IDENTIFIER_WRITER = "databaseRecordIdentifierWriterDefault";
+    private static final String DATABASE_RECORD_IDENTIFIER        = "databaseRecordIdentifierDefault";
+    private static final String LIGHTSEARCH_CHECKER               = "lightSearchCheckerDefault";
+    private static final String LIGHTSEARCH_LISTENER_DTO          = "lightSearchListenerDTODefault";
+    private static final String END_STARTUP_MESSAGE               = "endStartUpMessageDefault";
+    private static final String SERVER_STATE_CHANGER              = "serverStateChangerDefault";
+    private static final String TIMER_REBOOT_VALUE_CHECKER        = "timerRebootValueCheckerDefault";
+    private static final String LIGHTSEARCH_LISTENER              = "lightSearchServerListenerSocketDefault";
+    private static final String DATABASE_RECORD_IDENTIFIER_WRITER_TIMER_CREATOR_DTO = "databaseRecordIdentifierWriterTimerCreatorDTODefault";
 
     public static void main(String[] args) throws InterruptedException {
         ApplicationContext ctx = SpringApplication.run(LightSearchServer.class, args);
@@ -122,20 +124,20 @@ public class LightSearchServer {
         ThreadHolder threadHolder = (ThreadHolder) ctx.getBean(THREAD_HOLDER, threads);
         ThreadManager threadManager = (ThreadManager) ctx.getBean(THREAD_MANAGER, threadHolder);
         
-        IteratorDatabaseRecordReader iteratorReader = (IteratorDatabaseRecordReader) ctx.getBean(
-                ITERATOR_DATABASE_RECORD_READER, serverDTO);
-        IteratorDatabaseRecordWriter iteratorWriter = (IteratorDatabaseRecordWriter) ctx.getBean(
-                ITERATOR_DATABASE_RECORD_WRITER, serverDTO);
+        DatabaseRecordIdentifierReader identifierReader = (DatabaseRecordIdentifierReader) ctx.getBean(
+                DATABASE_RECORD_IDENTIFIER_READER, serverDTO);
+        DatabaseRecordIdentifierWriter identifierWriter = (DatabaseRecordIdentifierWriter) ctx.getBean(
+                DATABASE_RECORD_IDENTIFIER_WRITER, serverDTO);
         
-        IteratorDatabaseRecord iterator = (IteratorDatabaseRecord) ctx.getBean(
-                ITERATOR_DATABASE_RECORD, iteratorReader.read());
+        DatabaseRecordIdentifier identifier = (DatabaseRecordIdentifier) ctx.getBean(
+                DATABASE_RECORD_IDENTIFIER, identifierReader.read());
         
         LightSearchChecker checker = ctx.getBean(LIGHTSEARCH_CHECKER, LightSearchChecker.class);
         
         TimersIDEnum timerRebootId = TimersIDEnum.REBOOT_TIMER_ID;
         
         LightSearchListenerDTO listenerDTO = (LightSearchListenerDTO) ctx.getBean(LIGHTSEARCH_LISTENER_DTO,
-                checker, currentDateTime, threadManager, iterator, iteratorWriter, timerRebootId);
+                checker, currentDateTime, threadManager, identifier, identifierWriter, timerRebootId);
 
         EndStartupMessage endStartupMessage = ctx.getBean(END_STARTUP_MESSAGE, EndStartupMessage.class);
 
@@ -149,12 +151,12 @@ public class LightSearchServer {
         if(timerChecker.check(serverDTO.settingsDAO().serverRebootValue()))
             stateChanger.executeRebootTimer(timerRebootId);
         
-        TimersIDEnum timerIteratorId = TimersIDEnum.ITERATOR_WRITER_TIMER_ID;
+        TimersIDEnum timerIdentfierId = TimersIDEnum.IDENTIFIER_WRITER_TIMER_ID;
         long minutesToWrite = 30;
-        IteratorDatabaseRecordWriterTimerCreatorDTO itDbRecWriterTimerCrDTO = (IteratorDatabaseRecordWriterTimerCreatorDTO)
-                ctx.getBean(ITERATOR_DATABASE_RECORD_WRITER_TIMER_CREATOR_DTO, iterator, iteratorWriter, minutesToWrite,
-                        timerIteratorId);
-        stateChanger.executeIteratorDatabaseRecordWriterTimer(itDbRecWriterTimerCrDTO);
+        DatabaseRecordIdentifierWriterTimerCreatorDTO itDbRecWriterTimerCrDTO = (DatabaseRecordIdentifierWriterTimerCreatorDTO)
+                ctx.getBean(DATABASE_RECORD_IDENTIFIER_WRITER_TIMER_CREATOR_DTO, identifier, identifierWriter, minutesToWrite,
+                        timerIdentfierId);
+        stateChanger.executeDatabaseRecordIdentifierWriterTimer(itDbRecWriterTimerCrDTO);
 
         LightSearchServerListener serverListener = (LightSearchServerListener) ctx.getBean(LIGHTSEARCH_LISTENER, serverDTO,
                 listenerDTO, loggerServer);

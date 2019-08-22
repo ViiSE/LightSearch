@@ -20,17 +20,17 @@ import lightsearch.server.data.LightSearchListenerDTO;
 import lightsearch.server.data.LightSearchServerDTO;
 import lightsearch.server.handler.processor.HandlerCreatorProcessor;
 import lightsearch.server.identifier.ConnectionIdentifierResult;
-import lightsearch.server.iterator.HandlerIterator;
+import lightsearch.server.identifier.HandlerIdentifier;
 import lightsearch.server.log.LoggerServer;
 
 public interface HandlerCreatorProcessorProducer {
     HandlerCreatorProcessor getHandlerCreatorAdminProcessorInstance(
             ConnectionIdentifierResult identifierResult, LightSearchServerDTO serverDTO, LightSearchListenerDTO listenerDTO,
-            LoggerServer loggerServer, HandlerIterator handlerIterator);
+            LoggerServer loggerServer, HandlerIdentifier handlerIdentifier);
     HandlerCreatorProcessor getHandlerCreatorClientProcessorInstance(
             ConnectionIdentifierResult identifierResult, LightSearchServerDTO serverDTO, LightSearchListenerDTO listenerDTO,
-            LoggerServer loggerServer, HandlerIterator handlerIterator);
+            LoggerServer loggerServer, HandlerIdentifier handlerIdentifier);
     HandlerCreatorProcessor getHandlerCreatorSystemProcessorInstance(
             ConnectionIdentifierResult identifierResult, LightSearchListenerDTO listenerDTO, LoggerServer loggerServer,
-            HandlerIterator handlerIterator);
+            HandlerIdentifier handlerIdentifier);
 }

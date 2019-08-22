@@ -21,7 +21,7 @@ package lightsearch.server.thread;
  */
 public class LightSearchThreadID {
     
-    public static String createID(String identifier, long iteratorValue) {
-        return identifier + iteratorValue;
+    public static String createID(String identifier, long identifierValue) {
+        return identifier + identifierValue;
     }
 }
