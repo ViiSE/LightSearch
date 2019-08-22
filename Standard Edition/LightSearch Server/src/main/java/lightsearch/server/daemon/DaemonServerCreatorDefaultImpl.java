@@ -18,8 +18,11 @@ package lightsearch.server.daemon;
 import lightsearch.server.initialization.OsDetector;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.daemon.DaemonServerCreator} по умолчанию.
+ * <p>
+ * Создает демона, который перезагружает LightSearch Server.
  * @author ViiSE
+ * @since 1.0
  */
 public class DaemonServerCreatorDefaultImpl implements DaemonServerCreator {
 

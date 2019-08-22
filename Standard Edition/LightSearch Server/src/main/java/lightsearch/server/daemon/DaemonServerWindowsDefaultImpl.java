@@ -18,8 +18,11 @@ package lightsearch.server.daemon;
 import java.io.IOException;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.daemon.DaemonServer} по умолчанию.
+ * <p>
+ * Запускает демона LightSearch Daemon под операционной системой Microsoft Windows.
  * @author ViiSE
+ * @since 1.0
  */
 public class DaemonServerWindowsDefaultImpl implements DaemonServer {
 
