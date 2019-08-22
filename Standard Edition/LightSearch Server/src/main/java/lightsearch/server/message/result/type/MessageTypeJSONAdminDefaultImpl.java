@@ -23,8 +23,49 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.message.result.type.MessageType}, формирующее сообщение
+ * администратору в формате JSON.
+ * <p>
+ * В зависимотсти от присланной команды LightSearch Server формирует разные типы сообщений администратору. Тип сообщения
+ * зависит от того, какому классу принадлежит сообщение.
+ * Если сообщение - строка ({@link java.lang.String}), то формируется следующее сообщение:
+ * <code>
+ *     {
+ *         "name":"Имя администратора",
+ *         "is_done":"Значение статуса сообщения ("True" или "False")",
+ *         "message":"Результат проделанной операции"
+ *     }
+ * </code>
+ * <p>
+ * Если сообщение - список ({@link java.util.List}), то формируется следующее сообщение:
+ * <code>
+ *     {
+ *         "name":"Имя администратора",
+ *         "is_done":"Значение статуса сообщения ("True" или "False")",
+ *         "data":["Список", "Элементов"]
+ *     }
+ * <p>
+ * </code>
+ * Применяется в команде {@link lightsearch.server.cmd.admin.processor.BlacklistRequestProcessor}.
+ * <p>
+ * Если сообщение - карта ({@link java.util.Map}), то формируется следующее сообщение:
+ * <code>
+ *     {
+ *         "name":"Имя администратора",
+ *         "is_done":"Значение статуса сообщения ("True" или "False")",
+ *         "data":[
+ *                    "IMEI":"Значение IMEI клиента",
+ *                    "username":"Имя клиента"
+ *                ]
+ *     }
+ * <p>
+ * Применяется в команде {@link lightsearch.server.cmd.admin.processor.ClientListRequestProcessor}.
+ * </code>
+ * Создание сообщения в формате JSON осуществляется при помощи библиотеки
+ * <a href="https://github.com/fangyidong/json-simple">JSON.simple</a>.
  * @author ViiSE
+ * @see lightsearch.server.message.result.MessageCreatorDefaultImpl
+ * @since 1.0
  */
 public class MessageTypeJSONAdminDefaultImpl implements MessageType {
     

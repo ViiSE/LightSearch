@@ -16,8 +16,20 @@
 package lightsearch.server.message.result.type;
 
 /**
- *
+ * Тип клиентского сообщения LightSearchServer.
+ * <p>
+ * В LightSearch Server существует два типа клиента: клиент и администратор. Клиент - пользователь, который подключается
+ * к LightSearch Server и получает информацию предметной области. Администратор - пользователь, который подключается к
+ * LightSearch Server через программу LightSearch Admin Panel для его администрирования. Более подробную информацию об
+ * LightSearch Admin Panel читайте в соответствующей
+ * <a href="https://github.com/ViiSE/LightSearch/tree/master/Standard%20Edition/LightSearch%20Admin%20Panel/javadoc">документации</a>.
+ * <p>
+ * Используется в обработчике клиентов LightSearch Server и в формировании сообщения клиенту.
  * @author ViiSE
+ * @see lightsearch.server.message.result.MessageCreator
+ * @see lightsearch.server.cmd.client.processor
+ * @see lightsearch.server.cmd.admin.processor
+ * @since 1.0
  */
 public interface MessageType {
     String createFormattedMessage(String ident, String isDone, Object message);

@@ -13,8 +13,22 @@ import lightsearch.server.cmd.client.ClientCommandResultEnum;
 import org.json.simple.JSONObject;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.message.result.type.MessageType}, формирующее сообщение о провале в
+ * формате JSON.
+ * <p>
+ * Если результат обработки сообщения клиента провальный, то LightSearch Server формирует следующее сообщению клиенту:
+ * <code>
+ *     {
+ *         "IMEI":"Значение IMEI",
+ *         "is_done":"Значение статуса сообщения (в данном случае - "False")",
+ *         "message":"Сообщение об ошибке"
+ *     }
+ * </code>
+ * Создание сообщения в формате JSON осуществляется при помощи библиотеки
+ * <a href="https://github.com/fangyidong/json-simple">JSON.simple</a>.
  * @author ViiSE
+ * @see lightsearch.server.message.result.MessageCreatorDefaultImpl
+ * @since 1.0
  */
 public class MessageTypeClientJSONFailDefaultImpl implements MessageType {
 
