@@ -16,8 +16,10 @@
 package lightsearch.server.exception;
 
 /**
- *
+ * Исключение, возникающее при записи команды в таблицу базу данных.
  * @author ViiSE
+ * @see lightsearch.server.database.DatabaseWriter
+ * @since 2.0
  */
 public class DatabaseWriterException extends Exception {
     

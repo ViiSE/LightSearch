@@ -16,8 +16,10 @@
 package lightsearch.server.exception;
 
 /**
- *
+ * Исключение, возникающее при получении результата SQL-запроса.
  * @author ViiSE
+ * @see lightsearch.server.database.statement.result.DatabaseStatementResultSet
+ * @since 2.0
  */
 public class DatabaseStatementResultSetException extends Exception {
     

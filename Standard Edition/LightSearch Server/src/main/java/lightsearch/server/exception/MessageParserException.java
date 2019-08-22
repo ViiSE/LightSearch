@@ -16,8 +16,10 @@
 package lightsearch.server.exception;
 
 /**
- *
+ * Исключение, возникающее при парсинге сообщений клиентов.
  * @author ViiSE
+ * @see lightsearch.server.message.parser.MessageParser
+ * @since 2.0
  */
 public class MessageParserException extends Exception {
     

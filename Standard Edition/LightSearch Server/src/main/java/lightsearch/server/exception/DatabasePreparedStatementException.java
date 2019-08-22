@@ -16,8 +16,10 @@
 package lightsearch.server.exception;
 
 /**
- *
+ * Исключение, возникающее при создании скомпилированного SQL-запроса.
  * @author ViiSE
+ * @see lightsearch.server.database.statement.DatabasePreparedStatement
+ * @since 2.0
  */
 public class DatabasePreparedStatementException extends Exception {
     

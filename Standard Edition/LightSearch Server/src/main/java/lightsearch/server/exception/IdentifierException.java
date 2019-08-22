@@ -16,8 +16,10 @@
 package lightsearch.server.exception;
 
 /**
- *
+ * Исключение, возникающее при операциях, связанных с идентификаторами LightSearch Server.
  * @author ViiSE
+ * @see lightsearch.server.identifier.DatabaseRecordIdentifierWriter
+ * @since 2.0
  */
 public class IdentifierException extends Exception {
     

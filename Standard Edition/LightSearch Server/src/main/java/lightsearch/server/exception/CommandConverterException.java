@@ -16,8 +16,12 @@
 package lightsearch.server.exception;
 
 /**
- *
+ * Исключение, возникающее при конвертации сообщения в клиентскую команду.
  * @author ViiSE
+ * @see lightsearch.server.cmd.client.ClientCommandConverter
+ * @see lightsearch.server.cmd.admin.AdminCommandConverter
+ * @see lightsearch.server.cmd.system.SystemCommandConverter
+ * @since 2.0
  */
 public class CommandConverterException extends Exception {
     

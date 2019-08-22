@@ -16,8 +16,11 @@
 package lightsearch.server.exception;
 
 /**
- *
+ * Исключение, возникающее при проверке сообщения клиента, которое приняло LightSearch Server.
  * @author ViiSE
+ * @see lightsearch.server.handler.admin.ReceivedAdminCommandVerifier
+ * @see lightsearch.server.handler.client.ReceivedClientCommandVerifier
+ * @since 2.0
  */
 public class ReceivedCommandVerifierException extends Exception {
     
