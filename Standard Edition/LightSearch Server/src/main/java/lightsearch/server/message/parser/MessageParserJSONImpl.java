@@ -21,8 +21,13 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.message.MessageRecipient} для парсинга JSON сообщений.
+ * <p>
+ * Парсинг сообщения осуществляется при помощи библиотеки
+ * <a href="https://github.com/fangyidong/json-simple">JSON.simple</a>.
  * @author ViiSE
+ * @see lightsearch.server.cmd.client.processor.debug
+ * @since 1.0
  */
 public class MessageParserJSONImpl implements MessageParser {
 

@@ -18,8 +18,16 @@ package lightsearch.server.message.parser;
 import lightsearch.server.exception.MessageParserException;
 
 /**
- *
+ * Парсит сообщения клиентов LightSearch Server'а в необходимый объект.
+ * <p>
+ * Используется в обработчиках клиентов и при идентификации клиента.
+ * <p>
+ * Если произошла ошибка при принятии сообщения, то генерируется исключение
+ * {@link lightsearch.server.exception.MessageParserException}.
  * @author ViiSE
+ * @see lightsearch.server.handler.Handler
+ * @see lightsearch.server.identifier.ConnectionIdentifier
+ * @since 1.0
  */
 public interface MessageParser {
     Object parse(String rawMessage) throws MessageParserException;
