@@ -79,7 +79,7 @@ public class ConfirmSoftCheckProductsProcessor implements ProcessorClient {
                     
                     DatabaseStatementExecutor dbStatementExecutor = dbStateExecProducer.getDatabaseStatementExecutorDefaultInstance(
                             clientDAO.databaseConnection(), databaseRecordIdentifier.next(),
-                            currentDateTime.dateTimeInStandartFormat(), dbCmdMessage);
+                            currentDateTime.dateTimeInStandardFormat(), dbCmdMessage);
                     DatabaseStatementResult dbStatRes = dbStatementExecutor.exec();
 
                     String logMessage = "Client " + clientCommand.IMEI() + " confirm SoftCheck products, "

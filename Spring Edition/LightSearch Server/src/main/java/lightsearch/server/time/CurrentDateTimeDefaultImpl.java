@@ -28,7 +28,7 @@ import java.util.GregorianCalendar;
 public class CurrentDateTimeDefaultImpl implements CurrentDateTime {
 
     @Override
-    public String dateTimeInStandartFormat() {
+    public String dateTimeInStandardFormat() {
         SimpleDateFormat nice = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         GregorianCalendar cal = new GregorianCalendar();
         java.util.Date date = cal.getTime();

@@ -91,7 +91,7 @@ public class AuthenticationProcessor implements ProcessorClient {
                                     clientCommand.command(), clientCommand.IMEI(), clientCommand.username(), clientCommand.userIdentifier());
                     
                     DatabaseStatementExecutor dbStatementExecutor = dbStateExecProducer.getDatabaseStatementExecutorDefaultInstance(
-                            databaseConnection, databaseRecordIdentifier.next(), currentDateTime.dateTimeInStandartFormat(), dbCmdMessage);
+                            databaseConnection, databaseRecordIdentifier.next(), currentDateTime.dateTimeInStandardFormat(), dbCmdMessage);
                     
                     DatabaseStatementResult dbStatRes = dbStatementExecutor.exec();
 

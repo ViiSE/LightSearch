@@ -78,7 +78,7 @@ public class SearchProcessor implements ProcessorClient {
                     
                     DatabaseStatementExecutor dbStatementExecutor = dbStateExecProducer.getDatabaseStatementExecutorDefaultInstance(
                             clientDAO.databaseConnection(), databaseRecordIdentifier.next(),
-                            currentDateTime.dateTimeInStandartFormat(), dbCmdMessage);
+                            currentDateTime.dateTimeInStandardFormat(), dbCmdMessage);
                     DatabaseStatementResult dbStatRes = dbStatementExecutor.exec();
 
                     String result = dbStatRes.result();
