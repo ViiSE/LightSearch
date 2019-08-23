@@ -18,11 +18,16 @@ package lightsearch.server.message.result.type;
 /**
  * Тип клиентского сообщения LightSearchServer.
  * <p>
- * В LightSearch Server существует два типа клиента: клиент и администратор. Клиент - пользователь, который подключается
- * к LightSearch Server и получает информацию предметной области. Администратор - пользователь, который подключается к
- * LightSearch Server через программу LightSearch Admin Panel для его администрирования. Более подробную информацию об
- * LightSearch Admin Panel читайте в соответствующей
- * <a href="https://github.com/ViiSE/LightSearch/tree/master/Standard%20Edition/LightSearch%20Admin%20Panel/javadoc">документации</a>.
+ * В LightSearch Server существует три типа клиента: клиент, администратор и системный бот. Клиент - пользователь,
+ * который подключается к LightSearch Server и получает информацию предметной области. Администратор - пользователь,
+ * который подключается к LightSearch Server через программу LightSearch Admin Panel для его администрирования.
+ * Более подробную информацию об LightSearch Admin Panel читайте в соответствующей
+ * <a href="https://github.com/ViiSE/LightSearch/tree/master/Standard%20Edition/LightSearch%20Admin%20Panel/javadoc">
+ *     документации</a>.
+ * Системный бот - бот, который необходим для тестирования сервера через программу LightSearch Client Bot. Более
+ * подробную информацию об LightSearch Client Bot читайте в соответствующей
+ * <a href="https://github.com/ViiSE/LightSearch/tree/master/Standard%20Edition/LightSearch%20Client%20Bot/javadoc">
+ *     документации</a>.
  * <p>
  * Используется в обработчике клиентов LightSearch Server и в формировании сообщения клиенту.
  * @author ViiSE
