@@ -21,7 +21,7 @@ import lightsearch.server.thread.ThreadManager;
 /**
  * Реализация интерфейса {@link lightsearch.server.handler.HandlerExecutor} по умолчанию.
  * <p>
- * Запускает обработчик команд клиента LightSearch в отдельном потоке.
+ * Запускает обработчик клиента LightSearch в отдельном потоке.
  * @author ViiSE
  * @since 2.0
  */

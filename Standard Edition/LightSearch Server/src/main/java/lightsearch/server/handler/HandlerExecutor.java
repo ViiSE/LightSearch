@@ -16,7 +16,7 @@
 package lightsearch.server.handler;
 
 /**
- * Запускает на исполнение обработчик команд клиента LightSearch Server.
+ * Запускает на исполнение обработчик клиента LightSearch Server.
  * @author ViiSE
  * @see lightsearch.server.handler.Handler
  * @since 2.0
