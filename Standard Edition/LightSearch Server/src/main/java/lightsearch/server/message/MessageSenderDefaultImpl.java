@@ -20,8 +20,11 @@ import java.io.IOException;
 import lightsearch.server.exception.MessageSenderException;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.message.MessageSender} по умолчанию.
+ * <p>
+ * Отправка сообщения происходит через {@link java.io.DataOutputStream}. Записываются UTF символы.
  * @author ViiSE
+ * @since 1.0
  */
 public class MessageSenderDefaultImpl implements MessageSender {
 

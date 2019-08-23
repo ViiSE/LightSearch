@@ -20,8 +20,11 @@ import java.io.IOException;
 import lightsearch.server.exception.MessageRecipientException;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.message.MessageRecipient} по умолчанию.
+ * <p>
+ * Принятие сообщения происходит через {@link java.io.DataInputStream}. Читаются UTF символы.
  * @author ViiSE
+ * @since 1.0
  */
 public class MessageRecipientDefaultImpl implements MessageRecipient {
 

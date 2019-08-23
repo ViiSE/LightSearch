@@ -16,8 +16,15 @@
 package lightsearch.server.message;
 
 /**
- *
+ * Проделывает операции с временем.
+ * <p>
+ * Используется в отладке LightSearch Server для замеров скорости работы блоков программы. При помощи этого интерфейса
+ * можно суммировать время и высчитывать среднее значение всех замеров.
+ * {@link lightsearch.server.exception.MessageSenderException}.
  * @author ViiSE
+ * @see lightsearch.server.message.MessageRecipientDebugImpl
+ * @see lightsearch.server.cmd.client.processor.debug
+ * @since 1.0
  */
 public interface MessageTimeAdder {
     void add(long time);

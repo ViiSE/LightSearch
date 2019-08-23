@@ -18,8 +18,15 @@ package lightsearch.server.message;
 import lightsearch.server.exception.MessageRecipientException;
 
 /**
- *
+ * Принимает сообщения от клиентов LightSearch Server'а.
+ * <p>
+ * Используется в обработчиках клиентов.
+ * <p>
+ * Если произошла ошибка при принятии сообщения, то генерируется исключение
+ * {@link lightsearch.server.exception.MessageRecipientException}.
  * @author ViiSE
+ * @see lightsearch.server.handler.Handler
+ * @since 1.0
  */
 public interface MessageRecipient {
     String acceptMessage() throws MessageRecipientException;

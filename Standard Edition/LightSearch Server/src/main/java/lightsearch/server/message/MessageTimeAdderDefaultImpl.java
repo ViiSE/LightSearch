@@ -16,8 +16,18 @@
 package lightsearch.server.message;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.message.MessageTimeAdder} по умолчанию.
+ * <p>
+ * Так как при отладке сервера время замера скорости блока программы начинается сразу после работы LightSearch Server,
+ * то первое значение замера будет много больше, чем реальное время обработки блока программы. Поэтому первый замер
+ * опускается.
+ * <p>
+ * После проведенного замера времени выполнения блока программы необходимо вызвать метод {@link #clear()} для того,
+ * чтобы статическая переменная {@link #isFirst} снова имело значение {@code true}.
  * @author ViiSE
+ * @see lightsearch.server.message.MessageRecipientDebugImpl
+ * @see lightsearch.server.cmd.client.processor.debug
+ * @since 1.0
  */
 public class MessageTimeAdderDefaultImpl implements MessageTimeAdder {
 

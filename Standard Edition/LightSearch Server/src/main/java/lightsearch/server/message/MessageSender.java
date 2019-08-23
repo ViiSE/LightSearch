@@ -18,8 +18,15 @@ package lightsearch.server.message;
 import lightsearch.server.exception.MessageSenderException;
 
 /**
- *
+ * Отправляет сообщения клиентам LightSearch Server'а.
+ * <p>
+ * Используется в обработчиках клиентов.
+ * <p>
+ * Если произошла ошибка при отправке сообщения, то генерируется исключение
+ * {@link lightsearch.server.exception.MessageSenderException}.
  * @author ViiSE
+ * @see lightsearch.server.handler.Handler
+ * @since 1.0
  */
 public interface MessageSender {
     void sendMessage(String message) throws MessageSenderException;

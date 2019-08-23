@@ -21,8 +21,18 @@ import java.io.IOException;
 import lightsearch.server.exception.MessageRecipientException;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.message.MessageRecipient} для отладки.
+ * <p>
+ * Принятие сообщения происходит через {@link java.io.DataInputStream}. Читаются UTF символы.
+ * <p>
+ * Рассчитывается время принятия сообщения при помощи вызова {@link System#nanoTime()}. Ставится точка перед отправкой
+ * сообщения и после отправки сообщения клиенту. Затем вычисляется разность между последней точкой и первой.
+ * Результат отображается на экране.
+ * <p>
+ * Используется в отладочных обработчиках команд клиента.
  * @author ViiSE
+ * @see lightsearch.server.cmd.client.processor.debug
+ * @since 1.0
  */
 public class MessageRecipientDebugImpl implements MessageRecipient {
 
