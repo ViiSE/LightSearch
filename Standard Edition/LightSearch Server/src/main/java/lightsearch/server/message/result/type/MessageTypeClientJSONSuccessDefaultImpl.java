@@ -19,14 +19,15 @@ package lightsearch.server.message.result.type;
  * Реализация интерфейса {@link lightsearch.server.message.result.type.MessageType}, формирующее сообщение об успехе в
  * формате JSON.
  * <p>
- * Если результат обработки сообщения клиента провальный, то LightSearch Server формирует следующее сообщению клиенту:
- * <code>
+ * Если результат обработки сообщения клиента успешный, то LightSearch Server формирует следующее сообщению клиенту:
+ * <pre> <code>
  *     {
  *         "IMEI":"Значение IMEI",
  *         "is_done":"Значение статуса сообщения (в данном случае - "True")",
  *         "message":"Сообщение об успехе"
  *     }
- * </code>
+ * </code> </pre>
+ * <p>
  * Создание сообщения в формате JSON осуществляется при помощи библиотеки
  * <a href="https://github.com/fangyidong/json-simple">JSON.simple</a>.
  * @author ViiSE

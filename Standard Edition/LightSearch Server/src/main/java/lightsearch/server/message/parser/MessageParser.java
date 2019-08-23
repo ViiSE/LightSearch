@@ -22,7 +22,7 @@ import lightsearch.server.exception.MessageParserException;
  * <p>
  * Используется в обработчиках клиентов и при идентификации клиента.
  * <p>
- * Если произошла ошибка при принятии сообщения, то генерируется исключение
+ * Если произошла ошибка при парсинге сообщения, то генерируется исключение
  * {@link lightsearch.server.exception.MessageParserException}.
  * @author ViiSE
  * @see lightsearch.server.handler.Handler

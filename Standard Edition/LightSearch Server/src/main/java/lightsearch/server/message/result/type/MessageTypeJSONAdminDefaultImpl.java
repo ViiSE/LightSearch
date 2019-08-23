@@ -29,27 +29,27 @@ import org.json.simple.JSONObject;
  * В зависимотсти от присланной команды LightSearch Server формирует разные типы сообщений администратору. Тип сообщения
  * зависит от того, какому классу принадлежит сообщение.
  * Если сообщение - строка ({@link java.lang.String}), то формируется следующее сообщение:
- * <code>
+ * <pre> <code>
  *     {
  *         "name":"Имя администратора",
  *         "is_done":"Значение статуса сообщения ("True" или "False")",
  *         "message":"Результат проделанной операции"
  *     }
- * </code>
+ * </code> </pre>
  * <p>
  * Если сообщение - список ({@link java.util.List}), то формируется следующее сообщение:
- * <code>
+ * <pre> <code>
  *     {
  *         "name":"Имя администратора",
  *         "is_done":"Значение статуса сообщения ("True" или "False")",
  *         "data":["Список", "Элементов"]
  *     }
+ * </code> </pre>
  * <p>
- * </code>
  * Применяется в команде {@link lightsearch.server.cmd.admin.processor.BlacklistRequestProcessor}.
  * <p>
  * Если сообщение - карта ({@link java.util.Map}), то формируется следующее сообщение:
- * <code>
+ * <pre> <code>
  *     {
  *         "name":"Имя администратора",
  *         "is_done":"Значение статуса сообщения ("True" или "False")",
@@ -58,9 +58,10 @@ import org.json.simple.JSONObject;
  *                    "username":"Имя клиента"
  *                ]
  *     }
+ * </code> </pre>
  * <p>
  * Применяется в команде {@link lightsearch.server.cmd.admin.processor.ClientListRequestProcessor}.
- * </code>
+ * <p>
  * Создание сообщения в формате JSON осуществляется при помощи библиотеки
  * <a href="https://github.com/fangyidong/json-simple">JSON.simple</a>.
  * @author ViiSE

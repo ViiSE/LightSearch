@@ -17,13 +17,14 @@ import org.json.simple.JSONObject;
  * формате JSON.
  * <p>
  * Если результат обработки сообщения клиента провальный, то LightSearch Server формирует следующее сообщению клиенту:
- * <code>
+ * <pre> <code>
  *     {
  *         "IMEI":"Значение IMEI",
  *         "is_done":"Значение статуса сообщения (в данном случае - "False")",
  *         "message":"Сообщение об ошибке"
  *     }
- * </code>
+ * </code> </pre>
+ * <p>
  * Создание сообщения в формате JSON осуществляется при помощи библиотеки
  * <a href="https://github.com/fangyidong/json-simple">JSON.simple</a>.
  * @author ViiSE

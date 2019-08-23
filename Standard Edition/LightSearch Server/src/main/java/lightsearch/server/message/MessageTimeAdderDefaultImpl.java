@@ -23,7 +23,7 @@ package lightsearch.server.message;
  * опускается.
  * <p>
  * После проведенного замера времени выполнения блока программы необходимо вызвать метод {@link #clear()} для того,
- * чтобы статическая переменная {@link #isFirst} снова имело значение {@code true}.
+ * чтобы статическая переменная {@link #isFirst} снова имела значение {@code true}.
  * @author ViiSE
  * @see lightsearch.server.message.MessageRecipientDebugImpl
  * @see lightsearch.server.cmd.client.processor.debug
