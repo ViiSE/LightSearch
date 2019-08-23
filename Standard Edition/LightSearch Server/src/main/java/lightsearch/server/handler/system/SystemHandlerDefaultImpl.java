@@ -36,7 +36,7 @@ import lightsearch.server.message.MessageSender;
 import lightsearch.server.message.MessageSenderInit;
 
 /**
- * Обработчик системного бота по умолчанию.
+ * Обработчик системного бота LightSearch по умолчанию.
  * <p>
  * Получает от клиента команду и ее параметры, затем, используя {@link SystemParametersHolder#commandHolder()}, вызывает
  * необходимый обработчик команды и отправляет результат боту.
