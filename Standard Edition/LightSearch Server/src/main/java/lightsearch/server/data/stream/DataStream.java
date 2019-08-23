@@ -19,8 +19,14 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 
 /**
- *
+ * Поток данных, который создается при подключении клиента к LightSearch Server.
+ * <p>
+ * Необходим для создания экземпляров реализаций интерфейсов {@link lightsearch.server.message.MessageSender} и
+ * {@link lightsearch.server.message.MessageRecipient}, которые используются клиентами LightSearch Server.
  * @author ViiSE
+ * @see java.io.DataInputStream
+ * @see java.io.DataOutputStream
+ * @since 1.0
  */
 public interface DataStream {
     DataInputStream dataInputStream();

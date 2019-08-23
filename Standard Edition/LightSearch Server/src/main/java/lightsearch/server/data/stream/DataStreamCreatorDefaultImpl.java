@@ -22,8 +22,13 @@ import java.net.Socket;
 import lightsearch.server.exception.DataStreamCreatorException;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.data.stream.DataStreamCreator} по умолчанию.
+ * <p>
+ * Создает поток данных из сокета.
  * @author ViiSE
+ * @see java.net.Socket
+ * @see lightsearch.server.data.stream.DataStream
+ * @since 2.0
  */
 public class DataStreamCreatorDefaultImpl implements DataStreamCreator {
 

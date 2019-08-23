@@ -16,9 +16,15 @@
 package lightsearch.server.data.stream;
 
 import java.io.*;
+
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.data.stream.DataStream} по умолчанию.
+ * <p>
+ * Перед тем, как создавать экземпляр этого класса, необходимо в экземпляре
+ * {@link lightsearch.server.data.stream.DataStreamCreator} вызвать метод {@link DataStreamCreator#createDataStream()}
+ * для создания потока данных.
  * @author ViiSE
+ * @since 2.0
  */
 public class DataStreamDefaultImpl implements DataStream {
     

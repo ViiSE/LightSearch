@@ -20,8 +20,14 @@ import java.io.DataOutputStream;
 import lightsearch.server.exception.DataStreamCreatorException;
 
 /**
- *
+ * Создает поток данных {@link lightsearch.server.data.stream.DataStream} при подключении клиента к LightSearch Server.
+ * <p>
+ * Если поток данных не удалось создать, то генерируется исключение
+ * {@link lightsearch.server.exception.DataStreamCreatorException}.
  * @author ViiSE
+ * @see java.io.DataInputStream
+ * @see java.io.DataOutputStream
+ * @since 1.0
  */
 public interface DataStreamCreator {
     void createDataStream() throws DataStreamCreatorException;
