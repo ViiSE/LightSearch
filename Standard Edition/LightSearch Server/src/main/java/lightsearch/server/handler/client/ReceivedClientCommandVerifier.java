@@ -19,8 +19,11 @@ import lightsearch.server.cmd.client.ClientCommand;
 import lightsearch.server.exception.ReceivedCommandVerifierException;
 
 /**
- *
+ * Проверяет команду клиента LightSearch на соответствие протоколу команд.
+ * <p>
+ * Если команда не прошла проверку, то генерируется {@link lightsearch.server.exception.ReceivedCommandVerifierException}.
  * @author ViiSE
+ * @since 2.0
  */
 public interface ReceivedClientCommandVerifier {
     void verifyReceivedClientCommand(ClientCommand clientCommand, String IMEI) throws ReceivedCommandVerifierException;

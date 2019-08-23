@@ -19,8 +19,11 @@ import lightsearch.server.cmd.client.ClientCommand;
 import lightsearch.server.exception.ReceivedCommandVerifierException;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.handler.client.ReceivedClientCommandVerifier} по умолчанию.
+ * <p>
+ * Проверяет команду и IMEI клиента на {@code null}, и сравнивает IMEI клиента с IMEI клиента, присланного в сообщении.
  * @author ViiSE
+ * @since 2.0
  */
 public class ReceivedClientCommandVerifierDefaultImpl implements ReceivedClientCommandVerifier {
 

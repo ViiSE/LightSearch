@@ -40,8 +40,12 @@ import lightsearch.server.data.LightSearchServerDTO;
 import lightsearch.server.log.LogMessageTypeEnum;
 
 /**
- *
+ * Обработчик администратора LightSearch Server по умолчанию.
+ * <p>
+ * Получает от клиента команду и ее параметры, затем, используя {@link ClientParametersHolder#commandHolder()},
+ * вызывает необходимый обработчик команды и отправляет результат клиенту.
  * @author ViiSE
+ * @since 2.0
  */
 public class ClientHandlerDefaultImpl extends Handler {
 
