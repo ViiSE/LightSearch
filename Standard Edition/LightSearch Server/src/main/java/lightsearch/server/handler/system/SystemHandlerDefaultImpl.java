@@ -36,8 +36,12 @@ import lightsearch.server.message.MessageSender;
 import lightsearch.server.message.MessageSenderInit;
 
 /**
- *
+ * Обработчик системного бота по умолчанию.
+ * <p>
+ * Получает от клиента команду и ее параметры, затем, используя {@link SystemParametersHolder#commandHolder()}, вызывает
+ * необходимый обработчик команды и отправляет результат боту.
  * @author ViiSE
+ * @since 2.0
  */
 public class SystemHandlerDefaultImpl extends Handler {
 
