@@ -71,6 +71,11 @@ package lightsearch.server.thread;
  * }
  * </code> </pre>
  * <p>
+ * Применение смотрите в исходном коде обработчиков команд клиентов:
+ * <a href="https://github.com/ViiSE/LightSearch/blob/master/Standard%20Edition/LightSearch%20Server/src/main/java/lightsearch/server/handler/admin/AdminHandlerDefaultImpl.java">здесь</a>,
+ * <a href="https://github.com/ViiSE/LightSearch/blob/master/Standard%20Edition/LightSearch%20Server/src/main/java/lightsearch/server/handler/client/ClientHandlerDefaultImpl.java">здесь</a>,
+ * и
+ * <a href="https://github.com/ViiSE/LightSearch/blob/master/Standard%20Edition/LightSearch%20Server/src/main/java/lightsearch/server/handler/system/SystemHandlerDefaultImpl.java">здесь</a>,
  * Поле {@code isWorked} должно менятся извне другим, управляющим потоком. Для более удобного управления потоками в
  * данном пакете реализованы необходимые интерфейсы.
  * @author ViiSE
