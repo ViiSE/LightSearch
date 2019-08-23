@@ -38,8 +38,12 @@ import lightsearch.server.data.LightSearchServerDTO;
 import lightsearch.server.log.LogMessageTypeEnum;
 
 /**
- *
+ * Обработчик администратора LightSearch Server по умолчанию.
+ * <p>
+ * Получает от администратора команду и ее параметры, затем, используя {@link AdminParametersHolder#commandHolder()},
+ * вызывает необходимый обработчик команды и отправляет результат администратору.
  * @author ViiSE
+ * @since 2.0
  */
 public class AdminHandlerDefaultImpl extends Handler {
 

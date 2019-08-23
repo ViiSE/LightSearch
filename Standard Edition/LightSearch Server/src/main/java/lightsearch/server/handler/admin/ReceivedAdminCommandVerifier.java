@@ -19,8 +19,11 @@ import lightsearch.server.cmd.admin.AdminCommand;
 import lightsearch.server.exception.ReceivedCommandVerifierException;
 
 /**
- *
+ * Проверяет команду администратора LightSearch на соответствие протоколу команд.
+ * <p>
+ * Если команда не прошла проверку, то генерируется {@link lightsearch.server.exception.ReceivedCommandVerifierException}.
  * @author ViiSE
+ * @since 2.0
  */
 public interface ReceivedAdminCommandVerifier {
     void verifyReceivedAdminCommand(AdminCommand admCommand, String name) throws ReceivedCommandVerifierException;

@@ -19,8 +19,12 @@ import lightsearch.server.cmd.admin.AdminCommand;
 import lightsearch.server.exception.ReceivedCommandVerifierException;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.handler.admin.ReceivedAdminCommandVerifier} по умолчанию.
+ * <p>
+ * Проверяет команду и имя администратора на {@code null}, и сравнивает имя администратора с именем администратора,
+ * присланного в сообщении.
  * @author ViiSE
+ * @since 2.0
  */
 public class ReceivedAdminCommandVerifierDefaultImpl implements ReceivedAdminCommandVerifier {
 
