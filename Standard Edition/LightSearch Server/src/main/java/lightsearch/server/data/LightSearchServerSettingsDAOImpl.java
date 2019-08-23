@@ -16,8 +16,9 @@
 package lightsearch.server.data;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.data.LightSearchServerSettingsDAO}.
  * @author ViiSE
+ * @since 2.0
  */
 public class LightSearchServerSettingsDAOImpl implements LightSearchServerSettingsDAO {
 

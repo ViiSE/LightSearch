@@ -16,16 +16,36 @@
 package lightsearch.server.data;
 
 /**
- *
+ * DAO администратора LightSearch Server.
  * @author ViiSE
+ * @see lightsearch.server.cmd.admin.AdminCommand
+ * @see lightsearch.server.cmd.admin.processor.AuthenticationProcessor
+ * @see lightsearch.server.handler.admin
+ * @since 2.0
  */
 public interface AdminDAO {
     String name();
+    /**
+     * Проверяет, в первый ли раз администратор делает попытку авотризации или нет.
+     * @return Результат проверки.
+     */
     boolean isFirst();
+    /**
+     * @return Количество сделанных попыток авторизации в LightSearch Server.
+     */
     short tryNumber();
+    /**
+     * @return Количество попыток авторизации в LightSearch Server, которые может сделать администратор.
+     */
     short maxTryNumber();
-    
     void setName(String name);
+    /**
+     * Устанавливает, в первый ли раз администратор делает попытку авторизации или нет.
+     * @param isFirst указывает, в первый ли раз администратор делает попытку авторизации или нет.
+     */
     void setIsFirst(boolean isFirst);
+    /**
+     * Инкрементирует количество сделанных попыток авторизации в LightSearch Server.
+     */
     void incrementTryNumber();
 }

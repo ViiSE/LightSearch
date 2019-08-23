@@ -19,8 +19,10 @@ import lightsearch.server.thread.ThreadManager;
 import lightsearch.server.time.CurrentDateTime;
 
 /**
- *
+ * DTO обработчика системного бота LightSearch Server.
  * @author ViiSE
+ * @see lightsearch.server.handler.processor.HandlerCreatorSystemProcessor
+ * @since 2.0
  */
 public interface SystemHandlerDTO {
     SystemParametersHolder systemParametersHolder();

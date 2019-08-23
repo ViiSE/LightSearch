@@ -16,8 +16,14 @@
 package lightsearch.server.data;
 
 /**
- *
+ * Контейнер параметров потока LightSearch Server.
  * @author ViiSE
+ * @see lightsearch.server.thread
+ * @see lightsearch.server.data.AdminHandlerDTO
+ * @see lightsearch.server.data.ClientHandlerDTO
+ * @see lightsearch.server.data.SystemHandlerDTO
+ * @see lightsearch.server.handler.Handler
+ * @since 2.0
  */
 public interface ThreadParametersHolder {
     String id();

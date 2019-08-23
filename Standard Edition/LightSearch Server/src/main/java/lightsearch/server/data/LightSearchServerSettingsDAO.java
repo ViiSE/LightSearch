@@ -16,8 +16,10 @@
 package lightsearch.server.data;
 
 /**
- *
+ * DAO настроек LightSearch Server.
  * @author ViiSE
+ * @see lightsearch.server.data.LightSearchServerDTO
+ * @since 2.0
  */
 public interface LightSearchServerSettingsDAO {
     int serverRebootValue();

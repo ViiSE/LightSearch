@@ -16,8 +16,10 @@
 package lightsearch.server.data;
 
 /**
- *
+ * DTO базы данных, к которой подключается LightSearch Server.
  * @author ViiSE
+ * @see lightsearch.server.database
+ * @since 2.0
  */
 public interface LightSearchServerDatabaseDTO {
     String dbIP();

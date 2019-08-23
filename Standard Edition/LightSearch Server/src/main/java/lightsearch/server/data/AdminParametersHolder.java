@@ -23,8 +23,10 @@ import lightsearch.server.cmd.result.CommandResult;
 import lightsearch.server.data.stream.DataStream;
 
 /**
- *
+ * Контейнер параметров администратора LightSearch Server.
  * @author ViiSE
+ * @see lightsearch.server.handler.admin
+ * @since 2.0
  */
 public interface AdminParametersHolder {
     Socket adminSocket();

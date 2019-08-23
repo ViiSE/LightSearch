@@ -33,7 +33,7 @@ public class LightSearchListenerDTOInit {
             DatabaseRecordIdentifier databaseRecordIdentifier,
             DatabaseRecordIdentifierWriter databaseRecordIdentifierWriter,
             TimersIDEnum timerRebootId) {
-        return new LightSearchListenerDTOdefaultImpl(checker, currentDateTime, threadManager,
+        return new LightSearchListenerDTODefaultImpl(checker, currentDateTime, threadManager,
                 databaseRecordIdentifier, databaseRecordIdentifierWriter, timerRebootId);
     }
 }

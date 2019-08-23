@@ -23,10 +23,11 @@ import lightsearch.server.time.CurrentDateTime;
 import lightsearch.server.timer.TimersIDEnum;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.data.LightSearchListenerDTO} по умолчанию.
  * @author ViiSE
+ * @since 2.0
  */
-public class LightSearchListenerDTOdefaultImpl implements LightSearchListenerDTO {
+public class LightSearchListenerDTODefaultImpl implements LightSearchListenerDTO {
 
     private final LightSearchChecker checker;
     private final CurrentDateTime currentDateTime;
@@ -35,7 +36,7 @@ public class LightSearchListenerDTOdefaultImpl implements LightSearchListenerDTO
     private final DatabaseRecordIdentifierWriter databaseRecordIdentifierWriter;
     private final TimersIDEnum timerRebootId;
     
-    public LightSearchListenerDTOdefaultImpl(LightSearchChecker checker, CurrentDateTime currentDateTime,
+    public LightSearchListenerDTODefaultImpl(LightSearchChecker checker, CurrentDateTime currentDateTime,
                                              ThreadManager threadManager, DatabaseRecordIdentifier databaseRecordIdentifier,
                                              DatabaseRecordIdentifierWriter databaseRecordIdentifierWriter, TimersIDEnum timerRebootId) {
         this.checker = checker;

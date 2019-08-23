@@ -23,8 +23,14 @@ import lightsearch.server.time.CurrentDateTime;
 import lightsearch.server.timer.TimersIDEnum;
 
 /**
- *
+ * DTO принимающего новые соединения LightSearch Server.
  * @author ViiSE
+ * @see lightsearch.server.listener.LightSearchServerListener
+ * @see lightsearch.server.handler
+ * @see lightsearch.server.cmd.admin
+ * @see lightsearch.server.cmd.client
+ * @see lightsearch.server.cmd.system
+ * @since 2.0
  */
 public interface LightSearchListenerDTO {
     LightSearchChecker checker();

@@ -19,8 +19,9 @@ import lightsearch.server.thread.ThreadManager;
 import lightsearch.server.time.CurrentDateTime;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.data.AdminHandlerDTO} по умолчанию.
  * @author ViiSE
+ * @since 2.0
  */
 public class AdminHandlerDTODefaultImpl implements AdminHandlerDTO {
 

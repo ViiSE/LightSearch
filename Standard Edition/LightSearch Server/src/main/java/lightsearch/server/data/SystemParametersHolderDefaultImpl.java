@@ -23,8 +23,9 @@ import lightsearch.server.cmd.system.SystemCommand;
 import lightsearch.server.data.stream.DataStream;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.data.SystemParametersHolder} по умолчанию.
  * @author ViiSE
+ * @since 2.0
  */
 public class SystemParametersHolderDefaultImpl implements SystemParametersHolder {
     

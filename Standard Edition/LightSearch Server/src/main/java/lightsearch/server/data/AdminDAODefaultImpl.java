@@ -16,8 +16,11 @@
 package lightsearch.server.data;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.data.AdminDAO} по умолчанию.
+ * <p>
+ * Количество попыток авторизации администратора определяет поле {@link #MAX_TRY}.
  * @author ViiSE
+ * @since 2.0
  */
 public class AdminDAODefaultImpl implements AdminDAO {
 
@@ -31,6 +34,10 @@ public class AdminDAODefaultImpl implements AdminDAO {
         return name;
     }
 
+    /**
+     * Проверяет, в первый ли раз администратор делает попытку авотризации или нет.
+     * @return {@code false}, если администратор прошел авторизацию на LightSearch Server, иначе - {@code true}.
+     */
     @Override
     public boolean isFirst() {
         return isFirst;
@@ -41,6 +48,10 @@ public class AdminDAODefaultImpl implements AdminDAO {
         this.name = name;
     }
 
+    /**
+     * Устанавливает, в первый ли раз администратор делает попытку авторизации или нет.
+     * @param isFirst {@code false}, если администратор прошел авторизацию на LightSearch Server, иначе - {@code true}.
+     */
     @Override
     public void setIsFirst(boolean isFirst) {
         this.isFirst = isFirst;

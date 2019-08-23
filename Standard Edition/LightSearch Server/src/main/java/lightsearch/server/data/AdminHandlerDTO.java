@@ -19,8 +19,10 @@ import lightsearch.server.thread.ThreadManager;
 import lightsearch.server.time.CurrentDateTime;
 
 /**
- *
+ * DTO обработчика администратора LightSearch Servers.
  * @author ViiSE
+ * @see lightsearch.server.handler.processor.HandlerCreatorAdminProcessor
+ * @since 2.0
  */
 public interface AdminHandlerDTO {
     AdminParametersHolder adminParametersHolder();

@@ -16,8 +16,9 @@
 package lightsearch.server.data;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.data.ThreadParametersHolder} по умолчанию.
  * @author ViiSE
+ * @since 2.0
  */
 public class ThreadParametersHolderDefaultImpl implements ThreadParametersHolder {
 

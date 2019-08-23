@@ -23,8 +23,10 @@ import lightsearch.server.cmd.system.SystemCommand;
 import lightsearch.server.data.stream.DataStream;
 
 /**
- *
+ * Контейнер параметров системного бота LightSearch Server.
  * @author ViiSE
+ * @see lightsearch.server.handler.system
+ * @since 2.0
  */
 public interface SystemParametersHolder {
     Socket systemSocket();

@@ -19,8 +19,17 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
+ * DTO LightSearch Server.
  * @author ViiSE
+ * @see lightsearch.server.cmd
+ * @see lightsearch.server.cmd.admin
+ * @see lightsearch.server.cmd.client
+ * @see lightsearch.server.cmd.system
+ * @see lightsearch.server.handler
+ * @see lightsearch.server.handler.processor
+ * @see lightsearch.server.identifier
+ * @see lightsearch.server.listener
+ * @since 2.0
  */
 public interface LightSearchServerDTO {
     Map<String, String> admins();

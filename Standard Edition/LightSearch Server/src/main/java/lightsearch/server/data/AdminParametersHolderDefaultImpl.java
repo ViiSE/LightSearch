@@ -23,8 +23,9 @@ import lightsearch.server.cmd.result.CommandResult;
 import lightsearch.server.data.stream.DataStream;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.data.AdminParametersHolder} по умолчанию.
  * @author ViiSE
+ * @since 2.0
  */
 public class AdminParametersHolderDefaultImpl implements AdminParametersHolder {
 

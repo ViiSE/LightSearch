@@ -19,8 +19,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.data.LightSearchServerDTO}.
  * @author ViiSE
+ * @since 2.0
  */
 public class LightSearchServerDTOImpl implements LightSearchServerDTO {
 

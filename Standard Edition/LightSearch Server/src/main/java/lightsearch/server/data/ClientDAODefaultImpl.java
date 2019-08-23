@@ -18,8 +18,9 @@ package lightsearch.server.data;
 import lightsearch.server.database.DatabaseConnection;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.data.ClientDAO} по умолчанию.
  * @author ViiSE
+ * @since 2.0
  */
 public class ClientDAODefaultImpl implements ClientDAO {
 
