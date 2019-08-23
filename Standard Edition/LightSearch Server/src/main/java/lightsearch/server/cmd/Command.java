@@ -16,8 +16,21 @@
 package lightsearch.server.cmd;
 
 /**
- *
+ * Команда клиента LightSearch Server.
+ * <p>
+ * Общение между клиентами и LightSearch Server происходит через шаблон проектирования 'Команда'. Клиенты отправляют
+ * команды и соответствующие этим командам параметры. LightSearch Server считывает название команды, вызывает ее
+ * обработчик, и отправляет результат клиенту.
+ * <p>
+ * У любой команды в LightSearch Server есть название. Без названия команда не сможет выполниться. Если клиент прислал
+ * команду без названия, то LightSearch Server отключит этого клиента от текущего сеанса.
+ * <p>
+ * Для создания новой команды необходимо реализовывать этот интерфейс.
  * @author ViiSE
+ * @see lightsearch.server.cmd.admin.AdminCommand
+ * @see lightsearch.server.cmd.client.ClientCommand
+ * @see lightsearch.server.cmd.system.SystemCommand
+ * @since 1.0
  */
 public interface Command {
     String command();
