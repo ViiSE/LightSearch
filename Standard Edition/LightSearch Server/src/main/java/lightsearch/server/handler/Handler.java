@@ -22,8 +22,21 @@ import lightsearch.server.time.CurrentDateTime;
 import lightsearch.server.data.LightSearchServerDTO;
 
 /**
- *
+ * Абстрактный класс обработчика клиента LightSearch Server.
+ * <p>
+ * Для каждого клиента LightSearch Server создается обработчик команд. Обработчик принимает команды от клиента и
+ * вызывает соответствующий обработчик команды, возвращая результат клиенту.
+ * <p>
+ * Обработчик следит за завершением работы клиента и завершением работы потока, а также проверяет команды на соблюдения
+ * протокола. Для этого он использует необходимые интерфейсы.
  * @author ViiSE
+ * @see lightsearch.server.data.ThreadParametersHolder
+ * @see lightsearch.server.data.LightSearchServerDTO
+ * @see lightsearch.server.log.LoggerServer
+ * @see lightsearch.server.data.LightSearchServerDTO
+ * @see lightsearch.server.time.CurrentDateTime
+ * @see lightsearch.server.thread.ThreadManager
+ * @since 2.0
  */
 public abstract class Handler implements Runnable {
     
