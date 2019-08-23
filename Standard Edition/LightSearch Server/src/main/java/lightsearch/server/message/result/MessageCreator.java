@@ -16,8 +16,14 @@
 package lightsearch.server.message.result;
 
 /**
- *
+ * Создает сообщение для клиента LightSearch Server'а.
+ * <p>
+ * Используется в обработчиках команд клиентов и администраторов. Создает сообщение, которое затем может быть отправлено
+ * при помощи {@link lightsearch.server.message.MessageSender}.
  * @author ViiSE
+ * @see lightsearch.server.cmd.client.processor.AbstractProcessorClient
+ * @see lightsearch.server.cmd.admin.processor.AbstractProcessorAdmin
+ * @since 1.0
  */
 public interface MessageCreator {
     String createMessage(String name, ResultTypeMessageEnum isDone, Object message);

@@ -19,8 +19,16 @@ import lightsearch.server.identifier.IdentifierEnum;
 import org.json.simple.JSONObject;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.message.result.DeviceInformation}, принимающая сообщение, которое
+ * содержит информацию о подключаемом клиенте в формате JSON.
+ * <p>
+ * Из сообщения, которое пришло от клиента, LightSearch Server достает идентификатор клиента, который в дальнейшем
+ * используется для создания соответствующего обработчика клиента.
+ * <p>
+ * Для получения идентификатора клиента из сообщения в формате JSON используется библиотека
+ * <a href="https://github.com/fangyidong/json-simple">JSON.simple</a>.
  * @author ViiSE
+ * @since 1.0
  */
 public class DeviceInformationJSONImpl implements DeviceInformation {
 

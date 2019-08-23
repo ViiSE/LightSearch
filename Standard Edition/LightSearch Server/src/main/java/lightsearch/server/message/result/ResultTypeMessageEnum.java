@@ -16,8 +16,9 @@
 package lightsearch.server.message.result;
 
 /**
- *
+ * Константы для результирующего поля "is_done" сообщения клиента.
  * @author ViiSE
+ * @since 1.0
  */
 public enum ResultTypeMessageEnum {
     TRUE {
