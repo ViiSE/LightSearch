@@ -18,8 +18,15 @@ package lightsearch.server.cmd.admin;
 import lightsearch.server.cmd.Command;
 
 /**
- *
+ * Команда администратора LightSearch Server.
+ * <p>
+ * Содержит все необходимые параметры для всех команд администратора.
+ * <p>
+ * Применяется как аргумент метода <code>apply()</code> обработчиков команд администратора LightSearch Server.
  * @author ViiSE
+ * @see lightsearch.server.handler.admin
+ * @see lightsearch.server.cmd.admin.processor
+ * @since 1.0
  */
 public interface AdminCommand extends Command {
     String name();

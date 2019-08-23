@@ -18,8 +18,14 @@ package lightsearch.server.cmd.admin;
 import lightsearch.server.exception.CommandConverterException;
 
 /**
- *
+ * Конвертирует строку в команду администратора.
+ * <p>
+ * Конвертирует сообщение администратора в {@link lightsearch.server.cmd.admin.AdminCommand}.
+ * Если произошла ошибка при конвертации сообщения, то генерируется исключение
+ * {@link lightsearch.server.exception.CommandConverterException}.
  * @author ViiSE
+ * @see lightsearch.server.handler.admin
+ * @since 1.0
  */
 public interface AdminCommandConverter {
     AdminCommand convertToAdminCommand(String message) throws CommandConverterException;

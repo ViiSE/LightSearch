@@ -18,8 +18,16 @@ package lightsearch.server.cmd.admin;
 import org.json.simple.JSONObject;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.cmd.admin.AdminCommand}, в котором команда приходит от администратора
+ * в формате JSON.
+ * <p>
+ * Из сообщения, которое пришло от администратора, LightSearch Server достает все необходимые данные команд,
+ * согласно протоколу.
+ * <p>
+ * Для получения данных администратора из сообщения в формате JSON используется библиотека
+ * <a href="https://github.com/fangyidong/json-simple">JSON.simple</a>.
  * @author ViiSE
+ * @since 1.0
  */
 public class AdminCommandDefaultJSONImpl implements AdminCommand {
 

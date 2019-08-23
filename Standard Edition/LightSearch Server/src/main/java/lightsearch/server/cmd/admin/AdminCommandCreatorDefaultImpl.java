@@ -37,8 +37,12 @@ import lightsearch.server.log.LoggerServer;
 import lightsearch.server.data.LightSearchServerDTO;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.cmd.admin.AdminCommandCreator} по умолчанию.
+ * <p>
+ * Все команды создаются согласно протоколу.
  * @author ViiSE
+ * @see lightsearch.server.cmd.admin.AdminCommandContentEnum
+ * @since 1.0
  */
 public class AdminCommandCreatorDefaultImpl implements AdminCommandCreator {
 
