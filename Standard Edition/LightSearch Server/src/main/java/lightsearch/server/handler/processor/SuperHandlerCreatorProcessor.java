@@ -24,8 +24,15 @@ import lightsearch.server.identifier.HandlerIdentifier;
 import lightsearch.server.log.LoggerServer;
 
 /**
- *
+ * Абстрактный класс создания обработчика клиента LightSearch Server.
+ * <p>
  * @author ViiSE
+ * @see lightsearch.server.listener.LightSearchServerListener
+ * @see lightsearch.server.handler.HandlerCreator
+ * @see lightsearch.server.handler.processor.HandlerCreatorAdminProcessor
+ * @see lightsearch.server.handler.processor.HandlerCreatorClientProcessor
+ * @see lightsearch.server.handler.processor.HandlerCreatorSystemProcessor
+ * @since 2.0
  */
 public abstract class SuperHandlerCreatorProcessor implements Function<Void, Handler> {
     private final ConnectionIdentifierResult identifierResult;

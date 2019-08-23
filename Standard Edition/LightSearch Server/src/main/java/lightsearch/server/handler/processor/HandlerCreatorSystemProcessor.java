@@ -37,8 +37,12 @@ import lightsearch.server.log.LoggerServer;
 import lightsearch.server.thread.LightSearchThreadID;
 
 /**
- *
+ * Обработчик команды создания обработчика системного бота LightSearch Server.
+ * <p>
  * @author ViiSE
+ * @see lightsearch.server.listener.LightSearchServerListener
+ * @see lightsearch.server.handler.HandlerCreator
+ * @since 2.0
  */
 public class HandlerCreatorSystemProcessor extends SuperHandlerCreatorProcessor {
     
