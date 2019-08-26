@@ -18,8 +18,16 @@ package lightsearch.server.cmd.result;
 import lightsearch.server.log.LogMessageTypeEnum;
 
 /**
- *
+ * Результат команды клиентов LightSearch Server.
+ * Все клиенты LightSearch Server получают ответ от LightSearch Server в виде результата проделанной команды. Это
+ * сообщение возвращает метод {@link #message()}. Для сообщения в лог LightSearch Server применяется метод
+ * {@link #logMessage()}, и для определения типа сообщения лога - {@link #logMessage()}.
  * @author ViiSE
+ * @see lightsearch.server.log.LogMessageTypeEnum
+ * @see lightsearch.server.handler.admin
+ * @see lightsearch.server.handler.client
+ * @see lightsearch.server.handler.system
+ * @since 1.0
  */
 public interface CommandResult {
     String message();
