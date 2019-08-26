@@ -18,8 +18,21 @@ package lightsearch.server.database;
 import java.sql.Connection;
 
 /**
- *
+ * Соединение с базой данных.
+ * <p>
+ * Для работы LightSearch Server в базе данных предприятия необходимо завести две таблицы: LS_REQUEST и LS_RESPONSE.
+ * В LS_REQUEST LightSearch Server записывает команды клиента, в LS_RESPONSE программа предприятия, реализующая бизнес-
+ * логику, записывает результаты команд. Более подробное описание и структуры таблиц определяется в
+ * <a href="https://github.com/ViiSE/LightSearch/blob/master/Documents/Protocol/LightSearch%20Protocol.txt">протоколе</a>.
+ * <p>
+ * Используется при отправке команд и считывании их результатов.
  * @author ViiSE
+ * @see lightsearch.server.data.ClientDAO
+ * @see lightsearch.server.database.DatabaseReader
+ * @see lightsearch.server.database.DatabaseWriter
+ * @see lightsearch.server.database.statement.DatabasePreparedStatement
+ * @see lightsearch.server.database.statement.DatabaseStatementExecutor
+ * @since 1.0
  */
 public interface DatabaseConnection {
     Connection connection();

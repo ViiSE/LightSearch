@@ -18,8 +18,11 @@ package lightsearch.server.database;
 import java.sql.Connection;
 
 /**
- *
+ * Соединение с СУБД <a href=https://firebirdsql.org/>Firebird</a> по умолчанию.
  * @author ViiSE
+ * @see lightsearch.server.database.DatabaseConnection
+ * @see lightsearch.server.database.DatabaseConnectionCreator
+ * @since 1.0
  */
 public class DatabaseConnectionFirebirdDefaultImpl implements DatabaseConnection {
 

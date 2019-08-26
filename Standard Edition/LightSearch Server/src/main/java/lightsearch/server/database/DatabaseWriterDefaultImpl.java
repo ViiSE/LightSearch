@@ -23,8 +23,15 @@ import lightsearch.server.database.statement.result.DatabaseStatementResultSetUp
 import lightsearch.server.exception.DatabaseStatementResultSetException;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.database.DatabaseWriter} по умолчанию.
+ * <p>
+ * Записывает в таблицу LS_REQUEST команду клиента. Команда как есть(то есть точно такая, которая пришла от клиента в
+ * том же формате) записывается в поле CMD_IN таблицы LS_REQUEST. Значение поля {@code STATE} записывается значением
+ * {@code true}. Это необходимо для того, чтобы программа предприятия знала, что данная команда готова к обработке.
  * @author ViiSE
+ * @see lightsearch.server.database.statement.DatabasePreparedStatement
+ * @see lightsearch.server.database.statement.result.DatabaseStatementResult
+ * @since 2.0
  */
 public class DatabaseWriterDefaultImpl implements DatabaseWriter {
 

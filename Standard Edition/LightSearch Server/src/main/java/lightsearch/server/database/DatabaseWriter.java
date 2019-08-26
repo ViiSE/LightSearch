@@ -18,8 +18,14 @@ package lightsearch.server.database;
 import lightsearch.server.exception.DatabaseWriterException;
 
 /**
- *
+ * Записывает данные в таблицу базы данных.
+ * <p>
+ * Записывает команду в таблицу базы данных.
+ * <p>
+ * В случае ошибки считывания генерируется исключение {@link lightsearch.server.exception.DatabaseWriterException}.
  * @author ViiSE
+ * @see lightsearch.server.database.statement.DatabaseStatementExecutor
+ * @since 2.0
  */
 public interface DatabaseWriter {
     void write() throws DatabaseWriterException;

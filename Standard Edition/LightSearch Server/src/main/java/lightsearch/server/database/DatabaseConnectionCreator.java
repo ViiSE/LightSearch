@@ -18,8 +18,16 @@ package lightsearch.server.database;
 import lightsearch.server.exception.DatabaseConnectionCreatorException;
 
 /**
- *
+ * Создает соединение с базой данных.
+ * <p>
+ * Создает соединение для конкретной СУБД.
+ * <p>
+ * Для создания соединений с другими СУБД необходимо добавить новые методы для соответствующих СУБД в этот интерфейс.
+ * <p>
+ * В случае ошибки создания соединения генерируется исключение
+ * {@link lightsearch.server.exception.DatabaseConnectionCreatorException}.
  * @author ViiSE
+ * @since 1.0
  */
 public interface DatabaseConnectionCreator {
     DatabaseConnection createFirebirdConnection() throws DatabaseConnectionCreatorException;

@@ -26,8 +26,15 @@ import lightsearch.server.exception.DatabaseStatementResultSetException;
 import lightsearch.server.time.CurrentDateTimePattern;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.database.DatabaseReader} по умолчанию.
+ * <p>
+ * Считывает из таблицы LS_RESPONSE результат команды клиента. После успешного считывания изменяет значение поля
+ * {@code STATE} с {@code false} на  {@code true}. Это необходимо для того, чтобы программа предприятия знала, что данная
+ * команда была успешно считана.
  * @author ViiSE
+ * @see lightsearch.server.database.statement.DatabasePreparedStatement
+ * @see lightsearch.server.database.statement.result.DatabaseStatementResult
+ * @since 2.0
  */
 public class DatabaseReaderDefaultImpl implements DatabaseReader {
 

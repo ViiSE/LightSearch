@@ -16,8 +16,9 @@
 package lightsearch.server.database;
 
 /**
- *
+ * Имена таблиц, с которыми работает LightSearch Server.
  * @author ViiSE
+ * @since 2.0
  */
 public enum DatabaseTableEnum {
     LS_REQUEST {

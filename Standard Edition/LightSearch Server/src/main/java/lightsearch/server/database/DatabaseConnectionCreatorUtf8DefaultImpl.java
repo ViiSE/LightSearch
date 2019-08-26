@@ -22,8 +22,9 @@ import lightsearch.server.data.LightSearchServerDatabaseDTO;
 import lightsearch.server.exception.DatabaseConnectionCreatorException;
 
 /**
- *
+ * Создает соединение с СУБД <a href=https://firebirdsql.org/>Firebird</a> с кодировкой UTF-8.
  * @author ViiSE
+ * @since 1.0
  */
 public class DatabaseConnectionCreatorUtf8DefaultImpl implements DatabaseConnectionCreator {
 

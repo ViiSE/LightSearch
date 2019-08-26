@@ -18,8 +18,14 @@ package lightsearch.server.database;
 import lightsearch.server.exception.DatabaseReaderException;
 
 /**
- *
+ * Читает данные из таблицы базы данных.
+ * <p>
+ * Считывает результат команды из таблицы базы данных.
+ * <p>
+ * В случае ошибки считывания генерируется исключение {@link lightsearch.server.exception.DatabaseReaderException}.
  * @author ViiSE
+ * @see lightsearch.server.database.statement.DatabaseStatementExecutor
+ * @since 2.0
  */
 public interface DatabaseReader {
     String read() throws DatabaseReaderException;
