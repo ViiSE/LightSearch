@@ -22,8 +22,8 @@ import lightsearch.server.cmd.result.CommandResult;
 /**
  * Создает обработчики команд администратора LightSearch Server.
  * <p>
- * Все команды администратора, которые должны обрабатываться LightSearch Server, помещаются в держатель команд. Команды
- * из держателя берутся по имени команды.
+ * Все команды администратора, которые должны обрабатываться LightSearch Server, помещаются в контейнер команд. Команды
+ * из контейнера берутся по имени команды.
  * @author ViiSE
  * @see lightsearch.server.handler.processor
  * @since 1.0
