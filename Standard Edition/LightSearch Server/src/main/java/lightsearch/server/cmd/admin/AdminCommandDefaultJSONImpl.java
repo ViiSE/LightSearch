@@ -18,7 +18,7 @@ package lightsearch.server.cmd.admin;
 import org.json.simple.JSONObject;
 
 /**
- * Реализация интерфейса {@link lightsearch.server.cmd.admin.AdminCommand}, в котором команда приходит от администратора
+ * Реализация интерфейса {@link lightsearch.server.cmd.admin.AdminCommand}, в которой команда приходит от администратора
  * в формате JSON.
  * <p>
  * Из сообщения, которое пришло от администратора, LightSearch Server достает все необходимые данные команд,
