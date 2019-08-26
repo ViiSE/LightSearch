@@ -24,8 +24,11 @@ import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.message.result.ResultTypeMessageEnum;
 
 /**
- *
+ * Обработчик команды закрытия мягкого чека для отладки.
+ * <p>
+ * Для симуляции мягкого чека используется {@link lightsearch.server.cmd.client.processor.debug.SoftCheckDebug}.
  * @author ViiSE
+ * @since 2.0
  */
 public class CloseSoftCheckProcessorDebug extends AbstractProcessorClient {
     

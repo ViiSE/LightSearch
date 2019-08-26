@@ -25,8 +25,13 @@ import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.message.result.ResultTypeMessageEnum;
 
 /**
- *
+ * Обработчик команды авторизации клиента в LightSearch Server для отладки.
+ * <p>
+ * LightSearch Server сам проверяет авторизационные данные клиента и формирует ответ клиенту. В случае успеха
+ * авторизации клиент добавляется в список активных клиентов LightSearch Server.
  * @author ViiSE
+ * @see LightSearchServerDTO#clients()
+ * @since 2.0
  */
 public class AuthenticationProcessorDebug extends AbstractProcessorClient {
     

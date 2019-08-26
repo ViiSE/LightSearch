@@ -13,8 +13,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
+ * Контейнер для отладочных товаров предприятия.
+ * <p>
+ * Интерфейс со статической картой-контейнером, содержащая отладочные товары.
  * @author ViiSE
+ * @see lightsearch.server.cmd.client.processor.debug.ProductDebug
+ * @since 2.0
  */
 public interface ProductsMapDebug {
     

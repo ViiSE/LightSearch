@@ -10,8 +10,10 @@
 package lightsearch.server.cmd.client.processor.debug;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.cmd.client.processor.debug.SoftCheckDebug} по умолчанию.
+ * Мягкий чек статический и один для всех клиентов LightSearch Server.
  * @author ViiSE
+ * @since 2.0
  */
 public class SoftCheckDebugDefaultImpl implements SoftCheckDebug {
 

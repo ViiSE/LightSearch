@@ -29,8 +29,11 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 /**
- *
+ * Обработчик команды подтверждения товаров мягкого чека для отладки.
+ * <p>
+ * Для симуляции мягкого чека используется {@link lightsearch.server.cmd.client.processor.debug.SoftCheckDebug}.
  * @author ViiSE
+ * @since 2.0
  */
 public class ConfirmSoftCheckProductsProcessorDebug extends AbstractProcessorClient {
     

@@ -26,8 +26,10 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 /**
- *
+ * Обработчик команды поиска товара для отладки.
+ * Делает поиск товара в {@link lightsearch.server.cmd.client.processor.debug.ProductsMapDebug}
  * @author ViiSE
+ * @since 2.0
  */
 public class SearchProcessorDebug extends AbstractProcessorClient {
     
