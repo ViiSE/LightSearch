@@ -21,8 +21,11 @@ import lightsearch.server.database.DatabaseConnection;
 import lightsearch.server.exception.DatabasePreparedStatementException;
 
 /**
- *
+ * Создает скомпилированный запрос для чтения команды из таблицы базы данных.
+ * <p>
+ * Чтение происходит по полю {@code LSCODE} и {@code STATE}.
  * @author ViiSE
+ * @since 2.0
  */
 public class DatabasePreparedStatementSelectDefaultImpl implements DatabasePreparedStatement {
 

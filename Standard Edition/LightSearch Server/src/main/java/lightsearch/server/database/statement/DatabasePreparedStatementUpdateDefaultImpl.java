@@ -21,8 +21,11 @@ import lightsearch.server.database.DatabaseConnection;
 import lightsearch.server.exception.DatabasePreparedStatementException;
 
 /**
- *
+ * Создает скомпилированный запрос для обновления команды из таблицы базы данных.
+ * <p>
+ * Обновление происходит по полю {@code LSCODE}.
  * @author ViiSE
+ * @since 2.0
  */
 public class DatabasePreparedStatementUpdateDefaultImpl implements DatabasePreparedStatement {
 

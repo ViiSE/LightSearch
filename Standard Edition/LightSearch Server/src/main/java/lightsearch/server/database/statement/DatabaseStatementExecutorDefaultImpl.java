@@ -28,8 +28,13 @@ import lightsearch.server.database.statement.result.DatabaseStatementResult;
 import lightsearch.server.database.statement.result.DatabaseStatementResultInit;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.database.statement.DatabaseStatementExecutor} по умолчанию.
+ * <p>
+ * Использует {@link lightsearch.server.database.DatabaseWriter} и {@link lightsearch.server.database.DatabaseReader}
+ * для записи команды в таблицу базы данных и чтения результата команды из другой таблицы базы данных соответственно.
  * @author ViiSE
+ * @see lightsearch.server.cmd.client.processor
+ * @since 2.0
  */
 public class DatabaseStatementExecutorDefaultImpl implements DatabaseStatementExecutor {
 

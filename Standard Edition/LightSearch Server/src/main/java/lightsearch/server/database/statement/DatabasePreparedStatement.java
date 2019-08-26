@@ -19,8 +19,12 @@ import java.sql.PreparedStatement;
 import lightsearch.server.exception.DatabasePreparedStatementException;
 
 /**
- *
+ * Скомпилированный запрос в базу данных.
+ * <p>
+ * В случае ошибки при компиляции запроса генерируется исключение
+ * {@link lightsearch.server.exception.DatabasePreparedStatementException}.
  * @author ViiSE
+ * @since 2.0
  */
 public interface DatabasePreparedStatement {
     PreparedStatement preparedStatement() throws DatabasePreparedStatementException;
