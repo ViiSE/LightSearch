@@ -26,8 +26,12 @@ import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.message.result.ResultTypeMessageEnum;
 
 /**
- *
+ * Абстрактный класс обработчика команд системного бота LightSearch Server.
+ * <p>
+ * Все обработчики команд системного бота должны наследоваться от данного класса.
  * @author ViiSE
+ * @see lightsearch.server.cmd.system.SystemCommandCreator
+ * @since 2.0
  */
 public abstract class AbstractProcessorSystem extends SuperAbstractProcessor implements Function<SystemCommand, CommandResult> {
     
