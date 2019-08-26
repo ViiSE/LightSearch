@@ -30,7 +30,7 @@ import lightsearch.server.message.result.ResultTypeMessageEnum;
  * После того, как клиентские боты LightSearch Client Bot завершают свою работу, LightSearch Client Bot создает
  * системного бота, который подключается к серверу и вызывает эту команду. Тогда среднее время замера скорости блока
  * программы сбрасывается, и LightSearch Server готов к новому тестированию через программу
- * <a href=https://github.com/ViiSE/LightSearch/tree/master/Standard%20Edition/LightSearch%20Client%20Bot\javadoc>
+ * <a href=https://github.com/ViiSE/LightSearch/tree/master/Standard%20Edition/LightSearch%20Client%20Bot/javadoc>
  *     LightSearch Client Bot</a>.
  * @author ViiSE
  * @see lightsearch.server.message.MessageTimeAdder
