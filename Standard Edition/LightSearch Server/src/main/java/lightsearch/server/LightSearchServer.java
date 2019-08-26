@@ -61,18 +61,19 @@ import lightsearch.server.timer.TimersIDEnum;
     */
 
 /**
- *
+ * Main класс LightSearch Server.
  * @author ViiSE
+ * @since 1.0.0
  */
 public class LightSearchServer {
     
     /**
-     *
-     * @param argc
+     * Main метод.
+     * @param argc В данный момент нет передаваемых аргументов в командную строку.
      * @throws InterruptedException
      */
     public static void main(String[] argc) throws InterruptedException {
-        System.out.println("LightSearch Server, v. 2.8.0");
+        System.out.println("LightSearch Server, v. 2.8.1");
         System.out.println("Welcome!");
         
         CurrentServerDirectory currentServerDirectory = 
