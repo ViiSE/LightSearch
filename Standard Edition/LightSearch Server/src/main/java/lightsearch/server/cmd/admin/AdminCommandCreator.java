@@ -26,7 +26,6 @@ import lightsearch.server.cmd.result.CommandResult;
  * из держателя берутся по имени команды.
  * @author ViiSE
  * @see lightsearch.server.handler.processor
- * @see lightsearch.server.handler.processor
  * @since 1.0
  */
 public interface AdminCommandCreator {
