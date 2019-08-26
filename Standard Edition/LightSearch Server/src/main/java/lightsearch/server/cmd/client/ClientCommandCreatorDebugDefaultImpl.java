@@ -26,8 +26,13 @@ import lightsearch.server.data.LightSearchListenerDTO;
 import lightsearch.server.data.LightSearchServerDTO;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.cmd.client.ClientCommandConverter} для отладки по умолчанию.
+ * <p>
+ * Создает контейнер отладочных команд клиента LightSearch Server. Все отладочные команды создаются согласно протоколу.
  * @author ViiSE
+ * @see lightsearch.server.cmd.client.processor.debug
+ * @see lightsearch.server.cmd.client.ClientCommandContentEnum
+ * @since 1.0
  */
 public class ClientCommandCreatorDebugDefaultImpl implements ClientCommandCreator {
     private final String CONNECT                     = ClientCommandEnum.CONNECT.stringValue();

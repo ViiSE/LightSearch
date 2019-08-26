@@ -20,8 +20,13 @@ import java.util.function.Function;
 import lightsearch.server.cmd.result.CommandResult;
 
 /**
- *
+ * Создает обработчики команд клиента LightSearch Server.
+ * <p>
+ * Все команды клиента, которые должны обрабатываться LightSearch Server, помещаются в контейнер команд. Команды
+ * из контейнера берутся по имени команды.
  * @author ViiSE
+ * @see lightsearch.server.handler.processor
+ * @since 1.0
  */
 public interface ClientCommandCreator {
     Map<String, Function<ClientCommand, CommandResult>> createCommandHolder();

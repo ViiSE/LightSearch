@@ -18,8 +18,14 @@ package lightsearch.server.cmd.client;
 import lightsearch.server.exception.CommandConverterException;
 
 /**
- *
+ * Конвертирует строку в команду клиента.
+ * <p>
+ * Конвертирует сообщение клиента в {@link lightsearch.server.cmd.client.ClientCommand}.
+ * Если произошла ошибка при конвертации сообщения, то генерируется исключение
+ * {@link lightsearch.server.exception.CommandConverterException}.
  * @author ViiSE
+ * @see lightsearch.server.handler.client
+ * @since 1.0
  */
 public interface ClientCommandConverter {
     ClientCommand convertToClientCommand(String message) throws CommandConverterException;

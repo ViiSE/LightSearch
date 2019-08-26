@@ -30,8 +30,12 @@ import lightsearch.server.data.LightSearchListenerDTO;
 import lightsearch.server.data.LightSearchServerDTO;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.cmd.client.ClientCommandCreator} по умолчанию.
+ * <p>
+ * Все команды создаются согласно протоколу.
  * @author ViiSE
+ * @see lightsearch.server.cmd.client.ClientCommandContentEnum
+ * @since 1.0
  */
 public class ClientCommandCreatorDefaultImpl implements ClientCommandCreator {
 

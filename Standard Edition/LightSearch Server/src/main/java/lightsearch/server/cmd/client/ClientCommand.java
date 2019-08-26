@@ -18,8 +18,15 @@ package lightsearch.server.cmd.client;
 import lightsearch.server.cmd.Command;
 
 /**
- *
+ * Команда клиента LightSearch Server.
+ * <p>
+ * Содержит все необходимые параметры для всех команд клиента.
+ * <p>
+ * Применяется как аргумент метода <code>apply()</code> обработчиков команд клиента LightSearch Server.
  * @author ViiSE
+ * @see lightsearch.server.handler.client
+ * @see lightsearch.server.cmd.client.processor
+ * @since 1.0
  */
 public interface ClientCommand extends Command {
     String IMEI();

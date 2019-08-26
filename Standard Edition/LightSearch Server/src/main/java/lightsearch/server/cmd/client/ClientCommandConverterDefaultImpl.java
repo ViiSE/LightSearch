@@ -21,8 +21,9 @@ import lightsearch.server.message.parser.MessageParserInit;
 import lightsearch.server.exception.MessageParserException;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.cmd.client.ClientCommandConverter} по умолчанию.
  * @author ViiSE
+ * @since 1.0
  */
 public class ClientCommandConverterDefaultImpl implements ClientCommandConverter {
     
