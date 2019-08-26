@@ -27,8 +27,11 @@ import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.message.result.ResultTypeMessageEnum;
 
 /**
- *
+ * Обработчик команды создания нового администратора LightSearch Server.
+ * <p>
+ * Создает нового администратора LightSearch Server.
  * @author ViiSE
+ * @since 1.0
  */
 public class CreateAdminProcessor extends AbstractProcessorAdmin {
 

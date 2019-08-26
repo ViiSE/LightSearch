@@ -23,8 +23,11 @@ import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.message.result.ResultTypeMessageEnum;
 
 /**
- *
+ * Обработчик команды запроса черного списка.
+ * <p>
+ * Присылает черный список администратору.
  * @author ViiSE
+ * @since 1.0
  */
 public class BlacklistRequestProcessor extends AbstractProcessorAdmin {
 

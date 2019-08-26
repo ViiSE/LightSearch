@@ -27,8 +27,11 @@ import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.message.result.ResultTypeMessageEnum;
 
 /**
- *
+ * Обработчик команды удаления клиента LightSearch Server из черного списка.
+ * <p>
+ * Удаляет клиента LightSearch Server из черного списка.
  * @author ViiSE
+ * @since 1.0
  */
 public class DelBlacklistProcessor extends AbstractProcessorAdmin {
 

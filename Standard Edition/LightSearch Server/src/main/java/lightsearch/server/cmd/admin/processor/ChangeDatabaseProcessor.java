@@ -27,8 +27,11 @@ import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.message.result.ResultTypeMessageEnum;
 
 /**
- *
+ * Обработчик команды изменения параметров подключения к базе данных.
+ * <p>
+ * Принимает от администратора такие параметры, как IP-адрес, порт и имя базы данных.
  * @author ViiSE
+ * @since 1.0
  */
 public class ChangeDatabaseProcessor extends AbstractProcessorAdmin {
 

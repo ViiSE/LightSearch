@@ -31,10 +31,12 @@ import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.timer.TimersIDEnum;
 
 /**
- *
+ * Обработчик команды перезагрузки LightSearch Server.
+ * <p>
+ * Немедленно перезагружает LightSearch Server.
  * @author ViiSE
+ * @since 1.0
  */
-
 public class RestartProcessor extends AbstractProcessorAdmin {
 
     private final LoggerServer logger;

@@ -24,8 +24,9 @@ import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.message.result.ResultTypeMessageEnum;
 
 /**
- *
+ * Обработчик команды авторизации администратора в LightSearch Server.
  * @author ViiSE
+ * @since 1.0
  */
 public class AuthenticationProcessor extends AbstractProcessorAdmin {
 

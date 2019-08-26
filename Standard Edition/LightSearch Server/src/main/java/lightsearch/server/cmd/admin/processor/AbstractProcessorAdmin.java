@@ -30,8 +30,12 @@ import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.message.result.ResultTypeMessageEnum;
 
 /**
- *
+ * Абстрактный класс обработчика команд администратора LightSearch Server.
+ * <p>
+ * Все обработчики команд администратора должны наследоваться от данного класса.
  * @author ViiSE
+ * @see lightsearch.server.cmd.admin.AdminCommandCreator
+ * @since 1.0
  */
 public abstract class AbstractProcessorAdmin extends SuperAbstractProcessor implements Function<AdminCommand, CommandResult> {
     

@@ -27,8 +27,18 @@ import lightsearch.server.message.result.ResultTypeMessageEnum;
 import lightsearch.server.timer.TimersIDEnum;
 
 /**
- *
+ * Обработчик команды установки тайм-аута LightSearch Server.
+ * <p>
+ * Устанавливает тайм-аут LightSearch Server. По истечении этого тайм-аута LightSearch Server будет перезагружен.
+ * Единицы измерения значения тайм-аута - часы.
+ * <p>
+ * Пример. Администратор присылает значение тайм-аута LightSearch Server "8". Это значит, что к текущему времени
+ * прибавится 8 часов. Эти дата и время будут датой и временем перезагрузки LightSearch Server. За перезагрузку отвечает
+ * {@link lightsearch.server.timer.RebootServerTimerDefault}.
+ * Значение тайм-аута, равное 0, означает, что тайм-аут будет отключен, т.е. LightSearch Server будет работать без
+ * перезагрузки.
  * @author ViiSE
+ * @since 1.0
  */
 public class TimeoutServerProcessor extends AbstractProcessorAdmin {
 
