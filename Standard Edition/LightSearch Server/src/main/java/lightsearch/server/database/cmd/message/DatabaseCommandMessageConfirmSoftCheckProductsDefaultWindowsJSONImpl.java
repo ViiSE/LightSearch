@@ -16,8 +16,13 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 /**
- *
+ * Сообщение в формате JSON команды подтверждения товаров мягкого чека для СУБД, работающих под управлением операционной
+ * системы Microsoft Windows.
+ * <p>
+ * Для записи JSON сообщения в формате pretty в поле типа BLOB в сообщении необходимо добавлять после каждой строки
+ * помимо символа переноса новой строки {@code \n} символ возврата каретки {@code \r}.
  * @author ViiSE
+ * @since 2.0
  */
 public class DatabaseCommandMessageConfirmSoftCheckProductsDefaultWindowsJSONImpl implements DatabaseCommandMessage {
 

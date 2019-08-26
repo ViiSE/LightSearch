@@ -16,8 +16,11 @@
 package lightsearch.server.database.cmd.message;
 
 /**
- *
+ * Константы содержания команд клиента LightSearch Server для записи в базу данных согласно протоколу.
+ * Ознакомиться с протоколом можно по
+ * <a href="https://github.com/ViiSE/LightSearch/blob/master/Documents/Protocol/LightSearch%20Protocol.txt">ссылке</a>.
  * @author ViiSE
+ * @since 2.0
  */
 public enum DatabaseCommandMessageEnum {
     COMMAND {
