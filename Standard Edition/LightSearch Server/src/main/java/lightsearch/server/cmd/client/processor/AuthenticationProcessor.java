@@ -36,8 +36,12 @@ import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.message.result.ResultTypeMessageEnum;
 
 /**
- *
+ * Обработчик команды авторизации клиента в LightSearch Server.
+ * <p>
+ * После успешной авторизации клиент добавляется в список активных клиентов LightSearch Server.
  * @author ViiSE
+ * @see LightSearchServerDTO#clients()
+ * @since 1.0
  */
 public class AuthenticationProcessor extends AbstractProcessorClient {
     

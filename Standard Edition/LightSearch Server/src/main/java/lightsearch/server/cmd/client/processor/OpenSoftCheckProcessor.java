@@ -32,8 +32,9 @@ import lightsearch.server.message.result.ResultTypeMessageEnum;
 import lightsearch.server.time.CurrentDateTime;
 
 /**
- *
+ * Обработчик команды открытия мягкого чека.
  * @author ViiSE
+ * @since 2.0
  */
 public class OpenSoftCheckProcessor extends AbstractProcessorClient {
 
