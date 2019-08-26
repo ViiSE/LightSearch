@@ -21,7 +21,7 @@ package lightsearch.server.exception;
  * @see lightsearch.server.cmd.client.ClientCommandConverter
  * @see lightsearch.server.cmd.admin.AdminCommandConverter
  * @see lightsearch.server.cmd.system.SystemCommandConverter
- * @since 2.0
+ * @since 2.0.0
  */
 public class CommandConverterException extends Exception {
     

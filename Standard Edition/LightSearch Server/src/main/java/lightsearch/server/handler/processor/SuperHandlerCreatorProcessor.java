@@ -32,7 +32,7 @@ import lightsearch.server.log.LoggerServer;
  * @see lightsearch.server.handler.processor.HandlerCreatorAdminProcessor
  * @see lightsearch.server.handler.processor.HandlerCreatorClientProcessor
  * @see lightsearch.server.handler.processor.HandlerCreatorSystemProcessor
- * @since 2.0
+ * @since 2.0.0
  */
 public abstract class SuperHandlerCreatorProcessor implements Function<Void, Handler> {
     private final ConnectionIdentifierResult identifierResult;

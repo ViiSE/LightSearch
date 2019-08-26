@@ -33,7 +33,7 @@ import lightsearch.server.message.result.ResultTypeMessageEnum;
  * закончится провалом. В черный список администраторов добавлять нельзя.
  * @author ViiSE
  * @see LightSearchServerDTO#blacklist()
- * @since 1.0
+ * @since 1.0.0
  */
 public class AddBlacklistProcessor extends AbstractProcessorAdmin {
 

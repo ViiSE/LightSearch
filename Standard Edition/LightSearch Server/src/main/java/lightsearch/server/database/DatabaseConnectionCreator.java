@@ -27,7 +27,7 @@ import lightsearch.server.exception.DatabaseConnectionCreatorException;
  * В случае ошибки создания соединения генерируется исключение
  * {@link lightsearch.server.exception.DatabaseConnectionCreatorException}.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public interface DatabaseConnectionCreator {
     DatabaseConnection createFirebirdConnection() throws DatabaseConnectionCreatorException;

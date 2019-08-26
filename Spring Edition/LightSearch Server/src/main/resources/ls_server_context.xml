@@ -27,7 +27,7 @@
     c {uint} - Minor internal lightsearch.server changes.
     -->
     <bean id="appGreetingsDefault" class="lightsearch.server.about.AppGreetingsDefaultImpl">
-        <constructor-arg index="0" type="java.lang.String" value="&#10;------------------------------------------------&#10;LightSearch Client Server, version 2.0.&#10;Welcome!&#10;------------------------------------------------"/>
+        <constructor-arg index="0" type="java.lang.String" value="&#10;------------------------------------------------&#10;LightSearch Client Server, version 2.8.1&#10;Welcome!&#10;------------------------------------------------"/>
     </bean>
 
     <bean id="currentServerDirectoryFromFileDefault" class="lightsearch.server.initialization.CurrentServerDirectoryFromFileImpl">

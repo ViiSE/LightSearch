@@ -22,7 +22,7 @@ import lightsearch.server.initialization.OsDetector;
  * <p>
  * Создает демона, который перезагружает LightSearch Server.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public class DaemonServerCreatorDefaultImpl implements DaemonServerCreator {
 

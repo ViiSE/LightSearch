@@ -26,7 +26,7 @@ import java.time.LocalDateTime;
  * @author ViiSE
  * @see SuperDatabaseRecordIdentifierWriterTimer
  * @see lightsearch.server.database.statement.result.DatabaseStatementResultSetSelect
- * @since 1.0
+ * @since 1.0.0
  */
 public interface DateTimeComparator {
     boolean isAfter(Object originalDate, LocalDateTime afterDate);

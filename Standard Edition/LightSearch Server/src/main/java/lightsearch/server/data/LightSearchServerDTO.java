@@ -29,7 +29,7 @@ import java.util.Map;
  * @see lightsearch.server.handler.processor
  * @see lightsearch.server.identifier
  * @see lightsearch.server.listener
- * @since 2.0
+ * @since 2.0.0
  */
 public interface LightSearchServerDTO {
     Map<String, String> admins();

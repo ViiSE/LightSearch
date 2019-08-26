@@ -24,7 +24,7 @@ package lightsearch.server.initialization;
  * экземпляра реализации интерфейса {@link lightsearch.server.data.LightSearchServerSettingsDAO} по умолчанию.
  * @author ViiSE
  * @see lightsearch.server.data.LightSearchServerSettingsDAOImpl
- * @since 1.0
+ * @since 1.0.0
  */
 public interface ServerSettings {
     int rebootServerValue();

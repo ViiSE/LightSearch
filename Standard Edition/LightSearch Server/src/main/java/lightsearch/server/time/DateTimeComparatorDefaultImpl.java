@@ -32,7 +32,7 @@ import java.time.format.DateTimeFormatter;
  * дату в виде {@link java.lang.String}, то в качестве параметра в конструктор можно передать {@code null}.
  * @author ViiSE
  * @see lightsearch.server.time.CurrentDateTimePattern
- * @since 1.0
+ * @since 1.0.0
  */
 public class DateTimeComparatorDefaultImpl implements DateTimeComparator {
 

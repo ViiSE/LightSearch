@@ -20,7 +20,7 @@ import lightsearch.server.log.LogMessageTypeEnum;
 /**
  * Реализация интерфейса {@link lightsearch.server.cmd.result.CommandResult} по умолчанию.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public class CommandResultDefaultImpl implements CommandResult {
     

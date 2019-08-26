@@ -21,7 +21,7 @@ package lightsearch.server.database.statement.result;
  * В случае ошибки при считывании результата команды генерируется исключение
  * {@link lightsearch.server.exception.DatabaseStatementResultSetException}.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public interface DatabaseStatementResultSetSelect extends DatabaseStatementResultSet {
     String result();

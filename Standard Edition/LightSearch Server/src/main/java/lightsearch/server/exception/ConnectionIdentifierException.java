@@ -19,7 +19,7 @@ package lightsearch.server.exception;
  * Исключение, возникающее при идентификации подключения клиента.
  * @author ViiSE
  * @see lightsearch.server.identifier.ConnectionIdentifier
- * @since 2.0
+ * @since 2.0.0
  */
 public class ConnectionIdentifierException extends Exception {
     

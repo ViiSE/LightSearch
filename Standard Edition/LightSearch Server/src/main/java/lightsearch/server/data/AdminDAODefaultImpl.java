@@ -20,7 +20,7 @@ package lightsearch.server.data;
  * <p>
  * Количество попыток авторизации администратора определяет поле {@link #MAX_TRY}.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public class AdminDAODefaultImpl implements AdminDAO {
 

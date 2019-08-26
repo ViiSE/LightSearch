@@ -21,7 +21,7 @@ package lightsearch.server.identifier;
  * Значение статического поля {@link #incrementValue} при старте LightSearch Server равняется нулю. После каждого вызова
  * метода {@link #next()} значение этого поля увеличивается на 1, и возвращается вызываемому методу.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public class HandlerIdentifierDefaultImpl implements HandlerIdentifier {
 

@@ -26,7 +26,7 @@ import org.json.simple.JSONObject;
  * Для получения данных клиента из сообщения в формате JSON используется библиотека
  * <a href="https://github.com/fangyidong/json-simple">JSON.simple</a>.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public class ClientCommandDefaultJSONImpl implements ClientCommand {
 

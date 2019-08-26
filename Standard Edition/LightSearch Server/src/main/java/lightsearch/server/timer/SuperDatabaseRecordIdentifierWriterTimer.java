@@ -39,7 +39,7 @@ import lightsearch.server.time.DateTimeComparatorInit;
  * Через каждое значение поля {@link #minutesToWrite} будет производится запись значения идентификатора в файл.
  * @author ViiSE
  * @see DatabaseRecordIdentifier
- * @since 2.0
+ * @since 2.0.0
  */
 public abstract class SuperDatabaseRecordIdentifierWriterTimer extends SuperTimer {
     

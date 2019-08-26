@@ -47,7 +47,7 @@ import lightsearch.server.exception.MessageParserException;
  * @see lightsearch.server.message.MessageSender
  * @see lightsearch.server.message.parser.MessageParser
  * @see lightsearch.server.listener.LightSearchServerListenerSocketDefaultImpl
- * @since 1.0
+ * @since 1.0.0
  */
 public class ConnectionIdentifierDefaultImpl implements ConnectionIdentifier {
     

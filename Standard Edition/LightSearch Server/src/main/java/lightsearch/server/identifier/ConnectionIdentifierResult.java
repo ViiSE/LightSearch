@@ -29,7 +29,7 @@ import lightsearch.server.data.stream.DataStream;
  * @see lightsearch.server.data.stream.DataStream
  * @see lightsearch.server.handler.HandlerCreator
  * @see lightsearch.server.handler.HandlerCreatorDefaultImpl
- * @since 1.0
+ * @since 1.0.0
  */
 public class ConnectionIdentifierResult {
     

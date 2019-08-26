@@ -18,7 +18,7 @@ package lightsearch.server.cmd.client.processor.debug;
  * <p>
  * Нельзя отменить или закрыть мягкий чек, если он еще не был открыт.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public interface SoftCheckDebug {
     boolean closeSoftCheck();

@@ -40,7 +40,7 @@ package lightsearch.server.initialization;
  * @see lightsearch.server.initialization.ServerPortFromFileDefaultImpl
  * @see lightsearch.server.initialization.ServerSettingsFromFileDefaultImpl
  * @see lightsearch.server.log.LogDirectoryDefaultImpl
- * @since 1.0
+ * @since 1.0.0
  */
 public interface CurrentServerDirectory {
     String currentDirectory();

@@ -23,7 +23,7 @@ import java.util.GregorianCalendar;
  * <p>
  * Шаблоны для даты и времени предоставляет {@link lightsearch.server.time.CurrentDateTimePattern}.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public class CurrentDateTimeDefaultImpl implements CurrentDateTime {
 

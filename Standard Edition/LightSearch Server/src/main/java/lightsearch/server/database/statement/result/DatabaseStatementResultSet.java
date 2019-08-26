@@ -23,7 +23,7 @@ import lightsearch.server.exception.DatabaseStatementResultSetException;
  * В случае ошибки при исполнения запроса для результата команды генерируется исключение
  * {@link lightsearch.server.exception.DatabaseStatementResultSetException}.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public interface DatabaseStatementResultSet {
     void exec() throws DatabaseStatementResultSetException;

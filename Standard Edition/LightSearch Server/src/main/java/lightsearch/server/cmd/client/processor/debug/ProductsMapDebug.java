@@ -18,7 +18,7 @@ import java.util.Map;
  * Интерфейс со статической картой-контейнером, содержащая отладочные товары.
  * @author ViiSE
  * @see lightsearch.server.cmd.client.processor.debug.ProductDebug
- * @since 2.0
+ * @since 2.0.0
  */
 public interface ProductsMapDebug {
     

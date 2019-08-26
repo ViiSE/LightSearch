@@ -19,7 +19,7 @@ package lightsearch.server.exception;
  * Исключение, возникающее при выполнении SQL-запроса.
  * @author ViiSE
  * @see lightsearch.server.database.statement.DatabaseStatementExecutor
- * @since 2.0
+ * @since 2.0.0
  */
 public class DatabaseStatementExecutorException extends Exception {
     

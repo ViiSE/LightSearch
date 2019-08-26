@@ -18,7 +18,7 @@ package lightsearch.server.time;
 /**
  * Шаблоны для вывода текущей даты и времени.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public enum CurrentDateTimePattern {
 

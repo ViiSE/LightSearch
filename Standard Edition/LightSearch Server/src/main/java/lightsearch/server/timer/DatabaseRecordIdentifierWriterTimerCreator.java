@@ -18,7 +18,7 @@ package lightsearch.server.timer;
 /**
  * Создает таймер записи идентификатора базы данных.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public interface DatabaseRecordIdentifierWriterTimerCreator {
     SuperDatabaseRecordIdentifierWriterTimer getTimer();

@@ -18,7 +18,7 @@ package lightsearch.server.initialization;
 /**
  * Реализация интерфейса {@link lightsearch.server.initialization.OsDetector} по умолчанию.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public class OsDetectorDefaultImpl implements OsDetector {
 

@@ -20,7 +20,7 @@ package lightsearch.server.exception;
  * @author ViiSE
  * @see lightsearch.server.handler.admin.ReceivedAdminCommandVerifier
  * @see lightsearch.server.handler.client.ReceivedClientCommandVerifier
- * @since 2.0
+ * @since 2.0.0
  */
 public class ReceivedCommandVerifierException extends Exception {
     

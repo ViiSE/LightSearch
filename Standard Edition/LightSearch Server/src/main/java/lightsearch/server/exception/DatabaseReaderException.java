@@ -19,7 +19,7 @@ package lightsearch.server.exception;
  * Исключение, возникающее при считывании результата команды из таблицы базы данных.
  * @author ViiSE
  * @see lightsearch.server.database.DatabaseReader
- * @since 2.0
+ * @since 2.0.0
  */
 public class DatabaseReaderException extends Exception {
     

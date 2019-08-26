@@ -24,7 +24,7 @@ import lightsearch.server.exception.MessageRecipientException;
  * <p>
  * Принятие сообщения происходит через {@link java.io.DataInputStream}. Читаются UTF символы.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public class MessageRecipientDefaultImpl implements MessageRecipient {
 

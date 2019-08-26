@@ -25,7 +25,7 @@ import lightsearch.server.exception.DatabasePreparedStatementException;
  * <p>
  * Чтение происходит по полю {@code LSCODE} и {@code STATE}.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public class DatabasePreparedStatementSelectDefaultImpl implements DatabasePreparedStatement {
 

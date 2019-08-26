@@ -27,7 +27,7 @@ import lightsearch.server.exception.MessageParserException;
  * @author ViiSE
  * @see lightsearch.server.handler.Handler
  * @see lightsearch.server.identifier.ConnectionIdentifier
- * @since 1.0
+ * @since 1.0.0
  */
 public interface MessageParser {
     Object parse(String rawMessage) throws MessageParserException;

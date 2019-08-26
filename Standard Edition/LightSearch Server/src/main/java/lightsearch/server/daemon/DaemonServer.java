@@ -20,7 +20,7 @@ package lightsearch.server.daemon;
  * <p>
  * LightSearch Daemon - небольшая java программа, которая перезагружает LightSearch Server.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public interface DaemonServer {
     void exec();

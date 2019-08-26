@@ -28,7 +28,7 @@ import org.json.simple.JSONObject;
  * Для получения идентификатора клиента из сообщения в формате JSON используется библиотека
  * <a href="https://github.com/fangyidong/json-simple">JSON.simple</a>.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public class DeviceInformationJSONImpl implements DeviceInformation {
 

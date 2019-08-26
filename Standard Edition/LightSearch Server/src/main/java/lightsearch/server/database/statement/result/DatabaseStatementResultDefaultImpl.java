@@ -18,7 +18,7 @@ package lightsearch.server.database.statement.result;
 /**
  * Реализация интерфейса {@link lightsearch.server.database.statement.result.DatabaseStatementResult} по умолчанию.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public class DatabaseStatementResultDefaultImpl implements DatabaseStatementResult {
 

@@ -22,7 +22,7 @@ import lightsearch.server.time.CurrentDateTime;
  * <p>
  * Лог записывается в окно, в котором запущен LightSearch Server, и в файл лога.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public class LoggerServerDefaultImpl implements LoggerServer {
 

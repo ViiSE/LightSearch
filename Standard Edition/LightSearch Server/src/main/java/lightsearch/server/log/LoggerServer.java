@@ -21,7 +21,7 @@ import lightsearch.server.time.CurrentDateTime;
  * Логирует LightSearch Server.
  * @author ViiSE
  * @see lightsearch.server.log.LoggerFileDefaultImpl
- * @since 1.0
+ * @since 1.0.0
  */
 public interface LoggerServer {
     /**

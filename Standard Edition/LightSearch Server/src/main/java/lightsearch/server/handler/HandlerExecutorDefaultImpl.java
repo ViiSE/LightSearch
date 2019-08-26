@@ -23,7 +23,7 @@ import lightsearch.server.thread.ThreadManager;
  * <p>
  * Запускает обработчик клиента LightSearch в отдельном потоке.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public class HandlerExecutorDefaultImpl implements HandlerExecutor {
 

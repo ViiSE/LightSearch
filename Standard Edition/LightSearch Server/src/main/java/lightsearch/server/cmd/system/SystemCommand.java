@@ -26,6 +26,6 @@ import lightsearch.server.cmd.Command;
  * @author ViiSE
  * @see lightsearch.server.handler.system
  * @see lightsearch.server.cmd.system.processor
- * @since 2.0
+ * @since 2.0.0
  */
 public interface SystemCommand extends Command {}

@@ -25,7 +25,7 @@ import lightsearch.server.message.result.type.MessageType;
  * Преобразует сообщение из экземпляра класса Object в необходимый экземпляр и вызывает
  * {@link lightsearch.server.message.result.type.MessageType} для формирования необходимого сообщения.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public class MessageCreatorDefaultImpl implements MessageCreator {
 

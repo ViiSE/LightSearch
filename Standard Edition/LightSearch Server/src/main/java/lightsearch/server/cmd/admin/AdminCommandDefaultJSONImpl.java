@@ -27,7 +27,7 @@ import org.json.simple.JSONObject;
  * Для получения данных администратора из сообщения в формате JSON используется библиотека
  * <a href="https://github.com/fangyidong/json-simple">JSON.simple</a>.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public class AdminCommandDefaultJSONImpl implements AdminCommand {
 

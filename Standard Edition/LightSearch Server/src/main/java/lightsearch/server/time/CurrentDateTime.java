@@ -33,7 +33,7 @@ package lightsearch.server.time;
  * @see lightsearch.server.handler.Handler
  * @see lightsearch.server.cmd.client.processor.AuthenticationProcessor
  * @see lightsearch.server.timer.SuperTimer
- * @since 1.0
+ * @since 1.0.0
  */
 public interface CurrentDateTime {
     /**

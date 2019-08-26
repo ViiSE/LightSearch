@@ -27,7 +27,7 @@ import lightsearch.server.message.result.ResultTypeMessageEnum;
  * <p>
  * Присылает список активных клиентов LightSearch Server.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public class ClientListRequestProcessor extends AbstractProcessorAdmin {
 

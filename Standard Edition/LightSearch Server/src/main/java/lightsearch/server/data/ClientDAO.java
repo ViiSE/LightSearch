@@ -24,7 +24,7 @@ import lightsearch.server.database.DatabaseConnection;
  * @see lightsearch.server.cmd.client.processor
  * @see lightsearch.server.cmd.client.processor.debug
  * @see lightsearch.server.handler.client
- * @since 2.0
+ * @since 2.0.0
  */
 public interface ClientDAO {
     String IMEI();

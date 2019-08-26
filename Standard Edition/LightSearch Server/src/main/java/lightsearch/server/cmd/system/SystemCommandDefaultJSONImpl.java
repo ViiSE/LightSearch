@@ -27,7 +27,7 @@ import org.json.simple.JSONObject;
  * Для получения данных системного бота из сообщения в формате JSON используется библиотека
  * <a href="https://github.com/fangyidong/json-simple">JSON.simple</a>.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public class SystemCommandDefaultJSONImpl implements SystemCommand {
 

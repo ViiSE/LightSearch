@@ -24,7 +24,7 @@ import lightsearch.server.exception.DatabasePreparedStatementException;
 /**
  * Создает скомпилированный запрос для добавления команды в таблицу базы данных, совместимый с кодировкой windows-1251.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public class DatabasePreparedStatementInsertWin1251DefaultImpl implements DatabasePreparedStatement {
 

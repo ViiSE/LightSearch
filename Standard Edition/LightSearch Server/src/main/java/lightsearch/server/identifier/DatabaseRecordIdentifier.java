@@ -28,7 +28,7 @@ package lightsearch.server.identifier;
  * @author ViiSE
  * @see lightsearch.server.cmd.client.processor.AbstractProcessorClient
  * @see lightsearch.server.database.DatabaseWriter
- * @since 2.0
+ * @since 2.0.0
  */
 public interface DatabaseRecordIdentifier {
     long next();

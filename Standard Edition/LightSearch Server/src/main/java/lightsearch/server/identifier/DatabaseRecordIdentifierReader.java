@@ -19,7 +19,7 @@ package lightsearch.server.identifier;
  * Считывает значение идентификатора базы данных из стороннего источника.
  * @author ViiSE
  * @see DatabaseRecordIdentifier
- * @since 2.0
+ * @since 2.0.0
  */
 public interface DatabaseRecordIdentifierReader {
     long read();

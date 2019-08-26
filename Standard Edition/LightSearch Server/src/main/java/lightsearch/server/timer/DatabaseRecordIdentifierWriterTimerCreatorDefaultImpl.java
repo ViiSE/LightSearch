@@ -24,7 +24,7 @@ import lightsearch.server.time.CurrentDateTime;
 /**
  * Реализация интерфейса {@link DatabaseRecordIdentifierWriterTimerCreator} по умолчанию.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public class DatabaseRecordIdentifierWriterTimerCreatorDefaultImpl implements DatabaseRecordIdentifierWriterTimerCreator {
 

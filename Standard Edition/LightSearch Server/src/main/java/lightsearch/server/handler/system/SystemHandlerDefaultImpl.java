@@ -41,7 +41,7 @@ import lightsearch.server.message.MessageSenderInit;
  * Получает от бота команду и ее параметры, затем, используя {@link SystemParametersHolder#commandHolder()}, вызывает
  * необходимый обработчик команды и отправляет результат боту.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public class SystemHandlerDefaultImpl extends Handler {
 

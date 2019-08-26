@@ -19,7 +19,7 @@ package lightsearch.server.timer;
  * Создает таймер перезагрузки LightSearch Server.
  * @author ViiSE
  * @see lightsearch.server.timer.SuperRebootServerTimer
- * @since 2.0
+ * @since 2.0.0
  */
 public interface RebootTimerCreator {
     SuperRebootServerTimer getTimer();

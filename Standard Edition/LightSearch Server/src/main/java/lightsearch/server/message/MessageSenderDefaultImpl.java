@@ -24,7 +24,7 @@ import lightsearch.server.exception.MessageSenderException;
  * <p>
  * Отправка сообщения происходит через {@link java.io.DataOutputStream}. Записываются UTF символы.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public class MessageSenderDefaultImpl implements MessageSender {
 

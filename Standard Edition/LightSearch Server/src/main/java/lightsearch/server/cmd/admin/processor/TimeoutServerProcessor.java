@@ -38,7 +38,7 @@ import lightsearch.server.timer.TimersIDEnum;
  * Значение тайм-аута, равное 0, означает, что тайм-аут будет отключен, т.е. LightSearch Server будет работать без
  * перезагрузки.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public class TimeoutServerProcessor extends AbstractProcessorAdmin {
 

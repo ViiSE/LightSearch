@@ -19,7 +19,7 @@ package lightsearch.server.exception;
  * Исключение, возникающее при создании {@link lightsearch.server.data.stream.DataStream}.
  * @author ViiSE
  * @see lightsearch.server.data.stream.DataStreamCreator
- * @since 2.0
+ * @since 2.0.0
  */
 public class DataStreamCreatorException extends Exception {
     

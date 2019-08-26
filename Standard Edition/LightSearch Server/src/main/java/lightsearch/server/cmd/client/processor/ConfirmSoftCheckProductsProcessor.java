@@ -34,7 +34,7 @@ import lightsearch.server.time.CurrentDateTime;
 /**
  * Обработчик команды подтверждения товаров мягкого чека.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public class ConfirmSoftCheckProductsProcessor extends AbstractProcessorClient {
     

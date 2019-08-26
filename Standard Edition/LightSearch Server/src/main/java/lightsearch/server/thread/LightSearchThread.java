@@ -79,7 +79,7 @@ package lightsearch.server.thread;
  * Поле {@code isWorked} должно менятся извне другим, управляющим потоком. Для более удобного управления потоками в
  * данном пакете реализованы необходимые интерфейсы.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public class LightSearchThread extends Thread {
     

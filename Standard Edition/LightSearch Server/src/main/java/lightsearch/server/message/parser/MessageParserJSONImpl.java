@@ -27,7 +27,7 @@ import org.json.simple.parser.ParseException;
  * <a href="https://github.com/fangyidong/json-simple">JSON.simple</a>.
  * @author ViiSE
  * @see lightsearch.server.cmd.client.processor.debug
- * @since 1.0
+ * @since 1.0.0
  */
 public class MessageParserJSONImpl implements MessageParser {
 

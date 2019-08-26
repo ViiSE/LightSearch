@@ -34,7 +34,7 @@ import lightsearch.server.time.CurrentDateTimePattern;
  * @author ViiSE
  * @see lightsearch.server.database.statement.DatabasePreparedStatement
  * @see lightsearch.server.database.statement.result.DatabaseStatementResult
- * @since 2.0
+ * @since 2.0.0
  */
 public class DatabaseReaderDefaultImpl implements DatabaseReader {
 

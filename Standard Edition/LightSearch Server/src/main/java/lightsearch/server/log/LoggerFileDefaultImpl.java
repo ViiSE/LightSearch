@@ -29,7 +29,7 @@ import lightsearch.server.time.CurrentDateTime;
  * <p>
  * Записывает лог в файл {@code log_текущая_дата.txt}.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public class LoggerFileDefaultImpl implements LoggerFile {
 

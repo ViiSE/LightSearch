@@ -34,7 +34,7 @@ import lightsearch.server.database.statement.result.DatabaseStatementResultInit;
  * для записи команды в таблицу базы данных и чтения результата команды из другой таблицы базы данных соответственно.
  * @author ViiSE
  * @see lightsearch.server.cmd.client.processor
- * @since 2.0
+ * @since 2.0.0
  */
 public class DatabaseStatementExecutorDefaultImpl implements DatabaseStatementExecutor {
 

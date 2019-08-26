@@ -26,7 +26,7 @@ import lightsearch.server.data.stream.DataStream;
  * Контейнер параметров клиента LightSearch Server.
  * @author ViiSE
  * @see lightsearch.server.handler.admin
- * @since 2.0
+ * @since 2.0.0
  */
 public interface ClientParametersHolder {
     Socket clientSocket();

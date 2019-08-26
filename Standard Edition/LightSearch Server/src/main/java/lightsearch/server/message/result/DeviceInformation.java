@@ -31,7 +31,7 @@ package lightsearch.server.message.result;
  * любые устройства.
  * @author ViiSE
  * @see lightsearch.server.identifier.ConnectionIdentifier
- * @since 1.0
+ * @since 1.0.0
  */
 public interface DeviceInformation {
     String identifier();

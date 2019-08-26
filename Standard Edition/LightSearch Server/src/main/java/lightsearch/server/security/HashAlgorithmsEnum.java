@@ -12,7 +12,7 @@ package lightsearch.server.security;
 /**
  * Константы для реализаций {@link lightsearch.server.security.HashAlgorithms}.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public enum HashAlgorithmsEnum {
     SHA256 {

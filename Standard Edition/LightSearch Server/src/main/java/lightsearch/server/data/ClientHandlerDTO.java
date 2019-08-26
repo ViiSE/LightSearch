@@ -22,7 +22,7 @@ import lightsearch.server.time.CurrentDateTime;
  * DTO обработчика клиента LightSearch Server.
  * @author ViiSE
  * @see lightsearch.server.handler.processor.HandlerCreatorClientProcessor
- * @since 2.0
+ * @since 2.0.0
  */
 public interface ClientHandlerDTO {
     ClientParametersHolder clientParametersHolder();

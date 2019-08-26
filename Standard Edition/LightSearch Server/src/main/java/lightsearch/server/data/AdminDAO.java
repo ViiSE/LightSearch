@@ -21,7 +21,7 @@ package lightsearch.server.data;
  * @see lightsearch.server.cmd.admin.AdminCommand
  * @see lightsearch.server.cmd.admin.processor.AuthenticationProcessor
  * @see lightsearch.server.handler.admin
- * @since 2.0
+ * @since 2.0.0
  */
 public interface AdminDAO {
     String name();

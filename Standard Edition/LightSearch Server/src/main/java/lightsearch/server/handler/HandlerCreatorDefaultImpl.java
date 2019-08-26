@@ -34,7 +34,7 @@ import lightsearch.server.handler.processor.HandlerCreatorSystemProcessor;
  * <p>
  * Вызывает один из обработчиков, которые создают обработчиков клиента.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public class HandlerCreatorDefaultImpl implements HandlerCreator {
     

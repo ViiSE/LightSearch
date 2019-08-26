@@ -23,7 +23,7 @@ package lightsearch.server.message.result;
  * @author ViiSE
  * @see lightsearch.server.cmd.client.processor.AbstractProcessorClient
  * @see lightsearch.server.cmd.admin.processor.AbstractProcessorAdmin
- * @since 1.0
+ * @since 1.0.0
  */
 public interface MessageCreator {
     String createMessage(String name, ResultTypeMessageEnum isDone, Object message);

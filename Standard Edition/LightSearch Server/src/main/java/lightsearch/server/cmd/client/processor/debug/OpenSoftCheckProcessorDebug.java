@@ -28,7 +28,7 @@ import lightsearch.server.message.result.ResultTypeMessageEnum;
  * <p>
  * Для симуляции мягкого чека используется {@link lightsearch.server.cmd.client.processor.debug.SoftCheckDebug}.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public class OpenSoftCheckProcessorDebug extends AbstractProcessorClient {
 

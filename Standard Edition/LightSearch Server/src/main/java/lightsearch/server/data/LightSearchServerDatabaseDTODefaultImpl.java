@@ -18,7 +18,7 @@ package lightsearch.server.data;
 /**
  * Реализация интерфейса {@link lightsearch.server.data.LightSearchServerDatabaseDTO} по умолчанию.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public class LightSearchServerDatabaseDTODefaultImpl implements LightSearchServerDatabaseDTO {
 

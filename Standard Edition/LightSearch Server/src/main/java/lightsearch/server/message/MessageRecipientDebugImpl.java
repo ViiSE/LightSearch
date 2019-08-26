@@ -33,7 +33,7 @@ import lightsearch.server.exception.MessageRecipientException;
  * Используется в отладочных обработчиках команд клиента.
  * @author ViiSE
  * @see lightsearch.server.cmd.client.processor.debug
- * @since 1.0
+ * @since 1.0.0
  */
 public class MessageRecipientDebugImpl implements MessageRecipient {
 

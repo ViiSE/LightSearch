@@ -1,6 +1,6 @@
 /**
  * Исключения, возникающие при работе LightSearch Server.
- * @since 2.0
+ * @since 2.0.0
  * @author ViiSE
  * @version 1.0
  */

@@ -35,7 +35,7 @@ import lightsearch.server.time.DateTimeComparatorInit;
  * @author ViiSE
  * @see lightsearch.server.time.DateTimeComparator
  * @see lightsearch.server.database.statement.DatabasePreparedStatement
- * @since 2.0
+ * @since 2.0.0
  */
 public class DatabaseStatementResultSetSelectDefaultImpl implements DatabaseStatementResultSetSelect {
 

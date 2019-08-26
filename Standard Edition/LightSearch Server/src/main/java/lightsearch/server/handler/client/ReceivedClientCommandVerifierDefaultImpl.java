@@ -23,7 +23,7 @@ import lightsearch.server.exception.ReceivedCommandVerifierException;
  * <p>
  * Проверяет команду и IMEI клиента на {@code null}, и сравнивает IMEI клиента с IMEI клиента, присланного в сообщении.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public class ReceivedClientCommandVerifierDefaultImpl implements ReceivedClientCommandVerifier {
 

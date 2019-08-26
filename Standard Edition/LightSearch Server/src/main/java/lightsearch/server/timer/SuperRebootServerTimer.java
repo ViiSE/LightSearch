@@ -25,7 +25,7 @@ import lightsearch.server.time.CurrentDateTime;
  * <p>
  * Если необходимо создать таймер перезагрузки LightSearch Server, то надо наследоваться от данного класса.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public abstract class SuperRebootServerTimer extends SuperTimer {
     

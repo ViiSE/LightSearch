@@ -32,7 +32,7 @@ import java.sql.Connection;
  * @see lightsearch.server.database.DatabaseWriter
  * @see lightsearch.server.database.statement.DatabasePreparedStatement
  * @see lightsearch.server.database.statement.DatabaseStatementExecutor
- * @since 1.0
+ * @since 1.0.0
  */
 public interface DatabaseConnection {
     Connection connection();

@@ -27,7 +27,7 @@ import lightsearch.server.exception.DataStreamCreatorException;
  * @author ViiSE
  * @see java.io.DataInputStream
  * @see java.io.DataOutputStream
- * @since 1.0
+ * @since 1.0.0
  */
 public interface DataStreamCreator {
     void createDataStream() throws DataStreamCreatorException;

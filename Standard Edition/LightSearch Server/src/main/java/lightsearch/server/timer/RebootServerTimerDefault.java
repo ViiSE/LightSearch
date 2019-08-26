@@ -37,7 +37,7 @@ import lightsearch.server.time.CurrentDateTime;
  * @author ViiSE
  * @see lightsearch.server.thread.ThreadManager
  * @see lightsearch.server.daemon.DaemonServer
- * @since 2.0
+ * @since 2.0.0
  */
 public class RebootServerTimerDefault extends SuperRebootServerTimer {
 

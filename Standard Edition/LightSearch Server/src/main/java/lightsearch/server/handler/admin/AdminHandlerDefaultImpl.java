@@ -43,7 +43,7 @@ import lightsearch.server.log.LogMessageTypeEnum;
  * Получает от администратора команду и ее параметры, затем, используя {@link AdminParametersHolder#commandHolder()},
  * вызывает необходимый обработчик команды и отправляет результат администратору.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public class AdminHandlerDefaultImpl extends Handler {
 

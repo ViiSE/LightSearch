@@ -22,7 +22,7 @@ import lightsearch.server.time.CurrentDateTime;
  * Используется для создания экземпляра реализации интерфейса {@link lightsearch.server.log.LoggerWindow} по умолчанию.
  * @author ViiSE
  * @see lightsearch.server.log.LoggerWindowDefaultImpl
- * @since 1.0
+ * @since 1.0.0
  */
 public interface LoggerWindow {
     /**

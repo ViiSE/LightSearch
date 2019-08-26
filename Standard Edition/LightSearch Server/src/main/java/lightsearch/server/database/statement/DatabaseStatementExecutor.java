@@ -24,7 +24,7 @@ import lightsearch.server.database.statement.result.DatabaseStatementResult;
  * В случае ошибки исполнения запроса генерируется исключение
  * {@link lightsearch.server.exception.DatabaseStatementExecutorException}.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public interface DatabaseStatementExecutor {
     DatabaseStatementResult exec() throws DatabaseStatementExecutorException;

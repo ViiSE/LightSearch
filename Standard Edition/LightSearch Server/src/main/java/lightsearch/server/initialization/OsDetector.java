@@ -23,7 +23,7 @@ package lightsearch.server.initialization;
  * @author ViiSE
  * @see lightsearch.server.initialization.CurrentServerDirectory
  * @see lightsearch.server.daemon.DaemonServer
- * @since 1.0
+ * @since 1.0.0
  */
 public interface OsDetector {
     boolean isWindows();

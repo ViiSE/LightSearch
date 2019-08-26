@@ -28,7 +28,7 @@ import java.util.List;
  * экземпляра реализации интерфейса {@link lightsearch.server.data.LightSearchServerDTO} по умолчанию.
  * @author ViiSE
  * @see lightsearch.server.data.LightSearchServerDTOImpl
- * @since 1.0
+ * @since 1.0.0
  */
 public interface ClientBlacklist {    
     List<String> blacklist();

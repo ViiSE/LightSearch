@@ -46,7 +46,7 @@ import lightsearch.server.security.HashAlgorithmsInit;
  * Для определения текущей директории используется интерфейс
  * {@link lightsearch.server.initialization.CurrentServerDirectory}.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public class AdministratorsMapFromFileDefaultImpl implements AdministratorsMap {
 

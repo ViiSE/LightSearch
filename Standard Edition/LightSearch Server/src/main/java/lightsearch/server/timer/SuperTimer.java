@@ -25,7 +25,7 @@ import lightsearch.server.time.CurrentDateTime;
  * Все таймеры LightSearch Server наследуются от данного класса. Каждый таймер имеет идентификатор, который используется
  * при нахождении данного таймера в потоке, в котором он работает.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public abstract class SuperTimer implements Runnable {
     private final LoggerServer loggerServer;

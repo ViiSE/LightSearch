@@ -35,7 +35,7 @@ import lightsearch.server.message.result.ResultTypeMessageEnum;
  * Все обработчики команд клиента должны наследоваться от данного класса.
  * @author ViiSE
  * @see lightsearch.server.cmd.client.ClientCommandCreator
- * @since 1.0
+ * @since 1.0.0
  */
 public abstract class AbstractProcessorClient extends SuperAbstractProcessor implements Function<ClientCommand, CommandResult> {
     

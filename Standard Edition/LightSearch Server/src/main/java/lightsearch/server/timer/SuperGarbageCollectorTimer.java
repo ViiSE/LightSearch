@@ -20,7 +20,7 @@ import lightsearch.server.time.DateTimeComparatorInit;
  * @author ViiSE
  * @see java.lang.System
  * @see java.lang.Runtime
- * @since 2.0
+ * @since 2.0.0
  */
 public abstract class SuperGarbageCollectorTimer extends SuperTimer {
     

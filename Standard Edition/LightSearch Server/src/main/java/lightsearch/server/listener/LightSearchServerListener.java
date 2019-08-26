@@ -19,7 +19,7 @@ package lightsearch.server.listener;
  * Начинает работу LightSearch Server и принимает новые клиентские соединения.
  * @author ViiSE
  * @see lightsearch.server.log.LoggerFileDefaultImpl
- * @since 1.0
+ * @since 1.0.0
  */
 public interface LightSearchServerListener {
     void startServer();

@@ -10,7 +10,7 @@ package lightsearch.server.timer;
  * <p>
  * <b>Этот интерфейс экспериментальный и не следует его использовать в релизе. Применяйте его для тестов и экспериментов.</b>
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public interface GarbageCollectorTimer {
     void start();

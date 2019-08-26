@@ -15,7 +15,7 @@ package lightsearch.server.security;
  * Используется для генерирования хэша пароля администратора.
  * @author ViiSE
  * @see lightsearch.server.initialization.AdministratorsMap
- * @since 1.0
+ * @since 1.0.0
  */
 public interface HashAlgorithms {
     String sha256(String message);

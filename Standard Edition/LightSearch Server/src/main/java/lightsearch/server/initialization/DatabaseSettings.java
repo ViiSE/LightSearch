@@ -24,7 +24,7 @@ package lightsearch.server.initialization;
  * экземпляра реализации интерфейса {@link lightsearch.server.data.LightSearchServerDatabaseDTO} по умолчанию.
  * @author ViiSE
  * @see lightsearch.server.data.LightSearchServerDatabaseDTODefaultImpl
- * @since 1.0
+ * @since 1.0.0
  */
 public interface DatabaseSettings {
     String name();

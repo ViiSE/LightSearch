@@ -25,7 +25,7 @@ import lightsearch.server.exception.DatabaseReaderException;
  * В случае ошибки считывания генерируется исключение {@link lightsearch.server.exception.DatabaseReaderException}.
  * @author ViiSE
  * @see lightsearch.server.database.statement.DatabaseStatementExecutor
- * @since 2.0
+ * @since 2.0.0
  */
 public interface DatabaseReader {
     String read() throws DatabaseReaderException;

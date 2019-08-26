@@ -42,7 +42,7 @@ import lightsearch.server.thread.LightSearchThreadID;
  * @author ViiSE
  * @see lightsearch.server.listener.LightSearchServerListener
  * @see lightsearch.server.handler.HandlerCreator
- * @since 2.0
+ * @since 2.0.0
  */
 public class HandlerCreatorSystemProcessor extends SuperHandlerCreatorProcessor {
     

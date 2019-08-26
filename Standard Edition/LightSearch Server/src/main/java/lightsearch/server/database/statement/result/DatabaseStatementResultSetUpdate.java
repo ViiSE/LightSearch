@@ -22,7 +22,7 @@ package lightsearch.server.database.statement.result;
  * была успешно считана.
  * {@link lightsearch.server.database.statement.result.DatabaseStatementResultSet}.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public interface DatabaseStatementResultSetUpdate extends DatabaseStatementResultSet {
 }

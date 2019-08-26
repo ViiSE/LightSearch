@@ -25,7 +25,7 @@ import lightsearch.server.exception.CommandConverterException;
  * {@link lightsearch.server.exception.CommandConverterException}.
  * @author ViiSE
  * @see lightsearch.server.handler.client
- * @since 2.0
+ * @since 2.0.0
  */
 public interface SystemCommandConverter {
     SystemCommand convertToSystemCommand(String message) throws CommandConverterException;

@@ -18,7 +18,7 @@ package lightsearch.server.daemon;
 /**
  * Создает демона, который перезагружает LightSearch Server.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public interface DaemonServerCreator {
     DaemonServer createDaemonServer();

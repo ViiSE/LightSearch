@@ -23,7 +23,7 @@ import java.net.ServerSocket;
  * @author ViiSE
  * @see lightsearch.server.listener.LightSearchServerListener
  * @see lightsearch.server.listener.LightSearchServerListenerSocketDefaultImpl
- * @since 1.0
+ * @since 1.0.0
  */
 public class ServerSocketCreator {
     

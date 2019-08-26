@@ -27,7 +27,7 @@ package lightsearch.server.message;
  * @author ViiSE
  * @see lightsearch.server.message.MessageRecipientDebugImpl
  * @see lightsearch.server.cmd.client.processor.debug
- * @since 2.0
+ * @since 2.0.0
  */
 public class MessageTimeAdderDefaultImpl implements MessageTimeAdder {
 

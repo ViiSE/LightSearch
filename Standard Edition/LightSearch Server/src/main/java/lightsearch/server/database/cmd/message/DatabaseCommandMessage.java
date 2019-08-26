@@ -19,7 +19,7 @@ package lightsearch.server.database.cmd.message;
  * Сообщение команды клиента для записи в таблицу базы данных.
  * @author ViiSE
  * @see lightsearch.server.database.statement.DatabaseStatementExecutor
- * @since 2.0
+ * @since 2.0.0
  */
 public interface DatabaseCommandMessage {
     String message();

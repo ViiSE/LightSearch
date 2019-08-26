@@ -19,7 +19,7 @@ package lightsearch.server.handler;
  * Запускает на исполнение обработчик клиента LightSearch Server.
  * @author ViiSE
  * @see lightsearch.server.handler.Handler
- * @since 2.0
+ * @since 2.0.0
  */
 public interface HandlerExecutor {
     void executeHandler(Handler handler); 

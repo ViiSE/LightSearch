@@ -24,7 +24,7 @@ import lightsearch.server.time.CurrentDateTime;
  * Реализация интерфейса {@link lightsearch.server.timer.RebootTimerCreator} по умолчанию.
  * @author ViiSE
  * @see lightsearch.server.timer.SuperRebootServerTimer
- * @since 2.0
+ * @since 2.0.0
  */
 public class RebootTimerCreatorDefaultImpl implements RebootTimerCreator {
 

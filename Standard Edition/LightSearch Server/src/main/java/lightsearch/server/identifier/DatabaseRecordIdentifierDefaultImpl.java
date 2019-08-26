@@ -24,7 +24,7 @@ package lightsearch.server.identifier;
  * Поле {@link #databaseRecordIdentifier} статично. После первого вызова конструктора поле
  * {@link #databaseRecordIdentifier} не меняет свое значение.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public class DatabaseRecordIdentifierDefaultImpl implements DatabaseRecordIdentifier {
 

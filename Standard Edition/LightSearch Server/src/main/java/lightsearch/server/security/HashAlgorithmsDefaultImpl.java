@@ -18,7 +18,7 @@ import java.security.NoSuchAlgorithmException;
  * <p>
  * Используемая кодировка - UTF8.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public class HashAlgorithmsDefaultImpl implements HashAlgorithms {
 

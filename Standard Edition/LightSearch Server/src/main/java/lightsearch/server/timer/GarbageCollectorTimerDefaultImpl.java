@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * <p>
  * Делает системный вызов сборщика мусора {@link System#gc()} каждую секунду через секунду после запуска.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public class GarbageCollectorTimerDefaultImpl implements GarbageCollectorTimer {
 

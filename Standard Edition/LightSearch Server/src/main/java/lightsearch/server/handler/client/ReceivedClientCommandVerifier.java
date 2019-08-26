@@ -23,7 +23,7 @@ import lightsearch.server.exception.ReceivedCommandVerifierException;
  * <p>
  * Если команда не прошла проверку, то генерируется {@link lightsearch.server.exception.ReceivedCommandVerifierException}.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public interface ReceivedClientCommandVerifier {
     void verifyReceivedClientCommand(ClientCommand clientCommand, String IMEI) throws ReceivedCommandVerifierException;

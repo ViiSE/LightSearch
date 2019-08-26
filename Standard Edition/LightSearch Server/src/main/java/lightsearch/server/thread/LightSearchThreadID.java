@@ -27,7 +27,7 @@ import lightsearch.server.identifier.HandlerIdentifier;
  * Идентификаторы потоков, в которых работают таймеры, состоят только из буквенной части.
  * @author ViiSE
  * @see HandlerIdentifier
- * @since 1.0
+ * @since 1.0.0
  */
 public class LightSearchThreadID {
     

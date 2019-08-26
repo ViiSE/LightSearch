@@ -34,7 +34,7 @@ package lightsearch.server.message.result.type;
  * @see lightsearch.server.message.result.MessageCreator
  * @see lightsearch.server.cmd.client.processor
  * @see lightsearch.server.cmd.admin.processor
- * @since 1.0
+ * @since 1.0.0
  */
 public interface MessageType {
     String createFormattedMessage(String ident, String isDone, Object message);

@@ -22,7 +22,7 @@ import java.sql.Connection;
  * @author ViiSE
  * @see lightsearch.server.database.DatabaseConnection
  * @see lightsearch.server.database.DatabaseConnectionCreator
- * @since 1.0
+ * @since 1.0.0
  */
 public class DatabaseConnectionFirebirdDefaultImpl implements DatabaseConnection {
 

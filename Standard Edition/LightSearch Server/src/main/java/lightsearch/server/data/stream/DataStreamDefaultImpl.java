@@ -24,7 +24,7 @@ import java.io.*;
  * {@link lightsearch.server.data.stream.DataStreamCreator} вызвать метод {@link DataStreamCreator#createDataStream()}
  * для создания потока данных.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public class DataStreamDefaultImpl implements DataStream {
     

@@ -25,7 +25,7 @@ import lightsearch.server.exception.DatabasePreparedStatementException;
  * <p>
  * Обновление происходит по полю {@code LSCODE}.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public class DatabasePreparedStatementUpdateDefaultImpl implements DatabasePreparedStatement {
 

@@ -25,7 +25,7 @@ import lightsearch.server.data.stream.DataStream;
 /**
  * Реализация интерфейса {@link lightsearch.server.data.ClientParametersHolder} по умолчанию.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public class ClientParametersHolderDefaultImpl implements ClientParametersHolder {
 

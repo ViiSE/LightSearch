@@ -23,7 +23,7 @@ import java.util.Map;
  * <p>
  * Потоки хранятся в {@link java.util.Map}. Ключом является идентификатор потока, а значением сам поток.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public class ThreadHolderDefaultImpl implements ThreadHolder {
 

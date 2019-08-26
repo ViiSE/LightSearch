@@ -32,7 +32,7 @@ import lightsearch.server.data.LightSearchServerDTO;
  * @author ViiSE
  * @see lightsearch.server.cmd.client.processor.debug
  * @see lightsearch.server.cmd.client.ClientCommandContentEnum
- * @since 1.0
+ * @since 1.0.0
  */
 public class ClientCommandCreatorDebugDefaultImpl implements ClientCommandCreator {
     private final String CONNECT                     = ClientCommandEnum.CONNECT.stringValue();

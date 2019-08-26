@@ -31,7 +31,7 @@ import lightsearch.server.message.result.ResultTypeMessageEnum;
  * <p>
  * Принимает от администратора такие параметры, как IP-адрес, порт и имя базы данных.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public class ChangeDatabaseProcessor extends AbstractProcessorAdmin {
 

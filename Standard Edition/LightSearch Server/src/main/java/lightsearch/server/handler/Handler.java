@@ -36,7 +36,7 @@ import lightsearch.server.data.LightSearchServerDTO;
  * @see lightsearch.server.data.LightSearchServerDTO
  * @see lightsearch.server.time.CurrentDateTime
  * @see lightsearch.server.thread.ThreadManager
- * @since 2.0
+ * @since 2.0.0
  */
 public abstract class Handler implements Runnable {
     

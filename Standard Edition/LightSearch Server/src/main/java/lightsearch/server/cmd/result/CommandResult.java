@@ -27,7 +27,7 @@ import lightsearch.server.log.LogMessageTypeEnum;
  * @see lightsearch.server.handler.admin
  * @see lightsearch.server.handler.client
  * @see lightsearch.server.handler.system
- * @since 1.0
+ * @since 1.0.0
  */
 public interface CommandResult {
     String message();

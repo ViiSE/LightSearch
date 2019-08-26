@@ -30,7 +30,7 @@ import lightsearch.server.timer.TimersIDEnum;
  * @see lightsearch.server.cmd.admin
  * @see lightsearch.server.cmd.client
  * @see lightsearch.server.cmd.system
- * @since 2.0
+ * @since 2.0.0
  */
 public interface LightSearchListenerDTO {
     LightSearchChecker checker();

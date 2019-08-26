@@ -25,7 +25,7 @@ import lightsearch.server.timer.TimersIDEnum;
  * Изменения состояния LightSearch Server происходит при помощи запуска и уничтожения соответствующих таймеров.
  * @author ViiSE
  * @see lightsearch.server.timer
- * @since 2.0
+ * @since 2.0.0
  */
 public interface ServerStateChanger {
     void executeRebootTimer(TimersIDEnum id);

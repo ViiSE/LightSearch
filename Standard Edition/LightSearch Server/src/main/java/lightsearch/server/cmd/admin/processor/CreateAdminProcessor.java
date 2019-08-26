@@ -31,7 +31,7 @@ import lightsearch.server.message.result.ResultTypeMessageEnum;
  * <p>
  * Создает нового администратора LightSearch Server.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public class CreateAdminProcessor extends AbstractProcessorAdmin {
 

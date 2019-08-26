@@ -18,7 +18,7 @@ package lightsearch.server.handler;
 /**
  * Создает обработчик клиента LightSearch Server.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public interface HandlerCreator {
     Handler getHandler();

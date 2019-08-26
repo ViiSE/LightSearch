@@ -34,7 +34,7 @@ import lightsearch.server.message.result.ResultTypeMessageEnum;
  *     LightSearch Client Bot</a>.
  * @author ViiSE
  * @see lightsearch.server.message.MessageTimeAdder
- * @since 2.0
+ * @since 2.0.0
  */
 public class ClearAverageTimeProcessorDebug extends AbstractProcessorSystem {
     

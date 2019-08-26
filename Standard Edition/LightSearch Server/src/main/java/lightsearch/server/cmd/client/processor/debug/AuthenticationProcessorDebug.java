@@ -31,7 +31,7 @@ import lightsearch.server.message.result.ResultTypeMessageEnum;
  * авторизации клиент добавляется в список активных клиентов LightSearch Server.
  * @author ViiSE
  * @see LightSearchServerDTO#clients()
- * @since 2.0
+ * @since 2.0.0
  */
 public class AuthenticationProcessorDebug extends AbstractProcessorClient {
     

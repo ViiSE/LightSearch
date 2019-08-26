@@ -28,7 +28,7 @@ import lightsearch.server.data.LightSearchServerDTO;
  * исполняемый файл LightSearch Server.
  * @author ViiSE
  * @see DatabaseRecordIdentifier
- * @since 2.0
+ * @since 2.0.0
  */
 public class DatabaseRecordIdentifierWriterDefaultImpl implements DatabaseRecordIdentifierWriter {
 

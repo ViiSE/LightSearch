@@ -29,7 +29,7 @@ import lightsearch.server.exception.DatabaseStatementResultSetException;
  * успешно обработана, и не будет больше ее брать для обработки.
  * @author ViiSE
  * @see lightsearch.server.database.DatabaseReader
- * @since 2.0
+ * @since 2.0.0
  */
 public class DatabaseStatementResultSetUpdateDefaultImpl implements DatabaseStatementResultSetUpdate {
 

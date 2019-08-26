@@ -22,7 +22,7 @@ package lightsearch.server.identifier;
  * которое однозначно бы определяло этот поток. Для этого и нужен идентификатор обработчиков клиентов и администраторов.
  * @author ViiSE
  * @see lightsearch.server.handler.Handler
- * @since 2.0
+ * @since 2.0.0
  */
 public interface HandlerIdentifier {
     long next();

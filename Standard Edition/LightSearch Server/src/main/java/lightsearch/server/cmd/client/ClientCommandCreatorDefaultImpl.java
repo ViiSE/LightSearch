@@ -35,7 +35,7 @@ import lightsearch.server.data.LightSearchServerDTO;
  * Все команды создаются согласно протоколу.
  * @author ViiSE
  * @see lightsearch.server.cmd.client.ClientCommandContentEnum
- * @since 1.0
+ * @since 1.0.0
  */
 public class ClientCommandCreatorDefaultImpl implements ClientCommandCreator {
 

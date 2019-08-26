@@ -34,7 +34,7 @@ import lightsearch.server.message.result.ResultTypeMessageEnum;
  * <p>
  * Значение тайм-аута, равное 0, означает, что тайм-аут будет отключен.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public class TimeoutClientProcessor extends AbstractProcessorAdmin {
 

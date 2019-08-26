@@ -45,7 +45,7 @@ import lightsearch.server.log.LogMessageTypeEnum;
  * Получает от клиента команду и ее параметры, затем, используя {@link ClientParametersHolder#commandHolder()},
  * вызывает необходимый обработчик команды и отправляет результат клиенту.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public class ClientHandlerDefaultImpl extends Handler {
 

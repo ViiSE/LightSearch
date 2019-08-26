@@ -15,7 +15,7 @@ package lightsearch.server.cmd.client;
  * Ознакомиться с протоколом можно по
  * <a href="https://github.com/ViiSE/LightSearch/blob/master/Documents/Protocol/LightSearch%20Protocol.txt">ссылке</a>.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public enum ClientCommandResultEnum {
     IMEI {

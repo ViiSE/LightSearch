@@ -22,7 +22,7 @@ import lightsearch.server.time.CurrentDateTime;
  * <p>
  * Записывает лог в стандартный поток ввода-вывода.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public class LoggerWindowDefaultImpl implements LoggerWindow {
 

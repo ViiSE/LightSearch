@@ -15,7 +15,7 @@ package lightsearch.server.cmd.client.processor.debug;
  * Отладочный интерфейс товара предприятия. Принадлежит к какому-нибудь подразделению и имеет свой штрих-код.
  * Используется при подтверждении товаров мягкого чека и поиска товара
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public interface ProductDebug {
     String subdivision();

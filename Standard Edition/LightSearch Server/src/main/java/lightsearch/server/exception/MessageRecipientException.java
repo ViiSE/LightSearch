@@ -19,7 +19,7 @@ package lightsearch.server.exception;
  * Исключение, возникающее при принятии сообщения клиентов LightSearch Server'ом.
  * @author ViiSE
  * @see lightsearch.server.message.MessageRecipient
- * @since 2.0
+ * @since 2.0.0
  */
 public class MessageRecipientException extends Exception {
     

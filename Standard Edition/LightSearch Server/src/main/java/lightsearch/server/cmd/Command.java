@@ -30,7 +30,7 @@ package lightsearch.server.cmd;
  * @see lightsearch.server.cmd.admin.AdminCommand
  * @see lightsearch.server.cmd.client.ClientCommand
  * @see lightsearch.server.cmd.system.SystemCommand
- * @since 1.0
+ * @since 1.0.0
  */
 public interface Command {
     String command();

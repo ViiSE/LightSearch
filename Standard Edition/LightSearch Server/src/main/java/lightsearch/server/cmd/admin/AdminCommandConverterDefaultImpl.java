@@ -23,7 +23,7 @@ import lightsearch.server.exception.MessageParserException;
 /**
  * Реализация интерфейса {@link lightsearch.server.cmd.admin.AdminCommandConverter} по умолчанию.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public class AdminCommandConverterDefaultImpl implements AdminCommandConverter {
     

@@ -21,7 +21,7 @@ package lightsearch.server.thread;
  * Также можно завершить работу всех потоков, кроме таймера перезагрузки сервера. В текущей реализации LightSearch Server
  * только таймер перезагрузки после истечения времени перезагрузки вызывает данный метод.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public interface ThreadManager {
     ThreadHolder holder();

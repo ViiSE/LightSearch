@@ -20,7 +20,7 @@ package lightsearch.server.checker;
  * <p>
  * Применяется повсеместно во всем проекте.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public interface LightSearchChecker {
     boolean isEmpty(String... strings);

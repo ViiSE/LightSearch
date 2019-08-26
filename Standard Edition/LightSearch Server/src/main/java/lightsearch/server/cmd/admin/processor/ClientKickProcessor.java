@@ -27,7 +27,7 @@ import lightsearch.server.message.result.ResultTypeMessageEnum;
  * <p>
  * Исключает клиента LightSearch Server из текущего сеанса. Администраторы не могут быть исключены.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public class ClientKickProcessor extends AbstractProcessorAdmin {
 

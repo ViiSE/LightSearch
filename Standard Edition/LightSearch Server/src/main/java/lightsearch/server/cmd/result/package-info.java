@@ -1,6 +1,6 @@
 /**
  * Содержит интерфейсы и их реализации результата команд клиентов LightSearch Server.
- * @since 1.0
+ * @since 1.0.0
  * @author ViiSE
  * @version 1.0
  */

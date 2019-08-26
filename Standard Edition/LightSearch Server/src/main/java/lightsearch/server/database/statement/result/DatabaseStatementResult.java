@@ -20,7 +20,7 @@ package lightsearch.server.database.statement.result;
  * <p>
  * Метод {@link DatabaseStatementResult#result()} возращает результат команды, готовый к отправке клиенту.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public interface DatabaseStatementResult {
     String result();

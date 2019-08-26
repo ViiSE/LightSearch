@@ -28,7 +28,7 @@ import lightsearch.server.LightSearchServer;
  * Для определения текущей операционной системы используется интерфейс
  * {@link lightsearch.server.initialization.OsDetector}.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public class CurrentServerDirectoryFromFileImpl implements CurrentServerDirectory {
 

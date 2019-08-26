@@ -22,7 +22,7 @@ import org.json.simple.JSONObject;
  * Для записи JSON сообщения в формате pretty в поле типа BLOB в сообщении необходимо добавлять после каждой строки
  * помимо символа переноса новой строки {@code \n} символ возврата каретки {@code \r}.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public class DatabaseCommandMessageConfirmSoftCheckProductsDefaultWindowsJSONImpl implements DatabaseCommandMessage {
 

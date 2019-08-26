@@ -25,7 +25,7 @@ import lightsearch.server.exception.ConnectionIdentifierException;
  * @author ViiSE
  * @see java.net.Socket
  * @see lightsearch.server.handler.HandlerCreator
- * @since 1.0
+ * @since 1.0.0
  */
 public interface ConnectionIdentifier {
     ConnectionIdentifierResult identifyConnection(Socket clientSocket) throws ConnectionIdentifierException;

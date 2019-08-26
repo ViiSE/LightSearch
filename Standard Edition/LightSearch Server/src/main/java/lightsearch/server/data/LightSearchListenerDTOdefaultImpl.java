@@ -25,7 +25,7 @@ import lightsearch.server.timer.TimersIDEnum;
 /**
  * Реализация интерфейса {@link lightsearch.server.data.LightSearchListenerDTO} по умолчанию.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public class LightSearchListenerDTODefaultImpl implements LightSearchListenerDTO {
 

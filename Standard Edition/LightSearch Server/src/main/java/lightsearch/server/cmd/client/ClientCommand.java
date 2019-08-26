@@ -26,7 +26,7 @@ import lightsearch.server.cmd.Command;
  * @author ViiSE
  * @see lightsearch.server.handler.client
  * @see lightsearch.server.cmd.client.processor
- * @since 1.0
+ * @since 1.0.0
  */
 public interface ClientCommand extends Command {
     String IMEI();

@@ -24,7 +24,7 @@ import lightsearch.server.exception.DatabasePreparedStatementException;
  * В случае ошибки при компиляции запроса генерируется исключение
  * {@link lightsearch.server.exception.DatabasePreparedStatementException}.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public interface DatabasePreparedStatement {
     PreparedStatement preparedStatement() throws DatabasePreparedStatementException;

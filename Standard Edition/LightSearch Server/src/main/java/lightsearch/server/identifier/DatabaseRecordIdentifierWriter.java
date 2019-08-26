@@ -21,7 +21,7 @@ import lightsearch.server.exception.IdentifierException;
  * Записывает значение идентификатора базы данных в сторонний источник.
  * @author ViiSE
  * @see DatabaseRecordIdentifier
- * @since 2.0
+ * @since 2.0.0
  */
 public interface DatabaseRecordIdentifierWriter {
     void write(long databaseRecordIdentifier) throws IdentifierException;

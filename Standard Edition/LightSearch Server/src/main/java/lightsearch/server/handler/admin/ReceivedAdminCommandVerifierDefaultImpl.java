@@ -24,7 +24,7 @@ import lightsearch.server.exception.ReceivedCommandVerifierException;
  * Проверяет команду и имя администратора на {@code null}, и сравнивает имя администратора с именем администратора,
  * присланного в сообщении.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public class ReceivedAdminCommandVerifierDefaultImpl implements ReceivedAdminCommandVerifier {
 

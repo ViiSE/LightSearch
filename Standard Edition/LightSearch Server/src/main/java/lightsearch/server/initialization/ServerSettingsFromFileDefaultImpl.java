@@ -33,7 +33,7 @@ import java.io.IOException;
  * Для определения текущей директории используется интерфейс
  * {@link lightsearch.server.initialization.CurrentServerDirectory}.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public class ServerSettingsFromFileDefaultImpl implements ServerSettings{
 

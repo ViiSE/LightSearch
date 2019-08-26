@@ -25,7 +25,7 @@ import lightsearch.server.thread.LightSearchThread;
  * @see lightsearch.server.timer.SuperRebootServerTimer
  * @see lightsearch.server.thread.ThreadManager
  * @see lightsearch.server.daemon.DaemonServer
- * @since 2.0
+ * @since 2.0.0
  */
 public class RebootTimerExecutorDefaultImpl implements RebootTimerExecutor {
 

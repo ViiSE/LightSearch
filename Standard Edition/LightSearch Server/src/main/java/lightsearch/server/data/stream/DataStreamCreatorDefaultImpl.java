@@ -28,7 +28,7 @@ import lightsearch.server.exception.DataStreamCreatorException;
  * @author ViiSE
  * @see java.net.Socket
  * @see lightsearch.server.data.stream.DataStream
- * @since 2.0
+ * @since 2.0.0
  */
 public class DataStreamCreatorDefaultImpl implements DataStreamCreator {
 

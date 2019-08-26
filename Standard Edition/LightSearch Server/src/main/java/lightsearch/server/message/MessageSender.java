@@ -26,7 +26,7 @@ import lightsearch.server.exception.MessageSenderException;
  * {@link lightsearch.server.exception.MessageSenderException}.
  * @author ViiSE
  * @see lightsearch.server.handler.Handler
- * @since 1.0
+ * @since 1.0.0
  */
 public interface MessageSender {
     void sendMessage(String message) throws MessageSenderException;

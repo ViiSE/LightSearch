@@ -25,7 +25,7 @@ import lightsearch.server.exception.DatabaseWriterException;
  * В случае ошибки считывания генерируется исключение {@link lightsearch.server.exception.DatabaseWriterException}.
  * @author ViiSE
  * @see lightsearch.server.database.statement.DatabaseStatementExecutor
- * @since 2.0
+ * @since 2.0.0
  */
 public interface DatabaseWriter {
     void write() throws DatabaseWriterException;

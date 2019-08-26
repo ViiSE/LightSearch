@@ -26,7 +26,7 @@ import lightsearch.server.exception.MessageRecipientException;
  * {@link lightsearch.server.exception.MessageRecipientException}.
  * @author ViiSE
  * @see lightsearch.server.handler.Handler
- * @since 1.0
+ * @since 1.0.0
  */
 public interface MessageRecipient {
     String acceptMessage() throws MessageRecipientException;

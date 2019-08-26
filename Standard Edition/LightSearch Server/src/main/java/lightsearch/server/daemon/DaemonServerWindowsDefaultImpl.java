@@ -22,7 +22,7 @@ import java.io.IOException;
  * <p>
  * Запускает демона LightSearch Daemon под операционной системой Microsoft Windows.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public class DaemonServerWindowsDefaultImpl implements DaemonServer {
 

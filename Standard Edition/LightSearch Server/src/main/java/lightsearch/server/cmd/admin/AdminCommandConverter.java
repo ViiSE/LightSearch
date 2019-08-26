@@ -25,7 +25,7 @@ import lightsearch.server.exception.CommandConverterException;
  * {@link lightsearch.server.exception.CommandConverterException}.
  * @author ViiSE
  * @see lightsearch.server.handler.admin
- * @since 1.0
+ * @since 1.0.0
  */
 public interface AdminCommandConverter {
     AdminCommand convertToAdminCommand(String message) throws CommandConverterException;

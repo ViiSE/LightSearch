@@ -19,7 +19,7 @@ package lightsearch.server.exception;
  * Исключение, возникающее при создании соединения с базой данных.
  * @author ViiSE
  * @see lightsearch.server.database.DatabaseConnectionCreator
- * @since 2.0
+ * @since 2.0.0
  */
 public class DatabaseConnectionCreatorException extends Exception {
     

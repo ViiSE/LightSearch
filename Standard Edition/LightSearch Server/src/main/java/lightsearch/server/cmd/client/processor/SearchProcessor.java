@@ -34,7 +34,7 @@ import lightsearch.server.message.result.ResultTypeMessageEnum;
 /**
  * Обработчик команды поиска товара.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public class SearchProcessor extends AbstractProcessorClient {
 

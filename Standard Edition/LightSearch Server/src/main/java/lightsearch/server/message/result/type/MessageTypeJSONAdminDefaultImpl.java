@@ -66,7 +66,7 @@ import org.json.simple.JSONObject;
  * <a href="https://github.com/fangyidong/json-simple">JSON.simple</a>.
  * @author ViiSE
  * @see lightsearch.server.message.result.MessageCreatorDefaultImpl
- * @since 1.0
+ * @since 1.0.0
  */
 public class MessageTypeJSONAdminDefaultImpl implements MessageType {
     

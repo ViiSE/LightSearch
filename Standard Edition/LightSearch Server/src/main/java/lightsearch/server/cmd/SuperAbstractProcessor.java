@@ -24,7 +24,7 @@ import lightsearch.server.message.result.ResultTypeMessageEnum;
 /**
  * Абстрактный класс обработчика команды клиента LightSearch.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public abstract class SuperAbstractProcessor {
 

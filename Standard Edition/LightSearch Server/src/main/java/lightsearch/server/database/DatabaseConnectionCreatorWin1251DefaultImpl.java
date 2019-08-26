@@ -24,7 +24,7 @@ import lightsearch.server.exception.DatabaseConnectionCreatorException;
 /**
  * Создает соединение с СУБД <a href=https://firebirdsql.org/>Firebird</a> с кодировкой windows-1251.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public class DatabaseConnectionCreatorWin1251DefaultImpl implements DatabaseConnectionCreator {
 

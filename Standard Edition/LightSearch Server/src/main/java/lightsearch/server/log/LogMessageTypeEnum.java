@@ -18,7 +18,7 @@ package lightsearch.server.log;
 /**
  * Тип сообщения лога.
  * @author ViiSE
- * @since 1.0
+ * @since 1.0.0
  */
 public enum LogMessageTypeEnum {
     INFO {

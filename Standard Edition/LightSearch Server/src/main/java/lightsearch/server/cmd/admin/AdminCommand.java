@@ -26,7 +26,7 @@ import lightsearch.server.cmd.Command;
  * @author ViiSE
  * @see lightsearch.server.handler.admin
  * @see lightsearch.server.cmd.admin.processor
- * @since 1.0
+ * @since 1.0.0
  */
 public interface AdminCommand extends Command {
     String name();

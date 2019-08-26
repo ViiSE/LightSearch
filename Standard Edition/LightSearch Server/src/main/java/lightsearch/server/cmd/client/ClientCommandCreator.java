@@ -26,7 +26,7 @@ import lightsearch.server.cmd.result.CommandResult;
  * из контейнера берутся по имени команды.
  * @author ViiSE
  * @see lightsearch.server.handler.processor
- * @since 1.0
+ * @since 1.0.0
  */
 public interface ClientCommandCreator {
     Map<String, Function<ClientCommand, CommandResult>> createCommandHolder();

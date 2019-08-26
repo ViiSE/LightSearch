@@ -23,7 +23,7 @@ package lightsearch.server.data;
  * @see lightsearch.server.data.ClientHandlerDTO
  * @see lightsearch.server.data.SystemHandlerDTO
  * @see lightsearch.server.handler.Handler
- * @since 2.0
+ * @since 2.0.0
  */
 public interface ThreadParametersHolder {
     String id();

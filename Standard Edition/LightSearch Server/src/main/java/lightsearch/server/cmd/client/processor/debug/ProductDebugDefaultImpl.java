@@ -12,7 +12,7 @@ package lightsearch.server.cmd.client.processor.debug;
 /**
  * Реализация интерфейса {@link lightsearch.server.cmd.client.processor.debug.ProductDebug} по умолчанию.
  * @author ViiSE
- * @since 2.0
+ * @since 2.0.0
  */
 public class ProductDebugDefaultImpl implements ProductDebug {
 

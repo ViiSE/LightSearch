@@ -41,7 +41,7 @@ import lightsearch.server.log.LogMessageTypeEnum;
  * @see lightsearch.server.handler.Handler
  * @see lightsearch.server.handler.client.ClientHandlerDefaultImpl
  * @see lightsearch.server.handler.admin.AdminHandlerDefaultImpl
- * @since 1.0
+ * @since 1.0.0
  */
 public class LightSearchServerListenerSocketDefaultImpl implements LightSearchServerListener {
 
