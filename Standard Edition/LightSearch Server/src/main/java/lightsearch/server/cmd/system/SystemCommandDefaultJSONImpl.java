@@ -18,8 +18,16 @@ package lightsearch.server.cmd.system;
 import org.json.simple.JSONObject;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.cmd.system.SystemCommand}, в которой команда приходит от системного
+ * бота в формате JSON.
+ * <p>
+ * Из сообщения, которое пришло от системного бота, LightSearch Server достает все необходимые данные команд, согласно
+ * протоколу.
+ * <p>
+ * Для получения данных системного бота из сообщения в формате JSON используется библиотека
+ * <a href="https://github.com/fangyidong/json-simple">JSON.simple</a>.
  * @author ViiSE
+ * @since 2.0
  */
 public class SystemCommandDefaultJSONImpl implements SystemCommand {
 

@@ -21,8 +21,9 @@ import lightsearch.server.message.parser.MessageParserInit;
 import lightsearch.server.exception.MessageParserException;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.cmd.system.SystemCommandConverter} по умолчанию.
  * @author ViiSE
+ * @since 2.0
  */
 public class SystemCommandConverterDefaultImpl implements SystemCommandConverter {
     

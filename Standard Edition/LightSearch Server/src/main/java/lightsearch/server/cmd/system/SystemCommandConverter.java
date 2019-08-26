@@ -18,8 +18,14 @@ package lightsearch.server.cmd.system;
 import lightsearch.server.exception.CommandConverterException;
 
 /**
- *
+ * Конвертирует строку в команду системного бота.
+ * <p>
+ * Конвертирует сообщение системного бота в {@link lightsearch.server.cmd.system.SystemCommand}.
+ * Если произошла ошибка при конвертации сообщения, то генерируется исключение
+ * {@link lightsearch.server.exception.CommandConverterException}.
  * @author ViiSE
+ * @see lightsearch.server.handler.client
+ * @since 2.0
  */
 public interface SystemCommandConverter {
     SystemCommand convertToSystemCommand(String message) throws CommandConverterException;

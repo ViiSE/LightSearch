@@ -18,7 +18,14 @@ package lightsearch.server.cmd.system;
 import lightsearch.server.cmd.Command;
 
 /**
- *
+ * Команда системного бота LightSearch Server.
+ * <p>
+ * Содержит все необходимые параметры для всех команд системного бота.
+ * <p>
+ * Применяется как аргумент метода <code>apply()</code> обработчиков команд системного бота LightSearch Server.
  * @author ViiSE
+ * @see lightsearch.server.handler.system
+ * @see lightsearch.server.cmd.system.processor
+ * @since 2.0
  */
 public interface SystemCommand extends Command {}

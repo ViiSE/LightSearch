@@ -18,8 +18,12 @@ import lightsearch.server.data.LightSearchListenerDTO;
 import lightsearch.server.data.LightSearchServerDTO;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.cmd.system.SystemCommandCreator} по умолчанию.
+ * <p>
+ * Все команды создаются согласно протоколу.
  * @author ViiSE
+ * @see lightsearch.server.cmd.system.SystemCommandContentEnum
+ * @since 2.0
  */
 public class SystemCommandCreatorDefaultImpl implements SystemCommandCreator {
     

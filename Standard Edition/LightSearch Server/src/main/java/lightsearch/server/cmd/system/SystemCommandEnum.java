@@ -16,8 +16,12 @@
 package lightsearch.server.cmd.system;
 
 /**
- *
+ * Названия команд системного бота LightSearch Server согласно протоколу.
+ * <p>
+ * Ознакомиться с протоколом можно по
+ * <a href="https://github.com/ViiSE/LightSearch/blob/master/Documents/Protocol/LightSearch%20Protocol.txt">ссылке</a>.
  * @author ViiSE
+ * @since 2.0
  */
 public enum SystemCommandEnum {
     

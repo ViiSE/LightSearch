@@ -20,8 +20,13 @@ import java.util.function.Function;
 import lightsearch.server.cmd.result.CommandResult;
 
 /**
- *
+ * Создает обработчики команд системного бота LightSearch Server.
+ * <p>
+ * Все команды системного бота, которые должны обрабатываться LightSearch Server, помещаются в контейнер команд. Команды
+ * из контейнера берутся по имени команды.
  * @author ViiSE
+ * @see lightsearch.server.handler.processor
+ * @since 2.0
  */
 public interface SystemCommandCreator {
     Map<String, Function<SystemCommand, CommandResult>> createCommandHolder();
