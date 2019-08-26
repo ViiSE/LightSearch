@@ -29,8 +29,10 @@ import lightsearch.server.message.result.ResultTypeMessageEnum;
 /**
  * Обработчик команды добавления клиента в черный список.
  * <p>
- * Добавляет клиента LightSearch Server в черный список. В черный список администраторов добавлять нельзя.
+ * Добавляет клиента LightSearch Server в черный список. Если клиент уже сушествует в черном списке, то команда
+ * закончится провалом. В черный список администраторов добавлять нельзя.
  * @author ViiSE
+ * @see LightSearchServerDTO#blacklist()
  * @since 1.0
  */
 public class AddBlacklistProcessor extends AbstractProcessorAdmin {
