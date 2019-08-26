@@ -16,8 +16,12 @@
 package lightsearch.server.database.statement.result;
 
 /**
- *
+ * Считывает результат команды из таблицы базы данных.
+ * <p>
+ * В случае ошибки при считывании результата команды генерируется исключение
+ * {@link lightsearch.server.exception.DatabaseStatementResultSetException}.
  * @author ViiSE
+ * @since 2.0
  */
 public interface DatabaseStatementResultSetSelect extends DatabaseStatementResultSet {
     String result();

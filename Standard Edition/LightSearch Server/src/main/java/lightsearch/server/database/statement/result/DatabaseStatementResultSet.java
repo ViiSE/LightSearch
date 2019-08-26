@@ -18,8 +18,12 @@ package lightsearch.server.database.statement.result;
 import lightsearch.server.exception.DatabaseStatementResultSetException;
 
 /**
- *
+ * Исполняет запрос для результата команды из таблицы базы данных.
+ * <p>
+ * В случае ошибки при исполнения запроса для результата команды генерируется исключение
+ * {@link lightsearch.server.exception.DatabaseStatementResultSetException}.
  * @author ViiSE
+ * @since 2.0
  */
 public interface DatabaseStatementResultSet {
     void exec() throws DatabaseStatementResultSetException;

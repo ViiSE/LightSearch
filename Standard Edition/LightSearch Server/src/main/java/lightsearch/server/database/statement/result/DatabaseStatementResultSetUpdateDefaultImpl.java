@@ -21,8 +21,15 @@ import lightsearch.server.exception.DatabasePreparedStatementException;
 import lightsearch.server.exception.DatabaseStatementResultSetException;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.database.statement.result.DatabaseStatementResultSetUpdate} по
+ * умолчанию.
+ * <p>
+ * После того, как LightSearch Server успешно считал результат команды, он обновляет запись в таблице базы данных,
+ * которая соответствует этой команде. После этого программа бизнес-логики предриятия будет считать, что данная команда
+ * успешно обработана, и не будет больше ее брать для обработки.
  * @author ViiSE
+ * @see lightsearch.server.database.DatabaseReader
+ * @since 2.0
  */
 public class DatabaseStatementResultSetUpdateDefaultImpl implements DatabaseStatementResultSetUpdate {
 

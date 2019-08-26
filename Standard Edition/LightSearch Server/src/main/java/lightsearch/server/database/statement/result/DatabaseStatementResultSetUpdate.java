@@ -16,8 +16,13 @@
 package lightsearch.server.database.statement.result;
 
 /**
- *
+ * Обновляет запись результата команды в таблице базы данных.
+ * <p>
+ * Необходимо для того, чтобы программа, реализующая программу бизнес-логики предприятия, узнала, что данная команда
+ * была успешно считана.
+ * {@link lightsearch.server.database.statement.result.DatabaseStatementResultSet}.
  * @author ViiSE
+ * @since 2.0
  */
 public interface DatabaseStatementResultSetUpdate extends DatabaseStatementResultSet {
 }

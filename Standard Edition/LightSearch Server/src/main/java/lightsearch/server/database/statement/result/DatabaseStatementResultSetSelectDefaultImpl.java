@@ -27,8 +27,15 @@ import lightsearch.server.time.DateTimeComparator;
 import lightsearch.server.time.DateTimeComparatorInit;
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.database.statement.result.DatabaseStatementResultSetSelect} по
+ * умолчанию.
+ * <p>
+ * LightSearch Server ждет ответа от програмы, реализующей бизнес-логику, 30 секунд. Если ответ в таблице за это время
+ * не появился, то генерируется исключение {@link lightsearch.server.exception.DatabaseStatementResultSetException}.
  * @author ViiSE
+ * @see lightsearch.server.time.DateTimeComparator
+ * @see lightsearch.server.database.statement.DatabasePreparedStatement
+ * @since 2.0
  */
 public class DatabaseStatementResultSetSelectDefaultImpl implements DatabaseStatementResultSetSelect {
 
