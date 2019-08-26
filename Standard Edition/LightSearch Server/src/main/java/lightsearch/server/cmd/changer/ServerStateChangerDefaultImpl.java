@@ -39,8 +39,9 @@ import lightsearch.server.timer.TimersIDEnum;
 
 
 /**
- *
+ * Реализация интерфейса {@link lightsearch.server.cmd.changer.ServerStateChanger} по умолчанию.
  * @author ViiSE
+ * @since 2.0
  */
 public class ServerStateChangerDefaultImpl implements ServerStateChanger {
 
