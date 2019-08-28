@@ -20,16 +20,16 @@ import android.app.Activity;
 import android.support.v7.app.AlertDialog;
 
 import ru.viise.lightsearch.data.ButtonContentEnum;
-import ru.viise.lightsearch.data.SearchRecordDTO;
+import ru.viise.lightsearch.data.SearchRecord;
 
 public class OneResultAlertDialogCreatorDefaultImpl implements OneResultAlertDialogCreator {
 
     private final String OK = ButtonContentEnum.POSITIVE_BUTTON.stringValue();
 
     private final Activity activity;
-    private final SearchRecordDTO searchRecord;
+    private final SearchRecord searchRecord;
 
-    public OneResultAlertDialogCreatorDefaultImpl(Activity activity, SearchRecordDTO searchRecord) {
+    public OneResultAlertDialogCreatorDefaultImpl(Activity activity, SearchRecord searchRecord) {
         this.activity = activity;
         this.searchRecord = searchRecord;
     }
@@ -37,11 +37,11 @@ public class OneResultAlertDialogCreatorDefaultImpl implements OneResultAlertDia
     @Override
     public AlertDialog createAlertDialog() {
         return new android.support.v7.app.AlertDialog.Builder(activity).setTitle("").setMessage(
-                "Подразделение: " + searchRecord.subdivision() + "\n" +
-                        "ИД: " + searchRecord.id() + "\n" +
+                "ИД: " + searchRecord.barcode() + "\n" +
                         "Наименование: " + searchRecord.name() + "\n" +
-                        "Цена: " + searchRecord.price() + " " + searchRecord.priceUnit() + "\n" +
-                        "Кол-во: " + searchRecord.amount() + " " + searchRecord.amountUnit() + "\n")
+                        "Цена: " + searchRecord.priceWithUnit() + "\n" +
+                        "Кол-во: " + searchRecord.maxAmountWithUnit() + "\n" +
+                        "Подразделения: " + "\n" + searchRecord.subdivisions().toString())
                 .setPositiveButton(OK, (dialogInterface, i) -> dialogInterface.dismiss()).create();
     }
 }

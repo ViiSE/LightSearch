@@ -54,7 +54,7 @@ import ru.viise.lightsearch.data.CommandManagerAsyncTaskDTOInit;
 import ru.viise.lightsearch.data.ConnectionDTO;
 import ru.viise.lightsearch.data.ReconnectDTO;
 import ru.viise.lightsearch.data.ScanType;
-import ru.viise.lightsearch.data.SearchRecordDTO;
+import ru.viise.lightsearch.data.SearchRecord;
 import ru.viise.lightsearch.data.SoftCheckRecord;
 import ru.viise.lightsearch.data.creator.CommandAuthorizationDTOCreator;
 import ru.viise.lightsearch.data.creator.CommandAuthorizationDTOCreatorInit;
@@ -159,7 +159,7 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
         fragmentTransactionManager.doContainerFragmentTransactionFromCart();
     }
 
-    public void doResultSearchFragmentTransaction(String title, List<SearchRecordDTO> searchRecords) {
+    public void doResultSearchFragmentTransaction(String title, List<SearchRecord> searchRecords) {
         FragmentTransactionManager fragmentTransactionManager =
                 FragmentTransactionManagerInit.fragmentTransactionManager(this);
         fragmentTransactionManager.doResultSearchFragmentTransaction(title, searchRecords);
@@ -192,7 +192,7 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
         noResADCr.createAlertDialog().show();
     }
 
-    public void callDialogOneResult(SearchRecordDTO searchRecord) {
+    public void callDialogOneResult(SearchRecord searchRecord) {
         OneResultAlertDialogCreator oneResADCr =
                 OneResultAlertDialogCreatorInit.oneResultAlertDialogCreator(this, searchRecord);
         oneResADCr.createAlertDialog().show();

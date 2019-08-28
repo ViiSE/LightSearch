@@ -14,11 +14,8 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.data.creator;
+package ru.viise.lightsearch.data;
 
-public class SearchRecordsDTOCreatorInit {
-
-    public static SearchRecordsDTOCreator searchRecordsDTOCreator(Object data) {
-        return new SearchRecordsDTOCreatorJSONDefaultImpl(data);
-    }
+public interface SearchRecord extends SoftCheckRecord {
+    Subdivision getSubdivision(int index);
 }

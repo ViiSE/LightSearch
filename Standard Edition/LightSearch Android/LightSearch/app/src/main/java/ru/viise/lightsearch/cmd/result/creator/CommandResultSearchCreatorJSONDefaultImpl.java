@@ -26,9 +26,9 @@ import ru.viise.lightsearch.cmd.result.CommandResult;
 import ru.viise.lightsearch.cmd.result.SearchCommandResultInit;
 import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifier;
 import ru.viise.lightsearch.cmd.result.verify.ResultCommandVerifierInit;
-import ru.viise.lightsearch.data.SearchRecordDTO;
-import ru.viise.lightsearch.data.creator.SearchRecordsDTOCreator;
-import ru.viise.lightsearch.data.creator.SearchRecordsDTOCreatorInit;
+import ru.viise.lightsearch.data.SearchRecord;
+import ru.viise.lightsearch.data.creator.SearchRecordsCreator;
+import ru.viise.lightsearch.data.creator.SearchRecordsCreatorInit;
 import ru.viise.lightsearch.exception.CommandResultCreatorException;
 import ru.viise.lightsearch.exception.MessageParserException;
 import ru.viise.lightsearch.message.parser.MessageParser;
@@ -62,9 +62,9 @@ public class CommandResultSearchCreatorJSONDefaultImpl implements CommandResultC
                     ResultCommandVerifierInit.resultCommandVerifier(incomingIMEI, IMEI, incomingIsDone);
 
             boolean isDone = resCmdVerifier.verify();
-            SearchRecordsDTOCreator searchRecsDTOCr =
-                    SearchRecordsDTOCreatorInit.searchRecordsDTOCreator(objMsg.get(DATA));
-            List<SearchRecordDTO> searchRecords = searchRecsDTOCr.createSearchRecordsDTO();
+            SearchRecordsCreator searchRecsDTOCr =
+                    SearchRecordsCreatorInit.searchRecordsCreator(objMsg.get(DATA));
+            List<SearchRecord> searchRecords = searchRecsDTOCr.createSearchRecords();
 
             return SearchCommandResultInit.searchCommandResult(isDone,
                     null, searchRecords, subdivision, null);

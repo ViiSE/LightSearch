@@ -30,14 +30,14 @@ import android.widget.ListView;
 import java.util.List;
 
 import ru.viise.lightsearch.R;
-import ru.viise.lightsearch.data.SearchRecordDTO;
+import ru.viise.lightsearch.data.SearchRecord;
 import ru.viise.lightsearch.dialog.alert.OneResultAlertDialogCreator;
 import ru.viise.lightsearch.dialog.alert.OneResultAlertDialogCreatorInit;
 import ru.viise.lightsearch.fragment.adapter.ResultSearchArrayAdapter;
 
 public class ResultSearchFragment extends ListFragment {
 
-    private List<SearchRecordDTO> searchRecords;
+    private List<SearchRecord> searchRecords;
 
     @Override
     public void onAttach(Context context) {
@@ -58,7 +58,7 @@ public class ResultSearchFragment extends ListFragment {
         setListAdapter(adapter);
     }
 
-    public void init(List<SearchRecordDTO> searchRecords) {
+    public void init(List<SearchRecord> searchRecords) {
         this.searchRecords = searchRecords;
     }
 

@@ -38,7 +38,6 @@ public class SoftCheckRecordCreatorJSONDefaultImpl implements SoftCheckRecordCre
     private final String AMOUNT        = ClientCommandContentEnum.AMOUNT.stringValue();
     private final String UNIT          = ClientCommandContentEnum.UNIT.stringValue();
 
-
     private final JSONArray data;
 
     public SoftCheckRecordCreatorJSONDefaultImpl(Object data) {

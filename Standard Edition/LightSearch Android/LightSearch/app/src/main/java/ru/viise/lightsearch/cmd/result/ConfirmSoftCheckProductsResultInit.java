@@ -24,7 +24,7 @@ import ru.viise.lightsearch.data.SoftCheckRecord;
 public class ConfirmSoftCheckProductsResultInit {
 
     public static ConfirmSoftCheckProductsResult confirmSoftCheckProductsResult(boolean isDone,
-                    String message, List<SoftCheckRecord> cartRecords, ReconnectDTO reconnectDTO) {
+                                                                                String message, List<SoftCheckRecord> cartRecords, ReconnectDTO reconnectDTO) {
         return new ConfirmSoftCheckProductsResultDefaultImpl(isDone, message, cartRecords, reconnectDTO);
     }
 }

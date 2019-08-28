@@ -16,19 +16,25 @@
 
 package ru.viise.lightsearch.fragment.util;
 
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.data.Subdivision;
 
 public class CardViewRowResultFillerSubdivisionImpl implements ViewFiller {
 
+    private static final int stepDP = 20;
+
     private final float scale;
     private final CardView cardView;
 
-    private int cardHeightPx = 0;
+    private int cardHeightCurrentDP  = 70;
+    private int tvMarginTopCurrentDP = 45;
 
     public CardViewRowResultFillerSubdivisionImpl(View cardView) {
         this.scale    = cardView.getContext().getResources().getDisplayMetrics().density;
@@ -38,37 +44,54 @@ public class CardViewRowResultFillerSubdivisionImpl implements ViewFiller {
     @Override
     public void addView(Object... elements) {
         Subdivision subdivision = (Subdivision) elements[0];
-        cardHeightPx += increase();
+        String amountUnit = (String) elements[1];
+        int cardHeightCurrentPx = increaseHeightPx();
+        int tvMarginTopCurrentPx = increaseMarginTopPx();
 
-        cardView.setLayoutParams(new CardView.LayoutParams(cardView.getWidth(), cardHeightPx));
+        CardView.LayoutParams cardParams = new CardView.LayoutParams(
+                RelativeLayout.LayoutParams.MATCH_PARENT, cardHeightCurrentPx);
+        cardView.setLayoutParams(cardParams);
 
         int tvSubdivRSWidthPx  = (int) (250 * scale + 0.5f);
         int tvSubdivRSHeightPx = (int) (20  * scale + 0.5f);
         RelativeLayout.LayoutParams tvSubdivRSLayout = new RelativeLayout.LayoutParams(tvSubdivRSWidthPx, tvSubdivRSHeightPx);
-        tvSubdivRSLayout.setMarginStart((int) (5 * scale + 0.5f));
-        tvSubdivRSLayout.setMargins(0, (int) (65 * scale + 0.5f), 0, 0);
+        tvSubdivRSLayout.setMargins(0, tvMarginTopCurrentPx, 0, 0);
+        tvSubdivRSLayout.setMarginStart((int) (15 * scale + 0.5f));
+
         TextView tvSubdivRS = new TextView(cardView.getContext());
+        tvSubdivRS.setId(View.generateViewId());
         tvSubdivRS.setLayoutParams(tvSubdivRSLayout);
         tvSubdivRS.setTextSize(15);
+        tvSubdivRS.setTextColor(ContextCompat.getColor(cardView.getContext(), R.color.blackColor));
+        tvSubdivRS.setText(subdivision.name());
+
+        cardView.addView(tvSubdivRS);
 
         int tvSubdivRSAmountWidthPx  = (int) (112 * scale + 0.5f);
         int tvSubdivRSAmountHeightPx = (int) (20  * scale + 0.5f);
         RelativeLayout.LayoutParams tvSubdivRSAmountLayout = new RelativeLayout.LayoutParams(tvSubdivRSAmountWidthPx, tvSubdivRSAmountHeightPx);
-        tvSubdivRSAmountLayout.setMarginStart((int) (5 * scale + 0.5f));
-        tvSubdivRSAmountLayout.setMargins(0, (int) (65 * scale + 0.5f), 0, 0);
-        tvSubdivRSAmountLayout.addRule(RelativeLayout.END_OF, tvSubdivRS.getId());
+        tvSubdivRSAmountLayout.setMargins(0, tvMarginTopCurrentPx, 0, 0);
+        tvSubdivRSAmountLayout.setMarginStart((int) (237 * scale + 0.5f));
+        //tvSubdivRSAmountLayout.addRule(RelativeLayout.END_OF, tvSubdivRS.getId());
+
         TextView tvSubdivAmountRS = new TextView(cardView.getContext());
-        tvSubdivAmountRS.setLayoutParams(tvSubdivRSLayout);
+        tvSubdivRS.setId(View.generateViewId());
+        tvSubdivAmountRS.setLayoutParams(tvSubdivRSAmountLayout);
         tvSubdivAmountRS.setTextSize(15);
+        tvSubdivAmountRS.setGravity(Gravity.RIGHT);
+        tvSubdivAmountRS.setTextColor(ContextCompat.getColor(cardView.getContext(), R.color.blackColor));
+        tvSubdivAmountRS.setText(String.format("%s %s", subdivision.productAmount(), amountUnit));
 
-        tvSubdivRS.setText(subdivision.name());
-        tvSubdivAmountRS.setText(String.valueOf(subdivision.productAmount()));
-
-        cardView.addView(tvSubdivRS);
         cardView.addView(tvSubdivAmountRS);
     }
 
-    private int increase() {
-        return (int) (cardView.getHeight() + (20 * scale + 0.5f));
+    private int increaseHeightPx() {
+        cardHeightCurrentDP += stepDP;
+        return (int) (cardHeightCurrentDP * scale + 0.5f);
+    }
+
+    private int increaseMarginTopPx() {
+        tvMarginTopCurrentDP += stepDP;
+        return (int) (tvMarginTopCurrentDP * scale + 0.5f);
     }
 }

@@ -18,12 +18,12 @@ package ru.viise.lightsearch.dialog.alert;
 
 import android.app.Activity;
 
-import ru.viise.lightsearch.data.SearchRecordDTO;
+import ru.viise.lightsearch.data.SearchRecord;
 
 public class OneResultAlertDialogCreatorInit {
 
     public static OneResultAlertDialogCreator oneResultAlertDialogCreator(Activity activity,
-                      SearchRecordDTO searchRecord) {
+                      SearchRecord searchRecord) {
         return new OneResultAlertDialogCreatorDefaultImpl(activity, searchRecord);
     }
 }

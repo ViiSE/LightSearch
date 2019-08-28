@@ -22,7 +22,7 @@ import android.support.v4.app.FragmentTransaction;
 import java.util.List;
 
 import ru.viise.lightsearch.R;
-import ru.viise.lightsearch.data.SearchRecordDTO;
+import ru.viise.lightsearch.data.SearchRecord;
 import ru.viise.lightsearch.data.SoftCheckRecord;
 import ru.viise.lightsearch.fragment.AuthorizationFragment;
 import ru.viise.lightsearch.fragment.CartFragment;
@@ -61,7 +61,7 @@ public class FragmentTransactionManagerDefaultImpl implements FragmentTransactio
     }
 
     @Override
-    public void doResultSearchFragmentTransaction(String title, List<SearchRecordDTO> searchRecords) {
+    public void doResultSearchFragmentTransaction(String title, List<SearchRecord> searchRecords) {
         ResultSearchFragment resultSearchFragment = new ResultSearchFragment();
         resultSearchFragment.init(searchRecords);
         FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();

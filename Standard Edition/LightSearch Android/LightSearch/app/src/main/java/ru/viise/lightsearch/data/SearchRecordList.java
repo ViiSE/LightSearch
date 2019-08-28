@@ -16,10 +16,22 @@
 
 package ru.viise.lightsearch.data;
 
-public class SearchRecordDTOInit {
+import java.util.ArrayList;
 
-    public static SearchRecordDTO searchRecordDTO(String subdivision, String id, String fullName,
-            String price, String amount, String unit) {
-        return new SearchRecordDTODefaultImpl(subdivision, id, fullName, price, amount, unit);
+public class SearchRecordList extends ArrayList<SearchRecord> {
+
+    public SearchRecordList() {
+        super();
+    }
+
+    @Override
+    public boolean add(SearchRecord searchRecord) {
+        for(int i = 0; i < super.size(); i++) {
+            if(super.get(i).barcode().equals(searchRecord.barcode())) {
+                super.get(i).subdivisions().addSubdivision(searchRecord.getSubdivision(0));
+                return true;
+            }
+        }
+        return super.add(searchRecord);
     }
 }

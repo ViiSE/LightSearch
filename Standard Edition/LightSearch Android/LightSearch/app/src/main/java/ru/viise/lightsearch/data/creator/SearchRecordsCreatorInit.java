@@ -14,12 +14,11 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.data;
+package ru.viise.lightsearch.data.creator;
 
-public class SoftCheckRecordInit {
+public class SearchRecordsCreatorInit {
 
-    public static SoftCheckRecord softCheckRecord(String name, String barcode, String price,
-                                                  String amountUnit, SubdivisionList subdivisions) {
-        return new SoftCheckRecordDefaultImpl(name, barcode, price, amountUnit, subdivisions);
+    public static SearchRecordsCreator searchRecordsCreator(Object data) {
+        return new SearchRecordsCreatorJSONDefaultImpl(data);
     }
 }

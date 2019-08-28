@@ -19,17 +19,17 @@ package ru.viise.lightsearch.cmd.result;
 import java.util.List;
 
 import ru.viise.lightsearch.data.ReconnectDTO;
-import ru.viise.lightsearch.data.SearchRecordDTO;
+import ru.viise.lightsearch.data.SearchRecord;
 
 public class SearchCommandResultDefaultImpl implements SearchCommandResult {
 
     private final boolean isDone;
     private final String message;
-    private final List<SearchRecordDTO> records;
+    private final List<SearchRecord> records;
     private final String subdivision;
     private final ReconnectDTO reconnectDTO;
 
-    public SearchCommandResultDefaultImpl(boolean isDone, String message, List<SearchRecordDTO> records,
+    public SearchCommandResultDefaultImpl(boolean isDone, String message, List<SearchRecord> records,
               String subdivision, ReconnectDTO reconnectDTO) {
         this.isDone = isDone;
         this.message = message;
@@ -44,7 +44,7 @@ public class SearchCommandResultDefaultImpl implements SearchCommandResult {
     }
 
     @Override
-    public List<SearchRecordDTO> records() {
+    public List<SearchRecord> records() {
         return records;
     }
 

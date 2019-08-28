@@ -66,10 +66,7 @@ public class SearchProcessor implements Function<CommandDTO, CommandResult> {
             }
             return cmdResCr.createCommandResult();
         }
-        catch (CommandResultCreatorException ex) {
-            return errorCommandResult(ex.getMessageRU(), commandDTO);
-        }
-        catch(MessageSenderException | MessageRecipientException ex) {
+        catch (CommandResultCreatorException | MessageSenderException | MessageRecipientException ex) {
             return errorCommandResult(ex.getMessageRU(), commandDTO);
         }
     }

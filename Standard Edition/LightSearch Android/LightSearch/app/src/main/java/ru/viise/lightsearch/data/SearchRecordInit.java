@@ -16,12 +16,10 @@
 
 package ru.viise.lightsearch.data;
 
-public interface SearchRecordDTO {
-    String subdivision();
-    String id();
-    String name();
-    String price();
-    String amount();
-    String amountUnit();
-    String priceUnit();
+public class SearchRecordInit {
+
+    public static SearchRecord searchRecord(String name, String barcode, String price,
+                                            String amountUnit, SubdivisionList subdivisions) {
+        return new SearchRecordDefaultImpl(name, barcode, price, amountUnit, subdivisions);
+    }
 }

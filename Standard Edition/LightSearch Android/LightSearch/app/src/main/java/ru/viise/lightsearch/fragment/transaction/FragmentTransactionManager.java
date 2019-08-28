@@ -18,13 +18,13 @@ package ru.viise.lightsearch.fragment.transaction;
 
 import java.util.List;
 
-import ru.viise.lightsearch.data.SearchRecordDTO;
+import ru.viise.lightsearch.data.SearchRecord;
 import ru.viise.lightsearch.data.SoftCheckRecord;
 
 public interface FragmentTransactionManager {
     void doAuthorizationFragmentTransaction();
     void doContainerFragmentTransaction(String[] skladArray, String[] TKArray);
-    void doResultSearchFragmentTransaction(String title, List<SearchRecordDTO> searchRecords);
+    void doResultSearchFragmentTransaction(String title, List<SearchRecord> searchRecords);
     void doCartFragmentTransaction(List<SoftCheckRecord> cartRecords);
     void doContainerFragmentTransactionFromCart();
 }

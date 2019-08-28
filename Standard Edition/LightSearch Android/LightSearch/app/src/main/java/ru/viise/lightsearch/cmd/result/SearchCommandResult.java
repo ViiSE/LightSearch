@@ -18,9 +18,9 @@ package ru.viise.lightsearch.cmd.result;
 
 import java.util.List;
 
-import ru.viise.lightsearch.data.SearchRecordDTO;
+import ru.viise.lightsearch.data.SearchRecord;
 
 public interface SearchCommandResult extends CommandResult {
     String subdivision();
-    List<SearchRecordDTO> records();
+    List<SearchRecord> records();
 }

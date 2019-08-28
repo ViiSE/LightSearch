@@ -19,15 +19,19 @@ package ru.viise.lightsearch.data.creator;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import ru.viise.lightsearch.cmd.ClientCommandContentEnum;
-import ru.viise.lightsearch.data.SearchRecordDTO;
-import ru.viise.lightsearch.data.SearchRecordDTOInit;
+import ru.viise.lightsearch.data.SearchRecord;
+import ru.viise.lightsearch.data.SearchRecordInit;
+import ru.viise.lightsearch.data.SearchRecordList;
+import ru.viise.lightsearch.data.Subdivision;
+import ru.viise.lightsearch.data.SubdivisionInit;
+import ru.viise.lightsearch.data.SubdivisionList;
+import ru.viise.lightsearch.data.SubdivisionListInit;
 
-public class SearchRecordsDTOCreatorJSONDefaultImpl implements SearchRecordsDTOCreator {
+public class SearchRecordsCreatorJSONDefaultImpl implements SearchRecordsCreator {
 
     private final String SUBDIVISION   = ClientCommandContentEnum.SUBDIVISION.stringValue();
     private final String ID            = ClientCommandContentEnum.ID.stringValue();
@@ -38,30 +42,36 @@ public class SearchRecordsDTOCreatorJSONDefaultImpl implements SearchRecordsDTOC
 
     private final JSONArray data;
 
-    public SearchRecordsDTOCreatorJSONDefaultImpl(Object data) {
-        this.data = (JSONArray)data;
+    public SearchRecordsCreatorJSONDefaultImpl(Object data) {
+        this.data = (JSONArray) data;
     }
 
     @Override
-    public List<SearchRecordDTO> createSearchRecordsDTO() {
-        List<SearchRecordDTO> records = new ArrayList<>();
+    public List<SearchRecord> createSearchRecords() {
+        List<SearchRecord> records = new SearchRecordList();
         try {
-            for (Object rec : data) {
+            for(Object rec : data) {
                 JSONObject recJ = (JSONObject) rec;
-                SearchRecordDTO searchRecDTO = SearchRecordDTOInit.searchRecordDTO(
+
+                String barcode = Objects.requireNonNull(recJ.get(ID)).toString();
+                String name = Objects.requireNonNull(recJ.get(NAME)).toString();
+                String price = Objects.requireNonNull(recJ.get(PRICE)).toString();
+                String amountUnit = Objects.requireNonNull(recJ.get(UNIT)).toString();
+
+                Subdivision subdivision = SubdivisionInit.subdivision(
                         Objects.requireNonNull(recJ.get(SUBDIVISION)).toString(),
-                        Objects.requireNonNull(recJ.get(ID)).toString(),
-                        Objects.requireNonNull(recJ.get(NAME)).toString(),
-                        Objects.requireNonNull(recJ.get(PRICE)).toString(),
-                        Objects.requireNonNull(recJ.get(AMOUNT)).toString(),
-                        Objects.requireNonNull(recJ.get(UNIT)).toString()
-                );
-                records.add(searchRecDTO);
+                        Objects.requireNonNull(recJ.get(AMOUNT)).toString());
+
+                SubdivisionList subdivisions = SubdivisionListInit.subdivisionList(amountUnit);
+                subdivisions.addSubdivision(subdivision);
+
+                records.add(SearchRecordInit.searchRecord(name, barcode, price, amountUnit, subdivisions));
             }
+
             return records;
         }
-        catch(NullPointerException ex) {
-            return new ArrayList<>();
+        catch (NullPointerException | IndexOutOfBoundsException ex) {
+            return null;
         }
     }
 }

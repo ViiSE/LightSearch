@@ -54,7 +54,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 
     public RecyclerViewAdapter(Context context, List<SoftCheckRecord> data, TextView twTotalCost,
-               String priceUnit) {
+                               String priceUnit) {
         this.context = context;
         this.data = data;
         this.twTotalCost = twTotalCost;

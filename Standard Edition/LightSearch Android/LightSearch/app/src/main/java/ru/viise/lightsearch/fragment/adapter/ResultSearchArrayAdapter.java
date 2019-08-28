@@ -28,12 +28,15 @@ import android.widget.TextView;
 import java.util.List;
 
 import ru.viise.lightsearch.R;
-import ru.viise.lightsearch.data.SearchRecordDTO;
+import ru.viise.lightsearch.data.SearchRecord;
 import ru.viise.lightsearch.data.UnitsEnum;
+import ru.viise.lightsearch.fragment.util.ViewFillerInit;
+import ru.viise.lightsearch.fragment.util.ViewFillerProxy;
+import ru.viise.lightsearch.fragment.util.ViewFillerProxyInit;
 
-public class ResultSearchArrayAdapter extends ArrayAdapter<SearchRecordDTO> {
+public class ResultSearchArrayAdapter extends ArrayAdapter<SearchRecord> {
 
-    public ResultSearchArrayAdapter(@NonNull Context context, int resource, @NonNull List<SearchRecordDTO> records) {
+    public ResultSearchArrayAdapter(@NonNull Context context, int resource, @NonNull List<SearchRecord> records) {
         super(context, resource, records);
     }
 
@@ -41,7 +44,7 @@ public class ResultSearchArrayAdapter extends ArrayAdapter<SearchRecordDTO> {
     @SuppressLint("InflateParams")
     @Override
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-        SearchRecordDTO record = getItem(position);
+        SearchRecord record = getItem(position);
 
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext())
@@ -50,10 +53,21 @@ public class ResultSearchArrayAdapter extends ArrayAdapter<SearchRecordDTO> {
 
         if (record != null) {
             ((TextView) convertView.findViewById(R.id.textViewCardNameRS)).setText(record.name());
-            ((TextView) convertView.findViewById(R.id.textViewCardIDRS)).setText(record.id());
+            ((TextView) convertView.findViewById(R.id.textViewCardIDRS)).setText(record.barcode());
             ((TextView) convertView.findViewById(R.id.textViewCardAmountRS)).setText(
-                    String.format("%s %s", record.amount(), record.amountUnit()));
-            ((TextView) convertView.findViewById(R.id.textViewCardSubdivRS)).setText(record.subdivision());
+                    String.format("%s", record.maxAmountWithUnit()));
+
+            if(record.subdivisions().collection().size() > 1) {
+                ViewFillerProxy viewFillerProxy = ViewFillerProxyInit.viewFillerProxy();
+                viewFillerProxy.setViewFiller(ViewFillerInit.viewFiller(convertView));
+                record.subdivisions().collection().forEach(subdivision -> viewFillerProxy.addView(subdivision, record.amountUnit()));
+            }
+            else if(record.subdivisions().collection().size() == 1) {
+                ((TextView) convertView.findViewById(R.id.textViewCardSubdivRS)).setText(record.getSubdivision(0).name());
+                ((TextView) convertView.findViewById(R.id.textViewCardSubdivAmount)).setText(
+                        String.format("%s %s", record.getSubdivision(0).productAmount(), record.amountUnit()));
+            }
+
             ((TextView) convertView.findViewById(R.id.textViewCardPriceRS)).setText(
                     String.format("%s %s", record.price(), UnitsEnum.CURRENT_PRICE_UNIT.stringValue()));
         }

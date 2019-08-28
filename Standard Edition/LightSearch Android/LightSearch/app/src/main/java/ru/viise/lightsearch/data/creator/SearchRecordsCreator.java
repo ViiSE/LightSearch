@@ -18,8 +18,8 @@ package ru.viise.lightsearch.data.creator;
 
 import java.util.List;
 
-import ru.viise.lightsearch.data.SearchRecordDTO;
+import ru.viise.lightsearch.data.SearchRecord;
 
-public interface SearchRecordsDTOCreator {
-    List<SearchRecordDTO> createSearchRecordsDTO();
+public interface SearchRecordsCreator {
+    List<SearchRecord> createSearchRecords();
 }
