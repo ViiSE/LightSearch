@@ -21,9 +21,6 @@ import android.os.Parcelable;
 
 import java.util.List;
 
-import ru.viise.lightsearch.util.CostFormat;
-import ru.viise.lightsearch.util.CostFormatInit;
-
 public class SearchRecordDefaultImpl implements SearchRecord {
 
     private final String name;
@@ -34,8 +31,6 @@ public class SearchRecordDefaultImpl implements SearchRecord {
     private final SubdivisionList subdivisions;
 
     private float maxAmount;
-    private float currentAmount;
-    private float totalCost;
 
     public SearchRecordDefaultImpl(String name, String barcode, String price, String amountUnit,
                                       SubdivisionList subdivisions) {
@@ -53,14 +48,6 @@ public class SearchRecordDefaultImpl implements SearchRecord {
             tempMaxAmount += subdivision.productAmount();
 
         maxAmount = tempMaxAmount;
-
-        currentAmount = maxAmount;
-        totalCost = calculateTotalCost();
-    }
-
-    private float calculateTotalCost() {
-        CostFormat cFormat = CostFormatInit.costFormat();
-        return cFormat.format(this.currentAmount * this.price);
     }
 
     @Override
@@ -79,36 +66,6 @@ public class SearchRecordDefaultImpl implements SearchRecord {
     }
 
     @Override
-    public void setProductsCount(float count) {
-        currentAmount = count;
-        if(currentAmount > maxAmount)
-            currentAmount = maxAmount;
-        if(currentAmount < 0)
-            currentAmount = 0;
-        totalCost = calculateTotalCost();
-    }
-
-    @Override
-    public String totalCostWithUnit() {
-        return totalCost + " " + priceUnit;
-    }
-
-    @Override
-    public float totalCost() {
-        return totalCost;
-    }
-
-    @Override
-    public float maxAmount() {
-        return maxAmount;
-    }
-
-    @Override
-    public void setMaxAmount(float maxAmount) {
-        this.maxAmount = maxAmount;
-    }
-
-    @Override
     public String priceWithUnit() {
         return price + " " + priceUnit;
     }
@@ -116,15 +73,6 @@ public class SearchRecordDefaultImpl implements SearchRecord {
     @Override
     public String amountUnit() {
         return amountUnit;
-    }
-
-    @Override
-    public float currentAmount() {
-        if(currentAmount > maxAmount) {
-            currentAmount = maxAmount;
-            totalCost = calculateTotalCost();
-        }
-        return currentAmount;
     }
 
     @Override
@@ -136,44 +84,6 @@ public class SearchRecordDefaultImpl implements SearchRecord {
     public SubdivisionList subdivisions() {
         return subdivisions;
     }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(name);
-        parcel.writeString(barcode);
-        parcel.writeFloat(price);
-        parcel.writeFloat(maxAmount);
-        parcel.writeString(amountUnit);
-        parcel.writeParcelable(subdivisions, i);
-    }
-
-    private SearchRecordDefaultImpl(Parcel in) {
-        name = in.readString();
-        barcode = in.readString();
-        price = in.readFloat();
-        maxAmount = in.readFloat();
-        amountUnit = in.readString();
-        subdivisions = in.readParcelable(SubdivisionListDefaultImpl.class.getClassLoader());
-    }
-
-    public static final Parcelable.Creator<SoftCheckRecord> CREATOR
-            = new Parcelable.Creator<SoftCheckRecord>() {
-
-        @Override
-        public SoftCheckRecord createFromParcel(Parcel in) {
-            return new SearchRecordDefaultImpl(in);
-        }
-
-        @Override
-        public SoftCheckRecord[] newArray(int size) {
-            return new SoftCheckRecordDefaultImpl[size];
-        }
-    };
 
     @Override
     public Subdivision getSubdivision(int index) {
@@ -190,7 +100,6 @@ public class SearchRecordDefaultImpl implements SearchRecord {
             tempMaxAmount += subdivision.productAmount();
 
         maxAmount = tempMaxAmount;
-        currentAmount = maxAmount;
         return maxAmount;
     }
 }

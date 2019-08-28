@@ -16,6 +16,13 @@
 
 package ru.viise.lightsearch.data;
 
-public interface SearchRecord extends SoftCheckRecord {
+public interface SearchRecord {
+    String name();
+    String barcode();
+    float price();
+    String priceWithUnit();
+    String amountUnit();
+    String maxAmountWithUnit();
+    SubdivisionList subdivisions();
     Subdivision getSubdivision(int index);
 }
