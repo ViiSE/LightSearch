@@ -30,6 +30,9 @@ public interface ProductsMapDebug {
         put("5", ProductDebugInit.productDebug("Склад 2", "2200000738592", "Товар 5", "70.0", "10", "шт."));
         put("6", ProductDebugInit.productDebug("ТК 1", "111111", "Товар 1", "100.0", "7", "шт."));
         put("7", ProductDebugInit.productDebug("ТК 2", "444444", "Товар 4", "65.0", "12", "шт."));
-        put("8", ProductDebugInit.productDebug("ТК 2", "2200000738592", "Товар 5", "70.0", "20", "шт."));
+        put("8", ProductDebugInit.productDebug("ТК 2", "333333", "Товар 3", "45000.0", "20", "шт."));
+        put("9", ProductDebugInit.productDebug("ТК 2", "777777", "Товар 7", "70.0", "20", "шт."));
+        put("10", ProductDebugInit.productDebug("ТК 2", "888888", "Товар 8", "70.0", "20", "шт."));
+        put("11", ProductDebugInit.productDebug("ТК 2", "555555", "Товар 5", "100000.0", "1000", "шт."));
     }};
 }
