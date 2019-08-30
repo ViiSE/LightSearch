@@ -217,7 +217,10 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
     public void callDialogOneResult(SearchRecord searchRecord) {
         OneResultAlertDialogCreator oneResADCr =
                 OneResultAlertDialogCreatorInit.oneResultAlertDialogCreator(this, searchRecord);
-        oneResADCr.createAlertDialog().show();
+        android.support.v7.app.AlertDialog oneResAD = oneResADCr.createAlertDialog();
+        oneResAD.setCanceledOnTouchOutside(false);
+        oneResAD.show();
+
     }
 
     public IContainerFragment getContainerFragment() {
