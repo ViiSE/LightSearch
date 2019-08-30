@@ -14,17 +14,8 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.data;
+package ru.viise.lightsearch.activity;
 
-public interface SearchRecord {
-    String name();
-    String barcode();
-    float price();
-    String priceWithUnit();
-    String amountUnit();
-    String maxAmountWithUnit();
-    SubdivisionList subdivisions();
-    Subdivision getSubdivision(int index);
-    boolean isRender();
-    void setIsRender(boolean isRender);
+public interface KeyboardHideTool {
+    void hideKeyboard();
 }

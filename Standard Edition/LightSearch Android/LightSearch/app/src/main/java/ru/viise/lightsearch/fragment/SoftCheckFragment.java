@@ -1,5 +1,6 @@
 package ru.viise.lightsearch.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -27,6 +28,7 @@ import java.util.List;
 
 import dmax.dialog.SpotsDialog;
 import ru.viise.lightsearch.R;
+import ru.viise.lightsearch.activity.KeyboardHideToolInit;
 import ru.viise.lightsearch.activity.ManagerActivityHandler;
 import ru.viise.lightsearch.activity.ManagerActivityUI;
 import ru.viise.lightsearch.activity.scan.ScannerInit;
@@ -120,6 +122,8 @@ public class SoftCheckFragment extends Fragment implements ISoftCheckFragment {
 
             managerActivityUI.setScanType(ScanType.SEARCH_SOFT_CHECK);
             ScannerInit.scanner(this.getActivity()).scan();
+
+            KeyboardHideToolInit.keyboardHideTool(this.getActivity()).hideKeyboard();
 
             editTextSearch.clearFocus();
             searchButton.requestFocus();
@@ -215,6 +219,8 @@ public class SoftCheckFragment extends Fragment implements ISoftCheckFragment {
 
     @Override
     public void setSoftCheckBarcode(String barcode) {
+        KeyboardHideToolInit.keyboardHideTool(this.getActivity()).hideKeyboard();
+
         CommandSearchDTOCreator cmdSearchDTOCr =
                 CommandSearchDTOCreatorInit.commandSearchDTOCreator(barcode);
         CommandSearchDTO cmdSearchDTO = cmdSearchDTOCr.createCommandSearchDTO();
@@ -226,9 +232,11 @@ public class SoftCheckFragment extends Fragment implements ISoftCheckFragment {
         cmdManagerAT.execute(cmdManagerATDTO);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void addSoftCheckRecord(SoftCheckRecord record) {
         adapter.addItem(record);
+        recyclerView.scrollToPosition(adapter.getItemCount() - 1);
         cartButton.setText(toCart +  " (" + adapter.getItemCount() + ")");
         SnackbarSoftCheckCreator snackbarCr = SnackbarSoftCheckCreatorInit.snackbarSoftCheckCreator(
                 SoftCheckFragment.this, coordinatorLayout, "  Товар добавлен.");

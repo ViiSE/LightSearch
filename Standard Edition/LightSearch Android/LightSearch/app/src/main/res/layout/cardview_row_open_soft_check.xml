@@ -68,6 +68,7 @@
             android:imeOptions="flagNoExtractUi"
             android:inputType="numberSigned|number|numberDecimal"
             android:paddingRight="10dp"
+            android:selectAllOnFocus="true"
             android:maxLength="7"
             android:textColor="@color/colorChange"
             android:textSize="15sp" />
