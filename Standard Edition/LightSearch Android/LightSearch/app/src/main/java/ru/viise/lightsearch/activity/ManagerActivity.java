@@ -22,11 +22,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -134,6 +139,24 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
                 else if(scanType == ScanType.SEARCH_SOFT_CHECK)
                     containerFragment.setSoftCheckBarcode(scanContent);
         }
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        if(event.getAction() == MotionEvent.ACTION_DOWN) {
+            View view = getCurrentFocus();
+            if(view instanceof EditText) {
+                Rect r = new Rect();
+                view.getGlobalVisibleRect(r);
+                int rawX = (int)event.getRawX();
+                int rawY = (int)event.getRawY();
+                if(!r.contains(rawX, rawY)) {
+                    view.clearFocus();
+                    KeyboardHideToolInit.keyboardHideTool(this).hideKeyboard();
+                }
+            }
+        }
+        return super.dispatchTouchEvent(event);
     }
 
     private void reqPhonePermission() {
