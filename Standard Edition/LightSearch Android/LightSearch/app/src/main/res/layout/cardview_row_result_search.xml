@@ -12,67 +12,65 @@
     <RelativeLayout
         android:id="@+id/relativeLayoutRS"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:padding="5dp">
 
         <TextView
             android:id="@+id/textViewCardNameRS"
-            android:layout_width="370dp"
+            android:layout_width="374dp"
             android:layout_height="40dp"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="1dp"
             android:layout_marginTop="25dp"
             android:gravity="center"
+            android:textColor="@android:color/black"
             android:textSize="15sp" />
 
         <TextView
             android:id="@+id/textViewCardIDRS"
-            android:layout_width="140dp"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="234dp"
+            android:layout_marginStart="215dp"
             android:layout_marginTop="4dp"
             android:gravity="right"
-            android:textColor="@android:color/black"
             android:textSize="15sp" />
 
         <TextView
             android:id="@+id/textViewCardAmountRS"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="1dp"
             android:layout_marginTop="4dp"
             android:gravity="left"
-            android:textColor="@android:color/black"
             android:textSize="15sp" />
 
         <TextView
             android:id="@+id/textViewCardPriceRS"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="4dp"
             android:layout_toEndOf="@+id/textViewCardAmountRS"
             android:gravity="center"
-            android:textColor="@android:color/black"
             android:textSize="15sp" />
 
         <TextView
             android:id="@+id/textViewCardSubdivRS"
             android:layout_width="250dp"
             android:layout_height="20dp"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="1dp"
             android:layout_marginTop="65dp"
-            android:textColor="@android:color/background_dark" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/textViewCardSubdivAmount"
-            android:layout_width="112dp"
+            android:layout_width="115dp"
             android:layout_height="20dp"
             android:layout_marginStart="5dp"
             android:layout_marginTop="65dp"
             android:layout_toEndOf="@+id/textViewCardSubdivRS"
             android:gravity="right"
-            android:textColor="@android:color/background_dark"
             android:textSize="15sp" />
     </RelativeLayout>
 </android.support.v7.widget.CardView>

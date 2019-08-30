@@ -5,6 +5,7 @@
     android:id="@+id/ConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
     tools:context="ru.viise.lightsearch.fragment.SoftCheckFragment">
 
     <TableLayout
@@ -43,6 +44,7 @@
                 android:background="@drawable/edittextshape"
                 android:ems="10"
                 android:imeOptions="flagNoExtractUi"
+                android:selectAllOnFocus="true"
                 android:inputType="number" />
 
             <ImageButton
