@@ -227,8 +227,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 break;
             }
         }
-        if(!isFound)
+        if(!isFound) {
             data.add(record);
+            //notifyItemInserted(data.size() - 1);
+        }
 
         getTotalCost();
         notifyDataSetChanged();

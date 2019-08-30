@@ -16,62 +16,44 @@
 
 package ru.viise.lightsearch.fragment.adapter;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.data.SearchRecord;
-import ru.viise.lightsearch.data.UnitsEnum;
-import ru.viise.lightsearch.fragment.util.ViewFillerInit;
-import ru.viise.lightsearch.fragment.util.ViewFillerProxy;
-import ru.viise.lightsearch.fragment.util.ViewFillerProxyInit;
+import ru.viise.lightsearch.fragment.adapter.task.CreateCardFromSearchResult;
 
 public class ResultSearchArrayAdapter extends ArrayAdapter<SearchRecord> {
 
+    private List<View> cards = new ArrayList<>();
+
     public ResultSearchArrayAdapter(@NonNull Context context, int resource, @NonNull List<SearchRecord> records) {
         super(context, resource, records);
+
+        for(SearchRecord record: records) {
+            CreateCardFromSearchResult crCard = new CreateCardFromSearchResult(this, getContext());
+            crCard.execute(record);
+        }
     }
 
     @NonNull
-    @SuppressLint("InflateParams")
     @Override
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-        SearchRecord record = getItem(position);
-
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext())
-                    .inflate(R.layout.cardview_row_result_search, null);
+        if (cards.size() <= position) {
+            try { Thread.sleep(100); } catch (InterruptedException ignore) { }
         }
-
-        if (record != null) {
-            ((TextView) convertView.findViewById(R.id.textViewCardNameRS)).setText(record.name());
-            ((TextView) convertView.findViewById(R.id.textViewCardIDRS)).setText(record.barcode());
-            ((TextView) convertView.findViewById(R.id.textViewCardAmountRS)).setText(
-                    String.format("%s", record.maxAmountWithUnit()));
-
-            if(record.subdivisions().collection().size() > 1) {
-                ViewFillerProxy viewFillerProxy = ViewFillerProxyInit.viewFillerProxy();
-                viewFillerProxy.setViewFiller(ViewFillerInit.viewFiller(convertView));
-                record.subdivisions().collection().forEach(subdivision -> viewFillerProxy.addView(subdivision, record.amountUnit()));
-            }
-            else if(record.subdivisions().collection().size() == 1) {
-                ((TextView) convertView.findViewById(R.id.textViewCardSubdivRS)).setText(record.getSubdivision(0).name());
-                ((TextView) convertView.findViewById(R.id.textViewCardSubdivAmount)).setText(
-                        String.format("%s %s", record.getSubdivision(0).productAmount(), record.amountUnit()));
-            }
-
-            ((TextView) convertView.findViewById(R.id.textViewCardPriceRS)).setText(
-                    String.format("%s %s", record.price(), UnitsEnum.CURRENT_PRICE_UNIT.stringValue()));
-        }
+        notifyDataSetChanged();
+        convertView = cards.get(position);
 
         return convertView;
+    }
+
+    public void addCard(View card) {
+        cards.add(card);
     }
 }

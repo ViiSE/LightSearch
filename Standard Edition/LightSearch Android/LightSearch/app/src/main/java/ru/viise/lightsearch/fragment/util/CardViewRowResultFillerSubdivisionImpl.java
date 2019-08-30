@@ -33,8 +33,8 @@ public class CardViewRowResultFillerSubdivisionImpl implements ViewFiller {
     private final float scale;
     private final CardView cardView;
 
-    private int cardHeightCurrentDP  = 70;
-    private int tvMarginTopCurrentDP = 45;
+    private int cardHeightCurrentDP  = 75;
+    private int tvMarginTopCurrentDP = 50;
 
     public CardViewRowResultFillerSubdivisionImpl(View cardView) {
         this.scale    = cardView.getContext().getResources().getDisplayMetrics().density;
@@ -45,6 +45,8 @@ public class CardViewRowResultFillerSubdivisionImpl implements ViewFiller {
     public void addView(Object... elements) {
         Subdivision subdivision = (Subdivision) elements[0];
         String amountUnit = (String) elements[1];
+        int color = (Integer) elements[2];
+
         int cardHeightCurrentPx = increaseHeightPx();
         int tvMarginTopCurrentPx = increaseMarginTopPx();
 
@@ -56,13 +58,13 @@ public class CardViewRowResultFillerSubdivisionImpl implements ViewFiller {
         int tvSubdivRSHeightPx = (int) (20  * scale + 0.5f);
         RelativeLayout.LayoutParams tvSubdivRSLayout = new RelativeLayout.LayoutParams(tvSubdivRSWidthPx, tvSubdivRSHeightPx);
         tvSubdivRSLayout.setMargins(0, tvMarginTopCurrentPx, 0, 0);
-        tvSubdivRSLayout.setMarginStart((int) (15 * scale + 0.5f));
+        tvSubdivRSLayout.setMarginStart((int) (10 * scale + 0.5f));
 
         TextView tvSubdivRS = new TextView(cardView.getContext());
         tvSubdivRS.setId(View.generateViewId());
         tvSubdivRS.setLayoutParams(tvSubdivRSLayout);
         tvSubdivRS.setTextSize(15);
-        tvSubdivRS.setTextColor(ContextCompat.getColor(cardView.getContext(), R.color.blackColor));
+        tvSubdivRS.setTextColor(color);
         tvSubdivRS.setText(subdivision.name());
 
         cardView.addView(tvSubdivRS);
@@ -71,15 +73,14 @@ public class CardViewRowResultFillerSubdivisionImpl implements ViewFiller {
         int tvSubdivRSAmountHeightPx = (int) (20  * scale + 0.5f);
         RelativeLayout.LayoutParams tvSubdivRSAmountLayout = new RelativeLayout.LayoutParams(tvSubdivRSAmountWidthPx, tvSubdivRSAmountHeightPx);
         tvSubdivRSAmountLayout.setMargins(0, tvMarginTopCurrentPx, 0, 0);
-        tvSubdivRSAmountLayout.setMarginStart((int) (237 * scale + 0.5f));
-        //tvSubdivRSAmountLayout.addRule(RelativeLayout.END_OF, tvSubdivRS.getId());
+        tvSubdivRSAmountLayout.setMarginStart((int) (230 * scale + 0.5f));
 
         TextView tvSubdivAmountRS = new TextView(cardView.getContext());
-        tvSubdivRS.setId(View.generateViewId());
+        tvSubdivAmountRS.setId(View.generateViewId());
         tvSubdivAmountRS.setLayoutParams(tvSubdivRSAmountLayout);
         tvSubdivAmountRS.setTextSize(15);
         tvSubdivAmountRS.setGravity(Gravity.RIGHT);
-        tvSubdivAmountRS.setTextColor(ContextCompat.getColor(cardView.getContext(), R.color.blackColor));
+        tvSubdivAmountRS.setTextColor(color);
         tvSubdivAmountRS.setText(String.format("%s %s", subdivision.productAmount(), amountUnit));
 
         cardView.addView(tvSubdivAmountRS);

@@ -25,4 +25,6 @@ public interface SearchRecord {
     String maxAmountWithUnit();
     SubdivisionList subdivisions();
     Subdivision getSubdivision(int index);
+    boolean isRender();
+    void setIsRender(boolean isRender);
 }

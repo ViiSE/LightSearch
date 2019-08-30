@@ -161,6 +161,7 @@ public class AuthorizationFragment extends Fragment implements IAuthorizationFra
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.buttonConnect:
+                v.startAnimation(animAlpha);
                 if(editTextUsername.getText().toString().isEmpty()  ||
                     editTextPassword.getText().toString().isEmpty()) {
                     Toast t = Toast.makeText(this.getActivity().getApplicationContext(),
@@ -168,7 +169,6 @@ public class AuthorizationFragment extends Fragment implements IAuthorizationFra
                     t.show();
                 }
                 else {
-                    v.startAnimation(animAlpha);
                     prefManager.save(PreferencesManagerType.USERNAME_MANAGER, editTextUsername.getText().toString());
                     prefManager.save(PreferencesManagerType.PASS_MANAGER, editTextPassword.getText().toString());
                     prefManager.save(PreferencesManagerType.HOST_MANAGER, editTextHost.getText().toString());

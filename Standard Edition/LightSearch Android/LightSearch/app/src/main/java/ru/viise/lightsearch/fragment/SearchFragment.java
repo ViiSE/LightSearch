@@ -44,6 +44,7 @@ import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 import ru.viise.lightsearch.R;
+import ru.viise.lightsearch.activity.KeyboardHideToolInit;
 import ru.viise.lightsearch.activity.ManagerActivityHandler;
 import ru.viise.lightsearch.activity.ManagerActivityUI;
 import ru.viise.lightsearch.activity.scan.ScannerInit;
@@ -199,6 +200,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener, IS
                     t.show();
                 }
                 else {
+                    KeyboardHideToolInit.keyboardHideTool(this.getActivity()).hideKeyboard();
                     CommandSearchDTOCreator cmdSearchDTOCr =
                             CommandSearchDTOCreatorInit.commandSearchDTOCreator(
                                     barcode, getSubdivision(), getSelectedSklad(), getSelectedTK());
@@ -214,6 +216,8 @@ public class SearchFragment extends Fragment implements View.OnClickListener, IS
                 v.requestFocus();
                 break;
             case R.id.buttonBarcode:
+                KeyboardHideToolInit.keyboardHideTool(this.getActivity()).hideKeyboard();
+
                 searchEditText.clearFocus();
                 v.requestFocus();
 

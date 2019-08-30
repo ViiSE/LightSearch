@@ -16,9 +16,6 @@
 
 package ru.viise.lightsearch.data;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import java.util.List;
 
 public class SearchRecordDefaultImpl implements SearchRecord {
@@ -31,6 +28,7 @@ public class SearchRecordDefaultImpl implements SearchRecord {
     private final SubdivisionList subdivisions;
 
     private float maxAmount;
+    private boolean isRender = false;
 
     public SearchRecordDefaultImpl(String name, String barcode, String price, String amountUnit,
                                       SubdivisionList subdivisions) {
@@ -92,6 +90,16 @@ public class SearchRecordDefaultImpl implements SearchRecord {
         if(index < 0)
             return null;
         return ((List<Subdivision>) subdivisions.collection()).get(index);
+    }
+
+    @Override
+    public boolean isRender() {
+        return isRender;
+    }
+
+    @Override
+    public void setIsRender(boolean isRender) {
+        this.isRender = isRender;
     }
 
     private float calculateMaxAmount() {
