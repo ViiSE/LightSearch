@@ -16,11 +16,17 @@
 
 package ru.viise.lightsearch.dialog.alert;
 
-import android.app.Activity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
-public class ErrorAlertDialogCreatorInit {
+public class DialogSettingsContainerInit {
 
-    public static ErrorAlertDialogCreator errorAlertDialogCreator(Activity rootActivity, String errorMessage) {
-        return new ErrorAlertDialogCreatorDefaultImpl(rootActivity, errorMessage);
+    public static DialogSettingsContainer dialogSettingsContainer(
+            View dialogSettingsView, EditText editText, TextView textViewTitle, TextView textViewResult,
+            Button buttonOK, Button buttonCancel) {
+        return new DialogSettingsContainerDefaultImpl(dialogSettingsView, editText, textViewTitle,
+                textViewResult, buttonOK, buttonCancel);
     }
 }

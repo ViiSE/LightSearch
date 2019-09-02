@@ -26,7 +26,6 @@ import android.widget.Toast;
 
 import java.util.List;
 
-import dmax.dialog.SpotsDialog;
 import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.activity.KeyboardHideToolInit;
 import ru.viise.lightsearch.activity.ManagerActivityHandler;
@@ -47,6 +46,7 @@ import ru.viise.lightsearch.data.creator.CommandSearchDTOCreator;
 import ru.viise.lightsearch.data.creator.CommandSearchDTOCreatorInit;
 import ru.viise.lightsearch.dialog.alert.InfoProductAlertDialogCreator;
 import ru.viise.lightsearch.dialog.alert.InfoProductAlertDialogCreatorInit;
+import ru.viise.lightsearch.dialog.spots.SpotsDialogCreatorInit;
 import ru.viise.lightsearch.fragment.adapter.RecyclerViewAdapter;
 import ru.viise.lightsearch.fragment.adapter.SwipeToDeleteCallback;
 import ru.viise.lightsearch.fragment.adapter.SwipeToInfoCallback;
@@ -80,7 +80,9 @@ public class SoftCheckFragment extends Fragment implements ISoftCheckFragment {
 
         cartButton = view.findViewById(R.id.buttonCart);
         toCart = cartButton.getText().toString();
-        queryDialog = new SpotsDialog.Builder().setContext(this.getActivity()).setMessage("Выполнение").setCancelable(false).build();
+        queryDialog = SpotsDialogCreatorInit.spotsDialogCreator(this.getActivity(), R.string.spots_dialog_query_exec)
+                .create();
+
 
         AppCompatImageButton searchButton = view.findViewById(R.id.imageButtonSearch);
         AppCompatImageButton barcodeButton = view.findViewById(R.id.imageButtonBarcode);

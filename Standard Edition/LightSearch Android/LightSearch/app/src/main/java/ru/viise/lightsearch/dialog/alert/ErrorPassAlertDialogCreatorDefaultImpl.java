@@ -18,36 +18,34 @@ package ru.viise.lightsearch.dialog.alert;
 
 import android.app.Activity;
 import android.support.v7.app.AlertDialog;
-import android.view.View;
 
-import ru.viise.lightsearch.data.SoftCheckRecord;
+import ru.viise.lightsearch.R;
+import ru.viise.lightsearch.data.InputPasswordAlertDialogCreatorDTO;
 
-public class InfoProductAlertDialogCreatorSoftCheckDefaultImpl implements InfoProductAlertDialogCreator {
+public class ErrorPassAlertDialogCreatorDefaultImpl implements ErrorAlertDialogCreator {
 
     private final Activity activity;
-    private final SoftCheckRecord record;
+    private final InputPasswordAlertDialogCreatorDTO creatorDTO;
 
-    public InfoProductAlertDialogCreatorSoftCheckDefaultImpl(Activity activity, SoftCheckRecord record) {
-        this.record = record;
+
+    public ErrorPassAlertDialogCreatorDefaultImpl(Activity activity, InputPasswordAlertDialogCreatorDTO creatorDTO) {
         this.activity = activity;
+        this.creatorDTO = creatorDTO;
     }
 
     @Override
     public AlertDialog createAlertDialog() {
         DialogOKContainer dialogOKContainer =
                 DialogOKContainerCreatorInit.dialogOKContainerCreator(activity).createDialogOKContainer();
+        dialogOKContainer.textViewTitle().setText(R.string.dialog_error);
+        dialogOKContainer.textViewResult().setText(R.string.dialog_pass_error);
 
-        dialogOKContainer.textViewTitle().setVisibility(View.GONE);
-        dialogOKContainer.textViewResult().setText("ИД: " + record.barcode() + "\n" +
-                "Наименование: " + record.name() + "\n" +
-                "Цена: " + record.priceWithUnit() + "\n" +
-                "Общее кол-во: " + record.maxAmountWithUnit() + "\n" +
-                "Подразделения: \n" + record.subdivisions().toString());
+        AlertDialog dialog = new AlertDialog.Builder(activity).setView(dialogOKContainer.dialogOKView()).create();
+        dialogOKContainer.buttonOK().setOnClickListener(viewOK -> {
+            creatorDTO.cbSettings().setChecked(false);
+            dialog.dismiss();
+        });
 
-        AlertDialog dialog =
-                new AlertDialog.Builder(activity).setView(dialogOKContainer.dialogOKView()).create();
-
-        dialogOKContainer.buttonOK().setOnClickListener(viewOK -> dialog.dismiss());
         AlertDialogUtil.setTransparentBackground(dialog);
 
         return dialog;

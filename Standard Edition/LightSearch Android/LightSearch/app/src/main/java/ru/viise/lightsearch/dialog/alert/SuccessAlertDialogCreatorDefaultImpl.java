@@ -19,6 +19,7 @@ package ru.viise.lightsearch.dialog.alert;
 import android.app.Activity;
 import android.support.v7.app.AlertDialog;
 
+import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.data.ButtonContentEnum;
 
 public class SuccessAlertDialogCreatorDefaultImpl implements SuccessAlertDialogCreator {
@@ -35,7 +36,17 @@ public class SuccessAlertDialogCreatorDefaultImpl implements SuccessAlertDialogC
 
     @Override
     public AlertDialog createAlertDialog() {
-        return new android.support.v7.app.AlertDialog.Builder(activity).setTitle("Успех").setMessage(message)
-                .setPositiveButton(OK, (dialogInterface, i) -> dialogInterface.dismiss()).create();
+        DialogOKContainer dialogOKContainer =
+                DialogOKContainerCreatorInit.dialogOKContainerCreator(activity).createDialogOKContainer();
+
+        dialogOKContainer.textViewTitle().setText(R.string.dialog_success);
+        dialogOKContainer.textViewResult().setText(message);
+
+        AlertDialog dialog = new AlertDialog.Builder(activity).setView(dialogOKContainer.dialogOKView()).create();
+
+        dialogOKContainer.buttonOK().setOnClickListener(viewOK -> dialog.dismiss());
+        AlertDialogUtil.setTransparentBackground(dialog);
+
+        return dialog;
     }
 }

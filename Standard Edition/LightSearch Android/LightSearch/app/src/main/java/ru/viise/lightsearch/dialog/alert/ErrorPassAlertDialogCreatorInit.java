@@ -18,9 +18,11 @@ package ru.viise.lightsearch.dialog.alert;
 
 import android.app.Activity;
 
-public class ErrorAlertDialogCreatorInit {
+import ru.viise.lightsearch.data.InputPasswordAlertDialogCreatorDTO;
 
-    public static ErrorAlertDialogCreator errorAlertDialogCreator(Activity rootActivity, String errorMessage) {
-        return new ErrorAlertDialogCreatorDefaultImpl(rootActivity, errorMessage);
+public class ErrorPassAlertDialogCreatorInit {
+
+    public static ErrorAlertDialogCreator errorPassAlertDialogCreator(Activity activity, InputPasswordAlertDialogCreatorDTO creatorDTO) {
+        return new ErrorPassAlertDialogCreatorDefaultImpl(activity, creatorDTO);
     }
 }

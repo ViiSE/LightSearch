@@ -19,13 +19,9 @@ package ru.viise.lightsearch.dialog.alert;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.EditText;
 
 import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.data.AuthorizationPreferenceEnum;
-import ru.viise.lightsearch.data.ButtonContentEnum;
 import ru.viise.lightsearch.data.CreatePasswordInFirstTimeAlertDialogCreatorDTO;
 
 public class CreatePasswordInFirstTimeAlertDialogCreatorDefaultImpl implements CreatePasswordInFirstTimeAlertDialogCreator {
@@ -33,41 +29,42 @@ public class CreatePasswordInFirstTimeAlertDialogCreatorDefaultImpl implements C
     private final String FIRST_TIME = AuthorizationPreferenceEnum.FIRST_TIME.stringValue();
     private final String SUPERUSER  = AuthorizationPreferenceEnum.SUPERUSER.stringValue();
     private final String TRUE       = "True";
-    private final String OK         = ButtonContentEnum.POSITIVE_BUTTON.stringValue();
 
     private final CreatePasswordInFirstTimeAlertDialogCreatorDTO creatorDTO;
-    private final LayoutInflater inflater;
-    private final Activity rootActivity;
+    private final Activity activity;
     private final SharedPreferences sPref;
 
     public CreatePasswordInFirstTimeAlertDialogCreatorDefaultImpl(
             CreatePasswordInFirstTimeAlertDialogCreatorDTO creatorDTO) {
         this.creatorDTO = creatorDTO;
-        inflater = this.creatorDTO.alertDialogCreatorDTO().inflater();
-        rootActivity = this.creatorDTO.alertDialogCreatorDTO().rootActivity();
+        activity = this.creatorDTO.alertDialogCreatorDTO().rootActivity();
         sPref = this.creatorDTO.alertDialogCreatorDTO().sharedPreferences();
     }
 
     @Override
     public AlertDialog createAlertDialog() {
-        View settingsViewCreate = inflater.inflate(R.layout.dialog_settings, null);
-        AlertDialog.Builder dialogSettingsCreate =
-                new AlertDialog.Builder(rootActivity);
-        dialogSettingsCreate.setView(settingsViewCreate);
-        final EditText userInputCreate = settingsViewCreate.findViewById(R.id.editTextPasswordSettings);
-        dialogSettingsCreate
-                .setTitle("Создать пароль администратора")
-                .setCancelable(false)
-                .setPositiveButton(OK,
-                        (dialog, id) -> {
-                            SharedPreferences.Editor ed = sPref.edit();
-                            ed.putString(SUPERUSER,
-                                    creatorDTO.hashAlgorithms().sha256(userInputCreate.getText().toString()));
-                            ed.putString(FIRST_TIME, TRUE);
-                            ed.apply();
-                            userInputCreate.setText("");
-                            dialog.dismiss();
-                        });
-        return dialogSettingsCreate.create();
+        DialogSettingsContainer dialogSettingsContainer =
+                DialogSettingsContainerCreatorInit.dialogSettingsContainerCreator(activity)
+                        .createDialogSettingsContainer();
+
+        dialogSettingsContainer.textViewTitle().setText(R.string.create_password_admin);
+
+        AlertDialog dialog = new AlertDialog.Builder(activity)
+                .setView(dialogSettingsContainer.dialogSettingsView()).create();
+
+        dialogSettingsContainer.buttonOK().setOnClickListener(viewOK -> {
+            SharedPreferences.Editor ed = sPref.edit();
+            ed.putString(SUPERUSER,
+                    creatorDTO.hashAlgorithms().sha256(dialogSettingsContainer.editText().getText().toString()));
+            ed.putString(FIRST_TIME, TRUE);
+            ed.apply();
+            dialogSettingsContainer.editText().setText("");
+            dialog.dismiss();
+        });
+
+        dialog.setCancelable(false);
+        AlertDialogUtil.setTransparentBackground(dialog);
+
+        return dialog;
     }
 }

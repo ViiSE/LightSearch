@@ -18,9 +18,9 @@ package ru.viise.lightsearch.dialog.alert;
 
 import android.app.Activity;
 
-public class ErrorAlertDialogCreatorInit {
+public class DialogOKContainerCreatorInit {
 
-    public static ErrorAlertDialogCreator errorAlertDialogCreator(Activity rootActivity, String errorMessage) {
-        return new ErrorAlertDialogCreatorDefaultImpl(rootActivity, errorMessage);
+    public static DialogOKViewCreator dialogOKContainerCreator(Activity activity) {
+        return new DialogOKContainerCreatorDefaultImpl(activity);
     }
 }

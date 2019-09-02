@@ -21,14 +21,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.support.v4.app.ActivityCompat;
 
-import ru.viise.lightsearch.data.ButtonContentEnum;
+import ru.viise.lightsearch.R;
 
 public class RequestPhonePermissionAlertDialogCreatorDefaultImpl implements RequestPhonePermissionAlertDialogCreator {
 
     private final int PHONE_STATE_CODE = 1;
-    private final String OK       = ButtonContentEnum.POSITIVE_BUTTON.stringValue();
-    private final String NEGATIVE = ButtonContentEnum.NEGATIVE_BUTTON.stringValue();
-
     private final Activity activity;
 
     public RequestPhonePermissionAlertDialogCreatorDefaultImpl(Activity activity) {
@@ -37,15 +34,31 @@ public class RequestPhonePermissionAlertDialogCreatorDefaultImpl implements Requ
 
     @Override
     public AlertDialog createAlertDialog() {
-        return new android.app.AlertDialog.Builder(activity).setTitle("Запрос на права").setMessage("Нужны права на отправку IMEI.")
-                .setPositiveButton(OK, (dialogInterface, i) -> {
-                    ActivityCompat.requestPermissions(activity,
-                            new String[]{Manifest.permission.READ_PHONE_STATE}, PHONE_STATE_CODE);
-                    dialogInterface.dismiss();
-                }).setNegativeButton(NEGATIVE, (dialogInterface, i) -> {
-                    dialogInterface.dismiss();
-                    android.os.Process.killProcess(android.os.Process.myPid());
-                    System.exit(0);
-                }).create();
+        DialogOKCancelContainer dialogOKCancelContainer =
+                DialogOKCancelContainerCreatorInit.dialogOKCancelContainerCreator(activity)
+                        .createDialogOkCancelContainer();
+
+        dialogOKCancelContainer.textViewTitle().setText(R.string.permission_request);
+        dialogOKCancelContainer.textViewResult().setText(R.string.permission_request_IMEI);
+
+        AlertDialog dialog =
+                new AlertDialog.Builder(activity).setView(dialogOKCancelContainer.dialogOKCancelView()).create();
+
+        dialogOKCancelContainer.buttonOK().setOnClickListener(viewOK -> {
+            ActivityCompat.requestPermissions(activity,
+                    new String[]{Manifest.permission.READ_PHONE_STATE}, PHONE_STATE_CODE);
+            dialog.dismiss();
+        });
+
+        dialogOKCancelContainer.buttonCancel().setOnClickListener(viewCancel -> {
+            dialog.dismiss();
+            android.os.Process.killProcess(android.os.Process.myPid());
+            System.exit(0);
+        });
+
+        dialog.setCanceledOnTouchOutside(false);
+        AlertDialogUtil.setTransparentBackground(dialog);
+
+        return dialog;
     }
 }

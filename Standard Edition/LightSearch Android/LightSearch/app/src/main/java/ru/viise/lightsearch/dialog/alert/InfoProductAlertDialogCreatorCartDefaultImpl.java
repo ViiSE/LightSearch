@@ -18,13 +18,11 @@ package ru.viise.lightsearch.dialog.alert;
 
 import android.app.Activity;
 import android.support.v7.app.AlertDialog;
+import android.view.View;
 
-import ru.viise.lightsearch.data.ButtonContentEnum;
 import ru.viise.lightsearch.data.CartRecord;
 
 public class InfoProductAlertDialogCreatorCartDefaultImpl implements InfoProductAlertDialogCreator {
-
-    private final String OK = ButtonContentEnum.POSITIVE_BUTTON.stringValue();
 
     private final Activity activity;
     private final CartRecord record;
@@ -36,6 +34,10 @@ public class InfoProductAlertDialogCreatorCartDefaultImpl implements InfoProduct
 
     @Override
     public AlertDialog createAlertDialog() {
+        DialogOKContainer dialogOKContainer =
+                DialogOKContainerCreatorInit.dialogOKContainerCreator(activity).createDialogOKContainer();
+        dialogOKContainer.textViewTitle().setVisibility(View.GONE);
+
         String message = "ИД: " + record.barcode() + "\n" +
                 "Наименование: " + record.name() + "\n" +
                 "Цена: " + record.priceWithUnit() + "\n";
@@ -45,7 +47,14 @@ public class InfoProductAlertDialogCreatorCartDefaultImpl implements InfoProduct
             message += "Общее кол-во ДО: " + record.oldMaxAmountWithUnit() + "\n" +
                     "Общее кол-во ПОСЛЕ: " + record.maxAmountWithUnit();
 
-        return new android.support.v7.app.AlertDialog.Builder(activity).setTitle("").setMessage(message)
-                .setPositiveButton(OK, (dialogInterface, i) -> dialogInterface.dismiss()).create();
+        dialogOKContainer.textViewResult().setText(message);
+
+        AlertDialog dialog =
+                new AlertDialog.Builder(activity).setView(dialogOKContainer.dialogOKView()).create();
+
+        dialogOKContainer.buttonOK().setOnClickListener(viewOK -> dialog.dismiss());
+        AlertDialogUtil.setTransparentBackground(dialog);
+
+        return dialog;
     }
 }

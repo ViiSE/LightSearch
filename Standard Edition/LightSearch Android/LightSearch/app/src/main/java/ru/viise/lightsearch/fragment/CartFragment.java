@@ -42,7 +42,6 @@ import android.widget.Toast;
 
 import java.util.List;
 
-import dmax.dialog.SpotsDialog;
 import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.activity.ManagerActivityHandler;
 import ru.viise.lightsearch.activity.ManagerActivityUI;
@@ -66,6 +65,7 @@ import ru.viise.lightsearch.dialog.alert.InfoProductAlertDialogCreator;
 import ru.viise.lightsearch.dialog.alert.InfoProductAlertDialogCreatorInit;
 import ru.viise.lightsearch.dialog.alert.UnconfirmedRecordAlertDialogCreator;
 import ru.viise.lightsearch.dialog.alert.UnconfirmedRecordAlertDialogCreatorInit;
+import ru.viise.lightsearch.dialog.spots.SpotsDialogCreatorInit;
 import ru.viise.lightsearch.fragment.adapter.RecyclerViewAdapter;
 import ru.viise.lightsearch.fragment.adapter.SwipeToDeleteCallback;
 import ru.viise.lightsearch.fragment.adapter.SwipeToInfoCallback;
@@ -101,8 +101,9 @@ public class CartFragment extends Fragment implements ICartFragment, OnBackPress
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
 
         Button closeSoftCheckButton = view.findViewById(R.id.buttonCloseSoftCheck);
-        queryDialog = new SpotsDialog.Builder().setContext(this.getActivity()).setMessage("Выполнение").setCancelable(false).build();
 
+        queryDialog = SpotsDialogCreatorInit.spotsDialogCreator(this.getActivity(), R.string.spots_dialog_query_exec)
+                .create();
         Animation animAlpha = AnimationUtils.loadAnimation(this.getActivity(), R.anim.alpha);
 
         recyclerView = view.findViewById(R.id.recyclerViewCart);

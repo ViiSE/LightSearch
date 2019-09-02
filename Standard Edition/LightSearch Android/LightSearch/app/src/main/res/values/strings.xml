@@ -42,8 +42,24 @@
 
     <!-- Dialog Window -->
     <string name="dialog_error">Ошибка</string>
+    <string name="dialog_fail">Провал</string>
+    <string name="dialog_success">Успех</string>
+    <string name="dialog_pass_error">Введен неверный пароль!</string>
     <string name="dialog_OK">OK</string>
-    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_cancel">Отмена</string>
+    <string name="input_password">Введите пароль:</string>
+    <string name="create_password_admin">Создать пароль администратора</string>
+    <string name="change_password_admin">Изменить пароль администратора</string>
+    <string name="password_changed">Пароль изменен!</string>
+    <string name="dialog_exit">Выход</string>
+    <string name="dialog_exit_to_auth">Вы уверены, что хотите выйти в меню авторизации?</string>
+    <string name="dialog_message">Сообщение</string>
+    <string name="permission_request">Запрос на права</string>
+    <string name="permission_request_IMEI">Нужны права на отправку IMEI</string>
+    <string name="unconfirmed_record">Количество некоторых товаров, указанных в мягком чеке, больше, чем свободное количество данных товаров на складах. Данные товары выделены красным.</string>
+    <string name="spots_dialog_query_exec">Выполнение</string>
+    <string name="spots_dialog_connect">Подключение</string>
+    <string name="spots_dialog_auth">Авторизация</string>
     <!-- ============= -->
 
     <!-- TableResult -->

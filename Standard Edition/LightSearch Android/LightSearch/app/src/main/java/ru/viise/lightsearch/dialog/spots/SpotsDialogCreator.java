@@ -14,13 +14,10 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.dialog.alert;
+package ru.viise.lightsearch.dialog.spots;
 
-import android.app.Activity;
+import android.app.AlertDialog;
 
-public class ErrorAlertDialogCreatorInit {
-
-    public static ErrorAlertDialogCreator errorAlertDialogCreator(Activity rootActivity, String errorMessage) {
-        return new ErrorAlertDialogCreatorDefaultImpl(rootActivity, errorMessage);
-    }
+public interface SpotsDialogCreator {
+    AlertDialog create();
 }

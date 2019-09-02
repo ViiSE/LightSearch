@@ -18,13 +18,11 @@ package ru.viise.lightsearch.dialog.alert;
 
 import android.app.Activity;
 import android.support.v7.app.AlertDialog;
+import android.view.View;
 
-import ru.viise.lightsearch.data.ButtonContentEnum;
 import ru.viise.lightsearch.data.SearchRecord;
 
 public class OneResultAlertDialogCreatorDefaultImpl implements OneResultAlertDialogCreator {
-
-    private final String OK = ButtonContentEnum.POSITIVE_BUTTON.stringValue();
 
     private final Activity activity;
     private final SearchRecord searchRecord;
@@ -36,12 +34,25 @@ public class OneResultAlertDialogCreatorDefaultImpl implements OneResultAlertDia
 
     @Override
     public AlertDialog createAlertDialog() {
-        return new android.support.v7.app.AlertDialog.Builder(activity).setTitle("").setMessage(
-                "ИД: " + searchRecord.barcode() + "\n" +
-                        "Наименование: " + searchRecord.name() + "\n" +
-                        "Цена: " + searchRecord.priceWithUnit() + "\n" +
-                        "Кол-во: " + searchRecord.maxAmountWithUnit() + "\n" +
-                        "Подразделения: " + "\n" + searchRecord.subdivisions().toString())
-                .setPositiveButton(OK, (dialogInterface, i) -> dialogInterface.dismiss()).create();
+        DialogOKContainer dialogOKContainer = DialogOKContainerCreatorInit.dialogOKContainerCreator(activity)
+                .createDialogOKContainer();
+
+        dialogOKContainer.textViewTitle().setVisibility(View.GONE);
+
+        dialogOKContainer.textViewResult().setText("ИД: " + searchRecord.barcode() + "\n" +
+                "Наименование: " + searchRecord.name() + "\n" +
+                "Цена: " + searchRecord.priceWithUnit() + "\n" +
+                "Кол-во: " + searchRecord.maxAmountWithUnit() + "\n" +
+                "Подразделения: " + "\n" + searchRecord.subdivisions().toString());
+        dialogOKContainer.textViewTitle().setVisibility(View.GONE);
+
+        AlertDialog dialog = new AlertDialog.Builder(activity)
+                .setView(dialogOKContainer.dialogOKView())
+                .create();
+
+        dialogOKContainer.buttonOK().setOnClickListener(viewOK -> dialog.dismiss());
+        AlertDialogUtil.setTransparentBackground(dialog);
+
+        return dialog;
     }
 }

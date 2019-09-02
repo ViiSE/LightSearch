@@ -20,11 +20,9 @@ import android.app.Activity;
 import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
 
-import ru.viise.lightsearch.data.ButtonContentEnum;
+import ru.viise.lightsearch.R;
 
 public class ErrorAlertDialogCreatorDefaultImpl implements ErrorAlertDialogCreator {
-
-    private final String OK = ButtonContentEnum.POSITIVE_BUTTON.stringValue();
 
     private final Activity rootActivity;
     private final String errorMessage;
@@ -36,13 +34,22 @@ public class ErrorAlertDialogCreatorDefaultImpl implements ErrorAlertDialogCreat
 
     @Override
     public AlertDialog createAlertDialog() {
-        return new android.support.v7.app.AlertDialog.Builder(rootActivity).setTitle("Ошибка").setMessage(errorMessage)
-                .setPositiveButton(OK, (dialogInterface, i) -> dialogInterface.dismiss())
+        DialogOKContainer dialogOKContainer =
+                DialogOKContainerCreatorInit.dialogOKContainerCreator(rootActivity).createDialogOKContainer();
+        dialogOKContainer.textViewTitle().setText(R.string.dialog_error);
+        dialogOKContainer.textViewResult().setText(errorMessage);
+
+        AlertDialog dialog = new AlertDialog.Builder(rootActivity).setView(dialogOKContainer.dialogOKView())
                 .setOnKeyListener((dialogInterface, keyCode, event) -> {
-                    if(keyCode == KeyEvent.KEYCODE_BACK) {
+                    if(keyCode == KeyEvent.KEYCODE_BACK)
                         dialogInterface.dismiss();
-                    }
                     return true;
-                }).create();
+                })
+                .create();
+
+        dialogOKContainer.buttonOK().setOnClickListener(viewOK -> dialog.dismiss());
+        AlertDialogUtil.setTransparentBackground(dialog);
+
+        return dialog;
     }
 }

@@ -19,13 +19,10 @@ package ru.viise.lightsearch.dialog.alert;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 
 import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.data.AuthorizationPreferenceEnum;
-import ru.viise.lightsearch.data.ButtonContentEnum;
 import ru.viise.lightsearch.data.InputPasswordAlertDialogCreatorDTO;
 
 import static android.view.View.VISIBLE;
@@ -33,55 +30,56 @@ import static android.view.View.VISIBLE;
 public class InputPasswordAlertDialogCreatorDefaultImpl implements InputPasswordAlertDialogCreator {
 
     private final String SUPERUSER  = AuthorizationPreferenceEnum.SUPERUSER.stringValue();
-    private final String OK         = ButtonContentEnum.POSITIVE_BUTTON.stringValue();
-    private final String NEGATIVE   = ButtonContentEnum.NEGATIVE_BUTTON.stringValue();
 
     private final InputPasswordAlertDialogCreatorDTO creatorDTO;
-    private final LayoutInflater inflater;
-    private final Activity rootActivity;
+    private final Activity activity;
     private final SharedPreferences sPref;
 
     public InputPasswordAlertDialogCreatorDefaultImpl(InputPasswordAlertDialogCreatorDTO creatorDTO) {
         this.creatorDTO = creatorDTO;
-        inflater = this.creatorDTO.alertDialogCreatorDTO().inflater();
-        rootActivity = this.creatorDTO.alertDialogCreatorDTO().rootActivity();
+        activity = this.creatorDTO.alertDialogCreatorDTO().rootActivity();
         sPref = this.creatorDTO.alertDialogCreatorDTO().sharedPreferences();
     }
 
     @Override
     public AlertDialog createAlertDialog() {
-        View settingsView = inflater.inflate(R.layout.dialog_settings, null);
-        AlertDialog.Builder dialogSettingsPass = new AlertDialog.Builder(rootActivity);
-        dialogSettingsPass.setView(settingsView);
-        final EditText userInput = settingsView.findViewById(R.id.editTextPasswordSettings);
-        dialogSettingsPass
-                .setCancelable(false)
-                .setPositiveButton(OK,
-                        (dialog, id) -> {
-                            String password = sPref.getString(SUPERUSER, "");
-                            if (creatorDTO.hashAlgorithms().sha256(userInput.getText().toString()).equals(password)) {
-                                creatorDTO.twHost().setVisibility(VISIBLE);
-                                creatorDTO.twPort().setVisibility(VISIBLE);
-                                creatorDTO.etHost().setVisibility(VISIBLE);
-                                creatorDTO.etPort().setVisibility(VISIBLE);
-                                creatorDTO.bChangePassword().setVisibility(VISIBLE);
-                                userInput.setText("");
-                                dialog.dismiss();
-                            } else {
-                                new AlertDialog.Builder(rootActivity).setTitle("Провал").setMessage("Введен неверный пароль!")
-                                        .setPositiveButton(OK, (dialogInterface, i) -> {
-                                            creatorDTO.cbSettings().setChecked(false);
-                                            dialogInterface.dismiss();
-                                        }).create().show();
-                                userInput.setText("");
-                                dialog.dismiss();
-                            }
-                        })
-                .setNegativeButton(NEGATIVE,
-                        (dialog, id) -> {
-                            creatorDTO.cbSettings().setChecked(false);
-                            dialog.dismiss();
-                        });
-        return dialogSettingsPass.create();
+        DialogSettingsContainer dialogSettingsContainer =
+                DialogSettingsContainerCreatorInit.dialogSettingsContainerCreator(activity)
+                        .createDialogSettingsContainer();
+
+        dialogSettingsContainer.textViewTitle().setVisibility(View.GONE);
+        dialogSettingsContainer.textViewResult().setText(R.string.input_password);
+
+        AlertDialog dialog = new AlertDialog.Builder(activity).setView(dialogSettingsContainer.dialogSettingsView())
+                .create();
+
+        dialogSettingsContainer.buttonOK().setOnClickListener(viewOK -> {
+            String password = sPref.getString(SUPERUSER, "");
+            if (creatorDTO.hashAlgorithms().sha256(dialogSettingsContainer.editText().getText().toString()).equals(password)) {
+                creatorDTO.twHost().setVisibility(VISIBLE);
+                creatorDTO.twPort().setVisibility(VISIBLE);
+                creatorDTO.etHost().setVisibility(VISIBLE);
+                creatorDTO.etPort().setVisibility(VISIBLE);
+                creatorDTO.bChangePassword().setVisibility(VISIBLE);
+                dialogSettingsContainer.editText().setText("");
+                dialog.dismiss();
+            } else {
+                ErrorAlertDialogCreator errADCr =
+                        ErrorPassAlertDialogCreatorInit.errorPassAlertDialogCreator(activity, creatorDTO);
+                errADCr.createAlertDialog().show();
+                dialogSettingsContainer.editText().setText("");
+                dialog.dismiss();
+            }
+        });
+
+        dialogSettingsContainer.buttonCancel().setOnClickListener(viewCancel -> {
+            creatorDTO.cbSettings().setChecked(false);
+            dialog.dismiss();
+        });
+
+        AlertDialogUtil.setTransparentBackground(dialog);
+        dialog.setCanceledOnTouchOutside(false);
+
+        return dialog;
     }
 }

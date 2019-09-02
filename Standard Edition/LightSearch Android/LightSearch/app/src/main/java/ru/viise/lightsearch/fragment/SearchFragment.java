@@ -42,7 +42,6 @@ import android.widget.Toast;
 
 import java.util.Objects;
 
-import dmax.dialog.SpotsDialog;
 import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.activity.KeyboardHideToolInit;
 import ru.viise.lightsearch.activity.ManagerActivityHandler;
@@ -58,6 +57,7 @@ import ru.viise.lightsearch.data.ScanType;
 import ru.viise.lightsearch.data.SearchFragmentContentEnum;
 import ru.viise.lightsearch.data.creator.CommandSearchDTOCreator;
 import ru.viise.lightsearch.data.creator.CommandSearchDTOCreatorInit;
+import ru.viise.lightsearch.dialog.spots.SpotsDialogCreatorInit;
 
 
 public class SearchFragment extends Fragment implements View.OnClickListener, ISearchFragment {
@@ -162,8 +162,8 @@ public class SearchFragment extends Fragment implements View.OnClickListener, IS
             selected = 2;
         });
 
-        queryDialog = new SpotsDialog.Builder().setContext(this.getActivity()).setMessage("Выполнение").setCancelable(false).build();
-
+        queryDialog = SpotsDialogCreatorInit.spotsDialogCreator(this.getActivity(), R.string.spots_dialog_query_exec)
+                .create();
         return view;
     }
 

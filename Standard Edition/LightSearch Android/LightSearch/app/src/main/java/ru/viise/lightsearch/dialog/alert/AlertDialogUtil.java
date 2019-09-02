@@ -16,11 +16,19 @@
 
 package ru.viise.lightsearch.dialog.alert;
 
-import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.support.v7.app.AlertDialog;
 
-public class ErrorAlertDialogCreatorInit {
+import java.util.Objects;
 
-    public static ErrorAlertDialogCreator errorAlertDialogCreator(Activity rootActivity, String errorMessage) {
-        return new ErrorAlertDialogCreatorDefaultImpl(rootActivity, errorMessage);
+public class AlertDialogUtil {
+
+    public static void setTransparentBackground(AlertDialog dialog) {
+        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+    }
+
+    public static void setTransparentBackground(android.app.AlertDialog dialog) {
+        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
 }

@@ -16,11 +16,14 @@
 
 package ru.viise.lightsearch.dialog.alert;
 
-import android.app.Activity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
-public class ErrorAlertDialogCreatorInit {
-
-    public static ErrorAlertDialogCreator errorAlertDialogCreator(Activity rootActivity, String errorMessage) {
-        return new ErrorAlertDialogCreatorDefaultImpl(rootActivity, errorMessage);
-    }
+public interface DialogOKCancelContainer {
+    View dialogOKCancelView();
+    Button buttonOK();
+    Button buttonCancel();
+    TextView textViewTitle();
+    TextView textViewResult();
 }

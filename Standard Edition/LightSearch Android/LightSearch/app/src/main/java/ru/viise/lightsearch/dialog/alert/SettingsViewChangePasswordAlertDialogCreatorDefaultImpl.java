@@ -20,20 +20,15 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.data.AuthorizationPreferenceEnum;
-import ru.viise.lightsearch.data.ButtonContentEnum;
 import ru.viise.lightsearch.data.SettingsViewChangePasswordAlertDialogCreatorDTO;
 
 public class SettingsViewChangePasswordAlertDialogCreatorDefaultImpl implements SettingsViewChangePasswordAlertDialogCreator {
 
     private final String SUPERUSER = AuthorizationPreferenceEnum.SUPERUSER.stringValue();
-    private final String OK        = ButtonContentEnum.POSITIVE_BUTTON.stringValue();
-    private final String NEGATIVE  = ButtonContentEnum.NEGATIVE_BUTTON.stringValue();
 
     private final SettingsViewChangePasswordAlertDialogCreatorDTO creatorDTO;
     private final LayoutInflater inflater;
@@ -50,26 +45,29 @@ public class SettingsViewChangePasswordAlertDialogCreatorDefaultImpl implements 
 
     @Override
     public AlertDialog createAlertDialog() {
-        View settingsViewChangePass = inflater.inflate(R.layout.dialog_settings, null);
-        AlertDialog.Builder dialogSettingsChangePass =
-                new AlertDialog.Builder(rootActivity);
-        dialogSettingsChangePass.setView(settingsViewChangePass);
-        final EditText userInputChangePass = settingsViewChangePass.findViewById(R.id.editTextPasswordSettings);
-        dialogSettingsChangePass
-                .setCancelable(true)
-                .setPositiveButton(OK,
-                        (dialog, id) -> {
-                            SharedPreferences.Editor ed = sPref.edit();
-                            ed.putString(SUPERUSER, creatorDTO.hashAlgorithms().sha256(userInputChangePass.getText().toString()));
-                            ed.apply();
-                            userInputChangePass.setText("");
-                            Toast t =
-                                    Toast.makeText(rootActivity.getApplicationContext(), "Пароль изменен!", Toast.LENGTH_SHORT);
-                            t.show();
-                            dialog.dismiss();
-                        })
-                .setNegativeButton(NEGATIVE,
-                        (dialog, id) -> dialog.dismiss());
-        return dialogSettingsChangePass.create();
+        DialogSettingsContainer dialogSettingsContainer =
+                DialogSettingsContainerCreatorInit.dialogSettingsContainerCreator(rootActivity)
+                        .createDialogSettingsContainer();
+
+        dialogSettingsContainer.textViewTitle().setText(R.string.change_password_admin);
+
+        AlertDialog dialog = new AlertDialog.Builder(rootActivity)
+                .setView(dialogSettingsContainer.dialogSettingsView()).setCancelable(true).create();
+
+        dialogSettingsContainer.buttonOK().setOnClickListener(viewOK -> {
+            SharedPreferences.Editor ed = sPref.edit();
+            ed.putString(SUPERUSER, creatorDTO.hashAlgorithms().sha256(dialogSettingsContainer.editText().getText().toString()));
+            ed.apply();
+            dialogSettingsContainer.editText().setText("");
+            Toast t =
+                    Toast.makeText(rootActivity.getApplicationContext(), R.string.password_changed, Toast.LENGTH_SHORT);
+            t.show();
+            dialog.dismiss();
+        });
+
+        dialogSettingsContainer.buttonCancel().setOnClickListener(viewCancel -> dialog.dismiss());
+        AlertDialogUtil.setTransparentBackground(dialog);
+
+        return dialog;
     }
 }
