@@ -86,9 +86,9 @@
     <!-- ===== -->
 
     <!-- Snackbar -->
-    <string name="snackbar_prod_deleted">  Товар удален.</string>
-    <string name="snackbar_prod_added">  Товар добавлен.</string>
-    <string name="snackbar_cancel">Отмена   </string>
+    <string name="snackbar_prod_deleted">&#160;&#160;Товар удален.</string>
+    <string name="snackbar_prod_added">&#160;&#160;Товар добавлен.</string>
+    <string name="snackbar_cancel">Отмена&#160;&#160;&#160;</string>
     <!-- ======== -->
 
     <!-- TableResult -->
@@ -106,5 +106,9 @@
     <string name="fragment_result_search">Результат</string>
     <string name="fragment_cart">Корзина</string>
     <!-- ============ -->
+
+    <!-- App Updater -->
+    <string name="update_url">192.168.3.215:50001/update_android</string>
+    <!-- =========== -->
 
 </resources>

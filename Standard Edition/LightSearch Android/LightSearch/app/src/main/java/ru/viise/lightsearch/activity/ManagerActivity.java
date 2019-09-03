@@ -113,6 +113,9 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
         commandHolderUI = resCmdUiCr.createResultCommandHolderUI();
 
         doAuthorizationFragmentTransaction();
+
+        UpdateChecker updateChecker = UpdateCheckerInit.updateChecker();
+        updateChecker.checkUpdate();
     }
 
     @Override
