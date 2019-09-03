@@ -165,7 +165,7 @@ public class AuthorizationFragment extends Fragment implements IAuthorizationFra
                 if(editTextUsername.getText().toString().isEmpty()  ||
                     editTextPassword.getText().toString().isEmpty()) {
                     Toast t = Toast.makeText(this.getActivity().getApplicationContext(),
-                            "Заполните все поля, необходимые для регистрации!", Toast.LENGTH_LONG);
+                            R.string.toast_not_enough_auth_data, Toast.LENGTH_LONG);
                     t.show();
                 }
                 else {

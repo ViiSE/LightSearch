@@ -127,11 +127,11 @@ public class CartFragment extends Fragment implements ICartFragment, OnBackPress
         closeSoftCheckButton.setOnClickListener((view1) -> {
             view1.startAnimation(animAlpha);
             if(adapter.getItemCount() == 0) {
-                Toast t = Toast.makeText(this.getActivity().getApplicationContext(), "Корзина пуста!", Toast.LENGTH_LONG);
+                Toast t = Toast.makeText(this.getActivity().getApplicationContext(), R.string.toast_empty_cart, Toast.LENGTH_LONG);
                 t.show();
             }
             else if(spinnerDeliveryType.getSelectedItem().toString().equals(NO)) {
-                Toast t = Toast.makeText(this.getActivity().getApplicationContext(), "Выберите способ доставки!", Toast.LENGTH_LONG);
+                Toast t = Toast.makeText(this.getActivity().getApplicationContext(), R.string.toast_delivery_not_chosen, Toast.LENGTH_LONG);
                 t.show();
             }
             else {
@@ -193,19 +193,20 @@ public class CartFragment extends Fragment implements ICartFragment, OnBackPress
 
     private void initSwipeToDeleteAndUndo() {
         SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(this.getContext()) {
+            @SuppressLint("DefaultLocale")
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
                 final int position = viewHolder.getAdapterPosition();
                 final SoftCheckRecord item = adapter.getData().get(position);
                 adapter.removeItem(position);
-                tvTotalAmount.setText(adapter.getItemCount() + " " + UnitsEnum.CURRENT_AMOUNT_CART_UNIT.stringValue());
+                tvTotalAmount.setText(String.format("%d %s", adapter.getItemCount(), CartFragment.this.getString(R.string.current_amount_cart_unit)));
 
                 SnackbarSoftCheckCreator snackbarCr = SnackbarSoftCheckCreatorInit.snackbarSoftCheckCreator(
-                        CartFragment.this, coordinatorLayout, "  Товар удален.");
-                Snackbar snackbar = snackbarCr.createSnackbar().setAction("Отмена   ", view -> {
+                        CartFragment.this, coordinatorLayout, CartFragment.this.getString(R.string.snackbar_prod_deleted));
+                Snackbar snackbar = snackbarCr.createSnackbar().setAction(CartFragment.this.getString(R.string.snackbar_cancel), view -> {
                     adapter.restoreItem(item, position);
                     recyclerView.scrollToPosition(position);
-                    tvTotalAmount.setText(adapter.getItemCount() + " " + UnitsEnum.CURRENT_AMOUNT_CART_UNIT.stringValue());
+                    tvTotalAmount.setText(String.format("%d %s", adapter.getItemCount(), CartFragment.this.getString(R.string.current_amount_cart_unit)));
                 });
                 snackbar.show();
             }

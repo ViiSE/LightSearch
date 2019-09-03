@@ -17,9 +17,11 @@
 package ru.viise.lightsearch.dialog.alert;
 
 import android.app.Activity;
+import android.support.v4.text.HtmlCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 
+import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.data.CartRecord;
 
 public class InfoProductAlertDialogCreatorCartDefaultImpl implements InfoProductAlertDialogCreator {
@@ -34,20 +36,27 @@ public class InfoProductAlertDialogCreatorCartDefaultImpl implements InfoProduct
 
     @Override
     public AlertDialog createAlertDialog() {
+        String id = "<b>" + activity.getString(R.string.dialog_res_prod_id) + "</b>";
+        String name = "<b>" + activity.getString(R.string.dialog_res_prod_name) + "</b>";
+        String price = "<b>" + activity.getString(R.string.dialog_res_prod_price) + "</b>";
+        String max_amount = "<b>" + activity.getString(R.string.dialog_res_prod_max_amount) + "</b>";
+        String old_max_amount = "<b>" + activity.getString(R.string.dialog_res_prod_old_max_amount) + "</b>";
+        String new_max_amount = "<b>" + activity.getString(R.string.dialog_res_prod_new_max_amount) + "</b>";
+
         DialogOKContainer dialogOKContainer =
                 DialogOKContainerCreatorInit.dialogOKContainerCreator(activity).createDialogOKContainer();
         dialogOKContainer.textViewTitle().setVisibility(View.GONE);
 
-        String message = "ИД: " + record.barcode() + "\n" +
-                "Наименование: " + record.name() + "\n" +
-                "Цена: " + record.priceWithUnit() + "\n";
+        String message = id + ": " + record.barcode() + "<br>" +
+                name  + ": " + record.name() + "<br>" +
+                price + ": " + record.priceWithUnit() + "<br>";
         if(record.isConfirmed())
-            message += "Общее кол-во: " + record.maxAmountWithUnit();
+            message += max_amount + ": " + record.maxAmountWithUnit();
         else
-            message += "Общее кол-во ДО: " + record.oldMaxAmountWithUnit() + "\n" +
-                    "Общее кол-во ПОСЛЕ: " + record.maxAmountWithUnit();
+            message += old_max_amount + ": " + record.oldMaxAmountWithUnit() + "<br>" +
+                       new_max_amount + ": " + record.maxAmountWithUnit();
 
-        dialogOKContainer.textViewResult().setText(message);
+        dialogOKContainer.textViewResult().setText(HtmlCompat.fromHtml(message, HtmlCompat.FROM_HTML_MODE_LEGACY));
 
         AlertDialog dialog =
                 new AlertDialog.Builder(activity).setView(dialogOKContainer.dialogOKView()).create();

@@ -210,7 +210,7 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
     }
 
     public void callDialogNoResult() {
-        String message = "Запрос не дал результата.";
+        String message = this.getString(R.string.dialog_no_result);
         NoResultAlertDialogCreator noResADCr =
                 NoResultAlertDialogCreatorInit.noResultAlertDialogCreator(this, message);
         noResADCr.createAlertDialog().show();

@@ -31,14 +31,12 @@ public class SettingsViewChangePasswordAlertDialogCreatorDefaultImpl implements 
     private final String SUPERUSER = AuthorizationPreferenceEnum.SUPERUSER.stringValue();
 
     private final SettingsViewChangePasswordAlertDialogCreatorDTO creatorDTO;
-    private final LayoutInflater inflater;
     private final Activity rootActivity;
     private final SharedPreferences sPref;
 
     public SettingsViewChangePasswordAlertDialogCreatorDefaultImpl(
             SettingsViewChangePasswordAlertDialogCreatorDTO creatorDTO) {
         this.creatorDTO = creatorDTO;
-        inflater = this.creatorDTO.alertDialogCreatorDTO().inflater();
         rootActivity = this.creatorDTO.alertDialogCreatorDTO().rootActivity();
         sPref = this.creatorDTO.alertDialogCreatorDTO().sharedPreferences();
     }

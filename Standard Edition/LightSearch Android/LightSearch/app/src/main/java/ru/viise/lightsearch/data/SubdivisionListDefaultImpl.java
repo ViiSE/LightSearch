@@ -48,13 +48,13 @@ public class SubdivisionListDefaultImpl implements SubdivisionList {
     public String toString() {
         StringBuilder res = new StringBuilder();
         for(Subdivision subdivision : subdivisions) {
-            res.append("\t")
+            res.append("<pre>\t</pre>") // \t
                     .append(subdivision.name())
                     .append(" - ")
                     .append(subdivision.productAmount())
                     .append(" ")
                     .append(amountUnit)
-                    .append("\n");
+                    .append("<br>"); // \n
         }
         return res.toString();
     }

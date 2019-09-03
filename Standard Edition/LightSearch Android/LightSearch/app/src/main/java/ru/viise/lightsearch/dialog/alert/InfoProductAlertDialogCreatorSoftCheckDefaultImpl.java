@@ -17,9 +17,11 @@
 package ru.viise.lightsearch.dialog.alert;
 
 import android.app.Activity;
+import android.support.v4.text.HtmlCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 
+import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.data.SoftCheckRecord;
 
 public class InfoProductAlertDialogCreatorSoftCheckDefaultImpl implements InfoProductAlertDialogCreator {
@@ -34,15 +36,23 @@ public class InfoProductAlertDialogCreatorSoftCheckDefaultImpl implements InfoPr
 
     @Override
     public AlertDialog createAlertDialog() {
+        String id = "<b>" + activity.getString(R.string.dialog_res_prod_id) + "</b>";
+        String name = "<b>" + activity.getString(R.string.dialog_res_prod_name) + "</b>";
+        String price = "<b>" + activity.getString(R.string.dialog_res_prod_price) + "</b>";
+        String max_amount = "<b>" + activity.getString(R.string.dialog_res_prod_max_amount) + "</b>";
+        String subdivisions = "<b>" + activity.getString(R.string.dialog_res_prod_subdivisions) + "</b>";
+
+        String result = id + ": " + record.barcode() + "<br>"+
+                name + ": " + record.name() + "<br>" +
+                price + ": " + record.priceWithUnit() + "<br>" +
+                max_amount + ": " + record.maxAmountWithUnit() + "<br>" +
+                subdivisions + ": " + "<br>" + record.subdivisions().toString();
+
         DialogOKContainer dialogOKContainer =
                 DialogOKContainerCreatorInit.dialogOKContainerCreator(activity).createDialogOKContainer();
 
         dialogOKContainer.textViewTitle().setVisibility(View.GONE);
-        dialogOKContainer.textViewResult().setText("ИД: " + record.barcode() + "\n" +
-                "Наименование: " + record.name() + "\n" +
-                "Цена: " + record.priceWithUnit() + "\n" +
-                "Общее кол-во: " + record.maxAmountWithUnit() + "\n" +
-                "Подразделения: \n" + record.subdivisions().toString());
+        dialogOKContainer.textViewResult().setText(HtmlCompat.fromHtml(result, HtmlCompat.FROM_HTML_MODE_LEGACY));
 
         AlertDialog dialog =
                 new AlertDialog.Builder(activity).setView(dialogOKContainer.dialogOKView()).create();

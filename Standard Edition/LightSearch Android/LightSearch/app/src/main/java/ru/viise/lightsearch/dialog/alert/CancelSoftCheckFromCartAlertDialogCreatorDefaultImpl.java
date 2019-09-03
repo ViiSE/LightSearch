@@ -23,6 +23,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 
+import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.activity.ManagerActivityHandler;
 import ru.viise.lightsearch.cmd.CommandTypeEnum;
 import ru.viise.lightsearch.cmd.manager.CommandManager;
@@ -61,7 +62,7 @@ public class CancelSoftCheckFromCartAlertDialogCreatorDefaultImpl implements Can
                 dialogOKCancelContainerCreator(activity).createDialogOkCancelContainer();
 
         dialogOKCancelContainer.textViewTitle().setVisibility(View.GONE);
-        dialogOKCancelContainer.textViewResult().setText("Вы уверены, что хотите выйти из корзины? Это отменит текущий мягкий чек.");
+        dialogOKCancelContainer.textViewResult().setText(R.string.dialog_exit_to_cart);
 
         AlertDialog dialog = new AlertDialog.Builder(activity).setView(dialogOKCancelContainer.dialogOKCancelView()).create();
 

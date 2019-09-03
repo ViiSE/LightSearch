@@ -21,6 +21,7 @@ import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 
+import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.activity.ManagerActivityHandler;
 import ru.viise.lightsearch.cmd.CommandTypeEnum;
 import ru.viise.lightsearch.cmd.manager.CommandManager;
@@ -56,8 +57,8 @@ public class CancelSoftCheckAlertDialogCreatorDefaultImpl implements CancelSoftC
                 DialogOKCancelContainerCreatorInit.dialogOKCancelContainerCreator(fragment.getActivity())
                         .createDialogOkCancelContainer();
 
-        dialogOKCancelContainer.textViewResult().setText("Вы уверены, что хотите отменить текущий мягкий чек?");
-        dialogOKCancelContainer.textViewTitle().setText("Сообщение");
+        dialogOKCancelContainer.textViewResult().setText(R.string.dialog_cancel_soft_check);
+        dialogOKCancelContainer.textViewTitle().setText(R.string.dialog_message);
 
         AlertDialog dialog = new AlertDialog.Builder(fragment.getActivity()).setView(
                 dialogOKCancelContainer.dialogOKCancelView()).create();

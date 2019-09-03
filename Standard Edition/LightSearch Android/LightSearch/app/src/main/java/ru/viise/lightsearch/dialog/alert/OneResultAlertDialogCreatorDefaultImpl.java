@@ -17,9 +17,12 @@
 package ru.viise.lightsearch.dialog.alert;
 
 import android.app.Activity;
+import android.support.v4.text.HtmlCompat;
 import android.support.v7.app.AlertDialog;
+import android.text.Html;
 import android.view.View;
 
+import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.data.SearchRecord;
 
 public class OneResultAlertDialogCreatorDefaultImpl implements OneResultAlertDialogCreator {
@@ -34,16 +37,24 @@ public class OneResultAlertDialogCreatorDefaultImpl implements OneResultAlertDia
 
     @Override
     public AlertDialog createAlertDialog() {
+        String id = "<b>" + activity.getString(R.string.dialog_res_prod_id) + "</b>";
+        String name = "<b>" + activity.getString(R.string.dialog_res_prod_name) + "</b>";
+        String price = "<b>" + activity.getString(R.string.dialog_res_prod_price) + "</b>";
+        String amount = "<b>" + activity.getString(R.string.dialog_res_prod_amount) + "</b>";
+        String subdivisions = "<b>" + activity.getString(R.string.dialog_res_prod_subdivisions) + "</b>";
+
+        String result = id + ": " + searchRecord.barcode() + "<br>"+
+                name + ": " + searchRecord.name() + "<br>" +
+                price + ": " + searchRecord.priceWithUnit() + "<br>" +
+                amount + ": " + searchRecord.maxAmountWithUnit() + "<br>" +
+                subdivisions + ": " + "<br>" + searchRecord.subdivisions().toString();
+
         DialogOKContainer dialogOKContainer = DialogOKContainerCreatorInit.dialogOKContainerCreator(activity)
                 .createDialogOKContainer();
 
         dialogOKContainer.textViewTitle().setVisibility(View.GONE);
 
-        dialogOKContainer.textViewResult().setText("ИД: " + searchRecord.barcode() + "\n" +
-                "Наименование: " + searchRecord.name() + "\n" +
-                "Цена: " + searchRecord.priceWithUnit() + "\n" +
-                "Кол-во: " + searchRecord.maxAmountWithUnit() + "\n" +
-                "Подразделения: " + "\n" + searchRecord.subdivisions().toString());
+        dialogOKContainer.textViewResult().setText(HtmlCompat.fromHtml(result, HtmlCompat.FROM_HTML_MODE_LEGACY));
         dialogOKContainer.textViewTitle().setVisibility(View.GONE);
 
         AlertDialog dialog = new AlertDialog.Builder(activity)

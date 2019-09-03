@@ -13,6 +13,8 @@
     <string name="cartTotalCost_label">Итого:</string>
     <string name="cartTotalAmount_label">Товаров:</string>
     <string name="cartDeliveryType_label">Cпособ доставки:</string>
+    <string name="current_amount_cart_unit">ед.</string>
+    <string name="current_price_unit">руб.</string>
     <!-- ======== -->
 
     <!-- CheckBox -->
@@ -53,14 +55,39 @@
     <string name="password_changed">Пароль изменен!</string>
     <string name="dialog_exit">Выход</string>
     <string name="dialog_exit_to_auth">Вы уверены, что хотите выйти в меню авторизации?</string>
+    <string name="dialog_cancel_soft_check">Вы уверены, что хотите отменить текущий мягкий чек?</string>
+    <string name="dialog_exit_to_cart">Вы уверены, что хотите выйти из корзины? Это отменит текущий мягкий чек.</string>
     <string name="dialog_message">Сообщение</string>
+    <string name="dialog_no_result">Запрос не дал результата</string>
     <string name="permission_request">Запрос на права</string>
     <string name="permission_request_IMEI">Нужны права на отправку IMEI</string>
     <string name="unconfirmed_record">Количество некоторых товаров, указанных в мягком чеке, больше, чем свободное количество данных товаров на складах. Данные товары выделены красным.</string>
     <string name="spots_dialog_query_exec">Выполнение</string>
     <string name="spots_dialog_connect">Подключение</string>
     <string name="spots_dialog_auth">Авторизация</string>
+    <string name="dialog_res_prod_id">ИД</string>
+    <string name="dialog_res_prod_name">Наименование</string>
+    <string name="dialog_res_prod_price">Цена</string>
+    <string name="dialog_res_prod_amount">Кол-во</string>
+    <string name="dialog_res_prod_max_amount">Общее кол-во</string>
+    <string name="dialog_res_prod_old_max_amount">Общее кол-во ДО</string>
+    <string name="dialog_res_prod_new_max_amount">Общее кол-во ПОСЛЕ</string>
+    <string name="dialog_res_prod_subdivisions">Подразделения</string>
     <!-- ============= -->
+
+    <!-- Toast -->
+    <string name="toast_empty_cart">Корзина пуста!</string>
+    <string name="toast_delivery_not_chosen">Выберите способ доставки!</string>
+    <string name="toast_barcode_not_enough_symbols">"Введите не менее пяти символов!"</string>
+    <string name="toast_empty_soft_check">"Мягкий чек пуст!"</string>
+    <string name="toast_not_enough_auth_data">Заполните все поля, необходимые для регистрации!</string>
+    <!-- ===== -->
+
+    <!-- Snackbar -->
+    <string name="snackbar_prod_deleted">  Товар удален.</string>
+    <string name="snackbar_prod_added">  Товар добавлен.</string>
+    <string name="snackbar_cancel">Отмена   </string>
+    <!-- ======== -->
 
     <!-- TableResult -->
     <string name="subdivColLabel">Подразделение</string>
