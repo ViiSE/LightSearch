@@ -26,7 +26,6 @@ import android.widget.Toast;
 
 import java.util.List;
 
-import dmax.dialog.SpotsDialog;
 import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.activity.KeyboardHideToolInit;
 import ru.viise.lightsearch.activity.ManagerActivityHandler;
@@ -47,6 +46,7 @@ import ru.viise.lightsearch.data.creator.CommandSearchDTOCreator;
 import ru.viise.lightsearch.data.creator.CommandSearchDTOCreatorInit;
 import ru.viise.lightsearch.dialog.alert.InfoProductAlertDialogCreator;
 import ru.viise.lightsearch.dialog.alert.InfoProductAlertDialogCreatorInit;
+import ru.viise.lightsearch.dialog.spots.SpotsDialogCreatorInit;
 import ru.viise.lightsearch.fragment.adapter.RecyclerViewAdapter;
 import ru.viise.lightsearch.fragment.adapter.SwipeToDeleteCallback;
 import ru.viise.lightsearch.fragment.adapter.SwipeToInfoCallback;
@@ -80,7 +80,9 @@ public class SoftCheckFragment extends Fragment implements ISoftCheckFragment {
 
         cartButton = view.findViewById(R.id.buttonCart);
         toCart = cartButton.getText().toString();
-        queryDialog = new SpotsDialog.Builder().setContext(this.getActivity()).setMessage("Выполнение").setCancelable(false).build();
+        queryDialog = SpotsDialogCreatorInit.spotsDialogCreator(this.getActivity(), R.string.spots_dialog_query_exec)
+                .create();
+
 
         AppCompatImageButton searchButton = view.findViewById(R.id.imageButtonSearch);
         AppCompatImageButton barcodeButton = view.findViewById(R.id.imageButtonBarcode);
@@ -107,7 +109,7 @@ public class SoftCheckFragment extends Fragment implements ISoftCheckFragment {
             String barcode = editTextSearch.getText().toString();
 
             if(barcode.length() < 5) {
-                Toast t = Toast.makeText(this.getActivity().getApplicationContext(), "Введите не менее пяти символов!", Toast.LENGTH_LONG);
+                Toast t = Toast.makeText(this.getActivity().getApplicationContext(), R.string.toast_barcode_not_enough_symbols, Toast.LENGTH_LONG);
                 t.show();
             }
             else
@@ -132,7 +134,7 @@ public class SoftCheckFragment extends Fragment implements ISoftCheckFragment {
         cartButton.setOnClickListener(view3 -> {
             view3.startAnimation(animAlpha);
             if(adapter.getItemCount() == 0) {
-                Toast t = Toast.makeText(this.getActivity().getApplicationContext(), "Мягкий чек пуст!", Toast.LENGTH_LONG);
+                Toast t = Toast.makeText(this.getActivity().getApplicationContext(), R.string.toast_empty_soft_check, Toast.LENGTH_LONG);
                 t.show();
             }
             else {
@@ -186,8 +188,8 @@ public class SoftCheckFragment extends Fragment implements ISoftCheckFragment {
                 cartButton.setText(toCart +  " (" + adapter.getItemCount() + ")");
 
                 SnackbarSoftCheckCreator snackbarCr = SnackbarSoftCheckCreatorInit.snackbarSoftCheckCreator(
-                        SoftCheckFragment.this, coordinatorLayout, "  Товар удален.");
-                Snackbar snackbar = snackbarCr.createSnackbar().setAction("Отмена   ", view -> {
+                        SoftCheckFragment.this, coordinatorLayout, SoftCheckFragment.this.getString(R.string.snackbar_prod_deleted));
+                Snackbar snackbar = snackbarCr.createSnackbar().setAction(SoftCheckFragment.this.getString(R.string.snackbar_cancel), view -> {
                     adapter.restoreItem(item, position);
                     recyclerView.scrollToPosition(position);
                     cartButton.setText(toCart +  " (" + adapter.getItemCount() + ")");
@@ -239,7 +241,7 @@ public class SoftCheckFragment extends Fragment implements ISoftCheckFragment {
         recyclerView.scrollToPosition(adapter.getItemCount() - 1);
         cartButton.setText(toCart +  " (" + adapter.getItemCount() + ")");
         SnackbarSoftCheckCreator snackbarCr = SnackbarSoftCheckCreatorInit.snackbarSoftCheckCreator(
-                SoftCheckFragment.this, coordinatorLayout, "  Товар добавлен.");
+                SoftCheckFragment.this, coordinatorLayout, SoftCheckFragment.this.getString(R.string.snackbar_prod_added));
         Snackbar snackbar = snackbarCr.createSnackbar();
         snackbar.show();
     }

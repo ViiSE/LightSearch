@@ -16,14 +16,12 @@
 
 package ru.viise.lightsearch.fragment.util;
 
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.data.Subdivision;
 
 public class CardViewRowResultFillerSubdivisionImpl implements ViewFiller {

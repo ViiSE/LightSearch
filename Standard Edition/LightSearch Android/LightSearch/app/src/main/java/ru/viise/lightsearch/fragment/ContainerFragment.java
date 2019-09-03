@@ -29,7 +29,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import dmax.dialog.SpotsDialog;
 import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.activity.ManagerActivityHandler;
 import ru.viise.lightsearch.activity.ManagerActivityUI;
@@ -41,6 +40,7 @@ import ru.viise.lightsearch.dialog.alert.CancelSoftCheckAlertDialogCreator;
 import ru.viise.lightsearch.dialog.alert.CancelSoftCheckAlertDialogCreatorInit;
 import ru.viise.lightsearch.dialog.alert.ExitToAuthorizationAlertDialogCreator;
 import ru.viise.lightsearch.dialog.alert.ExitToAuthorizationAlertDialogCreatorInit;
+import ru.viise.lightsearch.dialog.spots.SpotsDialogCreatorInit;
 import ru.viise.lightsearch.exception.FindableException;
 import ru.viise.lightsearch.find.ImplFinder;
 import ru.viise.lightsearch.find.ImplFinderFragmentFromFragmentDefaultImpl;
@@ -81,7 +81,8 @@ public class ContainerFragment extends Fragment implements OnBackPressedListener
         TabLayout tabLayout = view.findViewById(R.id.TabLayoutCon);
         tabLayout.setupWithViewPager(viewPager);
 
-        queryDialog = new SpotsDialog.Builder().setContext(this.getActivity()).setMessage("Выполнение").setCancelable(false).build();
+        queryDialog = SpotsDialogCreatorInit.spotsDialogCreator(this.getActivity(), R.string.spots_dialog_query_exec)
+                .create();
 
         if(selected == 0)
             onBackPressedListenerType = OnBackPressedListenerType.CONTAINER_FRAGMENT;

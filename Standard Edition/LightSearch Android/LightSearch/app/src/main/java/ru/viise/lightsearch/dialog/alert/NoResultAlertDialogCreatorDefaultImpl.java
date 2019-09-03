@@ -19,11 +19,9 @@ package ru.viise.lightsearch.dialog.alert;
 import android.app.Activity;
 import android.support.v7.app.AlertDialog;
 
-import ru.viise.lightsearch.data.ButtonContentEnum;
+import ru.viise.lightsearch.R;
 
 public class NoResultAlertDialogCreatorDefaultImpl implements NoResultAlertDialogCreator {
-
-    private final String OK = ButtonContentEnum.POSITIVE_BUTTON.stringValue();
 
     private final Activity activity;
     private final String message;
@@ -35,7 +33,17 @@ public class NoResultAlertDialogCreatorDefaultImpl implements NoResultAlertDialo
 
     @Override
     public AlertDialog createAlertDialog() {
-        return new android.support.v7.app.AlertDialog.Builder(activity).setTitle("Сообщение").setMessage(message)
-                .setPositiveButton(OK, (dialogInterface, i) -> dialogInterface.dismiss()).create();
+        DialogOKContainer dialogOKContainer =
+                DialogOKContainerCreatorInit.dialogOKContainerCreator(activity).createDialogOKContainer();
+        dialogOKContainer.textViewTitle().setText(R.string.dialog_message);
+        dialogOKContainer.textViewResult().setText(message);
+
+        AlertDialog dialog =
+                new AlertDialog.Builder(activity).setView(dialogOKContainer.dialogOKView()).create();
+
+        dialogOKContainer.buttonOK().setOnClickListener(viewOK -> dialog.dismiss());
+        AlertDialogUtil.setTransparentBackground(dialog);
+
+        return dialog;
     }
 }

@@ -39,7 +39,7 @@ import ru.viise.lightsearch.dialog.alert.OneResultAlertDialogCreator;
 import ru.viise.lightsearch.dialog.alert.OneResultAlertDialogCreatorInit;
 import ru.viise.lightsearch.fragment.adapter.ResultSearchArrayAdapter;
 
-public class ResultSearchFragment  extends ListFragment {
+public class ResultSearchFragment extends ListFragment {
 
     private List<SearchRecord> searchRecords;
 
@@ -53,6 +53,7 @@ public class ResultSearchFragment  extends ListFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_result_search, container, false);
         initAdapter();
+
         return view;
     }
 

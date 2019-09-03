@@ -30,7 +30,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
-import dmax.dialog.SpotsDialog;
 import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.activity.ManagerActivityHandler;
 import ru.viise.lightsearch.activity.ManagerActivityUI;
@@ -43,6 +42,7 @@ import ru.viise.lightsearch.data.CommandManagerAsyncTaskDTOInit;
 import ru.viise.lightsearch.data.CommandOpenSoftCheckDTO;
 import ru.viise.lightsearch.data.CommandOpenSoftCheckDTOInit;
 import ru.viise.lightsearch.data.ScanType;
+import ru.viise.lightsearch.dialog.spots.SpotsDialogCreatorInit;
 import ru.viise.lightsearch.pref.PreferencesManager;
 import ru.viise.lightsearch.pref.PreferencesManagerInit;
 import ru.viise.lightsearch.pref.PreferencesManagerType;
@@ -62,7 +62,8 @@ public class OpenSoftCheckFragment extends Fragment implements IOpenSoftCheckFra
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_open_soft_check, container, false);
         Animation animAlpha = AnimationUtils.loadAnimation(this.getActivity(), R.anim.alpha);
-        queryDialog = new SpotsDialog.Builder().setContext(this.getActivity()).setMessage("Выполнение").setCancelable(false).build();
+        queryDialog = SpotsDialogCreatorInit.spotsDialogCreator(this.getActivity(), R.string.spots_dialog_query_exec)
+                .create();
 
         Button openSoftCheckButton = view.findViewById(R.id.buttonOpenSoftCheck);
         openSoftCheckButton.setOnClickListener(view1 -> {

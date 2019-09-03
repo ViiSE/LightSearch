@@ -20,8 +20,7 @@ import android.app.Activity;
 
 public class ErrorAlertDialogCreatorInit {
 
-    public static ErrorAlertDialogCreator errorAlertDialogCreator(Activity rootActivity,
-                      String errorMessage) {
+    public static ErrorAlertDialogCreator errorAlertDialogCreator(Activity rootActivity, String errorMessage) {
         return new ErrorAlertDialogCreatorDefaultImpl(rootActivity, errorMessage);
     }
 }

@@ -83,7 +83,7 @@ public class CommandManagerDefaultImpl implements CommandManager {
             if(initClientHandler()) {
                 done = false;
                 while(!exit) {
-                    try { Thread.sleep(100); } catch (InterruptedException ignore) {}
+                    try { Thread.sleep(500); } catch (InterruptedException ignore) {}
                     if(type != null) {
                         commandResult = clientHandler.doCommand(type, commandDTO);
                         done = true;

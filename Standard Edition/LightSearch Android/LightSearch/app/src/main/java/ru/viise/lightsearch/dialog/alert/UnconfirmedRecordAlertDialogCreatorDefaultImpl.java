@@ -18,12 +18,11 @@ package ru.viise.lightsearch.dialog.alert;
 
 import android.app.Activity;
 import android.support.v7.app.AlertDialog;
+import android.view.View;
 
-import ru.viise.lightsearch.data.ButtonContentEnum;
+import ru.viise.lightsearch.R;
 
 public class UnconfirmedRecordAlertDialogCreatorDefaultImpl implements UnconfirmedRecordAlertDialogCreator {
-
-    private final String OK = ButtonContentEnum.POSITIVE_BUTTON.stringValue();
 
     private final Activity activity;
 
@@ -33,9 +32,18 @@ public class UnconfirmedRecordAlertDialogCreatorDefaultImpl implements Unconfirm
 
     @Override
     public AlertDialog createAlertDialog() {
-        return new android.support.v7.app.AlertDialog.Builder(activity).setTitle("").setMessage(
-                "Количество некоторых товаров, указанных в мягком чеке, больше, " +
-                        "чем свободное количество данных товаров на складах. Данные товары выделены красным.")
-                .setPositiveButton(OK, (dialogInterface, i) -> dialogInterface.dismiss()).create();
+        DialogOKContainer dialogOKContainer =
+                DialogOKContainerCreatorInit.dialogOKContainerCreator(activity).createDialogOKContainer();
+
+        dialogOKContainer.textViewTitle().setVisibility(View.GONE);
+        dialogOKContainer.textViewResult().setText(R.string.unconfirmed_record);
+
+        AlertDialog dialog = new AlertDialog.Builder(activity).setView(dialogOKContainer.dialogOKView())
+                .create();
+
+        dialogOKContainer.buttonOK().setOnClickListener(viewOK -> dialog.dismiss());
+        AlertDialogUtil.setTransparentBackground(dialog);
+
+        return dialog;
     }
 }

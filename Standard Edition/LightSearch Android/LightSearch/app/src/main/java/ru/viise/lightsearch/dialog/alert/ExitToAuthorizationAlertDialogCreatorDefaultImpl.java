@@ -19,14 +19,11 @@ package ru.viise.lightsearch.dialog.alert;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
 
+import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.cmd.manager.CommandManager;
-import ru.viise.lightsearch.data.ButtonContentEnum;
 import ru.viise.lightsearch.fragment.StackFragmentTitle;
 
 public class ExitToAuthorizationAlertDialogCreatorDefaultImpl implements ExitToAuthorizationAlertDialogCreator {
-
-    private final String OK = ButtonContentEnum.POSITIVE_BUTTON.stringValue();
-    private final String NEGATIVE = ButtonContentEnum.NEGATIVE_BUTTON.stringValue();
 
     private final FragmentActivity activity;
     private final CommandManager commandManager;
@@ -39,14 +36,26 @@ public class ExitToAuthorizationAlertDialogCreatorDefaultImpl implements ExitToA
 
     @Override
     public AlertDialog createAlertDialog() {
-        return new android.support.v7.app.AlertDialog.Builder(activity).setTitle("Выход").setMessage("Вы уверены, что хотите выйти в меню авторизации?")
-                .setPositiveButton(OK, (dialogInterface, i) -> {
-                    commandManager.closeConnection();
-                    dialogInterface.dismiss();
-                    activity.setTitle(StackFragmentTitle.pop());
-                    activity.getSupportFragmentManager().popBackStack();
-                })
-                .setNegativeButton(NEGATIVE, (dialogInterface, i) -> dialogInterface.dismiss())
-                .create();
+        DialogOKCancelContainer dialogOKCancelContainer =
+                DialogOKCancelContainerCreatorInit.dialogOKCancelContainerCreator(activity)
+                        .createDialogOkCancelContainer();
+
+        dialogOKCancelContainer.textViewTitle().setText(R.string.dialog_exit);
+        dialogOKCancelContainer.textViewResult().setText(R.string.dialog_exit_to_auth);
+
+        AlertDialog dialog = new AlertDialog.Builder(activity)
+                .setView(dialogOKCancelContainer.dialogOKCancelView()).create();
+
+        dialogOKCancelContainer.buttonOK().setOnClickListener(viewOK -> {
+            commandManager.closeConnection();
+            dialog.dismiss();
+            activity.setTitle(StackFragmentTitle.pop());
+            activity.getSupportFragmentManager().popBackStack();
+        });
+
+        dialogOKCancelContainer.buttonCancel().setOnClickListener(viewCancel -> dialog.dismiss());
+        AlertDialogUtil.setTransparentBackground(dialog);
+
+        return dialog;
     }
 }

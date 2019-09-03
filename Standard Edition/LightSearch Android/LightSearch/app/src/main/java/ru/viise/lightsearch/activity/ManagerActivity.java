@@ -30,7 +30,6 @@ import android.telephony.TelephonyManager;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -38,7 +37,6 @@ import com.google.zxing.integration.android.IntentResult;
 
 import java.util.List;
 
-import dmax.dialog.SpotsDialog;
 import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.activity.result.holder.ResultCommandHolderUI;
 import ru.viise.lightsearch.activity.result.holder.ResultCommandUICreator;
@@ -71,6 +69,7 @@ import ru.viise.lightsearch.dialog.alert.OneResultAlertDialogCreator;
 import ru.viise.lightsearch.dialog.alert.OneResultAlertDialogCreatorInit;
 import ru.viise.lightsearch.dialog.alert.SuccessAlertDialogCreator;
 import ru.viise.lightsearch.dialog.alert.SuccessAlertDialogCreatorInit;
+import ru.viise.lightsearch.dialog.spots.SpotsDialogCreatorInit;
 import ru.viise.lightsearch.exception.FindableException;
 import ru.viise.lightsearch.find.ImplFinder;
 import ru.viise.lightsearch.find.ImplFinderFragmentFromActivityDefaultImpl;
@@ -105,8 +104,10 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
         else
             reqPhonePermission();
 
-        connectDialog = new SpotsDialog.Builder().setContext(ManagerActivity.this).setMessage("Подключение").setCancelable(false).build();
-        authDialog = new SpotsDialog.Builder().setContext(ManagerActivity.this).setMessage("Авторизация").setCancelable(false).build();
+        connectDialog = SpotsDialogCreatorInit.spotsDialogCreator(ManagerActivity.this, R.string.spots_dialog_connect)
+                .create();
+        authDialog = SpotsDialogCreatorInit.spotsDialogCreator(ManagerActivity.this, R.string.spots_dialog_auth)
+                .create();
 
         ResultCommandUICreator resCmdUiCr = ResultCommandUICreatorInit.resultCommandUICreator(this);
         commandHolderUI = resCmdUiCr.createResultCommandHolderUI();
@@ -209,7 +210,7 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
     }
 
     public void callDialogNoResult() {
-        String message = "Запрос не дал результата.";
+        String message = this.getString(R.string.dialog_no_result);
         NoResultAlertDialogCreator noResADCr =
                 NoResultAlertDialogCreatorInit.noResultAlertDialogCreator(this, message);
         noResADCr.createAlertDialog().show();
@@ -218,7 +219,9 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
     public void callDialogOneResult(SearchRecord searchRecord) {
         OneResultAlertDialogCreator oneResADCr =
                 OneResultAlertDialogCreatorInit.oneResultAlertDialogCreator(this, searchRecord);
-        oneResADCr.createAlertDialog().show();
+        android.support.v7.app.AlertDialog oneResAD = oneResADCr.createAlertDialog();
+        oneResAD.setCanceledOnTouchOutside(false);
+        oneResAD.show();
     }
 
     public IContainerFragment getContainerFragment() {

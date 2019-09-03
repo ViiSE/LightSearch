@@ -17,14 +17,14 @@
 package ru.viise.lightsearch.dialog.alert;
 
 import android.app.Activity;
+import android.support.v4.text.HtmlCompat;
 import android.support.v7.app.AlertDialog;
+import android.view.View;
 
-import ru.viise.lightsearch.data.ButtonContentEnum;
+import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.data.CartRecord;
 
 public class InfoProductAlertDialogCreatorCartDefaultImpl implements InfoProductAlertDialogCreator {
-
-    private final String OK = ButtonContentEnum.POSITIVE_BUTTON.stringValue();
 
     private final Activity activity;
     private final CartRecord record;
@@ -36,16 +36,34 @@ public class InfoProductAlertDialogCreatorCartDefaultImpl implements InfoProduct
 
     @Override
     public AlertDialog createAlertDialog() {
-        String message = "ИД: " + record.barcode() + "\n" +
-                "Наименование: " + record.name() + "\n" +
-                "Цена: " + record.priceWithUnit() + "\n";
-        if(record.isConfirmed())
-            message += "Общее кол-во: " + record.maxAmountWithUnit();
-        else
-            message += "Общее кол-во ДО: " + record.oldMaxAmountWithUnit() + "\n" +
-                    "Общее кол-во ПОСЛЕ: " + record.maxAmountWithUnit();
+        String id = "<b>" + activity.getString(R.string.dialog_res_prod_id) + "</b>";
+        String name = "<b>" + activity.getString(R.string.dialog_res_prod_name) + "</b>";
+        String price = "<b>" + activity.getString(R.string.dialog_res_prod_price) + "</b>";
+        String max_amount = "<b>" + activity.getString(R.string.dialog_res_prod_max_amount) + "</b>";
+        String old_max_amount = "<b>" + activity.getString(R.string.dialog_res_prod_old_max_amount) + "</b>";
+        String new_max_amount = "<b>" + activity.getString(R.string.dialog_res_prod_new_max_amount) + "</b>";
 
-        return new android.support.v7.app.AlertDialog.Builder(activity).setTitle("").setMessage(message)
-                .setPositiveButton(OK, (dialogInterface, i) -> dialogInterface.dismiss()).create();
+        DialogOKContainer dialogOKContainer =
+                DialogOKContainerCreatorInit.dialogOKContainerCreator(activity).createDialogOKContainer();
+        dialogOKContainer.textViewTitle().setVisibility(View.GONE);
+
+        String message = id + ": " + record.barcode() + "<br>" +
+                name  + ": " + record.name() + "<br>" +
+                price + ": " + record.priceWithUnit() + "<br>";
+        if(record.isConfirmed())
+            message += max_amount + ": " + record.maxAmountWithUnit();
+        else
+            message += old_max_amount + ": " + record.oldMaxAmountWithUnit() + "<br>" +
+                       new_max_amount + ": " + record.maxAmountWithUnit();
+
+        dialogOKContainer.textViewResult().setText(HtmlCompat.fromHtml(message, HtmlCompat.FROM_HTML_MODE_LEGACY));
+
+        AlertDialog dialog =
+                new AlertDialog.Builder(activity).setView(dialogOKContainer.dialogOKView()).create();
+
+        dialogOKContainer.buttonOK().setOnClickListener(viewOK -> dialog.dismiss());
+        AlertDialogUtil.setTransparentBackground(dialog);
+
+        return dialog;
     }
 }

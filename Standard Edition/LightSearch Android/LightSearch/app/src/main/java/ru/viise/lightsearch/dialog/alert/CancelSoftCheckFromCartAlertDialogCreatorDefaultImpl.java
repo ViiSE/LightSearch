@@ -21,12 +21,13 @@ import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
+import android.view.View;
 
+import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.activity.ManagerActivityHandler;
 import ru.viise.lightsearch.cmd.CommandTypeEnum;
 import ru.viise.lightsearch.cmd.manager.CommandManager;
 import ru.viise.lightsearch.cmd.manager.task.CommandManagerAsyncTask;
-import ru.viise.lightsearch.data.ButtonContentEnum;
 import ru.viise.lightsearch.data.CommandCancelSoftCheckDTO;
 import ru.viise.lightsearch.data.CommandCancelSoftCheckDTOInit;
 import ru.viise.lightsearch.data.CommandManagerAsyncTaskDTO;
@@ -36,9 +37,6 @@ import ru.viise.lightsearch.pref.PreferencesManagerInit;
 import ru.viise.lightsearch.pref.PreferencesManagerType;
 
 public class CancelSoftCheckFromCartAlertDialogCreatorDefaultImpl implements CancelSoftCheckFromCartAlertDialogCreator {
-
-    private final String OK       = ButtonContentEnum.POSITIVE_BUTTON.stringValue();
-    private final String NEGATIVE = ButtonContentEnum.NEGATIVE_BUTTON.stringValue();
 
     private final String PREF = "pref";
 
@@ -60,26 +58,35 @@ public class CancelSoftCheckFromCartAlertDialogCreatorDefaultImpl implements Can
 
     @Override
     public AlertDialog createAlertDialog() {
-        return new android.support.v7.app.AlertDialog.Builder(activity).setTitle("")
-                .setMessage("Вы уверены, что хотите выйти из корзины? Это отменит текущий мягкий чек.")
-                .setPositiveButton(OK, (dialogInterface, i) -> {
-                    SharedPreferences sPref = fragment.getActivity().getSharedPreferences(PREF, Context.MODE_PRIVATE);
-                    PreferencesManager prefManager = PreferencesManagerInit.preferencesManager(sPref);
+        DialogOKCancelContainer dialogOKCancelContainer = DialogOKCancelContainerCreatorInit.
+                dialogOKCancelContainerCreator(activity).createDialogOkCancelContainer();
 
-                    CommandCancelSoftCheckDTO cmdCancelSCDTO = CommandCancelSoftCheckDTOInit.commandCancelSoftCheckDTO(
-                            prefManager.load(PreferencesManagerType.USER_IDENT_MANAGER),
-                            prefManager.load(PreferencesManagerType.CARD_CODE_MANAGER),
-                            true);
-                    CommandManagerAsyncTaskDTO cmdManagerATDTO =
-                            CommandManagerAsyncTaskDTOInit.commandManagerAsyncTaskDTO(commandManager,
-                                    CommandTypeEnum.CANCEL_SOFT_CHECK, cmdCancelSCDTO);
-                    CommandManagerAsyncTask cmdManagerAT = new CommandManagerAsyncTask(managerActivityHandler,
-                            queryDialog);
-                    cmdManagerAT.execute(cmdManagerATDTO);
+        dialogOKCancelContainer.textViewTitle().setVisibility(View.GONE);
+        dialogOKCancelContainer.textViewResult().setText(R.string.dialog_exit_to_cart);
 
-                    dialogInterface.dismiss();
-                })
-                .setNegativeButton(NEGATIVE, (dialogInterface, i) -> dialogInterface.dismiss())
-                .create();
+        AlertDialog dialog = new AlertDialog.Builder(activity).setView(dialogOKCancelContainer.dialogOKCancelView()).create();
+
+        dialogOKCancelContainer.buttonOK().setOnClickListener(viewOK -> {
+            SharedPreferences sPref = fragment.getActivity().getSharedPreferences(PREF, Context.MODE_PRIVATE);
+            PreferencesManager prefManager = PreferencesManagerInit.preferencesManager(sPref);
+
+            CommandCancelSoftCheckDTO cmdCancelSCDTO = CommandCancelSoftCheckDTOInit.commandCancelSoftCheckDTO(
+                    prefManager.load(PreferencesManagerType.USER_IDENT_MANAGER),
+                    prefManager.load(PreferencesManagerType.CARD_CODE_MANAGER),
+                    true);
+            CommandManagerAsyncTaskDTO cmdManagerATDTO =
+                    CommandManagerAsyncTaskDTOInit.commandManagerAsyncTaskDTO(commandManager,
+                            CommandTypeEnum.CANCEL_SOFT_CHECK, cmdCancelSCDTO);
+            CommandManagerAsyncTask cmdManagerAT = new CommandManagerAsyncTask(managerActivityHandler,
+                    queryDialog);
+            cmdManagerAT.execute(cmdManagerATDTO);
+
+            dialog.dismiss();
+        });
+
+        dialogOKCancelContainer.buttonCancel().setOnClickListener(viewCancel -> dialog.dismiss());
+        AlertDialogUtil.setTransparentBackground(dialog);
+
+        return dialog;
     }
 }
