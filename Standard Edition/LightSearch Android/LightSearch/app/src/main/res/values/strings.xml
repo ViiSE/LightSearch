@@ -15,6 +15,8 @@
     <string name="cartDeliveryType_label">Cпособ доставки:</string>
     <string name="current_amount_cart_unit">ед.</string>
     <string name="current_price_unit">руб.</string>
+    <string name="default_ip">127.0.0.1</string>
+    <string name="default_port">50000</string>
     <!-- ======== -->
 
     <!-- CheckBox -->
