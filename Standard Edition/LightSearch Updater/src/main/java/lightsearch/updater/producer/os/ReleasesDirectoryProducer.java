@@ -1,5 +1,5 @@
 /*
- * Copyright @today.year ViiSE.
+ *  Copyright 2019 ViiSE
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -13,11 +13,10 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
+package lightsearch.updater.producer.os;
 
-package controller;
+import lightsearch.updater.os.ReleasesDirectory;
 
-import org.springframework.web.bind.annotation.RestController;
-
-@RestController
-public class UpdateAndroidController {
+public interface ReleasesDirectoryProducer {
+    ReleasesDirectory getReleasesDirectoryWindowsInstance();
 }
