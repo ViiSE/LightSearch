@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
     android:background="#00ffffff"
-    tools:context="ru.viise.lightsearch.fragment.SoftCheckFragment">
+    tools:activity="ru.viise.lightsearch.fragment.SoftCheckFragment">
 
     <TableLayout
         android:id="@+id/tableLayout"

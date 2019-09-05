@@ -14,25 +14,6 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.util;
+package ru.viise.lightsearch.dialog.alert;
 
-import android.app.Activity;
-
-import ru.viise.lightsearch.R;
-import ru.viise.lightsearch.util.appupdater.AppUpdater;
-
-public class UpdateCheckerAppUpdaterImpl implements UpdateChecker {
-
-    private final Activity activity;
-
-    public UpdateCheckerAppUpdaterImpl(Activity activity) {
-        this.activity = activity;
-    }
-
-    @Override
-    public void checkUpdate() {
-            new AppUpdater(activity)
-                    .setUpdateJSON(activity.getString(R.string.update_url))
-                    .start();
-    }
-}
+public interface UpdateAlertDialogCreator extends AlertDialogCreator { }
