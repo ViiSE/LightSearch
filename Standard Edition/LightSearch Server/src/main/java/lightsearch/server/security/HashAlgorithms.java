@@ -12,7 +12,7 @@ package lightsearch.server.security;
 /**
  * Генерирует хэш строки.
  * <p>
- * Используется для генерирования хэша пароля администратора.
+ * Используется для генирации хэша пароля администратора.
  * @author ViiSE
  * @see lightsearch.server.initialization.AdministratorsMap
  * @since 1.0.0
