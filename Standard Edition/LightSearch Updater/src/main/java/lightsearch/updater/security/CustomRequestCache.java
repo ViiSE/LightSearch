@@ -14,15 +14,18 @@
  *    limitations under the License.
  */
 
-package lightsearch.updater;
+package lightsearch.updater.security;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 
-@SpringBootApplication
-public class LightSearchUpdater {
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-    public static void main(String[] args) {
-        SpringApplication.run(LightSearchUpdater.class);
+public class CustomRequestCache extends HttpSessionRequestCache {
+
+    @Override
+    public void saveRequest(HttpServletRequest request, HttpServletResponse response) {
+        if(!SecurityUtils.isFrameworkInternalRequest(request))
+            super.saveRequest(request, response);
     }
 }

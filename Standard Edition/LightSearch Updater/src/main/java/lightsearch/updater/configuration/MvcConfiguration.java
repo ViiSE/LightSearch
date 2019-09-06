@@ -18,17 +18,35 @@ package lightsearch.updater.configuration;
 
 import lightsearch.updater.os.InfoDirectory;
 import lightsearch.updater.os.ReleasesDirectory;
+import lightsearch.updater.security.CustomRequestCache;
+import lightsearch.updater.security.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
+@EnableWebSecurity
 @EnableWebMvc
-public class MvcConfiguration implements WebMvcConfigurer {
+@ComponentScan
+public class MvcConfiguration extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
+
+    private static final String LOGIN_PROCESSING_URL = "/login";
+    private static final String LOGIN_FAILURE_URL    = "/login?error";
+    private static final String LOGIN_URL            = "/login";
+    private static final String LOGOUT_SUCCESS_URL   = "/login";
 
     @Autowired
     @Qualifier("infoDirectoryWindows")
@@ -47,10 +65,46 @@ public class MvcConfiguration implements WebMvcConfigurer {
     }
 
     @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/home").setViewName("home");
-        registry.addViewController("/").setViewName("home");
-        registry.addViewController("/hello").setViewName("hello");
-        registry.addViewController("login").setViewName("login");
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable()
+                .requestCache().requestCache(new CustomRequestCache())
+                .and().authorizeRequests()
+                .requestMatchers(SecurityUtils::isFrameworkInternalRequest).permitAll()
+                .anyRequest().authenticated()
+                .and().formLogin().loginPage(LOGIN_URL).permitAll().loginProcessingUrl(LOGIN_PROCESSING_URL)
+                .failureUrl(LOGIN_FAILURE_URL)
+                .and().logout().logoutSuccessUrl(LOGOUT_SUCCESS_URL);
+    }
+
+    @Bean
+    @Override
+    public UserDetailsService userDetailsService() {
+        UserDetails user = User.withUsername("user").password("{noop}password").roles("USER").build();
+
+        return new InMemoryUserDetailsManager(user);
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers(
+                "/VAADIN/**",
+                "/favicon.ico",
+                "/robots.txt",
+
+                "/manifest.webmanifest",
+                "/sw.js",
+                "/offline-page.html",
+
+                "/icons/**",
+                "/images/**",
+
+                "/update/info/**",
+                "/update/releases/**",
+
+                "/frontend/**",
+                "/webjars/**",
+                "/h2-console/**",
+
+                "/frontend-es5/**", "/frontend-es6/**");
     }
 }
