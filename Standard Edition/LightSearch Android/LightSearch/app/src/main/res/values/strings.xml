@@ -37,6 +37,8 @@
     <string name="buttonOpenSC_label">Открыть мягкий чек</string>
     <string name="buttonCart_label">В корзину</string>
     <string name="buttonCloseSC_label">Закрыть мягкий чек</string>
+    <string name="button_update">Обновить</string>
+    <string name="button_update_later">Позже</string>
     <!-- ====== -->
 
     <!-- Spinner -->
@@ -75,6 +77,7 @@
     <string name="dialog_res_prod_old_max_amount">Общее кол-во ДО</string>
     <string name="dialog_res_prod_new_max_amount">Общее кол-во ПОСЛЕ</string>
     <string name="dialog_res_prod_subdivisions">Подразделения</string>
+    <string name="dialog_update_title">Доступно обновление!</string>
     <!-- ============= -->
 
     <!-- Toast -->
@@ -108,7 +111,7 @@
     <!-- ============ -->
 
     <!-- App Updater -->
-    <string name="update_url">192.168.3.215:50001/update_android</string>
+    <string name="update_url">http://192.168.3.215:50001/update/info/update.json</string>
     <!-- =========== -->
 
 </resources>

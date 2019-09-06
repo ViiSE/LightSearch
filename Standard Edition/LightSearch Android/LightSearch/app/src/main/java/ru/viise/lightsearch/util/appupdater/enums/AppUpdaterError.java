@@ -14,25 +14,20 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.util;
+package ru.viise.lightsearch.util.appupdater.enums;
 
-import android.app.Activity;
+public enum AppUpdaterError {
+    /**
+     * Google Play returned "Varies by device"
+     */
+    UPDATE_VARIES_BY_DEVICE,
 
-import ru.viise.lightsearch.R;
-import ru.viise.lightsearch.util.appupdater.AppUpdater;
+    JSON_URL_MALFORMED,
 
-public class UpdateCheckerAppUpdaterImpl implements UpdateChecker {
+    /**
+     * JSON file is invalid or is down
+     */
+    JSON_ERROR,
 
-    private final Activity activity;
-
-    public UpdateCheckerAppUpdaterImpl(Activity activity) {
-        this.activity = activity;
-    }
-
-    @Override
-    public void checkUpdate() {
-            new AppUpdater(activity)
-                    .setUpdateJSON(activity.getString(R.string.update_url))
-                    .start();
-    }
+    NETWORK_NOT_AVAILABLE
 }

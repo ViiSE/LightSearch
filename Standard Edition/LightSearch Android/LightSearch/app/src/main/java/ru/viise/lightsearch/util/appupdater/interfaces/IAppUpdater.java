@@ -14,25 +14,34 @@
  * limitations under the License.
  */
 
-package ru.viise.lightsearch.util;
+package ru.viise.lightsearch.util.appupdater.interfaces;
 
-import android.app.Activity;
+import android.support.annotation.NonNull;
 
-import ru.viise.lightsearch.R;
 import ru.viise.lightsearch.util.appupdater.AppUpdater;
+import ru.viise.lightsearch.util.appupdater.enums.AppUpdaterError;
+import ru.viise.lightsearch.util.appupdater.objects.Update;
 
-public class UpdateCheckerAppUpdaterImpl implements UpdateChecker {
+public interface IAppUpdater {
 
-    private final Activity activity;
+    AppUpdater setUpdateJSON(@NonNull String jsonUrl);
 
-    public UpdateCheckerAppUpdaterImpl(Activity activity) {
-        this.activity = activity;
-    }
+    /**
+     * Execute AppUpdater in background.
+     *
+     * @return this
+     * @deprecated use {@link #start()} instead
+     */
+    AppUpdater init();
 
-    @Override
-    public void checkUpdate() {
-            new AppUpdater(activity)
-                    .setUpdateJSON(activity.getString(R.string.update_url))
-                    .start();
+    /**
+     * Execute AppUpdater in background.
+     */
+    void start();
+
+    interface LibraryListener {
+        void onSuccess(Update update);
+
+        void onFailed(AppUpdaterError error);
     }
 }

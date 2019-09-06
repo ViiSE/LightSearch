@@ -28,8 +28,9 @@ LightSearch состоит из четырех программ:
    -  Поиск по штрих-коду;
    -  Считывание штрих-кода через камеру смартфона;
    -  Выбор поиска по подразделению;
-   -  Сохранение параметров подключения.
-   - Создание мягкого чека.
+   -  Сохранение параметров подключения;
+   -  Создание мягкого чека;
+   -  Автообновление через LightSearch Updater.
 
 3) [LightSearch Server](https://github.com/ViiSE/LightSearch/blob/master/Documents/Project%20history/LightSearchServer.pdf) - работает под операционными системами GNU/Linux и Windows. Обеспечивает связь между LightSearchAndroid и базой данных.
  * Реализованы следующие функции:
@@ -61,3 +62,7 @@ LightSearch состоит из четырех программ:
 - [spots-dialog](https://github.com/d-max/spots-dialog)
 - [Jaybird](https://github.com/FirebirdSQL/jaybird)
 - [ZXing](https://github.com/zxing/zxing)
+- [AppUpdater](https://github.com/javiersantos/AppUpdater)
+- [Spring Framework](https://github.com/spring-projects/spring-framework)
+- [Spring Boot](https://github.com/spring-projects/spring-boot)
+- [Spring MVC](https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html)

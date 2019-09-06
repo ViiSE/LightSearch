@@ -82,6 +82,8 @@ import ru.viise.lightsearch.pref.PreferencesManagerInit;
 import ru.viise.lightsearch.pref.PreferencesManagerType;
 import ru.viise.lightsearch.request.PhonePermission;
 import ru.viise.lightsearch.request.PhonePermissionInit;
+import ru.viise.lightsearch.util.UpdateChecker;
+import ru.viise.lightsearch.util.UpdateCheckerInit;
 
 public class ManagerActivity extends AppCompatActivity implements ManagerActivityConnectionHandler, ManagerActivityHandler, ManagerActivityUI {
 
@@ -114,7 +116,7 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
 
         doAuthorizationFragmentTransaction();
 
-        UpdateChecker updateChecker = UpdateCheckerInit.updateChecker();
+        UpdateChecker updateChecker = UpdateCheckerInit.updateChecker(ManagerActivity.this);
         updateChecker.checkUpdate();
     }
 
