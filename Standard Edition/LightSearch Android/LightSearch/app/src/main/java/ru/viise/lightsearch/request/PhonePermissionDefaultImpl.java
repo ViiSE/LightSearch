@@ -34,13 +34,14 @@ public class PhonePermissionDefaultImpl implements PhonePermission {
 
     @Override
     public void requestPhonePermission() {
-        if(ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.READ_PHONE_STATE)) {
+        if(ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.READ_PHONE_STATE) ||
+                ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.READ_EXTERNAL_STORAGE)) {
             RequestPhonePermissionAlertDialogCreator reqPPADCr =
                     RequestPhonePermissionAlertDialogCreatorInit.requestPhonePermissionAlertDialogCreator(activity);
             reqPPADCr.createAlertDialog().show();
         }
         else
-            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.READ_PHONE_STATE},
+            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_EXTERNAL_STORAGE},
                     PHONE_STATE_CODE);
     }
 }

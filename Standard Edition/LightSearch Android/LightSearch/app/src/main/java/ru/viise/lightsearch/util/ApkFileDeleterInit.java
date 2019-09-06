@@ -16,26 +16,9 @@
 
 package ru.viise.lightsearch.util;
 
-import android.app.Activity;
+public class ApkFileDeleterInit {
 
-import ru.viise.lightsearch.R;
-import ru.viise.lightsearch.util.appupdater.AppUpdater;
-
-public class UpdateCheckerAppUpdaterImpl implements UpdateChecker {
-
-    private final Activity activity;
-
-    public UpdateCheckerAppUpdaterImpl(Activity activity) {
-        this.activity = activity;
-    }
-
-    @Override
-    public void checkUpdate() {
-        ApkFileDeleter apkFileDeleter = ApkFileDeleterInit.apkFileDeleter();
-        apkFileDeleter.tryToDeleteApkFile();
-
-        new AppUpdater(activity)
-                .setUpdateJSON(activity.getString(R.string.update_url))
-                .start();
+    public static ApkFileDeleter apkFileDeleter() {
+        return new ApkFileDeleterDefaultImpl();
     }
 }
