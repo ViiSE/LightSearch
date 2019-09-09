@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package test.admin.panel;
+package test.admin.panel.validate;
 
-import lightsearch.admin.panel.menu.AdminPanelMenuInit;
-import static org.testng.Assert.*;
+import lightsearch.admin.panel.exception.ValidatorException;
+import lightsearch.admin.panel.validate.PortValidator;
+import lightsearch.admin.panel.validate.PortValidatorInit;
 import org.testng.annotations.Test;
-import lightsearch.admin.panel.menu.AdminPanelMenu;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 
@@ -26,18 +26,22 @@ import static test.message.TestMessage.testEnd;
  *
  * @author ViiSE
  */
-public class AdminPanelMenuTestNG {
+public class PortValidatorTestNG {
     
     @Test
-    public void menu() {
-        testBegin("AdminPanelMenu", "menu()");
+    public void validate() {
+        testBegin("PortValidator", "validate()");
         
-        String menu = "I am menu";
-        assertNotNull(menu, "Menu string is null!");
-        assertFalse(menu.equals(""), "Menu string is null!");
-        AdminPanelMenu adminMenu = AdminPanelMenuInit.adminMenu(menu);
-        adminMenu.menu();
+        int port = 50000;
+        PortValidator portValidator = PortValidatorInit.portValidator();
+        try {
+            portValidator.validate(port);
+            System.out.println("Validation success");
+        }
+        catch(ValidatorException ex) {
+            System.out.println("CATCH! Exception: " + ex.getMessage());
+        }
         
-        testEnd("AdminPanelMenu", "menu()");
+        testEnd("PortValidator", "validate()");
     }
 }

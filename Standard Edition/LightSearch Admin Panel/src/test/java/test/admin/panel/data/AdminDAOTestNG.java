@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2019 ViiSE.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package test.admin.panel;
+package test.admin.panel.data;
 
-import lightsearch.admin.panel.menu.AdminPanelMenuInit;
+import lightsearch.admin.panel.data.AdminDAO;
+import lightsearch.admin.panel.data.AdminDAOInit;
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
-import lightsearch.admin.panel.menu.AdminPanelMenu;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 
@@ -26,18 +26,24 @@ import static test.message.TestMessage.testEnd;
  *
  * @author ViiSE
  */
-public class AdminPanelMenuTestNG {
+public class AdminDAOTestNG {
     
     @Test
-    public void menu() {
-        testBegin("AdminPanelMenu", "menu()");
+    public void name() {
+        testBegin("AdminDAO", "name()");
         
-        String menu = "I am menu";
-        assertNotNull(menu, "Menu string is null!");
-        assertFalse(menu.equals(""), "Menu string is null!");
-        AdminPanelMenu adminMenu = AdminPanelMenuInit.adminMenu(menu);
-        adminMenu.menu();
+        AdminDAO adminDAO = AdminDAOInit.adminDAO();
+        assertNotNull(adminDAO, "AdminDAO is null!");
         
-        testEnd("AdminPanelMenu", "menu()");
+        String name = "name";
+        assertNotNull(name, "Name is null!");
+        
+        adminDAO.setName(name);
+        String admDAOName = adminDAO.name();
+        assertNotNull(admDAOName, "AdminDAO: name is null!");
+        
+        System.out.println("AdminDAO: name(): " + adminDAO.name());
+        
+        testEnd("AdminDAO", "name()");
     }
 }

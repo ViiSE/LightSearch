@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2019 ViiSE.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,12 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package test.admin.panel;
+package test.admin.panel.validate;
 
-import lightsearch.admin.panel.menu.AdminPanelMenuInit;
+import lightsearch.admin.panel.exception.ValidatorException;
+import lightsearch.admin.panel.validate.NumberValidator;
+import lightsearch.admin.panel.validate.NumberValidatorInit;
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
-import lightsearch.admin.panel.menu.AdminPanelMenu;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 
@@ -26,18 +27,25 @@ import static test.message.TestMessage.testEnd;
  *
  * @author ViiSE
  */
-public class AdminPanelMenuTestNG {
+public class NumberValidatorTestNG {
     
     @Test
-    public void menu() {
-        testBegin("AdminPanelMenu", "menu()");
+    public void validate() {
+        testBegin("NumberValidator", "validate()");
         
-        String menu = "I am menu";
-        assertNotNull(menu, "Menu string is null!");
-        assertFalse(menu.equals(""), "Menu string is null!");
-        AdminPanelMenu adminMenu = AdminPanelMenuInit.adminMenu(menu);
-        adminMenu.menu();
+        try {    
+            String number = "11";
+            assertNotNull(number, "Number is null!");
+
+            NumberValidator numberValidator = NumberValidatorInit.numberValidator();
+            numberValidator.validate(number);
+            
+            System.out.println("Validation success");
+        }
+        catch(ValidatorException ex) {
+            System.out.println("CATCH! Message: " + ex.getMessage());
+        }
         
-        testEnd("AdminPanelMenu", "menu()");
+        testEnd("NumberValidator", "validate()");
     }
 }
