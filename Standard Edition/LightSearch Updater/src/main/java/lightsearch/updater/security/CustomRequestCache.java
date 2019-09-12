@@ -17,10 +17,12 @@
 package lightsearch.updater.security;
 
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@Component("customRequestCache")
 public class CustomRequestCache extends HttpSessionRequestCache {
 
     @Override

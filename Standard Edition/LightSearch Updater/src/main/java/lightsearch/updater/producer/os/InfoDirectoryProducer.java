@@ -19,4 +19,5 @@ import lightsearch.updater.os.InfoDirectory;
 
 public interface InfoDirectoryProducer {
     InfoDirectory getInfoDirectoryWindowsInstance();
+    InfoDirectory getInfoDirectoryDefaultInstance();
 }

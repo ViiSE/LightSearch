@@ -23,13 +23,19 @@ import org.springframework.stereotype.Service;
 @Service("releasesDirectoryProducerDefault")
 public class ReleasesDirectoryProducerDefaultImpl implements ReleasesDirectoryProducer {
 
-    private final String RELEASES_DIRECTORY = "releasesDirectoryWindows";
+    private final String RELEASES_DIRECTORY_WINDOWS = "releasesDirectoryWindows";
+    private final String RELEASES_DIRECTORY_DEFAULT = "releasesDirectoryDefault";
 
     @Autowired
     private ApplicationContext ctx;
 
     @Override
     public ReleasesDirectory getReleasesDirectoryWindowsInstance() {
-        return ctx.getBean(RELEASES_DIRECTORY, ReleasesDirectory.class);
+        return ctx.getBean(RELEASES_DIRECTORY_WINDOWS, ReleasesDirectory.class);
+    }
+
+    @Override
+    public ReleasesDirectory getReleasesDirectoryDefaultInstance() {
+        return ctx.getBean(RELEASES_DIRECTORY_DEFAULT, ReleasesDirectory.class);
     }
 }

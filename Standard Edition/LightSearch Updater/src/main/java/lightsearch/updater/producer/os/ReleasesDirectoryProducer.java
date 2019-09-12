@@ -19,4 +19,5 @@ import lightsearch.updater.os.ReleasesDirectory;
 
 public interface ReleasesDirectoryProducer {
     ReleasesDirectory getReleasesDirectoryWindowsInstance();
+    ReleasesDirectory getReleasesDirectoryDefaultInstance();
 }

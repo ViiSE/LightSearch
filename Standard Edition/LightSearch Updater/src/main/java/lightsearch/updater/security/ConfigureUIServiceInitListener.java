@@ -20,7 +20,7 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.server.ServiceInitEvent;
 import com.vaadin.flow.server.VaadinServiceInitListener;
-import lightsearch.updater.ui.views.LoginView;
+import lightsearch.updater.ui.views.login.LoginView;
 import org.springframework.stereotype.Component;
 
 @Component("configureUIServiceInitListener")

@@ -23,13 +23,19 @@ import org.springframework.stereotype.Service;
 @Service("infoDirectoryProducerDefault")
 public class InfoDirectoryProducerDefaultImpl implements InfoDirectoryProducer {
 
-    private final String INFO_DIRECTORY = "infoDirectoryWindows";
+    private final String INFO_DIRECTORY_WINDOWS = "infoDirectoryWindows";
+    private final String INFO_DIRECTORY_DEFAULT = "infoDirectoryDefault";
 
     @Autowired
     private ApplicationContext ctx;
 
     @Override
     public InfoDirectory getInfoDirectoryWindowsInstance() {
-        return ctx.getBean(INFO_DIRECTORY, InfoDirectory.class);
+        return ctx.getBean(INFO_DIRECTORY_WINDOWS, InfoDirectory.class);
+    }
+
+    @Override
+    public InfoDirectory getInfoDirectoryDefaultInstance() {
+        return ctx.getBean(INFO_DIRECTORY_DEFAULT, InfoDirectory.class);
     }
 }

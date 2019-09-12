@@ -50,11 +50,11 @@ public class MvcConfiguration extends WebSecurityConfigurerAdapter implements We
 
     @Autowired
     @Qualifier("infoDirectoryWindows")
-    InfoDirectory infoDirectory;
+    private InfoDirectory infoDirectory;
 
     @Autowired
     @Qualifier("releasesDirectoryWindows")
-    ReleasesDirectory releasesDirectory;
+    private ReleasesDirectory releasesDirectory;
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -64,22 +64,11 @@ public class MvcConfiguration extends WebSecurityConfigurerAdapter implements We
                 .addResourceLocations(releasesDirectory.releasesDirectory());
     }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .requestCache().requestCache(new CustomRequestCache())
-                .and().authorizeRequests()
-                .requestMatchers(SecurityUtils::isFrameworkInternalRequest).permitAll()
-                .anyRequest().authenticated()
-                .and().formLogin().loginPage(LOGIN_URL).permitAll().loginProcessingUrl(LOGIN_PROCESSING_URL)
-                .failureUrl(LOGIN_FAILURE_URL)
-                .and().logout().logoutSuccessUrl(LOGOUT_SUCCESS_URL);
-    }
-
     @Bean
     @Override
     public UserDetailsService userDetailsService() {
-        UserDetails user = User.withUsername("user").password("{noop}password").roles("USER").build();
+        UserDetails user = User.withUsername("admin").password("{noop}password")
+                .roles("USER").build();
 
         return new InMemoryUserDetailsManager(user);
     }
@@ -106,5 +95,17 @@ public class MvcConfiguration extends WebSecurityConfigurerAdapter implements We
                 "/h2-console/**",
 
                 "/frontend-es5/**", "/frontend-es6/**");
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable()
+                .requestCache().requestCache(new CustomRequestCache())
+                .and().authorizeRequests()
+                .requestMatchers(SecurityUtils::isFrameworkInternalRequest).permitAll()
+                .anyRequest().authenticated()
+                .and().formLogin().loginPage(LOGIN_URL).permitAll().loginProcessingUrl(LOGIN_PROCESSING_URL)
+                .failureUrl(LOGIN_FAILURE_URL)
+                .and().logout().logoutSuccessUrl(LOGOUT_SUCCESS_URL);
     }
 }
