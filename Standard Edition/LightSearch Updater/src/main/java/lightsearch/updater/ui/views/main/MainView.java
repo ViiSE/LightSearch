@@ -19,6 +19,7 @@ package lightsearch.updater.ui.views.main;
 import com.juicy.JuicyAceEditor;
 import com.juicy.mode.JuicyAceMode;
 import com.juicy.theme.JuicyAceTheme;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dialog.Dialog;
@@ -28,6 +29,7 @@ import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.page.Page;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.upload.Upload;
@@ -99,7 +101,7 @@ public class MainView extends VerticalLayout {
         mainWorkspace.getStyle().set("margin", "auto");
         mainWorkspace.getStyle().set("background-color", "#0083FF");
         mainWorkspace.getStyle().set("border-radius", "0px 0px 8px 8px");
-        mainWorkspace.setWidth("80%");
+        mainWorkspace.setWidth("90%");
         mainWorkspace.getStyle().set("box-shadow", "1px 3px 5px rgba(0,0,0,0.3)");
 
         super.add(mainWorkspace);
@@ -140,16 +142,20 @@ public class MainView extends VerticalLayout {
     }
 
     private VerticalLayout createAPKVersionsWorkspace() {
+        Label label = new Label("Releases Manager");
+        label.getStyle().set("color", "#596575");
+        label.getStyle().set("font-size", "12pt");
+
         ComboBox<String> comboBoxVersions = createComboBoxVersions();
         Button buttonCreateNewVersion = createButtonCreateNewVersion(comboBoxVersions);
         Upload uploadAPK = createUploadAPK(apk);
         Button buttonSubmitChanges = createButtonSubmitChanges(apk);
 
-        VerticalLayout apkWorkspace = new VerticalLayout(comboBoxVersions, buttonCreateNewVersion, uploadAPK, buttonSubmitChanges);
+        VerticalLayout apkWorkspace = new VerticalLayout(label, comboBoxVersions, buttonCreateNewVersion, uploadAPK, buttonSubmitChanges);
         apkWorkspace.getStyle().set("background-color", "#fafafa");
         apkWorkspace.getStyle().set("border-radius", "8px");
         apkWorkspace.getStyle().set("box-shadow", "1px 1px 3px rgba(0,0,0,0.2)");
-        apkWorkspace.setWidth("30%");
+        apkWorkspace.setWidth("40%");
 
         return apkWorkspace;
     }
@@ -261,7 +267,7 @@ public class MainView extends VerticalLayout {
         VerticalLayout filesWorkspace = new VerticalLayout(textAreaWorkspace, buttonChangeInfo);
         filesWorkspace.getStyle().set("background-color", "#fafafa");
         filesWorkspace.getStyle().set("border-radius", "8px");
-        filesWorkspace.setWidth("70%");
+        filesWorkspace.setWidth("60%");
         filesWorkspace.getStyle().set("box-shadow", "1px 1px 3px rgba(0,0,0,0.2)");
 
         return filesWorkspace;
