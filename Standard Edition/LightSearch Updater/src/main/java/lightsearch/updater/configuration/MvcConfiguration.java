@@ -67,7 +67,7 @@ public class MvcConfiguration extends WebSecurityConfigurerAdapter implements We
     @Bean
     @Override
     public UserDetailsService userDetailsService() {
-        UserDetails user = User.withUsername("admin").password("{noop}password")
+        UserDetails user = User.withUsername("admin").password("{bcrypt}$2a$15$9GEmgFJ7iyj.B2SKzrfIp./nJv.pbxwAu9v/anmPj9ZPt4zSN5Q/u")
                 .roles("USER").build();
 
         return new InMemoryUserDetailsManager(user);

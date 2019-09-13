@@ -18,6 +18,7 @@ package lightsearch.updater.apk;
 
 import lightsearch.updater.os.ReleasesDirectory;
 import lightsearch.updater.producer.os.ReleasesDirectoryProducer;
+import lightsearch.updater.util.ComparatorStringToNumber;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,10 @@ public class APKVersionsUploaderDefaultImpl implements APKVersionsUploader {
             Path root = Paths.get(releasesDirectory.releasesDirectory());
             List<Path> subfolders = Files.walk(root, 1).filter(Files::isDirectory).collect(Collectors.toList());
             logger.info("APK versions is uploaded");
-            return subfolders.stream().skip(1).map((path) -> path.getFileName().toString()).collect(Collectors.toList());
+            return subfolders.stream()
+                    .skip(1).map((path) -> path.getFileName().toString())
+                    .sorted(new ComparatorStringToNumber())
+                    .collect(Collectors.toList());
         } catch (IOException ex) {
             logger.error("uploadVersions: " + ex.getMessage() + ". Create empty versions list.");
             return Arrays.asList(new String[] {});
