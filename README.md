@@ -57,8 +57,8 @@ LightSearch состоит из четырех программ:
 
 История проекта будет описываться в документах, расположенных в папке Documents/Project history.
 
-Используемые библиотеки
-------------------------------------------
+Используемые библиотеки, фреймворки и технологии
+-------------------------------------------------
 - [JSON.simple](https://github.com/fangyidong/json-simple)
 - [spots-dialog](https://github.com/d-max/spots-dialog)
 - [Jaybird](https://github.com/FirebirdSQL/jaybird)
@@ -67,3 +67,8 @@ LightSearch состоит из четырех программ:
 - [Spring Framework](https://github.com/spring-projects/spring-framework)
 - [Spring Boot](https://github.com/spring-projects/spring-boot)
 - [Spring MVC](https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html)
+- [Spring Security](https://github.com/spring-projects/spring-security)
+- [Vaadin](https://github.com/vaadin/)
+- [JUnit 5](https://junit.org/junit5/)
+- [TestNG](https://testng.org/doc/)
+- [Mockito](https://github.com/mockito/mockito)
