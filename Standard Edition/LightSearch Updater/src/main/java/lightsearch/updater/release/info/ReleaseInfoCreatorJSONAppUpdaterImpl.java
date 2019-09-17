@@ -46,7 +46,8 @@ public class ReleaseInfoCreatorJSONAppUpdaterImpl implements ReleaseInfoCreator 
                 "}";
 
         try {
-            Files.write(path, content.getBytes());
+            Path infoPath = Files.createFile(path);
+            Files.write(infoPath, content.getBytes());
             logger.info("Create release info with AppUpdater API");
             return content;
         } catch (IOException ex) {

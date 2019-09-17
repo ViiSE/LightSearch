@@ -17,18 +17,15 @@
 package lightsearch.updater.release.info;
 
 import lightsearch.updater.exception.ReleaseInfoException;
-import lightsearch.updater.os.InfoDirectory;
-import lightsearch.updater.producer.os.InfoDirectoryProducer;
+import lightsearch.updater.producer.release.info.ReleaseInfoPathProducer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 @Component("releaseInfoSaverToFile")
 public class ReleaseInfoSaverToFileImpl implements ReleaseInfoSaver {
@@ -36,15 +33,15 @@ public class ReleaseInfoSaverToFileImpl implements ReleaseInfoSaver {
     private final Logger logger = LoggerFactory.getLogger(ReleaseInfoSaverToFileImpl.class);
 
     @Autowired
-    private InfoDirectoryProducer infoDirectoryProducer;
-    private InfoDirectory infoDirectory;
+    private ReleaseInfoPathProducer releaseInfoPathProducer;
+    private ReleaseInfoPath releaseInfoPath;
 
     @Override
     public synchronized void saveInfo(String infoContent) throws ReleaseInfoException {
-        if(infoDirectory == null)
-            infoDirectory = infoDirectoryProducer.getInfoDirectoryDefaultInstance();
+        if(releaseInfoPath == null)
+            releaseInfoPath = releaseInfoPathProducer.getReleaseInfoPathDefaultInstance();
 
-        Path infoPath = Paths.get(infoDirectory.infoDirectory() + File.separator + "update.json");
+        Path infoPath = releaseInfoPath.releaseInfoPath();
 
         try {
             Files.write(infoPath, infoContent.getBytes());

@@ -14,23 +14,10 @@
  *    limitations under the License.
  */
 
-package lightsearch.updater.producer.apk;
+package lightsearch.updater.producer.release.info;
 
-import lightsearch.updater.apk.APK;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Service;
+import lightsearch.updater.release.info.ReleaseInfoPath;
 
-@Service("apkProducerDefault")
-public class APKProducerDefaultImpl implements APKProducer {
-
-    private final String APK_DEFAULT = "apkDefault";
-
-    @Autowired
-    private ApplicationContext ctx;
-
-    @Override
-    public APK getAPKDefaultInstance() {
-        return ctx.getBean(APK_DEFAULT, APK.class);
-    }
+public interface ReleaseInfoPathProducer {
+    ReleaseInfoPath getReleaseInfoPathDefaultInstance();
 }

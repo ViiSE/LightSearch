@@ -19,5 +19,5 @@ package lightsearch.updater.producer.apk;
 import lightsearch.updater.apk.APK;
 
 public interface APKProducer {
-    APK getAPKProducerDefaultInstance();
+    APK getAPKDefaultInstance();
 }

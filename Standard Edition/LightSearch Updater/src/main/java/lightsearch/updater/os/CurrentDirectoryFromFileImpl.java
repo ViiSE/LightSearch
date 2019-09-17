@@ -30,17 +30,6 @@ public class CurrentDirectoryFromFileImpl implements CurrentDirectory {
 
     @Override
     public String currentDirectory() {
-
-        String currentDirectory = null;
-        try {
-            currentDirectory = new File(LightSearchUpdater.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath();
-            currentDirectory = currentDirectory.replaceAll("LightSearch_Updater.jar", "");
-
-            currentDirectory = currentDirectory + File.separator;
-
-        } catch (URISyntaxException ex) {
-            throw new RuntimeException("Error: " + ex.getMessage());
-        }
-        return currentDirectory;
+        return System.getProperty("user.dir") + File.separator;
     }
 }

@@ -25,7 +25,7 @@ import java.io.InputStream;
 
 @Component("apkDefault")
 @Scope("prototype")
-public class APKDefault implements APK {
+public class APKDefaultImpl implements APK {
 
     private String name;
     private String version;

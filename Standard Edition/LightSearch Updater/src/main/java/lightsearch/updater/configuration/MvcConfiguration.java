@@ -62,12 +62,15 @@ public class MvcConfiguration extends WebSecurityConfigurerAdapter implements We
                 .addResourceLocations(infoDirectory.infoDirectory());
         registry.addResourceHandler("/update/releases/**")
                 .addResourceLocations(releasesDirectory.releasesDirectory());
+        registry.addResourceHandler("/static/**")
+                .addResourceLocations("classpath:/static/");
     }
 
     @Bean
     @Override
     public UserDetailsService userDetailsService() {
-        UserDetails user = User.withUsername("admin").password("{bcrypt}$2a$15$9GEmgFJ7iyj.B2SKzrfIp./nJv.pbxwAu9v/anmPj9ZPt4zSN5Q/u")
+        UserDetails user = User.withUsername("admin")
+                .password("{noop}password")
                 .roles("USER").build();
 
         return new InMemoryUserDetailsManager(user);
@@ -79,6 +82,7 @@ public class MvcConfiguration extends WebSecurityConfigurerAdapter implements We
                 "/VAADIN/**",
                 "/favicon.ico",
                 "/robots.txt",
+                "/static/**",
 
                 "/manifest.webmanifest",
                 "/sw.js",

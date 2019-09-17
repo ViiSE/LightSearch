@@ -46,7 +46,7 @@ public class APKVersionWorkspaceCreatorProducerDefaultImpl implements APKVersion
         APKSaver apkSaver = apkSaverProducer.getAPKSaverDefaultInstance();
         APKVersionsUploader apkVersionsUploader = apkVersionsUploaderProducer.getApkVersionsUploaderDefaultInstance();
         APKVersionCreator apkVersionCreator = apkVersionCreatorProducer.getAPKVersionCreatorDefaultInstance();
-        APK apk = apkProducer.getAPKProducerDefaultInstance();
+        APK apk = apkProducer.getAPKDefaultInstance();
 
         return (APKVersionWorkspaceCreator) ctx.getBean(APK_VERSION_WORKSPACE_CREATOR, apkSaver, apkVersionsUploader, apkVersionCreator, apk);
     }

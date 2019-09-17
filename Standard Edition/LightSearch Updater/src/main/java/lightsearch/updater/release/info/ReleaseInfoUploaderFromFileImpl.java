@@ -21,6 +21,7 @@ import lightsearch.updater.exception.ReleaseInfoException;
 import lightsearch.updater.os.InfoDirectory;
 import lightsearch.updater.producer.os.InfoDirectoryProducer;
 import lightsearch.updater.producer.release.info.ReleaseInfoCreatorProducer;
+import lightsearch.updater.producer.release.info.ReleaseInfoPathProducer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,18 +38,18 @@ public class ReleaseInfoUploaderFromFileImpl implements ReleaseInfoUploader {
 
     private final Logger logger = LoggerFactory.getLogger(ReleaseInfoUploaderFromFileImpl.class);
 
-    @Autowired private InfoDirectoryProducer infoDirectoryProducer;
     @Autowired private ReleaseInfoCreatorProducer infoCreatorProducer;
+    @Autowired private ReleaseInfoPathProducer releaseInfoPathProducer;
 
-    private InfoDirectory infoDirectory;
     private ReleaseInfoCreator infoCreator;
+    private ReleaseInfoPath releaseInfoPath;
 
     @Override
     public Object uploadInfo() throws ReleaseInfoException {
-        if(infoDirectory == null || infoCreator == null)
+        if(infoCreator == null || releaseInfoPath == null)
             init();
 
-        Path path = Paths.get(infoDirectory.infoDirectory() + File.separator + "update.json");
+        Path path = releaseInfoPath.releaseInfoPath();
         if(Files.exists(path)) {
             try {
                 StringBuilder info = new StringBuilder();
@@ -63,13 +64,12 @@ public class ReleaseInfoUploaderFromFileImpl implements ReleaseInfoUploader {
         }
         else {
             try {
-                Path infoPath = Files.createFile(path);
-                String info = infoCreator.createInfo(infoPath);
+                String info = infoCreator.createInfo(path);
 
                 logger.info("Release info is uploaded");
                 return info;
             }
-            catch (IOException | ReleaseInfoCreatorException ex) {
+            catch (ReleaseInfoCreatorException ex) {
                 logger.error("uploadInfo: " + ex.getMessage());
                 throw new ReleaseInfoException(ex.getMessage());
             }
@@ -77,7 +77,7 @@ public class ReleaseInfoUploaderFromFileImpl implements ReleaseInfoUploader {
     }
 
     private void init() {
-        this.infoDirectory = infoDirectoryProducer.getInfoDirectoryDefaultInstance();
         this.infoCreator = infoCreatorProducer.getReleaseInfoCreatorJSONAppUpdaterInstance();
+        this.releaseInfoPath = releaseInfoPathProducer.getReleaseInfoPathDefaultInstance();
     }
 }
