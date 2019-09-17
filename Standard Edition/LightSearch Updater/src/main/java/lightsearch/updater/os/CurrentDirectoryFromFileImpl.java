@@ -15,11 +15,9 @@
  */
 package lightsearch.updater.os;
 
-import lightsearch.updater.LightSearchUpdater;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
-import java.net.URISyntaxException;
 
 /**
  *

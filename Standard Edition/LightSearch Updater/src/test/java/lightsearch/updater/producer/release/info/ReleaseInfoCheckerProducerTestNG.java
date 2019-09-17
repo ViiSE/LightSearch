@@ -17,7 +17,6 @@
 package lightsearch.updater.producer.release.info;
 
 import lightsearch.updater.LightSearchUpdater;
-import lightsearch.updater.os.CurrentDirectory;
 import lightsearch.updater.release.info.ReleaseInfoChecker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -18,7 +18,6 @@ package lightsearch.updater.producer.apk;
 
 import lightsearch.updater.LightSearchUpdater;
 import lightsearch.updater.apk.APK;
-import lightsearch.updater.producer.apk.APKProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
