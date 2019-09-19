@@ -15,10 +15,10 @@
  */
 package lightsearch.server.initialization;
 
+import lightsearch.server.LightSearchServer;
+
 import java.io.File;
 import java.net.URISyntaxException;
-
-import lightsearch.server.LightSearchServer;
 
 /**
  * Реализация интерфейса {@link lightsearch.server.initialization.CurrentServerDirectory} по умолчанию.
@@ -40,7 +40,6 @@ public class CurrentServerDirectoryFromFileImpl implements CurrentServerDirector
     
     @Override
     public String currentDirectory() {
-
         String currentDirectory;
         try {
             currentDirectory = new File(LightSearchServer.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath();
@@ -48,7 +47,6 @@ public class CurrentServerDirectoryFromFileImpl implements CurrentServerDirector
 
             if(osDetector.isWindows())
                 currentDirectory = currentDirectory + "\\";
-
         } catch (URISyntaxException ex) {
             throw new RuntimeException("Error: " + ex.getMessage());
         }

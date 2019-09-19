@@ -38,10 +38,10 @@ public class ThreadManagerDefaultImpl implements ThreadManager {
         LightSearchThread thread = holder.getThread(id);
         if(thread != null) {
             thread.interrupt();
-            while(!thread.isInterrupted())
-                thread.interrupt();
             while(!thread.isDone())
                 thread.setIsWorked(false);
+            while(!thread.isInterrupted())
+                thread.interrupt();
             holder.del(id);
         }
         return true;
@@ -53,11 +53,10 @@ public class ThreadManagerDefaultImpl implements ThreadManager {
             if(holder.getThread(timerId) != null && 
                     holder.getThread(timerId) != thread) {
                 thread.interrupt();
-                while(!thread.isInterrupted()) {
-                    thread.interrupt();
-                }
                 if(thread.isWorked())
                     thread.setIsWorked(false);
+                while(!thread.isInterrupted())
+                    thread.interrupt();
             }
         });
         holder.delAll();

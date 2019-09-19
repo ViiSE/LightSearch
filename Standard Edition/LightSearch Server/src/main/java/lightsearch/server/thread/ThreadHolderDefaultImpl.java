@@ -67,5 +67,4 @@ public class ThreadHolderDefaultImpl implements ThreadHolder {
         }
         return null;
     }
-    
 }

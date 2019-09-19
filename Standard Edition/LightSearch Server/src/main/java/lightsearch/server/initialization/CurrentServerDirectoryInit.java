@@ -26,5 +26,9 @@ public class CurrentServerDirectoryInit {
     public static CurrentServerDirectory currentDirectory(OsDetector osDetector) {
         return new CurrentServerDirectoryFromFileImpl(osDetector);
     }
+
+    public static CurrentServerDirectory currentDirectoryDebug(OsDetector osDetector) {
+        return new CurrentServerDirectoryFromFileDebugImpl(osDetector);
+    }
     
 }

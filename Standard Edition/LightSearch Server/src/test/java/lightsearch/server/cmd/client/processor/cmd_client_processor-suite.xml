@@ -1,0 +1,67 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="CmdClientProcessorSuite" verbose="1" >
+    <parameter name="authenticationClientMessage"
+               value="{
+                            &quot;command&quot;:&quot;connect&quot;,
+                            &quot;IMEI&quot;:&quot;123456789123456&quot;,
+                            &quot;ip&quot;:&quot;127.0.0.1&quot;,
+                            &quot;os&quot;:&quot;Android 8.1 Oreo&quot;,
+                            &quot;model&quot;:&quot;Pixel 2&quot;,
+                            &quot;username&quot;:&quot;androidUser&quot;,
+                            &quot;password&quot;:&quot;superSecretPass!12&quot;
+                          }"/>
+    <parameter name="cancelSoftCheckMessage"
+               value="{
+                            &quot;command&quot;:&quot;cancel_soft_check&quot;,
+                            &quot;IMEI&quot;:&quot;123456789123456&quot;,
+                            &quot;ident&quot;:&quot;111&quot;,
+                            &quot;card_code&quot;:&quot;123456&quot;
+                          }"/>
+    <parameter name="closeSoftCheckMessage"
+               value="{
+                            &quot;command&quot;:&quot;close_soft_check&quot;,
+                            &quot;IMEI&quot;:&quot;123456789123456&quot;,
+                            &quot;ident&quot;:&quot;111&quot;,
+                            &quot;card_code&quot;:&quot;123456&quot;,
+                            &quot;delivery&quot;:&quot;1&quot;
+                          }"/>
+    <parameter name="confirmSoftCheckProductsMessage"
+               value="{
+                            &quot;command&quot;:&quot;confirm_prod_sf&quot;,
+                            &quot;IMEI&quot;:&quot;123456789123456&quot;,
+                            &quot;ident&quot;:&quot;111&quot;,
+                            &quot;card_code&quot;:&quot;123456&quot;,
+                            &quot;data&quot;: [
+                                {&quot;ID&quot;:&quot;111111&quot;,&quot;amount&quot;:&quot;1&quot;},
+                                {&quot;ID&quot;:&quot;222222&quot;,&quot;amount&quot;:&quot;3&quot;}
+                            ]
+                          }"/>
+    <parameter name="openSoftCheckMessage"
+               value="{
+                            &quot;command&quot;:&quot;open_soft_check&quot;,
+                            &quot;IMEI&quot;:&quot;123456789123456&quot;,
+                            &quot;ident&quot;:&quot;111&quot;,
+                            &quot;card_code&quot;:&quot;123456&quot;
+                          }"/>
+    <parameter name="searchMessage"
+               value="{
+                            &quot;command&quot;:&quot;search&quot;,
+                            &quot;IMEI&quot;:&quot;123456789123456&quot;,
+                            &quot;barcode&quot;:&quot;5421354&quot;,
+                            &quot;sklad&quot;:&quot;null&quot;,
+                            &quot;TK&quot;:&quot;null&quot;
+                          }"/>
+
+    <test name="CmdClientProcessorSuiteTest" >
+        <packages>
+            <package name="lightsearch.server.cmd.client.processor"/>
+        </packages>
+    </test>
+
+    <test name="CmdClientProcessorDebugSuiteTest" >
+        <packages>
+            <package name="lightsearch.server.cmd.client.processor.debug"/>
+        </packages>
+    </test>
+</suite>

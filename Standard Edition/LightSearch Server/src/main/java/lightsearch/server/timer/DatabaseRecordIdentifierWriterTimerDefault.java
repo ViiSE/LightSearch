@@ -15,15 +15,15 @@
  */
 package lightsearch.server.timer;
 
-import java.time.LocalDateTime;
-
+import lightsearch.server.exception.IdentifierException;
 import lightsearch.server.identifier.DatabaseRecordIdentifier;
 import lightsearch.server.identifier.DatabaseRecordIdentifierWriter;
-import lightsearch.server.exception.IdentifierException;
 import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.log.LoggerServer;
 import lightsearch.server.thread.ThreadManager;
 import lightsearch.server.time.CurrentDateTime;
+
+import java.time.LocalDateTime;
 
 /**
  * Таймер идентификатора записи базы данных LightSearch Server по умолчанию.
@@ -67,6 +67,9 @@ public class DatabaseRecordIdentifierWriterTimerDefault extends SuperDatabaseRec
                         isDone = true;
                     }
                 }
+
+                if(!super.threadManager().holder().getThread(ID).isWorked())
+                    break;
                 dateTimeToWrite = null;
             }
         }
