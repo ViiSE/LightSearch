@@ -43,7 +43,7 @@ public class CreateAdminProcessor extends AbstractProcessorAdmin {
     @Override
     synchronized public CommandResult apply(AdminCommand admCommand) {
         if(!super.checker.isNull(admCommand.name(), admCommand.adminName(), admCommand.password())) {
-            if(!super.serverDTO.admins().containsValue(admCommand.adminName())) {
+            if(!super.serverDTO.admins().containsKey(admCommand.adminName())) {
                 try(FileOutputStream fout = new FileOutputStream(super.serverDTO.currentDirectory() + "admins", true); 
                         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fout))) {
                     bw.write(admCommand.adminName() + ";" + admCommand.password());
