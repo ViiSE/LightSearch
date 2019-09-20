@@ -25,7 +25,8 @@ import test.data.DataProviderCreator;
 import java.util.Map;
 import java.util.function.Function;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertNotEquals;
+import static org.testng.Assert.assertNotNull;
 import static test.message.TestMessage.*;
 
 /**

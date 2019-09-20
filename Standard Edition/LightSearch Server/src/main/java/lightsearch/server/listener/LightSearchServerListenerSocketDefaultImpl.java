@@ -15,22 +15,23 @@
  */
 package lightsearch.server.listener;
 
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
 import lightsearch.server.data.LightSearchListenerDTO;
+import lightsearch.server.data.LightSearchServerDTO;
+import lightsearch.server.exception.ConnectionIdentifierException;
 import lightsearch.server.handler.HandlerCreator;
 import lightsearch.server.handler.HandlerCreatorInit;
 import lightsearch.server.handler.HandlerExecutor;
 import lightsearch.server.handler.HandlerExecutorInit;
+import lightsearch.server.identifier.ConnectionIdentifier;
 import lightsearch.server.identifier.ConnectionIdentifierInit;
 import lightsearch.server.identifier.ConnectionIdentifierResult;
+import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.log.LoggerServer;
 import lightsearch.server.socket.ServerSocketCreator;
-import lightsearch.server.identifier.ConnectionIdentifier;
-import lightsearch.server.exception.ConnectionIdentifierException;
-import lightsearch.server.data.LightSearchServerDTO;
-import lightsearch.server.log.LogMessageTypeEnum;
+
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 /**
  * Реализация интерфейса {@link lightsearch.server.listener.LightSearchServerListener} по умолчанию.

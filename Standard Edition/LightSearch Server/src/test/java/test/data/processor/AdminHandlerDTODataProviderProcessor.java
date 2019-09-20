@@ -1,7 +1,8 @@
 package test.data.processor;
 
 import lightsearch.server.data.*;
-import lightsearch.server.identifier.*;
+import lightsearch.server.identifier.DatabaseRecordIdentifier;
+import lightsearch.server.identifier.IdentifierEnum;
 import lightsearch.server.thread.LightSearchThreadID;
 import lightsearch.server.thread.ThreadManager;
 import lightsearch.server.time.CurrentDateTime;

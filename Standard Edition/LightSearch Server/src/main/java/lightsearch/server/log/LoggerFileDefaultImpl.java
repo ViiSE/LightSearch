@@ -15,14 +15,11 @@
  */
 package lightsearch.server.log;
 
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import lightsearch.server.checker.LightSearchChecker;
 import lightsearch.server.checker.LightSearchCheckerInit;
 import lightsearch.server.time.CurrentDateTime;
+
+import java.io.*;
 
 /**
  * Реализация интерфейса {@link lightsearch.server.log.LoggerFile} по умолчанию.

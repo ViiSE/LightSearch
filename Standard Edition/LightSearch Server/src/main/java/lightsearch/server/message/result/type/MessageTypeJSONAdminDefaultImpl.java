@@ -15,12 +15,13 @@
  */
 package lightsearch.server.message.result.type;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import lightsearch.server.cmd.admin.AdminCommandResultEnum;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Реализация интерфейса {@link lightsearch.server.message.result.type.MessageType}, формирующее сообщение

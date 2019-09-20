@@ -15,8 +15,6 @@
  */
 package lightsearch.server.handler.system;
 
-import java.io.IOException;
-import java.util.function.Function;
 import lightsearch.server.cmd.result.CommandResult;
 import lightsearch.server.cmd.system.SystemCommand;
 import lightsearch.server.cmd.system.SystemCommandConverter;
@@ -34,6 +32,9 @@ import lightsearch.server.message.MessageRecipient;
 import lightsearch.server.message.MessageRecipientInit;
 import lightsearch.server.message.MessageSender;
 import lightsearch.server.message.MessageSenderInit;
+
+import java.io.IOException;
+import java.util.function.Function;
 
 /**
  * Обработчик системного бота LightSearch по умолчанию.

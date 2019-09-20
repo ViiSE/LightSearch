@@ -15,9 +15,10 @@
  */
 package lightsearch.server.message;
 
+import lightsearch.server.exception.MessageRecipientException;
+
 import java.io.DataInputStream;
 import java.io.IOException;
-import lightsearch.server.exception.MessageRecipientException;
 
 /**
  * Реализация интерфейса {@link lightsearch.server.message.MessageRecipient} по умолчанию.

@@ -9,13 +9,14 @@
  */
 package lightsearch.server.cmd.system;
 
+import lightsearch.server.cmd.result.CommandResult;
+import lightsearch.server.cmd.system.processor.ClearAverageTimeProcessorDebug;
+import lightsearch.server.data.LightSearchListenerDTO;
+import lightsearch.server.data.LightSearchServerDTO;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
-import lightsearch.server.cmd.system.processor.ClearAverageTimeProcessorDebug;
-import lightsearch.server.cmd.result.CommandResult;
-import lightsearch.server.data.LightSearchListenerDTO;
-import lightsearch.server.data.LightSearchServerDTO;
 
 /**
  * Реализация интерфейса {@link lightsearch.server.cmd.system.SystemCommandCreator} по умолчанию.

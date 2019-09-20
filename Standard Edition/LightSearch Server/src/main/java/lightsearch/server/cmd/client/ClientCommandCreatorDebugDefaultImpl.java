@@ -9,21 +9,15 @@
  */
 package lightsearch.server.cmd.client;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Function;
-import lightsearch.server.cmd.client.processor.debug.AuthenticationProcessorDebug;
-import lightsearch.server.cmd.client.processor.debug.CancelSoftCheckProcessorDebug;
-import lightsearch.server.cmd.client.processor.debug.CloseSoftCheckProcessorDebug;
-import lightsearch.server.cmd.client.processor.debug.ConfirmSoftCheckProductsProcessorDebug;
-import lightsearch.server.cmd.client.processor.debug.OpenSoftCheckProcessorDebug;
-import lightsearch.server.cmd.client.processor.debug.SearchProcessorDebug;
-import lightsearch.server.cmd.client.processor.debug.SoftCheckDebug;
-import lightsearch.server.cmd.client.processor.debug.SoftCheckDebugInit;
+import lightsearch.server.cmd.client.processor.debug.*;
 import lightsearch.server.cmd.result.CommandResult;
 import lightsearch.server.data.ClientDAO;
 import lightsearch.server.data.LightSearchListenerDTO;
 import lightsearch.server.data.LightSearchServerDTO;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
 
 /**
  * Реализация интерфейса {@link lightsearch.server.cmd.client.ClientCommandConverter} для отладки по умолчанию.

@@ -15,27 +15,16 @@
  */
 package lightsearch.server.cmd.changer;
 
-import java.time.LocalDateTime;
-
+import lightsearch.server.data.LightSearchServerDTO;
 import lightsearch.server.identifier.DatabaseRecordIdentifier;
 import lightsearch.server.identifier.DatabaseRecordIdentifierWriter;
+import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.log.LoggerServer;
 import lightsearch.server.thread.ThreadManager;
 import lightsearch.server.time.CurrentDateTime;
-import lightsearch.server.timer.DatabaseRecordIdentifierWriterTimerCreator;
-import lightsearch.server.timer.DatabaseRecordIdentifierWriterTimerCreatorInit;
-import lightsearch.server.timer.DatabaseRecordIdentifierWriterTimerExecutor;
-import lightsearch.server.timer.DatabaseRecordIdentifierWriterTimerExecutorInit;
-import lightsearch.server.timer.RebootTimerCreator;
-import lightsearch.server.timer.RebootTimerCreatorInit;
-import lightsearch.server.timer.RebootTimerExecutor;
-import lightsearch.server.timer.RebootTimerExecutorInit;
-import lightsearch.server.data.LightSearchServerDTO;
-import lightsearch.server.log.LogMessageTypeEnum;
-import lightsearch.server.timer.GarbageCollectorTimerCreator;
-import lightsearch.server.timer.GarbageCollectorTimerCreatorInit;
-import lightsearch.server.timer.GarbageCollectorTimerExecutorInit;
-import lightsearch.server.timer.TimersIDEnum;
+import lightsearch.server.timer.*;
+
+import java.time.LocalDateTime;
 
 
 /**

@@ -15,9 +15,9 @@
  */
 package lightsearch.server.cmd.client.processor.debug;
 
-import lightsearch.server.cmd.client.processor.*;
 import lightsearch.server.checker.LightSearchChecker;
 import lightsearch.server.cmd.client.ClientCommand;
+import lightsearch.server.cmd.client.processor.AbstractProcessorClient;
 import lightsearch.server.cmd.result.CommandResult;
 import lightsearch.server.data.LightSearchServerDTO;
 import lightsearch.server.log.LogMessageTypeEnum;

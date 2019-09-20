@@ -15,19 +15,20 @@
  */
 package lightsearch.server.handler;
 
+import lightsearch.server.data.LightSearchListenerDTO;
+import lightsearch.server.data.LightSearchServerDTO;
+import lightsearch.server.handler.processor.HandlerCreatorAdminProcessor;
+import lightsearch.server.handler.processor.HandlerCreatorClientProcessor;
+import lightsearch.server.handler.processor.HandlerCreatorSystemProcessor;
+import lightsearch.server.identifier.ConnectionIdentifierResult;
+import lightsearch.server.identifier.HandlerIdentifier;
+import lightsearch.server.identifier.HandlerIdentifierInit;
+import lightsearch.server.identifier.IdentifierEnum;
+import lightsearch.server.log.LoggerServer;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
-import lightsearch.server.data.LightSearchListenerDTO;
-import lightsearch.server.identifier.HandlerIdentifier;
-import lightsearch.server.identifier.HandlerIdentifierInit;
-import lightsearch.server.identifier.ConnectionIdentifierResult;
-import lightsearch.server.log.LoggerServer;
-import lightsearch.server.data.LightSearchServerDTO;
-import lightsearch.server.handler.processor.HandlerCreatorAdminProcessor;
-import lightsearch.server.identifier.IdentifierEnum;
-import lightsearch.server.handler.processor.HandlerCreatorClientProcessor;
-import lightsearch.server.handler.processor.HandlerCreatorSystemProcessor;
 
 /**
  * Реализация интерфейса {@link lightsearch.server.handler.HandlerCreator} по умолчанию.

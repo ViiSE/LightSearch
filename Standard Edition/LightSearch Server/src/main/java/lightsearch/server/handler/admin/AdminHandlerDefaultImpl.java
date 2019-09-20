@@ -15,27 +15,28 @@
  */
 package lightsearch.server.handler.admin;
 
-import java.io.IOException;
-import java.util.function.Function;
 import lightsearch.server.cmd.admin.AdminCommand;
 import lightsearch.server.cmd.admin.AdminCommandConverter;
 import lightsearch.server.cmd.admin.AdminCommandConverterInit;
-import lightsearch.server.exception.CommandConverterException;
 import lightsearch.server.cmd.result.CommandResult;
 import lightsearch.server.data.AdminDAO;
 import lightsearch.server.data.AdminHandlerDTO;
 import lightsearch.server.data.AdminParametersHolder;
-import lightsearch.server.handler.Handler;
+import lightsearch.server.data.LightSearchServerDTO;
+import lightsearch.server.exception.CommandConverterException;
+import lightsearch.server.exception.MessageRecipientException;
+import lightsearch.server.exception.MessageSenderException;
 import lightsearch.server.exception.ReceivedCommandVerifierException;
+import lightsearch.server.handler.Handler;
+import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.log.LoggerServer;
 import lightsearch.server.message.MessageRecipient;
 import lightsearch.server.message.MessageRecipientInit;
 import lightsearch.server.message.MessageSender;
 import lightsearch.server.message.MessageSenderInit;
-import lightsearch.server.exception.MessageRecipientException;
-import lightsearch.server.exception.MessageSenderException;
-import lightsearch.server.data.LightSearchServerDTO;
-import lightsearch.server.log.LogMessageTypeEnum;
+
+import java.io.IOException;
+import java.util.function.Function;
 
 /**
  * Обработчик администратора LightSearch Server по умолчанию.

@@ -15,26 +15,20 @@
  */
 package lightsearch.server.handler.processor;
 
-import java.util.Map;
-import java.util.function.Function;
 import lightsearch.server.cmd.result.CommandResult;
 import lightsearch.server.cmd.system.SystemCommand;
 import lightsearch.server.cmd.system.SystemCommandCreator;
 import lightsearch.server.cmd.system.SystemCommandCreatorInit;
-import lightsearch.server.data.LightSearchListenerDTO;
-import lightsearch.server.data.LightSearchServerDTO;
-import lightsearch.server.data.SystemHandlerDTO;
-import lightsearch.server.data.SystemHandlerDTOInit;
-import lightsearch.server.data.SystemParametersHolder;
-import lightsearch.server.data.SystemParametersHolderInit;
-import lightsearch.server.data.ThreadParametersHolder;
-import lightsearch.server.data.ThreadParametersHolderInit;
+import lightsearch.server.data.*;
 import lightsearch.server.handler.Handler;
 import lightsearch.server.handler.system.SystemHandlerInit;
 import lightsearch.server.identifier.ConnectionIdentifierResult;
 import lightsearch.server.identifier.HandlerIdentifier;
 import lightsearch.server.log.LoggerServer;
 import lightsearch.server.thread.LightSearchThreadID;
+
+import java.util.Map;
+import java.util.function.Function;
 
 /**
  * Обработчик команды создания обработчика системного бота LightSearch Server.

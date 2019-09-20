@@ -20,7 +20,8 @@ import org.testng.annotations.Test;
 
 import java.util.HashMap;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertNotEquals;
+import static org.testng.Assert.assertNotNull;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 

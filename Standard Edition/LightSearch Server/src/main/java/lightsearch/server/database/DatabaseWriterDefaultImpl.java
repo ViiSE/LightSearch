@@ -15,12 +15,12 @@
  */
 package lightsearch.server.database;
 
-import lightsearch.server.exception.DatabaseWriterException;
 import lightsearch.server.database.statement.DatabasePreparedStatement;
 import lightsearch.server.database.statement.DatabasePreparedStatementInit;
 import lightsearch.server.database.statement.result.DatabaseStatementResultSet;
 import lightsearch.server.database.statement.result.DatabaseStatementResultSetUpdateInit;
 import lightsearch.server.exception.DatabaseStatementResultSetException;
+import lightsearch.server.exception.DatabaseWriterException;
 
 /**
  * Реализация интерфейса {@link lightsearch.server.database.DatabaseWriter} по умолчанию.

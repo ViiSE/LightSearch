@@ -15,11 +15,12 @@
  */
 package lightsearch.server.database;
 
+import lightsearch.server.data.LightSearchServerDatabaseDTO;
+import lightsearch.server.exception.DatabaseConnectionCreatorException;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import lightsearch.server.data.LightSearchServerDatabaseDTO;
-import lightsearch.server.exception.DatabaseConnectionCreatorException;
 
 /**
  * Создает соединение с СУБД <a href=https://firebirdsql.org/>Firebird</a> с кодировкой UTF-8.

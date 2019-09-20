@@ -19,21 +19,21 @@ import lightsearch.server.checker.LightSearchChecker;
 import lightsearch.server.cmd.client.ClientCommand;
 import lightsearch.server.cmd.result.CommandResult;
 import lightsearch.server.data.ClientDAO;
+import lightsearch.server.data.LightSearchServerDTO;
 import lightsearch.server.database.DatabaseConnection;
 import lightsearch.server.database.DatabaseConnectionCreator;
 import lightsearch.server.database.DatabaseConnectionCreatorInit;
 import lightsearch.server.database.cmd.message.DatabaseCommandMessage;
 import lightsearch.server.database.cmd.message.DatabaseCommandMessageInit;
-import lightsearch.server.exception.DatabaseConnectionCreatorException;
 import lightsearch.server.database.statement.DatabaseStatementExecutor;
 import lightsearch.server.database.statement.DatabaseStatementExecutorInit;
-import lightsearch.server.exception.DatabaseStatementExecutorException;
 import lightsearch.server.database.statement.result.DatabaseStatementResult;
+import lightsearch.server.exception.DatabaseConnectionCreatorException;
+import lightsearch.server.exception.DatabaseStatementExecutorException;
 import lightsearch.server.identifier.DatabaseRecordIdentifier;
-import lightsearch.server.time.CurrentDateTime;
-import lightsearch.server.data.LightSearchServerDTO;
 import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.message.result.ResultTypeMessageEnum;
+import lightsearch.server.time.CurrentDateTime;
 
 /**
  * Обработчик команды авторизации клиента в LightSearch Server.

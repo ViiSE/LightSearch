@@ -16,7 +16,6 @@
 package lightsearch.server.message.parser;
 
 import lightsearch.server.exception.MessageParserException;
-import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 

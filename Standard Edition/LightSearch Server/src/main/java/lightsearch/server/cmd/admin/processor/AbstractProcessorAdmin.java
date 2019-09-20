@@ -15,19 +15,20 @@
  */
 package lightsearch.server.cmd.admin.processor;
 
-import java.util.function.Function;
 import lightsearch.server.checker.LightSearchChecker;
 import lightsearch.server.cmd.SuperAbstractProcessor;
 import lightsearch.server.cmd.admin.AdminCommand;
 import lightsearch.server.cmd.result.CommandResult;
 import lightsearch.server.cmd.result.CommandResultInit;
-import lightsearch.server.message.result.MessageCreator;
-import lightsearch.server.message.result.MessageCreatorInit;
-import lightsearch.server.message.result.type.MessageType;
-import lightsearch.server.message.result.type.MessageTypeInit;
 import lightsearch.server.data.LightSearchServerDTO;
 import lightsearch.server.log.LogMessageTypeEnum;
+import lightsearch.server.message.result.MessageCreator;
+import lightsearch.server.message.result.MessageCreatorInit;
 import lightsearch.server.message.result.ResultTypeMessageEnum;
+import lightsearch.server.message.result.type.MessageType;
+import lightsearch.server.message.result.type.MessageTypeInit;
+
+import java.util.function.Function;
 
 /**
  * Абстрактный класс обработчика команд администратора LightSearch Server.

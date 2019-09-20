@@ -15,10 +15,11 @@
  */
 package lightsearch.server.database.statement.result;
 
-import java.sql.SQLException;
 import lightsearch.server.database.statement.DatabasePreparedStatement;
 import lightsearch.server.exception.DatabasePreparedStatementException;
 import lightsearch.server.exception.DatabaseStatementResultSetException;
+
+import java.sql.SQLException;
 
 /**
  * Реализация интерфейса {@link lightsearch.server.database.statement.result.DatabaseStatementResultSetUpdate} по

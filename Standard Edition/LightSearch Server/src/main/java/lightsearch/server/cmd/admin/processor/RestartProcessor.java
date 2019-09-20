@@ -21,13 +21,13 @@ import lightsearch.server.cmd.result.CommandResult;
 import lightsearch.server.daemon.DaemonServer;
 import lightsearch.server.daemon.DaemonServerCreator;
 import lightsearch.server.daemon.DaemonServerCreatorInit;
+import lightsearch.server.data.LightSearchServerDTO;
 import lightsearch.server.initialization.OsDetector;
 import lightsearch.server.initialization.OsDetectorInit;
+import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.log.LoggerServer;
 import lightsearch.server.thread.ThreadManager;
 import lightsearch.server.time.CurrentDateTime;
-import lightsearch.server.data.LightSearchServerDTO;
-import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.timer.TimersIDEnum;
 
 /**

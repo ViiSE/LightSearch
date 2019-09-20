@@ -22,7 +22,8 @@ import lightsearch.server.exception.CommandConverterException;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertNotEquals;
+import static org.testng.Assert.assertNotNull;
 import static test.message.TestMessage.*;
 
 /**

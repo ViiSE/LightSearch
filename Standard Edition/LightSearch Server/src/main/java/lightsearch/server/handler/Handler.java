@@ -15,11 +15,11 @@
  */
 package lightsearch.server.handler;
 
+import lightsearch.server.data.LightSearchServerDTO;
 import lightsearch.server.data.ThreadParametersHolder;
 import lightsearch.server.log.LoggerServer;
 import lightsearch.server.thread.ThreadManager;
 import lightsearch.server.time.CurrentDateTime;
-import lightsearch.server.data.LightSearchServerDTO;
 
 /**
  * Абстрактный класс обработчика клиента LightSearch Server.

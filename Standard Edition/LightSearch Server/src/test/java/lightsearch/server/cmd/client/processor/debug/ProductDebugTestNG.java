@@ -9,9 +9,11 @@
  */
 package lightsearch.server.cmd.client.processor.debug;
 
-import static org.testng.Assert.*;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 

@@ -15,9 +15,10 @@
  */
 package lightsearch.server.message.result;
 
+import lightsearch.server.message.result.type.MessageType;
+
 import java.util.HashMap;
 import java.util.List;
-import lightsearch.server.message.result.type.MessageType;
 
 /**
  * Реализация интерфейса {@link lightsearch.server.message.result.MessageCreator} по умолчанию.

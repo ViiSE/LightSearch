@@ -15,24 +15,21 @@
  */
 package lightsearch.server.identifier;
 
-import java.net.Socket;
 import lightsearch.server.data.stream.DataStream;
 import lightsearch.server.data.stream.DataStreamCreator;
 import lightsearch.server.data.stream.DataStreamCreatorInit;
 import lightsearch.server.data.stream.DataStreamInit;
-import lightsearch.server.exception.DataStreamCreatorException;
-import lightsearch.server.exception.ConnectionIdentifierException;
+import lightsearch.server.exception.*;
 import lightsearch.server.message.MessageRecipient;
 import lightsearch.server.message.MessageRecipientInit;
 import lightsearch.server.message.MessageSender;
 import lightsearch.server.message.MessageSenderInit;
-import lightsearch.server.exception.MessageRecipientException;
-import lightsearch.server.exception.MessageSenderException;
+import lightsearch.server.message.parser.MessageParser;
 import lightsearch.server.message.parser.MessageParserInit;
 import lightsearch.server.message.result.DeviceInformation;
 import lightsearch.server.message.result.DeviceInformationInit;
-import lightsearch.server.message.parser.MessageParser;
-import lightsearch.server.exception.MessageParserException;
+
+import java.net.Socket;
 
 /**
  * Реализация интерфейса {@link lightsearch.server.identifier.ConnectionIdentifier} по умолчанию.

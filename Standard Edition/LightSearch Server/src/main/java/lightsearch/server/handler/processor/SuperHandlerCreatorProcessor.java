@@ -15,13 +15,14 @@
  */
 package lightsearch.server.handler.processor;
 
-import java.util.function.Function;
 import lightsearch.server.data.LightSearchListenerDTO;
 import lightsearch.server.data.LightSearchServerDTO;
 import lightsearch.server.handler.Handler;
 import lightsearch.server.identifier.ConnectionIdentifierResult;
 import lightsearch.server.identifier.HandlerIdentifier;
 import lightsearch.server.log.LoggerServer;
+
+import java.util.function.Function;
 
 /**
  * Абстрактный класс создания обработчика клиента LightSearch Server.

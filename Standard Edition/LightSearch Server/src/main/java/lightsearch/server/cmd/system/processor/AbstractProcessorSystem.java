@@ -15,7 +15,6 @@
  */
 package lightsearch.server.cmd.system.processor;
 
-import java.util.function.Function;
 import lightsearch.server.checker.LightSearchChecker;
 import lightsearch.server.cmd.SuperAbstractProcessor;
 import lightsearch.server.cmd.result.CommandResult;
@@ -24,6 +23,8 @@ import lightsearch.server.cmd.system.SystemCommand;
 import lightsearch.server.data.LightSearchServerDTO;
 import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.message.result.ResultTypeMessageEnum;
+
+import java.util.function.Function;
 
 /**
  * Абстрактный класс обработчика команд системного бота LightSearch Server.

@@ -15,8 +15,6 @@
  */
 package lightsearch.server.cmd.admin.processor;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
 import lightsearch.server.checker.LightSearchChecker;
 import lightsearch.server.cmd.admin.AdminCommand;
 import lightsearch.server.cmd.changer.ServerStateChanger;
@@ -25,6 +23,9 @@ import lightsearch.server.data.LightSearchServerDTO;
 import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.message.result.ResultTypeMessageEnum;
 import lightsearch.server.timer.TimersIDEnum;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * Обработчик команды установки тайм-аута LightSearch Server.

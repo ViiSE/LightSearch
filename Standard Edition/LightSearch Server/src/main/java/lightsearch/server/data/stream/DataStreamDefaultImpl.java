@@ -15,7 +15,8 @@
  */
 package lightsearch.server.data.stream;
 
-import java.io.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 
 /**
  * Реализация интерфейса {@link lightsearch.server.data.stream.DataStream} по умолчанию.

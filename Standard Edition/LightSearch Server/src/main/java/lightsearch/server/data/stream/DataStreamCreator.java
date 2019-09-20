@@ -15,9 +15,10 @@
  */
 package lightsearch.server.data.stream;
 
+import lightsearch.server.exception.DataStreamCreatorException;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import lightsearch.server.exception.DataStreamCreatorException;
 
 /**
  * Создает поток данных {@link lightsearch.server.data.stream.DataStream} при подключении клиента к LightSearch Server.

@@ -15,8 +15,9 @@
  */
 package lightsearch.server.identifier;
 
-import java.net.Socket;
 import lightsearch.server.exception.ConnectionIdentifierException;
+
+import java.net.Socket;
 
 /**
  * Идентифицирует соединение, пришедшее на сокет.

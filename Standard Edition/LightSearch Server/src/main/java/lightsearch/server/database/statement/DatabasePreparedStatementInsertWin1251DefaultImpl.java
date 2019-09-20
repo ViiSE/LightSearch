@@ -15,11 +15,12 @@
  */
 package lightsearch.server.database.statement;
 
+import lightsearch.server.database.DatabaseConnection;
+import lightsearch.server.exception.DatabasePreparedStatementException;
+
 import java.io.UnsupportedEncodingException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import lightsearch.server.database.DatabaseConnection;
-import lightsearch.server.exception.DatabasePreparedStatementException;
 
 /**
  * Создает скомпилированный запрос для добавления команды в таблицу базы данных, совместимый с кодировкой windows-1251.

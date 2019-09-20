@@ -15,43 +15,26 @@
  */
 package lightsearch.server;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import lightsearch.server.checker.LightSearchChecker;
 import lightsearch.server.checker.LightSearchCheckerInit;
 import lightsearch.server.checker.TimerRebootValueChecker;
 import lightsearch.server.checker.TimerRebootValueCheckerInit;
 import lightsearch.server.cmd.changer.ServerStateChanger;
 import lightsearch.server.cmd.changer.ServerStateChangerInit;
-import lightsearch.server.data.LightSearchListenerDTO;
-import lightsearch.server.data.LightSearchListenerDTOInit;
+import lightsearch.server.data.*;
 import lightsearch.server.identifier.*;
-import lightsearch.server.thread.ThreadHolder;
-import lightsearch.server.thread.ThreadManager;
-import lightsearch.server.thread.ThreadHolderInit;
-import lightsearch.server.thread.ThreadManagerInit;
-import lightsearch.server.listener.LightSearchServerListenerInit;
-import lightsearch.server.listener.LightSearchServerListener;
-import lightsearch.server.data.LightSearchServerDTOInit;
-import lightsearch.server.data.LightSearchServerDatabaseDTO;
-import lightsearch.server.data.LightSearchServerDatabaseDTOInit;
-import lightsearch.server.data.LightSearchServerSettingsDAOInit;
 import lightsearch.server.initialization.*;
-import lightsearch.server.log.LogDirectory;
-import lightsearch.server.log.LogDirectoryInit;
-import lightsearch.server.log.LoggerFile;
-import lightsearch.server.log.LoggerFileInit;
-import lightsearch.server.log.LoggerServer;
-import lightsearch.server.log.LoggerServerInit;
-import lightsearch.server.log.LoggerWindow;
-import lightsearch.server.log.LoggerWindowInit;
-import lightsearch.server.thread.LightSearchThread;
+import lightsearch.server.listener.LightSearchServerListener;
+import lightsearch.server.listener.LightSearchServerListenerInit;
+import lightsearch.server.log.*;
+import lightsearch.server.thread.*;
 import lightsearch.server.time.CurrentDateTime;
 import lightsearch.server.time.CurrentDateTimeInit;
-import lightsearch.server.data.LightSearchServerDTO;
-import lightsearch.server.data.LightSearchServerSettingsDAO;
 import lightsearch.server.timer.TimersIDEnum;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /*v. a.b.c:
     a {uint} - Very significant update(for example, adding a new features, 

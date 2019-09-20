@@ -15,8 +15,8 @@
  */
 package lightsearch.server.database.statement;
 
-import lightsearch.server.exception.DatabaseStatementExecutorException;
 import lightsearch.server.database.statement.result.DatabaseStatementResult;
+import lightsearch.server.exception.DatabaseStatementExecutorException;
 
 /**
  * Исполняет запросы к базе данных.

@@ -17,8 +17,8 @@ package lightsearch.server.log;
 
 import lightsearch.server.initialization.CurrentServerDirectory;
 import lightsearch.server.initialization.CurrentServerDirectoryInit;
-import lightsearch.server.initialization.OsDetectorInit;
 import lightsearch.server.initialization.OsDetector;
+import lightsearch.server.initialization.OsDetectorInit;
 
 /**
  * Реализация интерфейса {@link lightsearch.server.log.LogDirectory} по умолчанию.

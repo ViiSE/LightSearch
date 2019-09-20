@@ -15,9 +15,10 @@
  */
 package lightsearch.server.cmd.system;
 
+import lightsearch.server.cmd.result.CommandResult;
+
 import java.util.Map;
 import java.util.function.Function;
-import lightsearch.server.cmd.result.CommandResult;
 
 /**
  * Создает обработчики команд системного бота LightSearch Server.

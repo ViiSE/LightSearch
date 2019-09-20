@@ -15,12 +15,13 @@
  */
 package lightsearch.server.data;
 
-import java.net.Socket;
-import java.util.Map;
-import java.util.function.Function;
 import lightsearch.server.cmd.result.CommandResult;
 import lightsearch.server.cmd.system.SystemCommand;
 import lightsearch.server.data.stream.DataStream;
+
+import java.net.Socket;
+import java.util.Map;
+import java.util.function.Function;
 
 /**
  * Контейнер параметров системного бота LightSearch Server.

@@ -15,10 +15,11 @@
  */
 package lightsearch.server.database.statement;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import lightsearch.server.database.DatabaseConnection;
 import lightsearch.server.exception.DatabasePreparedStatementException;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 /**
  * Создает скомпилированный запрос для обновления команды из таблицы базы данных.

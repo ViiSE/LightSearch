@@ -15,8 +15,9 @@
  */
 package lightsearch.server.identifier;
 
-import java.net.Socket;
 import lightsearch.server.data.stream.DataStream;
+
+import java.net.Socket;
 
 /**
  * Результат идентификации соединения клиента.

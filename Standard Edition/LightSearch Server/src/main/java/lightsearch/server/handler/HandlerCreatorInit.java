@@ -16,9 +16,9 @@
 package lightsearch.server.handler;
 
 import lightsearch.server.data.LightSearchListenerDTO;
+import lightsearch.server.data.LightSearchServerDTO;
 import lightsearch.server.identifier.ConnectionIdentifierResult;
 import lightsearch.server.log.LoggerServer;
-import lightsearch.server.data.LightSearchServerDTO;
 
 /**
  *

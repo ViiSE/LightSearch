@@ -15,11 +15,12 @@
  */
 package lightsearch.server.data.stream;
 
+import lightsearch.server.exception.DataStreamCreatorException;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import lightsearch.server.exception.DataStreamCreatorException;
 
 /**
  * Реализация интерфейса {@link lightsearch.server.data.stream.DataStreamCreator} по умолчанию.

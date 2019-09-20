@@ -15,11 +15,11 @@
  */
 package lightsearch.server.identifier;
 
+import lightsearch.server.data.LightSearchServerDTO;
+import lightsearch.server.exception.IdentifierException;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
-
-import lightsearch.server.exception.IdentifierException;
-import lightsearch.server.data.LightSearchServerDTO;
 
 /**
  * Реализация интерфейса {@link DatabaseRecordIdentifierWriter} по умолчанию.

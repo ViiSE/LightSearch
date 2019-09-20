@@ -16,9 +16,9 @@
 package lightsearch.server.cmd.system;
 
 import lightsearch.server.exception.CommandConverterException;
+import lightsearch.server.exception.MessageParserException;
 import lightsearch.server.message.parser.MessageParser;
 import lightsearch.server.message.parser.MessageParserInit;
-import lightsearch.server.exception.MessageParserException;
 
 /**
  * Реализация интерфейса {@link lightsearch.server.cmd.system.SystemCommandConverter} по умолчанию.

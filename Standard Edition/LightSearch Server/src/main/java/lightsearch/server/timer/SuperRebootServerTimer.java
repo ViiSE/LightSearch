@@ -15,10 +15,11 @@
  */
 package lightsearch.server.timer;
 
-import java.time.LocalDateTime;
-import lightsearch.server.thread.ThreadManager;
 import lightsearch.server.log.LoggerServer;
+import lightsearch.server.thread.ThreadManager;
 import lightsearch.server.time.CurrentDateTime;
+
+import java.time.LocalDateTime;
 
 /**
  * Абстрактный класс таймера перезагрузки LightSearch Server.

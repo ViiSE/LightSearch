@@ -15,28 +15,20 @@
  */
 package lightsearch.server.handler.processor;
 
-import java.util.Map;
-import java.util.function.Function;
 import lightsearch.server.cmd.admin.AdminCommand;
 import lightsearch.server.cmd.admin.AdminCommandCreator;
 import lightsearch.server.cmd.admin.AdminCommandCreatorInit;
 import lightsearch.server.cmd.result.CommandResult;
-import lightsearch.server.data.AdminDAO;
-import lightsearch.server.data.AdminDAOInit;
-import lightsearch.server.data.AdminHandlerDTO;
-import lightsearch.server.data.AdminHandlerDTOInit;
-import lightsearch.server.data.AdminParametersHolder;
-import lightsearch.server.data.AdminParametersHolderInit;
-import lightsearch.server.data.LightSearchListenerDTO;
-import lightsearch.server.data.LightSearchServerDTO;
-import lightsearch.server.data.ThreadParametersHolder;
-import lightsearch.server.data.ThreadParametersHolderInit;
+import lightsearch.server.data.*;
 import lightsearch.server.handler.Handler;
 import lightsearch.server.handler.admin.AdminHandlerInit;
 import lightsearch.server.identifier.ConnectionIdentifierResult;
 import lightsearch.server.identifier.HandlerIdentifier;
 import lightsearch.server.log.LoggerServer;
 import lightsearch.server.thread.LightSearchThreadID;
+
+import java.util.Map;
+import java.util.function.Function;
 
 /**
  * Обработчик команды создания обработчика администратора LightSearch Server.

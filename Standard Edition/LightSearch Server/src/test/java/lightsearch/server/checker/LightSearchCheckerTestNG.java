@@ -16,6 +16,7 @@
 package lightsearch.server.checker;
 
 import org.testng.annotations.Test;
+
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 

@@ -19,8 +19,9 @@ import lightsearch.server.initialization.CurrentServerDirectory;
 import lightsearch.server.initialization.CurrentServerDirectoryInit;
 import lightsearch.server.initialization.OsDetector;
 import lightsearch.server.initialization.OsDetectorInit;
-import static org.testng.Assert.*;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertNotNull;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 

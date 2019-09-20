@@ -15,16 +15,17 @@
  */
 package lightsearch.server.cmd.admin.processor;
 
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
 import lightsearch.server.checker.LightSearchChecker;
 import lightsearch.server.cmd.admin.AdminCommand;
 import lightsearch.server.cmd.result.CommandResult;
 import lightsearch.server.data.LightSearchServerDTO;
 import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.message.result.ResultTypeMessageEnum;
+
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 /**
  * Обработчик команды создания нового администратора LightSearch Server.

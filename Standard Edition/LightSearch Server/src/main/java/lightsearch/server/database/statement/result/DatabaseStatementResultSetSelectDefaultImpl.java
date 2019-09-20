@@ -15,16 +15,17 @@
  */
 package lightsearch.server.database.statement.result;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import lightsearch.server.database.statement.DatabasePreparedStatement;
 import lightsearch.server.exception.DatabasePreparedStatementException;
 import lightsearch.server.exception.DatabaseStatementResultSetException;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import lightsearch.server.time.DateTimeComparator;
 import lightsearch.server.time.DateTimeComparatorInit;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 /**
  * Реализация интерфейса {@link lightsearch.server.database.statement.result.DatabaseStatementResultSetSelect} по

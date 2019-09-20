@@ -18,7 +18,8 @@ package lightsearch.server.message;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotEquals;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 

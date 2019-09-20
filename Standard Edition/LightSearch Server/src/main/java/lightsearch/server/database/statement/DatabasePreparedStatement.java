@@ -15,8 +15,9 @@
  */
 package lightsearch.server.database.statement;
 
-import java.sql.PreparedStatement;
 import lightsearch.server.exception.DatabasePreparedStatementException;
+
+import java.sql.PreparedStatement;
 
 /**
  * Скомпилированный запрос в базу данных.

@@ -15,26 +15,17 @@
  */
 package lightsearch.server.cmd.admin;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Function;
-import lightsearch.server.cmd.admin.processor.AddBlacklistProcessor;
-import lightsearch.server.cmd.admin.processor.AuthenticationProcessor;
-import lightsearch.server.cmd.admin.processor.BlacklistRequestProcessor;
-import lightsearch.server.cmd.admin.processor.ChangeDatabaseProcessor;
-import lightsearch.server.cmd.admin.processor.ClientKickProcessor;
-import lightsearch.server.cmd.admin.processor.ClientListRequestProcessor;
-import lightsearch.server.cmd.admin.processor.CreateAdminProcessor;
-import lightsearch.server.cmd.admin.processor.DelBlacklistProcessor;
-import lightsearch.server.cmd.admin.processor.RestartProcessor;
-import lightsearch.server.cmd.admin.processor.TimeoutClientProcessor;
-import lightsearch.server.cmd.admin.processor.TimeoutServerProcessor;
+import lightsearch.server.cmd.admin.processor.*;
 import lightsearch.server.cmd.changer.ServerStateChangerInit;
 import lightsearch.server.cmd.result.CommandResult;
 import lightsearch.server.data.AdminDAO;
 import lightsearch.server.data.LightSearchListenerDTO;
-import lightsearch.server.log.LoggerServer;
 import lightsearch.server.data.LightSearchServerDTO;
+import lightsearch.server.log.LoggerServer;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
 
 /**
  * Реализация интерфейса {@link lightsearch.server.cmd.admin.AdminCommandCreator} по умолчанию.
