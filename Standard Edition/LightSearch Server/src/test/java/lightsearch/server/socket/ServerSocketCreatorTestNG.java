@@ -15,10 +15,12 @@
  */
 package lightsearch.server.socket;
 
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+
 import java.net.ServerSocket;
 
-import static org.testng.Assert.*;
-import org.testng.annotations.Test;
+import static org.testng.Assert.assertFalse;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 
@@ -29,11 +31,11 @@ import static test.message.TestMessage.testEnd;
 public class ServerSocketCreatorTestNG {
     
     @Test
-    public void createServerSocket() {
+    @Parameters({"serverPort"})
+    public void createServerSocket(int serverPort) {
         testBegin("ServerSocketCreator", "createServerSocket()");
-        
-        int serverPort = 12345;
-        assertFalse(serverPort < 0 && serverPort > 65535, "Wrong server port number!");
+
+        assertFalse(serverPort < 0 || serverPort > 65535, "Wrong server port number!");
         ServerSocket socket = ServerSocketCreator.createServerSocket(serverPort);
         System.out.println("Server socket: " + socket);
         

@@ -15,8 +15,9 @@
  */
 package lightsearch.server.time;
 
-import static org.testng.Assert.*;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.*;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 
@@ -33,7 +34,7 @@ public class CurrentDateTimeTestNG {
         CurrentDateTime currentDateTime = CurrentDateTimeInit.currentDateTime();
         String curDateTime = currentDateTime.dateTimeWithDot();
         assertNotNull(curDateTime, "Current DateTime is null!");
-        assertFalse(curDateTime.equals(""), "Current DateTime is null!");
+        assertNotEquals(curDateTime, "", "Current DateTime is null!");
         System.out.println("dateTimeWithDot: " + curDateTime);
         
         testEnd("CurrentDateTime", "dateTimeWithDot()");
@@ -46,7 +47,7 @@ public class CurrentDateTimeTestNG {
         CurrentDateTime currentDateTime = CurrentDateTimeInit.currentDateTime();
         String curDateTime = currentDateTime.dateTimeInStandardFormat();
         assertNotNull(curDateTime, "Current DateTime is null!");
-        assertFalse(curDateTime.equals(""), "Current DateTime is null!");
+        assertNotEquals(curDateTime, "", "Current DateTime is null!");
         System.out.println("dateTimeInStandardFormat: " + curDateTime);
         
         testEnd("CurrentDateTime", "dateTimeInStandardFormat()");
@@ -59,7 +60,7 @@ public class CurrentDateTimeTestNG {
         CurrentDateTime currentDateTime = CurrentDateTimeInit.currentDateTime();
         String curDate = currentDateTime.dateLog();
         assertNotNull(curDate, "Current Date is null!");
-        assertFalse(curDate.equals(""), "Current Date is null!");
+        assertNotEquals(curDate, "", "Current Date is null!");
         System.out.println("dateLog: " + curDate);
         
         testEnd("CurrentDateTime", "dateLog()");

@@ -17,8 +17,10 @@ package lightsearch.server.log;
 
 import lightsearch.server.time.CurrentDateTime;
 import lightsearch.server.time.CurrentDateTimeInit;
-import static org.testng.Assert.*;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertNotNull;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 
@@ -29,14 +31,15 @@ import static test.message.TestMessage.testEnd;
 public class LoggerWindowTestNG {
     
     @Test
-    public void printLog() {
+    @Parameters({"message"})
+    public void printLog(String message) {
         testBegin("LoggerWindow", "printLog()");
         
         CurrentDateTime currentDateTime = CurrentDateTimeInit.currentDateTime();
         assertNotNull(currentDateTime, "CurrentDateTime is null!");
         
         LoggerWindow loggerWindow = LoggerWindowInit.loggerWindow();
-        loggerWindow.printLog("Info", currentDateTime, "Hello World!");
+        loggerWindow.printLog(LogMessageTypeEnum.INFO.stringValue(), currentDateTime, message);
         
         testEnd("LoggerWindow", "printLog()");
     }

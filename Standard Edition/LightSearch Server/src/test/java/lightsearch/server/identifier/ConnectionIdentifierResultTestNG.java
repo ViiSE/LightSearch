@@ -15,19 +15,17 @@
  */
 package lightsearch.server.identifier;
 
+import lightsearch.server.exception.ConnectionIdentifierException;
+import lightsearch.server.handler.HandlerTestUtils;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import lightsearch.server.data.stream.DataStream;
-import lightsearch.server.data.stream.DataStreamCreator;
-import lightsearch.server.data.stream.DataStreamCreatorInit;
-import lightsearch.server.data.stream.DataStreamInit;
-import lightsearch.server.exception.DataStreamCreatorException;
-import lightsearch.server.exception.ConnectionIdentifierException;
-import static org.testng.Assert.*;
-import org.testng.annotations.Test;
-import static test.message.TestMessage.testBegin;
-import static test.message.TestMessage.testEnd;
+
+import static org.testng.Assert.assertNotNull;
+import static test.message.TestMessage.*;
 
 /**
  *
@@ -35,35 +33,14 @@ import static test.message.TestMessage.testEnd;
  */
 public class ConnectionIdentifierResultTestNG {
     
-    private boolean close = false;
-    
-    public class Client implements Runnable {
-
-        @Override
-        public void run() {
-            try(Socket socket = new Socket("127.0.0.1", 49000);) { 
-                DataStreamCreator dataStreamCreator = DataStreamCreatorInit.dataStreamCreator(socket);
-                dataStreamCreator.createDataStream();
-                DataStream dataStream = DataStreamInit.dataStream(dataStreamCreator);
-                dataStream.dataOutputStream().writeUTF("{ \"identifier\": \"android\" }");
-                String message = dataStream.dataInputStream().readUTF();
-                if(message.equals("OK"))
-                    System.out.println("I am connected!");
-                while(!close) {
-                    // do something
-                }
-            } 
-            catch (IOException | DataStreamCreatorException ignore) {}   
-        }   
-    }
-    
     @Test
-    public void identifyConnection() {
+    @Parameters({"ip", "port"})
+    public void identifyConnection(String ip, int port) {
         testBegin("ConnectionIdentifierResult", "identifyConnection()");
-        
-        try(ServerSocket serverSocket = new ServerSocket(49000);) {
-            close = false;
-            Thread client = new Thread(new Client());
+
+        try(ServerSocket serverSocket = new ServerSocket(port)) {
+            HandlerTestUtils.close = false;
+            Thread client = new Thread(new HandlerTestUtils.Client(ip, port));
             client.start();
             Socket clientSocket = serverSocket.accept();
             ConnectionIdentifier connIndent = ConnectionIdentifierInit.connectionIdentifier();
@@ -74,11 +51,10 @@ public class ConnectionIdentifierResultTestNG {
             System.out.println("Identifier: " + connRes.identifier());
             System.out.println("Client socket: " + connRes.clientSocket());
             System.out.println("Data stream: " + connRes.dataStream());
-            
-            close = true;
-        }
-        catch(IOException | ConnectionIdentifierException ex) { 
-            System.out.println("CATCH! Message: " + ex.getMessage()); 
+
+            HandlerTestUtils.close = true;
+        } catch(IOException | ConnectionIdentifierException ex) {
+            catchMessage(ex);
         }
         
         testEnd("ConnectionIdentifierResult", "identifyConnection()");

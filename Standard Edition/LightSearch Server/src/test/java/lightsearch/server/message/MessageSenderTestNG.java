@@ -15,25 +15,27 @@
  */
 package lightsearch.server.message;
 
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
 import lightsearch.server.data.stream.DataStream;
 import lightsearch.server.data.stream.DataStreamCreator;
 import lightsearch.server.data.stream.DataStreamCreatorInit;
 import lightsearch.server.data.stream.DataStreamInit;
+import lightsearch.server.exception.ConnectionIdentifierException;
 import lightsearch.server.exception.DataStreamCreatorException;
+import lightsearch.server.exception.MessageSenderException;
 import lightsearch.server.identifier.ConnectionIdentifier;
 import lightsearch.server.identifier.ConnectionIdentifierInit;
 import lightsearch.server.identifier.ConnectionIdentifierResult;
-import lightsearch.server.exception.ConnectionIdentifierException;
-import lightsearch.server.exception.MessageSenderException;
 import lightsearch.server.thread.LightSearchThread;
 import lightsearch.server.thread.LightSearchThreadInit;
-import static org.testng.Assert.*;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import static test.message.TestMessage.testBegin;
-import static test.message.TestMessage.testEnd;
+
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+import static org.testng.Assert.assertNotNull;
+import static test.message.TestMessage.*;
 
 /**
  *
@@ -43,11 +45,19 @@ public class MessageSenderTestNG {
     
     private boolean close = false;
     
-    public class Admin implements Runnable {
+    private class Admin implements Runnable {
+
+        private final String ip;
+        private final int port;
+
+        Admin(String ip, int port) {
+            this.ip = ip;
+            this.port = port;
+        }
 
         @Override
         public void run() {
-            try(Socket socket = new Socket("127.0.0.1", 49000);) {
+            try(Socket socket = new Socket(ip, port)) {
                 DataStreamCreator dataStreamCreator = DataStreamCreatorInit.dataStreamCreator(socket);
                 dataStreamCreator.createDataStream();
                 DataStream dataStream = DataStreamInit.dataStream(dataStreamCreator);
@@ -67,14 +77,13 @@ public class MessageSenderTestNG {
                         System.out.println("Server send message: " + message2);
                     }
                 }
-            } 
-            catch (IOException | DataStreamCreatorException ignore) { }   
+            } catch (IOException | DataStreamCreatorException ignore) { }
         }   
     }
     
-    private void adminTest(ServerSocket serverSocket) {
+    private void adminTest(ServerSocket serverSocket, String ip, int port) {
         try {
-            LightSearchThread admin = LightSearchThreadInit.lightSearchThread(new Admin());
+            LightSearchThread admin = LightSearchThreadInit.lightSearchThread(new Admin(ip, port));
             admin.start();
             Socket clientSocket = serverSocket.accept();
             
@@ -92,22 +101,22 @@ public class MessageSenderTestNG {
             messageSender.sendMessage("Hello, mister admin!");
                         
         } catch (IOException | ConnectionIdentifierException | MessageSenderException ex) {
-            System.out.println("CATCH! adminTest: " + ex.getMessage());
+            catchMessage(ex);
         }
     }
     
     @Test
-    public void sendMessage() {
+    @Parameters({"ip", "port"})
+    public void sendMessage(String ip, int port) {
         testBegin("MessageSender", "sendMessage()");
         
         close = false;
-        try(ServerSocket serverSocket = new ServerSocket(49000);) {
-            adminTest(serverSocket);
+        try(ServerSocket serverSocket = new ServerSocket(port);) {
+            adminTest(serverSocket, ip, port);
             close = true;
             serverSocket.close();
-        }
-        catch(IOException ex) { 
-            System.out.println("CATCH! Message: " + ex.getMessage()); 
+        } catch(IOException ex) {
+            catchMessage(ex);
         }
         
         testEnd("MessageSender", "sendMessage()");

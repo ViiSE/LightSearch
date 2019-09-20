@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="MessageParserSuite" verbose="1" >
+
+    <parameter name="OKMessage" value="{&quot;IMEI&quot;:&quot;745689574123658&quot;}"/>
+    <parameter name="failMessage" value="{ 745689574123658:"/>
+
+    <test name="MessageParserSuiteTest">
+        <packages>
+            <package name="lightsearch.server.message.parser"/>
+        </packages>
+    </test>
+
+</suite>

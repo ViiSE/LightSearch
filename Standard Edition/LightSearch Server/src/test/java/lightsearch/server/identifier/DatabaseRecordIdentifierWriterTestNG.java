@@ -15,26 +15,14 @@
  */
 package lightsearch.server.identifier;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import lightsearch.server.data.LightSearchServerDTOInit;
-import lightsearch.server.data.LightSearchServerDatabaseDTO;
-import lightsearch.server.data.LightSearchServerDatabaseDTOInit;
-import lightsearch.server.data.LightSearchServerSettingsDAOInit;
-import lightsearch.server.exception.IdentifierException;
-import lightsearch.server.initialization.CurrentServerDirectory;
-import lightsearch.server.initialization.CurrentServerDirectoryInit;
-import lightsearch.server.initialization.OsDetector;
-import lightsearch.server.initialization.OsDetectorInit;
-
-import static org.testng.Assert.*;
-import org.testng.annotations.Test;
 import lightsearch.server.data.LightSearchServerDTO;
-import lightsearch.server.data.LightSearchServerSettingsDAO;
-import static test.message.TestMessage.testBegin;
-import static test.message.TestMessage.testEnd;
+import lightsearch.server.exception.IdentifierException;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import test.data.DataProviderCreator;
+
+import static org.testng.Assert.assertFalse;
+import static test.message.TestMessage.*;
 
 /**
  *
@@ -42,41 +30,19 @@ import static test.message.TestMessage.testEnd;
  */
 public class DatabaseRecordIdentifierWriterTestNG {
     
-    private LightSearchServerDTO init() {
-        Map<String, String> admins = new HashMap<>();
-        Map<String, String> clients = new HashMap<>();
-        List<String> blacklist = new ArrayList<>();
-        
-        String dbIP = "127.0.0.1";
-        String dbName = "example_db";
-        int dbPort = 8080;
-        LightSearchServerDatabaseDTO databaseDTO = LightSearchServerDatabaseDTOInit.lightSearchServerDatabaseDTO(dbIP, dbName, dbPort);
-        
-        int serverReboot = 0;
-        int clientTimeout = 0;
-        LightSearchServerSettingsDAO settingsDTO = LightSearchServerSettingsDAOInit.settingsDAO(serverReboot, clientTimeout);
-        
-        OsDetector osDetector = OsDetectorInit.osDetector();
-        CurrentServerDirectory currentDirectory = CurrentServerDirectoryInit.currentDirectory(osDetector);
-        
-        LightSearchServerDTO serverDTO = LightSearchServerDTOInit.LightSearchServerDTO(admins, clients, 
-                blacklist, databaseDTO, 0, settingsDTO, currentDirectory.currentDirectory());
-        
-        return serverDTO;
-    }
-    
     @Test
-    public void write() {
+    @Parameters({"minutesToWrite"})
+    public void write(int minutesToWrite) {
         testBegin("DatabaseRecordIdentifierWriter", "write()");
         
-        LightSearchServerDTO serverDTO = init();
-        DatabaseRecordIdentifierWriter identifierWriter = DatabaseRecordIdentifierWriterInit.databaseRecordIdentifierWriter(serverDTO);
+        LightSearchServerDTO serverDTO = DataProviderCreator.createDataProvider(LightSearchServerDTO.class);
+        DatabaseRecordIdentifierWriter identifierWriter =
+                DatabaseRecordIdentifierWriterInit.databaseRecordIdentifierWriter(serverDTO);
         try {
-            long valueToWrite = 15;
-            assertFalse(valueToWrite < 0, "Identifier value is less than 0!");
-            identifierWriter.write(valueToWrite);
+            assertFalse(minutesToWrite < 0, "Identifier value is less than 0!");
+            identifierWriter.write(minutesToWrite);
         } catch (IdentifierException ex) {
-            System.out.println(ex.getMessage());
+            catchMessage(ex);
         }
         
         testEnd("DatabaseRecordIdentifierWriter", "write()");

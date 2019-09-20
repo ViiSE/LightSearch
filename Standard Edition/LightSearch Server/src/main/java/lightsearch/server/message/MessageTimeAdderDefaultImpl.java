@@ -34,7 +34,11 @@ public class MessageTimeAdderDefaultImpl implements MessageTimeAdder {
     private static boolean isFirst = true;
     private static long count = 0;
     private static long sum = 0;
-    
+
+    public MessageTimeAdderDefaultImpl() {
+        clear();
+    }
+
     @Override
     synchronized public void add(long time) {
         if(time >= 0) {

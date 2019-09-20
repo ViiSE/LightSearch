@@ -15,15 +15,18 @@
  */
 package lightsearch.server.message;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import lightsearch.server.message.result.MessageCreator;
 import lightsearch.server.message.result.MessageCreatorInit;
 import lightsearch.server.message.result.ResultTypeMessageEnum;
 import lightsearch.server.message.result.type.MessageType;
 import lightsearch.server.message.result.type.MessageTypeInit;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 
@@ -34,13 +37,12 @@ import static test.message.TestMessage.testEnd;
 public class MessageCreatorTestNG {
     
     @Test
-    public void createMessage() {
+    @Parameters({"message", "name", "IMEI"})
+    public void createMessage(String message, String name, String IMEI) {
         testBegin("MessageCreator", "createMessage()");
         
         MessageType messageType = MessageTypeInit.messageTypeJSONAdmin();
-        
-        String message = "I am message";
-        String name = "Admin";
+
         MessageCreator messageCreator = MessageCreatorInit.messageCreator(messageType);
         String doneMessage = messageCreator.createMessage(name, ResultTypeMessageEnum.TRUE, message);
         System.out.println(doneMessage);
@@ -64,7 +66,6 @@ public class MessageCreatorTestNG {
         System.out.println(nullMessage);
         
         MessageCreator messageTypeClient = MessageCreatorInit.messageCreator(messageType);
-        String IMEI = "123456879765";
         String clientMessage = messageCreator.createMessage(IMEI, ResultTypeMessageEnum.TRUE, messageTypeClient);
         System.out.println(clientMessage);
         

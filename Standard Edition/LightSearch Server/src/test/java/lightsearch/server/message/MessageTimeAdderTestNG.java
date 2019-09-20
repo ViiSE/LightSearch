@@ -15,8 +15,10 @@
  */
 package lightsearch.server.message;
 
-import static org.testng.Assert.*;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.*;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 
@@ -27,22 +29,23 @@ import static test.message.TestMessage.testEnd;
 public class MessageTimeAdderTestNG {
     
     @Test
-    public void add() {
+    @Parameters({"firstValue", "secondValue", "thirdValue"})
+    public void add(int firstValue, int secondValue, int thirdValue) {
         testBegin("MessageTimeAdder", "add()");
         
         MessageTimeAdder msgTimeAdder = MessageTimeAdderInit.messageTimeAdder();
         
-        msgTimeAdder.add(25);
+        msgTimeAdder.add(firstValue);
         System.out.println("avg: " + msgTimeAdder.averageTime());
-        assertFalse(msgTimeAdder.averageTime() == 20, "First value is missing!");
+        assertNotEquals((firstValue - 5), msgTimeAdder.averageTime(), "First value is missing!");
         
-        msgTimeAdder.add(15);
+        msgTimeAdder.add(secondValue);
         System.out.println("avg: " + msgTimeAdder.averageTime());
-        assertTrue(msgTimeAdder.averageTime() == 15, "Second value is not missing!");
+        assertEquals(secondValue, msgTimeAdder.averageTime(), "Second value is not missing!");
         
-        msgTimeAdder.add(35);
+        msgTimeAdder.add(thirdValue);
         System.out.println("avg: " + msgTimeAdder.averageTime());
-        assertTrue(msgTimeAdder.averageTime() == 25, "Second value is not missing!");
+        assertEquals(msgTimeAdder.averageTime(), ((secondValue + thirdValue) / 2), "Second value is not missing!");
         
         testEnd("MessageTimeAdder", "add()");
     }

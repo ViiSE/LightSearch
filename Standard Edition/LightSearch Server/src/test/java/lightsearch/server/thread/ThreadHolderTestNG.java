@@ -15,10 +15,12 @@
  */
 package lightsearch.server.thread;
 
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+
 import java.util.HashMap;
 
 import static org.testng.Assert.*;
-import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 
@@ -29,12 +31,12 @@ import static test.message.TestMessage.testEnd;
 public class ThreadHolderTestNG {
     
     @Test
-    public void add() {
+    @Parameters("id")
+    public void add(String id) {
         testBegin("ThreadHolder", "add()");
         
-        String id = "admin1";
         assertNotNull(id, "Thread id is null!");
-        assertFalse(id.equals(""), "Thread id is null!");
+        assertNotEquals(id, "", "Thread id is null!");
         HashMap<String, LightSearchThread> threads = new HashMap<>();
         ThreadHolder holder = ThreadHolderInit.threadHolder(threads);
         holder.add(id, new LightSearchThread());
@@ -45,12 +47,12 @@ public class ThreadHolderTestNG {
     }
 
     @Test
-    public void del() {
+    @Parameters("id")
+    public void del(String id) {
         testBegin("ThreadHolder", "del()");
         
-        String id = "admin1";
         assertNotNull(id, "Thread id is null!");
-        assertFalse(id.equals(""), "Thread id is null!");
+        assertNotEquals(id, "", "Thread id is null!");
         HashMap<String, LightSearchThread> threads = new HashMap<>();
         ThreadHolder holder = ThreadHolderInit.threadHolder(threads);
         holder.add(id, new LightSearchThread());
@@ -64,12 +66,12 @@ public class ThreadHolderTestNG {
     }
 
     @Test
-    public void getThread() {
+    @Parameters("id")
+    public void getThread(String id) {
         testBegin("ThreadHolder", "getThread()");
-        
-        String id = "admin1";
+
         assertNotNull(id, "Thread id is null!");
-        assertFalse(id.equals(""), "Thread id is null!");
+        assertNotEquals(id, "", "Thread id is null!");
         HashMap<String, LightSearchThread> threads = new HashMap<>();
         ThreadHolder holder = ThreadHolderInit.threadHolder(threads);
         holder.add(id, new LightSearchThread());
@@ -79,24 +81,25 @@ public class ThreadHolderTestNG {
     }
 
     @Test
-    public void delAll() {
+    @Parameters("id")
+    public void delAll(String id) {
         testBegin("ThreadHolder", "delAll()");
-        
-        String id1 = "admin1";
-        String id2 = "admin2";
-        String id3 = "admin3";
-        String id4 = "admin4";
-        String id5 = "admin5";
+
+        String id1 = id;
+        String id2 = id + "2";
+        String id3 = id + "3";
+        String id4 = id + "4";
+        String id5 = id + "5";
         assertNotNull(id1, "Thread id is null!");
-        assertFalse(id1.equals(""), "Thread id is null!");
+        assertNotEquals(id1, "", "Thread id is null!");
         assertNotNull(id2, "Thread id is null!");
-        assertFalse(id2.equals(""), "Thread id is null!");
+        assertNotEquals(id2, "", "Thread id is null!");
         assertNotNull(id3, "Thread id is null!");
-        assertFalse(id3.equals(""), "Thread id is null!");
+        assertNotEquals(id3, "", "Thread id is null!");
         assertNotNull(id4, "Thread id is null!");
-        assertFalse(id4.equals(""), "Thread id is null!");
+        assertNotEquals(id4, "", "Thread id is null!");
         assertNotNull(id5, "Thread id is null!");
-        assertFalse(id5.equals(""), "Thread id is null!");
+        assertNotEquals(id5, "", "Thread id is null!");
         HashMap<String, LightSearchThread> threads = new HashMap<>();
         
         ThreadHolder holder = ThreadHolderInit.threadHolder(threads);
@@ -115,24 +118,25 @@ public class ThreadHolderTestNG {
     }
 
     @Test
-    public void getThreads() {
+    @Parameters("id")
+    public void getThreads(String id) {
         testBegin("ThreadHolder", "getThreads()");
-        
-        String id1 = "admin1";
-        String id2 = "admin2";
-        String id3 = "admin3";
-        String id4 = "admin4";
-        String id5 = "admin5";
+
+        String id1 = id;
+        String id2 = id + "2";
+        String id3 = id + "3";
+        String id4 = id + "4";
+        String id5 = id + "5";
         assertNotNull(id1, "Thread id is null!");
-        assertFalse(id1.equals(""), "Thread id is null!");
+        assertNotEquals(id1, "", "Thread id is null!");
         assertNotNull(id2, "Thread id is null!");
-        assertFalse(id2.equals(""), "Thread id is null!");
+        assertNotEquals(id2, "", "Thread id is null!");
         assertNotNull(id3, "Thread id is null!");
-        assertFalse(id3.equals(""), "Thread id is null!");
+        assertNotEquals(id3, "", "Thread id is null!");
         assertNotNull(id4, "Thread id is null!");
-        assertFalse(id4.equals(""), "Thread id is null!");
+        assertNotEquals(id4, "", "Thread id is null!");
         assertNotNull(id5, "Thread id is null!");
-        assertFalse(id5.equals(""), "Thread id is null!");
+        assertNotEquals(id5, "", "Thread id is null!");
         HashMap<String, LightSearchThread> threads = new HashMap<>();
         
         ThreadHolder holder = ThreadHolderInit.threadHolder(threads);
@@ -147,12 +151,12 @@ public class ThreadHolderTestNG {
     }
 
     @Test
-    public void getId() {
+    @Parameters({"id"})
+    public void getId(String id) {
         testBegin("ThreadHolder", "getId()");
-        
-        String id = "admin1";
+
         assertNotNull(id, "Thread id is null!");
-        assertFalse(id.equals(""), "Thread id is null!");
+        assertNotEquals(id, "", "Thread id is null!");
         HashMap<String, LightSearchThread> threads = new HashMap<>();
         ThreadHolder holder = ThreadHolderInit.threadHolder(threads);
         LightSearchThread thread = new LightSearchThread();

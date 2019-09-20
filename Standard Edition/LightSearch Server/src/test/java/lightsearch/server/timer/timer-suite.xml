@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="TimerSuite" verbose="1" >
+
+    <parameter name="serverRebootValue" value="24"/>
+    <parameter name="logDirectory" value="logs"/>
+    <parameter name="openTest" value="false"/>
+
+
+    <test name="TimerSuiteTest">
+        <packages>
+            <package name="lightsearch.server.timer"/>
+        </packages>
+    </test>
+
+</suite>

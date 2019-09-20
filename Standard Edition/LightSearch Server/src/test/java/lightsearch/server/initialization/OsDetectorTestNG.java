@@ -15,8 +15,9 @@
  */
 package lightsearch.server.initialization;
 
-import static org.testng.Assert.*;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertTrue;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 
@@ -26,14 +27,12 @@ import static test.message.TestMessage.testEnd;
  */
 public class OsDetectorTestNG {
     
-    @Test(groups = {"Initialization", "Server"})
+    @Test
     public void isWindows() {
         testBegin("OsDetector", "isWindow()");
         
         OsDetector osDetector = OsDetectorInit.osDetector();
-        assertTrue(osDetector.isWindows() ||
-                   osDetector.isLinux()   ||
-                   osDetector.isMacOS()     , "Not supported OS!");
+        assertTrue(osDetector.isWindows() || osDetector.isLinux() || osDetector.isMacOS(), "Not supported OS!");
         
         testEnd("OsDetector", "isWindow()");
     }

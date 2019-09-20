@@ -16,14 +16,15 @@
 package lightsearch.server.cmd.admin;
 
 import lightsearch.server.exception.CommandConverterException;
+import lightsearch.server.exception.ReceivedCommandVerifierException;
 import lightsearch.server.handler.admin.ReceivedAdminCommandVerifier;
 import lightsearch.server.handler.admin.ReceivedAdminCommandVerifierInit;
-import lightsearch.server.exception.ReceivedCommandVerifierException;
-import static org.testng.Assert.*;
-import static test.message.TestMessage.*;
-
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertNotEquals;
+import static org.testng.Assert.assertNotNull;
+import static test.message.TestMessage.*;
 
 /**
  *
@@ -34,8 +35,7 @@ public class ReceivedAdminCommandVerifierTestNG {
     private AdminCommand initAdminCommand(String message) {
         try {
             AdminCommandConverter admCmdConverter = AdminCommandConverterInit.adminCommandConverter();
-            AdminCommand admCmd;
-            admCmd = admCmdConverter.convertToAdminCommand(message);
+            AdminCommand admCmd = admCmdConverter.convertToAdminCommand(message);
             assertNotNull(admCmd, "Admin Command is null!");
             assertNotNull(admCmd.name(), "Admin name is null!");
             assertNotNull(admCmd.command(), "Admin command is null!");

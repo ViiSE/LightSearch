@@ -15,9 +15,9 @@
  */
 package lightsearch.server.initialization;
 
-import static org.testng.Assert.*;
-import org.testng.annotations.*;
+import org.testng.annotations.Test;
 
+import static org.testng.Assert.*;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 /**
@@ -26,16 +26,17 @@ import static test.message.TestMessage.testEnd;
  */
 public class CurrentServerDirectoryTestNG {
 
-    @Test(groups = {"Initialization", "Server"})
+    @Test
     public void currentDirectory() {
         testBegin("CurrentServerDirectory", "currentDirectory()");
         
-        CurrentServerDirectory currServerDir = CurrentServerDirectoryInit.currentDirectory(
-                OsDetectorInit.osDetector());
+        CurrentServerDirectory currServerDir =
+                CurrentServerDirectoryInit.currentDirectoryDebug(OsDetectorInit.osDetector());
         String currDir = currServerDir.currentDirectory();
-        
+        System.out.println("Current dir: " + currDir);
+
         assertNotNull(currDir, "Current dir is null!");
-        assertFalse(currDir.equals(""), "Current dir is \"\"!");
+        assertNotEquals(currDir, "", "Current dir is \"\"!");
         
         String os = System.getProperty("os.name");
         if(os.startsWith("Windows"))

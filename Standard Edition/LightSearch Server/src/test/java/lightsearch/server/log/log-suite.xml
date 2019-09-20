@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="LogSuite" verbose="1" >
+
+    <parameter name="logDirectory" value="logs"/>
+    <parameter name="message" value="Hello World!"/>
+
+    <test name="LogSuiteTest">
+        <packages>
+            <package name="lightsearch.server.log"/>
+        </packages>
+    </test>
+</suite>

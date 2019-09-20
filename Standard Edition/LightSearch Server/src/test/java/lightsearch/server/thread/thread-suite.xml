@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="ThreadSuite" verbose="1" >
+    <parameter name="id" value="admin1"/>
+    <parameter name="threadAmount" value="20"/>
+    <parameter name="openSecondTest" value="true"/>
+
+    <test name="ThreadSuiteTest">
+        <packages>
+            <package name="lightsearch.server.thread"/>
+        </packages>
+    </test>
+
+</suite>

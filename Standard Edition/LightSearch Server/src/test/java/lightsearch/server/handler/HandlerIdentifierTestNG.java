@@ -17,8 +17,10 @@ package lightsearch.server.handler;
 
 import lightsearch.server.identifier.HandlerIdentifier;
 import lightsearch.server.identifier.HandlerIdentifierInit;
-import static org.testng.Assert.*;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertNotEquals;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 
@@ -29,11 +31,11 @@ import static test.message.TestMessage.testEnd;
 public class HandlerIdentifierTestNG {
     
     @Test
-    public void next() {
+    @Parameters({"id"})
+    public void next(String id) {
         testBegin("HandlerIdentifier", "next()");
         
         HandlerIdentifier handlerIdentifier = HandlerIdentifierInit.handlerIdentifier();
-        String id = "admin";
         System.out.println(id);
         String newId1 =  id + handlerIdentifier.next();
         System.out.println(newId1);
@@ -46,10 +48,10 @@ public class HandlerIdentifierTestNG {
         
         String newNewId = id + newHandlerIdentifier.next();
         System.out.println(newNewId);
-        
-        assertFalse(newNewId.equals(newId1), "Number of id is equals!");
-        assertFalse(newNewId.equals(newId2), "Number of id is equals!");
-        assertFalse(newNewId.equals(newId3), "Number of id is equals!");
+
+        assertNotEquals(newId1, newNewId, "Number of id is equals!");
+        assertNotEquals(newId2, newNewId, "Number of id is equals!");
+        assertNotEquals(newId3, newNewId, "Number of id is equals!");
         
         testEnd("HandlerIdentifier", "next()");
     }

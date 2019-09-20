@@ -15,43 +15,42 @@
  */
 package lightsearch.server.message.parser;
 
-import lightsearch.server.message.parser.MessageParser;
-import lightsearch.server.message.parser.MessageParserInit;
 import lightsearch.server.exception.MessageParserException;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import static test.message.TestMessage.testBegin;
-import static test.message.TestMessage.testEnd;
+
+import static test.message.TestMessage.*;
 
 /**
  *
  * @author ViiSE
  */
 public class MessageParserTestNG {
-    
+
     @Test
-    public void parse() {
+    @Parameters({"OKMessage", "failMessage"})
+    public void parse(String OKMessage, String failMessage) {
         testBegin("MessageParser", "parse()");
         
-        String message1 = "745689574123658";
-        String message2 = "{\"IMEI\":\"745689574123658\"}";
         Object devInfo = null;
         MessageParser devInfoParser = MessageParserInit.messageParser();
       
         try {
-            devInfo = devInfoParser.parse(message1);
+            devInfo = devInfoParser.parse(OKMessage);
             System.out.println("Now isParse = true, devInfo value: " + devInfo);
             
         } catch(MessageParserException ex) {
             System.out.println("Now isParse = false, devInfo value: " + devInfo);
-            System.out.println("Error message: " + ex.getMessage());
+            catchMessage(ex);
         }
         
         try {
-            devInfo = devInfoParser.parse(message2);
+            devInfo = null;
+            devInfo = devInfoParser.parse(failMessage);
             System.out.println("Now isParse = true, devInfo value: " + devInfo);
         } catch(MessageParserException ex) {
             System.out.println("Now isParse = false, devInfo value: " + devInfo);
-            System.out.println("Error message: " + ex.getMessage());
+            catchMessage(ex);
         }
         
         testEnd("MessageParser", "parse()");

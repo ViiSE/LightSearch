@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="InitializationSuite" verbose="1" >
+
+    <test name="InitializationSuiteTest">
+        <packages>
+            <package name="lightsearch.server.initialization"/>
+        </packages>
+    </test>
+</suite>

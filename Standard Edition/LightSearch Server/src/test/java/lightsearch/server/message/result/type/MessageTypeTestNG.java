@@ -15,13 +15,14 @@
  */
 package lightsearch.server.message.result.type;
 
+import lightsearch.server.message.result.ResultTypeMessageEnum;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import lightsearch.server.message.result.ResultTypeMessageEnum;
-import lightsearch.server.message.result.type.MessageType;
-import lightsearch.server.message.result.type.MessageTypeInit;
-import org.testng.annotations.Test;
+
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 
@@ -32,13 +33,12 @@ import static test.message.TestMessage.testEnd;
 public class MessageTypeTestNG {
     
     @Test
-    public void createFormattedMessage() {
+    @Parameters({"message", "name", "IMEI"})
+    public void createFormattedMessage(String message, String name, String IMEI) {
         testBegin("MessageType", "createFormattedMessage()");
-        
-        String message = "I am message";
+
         String isDone = ResultTypeMessageEnum.TRUE.stringValue();
-        String name = "Admin";
-        
+
         MessageType messageType = MessageTypeInit.messageTypeJSONAdmin();
         String doneMessage = messageType.createFormattedMessage(name, isDone, message);
         System.out.println(doneMessage);
@@ -69,7 +69,6 @@ public class MessageTypeTestNG {
         System.out.println(nullMessage);
         
         MessageType messageTypeClient = MessageTypeInit.messageTypeJSONClientSuccess();
-        String IMEI = "123456879765";
         String clientMessage = messageTypeClient.createFormattedMessage(IMEI, isDone, message);
         System.out.println(clientMessage);
         

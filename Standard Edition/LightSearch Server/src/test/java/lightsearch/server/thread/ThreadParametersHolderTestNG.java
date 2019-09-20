@@ -17,8 +17,10 @@ package lightsearch.server.thread;
 
 import lightsearch.server.data.ThreadParametersHolder;
 import lightsearch.server.data.ThreadParametersHolderInit;
-import static org.testng.Assert.*;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.*;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 
@@ -29,12 +31,12 @@ import static test.message.TestMessage.testEnd;
 public class ThreadParametersHolderTestNG {
     
     @Test
-    public void id() {
+    @Parameters({"id"})
+    public void id(String id) {
         testBegin("ThreadParametersHolder", "id()");
-        
-        String id = "admin1";
+
         assertNotNull(id, "Thread id is null!");
-        assertFalse(id.equals(""), "Thread id is null!");
+        assertNotEquals(id, "", "Thread id is null!");
         ThreadParametersHolder threadParametersHolder = ThreadParametersHolderInit.threadParametersHolder(id);
         System.out.println(threadParametersHolder.id());
         

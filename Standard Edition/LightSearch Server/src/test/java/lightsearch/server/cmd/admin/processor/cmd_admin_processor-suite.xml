@@ -69,7 +69,7 @@
                    value="{
                             &quot;command&quot;:&quot;toutServer&quot;,
                             &quot;name&quot;:&quot;admin&quot;,
-                            &quot;time&quot;:&quot;0&quot;
+                            &quot;time&quot;:&quot;3&quot;
                           }"/>
         <parameter name="logDirectoryName" value="logs"/>
         <parameter name="openTest" value="false"/>

@@ -37,8 +37,7 @@ public class SearchProcessorDebugTestNG {
     private ClientCommand initClientCommand(String message) {
         try {
             ClientCommandConverter clientCmdConverter = ClientCommandConverterInit.clientCommandConverter();
-            ClientCommand clientCmd;
-            clientCmd = clientCmdConverter.convertToClientCommand(message);
+            ClientCommand clientCmd = clientCmdConverter.convertToClientCommand(message);
             assertNotNull(clientCmd, "Client Command is null!");
             assertNotNull(clientCmd.command(), "Client command is null!");
             assertNotNull(clientCmd.IMEI(), "Client IMEI is null!");

@@ -15,12 +15,12 @@
  */
 package lightsearch.server.message.result;
 
+import lightsearch.server.exception.MessageParserException;
 import lightsearch.server.message.parser.MessageParser;
 import lightsearch.server.message.parser.MessageParserInit;
-import lightsearch.server.exception.MessageParserException;
-import lightsearch.server.message.result.DeviceInformation;
-import lightsearch.server.message.result.DeviceInformationInit;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 
@@ -31,10 +31,9 @@ import static test.message.TestMessage.testEnd;
 public class DeviceInformationTestNG {
     
     @Test
-    public void identifier() {
+    @Parameters({"message"})
+    public void identifier(String message) {
         testBegin("DeviceInformation", "identifier()");
-        
-        String message = "{\"IMEI\":\"745689574123658\"}";
         
         MessageParser devInfoParser = MessageParserInit.messageParser();
         try {
@@ -42,7 +41,7 @@ public class DeviceInformationTestNG {
 
             DeviceInformation deviceInformation = DeviceInformationInit.deviceInformation(devInfo);
             String identifier = deviceInformation.identifier();
-            System.out.print(identifier);
+            System.out.println(identifier);
         } catch(MessageParserException ex) {
             System.out.println("CATCH! Message: " + ex.getMessage());
         }

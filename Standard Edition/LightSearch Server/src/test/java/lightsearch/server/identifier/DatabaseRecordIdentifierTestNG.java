@@ -15,23 +15,15 @@
  */
 package lightsearch.server.identifier;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import lightsearch.server.data.LightSearchServerDTOInit;
-import lightsearch.server.data.LightSearchServerDatabaseDTO;
-import lightsearch.server.data.LightSearchServerDatabaseDTOInit;
-import lightsearch.server.data.LightSearchServerSettingsDAOInit;
-import lightsearch.server.initialization.CurrentServerDirectory;
-import lightsearch.server.initialization.CurrentServerDirectoryInit;
-import lightsearch.server.initialization.OsDetector;
-import lightsearch.server.initialization.OsDetectorInit;
-
-import static org.testng.Assert.*;
-import org.testng.annotations.Test;
 import lightsearch.server.data.LightSearchServerDTO;
-import lightsearch.server.data.LightSearchServerSettingsDAO;
+import org.testng.annotations.Test;
+import test.TestUtils;
+import test.data.DataProviderCreator;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.testng.Assert.assertFalse;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 
@@ -41,37 +33,13 @@ import static test.message.TestMessage.testEnd;
  */
 public class DatabaseRecordIdentifierTestNG {
     
-    private DatabaseRecordIdentifierReader init() {
-        Map<String, String> admins = new HashMap<>();
-        Map<String, String> clients = new HashMap<>();
-        List<String> blacklist = new ArrayList<>();
-        
-        String dbIP = "127.0.0.1";
-        String dbName = "example_db";
-        int dbPort = 8080;
-        LightSearchServerDatabaseDTO databaseDTO = LightSearchServerDatabaseDTOInit.lightSearchServerDatabaseDTO(dbIP, dbName, dbPort);
-        
-        int serverReboot = 0;
-        int clientTimeout = 0;
-        LightSearchServerSettingsDAO settingsDTO = LightSearchServerSettingsDAOInit.settingsDAO(serverReboot, clientTimeout);
-        
-        OsDetector osDetector = OsDetectorInit.osDetector();
-        CurrentServerDirectory currentDirectory = CurrentServerDirectoryInit.currentDirectory(osDetector);
-        
-        LightSearchServerDTO serverDTO = LightSearchServerDTOInit.LightSearchServerDTO(admins, clients, 
-                blacklist, databaseDTO, 0, settingsDTO, currentDirectory.currentDirectory());
-        DatabaseRecordIdentifierReader identifierReader = DatabaseRecordIdentifierReaderInit.databaseRecordIdentifierReader(serverDTO);
-        
-        return identifierReader;
-    }
-    
     private final List<Boolean> threadsDone = new ArrayList<>();
     
-    public class Client implements Runnable {
+    private class Client implements Runnable {
         private final DatabaseRecordIdentifier identifier;
         private final int ID;
         
-        public Client(DatabaseRecordIdentifier identifier, int ID) {
+        Client(DatabaseRecordIdentifier identifier, int ID) {
             this.identifier = identifier;
             this.ID = ID;
         }
@@ -79,7 +47,7 @@ public class DatabaseRecordIdentifierTestNG {
         @Override
         public void run() {
             for(int i = 0; i < 100; i++) {
-                try { Thread.sleep(200); } catch(InterruptedException ignore) {}
+                TestUtils.sleep(200);
                 identifier.next();
                 System.out.println("Thread: ID - " + ID + " identifierValue: " + identifier.databaseRecordIdentifier());
             }
@@ -92,8 +60,10 @@ public class DatabaseRecordIdentifierTestNG {
     @Test
     public void next() {
         testBegin("DatabaseRecordIdentifier", "next()");
-        
-        DatabaseRecordIdentifierReader identifierReader = init();
+
+        LightSearchServerDTO serverDTO = DataProviderCreator.createDataProvider(LightSearchServerDTO.class);
+        DatabaseRecordIdentifierReader identifierReader =
+                DatabaseRecordIdentifierReaderInit.databaseRecordIdentifierReader(serverDTO);
         long identifierValue = identifierReader.read();
         
         DatabaseRecordIdentifier identifier = DatabaseRecordIdentifierInit.databaseRecordIdentifier(identifierValue);
@@ -108,7 +78,7 @@ public class DatabaseRecordIdentifierTestNG {
         System.out.println("20 threads test. BEGIN");
         for(int i = 0; i < 20; i++) {
             threadsDone.add(Boolean.FALSE);
-            try { Thread.sleep(100); } catch(InterruptedException ignore) {}
+            TestUtils.sleep(100);
             new Thread(new Client(identifier, i)).start();
         }
         while(true) {
@@ -128,8 +98,10 @@ public class DatabaseRecordIdentifierTestNG {
     @Test
     public void databaseRecordIdentifier() {
         testBegin("DatabaseRecordIdentifier", "databaseRecordIdentifier()");
-        
-        DatabaseRecordIdentifierReader identifierReader = init();
+
+        LightSearchServerDTO serverDTO = DataProviderCreator.createDataProvider(LightSearchServerDTO.class);
+        DatabaseRecordIdentifierReader identifierReader =
+                DatabaseRecordIdentifierReaderInit.databaseRecordIdentifierReader(serverDTO);
         long identifierValue = identifierReader.read();
         DatabaseRecordIdentifier identifier = DatabaseRecordIdentifierInit.databaseRecordIdentifier(identifierValue);
         assertFalse(identifierValue < 0, "Identifier value is less than 0!");

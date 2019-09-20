@@ -17,8 +17,10 @@ package lightsearch.server.log;
 
 import lightsearch.server.time.CurrentDateTime;
 import lightsearch.server.time.CurrentDateTimeInit;
-import static org.testng.Assert.*;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertNotNull;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 
@@ -28,19 +30,17 @@ import static test.message.TestMessage.testEnd;
  */
 public class LoggerFileTestNG {
     
-    @Test(groups = {"Initialization", "Server"})
-    public void writeLogFile() {
+    @Test
+    @Parameters({"logDirectory", "message"})
+    public void writeLogFile(String logName, String message) {
         testBegin("LoggerFile", "writeLogFile()");
-        
-        String logName = "logs";
+
         LoggerFile loggerFile = LoggerFileInit.loggerFile(LogDirectoryInit.logDirectory(logName));
-        
-        String message = "Hello, world!";
+
         CurrentDateTime currentDateTime = CurrentDateTimeInit.currentDateTime();
-        
         assertNotNull(currentDateTime, "CurrentDateTime is null!");
         
-        loggerFile.writeLogFile("Info", currentDateTime, message);
+        loggerFile.writeLogFile(LogMessageTypeEnum.INFO.stringValue(), currentDateTime, message);
         
         testEnd("LoggerFile", "writeLogFile()");
     }

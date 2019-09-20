@@ -15,8 +15,9 @@
  */
 package lightsearch.server.initialization;
 
-import static org.testng.Assert.*;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertFalse;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 
@@ -26,30 +27,32 @@ import static test.message.TestMessage.testEnd;
  */
 public class ServerSettingsTestNG {
     
-    @Test(groups = {"Initialization", "Server"})
+    @Test
     public void rebootServerValue() {
         testBegin("ServerSettings", "rebootServerValue()");
         
-        CurrentServerDirectory currentServerDirectory = CurrentServerDirectoryInit.currentDirectory(
-                OsDetectorInit.osDetector());
+        CurrentServerDirectory currentServerDirectory =
+                CurrentServerDirectoryInit.currentDirectoryDebug(OsDetectorInit.osDetector());
         
         ServerSettings serverSettings = ServerSettingsInit.serverSettings(currentServerDirectory);
         int rebootServer = serverSettings.rebootServerValue();
+        System.out.println("Reboot server value: " + rebootServer);
         
         assertFalse(rebootServer < 0, "Reboot server value is less than 0!");
         
         testEnd("ServerSettings", "rebootServerValue()");
     }
     
-    @Test(groups = {"Initialization", "Server"})
+    @Test
     public void timeoutClientValue() {
         testBegin("ServerSettings", "timeoutClientValue()");
         
-        CurrentServerDirectory currentServerDirectory = CurrentServerDirectoryInit.currentDirectory(
-                OsDetectorInit.osDetector());
+        CurrentServerDirectory currentServerDirectory =
+                CurrentServerDirectoryInit.currentDirectoryDebug(OsDetectorInit.osDetector());
         
         ServerSettings serverSettings = ServerSettingsInit.serverSettings(currentServerDirectory);
         int timeoutClient = serverSettings.timeoutClientValue();
+        System.out.println("Timeout client value: " + timeoutClient);
         
         assertFalse(timeoutClient < 0, "Timeout client value is less than 0!");
         

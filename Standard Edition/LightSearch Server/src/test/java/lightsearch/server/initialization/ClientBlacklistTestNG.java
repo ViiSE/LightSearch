@@ -15,17 +15,12 @@
  */
 package lightsearch.server.initialization;
 
+import org.testng.annotations.Test;
+
 import java.util.List;
 
-import lightsearch.server.initialization.ClientBlacklist;
-import lightsearch.server.initialization.ClientBlacklistInit;
-
-import lightsearch.server.initialization.CurrentServerDirectory;
-import lightsearch.server.initialization.CurrentServerDirectoryInit;
-import lightsearch.server.initialization.OsDetectorInit;
-
-import static org.testng.Assert.*;
-import org.testng.annotations.Test;
+import static org.testng.Assert.assertNotEquals;
+import static org.testng.Assert.assertNotNull;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 
@@ -35,12 +30,12 @@ import static test.message.TestMessage.testEnd;
  */
 public class ClientBlacklistTestNG {
 
-    @Test(groups = {"Initialization", "Server"})
+    @Test
     public void blacklist() {
         testBegin("ClientBlacklist", "blacklist()");
         
-        CurrentServerDirectory currentServerDirectory = CurrentServerDirectoryInit.currentDirectory(
-                OsDetectorInit.osDetector());
+        CurrentServerDirectory currentServerDirectory =
+                CurrentServerDirectoryInit.currentDirectory(OsDetectorInit.osDetector());
         ClientBlacklist clientBlacklist = ClientBlacklistInit.clientBlacklist(currentServerDirectory);
         List<String> blacklist = clientBlacklist.blacklist();
         

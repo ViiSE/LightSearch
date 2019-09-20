@@ -17,9 +17,10 @@ package lightsearch.server.log;
 
 import lightsearch.server.initialization.OsDetector;
 import lightsearch.server.initialization.OsDetectorInit;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
-import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 
@@ -29,11 +30,11 @@ import static test.message.TestMessage.testEnd;
  */
 public class LogDirectoryTestNG {
     
-    @Test(groups = {"Initialization", "Server"})
-    public void logDirectory() {
+    @Test
+    @Parameters({"logDirectory"})
+    public void logDirectory(String logName) {
         testBegin("LogDirectory", "logDirectory()");
-        
-        String logName = "logs";
+
         assertFalse(logName.contains("\\"), "Log Name contains \\ !");
         assertFalse(logName.contains("~"),  "Log Name contains ~ !");
         assertFalse(logName.contains("%"),  "Log Name contains % !");
@@ -54,7 +55,7 @@ public class LogDirectoryTestNG {
         LogDirectory logDirectory = LogDirectoryInit.logDirectory(logName);
         String logDir = logDirectory.logDirectory();
         assertNotNull(logDir, "Log directory is null!");
-        assertFalse(logDir.equals(""), "Log directory is null!");
+        assertNotEquals(logDir, "", "Log directory is null!");
         
         OsDetector osDetector = OsDetectorInit.osDetector();
         if(osDetector.isWindows())

@@ -15,8 +15,9 @@
  */
 package lightsearch.server.initialization;
 
-import static org.testng.Assert.*;
-import org.testng.annotations.*;
+import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertFalse;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 
@@ -26,14 +27,15 @@ import static test.message.TestMessage.testEnd;
  */
 public class ServerPortTestNG {
     
-    @Test(groups = {"Initialization", "Server"})
+    @Test
     public void port() {
         testBegin("ServerPort", "port()");
         
-        CurrentServerDirectory currentServerDirectory = CurrentServerDirectoryInit.currentDirectory(
-                OsDetectorInit.osDetector());
+        CurrentServerDirectory currentServerDirectory =
+                CurrentServerDirectoryInit.currentDirectoryDebug(OsDetectorInit.osDetector());
         ServerPort serverPort = ServerPortInit.serverPort(currentServerDirectory);
         int port = serverPort.port();
+        System.out.println("Port: " + port);
         
         assertFalse(port < 1023, "Wrong port!");
         assertFalse(port > 65535, "Wrong port!");

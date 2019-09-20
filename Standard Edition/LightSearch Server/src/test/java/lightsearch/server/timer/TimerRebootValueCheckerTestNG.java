@@ -17,8 +17,10 @@ package lightsearch.server.timer;
 
 import lightsearch.server.checker.TimerRebootValueChecker;
 import lightsearch.server.checker.TimerRebootValueCheckerInit;
-import static org.testng.Assert.*;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertFalse;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 
@@ -29,14 +31,12 @@ import static test.message.TestMessage.testEnd;
 public class TimerRebootValueCheckerTestNG {
     
     @Test
-    public void check() {
+    @Parameters({"serverRebootValue"})
+    public void check(int serverRebootValue) {
         testBegin("TimerRebootValueChecker", "check()");
-        
-        int serverRebootValue = 24;
+
         assertFalse(serverRebootValue < 0, "ServerRebootValue is less than 0!");
-        
         TimerRebootValueChecker timerChecker = TimerRebootValueCheckerInit.timerRebootValueChecker();
-        
         System.out.println("timerChecker.check(" + serverRebootValue + "): " + timerChecker.check(serverRebootValue));
         
         testEnd("TimerRebootValueChecker", "check()");

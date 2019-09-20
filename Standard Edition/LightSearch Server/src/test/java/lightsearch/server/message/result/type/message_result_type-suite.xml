@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="MessageResultTypeSuite" verbose="1" >
+
+    <parameter name="message" value="I am message"/>
+    <parameter name="name" value="admin"/>
+    <parameter name="IMEI" value="123456879765"/>
+
+    <test name="MessageResultTypeSuiteTest">
+        <packages>
+            <package name="lightsearch.server.message.result.type"/>
+        </packages>
+    </test>
+
+</suite>

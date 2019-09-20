@@ -15,30 +15,21 @@
  */
 package lightsearch.server.timer;
 
-import java.time.LocalDateTime;
-import java.util.HashMap;
-import lightsearch.server.initialization.CurrentServerDirectory;
 import lightsearch.server.initialization.CurrentServerDirectoryInit;
 import lightsearch.server.initialization.OsDetector;
 import lightsearch.server.initialization.OsDetectorInit;
-import lightsearch.server.log.LogDirectory;
-import lightsearch.server.log.LogDirectoryInit;
-import lightsearch.server.log.LoggerFile;
-import lightsearch.server.log.LoggerFileInit;
 import lightsearch.server.log.LoggerServer;
-import lightsearch.server.log.LoggerServerInit;
-import lightsearch.server.log.LoggerWindow;
-import lightsearch.server.log.LoggerWindowInit;
-import lightsearch.server.thread.LightSearchThread;
-import lightsearch.server.thread.ThreadHolder;
-import lightsearch.server.thread.ThreadHolderInit;
 import lightsearch.server.thread.ThreadManager;
-import lightsearch.server.thread.ThreadManagerInit;
 import lightsearch.server.time.CurrentDateTime;
 import lightsearch.server.time.CurrentDateTimeInit;
-
-import static org.testng.Assert.*;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import test.data.DataProviderCreator;
+
+import java.time.LocalDateTime;
+
+import static org.testng.Assert.assertNotEquals;
+import static org.testng.Assert.assertNotNull;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 
@@ -48,51 +39,32 @@ import static test.message.TestMessage.testEnd;
  */
 public class RebootTimerCreatorTestNG {
     
-    private String initCurrentDirectory() {
-        OsDetector osDetector = OsDetectorInit.osDetector();
-        CurrentServerDirectory currentDirectory = CurrentServerDirectoryInit.currentDirectory(osDetector);
-        
-        return currentDirectory.currentDirectory();
-    }
-    
-    private LoggerServer initLoggerServer() {
-        LogDirectory logDir = LogDirectoryInit.logDirectory("logs");
-        LoggerFile logFile = LoggerFileInit.loggerFile(logDir);
-        LoggerWindow logWindow = LoggerWindowInit.loggerWindow();
-        LoggerServer logServer = LoggerServerInit.loggerServer(logFile, logWindow);
-        return logServer;
-    }
-    
-    private ThreadManager initThreadManager() {
-        HashMap<String,LightSearchThread> threads = new HashMap<>();
-        ThreadHolder holder = ThreadHolderInit.threadHolder(threads);
-        ThreadManager threadManager = ThreadManagerInit.threadManager(holder);
-        return threadManager;
-    }
-    
     @Test
-    public void getTimer() {
+    @Parameters({"logDirectory"})
+    public void getTimer(String logDir) {
         testBegin("RebootTimerCreator", "getTimer()");
         
         LocalDateTime serverDateTimeRebootValue = LocalDateTime.now().plusMinutes(1);
-        
-        String currentDirectory = initCurrentDirectory();
+
+        OsDetector osDetector = OsDetectorInit.osDetector();
+        String currentDirectory = CurrentServerDirectoryInit.currentDirectoryDebug(osDetector).currentDirectory();
+
         assertNotNull(currentDirectory, "CurrentDirectory is null!");
-        assertFalse(currentDirectory.equals(""), "CurrentDirectory is null!");
-        
-        LoggerServer loggerServer = initLoggerServer();
+        assertNotEquals(currentDirectory, "", "CurrentDirectory is null!");
+
+        LoggerServer loggerServer = DataProviderCreator.createDataProvider(LoggerServer.class, logDir);
         assertNotNull(loggerServer, "Logger server is null!");
         
         CurrentDateTime currentDateTime = CurrentDateTimeInit.currentDateTime();
         
-        ThreadManager threadManager = initThreadManager();
+        ThreadManager threadManager = DataProviderCreator.createDataProvider(ThreadManager.class);
         assertNotNull(threadManager, "Thread manager is null!");
         
         TimersIDEnum id = TimersIDEnum.REBOOT_TIMER_ID;
         
-        RebootTimerCreator rebootTimerCreator = RebootTimerCreatorInit.rebootTimerCreator(
-                serverDateTimeRebootValue, currentDirectory, loggerServer, 
-                currentDateTime, threadManager, id);
+        RebootTimerCreator rebootTimerCreator =
+                RebootTimerCreatorInit.rebootTimerCreator(serverDateTimeRebootValue, currentDirectory, loggerServer,
+                        currentDateTime, threadManager, id);
         
         System.out.println("rebootTimerCreator.getTimer(): " + rebootTimerCreator.getTimer());
         
