@@ -55,7 +55,7 @@ LightSearch состоит из пяти программ:
    - Создание нового администратора;
    - Смена параметров базы данных.
    
-5) [LightSearch Updater]() - cервис для обновления LightSearch Android. Имеет web-панель администратора, при помощи которой можно создавать новые версии релиза LightSearch Android, добавлять через drag-and-drop apk файлы, и изменять файл релиза, который считывается LightSearch Android для проверки выхода нового релиза, в редакторе с поддержкой синтаксиса JSON. 
+5) [LightSearch Updater](https://github.com/ViiSE/LightSearch/tree/master/Standard%20Edition/LightSearch%20Updater) - cервис для обновления LightSearch Android. Имеет web-панель администратора, при помощи которой можно создавать новые версии релиза LightSearch Android, добавлять через drag-and-drop apk файлы, и изменять файл релиза, который считывается LightSearch Android для проверки выхода нового релиза, в редакторе с поддержкой синтаксиса JSON. 
 
 История проекта будет описываться в документах, расположенных в папке Documents/Project history.
 
