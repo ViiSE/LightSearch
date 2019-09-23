@@ -24,8 +24,11 @@ import lightsearch.admin.panel.print.AdminPanelPrinter;
  */
 public class ConnectionDTOCreatorInit {
     
-    public static ConnectionDTOCreator connectionDTOCreator(AdminPanelPrinter printer, 
-            ScannerConnectionDTO scannerDTO) {
+    public static ConnectionDTOCreator connectionDTOCreator(AdminPanelPrinter printer, ScannerConnectionDTO scannerDTO) {
         return new ConnectionDTOCreatorDefaultImpl(printer, scannerDTO);
+    }
+
+    public static ConnectionDTOCreator connectionDTOCreatorTest(String ip, int port) {
+        return new ConnectionDTOCreatorTestImpl(ip, port);
     }
 }

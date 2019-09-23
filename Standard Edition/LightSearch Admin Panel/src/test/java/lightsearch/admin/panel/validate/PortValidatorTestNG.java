@@ -1,4 +1,4 @@
-/*
+/* 
  * Copyright 2019 ViiSE.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,28 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lightsearch.admin.panel.data.creator;
+package lightsearch.admin.panel.validate;
 
-import java.util.Scanner;
-import lightsearch.admin.panel.data.ScannerConnectionDTO;
-import lightsearch.admin.panel.data.ScannerConnectionDTOInit;
-import lightsearch.admin.panel.validate.IPValidator;
-import lightsearch.admin.panel.validate.IPValidatorInit;
+import lightsearch.admin.panel.exception.ValidatorException;
 import lightsearch.admin.panel.validate.PortValidator;
 import lightsearch.admin.panel.validate.PortValidatorInit;
+import org.testng.annotations.Test;
+import static test.message.TestMessage.testBegin;
+import static test.message.TestMessage.testEnd;
 
 /**
  *
  * @author ViiSE
  */
-public class ScannerConnectionDTOCreatorDefaultImpl implements ScannerConnectionDTOCreator {
-
-    @Override
-    public ScannerConnectionDTO createScannerConnectionDTO() {
-        Scanner scanner = new Scanner(System.in);
-        IPValidator ipValidator = IPValidatorInit.ipValidator();
+public class PortValidatorTestNG {
+    
+    @Test
+    public void validate() {
+        testBegin("PortValidator", "validate()");
+        
+        int port = 50000;
         PortValidator portValidator = PortValidatorInit.portValidator();
-
-        return ScannerConnectionDTOInit.scannerConnectionDTO(scanner, ipValidator, portValidator);
+        try {
+            portValidator.validate(port);
+            System.out.println("Validation success");
+        }
+        catch(ValidatorException ex) {
+            System.out.println("CATCH! Exception: " + ex.getMessage());
+        }
+        
+        testEnd("PortValidator", "validate()");
     }
 }

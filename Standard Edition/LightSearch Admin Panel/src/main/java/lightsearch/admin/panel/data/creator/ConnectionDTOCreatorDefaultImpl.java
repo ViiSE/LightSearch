@@ -48,10 +48,8 @@ public class ConnectionDTOCreatorDefaultImpl implements ConnectionDTOCreator {
                 ip = scannerConnection.scanIP();
                 printer.print("Input server port: ");
                 port = scannerConnection.scanPort();
-                ConnectionDTO connectionDTO = ConnectionDTOInit.connectionDTO(ip, port);
-                return connectionDTO;
-            }
-            catch(ScannerException ex) {
+                return ConnectionDTOInit.connectionDTO(ip, port);
+            } catch(ScannerException ex) {
                 printer.println(ex.getMessage());
             }
         }

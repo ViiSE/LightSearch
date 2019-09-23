@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="CmdAdminProcessorSuite">
+
+    <parameter name="ip" value="127.0.0.1"/>
+    <parameter name="port" value="50000"/>
+    <parameter name="openTest" value="false"/>
+
+    <parameter name="addBlMessage"
+               value="{
+                        &quot;name&quot;:&quot;name&quot;,
+                        &quot;isDone&quot;:&quot;True&quot;,
+                        &quot;message&quot;:&quot;AddBlacklist&quot;
+                      }"/>
+    <parameter name="authMessage"
+               value="{
+                        &quot;name&quot;:&quot;name&quot;,
+                        &quot;isDone&quot;:&quot;True&quot;,
+                        &quot;message&quot;:&quot;Authentication&quot;
+                      }"/>
+    <parameter name="blMessage"
+               value="{
+                        &quot;name&quot;:&quot;name&quot;,
+                        &quot;isDone&quot;:&quot;True&quot;,
+                        &quot;data&quot;:[
+                            {
+                                &quot;IMEI&quot;:&quot;123456789123456&quot;
+                            },
+                            {
+                                &quot;IMEI&quot;:&quot;987654321987654&quot;
+                            }
+                        ]
+                      }"/>
+    <parameter name="chDbMessage"
+               value="{
+                        &quot;name&quot;:&quot;name&quot;,
+                        &quot;isDone&quot;:&quot;True&quot;,
+                        &quot;message&quot;:&quot;ChangeDatabase&quot;
+                      }"/>
+    <parameter name="kickMessage"
+               value="{
+                        &quot;name&quot;:&quot;name&quot;,
+                        &quot;isDone&quot;:&quot;True&quot;,
+                        &quot;message&quot;:&quot;ClientKick&quot;
+                      }"/>
+    <parameter name="clMessage"
+               value="{
+                        &quot;name&quot;:&quot;name&quot;,
+                        &quot;isDone&quot;:&quot;True&quot;,
+                        &quot;data&quot;:[
+                            {
+                                &quot;username&quot;:&quot;client1&quot;,
+                                &quot;IMEI&quot;:&quot;123456789123456&quot;
+                            },
+                            {
+                                &quot;username&quot;:&quot;client2&quot;,
+                                &quot;IMEI&quot;:&quot;987654321987654&quot;
+                            }
+                        ]
+                      }"/>
+    <parameter name="crAdmMessage"
+               value="{
+                        &quot;name&quot;:&quot;name&quot;,
+                        &quot;isDone&quot;:&quot;True&quot;,
+                        &quot;message&quot;:&quot;CreateAdmin&quot;
+                      }"/>
+    <parameter name="delBlMessage"
+               value="{
+                        &quot;name&quot;:&quot;name&quot;,
+                        &quot;isDone&quot;:&quot;True&quot;,
+                        &quot;message&quot;:&quot;DelBlacklist&quot;
+                      }"/>
+    <parameter name="exitAdmMessage"
+               value="{
+                        &quot;name&quot;:&quot;name&quot;,
+                        &quot;isDone&quot;:&quot;True&quot;,
+                        &quot;message&quot;:&quot;ExitAdminPanel&quot;
+                      }"/>
+    <parameter name="toutClMessage"
+               value="{
+                        &quot;name&quot;:&quot;name&quot;,
+                        &quot;isDone&quot;:&quot;True&quot;,
+                        &quot;message&quot;:&quot;TimeoutClient&quot;
+                      }"/>
+    <parameter name="toutServerMessage"
+               value="{
+                        &quot;name&quot;:&quot;name&quot;,
+                        &quot;isDone&quot;:&quot;True&quot;,
+                        &quot;message&quot;:&quot;TimeoutServer&quot;
+                      }"/>
+
+    <test name="CmdAdminProcessorTestSuite">
+        <packages>
+            <package name="lightsearch.admin.panel.cmd.admin.processor"/>
+        </packages>
+    </test>
+
+</suite>

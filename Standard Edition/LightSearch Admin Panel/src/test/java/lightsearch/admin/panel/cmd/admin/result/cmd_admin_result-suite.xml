@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="CmdAdminResultSuite">
+
+    <parameter name="dataBlRaw"
+               value="{
+                        &quot;data&quot;:[
+                            {
+                                &quot;IMEI&quot;:&quot;123456789123456&quot;
+                            },
+                            {
+                                &quot;IMEI&quot;:&quot;987654321987654&quot;
+                            }
+                        ]
+                      }"/>
+    <parameter name="dataClRaw"
+               value="{
+                        &quot;data&quot;:[
+                            {
+                                &quot;IMEI&quot;:&quot;123456789123456&quot;,
+                                &quot;username&quot;:&quot;client1&quot;
+                            },
+                            {
+                                &quot;IMEI&quot;:&quot;987654321987654&quot;,
+                                &quot;username&quot;:&quot;client2&quot;
+
+                            }
+                        ]
+                      }"/>
+
+    <test name="CmdAdminResultTestSuite">
+        <packages>
+            <package name="lightsearch.admin.panel.cmd.admin.result"/>
+        </packages>
+    </test>
+
+</suite>

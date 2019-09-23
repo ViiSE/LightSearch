@@ -24,8 +24,11 @@ import lightsearch.admin.panel.util.MapRemover;
  */
 public class AdminCommandCreatorInit {
     
-    public static AdminCommandCreator adminCommandCreator(AdminDTO adminDTO,
-            MapRemover mapRemover) {
+    public static AdminCommandCreator adminCommandCreator(AdminDTO adminDTO, MapRemover mapRemover) {
         return new AdminCommandCreatorDefaultImpl(adminDTO, mapRemover);
+    }
+
+    public static AdminCommandCreator adminCommandCreatorTest(AdminDTO adminDTO, MapRemover mapRemover) {
+        return new AdminCommandCreatorTestImpl(adminDTO, mapRemover);
     }
 }
