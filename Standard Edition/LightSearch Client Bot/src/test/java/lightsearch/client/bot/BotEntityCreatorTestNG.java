@@ -15,13 +15,6 @@
  */
 package lightsearch.client.bot;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
-import lightsearch.client.bot.BotEntityCreator;
-import lightsearch.client.bot.BotEntityCreatorInit;
 import lightsearch.client.bot.exception.MessageRecipientException;
 import lightsearch.client.bot.exception.MessageSenderException;
 import lightsearch.client.bot.message.MessageRecipient;
@@ -30,12 +23,19 @@ import lightsearch.client.bot.message.MessageSender;
 import lightsearch.client.bot.message.MessageSenderInit;
 import lightsearch.client.bot.settings.BotSettingsReader;
 import lightsearch.client.bot.settings.BotSettingsReaderInit;
-import static org.testng.Assert.*;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import test.TestUtils;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
 import static test.ResourcesFilesPath.getResourcesFilesPath;
 import static test.message.TestMessage.*;
 

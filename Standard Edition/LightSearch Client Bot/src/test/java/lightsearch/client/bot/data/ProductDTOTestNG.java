@@ -15,11 +15,11 @@
  */
 package lightsearch.client.bot.data;
 
-import lightsearch.client.bot.data.ProductDTO;
-import lightsearch.client.bot.data.ProductDTOInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import static org.testng.Assert.*;
+
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
 import static test.message.TestMessage.*;
 
 /**

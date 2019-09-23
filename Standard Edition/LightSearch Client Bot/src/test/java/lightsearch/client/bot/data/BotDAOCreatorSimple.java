@@ -15,15 +15,13 @@
  */
 package lightsearch.client.bot.data;
 
-import lightsearch.client.bot.data.BotDAO;
-import lightsearch.client.bot.data.BotDAOCreator;
-import lightsearch.client.bot.data.BotDAOCreatorInit;
 import lightsearch.client.bot.settings.BotSettingsEnum;
 import org.json.simple.JSONObject;
-import static org.testng.Assert.*;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertNotNull;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 

@@ -15,9 +15,10 @@
  */
 package lightsearch.client.bot.data;
 
-import java.net.Socket;
 import lightsearch.client.bot.message.MessageRecipient;
 import lightsearch.client.bot.message.MessageSender;
+
+import java.net.Socket;
 
 /**
  *

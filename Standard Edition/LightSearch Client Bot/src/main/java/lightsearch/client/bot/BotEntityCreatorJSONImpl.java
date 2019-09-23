@@ -15,12 +15,13 @@
  */
 package lightsearch.client.bot;
 
-import java.util.List;
 import lightsearch.client.bot.processor.BotEntityProcessor;
 import lightsearch.client.bot.settings.BotEntityCreatorHolder;
 import lightsearch.client.bot.settings.BotEntityCreatorHolderInit;
 import lightsearch.client.bot.settings.BotSettingsReader;
 import org.json.simple.JSONObject;
+
+import java.util.List;
 
 /**
  *

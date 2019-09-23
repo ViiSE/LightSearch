@@ -15,9 +15,10 @@
  */
 package lightsearch.client.bot.message;
 
+import lightsearch.client.bot.exception.MessageSenderException;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
-import lightsearch.client.bot.exception.MessageSenderException;
 
 /**
  *

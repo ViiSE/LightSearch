@@ -15,10 +15,11 @@
  */
 package lightsearch.client.bot.message;
 
+import lightsearch.client.bot.exception.MessageRecipientException;
+
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.Calendar;
-import lightsearch.client.bot.exception.MessageRecipientException;
 
 /**
  *

@@ -15,9 +15,10 @@
  */
 package lightsearch.client.bot.processor;
 
+import lightsearch.client.bot.BotEntity;
+
 import java.util.List;
 import java.util.function.Function;
-import lightsearch.client.bot.BotEntity;
 
 /**
  *

@@ -15,40 +15,30 @@
  */
 package lightsearch.client.bot;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
-import lightsearch.client.bot.BotEntity;
-import lightsearch.client.bot.BotEntityInit;
-import lightsearch.client.bot.TestCycle;
-import lightsearch.client.bot.TestCycleInit;
 import lightsearch.client.bot.data.BotDAO;
-import lightsearch.client.bot.data.BotDAODefaultImpl;
 import lightsearch.client.bot.data.BotEntityDTO;
 import lightsearch.client.bot.data.BotEntityDTODefaultImpl;
 import lightsearch.client.bot.data.BotSettingsDTO;
-import lightsearch.client.bot.data.BotSettingsDTOInit;
 import lightsearch.client.bot.exception.MessageRecipientException;
 import lightsearch.client.bot.exception.MessageSenderException;
 import lightsearch.client.bot.message.MessageRecipient;
 import lightsearch.client.bot.message.MessageRecipientInit;
 import lightsearch.client.bot.message.MessageSender;
 import lightsearch.client.bot.message.MessageSenderInit;
-import lightsearch.client.bot.processor.Processor;
-import lightsearch.client.bot.processor.ProcessorAuthorizationDefaultImpl;
-import lightsearch.client.bot.processor.ProcessorConnectionDefaultImpl;
-import static org.testng.Assert.*;
-import static test.message.TestMessage.*;
-
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import test.data.DataProviderCreator;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+import static org.testng.Assert.assertNotNull;
+import static test.message.TestMessage.*;
 
 /**
  *

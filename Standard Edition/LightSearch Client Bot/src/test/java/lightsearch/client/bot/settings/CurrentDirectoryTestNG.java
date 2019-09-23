@@ -15,12 +15,9 @@
  */
 package lightsearch.client.bot.settings;
 
-import lightsearch.client.bot.settings.CurrentDirectory;
-import lightsearch.client.bot.settings.CurrentDirectoryInit;
-import lightsearch.client.bot.settings.OsDetector;
-import lightsearch.client.bot.settings.OsDetectorInit;
-import static org.testng.Assert.*;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertNotNull;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 

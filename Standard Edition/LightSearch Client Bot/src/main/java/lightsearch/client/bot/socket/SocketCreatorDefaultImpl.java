@@ -15,10 +15,11 @@
  */
 package lightsearch.client.bot.socket;
 
-import java.io.IOException;
-import java.net.Socket;
 import lightsearch.client.bot.data.ConnectionDTO;
 import lightsearch.client.bot.exception.SocketException;
+
+import java.io.IOException;
+import java.net.Socket;
 
 /**
  *

@@ -15,21 +15,19 @@
  */
 package lightsearch.client.bot.message;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
 import lightsearch.client.bot.exception.MessageRecipientException;
-import lightsearch.client.bot.message.MessageRecipient;
-import lightsearch.client.bot.message.MessageRecipientInit;
-import static org.testng.Assert.*;
-import static test.message.TestMessage.*;
-
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import test.data.DataProviderCreator;
+
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+import static org.testng.Assert.assertNotNull;
+import static test.message.TestMessage.*;
 
 /**
  *

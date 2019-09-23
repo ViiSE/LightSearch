@@ -15,8 +15,9 @@
  */
 package lightsearch.client.bot;
 
-import java.util.List;
 import lightsearch.client.bot.processor.Processor;
+
+import java.util.List;
 
 /**
  *

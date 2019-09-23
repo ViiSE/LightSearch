@@ -16,16 +16,13 @@
 package lightsearch.client.bot.parser;
 
 import lightsearch.client.bot.exception.SettingsParserException;
-import lightsearch.client.bot.parser.SettingsParser;
-import lightsearch.client.bot.parser.SettingsParserInit;
 import lightsearch.client.bot.settings.GlobalSettingsEnum;
 import org.json.simple.JSONObject;
-import static org.testng.Assert.*;
-import static test.message.TestMessage.*;
-
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertNotNull;
+import static test.message.TestMessage.*;
 
 /**
  *

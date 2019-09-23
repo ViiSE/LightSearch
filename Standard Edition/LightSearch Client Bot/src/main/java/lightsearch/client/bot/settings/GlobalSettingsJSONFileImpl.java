@@ -16,9 +16,9 @@
 package lightsearch.client.bot.settings;
 
 import lightsearch.client.bot.exception.SettingsParserException;
+import lightsearch.client.bot.parser.SettingsParser;
 import lightsearch.client.bot.parser.SettingsParserInit;
 import org.json.simple.JSONObject;
-import lightsearch.client.bot.parser.SettingsParser;
 
 /**
  *

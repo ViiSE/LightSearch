@@ -15,15 +15,7 @@
  */
 package lightsearch.client.bot;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
-import lightsearch.client.bot.data.ProductsCreator;
-import lightsearch.client.bot.data.ProductsCreatorInit;
-import lightsearch.client.bot.data.SearchDTO;
-import lightsearch.client.bot.data.SearchDTOCreator;
-import lightsearch.client.bot.data.SearchDTOCreatorInit;
+import lightsearch.client.bot.data.*;
 import lightsearch.client.bot.processor.Processor;
 import lightsearch.client.bot.processor.ProcessorCloseSoftCheck;
 import lightsearch.client.bot.processor.ProcessorConfirmSoftCheckProducts;
@@ -31,6 +23,11 @@ import lightsearch.client.bot.processor.ProcessorSearch;
 import lightsearch.client.bot.settings.BotSettingsEnum;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *

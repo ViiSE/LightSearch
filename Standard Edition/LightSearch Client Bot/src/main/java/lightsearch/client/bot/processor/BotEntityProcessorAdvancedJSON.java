@@ -15,26 +15,8 @@
  */
 package lightsearch.client.bot.processor;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
-import lightsearch.client.bot.BotEntity;
-import lightsearch.client.bot.BotEntityInit;
-import lightsearch.client.bot.TestCycle;
-import lightsearch.client.bot.TestCycleCreator;
-import lightsearch.client.bot.TestCycleCreatorInit;
-import lightsearch.client.bot.data.BotDAO;
-import lightsearch.client.bot.data.BotDAOCreator;
-import lightsearch.client.bot.data.BotDAOCreatorInit;
-import lightsearch.client.bot.data.BotEntityDTO;
-import lightsearch.client.bot.data.BotEntityDTOInit;
-import lightsearch.client.bot.data.BotSettingsDTO;
-import lightsearch.client.bot.data.BotSettingsDTOInit;
-import lightsearch.client.bot.data.ConnectionDTO;
-import lightsearch.client.bot.data.ConnectionDTOInit;
+import lightsearch.client.bot.*;
+import lightsearch.client.bot.data.*;
 import lightsearch.client.bot.exception.SocketException;
 import lightsearch.client.bot.message.MessageRecipient;
 import lightsearch.client.bot.message.MessageRecipientInit;
@@ -44,6 +26,13 @@ import lightsearch.client.bot.settings.BotSettingsEnum;
 import lightsearch.client.bot.socket.SocketCreatorInit;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *

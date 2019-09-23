@@ -15,12 +15,10 @@
  */
 package lightsearch.client.bot.data;
 
-import lightsearch.client.bot.data.BotDAO;
-import lightsearch.client.bot.data.BotDAODefaultImpl;
-import static org.testng.Assert.*;
-
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertNotNull;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 

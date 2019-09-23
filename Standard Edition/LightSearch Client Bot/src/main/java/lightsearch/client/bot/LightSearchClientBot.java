@@ -15,12 +15,12 @@
  */
 package lightsearch.client.bot;
 
-import lightsearch.client.bot.session.BotSessionInit;
-import lightsearch.client.bot.settings.GlobalSettingsInit;
 import lightsearch.client.bot.session.BotSession;
+import lightsearch.client.bot.session.BotSessionInit;
 import lightsearch.client.bot.settings.Configuration;
 import lightsearch.client.bot.settings.ConfigurationInit;
 import lightsearch.client.bot.settings.GlobalSettings;
+import lightsearch.client.bot.settings.GlobalSettingsInit;
 
 /**
  *

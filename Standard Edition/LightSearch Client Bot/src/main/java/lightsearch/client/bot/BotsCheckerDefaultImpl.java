@@ -15,10 +15,6 @@
  */
 package lightsearch.client.bot;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.net.Socket;
 import lightsearch.client.bot.data.BotDAO;
 import lightsearch.client.bot.data.BotDAODefaultImpl;
 import lightsearch.client.bot.data.ConnectionDTO;
@@ -32,6 +28,11 @@ import lightsearch.client.bot.processor.ProcessorClearAverageTimeDeafultImpl;
 import lightsearch.client.bot.processor.ProcessorConnectionSystemDefaultImpl;
 import lightsearch.client.bot.socket.SocketCreator;
 import lightsearch.client.bot.socket.SocketCreatorInit;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
 
 /**
  *

@@ -15,20 +15,14 @@
  */
 package lightsearch.client.bot.settings;
 
-import java.util.ArrayList;
-import java.util.List;
 import lightsearch.client.bot.TestCycle;
-import lightsearch.client.bot.TestCycleInit;
-import lightsearch.client.bot.processor.Processor;
-import lightsearch.client.bot.processor.ProcessorConnectionDefaultImpl;
-import lightsearch.client.bot.settings.BotSettings;
-import lightsearch.client.bot.settings.BotSettingsDefaultImpl;
-import static org.testng.Assert.*;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import test.data.DataProviderCreator;
 
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 

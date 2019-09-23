@@ -15,21 +15,20 @@
  */
 package lightsearch.client.bot.socket;
 
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
 import lightsearch.client.bot.data.ConnectionDTO;
 import lightsearch.client.bot.data.ConnectionDTOInit;
 import lightsearch.client.bot.exception.SocketException;
-import lightsearch.client.bot.socket.SocketCreator;
-import lightsearch.client.bot.socket.SocketCreatorInit;
-import static org.testng.Assert.*;
-import static test.message.TestMessage.*;
-
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+import static org.testng.Assert.assertNotNull;
+import static test.message.TestMessage.*;
 
 /**
  *

@@ -15,11 +15,12 @@
  */
 package lightsearch.client.bot.settings;
 
-import java.util.HashMap;
-import java.util.Map;
 import lightsearch.client.bot.processor.BotEntityProcessor;
 import lightsearch.client.bot.processor.BotEntityProcessorAdvancedJSON;
 import lightsearch.client.bot.processor.BotEntityProcessorSimpleJSON;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *

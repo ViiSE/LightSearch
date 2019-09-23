@@ -17,12 +17,12 @@ package lightsearch.client.bot.processor;
 
 import lightsearch.client.bot.CommandContentType;
 import lightsearch.client.bot.CommandType;
+import lightsearch.client.bot.data.BotDAO;
 import lightsearch.client.bot.exception.MessageRecipientException;
 import lightsearch.client.bot.exception.MessageSenderException;
 import lightsearch.client.bot.message.MessageRecipient;
 import lightsearch.client.bot.message.MessageSender;
 import org.json.simple.JSONObject;
-import lightsearch.client.bot.data.BotDAO;
 
 /**
  *

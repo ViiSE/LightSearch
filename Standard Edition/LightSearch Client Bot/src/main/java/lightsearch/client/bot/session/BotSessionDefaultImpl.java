@@ -15,20 +15,14 @@
  */
 package lightsearch.client.bot.session;
 
-import java.util.ArrayList;
-import java.util.List;
-import lightsearch.client.bot.BotThread;
-import lightsearch.client.bot.BotThreadInit;
-import lightsearch.client.bot.settings.BotSettingsReaderInit;
-import lightsearch.client.bot.settings.GlobalSettings;
-import lightsearch.client.bot.BotEntity;
-import lightsearch.client.bot.BotEntityCreator;
-import lightsearch.client.bot.BotEntityCreatorInit;
-import lightsearch.client.bot.BotsChecker;
-import lightsearch.client.bot.BotsCheckerInit;
-import lightsearch.client.bot.BotsDoneSwitcher;
+import lightsearch.client.bot.*;
 import lightsearch.client.bot.data.ConnectionDTOInit;
 import lightsearch.client.bot.settings.BotSettingsReader;
+import lightsearch.client.bot.settings.BotSettingsReaderInit;
+import lightsearch.client.bot.settings.GlobalSettings;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *

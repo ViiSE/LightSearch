@@ -15,11 +15,12 @@
  */
 package lightsearch.client.bot.data;
 
-import java.util.ArrayList;
-import java.util.List;
 import lightsearch.client.bot.settings.BotSettingsEnum;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *

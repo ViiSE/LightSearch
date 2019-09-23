@@ -15,9 +15,10 @@
  */
 package lightsearch.client.bot.settings;
 
+import lightsearch.client.bot.LightSearchClientBot;
+
 import java.io.File;
 import java.net.URISyntaxException;
-import lightsearch.client.bot.LightSearchClientBot;
 
 /**
  *

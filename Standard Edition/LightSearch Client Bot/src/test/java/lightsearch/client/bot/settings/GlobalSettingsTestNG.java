@@ -15,12 +15,10 @@
  */
 package lightsearch.client.bot.settings;
 
-import lightsearch.client.bot.settings.GlobalSettings;
-import lightsearch.client.bot.settings.GlobalSettingsInit;
-import static org.testng.Assert.*;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static org.testng.Assert.assertNotNull;
 import static test.ResourcesFilesPath.getResourcesFilesPath;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;

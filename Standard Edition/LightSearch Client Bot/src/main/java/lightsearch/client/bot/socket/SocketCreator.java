@@ -15,8 +15,9 @@
  */
 package lightsearch.client.bot.socket;
 
-import java.net.Socket;
 import lightsearch.client.bot.exception.SocketException;
+
+import java.net.Socket;
 
 /**
  *

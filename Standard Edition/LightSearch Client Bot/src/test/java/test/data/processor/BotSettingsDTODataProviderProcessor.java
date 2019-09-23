@@ -17,15 +17,8 @@
 package test.data.processor;
 
 import lightsearch.client.bot.TestCycle;
-import lightsearch.client.bot.TestCycleInit;
 import lightsearch.client.bot.data.BotSettingsDTOInit;
-import lightsearch.client.bot.processor.Processor;
-import lightsearch.client.bot.processor.ProcessorAuthorizationDefaultImpl;
-import lightsearch.client.bot.processor.ProcessorConnectionDefaultImpl;
 import test.data.DataProviderCreator;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class BotSettingsDTODataProviderProcessor implements DataProviderProcessor {
 

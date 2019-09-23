@@ -16,9 +16,7 @@
 
 package test.data.processor;
 
-import lightsearch.client.bot.settings.BotSettingsReader;
 import lightsearch.client.bot.settings.BotSettingsReaderInit;
-import org.testng.annotations.BeforeClass;
 
 import static test.ResourcesFilesPath.getResourcesFilesPath;
 

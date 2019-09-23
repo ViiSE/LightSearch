@@ -15,11 +15,9 @@
  */
 package lightsearch.client.bot.settings;
 
-import lightsearch.client.bot.settings.SettingsReader;
-import lightsearch.client.bot.settings.SettingsReaderInit;
-import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
+import static org.testng.Assert.assertNotNull;
 import static test.ResourcesFilesPath.getResourcesFilesPath;
 import static test.message.TestMessage.testBegin;
 

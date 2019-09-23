@@ -16,7 +16,6 @@
 
 package test.data.processor;
 
-import lightsearch.client.bot.TestCycle;
 import lightsearch.client.bot.TestCycleInit;
 import lightsearch.client.bot.processor.Processor;
 import lightsearch.client.bot.processor.ProcessorAuthorizationDefaultImpl;

@@ -15,10 +15,11 @@
  */
 package lightsearch.client.bot.data;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import lightsearch.client.bot.settings.BotSettingsEnum;
 import org.json.simple.JSONObject;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  *

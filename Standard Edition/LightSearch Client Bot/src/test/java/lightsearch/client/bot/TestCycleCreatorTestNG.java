@@ -15,18 +15,14 @@
  */
 package lightsearch.client.bot;
 
-import lightsearch.client.bot.TestCycleCreator;
-import lightsearch.client.bot.TestCycleCreatorInit;
 import lightsearch.client.bot.settings.BotSettingsEnum;
 import lightsearch.client.bot.settings.BotSettingsReader;
 import lightsearch.client.bot.settings.BotSettingsReaderInit;
 import org.json.simple.JSONObject;
-import static org.testng.Assert.*;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.io.File;
-
+import static org.testng.Assert.assertNotNull;
 import static test.ResourcesFilesPath.getResourcesFilesPath;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
