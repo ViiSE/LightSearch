@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="LightSearchClientBotSuite">
+
+    <suite-files>
+        <suite-file path="data/data-suite.xml"/>
+        <suite-file path="message/message-suite.xml"/>
+        <suite-file path="parser/parser-suite.xml"/>
+        <suite-file path="processor/processor-suite.xml"/>
+        <suite-file path="session/session-suite.xml"/>
+        <suite-file path="settings/settings-suite.xml"/>
+        <suite-file path="socket/socket-suite.xml"/>
+        <suite-file path="bot-suite.xml"/>
+    </suite-files>
+
+</suite>

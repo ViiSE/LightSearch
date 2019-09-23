@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="BotSuite">
+
+    <parameter name="ip" value="127.0.0.1"/>
+    <parameter name="port" value="50000"/>
+    <parameter name="delayMessageDisplay" value="1"/>
+    <parameter name="cycleAmount" value="1"/>
+    <parameter name="delayBeforeSendingMessage" value="3"/>
+
+    <test name="BotSuiteTest">
+        <classes>
+            <class name="lightsearch.client.bot.BotEntityCreatorTestNG"/>
+            <class name="lightsearch.client.bot.BotEntityTestNG"/>
+            <class name="lightsearch.client.bot.BotThreadTestNG"/>
+            <class name="lightsearch.client.bot.TestCycleCreatorTestNG"/>
+            <class name="lightsearch.client.bot.TestCycleTestNG"/>
+        </classes>
+    </test>
+
+</suite>

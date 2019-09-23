@@ -46,4 +46,8 @@ public class TestMessage {
     public static void testEnd(String className, String methodName) {
         printTestMessage(className, methodName, IDENTIFY.END);
     }
+
+    public static void catchMessage(Exception ex) {
+        System.out.println("CATCH! Exception: " + ex.getMessage());
+    }
 }
