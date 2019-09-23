@@ -14,51 +14,38 @@
  * limitations under the License.
  */
 
-package test.daemon.os.detector;
+package lightsearch.daemon.creator;
 
 import lightsearch.daemon.os.detector.OsDetector;
 import lightsearch.daemon.os.detector.OsDetectorInit;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import static org.testng.Assert.assertNotNull;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
-import static org.testng.Assert.*;
 
-public class OsDetectorTestNG {
+
+public class DaemonCreatorTestNG {
 
     private OsDetector osDetector;
 
     @BeforeClass
     public void setUpClass() {
         osDetector = OsDetectorInit.osDetector();
+    }
+
+    @Test
+    @Parameters({"serverName"})
+    public void createDaemon(String serverName) {
+        testBegin("DaemonCreator", "createDaemon");
+
         assertNotNull(osDetector, "OSDetector is null!");
-    }
+        DaemonCreator daemonCreator = DaemonCreatorInit.daemonCreator(osDetector);
+        assertNotNull(daemonCreator, "DaemonCreator is null!");
 
-    @Test
-    public void isWindows() {
-        testBegin("OsDetector", "isWindows()");
-
-        System.out.println("isWindows(): " + osDetector.isWindows());
-
-        testEnd("OsDetector", "isWindows()");
-    }
-
-    @Test
-    public void isLinux() {
-        testBegin("OsDetector", "isLinux()");
-
-        System.out.println("isLinux(): " + osDetector.isLinux());
-
-        testEnd("OsDetector", "isLinux()");
-    }
-
-    @Test
-    public void isMacOS() {
-        testBegin("OsDetector", "isMacOS()");
-
-        System.out.println("isMacOS(): " + osDetector.isMacOS());
-
-        testEnd("OsDetector", "isMacOS()");
+        System.out.println("DaemonCreator.createDaemon(): " + daemonCreator.createDaemon(serverName));
+        testEnd("DaemonCreator", "createDaemon");
     }
 }

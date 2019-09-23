@@ -14,32 +14,32 @@
  * limitations under the License.
  */
 
-package test.daemon.type;
+package lightsearch.daemon.type;
 
-import lightsearch.daemon.type.Daemon;
-import lightsearch.daemon.type.DaemonInit;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import static org.testng.Assert.*;
 import static test.ResourcesFilesPath.getResourcesFilesPath;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
-import static org.testng.Assert.*;
 
 public class DaemonWindowsDefaultImplTestNG {
 
-    private final String lightSearchServerName = getResourcesFilesPath() + "LightSearch_Server.jar";
-
     @Test
-    public void execute() {
+    @Parameters({"serverName", "openTest"})
+    public void execute(String serverName, boolean openTest) {
         testBegin("DaemonWindowsDefaultImpl", "execute()");
 
+        String lightSearchServerName = getResourcesFilesPath() + serverName;
         assertNotNull(lightSearchServerName, "LightSearch Server Name value is null!");
-        assertFalse(lightSearchServerName.equals(""), "LightSearch Server Name value is empty!");
+        assertNotEquals(lightSearchServerName, "", "LightSearch Server Name value is empty!");
 
         Daemon daemon = DaemonInit.daemonWindows(lightSearchServerName);
         assertNotNull(daemon, "Daemon is null!");
 
-        daemon.execute();
+        if(openTest)
+            daemon.execute();
 
         testEnd("DaemonWindowsDefaultImpl", "execute()");
     }
