@@ -15,10 +15,10 @@
  */
 package lightsearch.daemon;
 
+import lightsearch.daemon.creator.DaemonCreator;
 import lightsearch.daemon.creator.DaemonCreatorInit;
 import lightsearch.daemon.os.detector.OsDetector;
 import lightsearch.daemon.os.detector.OsDetectorInit;
-import lightsearch.daemon.creator.DaemonCreator;
 import lightsearch.daemon.type.Daemon;
 
 /**
