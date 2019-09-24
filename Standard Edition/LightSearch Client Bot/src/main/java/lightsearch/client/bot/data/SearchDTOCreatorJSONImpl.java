@@ -38,6 +38,7 @@ public class SearchDTOCreatorJSONImpl implements SearchDTOCreator {
         this.data = (JSONObject) data;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public SearchDTO createSearchDTO() {
         try {

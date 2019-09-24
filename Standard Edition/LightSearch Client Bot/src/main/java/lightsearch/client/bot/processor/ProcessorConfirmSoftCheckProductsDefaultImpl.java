@@ -64,6 +64,7 @@ public class ProcessorConfirmSoftCheckProductsDefaultImpl implements ProcessorCo
         }
     }
     
+    @SuppressWarnings("unchecked")
     private String generateJSONRequest(BotDAO botDAO) {
         JSONObject jObj = new JSONObject();
         JSONArray jData = new JSONArray();
@@ -72,7 +73,7 @@ public class ProcessorConfirmSoftCheckProductsDefaultImpl implements ProcessorCo
             jPr.put(ID, product.id());
             jPr.put(AMOUNT, product.amount());
             return jPr;
-        }).forEachOrdered((jPr) -> { jData.add(jPr); });
+        }).forEachOrdered(jData::add);
         jObj.put(COMMAND, CONFIRM_SOFT_CHECK_PRODUCTS);
         jObj.put(IMEI_FIELD, botDAO.IMEI());
         jObj.put(IDENT, botDAO.userIdent());

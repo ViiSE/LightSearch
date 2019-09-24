@@ -63,6 +63,7 @@ public class ProcessorSearchDefaultImpl implements ProcessorSearch {
         }
     }
     
+    @SuppressWarnings("unchecked")
     private String generateJSONRequest(BotDAO botDAO) {
         JSONObject jObj = new JSONObject();
         jObj.put(COMMAND, SEARCH);

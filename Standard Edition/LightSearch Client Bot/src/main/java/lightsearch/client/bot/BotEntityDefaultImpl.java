@@ -66,9 +66,8 @@ public class BotEntityDefaultImpl implements BotEntity {
             while(done) {
                 try {
                     testCycle.next().apply(botDAO, messageSender, messageRecipient, delayMessageDisplay);
-                    if(cycleAmount != 0) Thread.sleep(delayBeforeSendingMessage);
-                }
-                catch(InterruptedException ignore) {}
+                    if(delayBeforeSendingMessage != 0) Thread.sleep(delayBeforeSendingMessage);
+                } catch(InterruptedException ignore) {}
                 catch(TestCycleOutOfBoundException ex) {
                     InetAddress address = socket.getInetAddress();
                     int port = socket.getPort();
@@ -80,8 +79,7 @@ public class BotEntityDefaultImpl implements BotEntity {
                         socket = new Socket(address, port);
                         messageSender    = MessageSenderInit.messageSender(new DataOutputStream(socket.getOutputStream()));
                         messageRecipient = MessageRecipientInit.messageRecipient(new DataInputStream(socket.getInputStream()));
-                    }
-                    catch(IOException connectEx) {
+                    } catch(IOException connectEx) {
                         throw new RuntimeException("Cannot connect socket. Exception: " + connectEx.getMessage());
                     }
                     

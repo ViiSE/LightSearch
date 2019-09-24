@@ -42,11 +42,9 @@ public class ConfigurationJSONFileImpl implements Configuration {
             JSONObject jObj = (JSONObject)parser.parse(content);
             globalSettingsName = jObj.get(GLOBAL_SETTINGS).toString();
             botSettingsName    = jObj.get(BOT_SETTINGS).toString();
-            isPerformance = Boolean.valueOf(jObj.get(PERFORMANCE).toString());
-        }
-        catch(SettingsParserException ex) {
-            throw new RuntimeException("Error in file " + configurationName + ".json. "
-                    + "Exception: " + ex.getMessage());
+            isPerformance = Boolean.parseBoolean(jObj.get(PERFORMANCE).toString());
+        } catch(SettingsParserException ex) {
+            throw new RuntimeException("Error in file " + configurationName + ".json. Exception: " + ex.getMessage());
         }
     }
 

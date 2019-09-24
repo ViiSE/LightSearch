@@ -41,8 +41,7 @@ public class SettingsReaderFileImpl implements SettingsReader {
         try(FileInputStream fin = new FileInputStream(currDir.currentDirectory() + settingsName); 
                 BufferedReader br = new BufferedReader(new InputStreamReader(fin))) {
             return br.lines().collect(Collectors.joining());
-        }
-        catch(IOException ex) {
+        } catch(IOException ex) {
             throw new RuntimeException("Error " + settingsName + " file: " + ex.getMessage());
         }
     }

@@ -47,7 +47,8 @@ public class ProcessorClearAverageTimeDeafultImpl implements Processor {
             try {Thread.sleep(delay);} catch(InterruptedException ignore) {}
         }
     }
-    
+
+    @SuppressWarnings("unchecked")
     private String generateJSONRequest() {
         JSONObject jObj = new JSONObject();
         jObj.put(COMMAND, CLEAR_AVERAGE_TIME);

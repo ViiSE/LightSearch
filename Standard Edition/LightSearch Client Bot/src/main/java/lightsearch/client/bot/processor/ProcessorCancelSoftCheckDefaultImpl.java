@@ -51,6 +51,7 @@ public class ProcessorCancelSoftCheckDefaultImpl implements Processor {
         }
     }
     
+    @SuppressWarnings("unchecked")
     private String generateJSONRequest(BotDAO botDAO) {
         JSONObject jObj = new JSONObject();
         jObj.put(COMMAND, CANCEL_SOFT_CHECK);

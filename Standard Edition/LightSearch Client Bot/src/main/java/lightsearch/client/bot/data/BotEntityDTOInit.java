@@ -26,10 +26,10 @@ import java.net.Socket;
  */
 public class BotEntityDTOInit {
     
-    public static BotEntityDTO botEntityDTO(BotDAO botDAO, Socket socket, 
-            BotSettingsDTO botSettingsDTO, MessageSender messageSender, 
+    public static BotEntityDTO botEntityDTO(
+            BotDAO botDAO, Socket socket, BotSettingsDTO botSettingsDTO, MessageSender messageSender,
             MessageRecipient messageRecipient, long delayMessageDisplay) {
-        return new BotEntityDTODefaultImpl(botDAO, socket, botSettingsDTO,
-            messageSender, messageRecipient, delayMessageDisplay);
+        return new BotEntityDTODefaultImpl(botDAO, socket, botSettingsDTO, messageSender, messageRecipient,
+                delayMessageDisplay);
     }
 }

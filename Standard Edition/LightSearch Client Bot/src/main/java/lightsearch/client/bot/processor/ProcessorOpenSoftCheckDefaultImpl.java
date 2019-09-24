@@ -51,6 +51,7 @@ public class ProcessorOpenSoftCheckDefaultImpl implements Processor {
         }
     }
     
+    @SuppressWarnings("unchecked")
     private String generateJSONRequest(BotDAO botDAO) {
         JSONObject jObj = new JSONObject();
         jObj.put(COMMAND, OPEN_SOFT_CHECK);

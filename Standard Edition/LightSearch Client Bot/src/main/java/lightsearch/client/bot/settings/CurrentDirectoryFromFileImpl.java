@@ -35,9 +35,10 @@ public class CurrentDirectoryFromFileImpl implements CurrentDirectory {
     @Override
     public String currentDirectory() {
 
-        String currentDirectory = null;
+        String currentDirectory;
         try {
-            currentDirectory = new File(LightSearchClientBot.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath();
+            currentDirectory = new File(
+                    LightSearchClientBot.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath();
             currentDirectory = currentDirectory.replaceAll("LightSearch_Client_Bot.jar", "");
             currentDirectory = currentDirectory.substring(0, currentDirectory.length());
 

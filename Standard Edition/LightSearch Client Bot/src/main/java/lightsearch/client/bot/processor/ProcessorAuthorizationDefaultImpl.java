@@ -55,6 +55,7 @@ public class ProcessorAuthorizationDefaultImpl implements Processor {
         }
     }
     
+    @SuppressWarnings("unchecked")
     private String generateJSONRequest(BotDAO botDAO) {
         JSONObject jObj = new JSONObject();
         jObj.put(COMMAND, CONNECT);

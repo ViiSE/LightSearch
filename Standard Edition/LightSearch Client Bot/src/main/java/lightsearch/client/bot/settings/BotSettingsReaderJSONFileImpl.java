@@ -41,8 +41,7 @@ public class BotSettingsReaderJSONFileImpl implements BotSettingsReader {
             
             botSettingsType = data.get(TYPE).toString();
             botAmount       = Integer.parseInt(data.get(BOT_AMOUNT).toString());
-        }
-        catch(SettingsParserException ex) {
+        } catch(SettingsParserException ex) {
             throw new RuntimeException("Error " + fileName + " file: " + ex.getMessage());
         }
     }

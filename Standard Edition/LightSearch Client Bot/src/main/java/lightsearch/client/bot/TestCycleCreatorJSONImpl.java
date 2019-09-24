@@ -46,6 +46,7 @@ public class TestCycleCreatorJSONImpl implements TestCycleCreator {
         this.cycleContent = (JSONArray) cycleContent;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public TestCycle createCycle() {
         List<Processor> procs = new ArrayList<>();
@@ -57,16 +58,13 @@ public class TestCycleCreatorJSONImpl implements TestCycleCreator {
                 
                 if(ProcessorSearch.class.isAssignableFrom(clazz)) {
                     JSONObject jSearchDTO = (JSONObject) jProc.get(SEARCH_DTO);
-                    SearchDTOCreator searchDTOCreator = 
-                            SearchDTOCreatorInit.searchDTOCreator(jSearchDTO);
+                    SearchDTOCreator searchDTOCreator = SearchDTOCreatorInit.searchDTOCreator(jSearchDTO);
                     
                     Constructor constructor = clazz.getConstructor(SearchDTO.class);
-                    ProcessorSearch proc = (ProcessorSearch) constructor.newInstance(
-                            searchDTOCreator.createSearchDTO());
+                    ProcessorSearch proc = (ProcessorSearch) constructor.newInstance(searchDTOCreator.createSearchDTO());
                     
                     procs.add(proc);
-                }
-                else if(ProcessorConfirmSoftCheckProducts.class.isAssignableFrom(clazz)) {
+                } else if(ProcessorConfirmSoftCheckProducts.class.isAssignableFrom(clazz)) {
                     JSONObject jProdDTO = (JSONObject) jProc.get(PRODUCT_DTO);
                     ProductsCreator prodCr = ProductsCreatorInit.productsCreator(jProdDTO);
                     
@@ -76,8 +74,7 @@ public class TestCycleCreatorJSONImpl implements TestCycleCreator {
                                     prodCr.createProducts());
                     
                     procs.add(proc);
-                }
-                else if(ProcessorCloseSoftCheck.class.isAssignableFrom(clazz)) {
+                } else if(ProcessorCloseSoftCheck.class.isAssignableFrom(clazz)) {
                     String delivery = jProc.get(DELIVERY).toString();
                     
                     Constructor constructor = clazz.getConstructor(String.class);
@@ -85,8 +82,7 @@ public class TestCycleCreatorJSONImpl implements TestCycleCreator {
                             (ProcessorCloseSoftCheck) constructor.newInstance(delivery);
                     
                     procs.add(proc);
-                }
-                else {
+                } else {
                     Processor procInstance = (Processor) Class.forName(impl).newInstance();
                     procs.add(procInstance);
                 }

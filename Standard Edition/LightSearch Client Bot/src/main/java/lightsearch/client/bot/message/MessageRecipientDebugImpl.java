@@ -36,7 +36,6 @@ public class MessageRecipientDebugImpl implements MessageRecipient {
     @Override
     public String acceptMessage() throws MessageRecipientException {
         try {
-            //Calendar calendar = Calendar.getInstance();
             long start = Calendar.getInstance().getTimeInMillis();
             String res = dataInputStream.readUTF();
             long end   = Calendar.getInstance().getTimeInMillis();
@@ -49,8 +48,7 @@ public class MessageRecipientDebugImpl implements MessageRecipient {
             System.out.println("ACCEPT: " + ms + " ms." );
             
             return res;
-        }
-        catch(IOException ex) {
+        } catch(IOException ex) {
             throw new MessageRecipientException(ex.getMessage());
         }
     }

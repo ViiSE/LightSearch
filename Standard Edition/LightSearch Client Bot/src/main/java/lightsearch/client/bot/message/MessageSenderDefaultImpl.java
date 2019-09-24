@@ -37,8 +37,7 @@ public class MessageSenderDefaultImpl implements MessageSender {
         try {
             dataOutputStream.writeUTF(message);
             dataOutputStream.flush();
-        }
-        catch(IOException ex) {
+        } catch(IOException ex) {
             throw new MessageSenderException(ex.getMessage());
         }
     }

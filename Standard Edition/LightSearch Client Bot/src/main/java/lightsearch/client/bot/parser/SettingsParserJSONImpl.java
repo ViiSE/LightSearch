@@ -30,10 +30,8 @@ public class SettingsParserJSONImpl implements SettingsParser {
     public Object parse(String rawData) throws SettingsParserException {
         try {
             JSONParser parser = new JSONParser();
-            JSONObject devInfo = (JSONObject)parser.parse(rawData);
-            return devInfo;
-        }
-        catch (ParseException | NullPointerException | ClassCastException ex) {
+            return parser.parse(rawData);
+        } catch (ParseException | NullPointerException | ClassCastException ex) {
             throw new SettingsParserException(ex.getMessage());
         }
     }

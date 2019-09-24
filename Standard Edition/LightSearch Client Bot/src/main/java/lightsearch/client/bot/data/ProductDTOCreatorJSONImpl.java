@@ -38,6 +38,7 @@ public class ProductDTOCreatorJSONImpl implements ProductDTOCreator {
         this.data = (JSONObject) data;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public ProductDTO createProductDTO() {
         try {

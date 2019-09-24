@@ -59,12 +59,11 @@ public class BotSessionDefaultImpl implements BotSession {
             bots.add(bThread);
         });
         
-        bots.forEach((bot) -> { bot.start(); });
+        bots.forEach(BotThread::start);
         
         if(isPerformance) {
             BotsDoneSwitcher.addBots(bots.size());
-            BotsChecker checker = BotsCheckerInit.botsChecker(
-                    ConnectionDTOInit.connectDTO(serverIP, serverPort));
+            BotsChecker checker = BotsCheckerInit.botsChecker(ConnectionDTOInit.connectDTO(serverIP, serverPort));
             checker.start();
         }
     }

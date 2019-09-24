@@ -47,6 +47,7 @@ public class ProcessorConnectionDefaultImpl implements Processor {
         }
     }
     
+    @SuppressWarnings("unchecked")
     private String generateJSONRequest() {
         JSONObject jObj = new JSONObject();
         jObj.put(IDENTIFIER, CLIENT);

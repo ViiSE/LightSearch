@@ -68,8 +68,7 @@ public class BotsCheckerDefaultImpl implements BotsChecker {
                     procClear.apply(botDAO, msgSender, msgRecipient, 0);
                     
                     isWorked = false;
-                }
-                catch(IOException | SocketException ignored) { }
+                } catch(IOException | SocketException ignored) { }
             }
         }
     }

@@ -54,11 +54,9 @@ public class BotEntityCreatorJSONImpl implements BotEntityCreator {
                         serverIP, serverPort, delayMessageDisplay);
         
         BotEntityProcessor proc = holder.get(type);
-        if(proc != null) {
+        if(proc != null)
             return proc.apply(data);
-        }
-        else {
+        else
             throw new RuntimeException("BotEntityProcessor is null!");
-        }
     }
 }

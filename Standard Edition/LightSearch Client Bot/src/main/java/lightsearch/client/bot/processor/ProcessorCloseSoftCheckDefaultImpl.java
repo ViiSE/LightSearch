@@ -58,6 +58,7 @@ public class ProcessorCloseSoftCheckDefaultImpl implements ProcessorCloseSoftChe
         }
     }
     
+    @SuppressWarnings("unchecked")
     private String generateJSONRequest(BotDAO botDAO) {
         JSONObject jObj = new JSONObject();
         jObj.put(COMMAND, CLOSE_SOFT_CHECK);

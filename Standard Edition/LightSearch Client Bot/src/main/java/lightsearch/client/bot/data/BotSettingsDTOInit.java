@@ -23,8 +23,7 @@ import lightsearch.client.bot.TestCycle;
  */
 public class BotSettingsDTOInit {
     
-    public static BotSettingsDTO botSettingsDTO(TestCycle testCycle, int cycleAmount,
-            long delayBeforeSendingMessage) {
+    public static BotSettingsDTO botSettingsDTO(TestCycle testCycle, int cycleAmount, long delayBeforeSendingMessage) {
         return new BotSettingsDTODefaultImpl(testCycle, cycleAmount, delayBeforeSendingMessage);
     }
 }

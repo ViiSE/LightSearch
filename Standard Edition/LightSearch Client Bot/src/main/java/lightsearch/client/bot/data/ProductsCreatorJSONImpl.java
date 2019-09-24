@@ -37,6 +37,7 @@ public class ProductsCreatorJSONImpl implements ProductsCreator {
         jProductsData = (JSONObject) rawProductsData;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<ProductDTO> createProducts() {
         List<ProductDTO> prods = new ArrayList<>();

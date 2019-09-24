@@ -30,16 +30,13 @@ public class BotEntityCreatorHolderMapDefaultImpl implements BotEntityCreatorHol
 
     private final String SIMPLE   = BotSettingsType.SIMPLE.toString();
     private final String ADVANCED = BotSettingsType.ADVANCED.toString();
-    
-    Map<String, BotEntityProcessor> processorsMap;
 
-    public BotEntityCreatorHolderMapDefaultImpl(int botAmount, String ip, int port,
-            long delayMessageDisplay) {
+    private Map<String, BotEntityProcessor> processorsMap;
+
+    public BotEntityCreatorHolderMapDefaultImpl(int botAmount, String ip, int port, long delayMessageDisplay) {
         processorsMap = new HashMap<>();
-        processorsMap.put(SIMPLE, new BotEntityProcessorSimpleJSON(
-                botAmount, ip, port, delayMessageDisplay));
-        processorsMap.put(ADVANCED, new BotEntityProcessorAdvancedJSON(
-                botAmount, ip, port, delayMessageDisplay));
+        processorsMap.put(SIMPLE, new BotEntityProcessorSimpleJSON(botAmount, ip, port, delayMessageDisplay));
+        processorsMap.put(ADVANCED, new BotEntityProcessorAdvancedJSON(botAmount, ip, port, delayMessageDisplay));
     }
 
     @Override
