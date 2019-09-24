@@ -33,14 +33,12 @@ public class ScannerRegistrationCreatorDTOTestNG {
     public void createScannerRegistrationDTO() {
         testBegin("ScannerRegistrationDTOCreator", "createScannerRegistrationDTO()");
         
-        ScannerRegistrationDTOCreator scRegDTOCreator = 
-                ScannerRegistrationDTOCreatorInit.scannerRegistrationDTOCreator();
+        ScannerRegistrationDTOCreator scRegDTOCreator = ScannerRegistrationDTOCreatorInit.scannerRegistrationDTOCreator();
         assertNotNull(scRegDTOCreator, "ScannerRegistrationDTOCreator is null!");
         
         System.out.println("ScannerRegistrationDTOCreator: " + scRegDTOCreator);
         
-        ScannerRegistrationDTO scRegDTO = 
-                scRegDTOCreator.createScannerRegistrationDTO();
+        ScannerRegistrationDTO scRegDTO = scRegDTOCreator.createScannerRegistrationDTO();
         assertNotNull(scRegDTO, "ScannerRegistrationDTO is null!");
         
         System.out.println("ScannerRegistrationDTO: " + scRegDTO);

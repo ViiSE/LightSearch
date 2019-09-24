@@ -22,10 +22,12 @@ import lightsearch.admin.panel.exception.ScannerException;
 import lightsearch.admin.panel.scanner.ScannerClientValue;
 import lightsearch.admin.panel.scanner.ScannerClientValueInit;
 import static org.testng.Assert.*;
+import static test.message.TestMessage.*;
+
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import static test.message.TestMessage.testBegin;
-import static test.message.TestMessage.testEnd;
 
 /**
  *
@@ -35,10 +37,9 @@ public class ScannerClientValueTestNG {
 
     private ScannerClientValueDTO scannerClientValueDTO;
 
-    @BeforeTest
+    @BeforeClass
     public void setUpMethod() {
-        ScannerClientValueDTOCreator scClValDTOCreator = 
-                ScannerClientValueDTOCreatorInit.scannerClientValueDTOCreator();
+        ScannerClientValueDTOCreator scClValDTOCreator = ScannerClientValueDTOCreatorInit.scannerClientValueDTOCreator();
         assertNotNull(scClValDTOCreator, "ScannerClientValueDTOCreator is null!");
         
         scannerClientValueDTO = scClValDTOCreator.createScannerClientValueDTO();
@@ -47,20 +48,18 @@ public class ScannerClientValueTestNG {
     @Test
     public void scanValue() {
         testBegin("ScannerClientValue", "scanValue()");
-        
+
         try {
             assertNotNull(scannerClientValueDTO, "ScannerClientValueDTOCreator is null!");
 
-            ScannerClientValue scClVal = 
-                    ScannerClientValueInit.scannerClientValue(scannerClientValueDTO);
+            ScannerClientValue scClVal = ScannerClientValueInit.scannerClientValue(scannerClientValueDTO);
             System.out.print("Input IMEI, or number in clients list or blacklist: ");
             String value = scClVal.scanValue();
             System.out.println("Scan value: " + value);
+        } catch (ScannerException ex) {
+            catchMessage(ex);
         }
-        catch(ScannerException ex) {
-            System.out.println("CATCH! Message: " + ex.getMessage());
-        }
-        
+
         testEnd("ScannerClientValue", "scanValue()");
     }
 }

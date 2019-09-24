@@ -31,8 +31,6 @@ public class ScannerChooserCommandDTOCreatorDefaultImpl implements ScannerChoose
     public ScannerChooserCommandDTO createScannerChooserCommandDTO() {
         Scanner scanner = new Scanner(System.in);
         CommandValidator commandValidator = CommandValidatorInit.commandValidator();
-        ScannerChooserCommandDTO scannerDTO = ScannerChooserCommandDTOInit.
-                scannerChooserCommandDTO(scanner, commandValidator);
-        return scannerDTO;
+        return ScannerChooserCommandDTOInit.scannerChooserCommandDTO(scanner, commandValidator);
     }
 }

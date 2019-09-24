@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="MessageSuite">
+
+    <parameter name="ip" value="127.0.0.1"/>
+    <parameter name="port" value="50000"/>
+
+    <parameter name="sendMessage"
+               value="{
+                        &quot;name&quot;:&quot;admin&quot;
+                      }"/>
+    <parameter name="recipientMessage" value="OK"/>
+
+    <test name="MessageTestSuite">
+        <classes>
+            <class name="lightsearch.admin.panel.message.MessageSenderTestNG"/>
+            <class name="lightsearch.admin.panel.message.MessageRecipientTestNG"/>
+        </classes>
+    </test>
+
+</suite>

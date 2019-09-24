@@ -19,6 +19,8 @@ import lightsearch.admin.panel.data.ScannerRegistrationDTO;
 import lightsearch.admin.panel.data.creator.ScannerRegistrationDTOCreator;
 import lightsearch.admin.panel.data.creator.ScannerRegistrationDTOCreatorInit;
 import static org.testng.Assert.*;
+
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
@@ -30,23 +32,19 @@ import static test.message.TestMessage.testEnd;
  */
 public class ScannerRegistrationDTOTestNG {
     
-    private ScannerRegistrationDTOCreator scRegDTOCreator;
+    private ScannerRegistrationDTO scRegDTO;
     
-    @BeforeTest
+    @BeforeClass
     public void setUpMethod() {
-        scRegDTOCreator = 
-                ScannerRegistrationDTOCreatorInit.scannerRegistrationDTOCreator();
-        assertNotNull(scRegDTOCreator, "ScannerRegistrationDTOCreator is null!");
+        scRegDTO = ScannerRegistrationDTOCreatorInit.scannerRegistrationDTOCreator().createScannerRegistrationDTO();
+        assertNotNull(scRegDTO, "ScannerRegistrationDTO is null!");
     }
     
     @Test
     public void scanner() {
         testBegin("ScannerRegistrationDTO", "scanner()");
         
-        ScannerRegistrationDTO scRegDTO = scRegDTOCreator.createScannerRegistrationDTO();
-        assertNotNull(scRegDTO, "ScannerRegistrationDTO is null!");
         assertNotNull(scRegDTO.scanner(), "ScannerRegistrationDTO: scanner is null!");
-        
         System.out.println("ScannerRegistrationDTO: scanner: " + scRegDTO.scanner());
         
         testEnd("ScannerRegistrationDTO", "scanner()");
@@ -56,13 +54,8 @@ public class ScannerRegistrationDTOTestNG {
     public void adminNameValidator() {
         testBegin("ScannerRegistrationDTO", "adminNameValidator()");
         
-        ScannerRegistrationDTO scRegDTO = scRegDTOCreator.createScannerRegistrationDTO();
-        assertNotNull(scRegDTO, "ScannerRegistrationDTO is null!");
-        assertNotNull(scRegDTO.adminNameValidator(), 
-                "ScannerRegistrationDTO: adminNameValidator is null!");
-        
-        System.out.println("ScannerRegistrationDTO: adminNameValidator: " 
-                + scRegDTO.adminNameValidator());
+        assertNotNull(scRegDTO.adminNameValidator(), "ScannerRegistrationDTO: adminNameValidator is null!");
+        System.out.println("ScannerRegistrationDTO: adminNameValidator: " + scRegDTO.adminNameValidator());
         
         testEnd("ScannerRegistrationDTO", "adminNameValidator()");
     }
@@ -71,13 +64,8 @@ public class ScannerRegistrationDTOTestNG {
     public void hashAlgorithms() {
         testBegin("ScannerRegistrationDTO", "hashAlgorithms()");
         
-        ScannerRegistrationDTO scRegDTO = scRegDTOCreator.createScannerRegistrationDTO();
-        assertNotNull(scRegDTO, "ScannerRegistrationDTO is null!");
-        assertNotNull(scRegDTO.hashAlgorithms(), 
-                "ScannerRegistrationDTO: hashAlgorithms is null!");
-        
-        System.out.println("ScannerRegistrationDTO: hashAlgorithms: " 
-                + scRegDTO.hashAlgorithms());
+        assertNotNull(scRegDTO.hashAlgorithms(), "ScannerRegistrationDTO: hashAlgorithms is null!");
+        System.out.println("ScannerRegistrationDTO: hashAlgorithms: " + scRegDTO.hashAlgorithms());
         
         testEnd("ScannerRegistrationDTO", "hashAlgorithms()");
     }

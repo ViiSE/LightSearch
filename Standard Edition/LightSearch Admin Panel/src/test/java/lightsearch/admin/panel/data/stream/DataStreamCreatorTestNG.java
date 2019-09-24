@@ -16,41 +16,45 @@
 package lightsearch.admin.panel.data.stream;
 
 import java.io.IOException;
-import java.net.ServerSocket;
 import java.net.Socket;
-import lightsearch.admin.panel.data.stream.DataStreamCreator;
-import lightsearch.admin.panel.data.stream.DataStreamCreatorInit;
+
+import test.TestServer;
 import lightsearch.admin.panel.exception.DataStreamCreatorException;
 import static org.testng.Assert.*;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
-import static test.message.TestMessage.testBegin;
-import static test.message.TestMessage.testEnd;
+import static test.message.TestMessage.*;
+
+import org.testng.annotations.*;
 
 /**
  *
  * @author ViiSE
  */
 public class DataStreamCreatorTestNG {
-    
-    private Thread testServerTh;
-    private boolean closeServer = true;
-    
+
     private Socket adminSocket;
-    
+
     @BeforeTest
-    public void setUpMethod() {
-        testServerTh = new Thread(new TestServer());
-        testServerTh.start();
+    @Parameters({"ip", "port"})
+    public void setUpTest(String ip, int port) {
+        if(!TestServer.serverOn) {
+            Thread testServerTh = new Thread(new TestServer(port));
+            testServerTh.start();
+        }
+    }
+
+    @BeforeClass
+    @Parameters({"ip", "port"})
+    public void setUpMethod(String ip, int port) {
+        TestServer.closeClient = false;
+        TestServer.setAnswerMessage(null);
+        TestServer.setSimpleMode(true);
         
         try {
-            adminSocket = new Socket("127.0.0.1", 50000);
+            adminSocket = new Socket(ip, port);
             assertNotNull(adminSocket, "Socket is null!");
         
-        }
-        catch(IOException ex) {
-            System.out.println("CATCH! Message: " + ex.getMessage());
+        } catch(IOException ex) {
+            catchMessage(ex);
         }
     }
     
@@ -58,15 +62,13 @@ public class DataStreamCreatorTestNG {
     public void createDataStream() {
         testBegin("DataStreamCreator", "createDataStream()");
         
-        DataStreamCreator dsCreator = 
-                DataStreamCreatorInit.dataStreamCreator(adminSocket);
+        DataStreamCreator dsCreator = DataStreamCreatorInit.dataStreamCreator(adminSocket);
         assertNotNull(dsCreator, "DataStreamCreator is null!");
         
         try {
             dsCreator.createDataStream();
-        }
-        catch(DataStreamCreatorException ex) {
-            System.out.println("CATCH! Message: " + ex.getMessage());
+        } catch(DataStreamCreatorException ex) {
+            catchMessage(ex);
         }
         
         System.out.println("DataInputStream: " + dsCreator.dataInputStream());
@@ -74,38 +76,10 @@ public class DataStreamCreatorTestNG {
         
         testEnd("DataStreamCreator", "createDataStream()");
     }
-    
-    @AfterTest
-    public void closeMethod() {
-        closeServer = false;
-    }
-    
-    private class TestServer implements Runnable {
 
-        @Override
-        public void run() {
-            ServerSocket serverSocket = null;
-            
-            try { serverSocket = new ServerSocket(50000); }
-            catch(IOException ex) {
-                System.out.println("CATCH! Message: " + ex.getMessage());
-            }
-            
-            System.out.println("Test server on");
-            
-            try { if(serverSocket != null) serverSocket.accept(); }
-            catch(IOException ex) {
-                System.out.println("CATCH! Message: " + ex.getMessage());
-            }
-            
-            while(closeServer) { /* Just waiting for the end of test */ }
-            
-            try { if(serverSocket != null) serverSocket.close(); }
-            catch(IOException ex) {
-                System.out.println("CATCH! Message: " + ex.getMessage());
-            }
-            
-            System.out.println("Test server off");
-        }   
+    @AfterClass
+    public void closeMethod() {
+        TestServer.setSimpleMode(false);
+        TestServer.closeClient = true;
     }
 }

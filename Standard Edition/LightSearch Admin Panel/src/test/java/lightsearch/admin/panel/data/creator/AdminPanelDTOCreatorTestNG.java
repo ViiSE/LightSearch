@@ -33,8 +33,7 @@ public class AdminPanelDTOCreatorTestNG {
     public void createAdminPanelDTO() {
         testBegin("AdminPanelDTOCreator", "createAdminPanelDTO()");
         
-        AdminPanelDTOCreator admPanelDTOCreator = 
-                AdminPanelDTOCreatorInit.adminPanelDTOCreator();
+        AdminPanelDTOCreator admPanelDTOCreator = AdminPanelDTOCreatorInit.adminPanelDTOCreator();
         assertNotNull(admPanelDTOCreator, "AdminPanelDTOCreator is null!");
         
         System.out.println("AdminPanelDTOCreator: " + admPanelDTOCreator);

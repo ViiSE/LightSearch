@@ -22,10 +22,12 @@ import lightsearch.admin.panel.exception.ScannerException;
 import lightsearch.admin.panel.scanner.ScannerChooserCommand;
 import lightsearch.admin.panel.scanner.ScannerChooserCommandInit;
 import static org.testng.Assert.*;
+import static test.message.TestMessage.*;
+
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import static test.message.TestMessage.testBegin;
-import static test.message.TestMessage.testEnd;
 
 /**
  *
@@ -35,9 +37,9 @@ public class ScannerChooserCommandTestNG {
     
     private ScannerChooserCommandDTO scannerChooserCommandDTO;
     
-    @BeforeTest
+    @BeforeClass
     public void setUpMethod() {
-        ScannerChooserCommandDTOCreator scChCmdCreator = 
+        ScannerChooserCommandDTOCreator scChCmdCreator =
                 ScannerChooserCommandDTOCreatorInit.scannerChooserCommandDTOCreator();
         assertNotNull(scChCmdCreator, "ScannerChooserCommandDTOCreator is null!");
         
@@ -48,21 +50,18 @@ public class ScannerChooserCommandTestNG {
     @Test
     public void scanCommand() {
         testBegin("ScannerChooserCommand", "scanCommand()");
-        
+
         try {
-        
-            ScannerChooserCommand scChCmd =
-                    ScannerChooserCommandInit.scannerChooserCommand(scannerChooserCommandDTO);
+            ScannerChooserCommand scChCmd = ScannerChooserCommandInit.scannerChooserCommand(scannerChooserCommandDTO);
             assertNotNull(scChCmd, "ScannerChooserCommand is null!");
-        
+
             System.out.print("Input command number: ");
             String command = scChCmd.scanCommand();
             System.out.println("Command scan: " + command);
+        } catch (ScannerException ex) {
+            catchMessage(ex);
         }
-        catch(ScannerException ex) {
-            System.out.println("CATCH! Message: " + ex.getMessage());
-        }
-        
+
         testEnd("ScannerChooserCommand", "scanCommand()");
     }
 }

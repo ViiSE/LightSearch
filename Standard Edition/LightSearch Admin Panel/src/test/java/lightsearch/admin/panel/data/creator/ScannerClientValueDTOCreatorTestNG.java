@@ -33,14 +33,12 @@ public class ScannerClientValueDTOCreatorTestNG {
     public void createScannerClientValueDTO() {
         testBegin("ScannerClientValueDTOCreator", "createScannerClientValueDTO()");
         
-        ScannerClientValueDTOCreator scClValDTOCreator = 
-                ScannerClientValueDTOCreatorInit.scannerClientValueDTOCreator();
+        ScannerClientValueDTOCreator scClValDTOCreator = ScannerClientValueDTOCreatorInit.scannerClientValueDTOCreator();
         assertNotNull(scClValDTOCreator, "ScannerClientValueDTOCreator is null!");
         
         System.out.println("ScannerClientValueDTOCreator: " + scClValDTOCreator);
         
-        ScannerClientValueDTO scClValDTO = 
-                scClValDTOCreator.createScannerClientValueDTO();
+        ScannerClientValueDTO scClValDTO = scClValDTOCreator.createScannerClientValueDTO();
         assertNotNull(scClValDTO, "ScannerClientValueDTO is null!");
         
         System.out.println("ScannerClientValueDTO: " + scClValDTO);

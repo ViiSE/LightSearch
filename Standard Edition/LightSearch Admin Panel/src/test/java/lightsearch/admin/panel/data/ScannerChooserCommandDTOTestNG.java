@@ -19,6 +19,8 @@ import lightsearch.admin.panel.data.ScannerChooserCommandDTO;
 import lightsearch.admin.panel.data.creator.ScannerChooserCommandDTOCreator;
 import lightsearch.admin.panel.data.creator.ScannerChooserCommandDTOCreatorInit;
 import static org.testng.Assert.*;
+
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
@@ -30,23 +32,19 @@ import static test.message.TestMessage.testEnd;
  */
 public class ScannerChooserCommandDTOTestNG {
     
-    private ScannerChooserCommandDTOCreator scChCmdDTOCreator;
+    private ScannerChooserCommandDTO scChCmdDTO;
     
-    @BeforeTest
+    @BeforeClass
     public void setUpMethod() {
-        scChCmdDTOCreator = 
-                ScannerChooserCommandDTOCreatorInit.scannerChooserCommandDTOCreator();
-        assertNotNull(scChCmdDTOCreator, "ScannerChooserCommandDTOCreator is null!");
+        scChCmdDTO = ScannerChooserCommandDTOCreatorInit.scannerChooserCommandDTOCreator().createScannerChooserCommandDTO();
+        assertNotNull(scChCmdDTO, "ScannerChooserCommandDTO is null!");
     }
     
     @Test
     public void scanner() {
         testBegin("ScannerChooserCommandDTO", "scanner()");
         
-        ScannerChooserCommandDTO scChCmdDTO = scChCmdDTOCreator.createScannerChooserCommandDTO();
-        assertNotNull(scChCmdDTO, "ScannerChooserCommandDTO is null!");
         assertNotNull(scChCmdDTO.scanner(), "ScannerChooserCommandDTO: scanner is null!");
-        
         System.out.println("ScannerChooserCommandDTO: scanner: " + scChCmdDTO.scanner());
         
         testEnd("ScannerChooserCommandDTO", "scanner()");
@@ -56,12 +54,8 @@ public class ScannerChooserCommandDTOTestNG {
     public void commandValidator() {
         testBegin("ScannerChooserCommandDTO", "commandValidator()");
         
-        ScannerChooserCommandDTO scChCmdDTO = scChCmdDTOCreator.createScannerChooserCommandDTO();
-        assertNotNull(scChCmdDTO, "ScannerChooserCommandDTO is null!");
         assertNotNull(scChCmdDTO.commandValidator(), "ScannerChooserCommandDTO: commandValidator is null!");
-        
-        System.out.println("ScannerChooserCommandDTO: commandValidator: " 
-                + scChCmdDTO.commandValidator());
+        System.out.println("ScannerChooserCommandDTO: commandValidator: " + scChCmdDTO.commandValidator());
         
         testEnd("ScannerChooserCommandDTO", "commandValidator()");
     }

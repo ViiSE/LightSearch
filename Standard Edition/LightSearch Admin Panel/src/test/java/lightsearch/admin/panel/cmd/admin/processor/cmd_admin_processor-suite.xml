@@ -71,12 +71,6 @@
                         &quot;isDone&quot;:&quot;True&quot;,
                         &quot;message&quot;:&quot;DelBlacklist&quot;
                       }"/>
-    <parameter name="exitAdmMessage"
-               value="{
-                        &quot;name&quot;:&quot;name&quot;,
-                        &quot;isDone&quot;:&quot;True&quot;,
-                        &quot;message&quot;:&quot;ExitAdminPanel&quot;
-                      }"/>
     <parameter name="toutClMessage"
                value="{
                         &quot;name&quot;:&quot;name&quot;,

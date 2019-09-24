@@ -15,58 +15,42 @@
  */
 package lightsearch.admin.panel.message;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
+import test.TestServer;
 import lightsearch.admin.panel.data.stream.DataStream;
-import lightsearch.admin.panel.data.stream.DataStreamCreator;
-import lightsearch.admin.panel.data.stream.DataStreamCreatorInit;
-import lightsearch.admin.panel.data.stream.DataStreamInit;
-import lightsearch.admin.panel.exception.DataStreamCreatorException;
 import lightsearch.admin.panel.exception.MessageRecipientException;
-import lightsearch.admin.panel.message.MessageRecipient;
-import lightsearch.admin.panel.message.MessageRecipientInit;
+
 import static org.testng.Assert.*;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
-import static test.message.TestMessage.testBegin;
-import static test.message.TestMessage.testEnd;
+import static test.message.TestMessage.*;
+
+import org.testng.annotations.*;
+import test.data.DataProviderCreator;
 
 /**
  *
  * @author ViiSE
  */
 public class MessageRecipientTestNG {
-    
-    private Thread testServerTh;    
+
     private DataStream dataStream;
-    
+
     @BeforeTest
-    public void setUpMethod() {
-        testServerTh = new Thread(new TestServer());
-        testServerTh.start();
-        
-        try {
-            Socket socket = new Socket("127.0.0.1", 50000);
-            assertNotNull(socket, "Socket is null!");
-        
-            DataStreamCreator dsCreator 
-                    = DataStreamCreatorInit.dataStreamCreator(socket);
-            assertNotNull(dsCreator, "DataStreamCreator is null!");
-        
-            try {
-                dsCreator.createDataStream();
-            }
-            catch(DataStreamCreatorException ex) {
-                System.out.println("CATCH! Message: " + ex.getMessage());
-            }
-            
-            dataStream = DataStreamInit.dataStream(dsCreator);
+    @Parameters({"ip", "port"})
+    public void setUpTest(String ip, int port) {
+        if(!TestServer.serverOn) {
+            Thread testServerTh = new Thread(new TestServer(port));
+            testServerTh.start();
         }
-        catch(IOException ex) {
-            System.out.println("CATCH! Message: " + ex.getMessage());
-        }
+    }
+
+    @BeforeClass
+    @Parameters({"ip", "port", "recipientMessage"})
+    public void setUpMethod(String ip, int port, String answerMessage) {
+        TestServer.closeClient = false;
+        TestServer.setAnswerMessage(answerMessage);
+        TestServer.setRecipientMode(false);
+
+        dataStream = DataProviderCreator.createDataProvider(DataStream.class, ip, port);
+        assertNotNull(dataStream, "DataStream is null!");
     }
     
     @Test
@@ -74,43 +58,19 @@ public class MessageRecipientTestNG {
         testBegin("MessageRecipient", "acceptMessage()");
 
         try {
-            assertNotNull(dataStream, "DataStream is null!");
-
-            MessageRecipient msgRecipient = 
-                    MessageRecipientInit.messageRecipient(dataStream.dataInputStream());
-
+            MessageRecipient msgRecipient = MessageRecipientInit.messageRecipient(dataStream.dataInputStream());
             String acceptMessage = msgRecipient.acceptMessage();
             System.out.println("Accept message: " + acceptMessage);
-
-        }
-        catch(MessageRecipientException ex) {
-            System.out.println("CATCH! Message: " + ex.getMessage());
+        } catch(MessageRecipientException ex) {
+            catchMessage(ex);
         }
         
         testEnd("MessageRecipient", "acceptMessage()");
     }
-    
-    private class TestServer implements Runnable {
 
-        @Override
-        public void run() {
-            
-            System.out.println("Test server on");
-            
-            try(ServerSocket serverSocket = new ServerSocket(50000)) {
-                Socket admSocket = serverSocket.accept();
-                DataOutputStream dOutStream = 
-                        new DataOutputStream(admSocket.getOutputStream());
-                
-                String message = "OK";
-                System.out.println("Server send message: " + message);
-                dOutStream.writeUTF(message);
-            }
-            catch(IOException ex) {
-                System.out.println("CATCH! Message: " + ex.getMessage());
-            }
-            
-            System.out.println("Test server off");
-        }   
+    @AfterClass
+    public void tearDownClass() {
+        TestServer.setRecipientMode(true);
+        TestServer.closeClient = true;
     }
 }

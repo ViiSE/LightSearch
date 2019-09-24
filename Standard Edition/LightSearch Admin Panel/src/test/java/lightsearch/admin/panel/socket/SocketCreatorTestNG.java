@@ -29,10 +29,12 @@ import lightsearch.admin.panel.print.AdminPanelPrinterInit;
 import lightsearch.admin.panel.socket.SocketCreator;
 import lightsearch.admin.panel.socket.SocketCreatorInit;
 import static org.testng.Assert.*;
+import static test.message.TestMessage.*;
+
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import static test.message.TestMessage.testBegin;
-import static test.message.TestMessage.testEnd;
 
 /**
  *
@@ -42,18 +44,10 @@ public class SocketCreatorTestNG {
     
     private ConnectionDTO connectionDTO;
     
-    @BeforeTest
-    public void setUpMethod() throws Exception {
-        AdminPanelPrinter printer = AdminPanelPrinterInit.adminPanelPrinter();
-        assertNotNull(printer, "AdminPanelPrinter is null!");
-        
-        ScannerConnectionDTOCreator scConnDTOCreator = 
-                ScannerConnectionDTOCreatorInit.scannerConnectionDTOCreator();
-        assertNotNull(scConnDTOCreator, "ScannerConnectionDTOCreator is null!");
-        ScannerConnectionDTO scConnDTO = scConnDTOCreator.createScannerConnectionDTO();
-        
-        ConnectionDTOCreator connDTOCreator = 
-                ConnectionDTOCreatorInit.connectionDTOCreator(printer, scConnDTO);
+    @BeforeClass
+    @Parameters({"ip", "port"})
+    public void setUpMethod(String ip, int port) {
+        ConnectionDTOCreator connDTOCreator = ConnectionDTOCreatorInit.connectionDTOCreatorTest(ip, port);
         assertNotNull(connDTOCreator, "ConnectionDTOCreator is null!");
         connectionDTO = connDTOCreator.createConnectionDTO();
     }
@@ -66,13 +60,11 @@ public class SocketCreatorTestNG {
             SocketCreator socketCreator = SocketCreatorInit.socketCreator(connectionDTO);
             try (Socket socket = socketCreator.createSocket()) {
                 System.out.println("Socket created: socket = " + socket);
+            } catch(IOException ex) {
+                catchMessage(ex);
             }
-            catch(IOException ex) {
-                System.out.println("CATCH! Message: " + ex.getMessage());
-            }
-        }
-        catch(SocketException ex) {
-            System.out.println("CATCH! Message: " + ex.getMessage());
+        } catch(SocketException ex) {
+            catchMessage(ex);
         }
         
         testEnd("SocketCreator", "createSocket()");

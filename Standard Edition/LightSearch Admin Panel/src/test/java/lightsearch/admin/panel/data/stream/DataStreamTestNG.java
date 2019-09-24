@@ -18,52 +18,50 @@ package lightsearch.admin.panel.data.stream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.ServerSocket;
 import java.net.Socket;
-import lightsearch.admin.panel.data.stream.DataStream;
-import lightsearch.admin.panel.data.stream.DataStreamCreator;
-import lightsearch.admin.panel.data.stream.DataStreamCreatorInit;
-import lightsearch.admin.panel.data.stream.DataStreamInit;
+
+import test.TestServer;
 import lightsearch.admin.panel.exception.DataStreamCreatorException;
 import static org.testng.Assert.*;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
-import static test.message.TestMessage.testBegin;
-import static test.message.TestMessage.testEnd;
+import static test.message.TestMessage.*;
+
+import org.testng.annotations.*;
 
 /**
  *
  * @author ViiSE
  */
 public class DataStreamTestNG {
-    
-    private Thread testServerTh;
-    private boolean closeServer = true;
-    
+
     private DataStreamCreator dataStreamCreator;
-    
+
     @BeforeTest
-    public void setUpMethod() {
-        testServerTh = new Thread(new TestServer());
-        testServerTh.start();
+    @Parameters({"ip", "port"})
+    public void setUpTest(String ip, int port) {
+        if(!TestServer.serverOn) {
+            Thread testServerTh = new Thread(new TestServer(port));
+            testServerTh.start();
+        }
+    }
+
+    @BeforeClass
+    @Parameters({"ip", "port"})
+    public void setUpMethod(String ip, int port) {
+        TestServer.closeClient = false;
+        TestServer.setAnswerMessage(null);
+        TestServer.setSimpleMode(true);
         
         try {
-            Socket socket = new Socket("127.0.0.1", 50000);
+            Socket socket = new Socket(ip, port);
             assertNotNull(socket, "Socket is null!");
         
             dataStreamCreator = DataStreamCreatorInit.dataStreamCreator(socket);
             assertNotNull(dataStreamCreator, "DataStreamCreator is null!");
         
-            try {
-                dataStreamCreator.createDataStream();
-            }
-            catch(DataStreamCreatorException ex) {
-                System.out.println("CATCH! Message: " + ex.getMessage());
-            }
-        }
-        catch(IOException ex) {
-            System.out.println("CATCH! Message: " + ex.getMessage());
+            dataStreamCreator.createDataStream();
+
+        } catch(IOException | DataStreamCreatorException ex) {
+            catchMessage(ex);
         }
     }
     
@@ -97,37 +95,9 @@ public class DataStreamTestNG {
         testEnd("DataStream", "dataOutputStream()");
     }
     
-    @AfterTest
+    @AfterClass
     public void closeMethod() {
-        closeServer = false;
-    }
-    
-    private class TestServer implements Runnable {
-
-        @Override
-        public void run() {
-            ServerSocket serverSocket = null;
-            
-            try { serverSocket = new ServerSocket(50000); }
-            catch(IOException ex) {
-                System.out.println("CATCH! Message: " + ex.getMessage());
-            }
-            
-            System.out.println("Test server on");
-            
-            try { if(serverSocket != null) serverSocket.accept(); }
-            catch(IOException ex) {
-                System.out.println("CATCH! Message: " + ex.getMessage());
-            }
-            
-            while(closeServer) { /* Just waiting for the end of test */ }
-            
-            try { if(serverSocket != null) serverSocket.close(); }
-            catch(IOException ex) {
-                System.out.println("CATCH! Message: " + ex.getMessage());
-            }
-            
-            System.out.println("Test server off");
-        }   
+        TestServer.setSimpleMode(false);
+        TestServer.closeClient = true;
     }
 }

@@ -15,40 +15,8 @@
  */
 package lightsearch.admin.panel.cmd.admin;
 
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
-import lightsearch.admin.panel.cmd.admin.AdminCommandCreator;
-import lightsearch.admin.panel.cmd.admin.AdminCommandCreatorInit;
-import lightsearch.admin.panel.cmd.admin.processor.TestServer;
-import lightsearch.admin.panel.cmd.message.MessageCommandCreator;
-import lightsearch.admin.panel.cmd.message.MessageCommandCreatorInit;
-import lightsearch.admin.panel.data.AdminDAO;
-import lightsearch.admin.panel.data.AdminDAOInit;
+import test.TestServer;
 import lightsearch.admin.panel.data.AdminDTO;
-import lightsearch.admin.panel.data.AdminDTOInit;
-import lightsearch.admin.panel.data.ConnectionDTO;
-import lightsearch.admin.panel.data.MessageCommandDTO;
-import lightsearch.admin.panel.data.MessageCommandDTOInit;
-import lightsearch.admin.panel.data.ScannerConnectionDTO;
-import lightsearch.admin.panel.data.creator.ConnectionDTOCreator;
-import lightsearch.admin.panel.data.creator.ConnectionDTOCreatorInit;
-import lightsearch.admin.panel.data.creator.ScannerConnectionDTOCreator;
-import lightsearch.admin.panel.data.creator.ScannerConnectionDTOCreatorInit;
-import lightsearch.admin.panel.data.stream.DataStream;
-import lightsearch.admin.panel.data.stream.DataStreamCreator;
-import lightsearch.admin.panel.data.stream.DataStreamCreatorInit;
-import lightsearch.admin.panel.data.stream.DataStreamInit;
-import lightsearch.admin.panel.exception.DataStreamCreatorException;
-import lightsearch.admin.panel.exception.SocketException;
-import lightsearch.admin.panel.message.MessageRecipient;
-import lightsearch.admin.panel.message.MessageRecipientInit;
-import lightsearch.admin.panel.message.MessageSender;
-import lightsearch.admin.panel.message.MessageSenderInit;
-import lightsearch.admin.panel.print.AdminPanelPrinter;
-import lightsearch.admin.panel.print.AdminPanelPrinterInit;
-import lightsearch.admin.panel.socket.SocketCreator;
-import lightsearch.admin.panel.socket.SocketCreatorInit;
 import lightsearch.admin.panel.util.MapRemover;
 import lightsearch.admin.panel.util.MapRemoverInit;
 import static org.testng.Assert.*;
@@ -56,6 +24,7 @@ import static test.message.TestMessage.*;
 
 import org.testng.annotations.*;
 import test.data.DataProviderCreator;
+import test.message.TestUtils;
 
 /**
  *
@@ -65,15 +34,22 @@ public class AdminCommandCreatorTestNG {
 
     private AdminDTO adminDTO;
     private MapRemover mapRemover;
-    
+
+    @BeforeTest
+    @Parameters({"ip", "port"})
+    public void setUpTest(String ip, int port) {
+        if(!TestServer.serverOn) {
+            Thread testServerTh = new Thread(new TestServer(port));
+            testServerTh.start();
+        }
+    }
+
     @BeforeClass
     @Parameters({"ip", "port"})
     public void setUpMethod(String ip, int port) {
-        TestServer.closeServer = false;
-        TestServer ts = new TestServer(port, null);
-        ts.setSimpleMode(true);
-        Thread testServerTh = new Thread(ts);
-        testServerTh.start();
+        TestServer.closeClient = false;
+        TestServer.setSimpleMode(true);
+        TestServer.setAnswerMessage(null);
 
         adminDTO = DataProviderCreator.createDataProvider(AdminDTO.class, ip, port);
         assertNotNull(adminDTO, "AdminDTO is null!");
@@ -90,12 +66,13 @@ public class AdminCommandCreatorTestNG {
         assertNotNull(admCmdCreator.createCommandHolder(), "AdminCommandHolder is null!");
         
         System.out.println("AdminCommandHolderCreator: createCommandHolder() :" + admCmdCreator.createCommandHolder());
-        
+
         testEnd("AdminCommandCreator", "createCommandHolder()");
     }
     
     @AfterClass
     public void closeMethod() {
-        TestServer.closeServer = true;
+        TestServer.setSimpleMode(false);
+        TestServer.closeClient = true;
     }
 }

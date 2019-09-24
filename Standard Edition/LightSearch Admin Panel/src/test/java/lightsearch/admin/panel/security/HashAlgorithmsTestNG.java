@@ -18,6 +18,8 @@ package lightsearch.admin.panel.security;
 import lightsearch.admin.panel.security.HashAlgorithms;
 import lightsearch.admin.panel.security.HashAlgorithmsInit;
 import static org.testng.Assert.*;
+
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
@@ -29,10 +31,10 @@ import static test.message.TestMessage.testEnd;
 public class HashAlgorithmsTestNG {
     
     @Test
-    public void sha256() {
+    @Parameters({"message"})
+    public void sha256(String message) {
         testBegin("HashAlgorithms", "sha256()");
-        
-        String message = "password";
+
         assertNotNull(message, "Message is null!");
         
         System.out.println("Source message: " + message);

@@ -25,6 +25,7 @@ import lightsearch.admin.panel.data.creator.AdminPanelDTOCreatorInit;
 import static org.testng.Assert.*;
 
 import org.testng.annotations.*;
+import test.TestServer;
 import test.data.DataProviderCreator;
 
 import static test.message.TestMessage.testBegin;
@@ -40,13 +41,22 @@ public class ExitAdminPanelProcessorTestNG {
     
     private Map<String, Function<AdminPanelDTO, String>> admCmdHolder;
     private AdminPanelDTO adminPanelDTO;
-    
+
+    @BeforeTest
+    @Parameters({"ip", "port"})
+    public void setUpTest(String ip, int port) {
+        if(!TestServer.serverOn) {
+            Thread testServerTh = new Thread(new TestServer(port));
+            testServerTh.start();
+        }
+    }
+
     @BeforeClass
-    @Parameters({"ip", "port", "exitAdmMessage", "openTest"})
-    public void setUpMethod(String ip, int port, String answerMessage, boolean openTest) {
-        TestServer.closeServer = false;
-        Thread testServerTh = new Thread(new TestServer(port, answerMessage));
-        testServerTh.start();
+    @Parameters({"ip", "port", "openTest"})
+    public void setUpMethod(String ip, int port, boolean openTest) {
+        TestServer.closeClient = false;
+        TestServer.setAnswerMessage(null);
+        TestServer.setSimpleMode(true);
 
         admCmdHolder =
                 DataProviderCreator.createDataProvider(AdminCommandCreator.class, ip, port, openTest).createCommandHolder();
@@ -75,6 +85,7 @@ public class ExitAdminPanelProcessorTestNG {
 
     @AfterClass
     public void closeMethod() {
-        TestServer.closeServer = true;
+        TestServer.setSimpleMode(false);
+        TestServer.closeClient = true;
     }
 }

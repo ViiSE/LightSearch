@@ -18,6 +18,8 @@ package lightsearch.admin.panel.message.type;
 import lightsearch.admin.panel.message.type.MessageAuthentication;
 import lightsearch.admin.panel.message.type.MessageAuthenticationInit;
 import static org.testng.Assert.*;
+
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
@@ -29,19 +31,17 @@ import static test.message.TestMessage.testEnd;
 public class MessageAuthenticationTestNG {
     
     @Test
-    public void message() {
+    @Parameters({"name", "password"})
+    public void message(String name, String password) {
         testBegin("MessageAuthentication", "message()");
         
-        String name = "name";
         assertNotNull(name, "Name is null!");
         assertFalse(name.isEmpty(), "Name is null!");
         
-        String pass = "password";
-        assertNotNull(pass, "Password is null!");
-        assertFalse(pass.isEmpty(), "Password is null!");
+        assertNotNull(password, "Password is null!");
+        assertFalse(password.isEmpty(), "Password is null!");
         
-        MessageAuthentication msgAuth = 
-                MessageAuthenticationInit.messageAuthentication(name, pass);
+        MessageAuthentication msgAuth = MessageAuthenticationInit.messageAuthentication(name, password);
         assertNotNull(msgAuth, "MessageAuthentication is null!");
         
         String message = msgAuth.message();

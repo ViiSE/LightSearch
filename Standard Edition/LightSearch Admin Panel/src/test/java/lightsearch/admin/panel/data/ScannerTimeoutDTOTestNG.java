@@ -19,6 +19,8 @@ import lightsearch.admin.panel.data.ScannerTimeoutDTO;
 import lightsearch.admin.panel.data.creator.ScannerTimeoutDTOCreator;
 import lightsearch.admin.panel.data.creator.ScannerTimeoutDTOCreatorInit;
 import static org.testng.Assert.*;
+
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
@@ -30,23 +32,19 @@ import static test.message.TestMessage.testEnd;
  */
 public class ScannerTimeoutDTOTestNG {
     
-    private ScannerTimeoutDTOCreator scToutDTOCreator;
+    private ScannerTimeoutDTO scToutDTO;
     
-    @BeforeTest
+    @BeforeClass
     public void setUpMethod() {
-        scToutDTOCreator = 
-                ScannerTimeoutDTOCreatorInit.scannerTimeoutDTOCreator();
-        assertNotNull(scToutDTOCreator, "ScannerTimeoutDTOCreator is null!");
+        scToutDTO = ScannerTimeoutDTOCreatorInit.scannerTimeoutDTOCreator().createScannerTimeoutDTO();
+        assertNotNull(scToutDTO, "ScannerTimeoutDTO is null!");
     }
     
     @Test
     public void scanner() {
         testBegin("ScannerTimeoutDTO", "scanner()");
         
-        ScannerTimeoutDTO scToutDTO = scToutDTOCreator.createScannerTimeoutDTO();
-        assertNotNull(scToutDTO, "ScannerTimeoutDTO is null!");
         assertNotNull(scToutDTO.scanner(), "ScannerTimeoutDTO: scanner is null!");
-        
         System.out.println("ScannerTimeoutDTO: scanner: " + scToutDTO.scanner());
         
         testEnd("ScannerTimeoutDTO", "scanner()");
@@ -56,13 +54,8 @@ public class ScannerTimeoutDTOTestNG {
     public void timeoutValidator() {
         testBegin("ScannerTimeoutDTO", "timeoutValidator()");
         
-        ScannerTimeoutDTO scToutDTO = scToutDTOCreator.createScannerTimeoutDTO();
-        assertNotNull(scToutDTO, "ScannerTimeoutDTO is null!");
-        assertNotNull(scToutDTO.timeoutValidator(), 
-                "ScannerTimeoutDTO: timeoutValidator is null!");
-        
-        System.out.println("ScannerTimeoutDTO: timeoutValidator: " 
-                + scToutDTO.timeoutValidator());
+        assertNotNull(scToutDTO.timeoutValidator(), "ScannerTimeoutDTO: timeoutValidator is null!");
+        System.out.println("ScannerTimeoutDTO: timeoutValidator: " + scToutDTO.timeoutValidator());
         
         testEnd("ScannerTimeoutDTO", "timeoutValidator()");
     }

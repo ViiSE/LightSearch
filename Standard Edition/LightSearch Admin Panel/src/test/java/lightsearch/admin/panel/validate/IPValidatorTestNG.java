@@ -19,9 +19,10 @@ import lightsearch.admin.panel.exception.ValidatorException;
 import lightsearch.admin.panel.validate.IPValidator;
 import lightsearch.admin.panel.validate.IPValidatorInit;
 import static org.testng.Assert.*;
+import static test.message.TestMessage.*;
+
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import static test.message.TestMessage.testBegin;
-import static test.message.TestMessage.testEnd;
 
 /**
  *
@@ -30,19 +31,18 @@ import static test.message.TestMessage.testEnd;
 public class IPValidatorTestNG {
     
     @Test
-    public void validate() {
+    @Parameters({"ip"})
+    public void validate(String ip) {
         testBegin("IPValidator", "validate()");
-        
-        String ip = "127.0.0.1";
-        assertNotNull(ip, "IP is null!");
-        assertFalse(ip.isEmpty(), "IP is null!");
-        IPValidator ipValidator = IPValidatorInit.ipValidator();
+
         try {
+            assertNotNull(ip, "IP is null!");
+            assertFalse(ip.isEmpty(), "IP is null!");
+            IPValidator ipValidator = IPValidatorInit.ipValidator();
             ipValidator.validate(ip);
             System.out.println("Validation success");
-        }
-        catch(ValidatorException ex) {
-            System.out.println("CATCH! Exception: " + ex.getMessage());
+        } catch(ValidatorException ex) {
+            catchMessage(ex);
         }
         
         testEnd("IPValidator", "validate()");

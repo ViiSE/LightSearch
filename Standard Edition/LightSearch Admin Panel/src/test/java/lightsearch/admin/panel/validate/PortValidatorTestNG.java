@@ -18,9 +18,10 @@ package lightsearch.admin.panel.validate;
 import lightsearch.admin.panel.exception.ValidatorException;
 import lightsearch.admin.panel.validate.PortValidator;
 import lightsearch.admin.panel.validate.PortValidatorInit;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import static test.message.TestMessage.testBegin;
-import static test.message.TestMessage.testEnd;
+
+import static test.message.TestMessage.*;
 
 /**
  *
@@ -29,17 +30,16 @@ import static test.message.TestMessage.testEnd;
 public class PortValidatorTestNG {
     
     @Test
-    public void validate() {
+    @Parameters({"port"})
+    public void validate(int port) {
         testBegin("PortValidator", "validate()");
-        
-        int port = 50000;
-        PortValidator portValidator = PortValidatorInit.portValidator();
+
         try {
+            PortValidator portValidator = PortValidatorInit.portValidator();
             portValidator.validate(port);
             System.out.println("Validation success");
-        }
-        catch(ValidatorException ex) {
-            System.out.println("CATCH! Exception: " + ex.getMessage());
+        } catch(ValidatorException ex) {
+            catchMessage(ex);
         }
         
         testEnd("PortValidator", "validate()");

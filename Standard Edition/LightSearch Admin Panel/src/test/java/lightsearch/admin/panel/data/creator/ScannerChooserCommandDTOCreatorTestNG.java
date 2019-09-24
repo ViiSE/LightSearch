@@ -33,14 +33,13 @@ public class ScannerChooserCommandDTOCreatorTestNG {
     public void createScannerChooserCommandDTO() {
         testBegin("ScannerChooserCommandDTOCreator", "createScannerChooserCommandDTO()");
         
-        ScannerChooserCommandDTOCreator scChCmdDTOCreator = 
+        ScannerChooserCommandDTOCreator scChCmdDTOCreator =
                 ScannerChooserCommandDTOCreatorInit.scannerChooserCommandDTOCreator();
         assertNotNull(scChCmdDTOCreator, "ScannerChooserCommandDTOCreator is null!");
         
         System.out.println("ScannerChooserCommandDTOCreator: " + scChCmdDTOCreator);
         
-        ScannerChooserCommandDTO scChCmdDTO = 
-                scChCmdDTOCreator.createScannerChooserCommandDTO();
+        ScannerChooserCommandDTO scChCmdDTO = scChCmdDTOCreator.createScannerChooserCommandDTO();
         assertNotNull(scChCmdDTO, "ScannerChooserCommandDTO is null!");
         
         System.out.println("ScannerChooserCommandDTO: " + scChCmdDTO);

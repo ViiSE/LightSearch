@@ -23,6 +23,8 @@ import lightsearch.admin.panel.validate.IPValidatorInit;
 import lightsearch.admin.panel.validate.PortValidator;
 import lightsearch.admin.panel.validate.PortValidatorInit;
 import static org.testng.Assert.*;
+
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
@@ -34,26 +36,25 @@ import static test.message.TestMessage.testEnd;
  */
 public class ScannerConnectionDTOTestNG {
     
-    private Scanner scanner;
-    private IPValidator ipValidator;
-    private PortValidator portValidator;
-    
-    @BeforeTest
-    public void init() {
-        scanner = new Scanner(System.in);
-        ipValidator = IPValidatorInit.ipValidator();
-        portValidator = PortValidatorInit.portValidator();
+    private ScannerConnectionDTO scannerDTO;
+
+    @BeforeClass
+    public void setUpClass() {
+        Scanner scanner = new Scanner(System.in);
+        IPValidator ipValidator = IPValidatorInit.ipValidator();
+        PortValidator portValidator = PortValidatorInit.portValidator();
+        assertNotNull(scanner, "Scanner is null!");
+        assertNotNull(ipValidator, "IP validator is null!");
+        assertNotNull(portValidator, "Port validator is null!");
+
+        scannerDTO = ScannerConnectionDTOInit.scannerConnectionDTO(scanner, ipValidator, portValidator);
+        assertNotNull(scannerDTO, "ScannerConnectionDTO is null!");
     }
     
     @Test
     public void scanner() {
         testBegin("ScannerConnectionDTO", "scanner()");
         
-        assertNotNull(scanner, "Scanner is null!");
-        assertNotNull(ipValidator, "IP validator is null!");
-        assertNotNull(portValidator, "Port validator is null!");
-        
-        ScannerConnectionDTO scannerDTO = ScannerConnectionDTOInit.scannerConnectionDTO(scanner, ipValidator, portValidator);
         System.out.println("scannerDTO.scanner(): " + scannerDTO.scanner());
         
         testEnd("ScannerConnectionDTO", "scanner()");
@@ -63,11 +64,6 @@ public class ScannerConnectionDTOTestNG {
     public void ipValidator() {
         testBegin("ScannerConnectionDTO", "ipValidator()");
         
-        assertNotNull(scanner, "Scanner is null!");
-        assertNotNull(ipValidator, "IP validator is null!");
-        assertNotNull(portValidator, "Port validator is null!");
-        
-        ScannerConnectionDTO scannerDTO = ScannerConnectionDTOInit.scannerConnectionDTO(scanner, ipValidator, portValidator);
         System.out.println("scannerDTO.ipValidator(): " + scannerDTO.ipValidator());
         
         testEnd("ScannerConnectionDTO", "ipValidator()");
@@ -77,11 +73,6 @@ public class ScannerConnectionDTOTestNG {
     public void portValidator() {
         testBegin("ScannerConnectionDTO", "portValidator()");
         
-        assertNotNull(scanner, "Scanner is null!");
-        assertNotNull(ipValidator, "IP validator is null!");
-        assertNotNull(portValidator, "Port validator is null!");
-        
-        ScannerConnectionDTO scannerDTO = ScannerConnectionDTOInit.scannerConnectionDTO(scanner, ipValidator, portValidator);
         System.out.println("scannerDTO.portValidator(): " + scannerDTO.portValidator());
         
         testEnd("ScannerConnectionDTO", "portValidator()");

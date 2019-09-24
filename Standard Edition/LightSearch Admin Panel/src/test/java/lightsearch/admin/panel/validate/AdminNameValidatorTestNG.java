@@ -19,31 +19,29 @@ import lightsearch.admin.panel.exception.ValidatorException;
 import lightsearch.admin.panel.validate.AdminNameValidator;
 import lightsearch.admin.panel.validate.AdminNameValidatorInit;
 import static org.testng.Assert.*;
+import static test.message.TestMessage.*;
+
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import static test.message.TestMessage.testBegin;
-import static test.message.TestMessage.testEnd;
 
 /**
  *
  * @author ViiSE
  */
 public class AdminNameValidatorTestNG {
-    
+
     @Test
-    public void validate() {
+    @Parameters({"adminName"})
+    public void validate(String adminName) {
         testBegin("AdminNameValidator", "validate()");
         
-        try {    
-            String adminName = "name";
+        try {
             assertNotNull(adminName, "Admin name is null!");
-
             AdminNameValidator admNameValidator = AdminNameValidatorInit.adminNameValidator();
             admNameValidator.validate(adminName);
-            
             System.out.println("Validation success");
-        }
-        catch(ValidatorException ex) {
-            System.out.println("CATCH! Message: " + ex.getMessage());
+        } catch(ValidatorException ex) {
+            catchMessage(ex);
         }
         
         testEnd("AdminNameValidator", "validate()");

@@ -37,8 +37,11 @@ public class AdminCommandCreatorDataProviderProcessor implements DataProviderPro
         String ip = (String) args[0];
         int port = (Integer) args[1];
         boolean openTest = (Boolean) args[2];
-
-        AdminPanelPrinter printer = AdminPanelPrinterInit.adminPanelPrinter();
+        AdminPanelPrinter printer;
+        if(args.length == 4)
+            printer = (AdminPanelPrinter) args[3];
+        else
+            printer = AdminPanelPrinterInit.adminPanelPrinter();
         ConnectionDTOCreator connDTOCreator = ConnectionDTOCreatorInit.connectionDTOCreatorTest(ip, port);
         ConnectionDTO connDTO = connDTOCreator.createConnectionDTO();
         SocketCreator admSocketCreator = SocketCreatorInit.socketCreator(connDTO);

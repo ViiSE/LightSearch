@@ -16,6 +16,7 @@
 package lightsearch.admin.panel.print;
 
 import lightsearch.admin.panel.print.AdminPanelPrinterInit;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import lightsearch.admin.panel.print.AdminPanelPrinter;
 import static test.message.TestMessage.testBegin;
@@ -28,29 +29,26 @@ import static test.message.TestMessage.testEnd;
 public class AdminPanelPrinterTestNG {
     
     @Test
-    public void print() {
+    @Parameters({"firstMessage", "secondMessage"})
+    public void print(String firstMessage, String secondMessage) {
         testBegin("AdminPanelPrinter", "print()");
         
-        String message1 = "Hello! ";
-        String message2 = "World!";
         AdminPanelPrinter printer = AdminPanelPrinterInit.adminPanelPrinter();
-        printer.print(message1);
-        printer.print(message2);
-        
+        printer.print(firstMessage);
+        printer.print(secondMessage);
         System.out.println();
         
         testEnd("AdminPanelPrinter", "print()");
     }
     
     @Test
-    public void println() {
+    @Parameters({"firstMessage", "secondMessage"})
+    public void println(String firstMessage, String secondMessage) {
         testBegin("AdminPanelPrinter", "println()");
-        
-        String message1 = "Hello! ";
-        String message2 = "World!";
+
         AdminPanelPrinter printer = AdminPanelPrinterInit.adminPanelPrinter();
-        printer.println(message1);
-        printer.println(message2);
+        printer.println(firstMessage);
+        printer.println(secondMessage);
         
         testEnd("AdminPanelPrinter", "println()");
     }

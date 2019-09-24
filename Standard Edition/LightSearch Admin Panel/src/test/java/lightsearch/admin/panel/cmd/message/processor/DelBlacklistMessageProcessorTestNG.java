@@ -15,45 +15,16 @@
  */
 package lightsearch.admin.panel.cmd.message.processor;
 
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.Map;
 import java.util.function.Function;
 
-import lightsearch.admin.panel.cmd.admin.processor.TestServer;
+import test.TestServer;
 import lightsearch.admin.panel.cmd.message.MessageCommandCreator;
-import lightsearch.admin.panel.cmd.message.MessageCommandCreatorInit;
 import lightsearch.admin.panel.cmd.message.MessageCommandEnum;
 import lightsearch.admin.panel.cmd.result.CommandResult;
 import lightsearch.admin.panel.data.AdminCommandDAO;
 import lightsearch.admin.panel.data.AdminCommandDAOInit;
-import lightsearch.admin.panel.data.AdminDAO;
-import lightsearch.admin.panel.data.AdminDAOInit;
-import lightsearch.admin.panel.data.ConnectionDTO;
-import lightsearch.admin.panel.data.MessageCommandDTO;
-import lightsearch.admin.panel.data.MessageCommandDTOInit;
-import lightsearch.admin.panel.data.ScannerConnectionDTO;
-import lightsearch.admin.panel.data.creator.ConnectionDTOCreator;
-import lightsearch.admin.panel.data.creator.ConnectionDTOCreatorInit;
-import lightsearch.admin.panel.data.creator.ScannerConnectionDTOCreator;
-import lightsearch.admin.panel.data.creator.ScannerConnectionDTOCreatorInit;
-import lightsearch.admin.panel.data.stream.DataStream;
-import lightsearch.admin.panel.data.stream.DataStreamCreator;
-import lightsearch.admin.panel.data.stream.DataStreamCreatorInit;
-import lightsearch.admin.panel.data.stream.DataStreamInit;
-import lightsearch.admin.panel.exception.DataStreamCreatorException;
-import lightsearch.admin.panel.exception.MessageRecipientException;
-import lightsearch.admin.panel.exception.MessageSenderException;
-import lightsearch.admin.panel.exception.SocketException;
-import lightsearch.admin.panel.message.MessageRecipient;
-import lightsearch.admin.panel.message.MessageRecipientInit;
-import lightsearch.admin.panel.message.MessageSender;
-import lightsearch.admin.panel.message.MessageSenderInit;
-import lightsearch.admin.panel.print.AdminPanelPrinter;
-import lightsearch.admin.panel.print.AdminPanelPrinterInit;
-import lightsearch.admin.panel.socket.SocketCreator;
-import lightsearch.admin.panel.socket.SocketCreatorInit;
+
 import static org.testng.Assert.*;
 
 import org.testng.annotations.*;
@@ -71,13 +42,21 @@ public class DelBlacklistMessageProcessorTestNG {
     private final String DEL_BLACKLIST = MessageCommandEnum.DEL_BLACKLIST.stringValue();
     
     private Map<String, Function<AdminCommandDAO, CommandResult>> msgCmdHolder;
-    
+
+    @BeforeTest
+    @Parameters({"ip", "port"})
+    public void setUpTest(String ip, int port) {
+        if(!TestServer.serverOn) {
+            Thread testServerTh = new Thread(new TestServer(port));
+            testServerTh.start();
+        }
+    }
+
     @BeforeClass
     @Parameters({"ip", "port", "delBlMessage"})
     public void setUpMethod(String ip, int port, String answerMessage) {
-        TestServer.closeServer = false;
-        Thread testServerTh = new Thread(new TestServer(port, answerMessage));
-        testServerTh.start();
+        TestServer.closeClient = false;
+        TestServer.setAnswerMessage(answerMessage);
 
         MessageCommandCreator msgCmdCreator = DataProviderCreator.createDataProvider(MessageCommandCreator.class, ip, port);
         assertNotNull(msgCmdCreator, "MessageCommandCreator is null!");
@@ -132,6 +111,6 @@ public class DelBlacklistMessageProcessorTestNG {
     
     @AfterClass
     public void closeMethod() {
-        TestServer.closeServer = true;
+        TestServer.closeClient = true;
     }
 }

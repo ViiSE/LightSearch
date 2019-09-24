@@ -19,6 +19,8 @@ import lightsearch.admin.panel.data.AdminPanelDTO;
 import lightsearch.admin.panel.data.creator.AdminPanelDTOCreator;
 import lightsearch.admin.panel.data.creator.AdminPanelDTOCreatorInit;
 import static org.testng.Assert.*;
+
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
@@ -30,23 +32,20 @@ import static test.message.TestMessage.testEnd;
  */
 public class AdminPanelDTOTestNG {
     
-    private AdminPanelDTOCreator adminPanelDTOCreator;
+    private AdminPanelDTO adminPanelDTO;
     
-    @BeforeTest
+    @BeforeClass
     public void setUpMethod() {
-        adminPanelDTOCreator = AdminPanelDTOCreatorInit.adminPanelDTOCreator();
-        assertNotNull(adminPanelDTOCreator, "AdminPanelDTOCreator is null!");
+        adminPanelDTO = AdminPanelDTOCreatorInit.adminPanelDTOCreator().createAdminPanelDTO();
+        assertNotNull(adminPanelDTO, "AdminPanelDTO is null!");
     }
     
     @Test
     public void clients() {
         testBegin("AdminPanelDTO", "clients()");
         
-        AdminPanelDTO admPanelDTO = adminPanelDTOCreator.createAdminPanelDTO();
-        assertNotNull(admPanelDTO, "AdminPanelDTO is null!");
-        assertNotNull(admPanelDTO.clients(), "AdminPanelDTO: clients is null!");
-        
-        System.out.println("AdminPanelDTO: clients: " + admPanelDTO.clients());
+        assertNotNull(adminPanelDTO.clients(), "AdminPanelDTO: clients is null!");
+        System.out.println("AdminPanelDTO: clients: " + adminPanelDTO.clients());
         
         testEnd("AdminPanelDTO", "clients()");
     }
@@ -54,12 +53,9 @@ public class AdminPanelDTOTestNG {
     @Test
     public void blacklist() {
         testBegin("AdminPanelDTO", "blacklist()");
-        
-        AdminPanelDTO admPanelDTO = adminPanelDTOCreator.createAdminPanelDTO();
-        assertNotNull(admPanelDTO, "AdminPanelDTO is null!");
-        assertNotNull(admPanelDTO.blacklist(), "AdminPanelDTO: blacklist is null!");
-        
-        System.out.println("AdminPanelDTO: blacklist: " + admPanelDTO.blacklist());
+
+        assertNotNull(adminPanelDTO.blacklist(), "AdminPanelDTO: blacklist is null!");
+        System.out.println("AdminPanelDTO: blacklist: " + adminPanelDTO.blacklist());
         
         testEnd("AdminPanelDTO", "blacklist()");
     }

@@ -17,6 +17,8 @@ package lightsearch.admin.panel.menu;
 
 import lightsearch.admin.panel.menu.AdminPanelMenuInit;
 import static org.testng.Assert.*;
+
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import lightsearch.admin.panel.menu.AdminPanelMenu;
 import static test.message.TestMessage.testBegin;
@@ -29,12 +31,12 @@ import static test.message.TestMessage.testEnd;
 public class AdminPanelMenuTestNG {
     
     @Test
-    public void menu() {
+    @Parameters({"menu"})
+    public void menu(String menu) {
         testBegin("AdminPanelMenu", "menu()");
         
-        String menu = "I am menu";
         assertNotNull(menu, "Menu string is null!");
-        assertFalse(menu.equals(""), "Menu string is null!");
+        assertNotEquals(menu, "", "Menu string is null!");
         AdminPanelMenu adminMenu = AdminPanelMenuInit.adminMenu(menu);
         adminMenu.menu();
         

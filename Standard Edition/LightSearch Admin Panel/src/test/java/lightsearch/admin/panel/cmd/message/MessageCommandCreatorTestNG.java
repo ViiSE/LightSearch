@@ -15,39 +15,13 @@
  */
 package lightsearch.admin.panel.cmd.message;
 
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
-import lightsearch.admin.panel.cmd.message.MessageCommandCreator;
-import lightsearch.admin.panel.cmd.message.MessageCommandCreatorInit;
-import lightsearch.admin.panel.data.AdminDAO;
-import lightsearch.admin.panel.data.AdminDAOInit;
-import lightsearch.admin.panel.data.ConnectionDTO;
-import lightsearch.admin.panel.data.MessageCommandDTO;
-import lightsearch.admin.panel.data.MessageCommandDTOInit;
-import lightsearch.admin.panel.data.ScannerConnectionDTO;
-import lightsearch.admin.panel.data.creator.ConnectionDTOCreator;
-import lightsearch.admin.panel.data.creator.ConnectionDTOCreatorInit;
-import lightsearch.admin.panel.data.creator.ScannerConnectionDTOCreator;
-import lightsearch.admin.panel.data.creator.ScannerConnectionDTOCreatorInit;
-import lightsearch.admin.panel.data.stream.DataStream;
-import lightsearch.admin.panel.data.stream.DataStreamCreator;
-import lightsearch.admin.panel.data.stream.DataStreamCreatorInit;
-import lightsearch.admin.panel.data.stream.DataStreamInit;
-import lightsearch.admin.panel.exception.DataStreamCreatorException;
-import lightsearch.admin.panel.exception.SocketException;
-import lightsearch.admin.panel.message.MessageRecipient;
-import lightsearch.admin.panel.message.MessageRecipientInit;
-import lightsearch.admin.panel.message.MessageSender;
-import lightsearch.admin.panel.message.MessageSenderInit;
-import lightsearch.admin.panel.print.AdminPanelPrinter;
-import lightsearch.admin.panel.print.AdminPanelPrinterInit;
-import lightsearch.admin.panel.socket.SocketCreator;
-import lightsearch.admin.panel.socket.SocketCreatorInit;
+import test.TestServer;
+
 import static org.testng.Assert.*;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+
+import org.testng.annotations.*;
+import test.data.DataProviderCreator;
+
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 
@@ -56,78 +30,32 @@ import static test.message.TestMessage.testEnd;
  * @author ViiSE
  */
 public class MessageCommandCreatorTestNG {
-    
-    private Thread testServerTh;
-    private boolean closeServer = true;
-    
-    private Socket adminSocket;
-    MessageCommandDTO messageCommandDTO;
-    
+
+    private MessageCommandCreator msgCmdCreator;
+
     @BeforeTest
-    public void setUpMethod() {
-        testServerTh = new Thread(new TestServer());
-        testServerTh.start();
-        
-        AdminPanelPrinter printer = AdminPanelPrinterInit.adminPanelPrinter();
-        assertNotNull("printer", "AdminPanelPrinter is null!");
-        
-        ScannerConnectionDTOCreator scConnDTOCreator = 
-                ScannerConnectionDTOCreatorInit.scannerConnectionDTOCreator();
-        assertNotNull(scConnDTOCreator, "ScannerConnectionDTOCreator is null!");
-        
-        ScannerConnectionDTO scConnDTO = scConnDTOCreator.createScannerConnectionDTO();
-        assertNotNull(scConnDTO, "ScannerConnectionDTO is null!");
-        
-        ConnectionDTOCreator connDTOCreator = 
-                ConnectionDTOCreatorInit.connectionDTOCreator(printer, scConnDTO);
-        assertNotNull(connDTOCreator, "ConnectionDTOCreator is null!");
-        
-        ConnectionDTO connDTO = connDTOCreator.createConnectionDTO();
-        assertNotNull(connDTO, "ConnectionDTO is null!");
-        
-        SocketCreator admSocketCreator = SocketCreatorInit.socketCreator(connDTO);
-        assertNotNull(admSocketCreator, "Socket creator is null!");
-        
-        try {
-            adminSocket = admSocketCreator.createSocket();
-            assertNotNull(adminSocket, "Socket is null!");
-
-            AdminDAO adminDAO = AdminDAOInit.adminDAO();
-            assertNotNull(adminDAO, "AdminDAO is null!");
-
-            DataStreamCreator dsCreator = 
-                    DataStreamCreatorInit.dataStreamCreator(adminSocket);
-            assertNotNull(dsCreator, "DataStreamCreator is null!");
-            dsCreator.createDataStream();
-            
-            DataStream ds = DataStreamInit.dataStream(dsCreator);
-            assertNotNull(ds, "DataStream is null!");
-            
-            MessageSender msgSender = 
-                    MessageSenderInit.messageSender(ds.dataOutputStream());
-            assertNotNull(msgSender, "MessageSender is null!");
-            
-            MessageRecipient msgRecipient = 
-                    MessageRecipientInit.messageRecipient(ds.dataInputStream());
-            assertNotNull(msgRecipient, "MessageRecipient is null!");
-            
-            messageCommandDTO = 
-                    MessageCommandDTOInit.messageCommandDTO(msgSender, msgRecipient);
-            assertNotNull(messageCommandDTO, "MessageCommandDTO is null!");
-            
+    @Parameters({"ip", "port"})
+    public void setUpTest(String ip, int port) {
+        if(!TestServer.serverOn) {
+            Thread testServerTh = new Thread(new TestServer(port));
+            testServerTh.start();
         }
-        catch(SocketException | 
-                DataStreamCreatorException ex) {
-            System.out.println("CATCH! Message: " + ex.getMessage());
-        }
+    }
+
+    @BeforeClass
+    @Parameters({"ip", "port"})
+    public void setUpMethod(String ip, int port) {
+        TestServer.closeClient = false;
+        TestServer.setAnswerMessage(null);
+        TestServer.setSimpleMode(true);
+
+        msgCmdCreator = DataProviderCreator.createDataProvider(MessageCommandCreator.class, ip, port);
     }
     
     @Test
     public void createMessageCommandHolder() {
         testBegin("MessageCommandCreator", "createMessageCommandHolder()");
-        
-        MessageCommandCreator msgCmdCreator = 
-                MessageCommandCreatorInit.messageCommandCreator(messageCommandDTO);
+
         assertNotNull(msgCmdCreator, "MessageCommandCreator is null!");
         assertNotNull(msgCmdCreator.createMessageCommandHolder(),
                 "MessageCommandCreator: createMessageCommandHolder() is null!");
@@ -137,37 +65,9 @@ public class MessageCommandCreatorTestNG {
         testEnd("MessageCommandCreator", "createMessageCommandHolder()");
     }
     
-    @AfterTest
+    @AfterClass
     public void closeMethod() {
-        closeServer = false;
-    }
-    
-    private class TestServer implements Runnable {
-
-        @Override
-        public void run() {
-            ServerSocket serverSocket = null;
-            
-            try { serverSocket = new ServerSocket(50000); }
-            catch(IOException ex) {
-                System.out.println("CATCH! Message: " + ex.getMessage());
-            }
-            
-            System.out.println("Test server on");
-            
-            try { if(serverSocket != null) serverSocket.accept(); }
-            catch(IOException ex) {
-                System.out.println("CATCH! Message: " + ex.getMessage());
-            }
-            
-            while(closeServer) { /* Just waiting for the end of test */ }
-            
-            try { if(serverSocket != null) serverSocket.close(); }
-            catch(IOException ex) {
-                System.out.println("CATCH! Message: " + ex.getMessage());
-            }
-            
-            System.out.println("Test server off");
-        }   
+        TestServer.setSimpleMode(false);
+        TestServer.closeClient = true;
     }
 }

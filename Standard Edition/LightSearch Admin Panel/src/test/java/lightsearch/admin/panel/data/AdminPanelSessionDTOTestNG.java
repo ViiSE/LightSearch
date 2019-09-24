@@ -22,6 +22,8 @@ import lightsearch.admin.panel.data.AdminPanelDTO;
 import lightsearch.admin.panel.data.AdminPanelDTOInit;
 import lightsearch.admin.panel.data.AdminPanelSessionDTOInit;
 import static org.testng.Assert.*;
+
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
@@ -43,55 +45,45 @@ import lightsearch.admin.panel.scanner.ScannerChooserCommandInit;
  * @author ViiSE
  */
 public class AdminPanelSessionDTOTestNG {
-    
-    private AdminPanelMenu menu;
-    private AdminPanelDTO adminPanelDTO;
-    private Map<String, Function<AdminPanelDTO, String>> commandHolder;
-    private AdminPanelPrinter printer; 
-    private ScannerChooserCommand scannerChCmd;
-    
-    @BeforeTest
-    public void setUpMethod() throws Exception {
+
+    private AdminPanelSessionDTO admPanelSessionDTO;
+
+    @BeforeClass
+    public void setUpMethod() {
         AdminPanelMenuCreator menuCreator = AdminPanelMenuCreatorInit.adminMenuCreator();
         assertNotNull(menuCreator, "MenuCreator is null!");
-        menu = menuCreator.createAdminMenu();
+        AdminPanelMenu menu = menuCreator.createAdminMenu();
         
         Map<String, String> clients = new HashMap<>();
         assertNotNull(clients, "Clients map is null!");
         Map<String, String> blacklist = new HashMap<>();
         assertNotNull(blacklist, "Blacklist map is null!");
-        adminPanelDTO = AdminPanelDTOInit.adminPanelDTO(clients, blacklist); 
+        AdminPanelDTO adminPanelDTO = AdminPanelDTOInit.adminPanelDTO(clients, blacklist);
         
-        commandHolder = new HashMap<>();
-        
-        printer = AdminPanelPrinterInit.adminPanelPrinter();
-        
-        ScannerChooserCommandDTOCreator scChCmdDTOCreator = 
+        AdminPanelPrinter printer = AdminPanelPrinterInit.adminPanelPrinter();
+
+        Map<String, Function<AdminPanelDTO, String>> commandHolder = new HashMap<>();
+
+        ScannerChooserCommandDTOCreator scChCmdDTOCreator =
                 ScannerChooserCommandDTOCreatorInit.scannerChooserCommandDTOCreator();
         assertNotNull(scChCmdDTOCreator, "ScannerChooserCommandDTOCreator is null!");
         ScannerChooserCommandDTO scChCmdDTO = scChCmdDTOCreator.createScannerChooserCommandDTO();
         assertNotNull(scChCmdDTO, "ScannerChooserCommanDTO is null!");
-        scannerChCmd = ScannerChooserCommandInit.scannerChooserCommand(scChCmdDTO);
-    }
-    
-    @Test
-    public void menu() {
-        testBegin("AdminPanelSessionDTO", "menu()");
-        
+        ScannerChooserCommand scannerChCmd = ScannerChooserCommandInit.scannerChooserCommand(scChCmdDTO);
+
         assertNotNull(menu, "AdminPanelMenu is null!");
         assertNotNull(adminPanelDTO, "AdminPanelDTO is null!");
         assertNotNull(commandHolder, "CommandHolder is null!");
         assertNotNull(printer, "AdminPanelPrinter is null!");
         assertNotNull(scannerChCmd, "ScannerChooserCommand is null!");
-        
-        AdminPanelSessionDTO admPanelSessionDTO = 
-                AdminPanelSessionDTOInit.adminPanelDTO(
-                        menu, 
-                        adminPanelDTO, 
-                        commandHolder, 
-                        printer, 
-                        scannerChCmd
-                );
+
+        admPanelSessionDTO =
+                AdminPanelSessionDTOInit.adminPanelDTO(menu, adminPanelDTO, commandHolder, printer, scannerChCmd);
+    }
+    
+    @Test
+    public void menu() {
+        testBegin("AdminPanelSessionDTO", "menu()");
         
         System.out.print("Get menu: ");
         System.out.println(admPanelSessionDTO.adminMenu());
@@ -103,21 +95,6 @@ public class AdminPanelSessionDTOTestNG {
     public void adminPanelDTO() {
         testBegin("AdminPanelSessionDTO", "adminPanelDTO()");
         
-        assertNotNull(menu, "AdminPanelMenu is null!");
-        assertNotNull(adminPanelDTO, "AdminPanelDTO is null!");
-        assertNotNull(commandHolder, "CommandHolder is null!");
-        assertNotNull(printer, "AdminPanelPrinter is null!");
-        assertNotNull(scannerChCmd, "ScannerChooserCommand is null!");
-        
-        AdminPanelSessionDTO admPanelSessionDTO = 
-                AdminPanelSessionDTOInit.adminPanelDTO(
-                        menu, 
-                        adminPanelDTO, 
-                        commandHolder, 
-                        printer, 
-                        scannerChCmd
-                );
-        
         System.out.print("Get adminPanelDTO: ");
         System.out.println(admPanelSessionDTO.adminPanelDTO());
         
@@ -127,21 +104,6 @@ public class AdminPanelSessionDTOTestNG {
     @Test
     public void commandHolder() {
         testBegin("AdminPanelSessionDTO", "commandHolder()");
-        
-        assertNotNull(menu, "AdminPanelMenu is null!");
-        assertNotNull(adminPanelDTO, "AdminPanelDTO is null!");
-        assertNotNull(commandHolder, "CommandHolder is null!");
-        assertNotNull(printer, "AdminPanelPrinter is null!");
-        assertNotNull(scannerChCmd, "ScannerChooserCommand is null!");
-        
-        AdminPanelSessionDTO admPanelSessionDTO = 
-                AdminPanelSessionDTOInit.adminPanelDTO(
-                        menu, 
-                        adminPanelDTO, 
-                        commandHolder, 
-                        printer, 
-                        scannerChCmd
-                );
         
         System.out.print("Get commandHolder: ");
         System.out.println(admPanelSessionDTO.commandHolder().getClass());
@@ -153,21 +115,6 @@ public class AdminPanelSessionDTOTestNG {
     public void printer() {
         testBegin("AdminPanelSessionDTO", "printer()");
         
-        assertNotNull(menu, "AdminPanelMenu is null!");
-        assertNotNull(adminPanelDTO, "AdminPanelDTO is null!");
-        assertNotNull(commandHolder, "CommandHolder is null!");
-        assertNotNull(printer, "AdminPanelPrinter is null!");
-        assertNotNull(scannerChCmd, "ScannerChooserCommand is null!");
-        
-        AdminPanelSessionDTO admPanelSessionDTO = 
-                AdminPanelSessionDTOInit.adminPanelDTO(
-                        menu, 
-                        adminPanelDTO, 
-                        commandHolder, 
-                        printer, 
-                        scannerChCmd
-                );
-        
         System.out.print("Get printer: ");
         System.out.println(admPanelSessionDTO.printer());
         
@@ -177,21 +124,6 @@ public class AdminPanelSessionDTOTestNG {
     @Test
     public void scannerCommand() {
         testBegin("AdminPanelSessionDTO", "scannerCommand()");
-        
-        assertNotNull(menu, "AdminPanelMenu is null!");
-        assertNotNull(adminPanelDTO, "AdminPanelDTO is null!");
-        assertNotNull(commandHolder, "CommandHolder is null!");
-        assertNotNull(printer, "AdminPanelPrinter is null!");
-        assertNotNull(scannerChCmd, "ScannerChooserCommand is null!");
-        
-        AdminPanelSessionDTO admPanelSessionDTO = 
-                AdminPanelSessionDTOInit.adminPanelDTO(
-                        menu, 
-                        adminPanelDTO, 
-                        commandHolder, 
-                        printer, 
-                        scannerChCmd
-                );
         
         System.out.print("Get scannerCommand: ");
         System.out.println(admPanelSessionDTO.scannerCommand());

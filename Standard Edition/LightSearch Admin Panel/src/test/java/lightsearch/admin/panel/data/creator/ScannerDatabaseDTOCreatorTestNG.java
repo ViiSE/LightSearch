@@ -33,14 +33,12 @@ public class ScannerDatabaseDTOCreatorTestNG {
     public void createScannerDatabaseDTO() {
         testBegin("ScannerDatabaseDTOCreator", "createScannerDatabaseDTO()");
         
-        ScannerDatabaseDTOCreator scDbDTOCreator = 
-                ScannerDatabaseDTOCreatorInit.scannerDatabaseDTOCreator();
+        ScannerDatabaseDTOCreator scDbDTOCreator = ScannerDatabaseDTOCreatorInit.scannerDatabaseDTOCreator();
         assertNotNull(scDbDTOCreator, "ScannerDatabaseDTOCreator is null!");
         
         System.out.println("ScannerDatabaseDTOCreator: " + scDbDTOCreator);
         
-        ScannerDatabaseDTO scDbDTO = 
-                scDbDTOCreator.createScannerDatabaseDTO();
+        ScannerDatabaseDTO scDbDTO = scDbDTOCreator.createScannerDatabaseDTO();
         assertNotNull(scDbDTO, "ScannerDatabaseDTO is null!");
         
         System.out.println("ScannerDatabaseDTO: " + scDbDTO);

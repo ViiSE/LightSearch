@@ -44,12 +44,10 @@ public class ExitAdminPanelProcessor extends AbstractProcessorAdmin {
                     super.adminDTO().printer().println("Goodbye!");
                     super.adminDTO().adminSocket().close();
                     System.exit(0);
-                }
-                else {
+                } else {
                     return answer;
                 }
-            }
-            catch(ScannerException ex) {
+            } catch(ScannerException ex) {
                 super.adminDTO().printer().println(ex.getMessage());
             } catch (IOException ex) {
                 throw new RuntimeException(ex.getMessage());

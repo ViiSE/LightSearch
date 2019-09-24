@@ -19,9 +19,10 @@ import lightsearch.admin.panel.exception.MessageParserException;
 import lightsearch.admin.panel.message.parser.MessageParser;
 import lightsearch.admin.panel.message.parser.MessageParserInit;
 import static org.testng.Assert.*;
+import static test.message.TestMessage.*;
+
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import static test.message.TestMessage.testBegin;
-import static test.message.TestMessage.testEnd;
 
 /**
  *
@@ -30,22 +31,21 @@ import static test.message.TestMessage.testEnd;
 public class MessageParserTestNG {
     
     @Test
-    public void parse() {
+    @Parameters({"message"})
+    public void parse(String message) {
         testBegin("MessageParser", "parse()");
         
         try {
-            String rawMessage = "{\"name\":\"admin\"}";
-            assertNotNull(rawMessage, "Raw message is null!");
-            assertFalse(rawMessage.isEmpty(), "Raw message is null!");
+            assertNotNull(message, "Raw message is null!");
+            assertFalse(message.isEmpty(), "Raw message is null!");
 
             MessageParser msgParser = MessageParserInit.messageParser();
             assertNotNull(msgParser, "MessageParser is null!");
 
-            Object msgParse = msgParser.parse(rawMessage);
+            Object msgParse = msgParser.parse(message);
             System.out.println("Parse message: " + msgParse);
-        }
-        catch(MessageParserException ex) {
-            System.out.println("CATCH! Message: " + ex.getMessage());
+        } catch(MessageParserException ex) {
+            catchMessage(ex);
         }
         
         testEnd("MessageParser", "parse()");

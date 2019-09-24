@@ -41,10 +41,12 @@ import lightsearch.admin.panel.session.AdminPanelSession;
 import lightsearch.admin.panel.session.AdminPanelSessionCreator;
 import lightsearch.admin.panel.session.AdminPanelSessionCreatorInit;
 import static org.testng.Assert.*;
+import static test.message.TestMessage.*;
+
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import static test.message.TestMessage.testBegin;
-import static test.message.TestMessage.testEnd;
 
 /**
  *
@@ -56,35 +58,32 @@ public class AdminPanelSessionCreatorTestNG {
     private ScannerConnectionDTO scannerConnectionDTO;
     private AdminPanelDTO adminPanelDTO;
     
-    @BeforeTest
-    public void setUpMethod() throws Exception {
+    @BeforeClass
+    public void setUpMethod() {
         printer = AdminPanelPrinterInit.adminPanelPrinter();
         
-        ScannerConnectionDTOCreator scannerDTOCreator = 
-                ScannerConnectionDTOCreatorInit.scannerConnectionDTOCreator();
+        ScannerConnectionDTOCreator scannerDTOCreator = ScannerConnectionDTOCreatorInit.scannerConnectionDTOCreator();
         assertNotNull(scannerDTOCreator, "ScannerDTOCreator is null!");
-        scannerConnectionDTO = 
-                scannerDTOCreator.createScannerConnectionDTO();
+        scannerConnectionDTO = scannerDTOCreator.createScannerConnectionDTO();
         
-        AdminPanelDTOCreator admPanelDTOCreator = 
-                AdminPanelDTOCreatorInit.adminPanelDTOCreator();
+        AdminPanelDTOCreator admPanelDTOCreator = AdminPanelDTOCreatorInit.adminPanelDTOCreator();
         assertNotNull(admPanelDTOCreator, "AdminPanelDTOCreator is null!");
         adminPanelDTO = admPanelDTOCreator.createAdminPanelDTO();
     }
     
     @Test
-    public void createSession() {
+    @Parameters({"port"})
+    public void createSession(int port) {
         testBegin("AdminPanelSessionCreator", "createSession()");
         
         assertNotNull(printer, "AdminPanelPrinter is null!");
         assertNotNull(printer, "ScannerConnectionDTO is null!");
         assertNotNull(printer, "adminPanelDTO is null!");
         
-        Thread serverThread = new Thread(new TestLightSearchServer());
+        Thread serverThread = new Thread(new TestLightSearchServer(port));
         serverThread.start();
         
-        AdminPanelSessionCreator sessionCreator = 
-                AdminPanelSessionCreatorInit.adminPanelSessionCreatorInteractive(
+        AdminPanelSessionCreator sessionCreator = AdminPanelSessionCreatorInit.adminPanelSessionCreatorInteractive(
                         printer, scannerConnectionDTO, adminPanelDTO);
         assertNotNull(sessionCreator, "AdminPanelSessionCreator is null!");
         AdminPanelSession session = sessionCreator.createSession();
@@ -95,57 +94,41 @@ public class AdminPanelSessionCreatorTestNG {
         testEnd("AdminPanelSessionCreator", "createSession()");
     }
     
-    public class TestLightSearchServer implements Runnable {
+    public static class TestLightSearchServer implements Runnable {
+
+        private final int port;
+
+        TestLightSearchServer(int port) {
+            this.port = port;
+        }
 
         @Override
         public void run() {
-            try(ServerSocket serverSocket = new ServerSocket(50000);) {
+            try(ServerSocket serverSocket = new ServerSocket(port)) {
                 System.out.println("ServerTest Started");
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("ACCEPT!");
-                DataStreamCreator dataStreamCreator = 
-                        DataStreamCreatorInit.dataStreamCreator(clientSocket);
-                try {
-                    dataStreamCreator.createDataStream();
-                }
-                catch(DataStreamCreatorException ex) {
-                    System.out.println("CATCH! Message: " + ex.getMessage());
-                }
-                
+
+                DataStreamCreator dataStreamCreator = DataStreamCreatorInit.dataStreamCreator(clientSocket);
+                dataStreamCreator.createDataStream();
                 DataStream dataStream = DataStreamInit.dataStream(dataStreamCreator);
+
+                MessageSender msgSender = MessageSenderInit.messageSender(dataStream.dataOutputStream());
+                MessageRecipient msgRecipient = MessageRecipientInit.messageRecipient(dataStream.dataInputStream());
                 
-                MessageSender msgSender = 
-                        MessageSenderInit.messageSender(dataStream.dataOutputStream());
-                MessageRecipient msgRecipient = 
-                        MessageRecipientInit.messageRecipient(dataStream.dataInputStream());
-                
-                try {
-                    String recMsgIdent = msgRecipient.acceptMessage();
-                    System.out.println("Received message: " + recMsgIdent);
-                }
-                catch(MessageRecipientException ex) {
-                    System.out.println("CATCH! Message: " + ex.getMessage());
-                }
-                
-                try {
-                    String sendMsg = "OK";
-                    System.out.println("Send message: " + sendMsg);
-                    msgSender.sendMessage(sendMsg);
-                }
-                catch(MessageSenderException ex) {
-                    System.out.println("CATCH! Message: " + ex.getMessage());
-                }
-                
-                try {
-                    String recMsg = msgRecipient.acceptMessage();
-                    System.out.println("Received message: " + recMsg);
-                }
-                catch(MessageRecipientException ex) {
-                    System.out.println("CATCH! Message: " + ex.getMessage());
-                }
+                String recMsgIdent = msgRecipient.acceptMessage();
+                System.out.println("Received message: " + recMsgIdent);
+
+                String sendMsg = "OK";
+                System.out.println("Send message: " + sendMsg);
+                msgSender.sendMessage(sendMsg);
+
+                String recMsg = msgRecipient.acceptMessage();
+                System.out.println("Received message: " + recMsg);
+
             }
-            catch(IOException ex) {
-                System.out.println("CATCH! Message: " + ex.getMessage());
+            catch(IOException | DataStreamCreatorException | MessageRecipientException | MessageSenderException ex) {
+                catchMessage(ex);
             }
         }
     }

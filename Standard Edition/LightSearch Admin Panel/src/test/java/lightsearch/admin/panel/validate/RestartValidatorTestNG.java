@@ -19,34 +19,30 @@ import lightsearch.admin.panel.exception.ValidatorException;
 import lightsearch.admin.panel.validate.RestartValidator;
 import lightsearch.admin.panel.validate.RestartValidatorInit;
 import static org.testng.Assert.*;
+import static test.message.TestMessage.*;
+
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import static test.message.TestMessage.testBegin;
-import static test.message.TestMessage.testEnd;
 
 /**
  *
  * @author ViiSE
  */
 public class RestartValidatorTestNG {
-    
-    public RestartValidatorTestNG() {
-    }
 
     @Test
-    public void validate() {
+    @Parameters({"answer"})
+    public void validate(String answer) {
         testBegin("RestartValidator", "validate()");
          
         try {
-            String answer = "yes";
             assertNotNull(answer, "Answer is null!");
             assertFalse(answer.isEmpty(), "Answer is null!");
-
             RestartValidator restartValidator = RestartValidatorInit.restartValidator();
             restartValidator.validate(answer);
             System.out.println("Validation success");
-        }
-        catch(ValidatorException ex) {
-            System.out.println("CATCH! Message: " + ex.getMessage());
+        } catch(ValidatorException ex) {
+            catchMessage(ex);
         }
          
         testEnd("RestartValidator", "validate()");

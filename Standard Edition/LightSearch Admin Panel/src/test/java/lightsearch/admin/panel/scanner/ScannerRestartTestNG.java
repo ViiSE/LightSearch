@@ -22,10 +22,11 @@ import lightsearch.admin.panel.exception.ScannerException;
 import lightsearch.admin.panel.scanner.ScannerRestart;
 import lightsearch.admin.panel.scanner.ScannerRestartInit;
 import static org.testng.Assert.*;
+import static test.message.TestMessage.*;
+
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import static test.message.TestMessage.testBegin;
-import static test.message.TestMessage.testEnd;
 
 /**
  *
@@ -33,15 +34,16 @@ import static test.message.TestMessage.testEnd;
  */
 public class ScannerRestartTestNG {
     
-    private ScannerRestartDTO scannerRestartDTO;
+    private ScannerRestart scanner;
     
-    @BeforeTest
+    @BeforeClass
     public void setUpMethod() {
-        ScannerRestartDTOCreator scResDTOCreator = 
-                ScannerRestartDTOCreatorInit.scannerRestartDTOCreator();
+        ScannerRestartDTOCreator scResDTOCreator = ScannerRestartDTOCreatorInit.scannerRestartDTOCreator();
         assertNotNull(scResDTOCreator, "ScannerRestartDTOCreator is null!");
-        
-        scannerRestartDTO = scResDTOCreator.createScannerRestartDTO();
+
+        ScannerRestartDTO scannerRestartDTO = scResDTOCreator.createScannerRestartDTO();
+        scanner = ScannerRestartInit.scannerRestart(scannerRestartDTO);
+        assertNotNull(scanner, "ScannerRestart is null!");
     }
     
     @Test
@@ -49,18 +51,11 @@ public class ScannerRestartTestNG {
         testBegin("ScannerRestart", "scanAnswer()");
         
         try {
-            assertNotNull(scannerRestartDTO, "ScannerRestartDTO is null!");
-            
-            ScannerRestart scanner = 
-                    ScannerRestartInit.scannerRestart(scannerRestartDTO);
-            assertNotNull(scanner, "ScannerRestart is null!");
-            
             System.out.print("Input y|yes or n|no: ");
             String answer = scanner.scanAnswer();
             System.out.println("Scan answer: " + answer);
-        }
-        catch(ScannerException ex) {
-            System.out.println("CATCH! Message: " + ex.getMessage());
+        } catch(ScannerException ex) {
+            catchMessage(ex);
         }
         
         testEnd("ScannerRestart", "scanAnswer()");

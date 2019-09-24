@@ -18,6 +18,8 @@ package lightsearch.admin.panel.message.type;
 import lightsearch.admin.panel.message.type.MessageCreateAdmin;
 import lightsearch.admin.panel.message.type.MessageCreateAdminInit;
 import static org.testng.Assert.*;
+
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
@@ -27,26 +29,22 @@ import static test.message.TestMessage.testEnd;
  * @author ViiSE
  */
 public class MessageCreateAdminTestNG {
-    
+
     @Test
-    public void message() {
+    @Parameters({"name", "adminName", "password"})
+    public void message(String name, String adminName, String password) {
         testBegin("MessageCreateAdmin", "message()");
         
-        String name = "name";
         assertNotNull(name, "Name is null!");
         assertFalse(name.isEmpty(), "Name is null!");
-        
-        
-        String adminName = "adminName";
+
         assertNotNull(adminName, "Admin name is null!");
         assertFalse(adminName.isEmpty(), "Admin name is null!");
         
-        String pass = "password";
-        assertNotNull(pass, "Password is null!");
-        assertFalse(pass.isEmpty(), "Password is null!");
+        assertNotNull(password, "Password is null!");
+        assertFalse(password.isEmpty(), "Password is null!");
         
-        MessageCreateAdmin msgCrAdmin = 
-                MessageCreateAdminInit.messageCreateAdmin(name, adminName, pass);
+        MessageCreateAdmin msgCrAdmin = MessageCreateAdminInit.messageCreateAdmin(name, adminName, password);
         assertNotNull(msgCrAdmin, "MessageCreateAdmin is null!");
         
         String message = msgCrAdmin.message();

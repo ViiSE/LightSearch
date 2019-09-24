@@ -32,8 +32,7 @@ public class MessageConnectionTestNG {
     public void message() {
         testBegin("MessageConnection", "message()");
         
-        MessageConnection msgConn = 
-                MessageConnectionInit.messageConnection();
+        MessageConnection msgConn = MessageConnectionInit.messageConnection();
         assertNotNull(msgConn, "MessageConnection is null!");
         
         String message = msgConn.message();

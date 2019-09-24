@@ -18,6 +18,10 @@ package lightsearch.admin.panel.data;
 import lightsearch.admin.panel.data.ConnectionDTO;
 import lightsearch.admin.panel.data.ConnectionDTOInit;
 import static org.testng.Assert.*;
+
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
@@ -27,20 +31,23 @@ import static test.message.TestMessage.testEnd;
  * @author ViiSE
  */
 public class ConnectionDTOTestNG {
-    
+
+    private ConnectionDTO connectionDTO;
+
+    @BeforeClass
+    @Parameters({"ip", "port"})
+    public void setUpClass(String ip, int port) {
+        assertNotNull(ip, "IP is null!");
+        assertFalse(ip.isEmpty(), "IP is null!");
+        assertFalse(port < 1023 || port > 65535, "Wrong port number!");
+
+        connectionDTO = ConnectionDTOInit.connectionDTO(ip, port);
+        assertNotNull(connectionDTO, "ConnectionDTO is null!");
+    }
+
     @Test
     public void ip() {
         testBegin("ConnectionDTO", "ip()");
-        
-        String ip = "127.0.0.1";
-        assertNotNull(ip, "IP is null!");
-        assertFalse(ip.isEmpty(), "IP is null!");
-        
-        int port = 50000;
-        assertFalse(port < 1023 || port > 65535, "Wrong port number!");
-        
-        ConnectionDTO connectionDTO = ConnectionDTOInit.connectionDTO(ip, port);
-        assertNotNull(connectionDTO, "ConnectionDTO is null!");
         
         System.out.println("ip: "  + connectionDTO.ip());
         
@@ -50,16 +57,6 @@ public class ConnectionDTOTestNG {
     @Test
     public void port() {
         testBegin("ConnectionDTO", "port()");
-        
-        String ip = "127.0.0.1";
-        assertNotNull(ip, "IP is null!");
-        assertFalse(ip.isEmpty(), "IP is null!");
-        
-        int port = 50000;
-        assertFalse(port < 1023 || port > 65535, "Wrong port number!");
-        
-        ConnectionDTO connectionDTO = ConnectionDTOInit.connectionDTO(ip, port);
-        assertNotNull(connectionDTO, "ConnectionDTO is null!");
         
         System.out.println("port: " + connectionDTO.port());
         

@@ -33,14 +33,12 @@ public class ScannerConnectionDTOCreatorTestNG {
     public void createScannerConnectionDTO() {
         testBegin("ScannerConnectionDTOCreator", "createScannerConnectionDTO()");
         
-        ScannerConnectionDTOCreator scConnDTOCreator = 
-                ScannerConnectionDTOCreatorInit.scannerConnectionDTOCreator();
+        ScannerConnectionDTOCreator scConnDTOCreator = ScannerConnectionDTOCreatorInit.scannerConnectionDTOCreator();
         assertNotNull(scConnDTOCreator, "ScannerConnectionDTOCreator is null!");
         
         System.out.println("ScannerConnectionDTOCreator: " + scConnDTOCreator);
         
-        ScannerConnectionDTO scConnDTO = 
-                scConnDTOCreator.createScannerConnectionDTO();
+        ScannerConnectionDTO scConnDTO = scConnDTOCreator.createScannerConnectionDTO();
         assertNotNull(scConnDTO, "ScannerConnectionDTO is null!");
         
         System.out.println("ScannerConnectionDTO: " + scConnDTO);

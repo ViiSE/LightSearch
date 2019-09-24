@@ -24,7 +24,10 @@ import lightsearch.admin.panel.data.creator.ScannerConnectionDTOCreatorInit;
 import lightsearch.admin.panel.print.AdminPanelPrinter;
 import lightsearch.admin.panel.print.AdminPanelPrinterInit;
 import static org.testng.Assert.*;
+
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
@@ -38,35 +41,35 @@ public class ConnectionDTOCreatorTestNG {
     private AdminPanelPrinter printer;
     private ScannerConnectionDTO scannerDTO;
     
-    @BeforeTest
+    @BeforeClass
     public void setUpMethod() {
         printer = AdminPanelPrinterInit.adminPanelPrinter();
         
-        ScannerConnectionDTOCreator scConnDTOCreator = 
-                ScannerConnectionDTOCreatorInit.scannerConnectionDTOCreator();
+        ScannerConnectionDTOCreator scConnDTOCreator = ScannerConnectionDTOCreatorInit.scannerConnectionDTOCreator();
         assertNotNull(scConnDTOCreator, "ScannerConnectionDTOCreator is null!");
         
         scannerDTO = scConnDTOCreator.createScannerConnectionDTO();
     }
     
     @Test
-    public void createConnectionDTO() {
+    @Parameters({"openTest"})
+    public void createConnectionDTO(boolean openTest) {
         testBegin("ConnectionDTOCreator", "createConnectionDTOCreator()");
         
         assertNotNull(printer, "AdminPanelPrinter is null!");
         assertNotNull(scannerDTO, "ScannerConnectionDTO is null!");
         
-        ConnectionDTOCreator connDTOCreator = 
-                ConnectionDTOCreatorInit.connectionDTOCreator(printer, scannerDTO);
+        ConnectionDTOCreator connDTOCreator = ConnectionDTOCreatorInit.connectionDTOCreator(printer, scannerDTO);
         assertNotNull(connDTOCreator, "ConnectionDTOCreator is null!");
         
         System.out.println("ConnectionDTOCreator: " + connDTOCreator);
-        
-        ConnectionDTO connDTO = connDTOCreator.createConnectionDTO();
-        assertNotNull(connDTO, "ConnectionDTO is null!");
-        
-        System.out.println("ConnectionDTO: " + connDTO);
-        
+
+        if(openTest) {
+            ConnectionDTO connDTO = connDTOCreator.createConnectionDTO();
+            assertNotNull(connDTO, "ConnectionDTO is null!");
+
+            System.out.println("ConnectionDTO: " + connDTO);
+        }
         testEnd("ConnectionDTOCreator", "createConnectionDTOCreator()");
     }
 }

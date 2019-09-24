@@ -18,6 +18,8 @@ package lightsearch.admin.panel.message.type;
 import lightsearch.admin.panel.message.type.MessageRestart;
 import lightsearch.admin.panel.message.type.MessageRestartInit;
 import static org.testng.Assert.*;
+
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
@@ -29,15 +31,14 @@ import static test.message.TestMessage.testEnd;
 public class MessageRestartTestNG {
     
     @Test
-    public void message() {
+    @Parameters({"name"})
+    public void message(String name) {
         testBegin("MessageRestart", "message()");
-        
-        String name = "name";
+
         assertNotNull(name, "Name is null!");
         assertFalse(name.isEmpty(), "Name is null!");
         
-        MessageRestart msgRes = 
-                MessageRestartInit.messageRestart(name);
+        MessageRestart msgRes = MessageRestartInit.messageRestart(name);
         assertNotNull(msgRes, "MessageRestart is null!");
         
         String message = msgRes.message();

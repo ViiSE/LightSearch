@@ -19,6 +19,8 @@ import lightsearch.admin.panel.data.ScannerDatabaseDTO;
 import lightsearch.admin.panel.data.creator.ScannerDatabaseDTOCreator;
 import lightsearch.admin.panel.data.creator.ScannerDatabaseDTOCreatorInit;
 import static org.testng.Assert.*;
+
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
@@ -30,22 +32,19 @@ import static test.message.TestMessage.testEnd;
  */
 public class ScannerDatabaseDTOTestNG {
     
-    private ScannerDatabaseDTOCreator scDbDTOCreator;
+    private ScannerDatabaseDTO scDbDTO;
     
-    @BeforeTest
+    @BeforeClass
     public void setUpMethod() {
-        scDbDTOCreator = ScannerDatabaseDTOCreatorInit.scannerDatabaseDTOCreator();
-        assertNotNull(scDbDTOCreator, "ScannerDatabaseDTOCreator is null!");
+        scDbDTO = ScannerDatabaseDTOCreatorInit.scannerDatabaseDTOCreator().createScannerDatabaseDTO();
+        assertNotNull(scDbDTO, "ScannerDatabaseDTO is null!");
     }
     
     @Test
     public void scanner() {
         testBegin("ScannerDatabaseDTO", "scanner()");
         
-        ScannerDatabaseDTO scDbDTO = scDbDTOCreator.createScannerDatabaseDTO();
-        assertNotNull(scDbDTO, "ScannerDatabaseDTO is null!");
         assertNotNull(scDbDTO.scanner(), "ScannerDatabaseDTO: scanner is null!");
-        
         System.out.println("ScannerDatabaseDTO: scanner: " + scDbDTO.scanner());
         
         testEnd("ScannerDatabaseDTO", "scanner()");
@@ -55,13 +54,8 @@ public class ScannerDatabaseDTOTestNG {
     public void ipValidator() {
         testBegin("ScannerDatabaseDTO", "ipValidator()");
         
-        ScannerDatabaseDTO scDbDTO = scDbDTOCreator.createScannerDatabaseDTO();
-        assertNotNull(scDbDTO, "ScannerDatabaseDTO is null!");
-        assertNotNull(scDbDTO.ipValidator(), 
-                "ScannerDatabaseDTO: ipValidator is null!");
-        
-        System.out.println("ScannerDatabaseDTO: ipValidator: " 
-                + scDbDTO.ipValidator());
+        assertNotNull(scDbDTO.ipValidator(), "ScannerDatabaseDTO: ipValidator is null!");
+        System.out.println("ScannerDatabaseDTO: ipValidator: " + scDbDTO.ipValidator());
         
         testEnd("ScannerDatabaseDTO", "ipValidator()");
     }
@@ -70,29 +64,19 @@ public class ScannerDatabaseDTOTestNG {
     public void portValidator() {
         testBegin("ScannerDatabaseDTO", "portValidator()");
         
-        ScannerDatabaseDTO scDbDTO = scDbDTOCreator.createScannerDatabaseDTO();
-        assertNotNull(scDbDTO, "ScannerDatabaseDTO is null!");
-        assertNotNull(scDbDTO.portValidator(), 
-                "ScannerDatabaseDTO: portValidator is null!");
-        
-        System.out.println("ScannerDatabaseDTO: portValidator: " 
-                + scDbDTO.portValidator());
+        assertNotNull(scDbDTO.portValidator(), "ScannerDatabaseDTO: portValidator is null!");
+        System.out.println("ScannerDatabaseDTO: portValidator: " + scDbDTO.portValidator());
         
         testEnd("ScannerDatabaseDTO", "portValidator()");
     }
     
     @Test
-    public void dbNameValidattor() {
-        testBegin("ScannerDatabaseDTO", "dbNameValidattor()");
+    public void dbNameValidator() {
+        testBegin("ScannerDatabaseDTO", "dbNameValidator()");
         
-        ScannerDatabaseDTO scDbDTO = scDbDTOCreator.createScannerDatabaseDTO();
-        assertNotNull(scDbDTO, "ScannerDatabaseDTO is null!");
-        assertNotNull(scDbDTO.dbNameValidattor(), 
-                "ScannerDatabaseDTO: dbNameValidattor is null!");
+        assertNotNull(scDbDTO.dbNameValidattor(), "ScannerDatabaseDTO: dbNameValidator is null!");
+        System.out.println("ScannerDatabaseDTO: dbNameValidator: " + scDbDTO.dbNameValidattor());
         
-        System.out.println("ScannerDatabaseDTO: dbNameValidattor: " 
-                + scDbDTO.dbNameValidattor());
-        
-        testEnd("ScannerDatabaseDTO", "dbNameValidattor()");
+        testEnd("ScannerDatabaseDTO", "dbNameValidator()");
     }
 }

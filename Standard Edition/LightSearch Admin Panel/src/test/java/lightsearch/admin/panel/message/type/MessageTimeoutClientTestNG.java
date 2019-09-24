@@ -18,6 +18,8 @@ package lightsearch.admin.panel.message.type;
 import lightsearch.admin.panel.message.type.MessageTimeoutClient;
 import lightsearch.admin.panel.message.type.MessageTimeoutClientInit;
 import static org.testng.Assert.*;
+
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
@@ -29,19 +31,17 @@ import static test.message.TestMessage.testEnd;
 public class MessageTimeoutClientTestNG {
     
     @Test
-    public void message() {
+    @Parameters({"name", "clTimeoutValue"})
+    public void message(String name, String timeoutValue) {
         testBegin("MessageTimeoutClient", "message()");
-        
-        String name = "name";
+
         assertNotNull(name, "Name is null!");
         assertFalse(name.isEmpty(), "Name is null!");
         
-        String timeoutValue = "10000";
         assertNotNull(timeoutValue, "TimeoutValue is null!");
         assertFalse(timeoutValue.isEmpty(), "TimeoutValue is null!");
         
-        MessageTimeoutClient msgToutClient = 
-                MessageTimeoutClientInit.messageTimeoutClient(name, timeoutValue);
+        MessageTimeoutClient msgToutClient = MessageTimeoutClientInit.messageTimeoutClient(name, timeoutValue);
         assertNotNull(msgToutClient, "MessageTimeoutClient is null!");
         
         String message = msgToutClient.message();

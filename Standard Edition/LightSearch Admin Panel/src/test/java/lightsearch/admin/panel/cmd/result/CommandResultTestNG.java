@@ -21,10 +21,12 @@ import lightsearch.admin.panel.exception.MessageParserException;
 import lightsearch.admin.panel.message.parser.MessageParser;
 import lightsearch.admin.panel.message.parser.MessageParserInit;
 import static org.testng.Assert.*;
+import static test.message.TestMessage.*;
+
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import static test.message.TestMessage.testBegin;
-import static test.message.TestMessage.testEnd;
 
 /**
  *
@@ -34,42 +36,22 @@ public class CommandResultTestNG {
     
     private Object parseMessage;
     
-    @BeforeTest
-    public void setUpMethod() {
-        String messageRaw = 
-                    "{\n"
-                        + "\"name\": \"admin\"\n"
-                        + "\"isDone\": \"True\"\n"
-                        + "\"message\": \"some message\"\n"
-                        + "\"data\": [\n"
-                                        + "{\n"
-                                            +"\"name\": \"client1\"\n"
-                                            + "\"IMEI\": \"123456789123456\"\n"
-                                        + "}\n"
-                                        + "{\n"
-                                            +"\"name\": \"client2\"\n"
-                                            + "\"IMEI\": \"123456123456789\"\n"
-                                        + "}\n"
-                                  + "]\n"
-                  + "}\n";
-        assertNotNull(messageRaw, "MessageRaw is null!");
-        assertFalse(messageRaw.isEmpty(), "MessageRaw is null!");
+    @BeforeClass
+    @Parameters({"message"})
+    public void setUpMethod(String message) {
+        assertNotNull(message, "MessageRaw is null!");
+        assertFalse(message.isEmpty(), "MessageRaw is null!");
         
         MessageParser messageParser = MessageParserInit.messageParser();
         assertNotNull(messageParser, "MessageParser is null!");
         
         try {
-            parseMessage = messageParser.parse(messageRaw);
-        }
-        catch(MessageParserException ex) {
-            System.out.println("CATCH! Message: " + ex.getMessage());
+            parseMessage = messageParser.parse(message);
+        } catch(MessageParserException ex) {
+            catchMessage(ex);
         }
         assertNotNull(parseMessage, "ParseMessage is null!");
     }
-
-//        cmdRes.data();
-//        cmdRes.message();
-
     
     @Test
     public void name() {

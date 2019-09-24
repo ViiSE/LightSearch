@@ -19,9 +19,10 @@ import lightsearch.admin.panel.exception.ValidatorException;
 import lightsearch.admin.panel.validate.DatabaseNameValidator;
 import lightsearch.admin.panel.validate.DatabaseNameValidatorInit;
 import static org.testng.Assert.*;
+import static test.message.TestMessage.*;
+
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import static test.message.TestMessage.testBegin;
-import static test.message.TestMessage.testEnd;
 
 /**
  *
@@ -30,20 +31,17 @@ import static test.message.TestMessage.testEnd;
 public class DatabaseNameValidatorTestNG {
     
     @Test
-    public void validate() {
+    @Parameters("dbName")
+    public void validate(String dbName) {
         testBegin("DatabaseNameValidator", "validate()");
         
-        try {    
-            String dbName = "/home/user/mydb/db.fdb";
+        try {
             assertNotNull(dbName, "Database name is null!");
-
             DatabaseNameValidator dbNameValidator = DatabaseNameValidatorInit.databaseNameValidator();
             dbNameValidator.validate(dbName);
-            
             System.out.println("Validation success");
-        }
-        catch(ValidatorException ex) {
-            System.out.println("CATCH! Message: " + ex.getMessage());
+        } catch(ValidatorException ex) {
+            catchMessage(ex);
         }
         
         testEnd("DatabaseNameValidator", "validate()");

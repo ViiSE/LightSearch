@@ -19,6 +19,8 @@ import lightsearch.admin.panel.data.ScannerRestartDTO;
 import lightsearch.admin.panel.data.creator.ScannerRestartDTOCreator;
 import lightsearch.admin.panel.data.creator.ScannerRestartDTOCreatorInit;
 import static org.testng.Assert.*;
+
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
@@ -30,24 +32,20 @@ import static test.message.TestMessage.testEnd;
  */
 public class ScannerRestartDTOTestNG {
     
-    private ScannerRestartDTOCreator scResDTOCreator;
+    private ScannerRestartDTO scResDTO;
     
-    @BeforeTest
+    @BeforeClass
     public void setUpMethod() {
-        scResDTOCreator = 
-                ScannerRestartDTOCreatorInit.scannerRestartDTOCreator();
-        assertNotNull(scResDTOCreator, "ScannerRestartDTOCreator is null!");
+        scResDTO = ScannerRestartDTOCreatorInit.scannerRestartDTOCreator().createScannerRestartDTO();
+        assertNotNull(scResDTO, "ScannerRestartDTO is null!");
     }
     
     @Test
     public void scanner() {
         testBegin("ScannerRestartDTO", "scanner()");
         
-        ScannerRestartDTO scRegDTO = scResDTOCreator.createScannerRestartDTO();
-        assertNotNull(scRegDTO, "ScannerRestartDTO is null!");
-        assertNotNull(scRegDTO.scanner(), "ScannerRestartDTO: scanner is null!");
-        
-        System.out.println("ScannerRestartDTO: scanner: " + scRegDTO.scanner());
+        assertNotNull(scResDTO.scanner(), "ScannerRestartDTO: scanner is null!");
+        System.out.println("ScannerRestartDTO: scanner: " + scResDTO.scanner());
         
         testEnd("ScannerRestartDTO", "scanner()");
     }
@@ -56,13 +54,8 @@ public class ScannerRestartDTOTestNG {
     public void restartValidator() {
         testBegin("ScannerRestartDTO", "restartValidator()");
         
-        ScannerRestartDTO scRegDTO = scResDTOCreator.createScannerRestartDTO();
-        assertNotNull(scRegDTO, "ScannerRestartDTO is null!");
-        assertNotNull(scRegDTO.restartValidator(), 
-                "ScannerRestartDTO: restartValidator is null!");
-        
-        System.out.println("ScannerRestartDTO: restartValidator: " 
-                + scRegDTO.restartValidator());
+        assertNotNull(scResDTO.restartValidator(), "ScannerRestartDTO: restartValidator is null!");
+        System.out.println("ScannerRestartDTO: restartValidator: " + scResDTO.restartValidator());
         
         testEnd("ScannerRestartDTO", "restartValidator()");
     }

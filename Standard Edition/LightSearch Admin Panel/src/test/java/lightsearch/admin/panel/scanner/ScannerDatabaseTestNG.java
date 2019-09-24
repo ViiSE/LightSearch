@@ -22,10 +22,11 @@ import lightsearch.admin.panel.exception.ScannerException;
 import lightsearch.admin.panel.scanner.ScannerDatabase;
 import lightsearch.admin.panel.scanner.ScannerDatabaseInit;
 import static org.testng.Assert.*;
+import static test.message.TestMessage.*;
+
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import static test.message.TestMessage.testBegin;
-import static test.message.TestMessage.testEnd;
 
 /**
  *
@@ -33,15 +34,16 @@ import static test.message.TestMessage.testEnd;
  */
 public class ScannerDatabaseTestNG {
 
-    private ScannerDatabaseDTO scannerDatabaseDTO;
+    private ScannerDatabase scanner;
     
-    @BeforeTest
+    @BeforeClass
     public void setUpMethod() {
-        ScannerDatabaseDTOCreator scDbDTOCreator = 
-                ScannerDatabaseDTOCreatorInit.scannerDatabaseDTOCreator();
+        ScannerDatabaseDTOCreator scDbDTOCreator = ScannerDatabaseDTOCreatorInit.scannerDatabaseDTOCreator();
         assertNotNull(scDbDTOCreator, "ScannerDatabaseDTOCreator is null!");
         
-        scannerDatabaseDTO = scDbDTOCreator.createScannerDatabaseDTO();
+        ScannerDatabaseDTO scannerDatabaseDTO = scDbDTOCreator.createScannerDatabaseDTO();
+        scanner = ScannerDatabaseInit.scannerDatabase(scannerDatabaseDTO);
+        assertNotNull(scanner, "ScannerDatabase is null!");
     }
     
     @Test
@@ -49,18 +51,11 @@ public class ScannerDatabaseTestNG {
         testBegin("ScannerDatabase", "scanIP()");
         
         try {
-            assertNotNull(scannerDatabaseDTO, "ScannerDatabaseDTO is null!");
-            
-            ScannerDatabase scanner = 
-                    ScannerDatabaseInit.scannerDatabase(scannerDatabaseDTO);
-            assertNotNull(scanner, "ScannerDatabase is null!");
-            
             System.out.print("Input database IP: ");
             String ip = scanner.scanIP();
             System.out.println("Scan ip: " + ip);
-        }
-        catch(ScannerException ex) {
-            System.out.println("CATCH! Message: " + ex.getMessage());
+        } catch(ScannerException ex) {
+            catchMessage(ex);
         }
         
         testEnd("ScannerDatabase", "scanIP()");
@@ -71,18 +66,11 @@ public class ScannerDatabaseTestNG {
         testBegin("ScannerDatabase", "scanPort()");
         
         try {
-            assertNotNull(scannerDatabaseDTO, "ScannerDatabaseDTO is null!");
-            
-            ScannerDatabase scanner = 
-                    ScannerDatabaseInit.scannerDatabase(scannerDatabaseDTO);
-            assertNotNull(scanner, "ScannerDatabase is null!");
-            
             System.out.print("Input database port: ");
             String port = scanner.scanPort();
             System.out.println("Scan port: " + port);
-        }
-        catch(ScannerException ex) {
-            System.out.println("CATCH! Message: " + ex.getMessage());
+        } catch(ScannerException ex) {
+            catchMessage(ex);
         }
         
         testEnd("ScannerDatabase", "scanPort()");
@@ -93,18 +81,11 @@ public class ScannerDatabaseTestNG {
         testBegin("ScannerDatabase", "scanDBName()");
         
         try {
-            assertNotNull(scannerDatabaseDTO, "ScannerDatabaseDTO is null!");
-            
-            ScannerDatabase scanner = 
-                    ScannerDatabaseInit.scannerDatabase(scannerDatabaseDTO);
-            assertNotNull(scanner, "ScannerDatabase is null!");
-            
             System.out.print("Input database name: ");
             String dbName = scanner.scanDBName();
             System.out.println("Scan ip: " + dbName);
-        }
-        catch(ScannerException ex) {
-            System.out.println("CATCH! Message: " + ex.getMessage());
+        } catch(ScannerException ex) {
+            catchMessage(ex);
         }
         
         testEnd("ScannerDatabase", "scanDBName()");

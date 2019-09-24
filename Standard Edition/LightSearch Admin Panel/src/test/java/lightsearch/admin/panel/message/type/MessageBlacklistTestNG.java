@@ -18,6 +18,8 @@ package lightsearch.admin.panel.message.type;
 import lightsearch.admin.panel.message.type.MessageBlacklist;
 import lightsearch.admin.panel.message.type.MessageBlacklistInit;
 import static org.testng.Assert.*;
+
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
@@ -29,15 +31,14 @@ import static test.message.TestMessage.testEnd;
 public class MessageBlacklistTestNG {
     
     @Test
-    public void message() {
+    @Parameters({"name"})
+    public void message(String name) {
         testBegin("MessageBlacklist", "message()");
-        
-        String name = "name";
+
         assertNotNull(name, "Name is null!");
         assertFalse(name.isEmpty(), "Name is null!");
         
-        MessageBlacklist msgBl = 
-                MessageBlacklistInit.messageBlacklist(name);
+        MessageBlacklist msgBl = MessageBlacklistInit.messageBlacklist(name);
         assertNotNull(msgBl, "MessageBlacklist is null!");
         
         String message = msgBl.message();

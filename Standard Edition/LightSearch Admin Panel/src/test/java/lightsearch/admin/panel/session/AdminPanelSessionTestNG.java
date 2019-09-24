@@ -67,10 +67,13 @@ import lightsearch.admin.panel.socket.SocketCreatorInit;
 import lightsearch.admin.panel.util.MapRemover;
 import lightsearch.admin.panel.util.MapRemoverInit;
 import static org.testng.Assert.*;
+import static test.message.TestMessage.*;
+
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import static test.message.TestMessage.testBegin;
-import static test.message.TestMessage.testEnd;
+import test.data.DataProviderCreator;
 
 /**
  *
@@ -79,147 +82,31 @@ import static test.message.TestMessage.testEnd;
 public class AdminPanelSessionTestNG {
     
     private AdminPanelSessionDTO sessionDTO;
-    private Thread testServerThread;
     
-    private void startTestServer() {
-        testServerThread = new Thread(new TestLightSearchServer());
+    @BeforeClass
+    @Parameters({"ip", "port", "openTest"})
+    public void setUpMethod(String ip, int port, boolean openTest) {
+        Thread testServerThread = new Thread(new TestLightSearchServer(port));
         testServerThread.start();
-    }
-    
-    private AdminPanelMenu createMenu() {
-        AdminPanelMenuCreator menuCreator = 
-                AdminPanelMenuCreatorInit.adminMenuCreator();
-        assertNotNull(menuCreator, "AdminPanelMenuCreator is null!");
-        AdminPanelMenu menu = menuCreator.createAdminMenu();
+
+        AdminPanelMenu menu = AdminPanelMenuCreatorInit.adminMenuCreator().createAdminMenu();
         assertNotNull(menu, "AdminPanelMenu is null!");
-        
-        return menu;
-    }
-    
-    private AdminPanelDTO createAdminPanelDTO() {
-        AdminPanelDTOCreator admPanelDTOCreator = 
-                AdminPanelDTOCreatorInit.adminPanelDTOCreator();
-        assertNotNull(admPanelDTOCreator, "AdminPanelDTOCreator is null!");
-        AdminPanelDTO admPanelDTO = admPanelDTOCreator.createAdminPanelDTO();
+
+        AdminPanelDTO admPanelDTO = AdminPanelDTOCreatorInit.adminPanelDTOCreator().createAdminPanelDTO();
         assertNotNull(admPanelDTO, "AdminPanelDTO is null!");
-        
-        return admPanelDTO;
-    }
-    
-    private AdminPanelPrinter createAdminPanelPrinter() {
+
         AdminPanelPrinter printer = AdminPanelPrinterInit.adminPanelPrinter();
         assertNotNull(printer, "AdminPanelPrinter is null!");
-        
-        return printer;
-    }
-    
-    private AdminCommandCreator createAdminCommandCreator(AdminPanelPrinter printer)
-            throws Exception {
-        ScannerConnectionDTOCreator scConnDTOCreator = 
-                ScannerConnectionDTOCreatorInit.scannerConnectionDTOCreator();
-        assertNotNull(scConnDTOCreator, "ScannerConnectionDTOCreator is null!");
-        ScannerConnectionDTO scConnDTO = 
-                scConnDTOCreator.createScannerConnectionDTO();
-        assertNotNull(scConnDTO, "ScannerConnectionDTO is null!");
-        
-        ConnectionDTOCreator connDTOCreator = 
-                ConnectionDTOCreatorInit.connectionDTOCreator(printer, scConnDTO);
-        assertNotNull(connDTOCreator, "ConnectionDTOCreator is null!");
-        ConnectionDTO connDTO = connDTOCreator.createConnectionDTO();
-        assertNotNull(connDTO, "ConnectionDTO is null!");
-        
-        SocketCreator socketCreator = SocketCreatorInit.socketCreator(connDTO);
-        assertNotNull(socketCreator, "SocketCreator is null!");
-        Socket adminSocket = socketCreator.createSocket();
-        
-        DataStreamCreator dsCreator = 
-                DataStreamCreatorInit.dataStreamCreator(adminSocket);
-        assertNotNull(dsCreator, "DataStreamCreator is null!");
-        try { 
-            dsCreator.createDataStream();
-        }
-        catch(DataStreamCreatorException ex) {
-            System.out.println("CATCH! Message: " + ex.getMessage());
-        }
-        assertNotNull(dsCreator, "DataStreamCreator is null!");
-        
-        DataStream ds = DataStreamInit.dataStream(dsCreator);
-        assertNotNull(ds, "DataStream is null!");
-        
-        MessageSender msgSender = 
-                MessageSenderInit.messageSender(ds.dataOutputStream());
-        assertNotNull(msgSender, "MessageSender is null!");
-        
-        MessageRecipient msgRecipient = 
-                MessageRecipientInit.messageRecipient(ds.dataInputStream());
-        assertNotNull(msgRecipient, "MessageRecipient is null!");
-        
-        MessageCommandDTO msgCmdDTO = 
-                MessageCommandDTOInit.messageCommandDTO(msgSender, msgRecipient);
-        assertNotNull(msgCmdDTO, "MessageCommandDTO is null!");
-        
-        MessageCommandCreator msgCmdCreator = 
-                MessageCommandCreatorInit.messageCommandCreator(msgCmdDTO);
-        assertNotNull(msgCmdCreator, "MessageCommandCreator is null!");
-        assertNotNull(msgCmdCreator.createMessageCommandHolder(),
-                "MessageCommandHolder is null!");
-        
-        AdminDAO adminDAO = AdminDAOInit.adminDAO();
-        assertNotNull(adminDAO, "AdminDAO is null!");
-        
-        AdminDTO adminDTO = AdminDTOInit.adminDTO(
-                adminSocket, 
-                adminDAO, 
-                printer, 
-                msgCmdCreator.createMessageCommandHolder()
-        );
-        assertNotNull(adminDTO, "AdminDTO is null");
-        
-        MapRemover mapRemover = MapRemoverInit.mapRemover();
-        assertNotNull(mapRemover, "MapRemover is null!");
-        
-        AdminCommandCreator admCmdCreator = 
-                AdminCommandCreatorInit.adminCommandCreator(adminDTO, mapRemover);
+
+        AdminCommandCreator admCmdCreator =
+                DataProviderCreator.createDataProvider(AdminCommandCreator.class, ip, port, openTest, printer);
         assertNotNull(admCmdCreator, "AdminCommandCreator is null!");
-        assertNotNull(admCmdCreator.createCommandHolder(), 
-                "AdminCommandHolder is null!");
-        
-        return admCmdCreator;
-    }
-    
-    private ScannerChooserCommand createScannerChooserCommand() {
-        ScannerChooserCommandDTOCreator scChCmdCreator = 
-                ScannerChooserCommandDTOCreatorInit.scannerChooserCommandDTOCreator();
-        assertNotNull(scChCmdCreator, "ScannerChooserCommandDTOCreator is null!");
-        
-        ScannerChooserCommandDTO scChCmdDTO = 
-                scChCmdCreator.createScannerChooserCommandDTO();
-        assertNotNull(scChCmdDTO, "ScannerChooserCommandDTO is null!");
-        
-        ScannerChooserCommand scannerCmd = 
-                ScannerChooserCommandInit.scannerChooserCommand(scChCmdDTO);
+
+        ScannerChooserCommand scannerCmd = DataProviderCreator.createDataProvider(ScannerChooserCommand.class);
         assertNotNull(scannerCmd, "ScannerChooserCommand is null!");
-        
-        return scannerCmd;
-    }
-    
-    @BeforeTest
-    public void setUpMethod() throws Exception {
-        startTestServer();
-        
-        AdminPanelMenu menu               = createMenu();
-        AdminPanelDTO adminPanelDTO       = createAdminPanelDTO();
-        AdminPanelPrinter printer         = createAdminPanelPrinter();
-        AdminCommandCreator admCmdCreator = createAdminCommandCreator(printer);
-        ScannerChooserCommand scannerCmd  = createScannerChooserCommand();
-        
+
         sessionDTO = AdminPanelSessionDTOInit.adminPanelDTO(
-                menu,
-                adminPanelDTO,
-                admCmdCreator.createCommandHolder(),
-                printer,
-                scannerCmd
-        );
+                menu, admPanelDTO, admCmdCreator.createCommandHolder(), printer, scannerCmd);
     }
     
     @Test
@@ -227,64 +114,46 @@ public class AdminPanelSessionTestNG {
         testBegin("AdminPanelSession", "startSession()");
         
         assertNotNull(sessionDTO, "AdminPanelSessionDTO is null!");
-        AdminPanelSession admPanelSession = 
-                AdminPanelSessionInit.adminPanelSession(sessionDTO);
+        AdminPanelSession admPanelSession = AdminPanelSessionInit.adminPanelSession(sessionDTO);
         admPanelSession.startSession();
         
         testEnd("AdminPanelSession", "startSession()");
     }
     
-    public class TestLightSearchServer implements Runnable {
+    public static class TestLightSearchServer implements Runnable {
+
+        private final int port;
+
+        TestLightSearchServer(int port) {
+            this.port = port;
+        }
 
         @Override
         public void run() {
-            try(ServerSocket serverSocket = new ServerSocket(50000);) {
+            try(ServerSocket serverSocket = new ServerSocket(port)) {
                 System.out.println("ServerTest Started");
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("ACCEPT!");
-                DataStreamCreator dataStreamCreator = 
-                        DataStreamCreatorInit.dataStreamCreator(clientSocket);
-                try {
-                    dataStreamCreator.createDataStream();
-                }
-                catch(DataStreamCreatorException ex) {
-                    System.out.println("CATCH! Message: " + ex.getMessage());
-                }
-                
+                DataStreamCreator dataStreamCreator = DataStreamCreatorInit.dataStreamCreator(clientSocket);
+                dataStreamCreator.createDataStream();
+
                 DataStream dataStream = DataStreamInit.dataStream(dataStreamCreator);
                 
-                MessageSender msgSender = 
-                        MessageSenderInit.messageSender(dataStream.dataOutputStream());
-                MessageRecipient msgRecipient = 
-                        MessageRecipientInit.messageRecipient(dataStream.dataInputStream());
+                MessageSender msgSender = MessageSenderInit.messageSender(dataStream.dataOutputStream());
+                MessageRecipient msgRecipient = MessageRecipientInit.messageRecipient(dataStream.dataInputStream());
                 
-                try {
-                    String recMsgIdent = msgRecipient.acceptMessage();
-                    System.out.println("Received message: " + recMsgIdent);
-                }
-                catch(MessageRecipientException ex) {
-                    System.out.println("CATCH! Message: " + ex.getMessage());
-                }
-                
-                try {
-                    String sendMsg = "OK";
-                    System.out.println("Send message: " + sendMsg);
-                    msgSender.sendMessage(sendMsg);
-                }
-                catch(MessageSenderException ex) {
-                    System.out.println("CATCH! Message: " + ex.getMessage());
-                }
-                
-                try {
-                    String recMsg = msgRecipient.acceptMessage();
-                    System.out.println("Received message: " + recMsg);
-                }
-                catch(MessageRecipientException ex) {
-                    System.out.println("CATCH! Message: " + ex.getMessage());
-                }
-            }
-            catch(IOException ex) {
-                System.out.println("CATCH! Message: " + ex.getMessage());
+                String recMsgIdent = msgRecipient.acceptMessage();
+                System.out.println("Received message: " + recMsgIdent);
+
+                String sendMsg = "OK";
+                System.out.println("Send message: " + sendMsg);
+                msgSender.sendMessage(sendMsg);
+
+                String recMsg = msgRecipient.acceptMessage();
+                System.out.println("Received message: " + recMsg);
+
+            } catch(IOException | DataStreamCreatorException | MessageRecipientException | MessageSenderException ex) {
+                catchMessage(ex);
             }
         }
     }

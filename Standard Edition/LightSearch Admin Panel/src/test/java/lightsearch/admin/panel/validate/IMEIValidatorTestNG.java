@@ -19,9 +19,10 @@ import lightsearch.admin.panel.exception.ValidatorException;
 import lightsearch.admin.panel.validate.IMEIValidator;
 import lightsearch.admin.panel.validate.IMEIValidatorInit;
 import static org.testng.Assert.*;
+import static test.message.TestMessage.*;
+
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import static test.message.TestMessage.testBegin;
-import static test.message.TestMessage.testEnd;
 
 /**
  *
@@ -30,20 +31,18 @@ import static test.message.TestMessage.testEnd;
 public class IMEIValidatorTestNG {
     
     @Test
-    public void validate() {
+    @Parameters("IMEI")
+    public void validate(String IMEI) {
         testBegin("IMEIValidator", "validate()");
         
         try {
-            String IMEI = "123456789123456";
             assertNotNull(IMEI, "IMEI is null!");
             assertFalse(IMEI.isEmpty(), "IMEI is empty!");
             IMEIValidator imeiValidator = IMEIValidatorInit.IMEIValidator();
             imeiValidator.validate(IMEI);
-            
             System.out.println("Validation success");
-        }
-        catch(ValidatorException ex) {
-            System.out.println("CATCH! Message: " + ex.getMessage());
+        } catch(ValidatorException ex) {
+            catchMessage(ex);
         }
         
         testEnd("IMEIValidator", "validate()");

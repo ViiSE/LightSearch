@@ -19,9 +19,10 @@ import lightsearch.admin.panel.exception.ValidatorException;
 import lightsearch.admin.panel.validate.NumberValidator;
 import lightsearch.admin.panel.validate.NumberValidatorInit;
 import static org.testng.Assert.*;
+import static test.message.TestMessage.*;
+
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import static test.message.TestMessage.testBegin;
-import static test.message.TestMessage.testEnd;
 
 /**
  *
@@ -30,20 +31,17 @@ import static test.message.TestMessage.testEnd;
 public class NumberValidatorTestNG {
     
     @Test
-    public void validate() {
+    @Parameters({"number"})
+    public void validate(String number) {
         testBegin("NumberValidator", "validate()");
         
         try {    
-            String number = "11";
             assertNotNull(number, "Number is null!");
-
             NumberValidator numberValidator = NumberValidatorInit.numberValidator();
             numberValidator.validate(number);
-            
             System.out.println("Validation success");
-        }
-        catch(ValidatorException ex) {
-            System.out.println("CATCH! Message: " + ex.getMessage());
+        } catch(ValidatorException ex) {
+            catchMessage(ex);
         }
         
         testEnd("NumberValidator", "validate()");

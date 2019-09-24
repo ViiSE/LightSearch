@@ -22,10 +22,11 @@ import lightsearch.admin.panel.exception.ScannerException;
 import lightsearch.admin.panel.scanner.ScannerRegistration;
 import lightsearch.admin.panel.scanner.ScannerRegistrationInit;
 import static org.testng.Assert.*;
+import static test.message.TestMessage.*;
+
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import static test.message.TestMessage.testBegin;
-import static test.message.TestMessage.testEnd;
 
 /**
  *
@@ -33,15 +34,17 @@ import static test.message.TestMessage.testEnd;
  */
 public class ScannerRegistrationTestNG {
     
-    private ScannerRegistrationDTO scannerRegistrationDTO;
+    private ScannerRegistration scanner;
     
-    @BeforeTest
+    @BeforeClass
     public void setUpMethod() {
         ScannerRegistrationDTOCreator scRegDTOCreator = 
                 ScannerRegistrationDTOCreatorInit.scannerRegistrationDTOCreator();
         assertNotNull(scRegDTOCreator, "ScannerRegistrationDTOCreator is null!");
-        
-        scannerRegistrationDTO = scRegDTOCreator.createScannerRegistrationDTO();
+
+        ScannerRegistrationDTO scannerRegistrationDTO = scRegDTOCreator.createScannerRegistrationDTO();
+        scanner = ScannerRegistrationInit.scannerRegistration(scannerRegistrationDTO);
+        assertNotNull(scanner, "ScannerRegistration is null!");
     }
     
     @Test
@@ -49,18 +52,11 @@ public class ScannerRegistrationTestNG {
         testBegin("ScannerRegistration", "scanAdminName()");
         
         try {
-            assertNotNull(scannerRegistrationDTO, "ScannerRegistrationDTO is null!");
-            
-            ScannerRegistration scanner = 
-                    ScannerRegistrationInit.scannerRegistration(scannerRegistrationDTO);
-            assertNotNull(scanner, "ScannerRegistration is null!");
-            
             System.out.print("Input admin name: ");
             String adminName = scanner.scanAdminName();
             System.out.println("Scan admin name: " + adminName);
-        }
-        catch(ScannerException ex) {
-            System.out.println("CATCH! Message: " + ex.getMessage());
+        } catch(ScannerException ex) {
+            catchMessage(ex);
         }
         
         testEnd("ScannerRegistration", "scanAdminName()");
@@ -71,18 +67,11 @@ public class ScannerRegistrationTestNG {
         testBegin("ScannerRegistration", "scanAdminPassword()");
         
         try {
-            assertNotNull(scannerRegistrationDTO, "ScannerRegistrationDTO is null!");
-            
-            ScannerRegistration scanner = 
-                    ScannerRegistrationInit.scannerRegistration(scannerRegistrationDTO);
-            assertNotNull(scanner, "ScannerRegistration is null!");
-            
             System.out.print("Input admin password: ");
             String password = scanner.scanAdminPassword();
             System.out.println("Scan admin password: " + password);
-        }
-        catch(ScannerException ex) {
-            System.out.println("CATCH! Message: " + ex.getMessage());
+        } catch(ScannerException ex) {
+            catchMessage(ex);
         }
         
         testEnd("ScannerRegistration", "scanAdminPassword()");

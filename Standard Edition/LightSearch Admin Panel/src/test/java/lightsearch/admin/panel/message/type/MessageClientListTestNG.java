@@ -18,6 +18,8 @@ package lightsearch.admin.panel.message.type;
 import lightsearch.admin.panel.message.type.MessageClientList;
 import lightsearch.admin.panel.message.type.MessageClientListInit;
 import static org.testng.Assert.*;
+
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
@@ -29,15 +31,14 @@ import static test.message.TestMessage.testEnd;
 public class MessageClientListTestNG {
     
     @Test
-    public void message() {
+    @Parameters({"name"})
+    public void message(String name) {
         testBegin("MessageClientList", "message()");
-        
-        String name = "name";
+
         assertNotNull(name, "Name is null!");
         assertFalse(name.isEmpty(), "Name is null!");
         
-        MessageClientList msgClList = 
-                MessageClientListInit.messageClientList(name);
+        MessageClientList msgClList = MessageClientListInit.messageClientList(name);
         assertNotNull(msgClList, "MessageClientList is null!");
         
         String message = msgClList.message();

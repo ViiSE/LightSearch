@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="MessageTypeSuite">
+
+    <parameter name="name" value="name"/>
+    <parameter name="IMEI" value="123456789123456"/>
+    <parameter name="password" value="password"/>
+    <parameter name="dbName" value="dbName"/>
+    <parameter name="ip" value="127.0.0.1"/>
+    <parameter name="port" value="50000"/>
+    <parameter name="adminName" value="adminName"/>
+    <parameter name="clTimeoutValue" value="10000"/>
+    <parameter name="rTimeoutValue" value="8"/>
+
+    <test name="MessageTypeTestSuite">
+        <packages>
+            <package name="lightsearch.admin.panel.message.type"/>
+        </packages>
+    </test>
+
+</suite>

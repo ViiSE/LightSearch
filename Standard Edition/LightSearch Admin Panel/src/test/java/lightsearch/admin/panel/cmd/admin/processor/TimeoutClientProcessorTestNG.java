@@ -25,6 +25,7 @@ import lightsearch.admin.panel.data.creator.AdminPanelDTOCreatorInit;
 import static org.testng.Assert.*;
 
 import org.testng.annotations.*;
+import test.TestServer;
 import test.data.DataProviderCreator;
 
 import static test.message.TestMessage.testBegin;
@@ -40,19 +41,27 @@ public class TimeoutClientProcessorTestNG {
     
     private Map<String, Function<AdminPanelDTO, String>> admCmdHolder;
     private AdminPanelDTO adminPanelDTO;
-    
+
+    @BeforeTest
+    @Parameters({"ip", "port"})
+    public void setUpTest(String ip, int port) {
+        if(!TestServer.serverOn) {
+            Thread testServerTh = new Thread(new TestServer(port));
+            testServerTh.start();
+        }
+    }
+
     @BeforeClass
     @Parameters({"ip", "port", "toutClMessage", "openTest"})
     public void setUpMethod(String ip, int port, String answerMessage, boolean openTest) {
-        TestServer.closeServer = false;
-        Thread testServerTh = new Thread(new TestServer(port, answerMessage));
-        testServerTh.start();
+        TestServer.closeClient = false;
+        TestServer.setAnswerMessage(answerMessage);
 
         admCmdHolder =
                 DataProviderCreator.createDataProvider(AdminCommandCreator.class, ip, port, openTest).createCommandHolder();
         assertNotNull(admCmdHolder, "AdminCommandHolder is null!");
 
-        adminPanelDTO  = AdminPanelDTOCreatorInit.adminPanelDTOCreator().createAdminPanelDTO();
+        adminPanelDTO = AdminPanelDTOCreatorInit.adminPanelDTOCreator().createAdminPanelDTO();
         assertNotNull(adminPanelDTO, "AdminPanelDTO is null!");
     }
     
@@ -75,6 +84,6 @@ public class TimeoutClientProcessorTestNG {
     
     @AfterClass
     public void closeMethod() {
-        TestServer.closeServer = true;
+        TestServer.closeClient = true;
     }
 }

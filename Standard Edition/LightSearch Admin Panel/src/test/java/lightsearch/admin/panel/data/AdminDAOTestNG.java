@@ -18,6 +18,8 @@ package lightsearch.admin.panel.data;
 import lightsearch.admin.panel.data.AdminDAO;
 import lightsearch.admin.panel.data.AdminDAOInit;
 import static org.testng.Assert.*;
+
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
@@ -29,13 +31,13 @@ import static test.message.TestMessage.testEnd;
 public class AdminDAOTestNG {
     
     @Test
-    public void name() {
+    @Parameters({"name"})
+    public void name(String name) {
         testBegin("AdminDAO", "name()");
         
         AdminDAO adminDAO = AdminDAOInit.adminDAO();
         assertNotNull(adminDAO, "AdminDAO is null!");
-        
-        String name = "name";
+
         assertNotNull(name, "Name is null!");
         
         adminDAO.setName(name);

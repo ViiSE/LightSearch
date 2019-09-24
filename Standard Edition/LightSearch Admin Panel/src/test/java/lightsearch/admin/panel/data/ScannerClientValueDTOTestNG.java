@@ -19,6 +19,8 @@ import lightsearch.admin.panel.data.ScannerClientValueDTO;
 import lightsearch.admin.panel.data.creator.ScannerClientValueDTOCreator;
 import lightsearch.admin.panel.data.creator.ScannerClientValueDTOCreatorInit;
 import static org.testng.Assert.*;
+
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
@@ -30,23 +32,19 @@ import static test.message.TestMessage.testEnd;
  */
 public class ScannerClientValueDTOTestNG {
     
-    private ScannerClientValueDTOCreator scClValDTOCreator;
+    private ScannerClientValueDTO scClValDTO;
     
-    @BeforeTest
+    @BeforeClass
     public void setUpMethod() {
-        scClValDTOCreator = 
-                ScannerClientValueDTOCreatorInit.scannerClientValueDTOCreator();
-        assertNotNull(scClValDTOCreator, "ScannerClientValueDTOCreator is null!");
+        scClValDTO = ScannerClientValueDTOCreatorInit.scannerClientValueDTOCreator().createScannerClientValueDTO();
+        assertNotNull(scClValDTO, "ScannerClientValueDTO is null!");
     }
     
     @Test
     public void scanner() {
         testBegin("ScannerClientValueDTO", "scanner()");
         
-        ScannerClientValueDTO scClValDTO = scClValDTOCreator.createScannerClientValueDTO();
-        assertNotNull(scClValDTO, "ScannerClientValueDTO is null!");
         assertNotNull(scClValDTO.scanner(), "ScannerClientValueDTO: scanner is null!");
-        
         System.out.println("ScannerClientValueDTO: scanner: " + scClValDTO.scanner());
         
         testEnd("ScannerClientValueDTO", "scanner()");
@@ -56,10 +54,7 @@ public class ScannerClientValueDTOTestNG {
     public void IMEIValidator() {
         testBegin("ScannerClientValueDTO", "IMEIValidator()");
         
-        ScannerClientValueDTO scClValDTO = scClValDTOCreator.createScannerClientValueDTO();
-        assertNotNull(scClValDTO, "ScannerClientValueDTO is null!");
         assertNotNull(scClValDTO.IMEIValidator(), "ScannerClientValueDTO: IMEIValidator is null!");
-        
         System.out.println("ScannerClientValueDTO: IMEIValidator: " + scClValDTO.IMEIValidator());
         
         testEnd("ScannerClientValueDTO", "IMEIValidator()");
@@ -69,13 +64,8 @@ public class ScannerClientValueDTOTestNG {
     public void numberValidator() {
         testBegin("ScannerClientValueDTO", "numberValidator()");
         
-        ScannerClientValueDTO scClValDTO = scClValDTOCreator.createScannerClientValueDTO();
-        assertNotNull(scClValDTO, "ScannerClientValueDTO is null!");
-        assertNotNull(scClValDTO.numberValidator(), 
-                "ScannerClientValueDTO: numberValidator is null!");
-        
-        System.out.println("ScannerClientValueDTO: numberValidator: " 
-                + scClValDTO.numberValidator());
+        assertNotNull(scClValDTO.numberValidator(), "ScannerClientValueDTO: numberValidator is null!");
+        System.out.println("ScannerClientValueDTO: numberValidator: " + scClValDTO.numberValidator());
         
         testEnd("ScannerClientValueDTO", "numberValidator()");
     }

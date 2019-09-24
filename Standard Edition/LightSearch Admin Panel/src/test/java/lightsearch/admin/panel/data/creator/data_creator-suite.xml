@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="DataCreatorSuite">
+
+    <parameter name="ip" value="127.0.0.1"/>
+    <parameter name="port" value="50000"/>
+    <parameter name="openTest" value="false"/>
+
+    <test name="DataCreatorTestSuite">
+        <packages>
+            <package name="lightsearch.admin.panel.data.creator"/>
+        </packages>
+    </test>
+
+</suite>

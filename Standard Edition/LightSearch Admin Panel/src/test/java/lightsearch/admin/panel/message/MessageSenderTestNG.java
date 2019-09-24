@@ -15,102 +15,52 @@
  */
 package lightsearch.admin.panel.message;
 
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
+import test.TestServer;
 import lightsearch.admin.panel.data.stream.DataStream;
-import lightsearch.admin.panel.data.stream.DataStreamCreator;
-import lightsearch.admin.panel.data.stream.DataStreamCreatorInit;
-import lightsearch.admin.panel.data.stream.DataStreamInit;
-import lightsearch.admin.panel.exception.DataStreamCreatorException;
 import lightsearch.admin.panel.exception.MessageSenderException;
-import lightsearch.admin.panel.message.MessageSender;
-import lightsearch.admin.panel.message.MessageSenderInit;
+
 import static org.testng.Assert.*;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
-import static test.message.TestMessage.testBegin;
-import static test.message.TestMessage.testEnd;
+import static test.message.TestMessage.*;
+
+import org.testng.annotations.*;
+import test.data.DataProviderCreator;
 
 /**
  *
  * @author ViiSE
  */
 public class MessageSenderTestNG {
-    
-    private Thread testServerTh;    
+
     private DataStream dataStream;
     
-    @BeforeTest
-    public void setUpMethod() {
-        testServerTh = new Thread(new TestServer());
-        testServerTh.start();
+    @BeforeClass
+    @Parameters({"ip", "port"})
+    public void setUpMethod(String ip, int port) {
+        TestServer.closeClient = false;
+        TestServer.setAnswerMessage(null);
         
-        try {
-            Socket socket = new Socket("127.0.0.1", 50000);
-            assertNotNull(socket, "Socket is null!");
-        
-            DataStreamCreator dsCreator 
-                    = DataStreamCreatorInit.dataStreamCreator(socket);
-            assertNotNull(dsCreator, "DataStreamCreator is null!");
-        
-            try {
-                dsCreator.createDataStream();
-            }
-            catch(DataStreamCreatorException ex) {
-                System.out.println("CATCH! Message: " + ex.getMessage());
-            }
-            
-            dataStream = DataStreamInit.dataStream(dsCreator);
-        }
-        catch(IOException ex) {
-            System.out.println("CATCH! Message: " + ex.getMessage());
-        }
+        dataStream = DataProviderCreator.createDataProvider(DataStream.class, ip, port);
+        assertNotNull(dataStream, "DataStream is null!");
     }
     
     @Test
-    public void sendMessage() {
+    @Parameters({"sendMessage"})
+    public void sendMessage(String message) {
         testBegin("MessageSender", "sendMessage()");
 
         try {
-            assertNotNull(dataStream, "DataStream is null!");
-
-            MessageSender msgSender = 
-                    MessageSenderInit.messageSender(dataStream.dataOutputStream());
-
-            String message = "OK";
+            MessageSender msgSender = MessageSenderInit.messageSender(dataStream.dataOutputStream());
             msgSender.sendMessage(message);
             System.out.println("Admin send message: " + message);
-
-        }
-        catch(MessageSenderException ex) {
-            System.out.println("CATCH! Message: " + ex.getMessage());
+        } catch(MessageSenderException ex) {
+            catchMessage(ex);
         }
         
         testEnd("MessageSender", "sendMessage()");
     }
-    
-    private class TestServer implements Runnable {
 
-        @Override
-        public void run() {
-            
-            System.out.println("Test server on");
-            
-            try(ServerSocket serverSocket = new ServerSocket(50000)) {
-                Socket admSocket = serverSocket.accept();
-                DataInputStream dInStream = 
-                        new DataInputStream(admSocket.getInputStream());
-                
-                String message = dInStream.readUTF();
-                System.out.println("Server accept message: " + message);
-            }
-            catch(IOException ex) {
-                System.out.println("CATCH! Message: " + ex.getMessage());
-            }
-            
-            System.out.println("Test server off");
-        }   
+    @AfterClass
+    public void tearDownClass() {
+        TestServer.closeClient = true;
     }
 }

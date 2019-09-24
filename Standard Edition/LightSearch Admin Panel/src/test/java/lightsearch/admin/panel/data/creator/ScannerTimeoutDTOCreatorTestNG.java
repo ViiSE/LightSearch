@@ -33,14 +33,12 @@ public class ScannerTimeoutDTOCreatorTestNG {
     public void createScannerTimeoutDTO() {
         testBegin("ScannerTimeoutDTOCreator", "createScannerTimeoutDTO()");
         
-        ScannerTimeoutDTOCreator scToutDTOCreator = 
-                ScannerTimeoutDTOCreatorInit.scannerTimeoutDTOCreator();
+        ScannerTimeoutDTOCreator scToutDTOCreator = ScannerTimeoutDTOCreatorInit.scannerTimeoutDTOCreator();
         assertNotNull(scToutDTOCreator, "ScannerTimeoutDTOCreator is null!");
         
         System.out.println("ScannerTimeoutDTOCreator: " + scToutDTOCreator);
         
-        ScannerTimeoutDTO scToutDTO = 
-                scToutDTOCreator.createScannerTimeoutDTO();
+        ScannerTimeoutDTO scToutDTO = scToutDTOCreator.createScannerTimeoutDTO();
         assertNotNull(scToutDTO, "ScannerTimeoutDTO is null!");
         
         System.out.println("ScannerTimeoutDTO: " + scToutDTO);

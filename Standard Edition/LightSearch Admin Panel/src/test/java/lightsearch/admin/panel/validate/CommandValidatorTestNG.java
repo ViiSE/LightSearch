@@ -19,9 +19,10 @@ import lightsearch.admin.panel.exception.ValidatorException;
 import lightsearch.admin.panel.validate.CommandValidator;
 import lightsearch.admin.panel.validate.CommandValidatorInit;
 import static org.testng.Assert.*;
+import static test.message.TestMessage.*;
+
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import static test.message.TestMessage.testBegin;
-import static test.message.TestMessage.testEnd;
 
 /**
  *
@@ -30,18 +31,18 @@ import static test.message.TestMessage.testEnd;
 public class CommandValidatorTestNG {
     
      @Test
-     public void validate() {
+     @Parameters({"commandNumber"})
+     public void validate(String commandNumber) {
          testBegin("CommandValidator", "validate()");
          
          try {
-             String commandNumber = "10";
              assertNotNull(commandNumber, "Command number is null!");
              assertFalse(commandNumber.isEmpty(), "Command number is null!");
              CommandValidator cmdValidator = CommandValidatorInit.commandValidator();
              cmdValidator.validate(commandNumber);
              System.out.println("Command number " + commandNumber + " is validate.");
          } catch (ValidatorException ex) {
-             System.out.println("CATCH! Exception: " + ex.getMessage());
+             catchMessage(ex);
          }
          
          testEnd("CommandValidator", "validate()");

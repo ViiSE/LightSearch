@@ -15,45 +15,13 @@
  */
 package lightsearch.admin.panel.data;
 
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.Map;
-import java.util.function.Function;
-import lightsearch.admin.panel.cmd.message.MessageCommandCreator;
-import lightsearch.admin.panel.cmd.message.MessageCommandCreatorInit;
-import lightsearch.admin.panel.cmd.result.CommandResult;
-import lightsearch.admin.panel.data.AdminCommandDAO;
-import lightsearch.admin.panel.data.AdminDAO;
-import lightsearch.admin.panel.data.AdminDAOInit;
-import lightsearch.admin.panel.data.AdminDTO;
-import lightsearch.admin.panel.data.AdminDTOInit;
-import lightsearch.admin.panel.data.ConnectionDTO;
-import lightsearch.admin.panel.data.MessageCommandDTO;
-import lightsearch.admin.panel.data.MessageCommandDTOInit;
-import lightsearch.admin.panel.data.ScannerConnectionDTO;
-import lightsearch.admin.panel.data.creator.ConnectionDTOCreator;
-import lightsearch.admin.panel.data.creator.ConnectionDTOCreatorInit;
-import lightsearch.admin.panel.data.creator.ScannerConnectionDTOCreator;
-import lightsearch.admin.panel.data.creator.ScannerConnectionDTOCreatorInit;
-import lightsearch.admin.panel.data.stream.DataStream;
-import lightsearch.admin.panel.data.stream.DataStreamCreator;
-import lightsearch.admin.panel.data.stream.DataStreamCreatorInit;
-import lightsearch.admin.panel.data.stream.DataStreamInit;
-import lightsearch.admin.panel.exception.DataStreamCreatorException;
-import lightsearch.admin.panel.exception.SocketException;
-import lightsearch.admin.panel.message.MessageRecipient;
-import lightsearch.admin.panel.message.MessageRecipientInit;
-import lightsearch.admin.panel.message.MessageSender;
-import lightsearch.admin.panel.message.MessageSenderInit;
-import lightsearch.admin.panel.print.AdminPanelPrinter;
-import lightsearch.admin.panel.print.AdminPanelPrinterInit;
-import lightsearch.admin.panel.socket.SocketCreator;
-import lightsearch.admin.panel.socket.SocketCreatorInit;
+import test.TestServer;
+
 import static org.testng.Assert.*;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+
+import org.testng.annotations.*;
+import test.data.DataProviderCreator;
+
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 
@@ -62,89 +30,35 @@ import static test.message.TestMessage.testEnd;
  * @author ViiSE
  */
 public class AdminDTOTestNG {
-    
-    private Thread testServerTh;
-    private boolean closeServer = true;
-    
-    private Socket adminSocket;
-    private AdminDAO adminDAO;
-    private AdminPanelPrinter printer;
-    private Map<String, Function<AdminCommandDAO, CommandResult>> msgCmdHolder;
-    
+
+    private AdminDTO adminDTO;
+
     @BeforeTest
-    public void setUpMethod() {
-        testServerTh = new Thread(new TestServer());
-        testServerTh.start();
-        
-        printer = AdminPanelPrinterInit.adminPanelPrinter();
-        assertNotNull("printer", "AdminPanelPrinter is null!");
-        
-        ScannerConnectionDTOCreator scConnDTOCreator = 
-                ScannerConnectionDTOCreatorInit.scannerConnectionDTOCreator();
-        assertNotNull(scConnDTOCreator, "ScannerConnectionDTOCreator is null!");
-        
-        ScannerConnectionDTO scConnDTO = scConnDTOCreator.createScannerConnectionDTO();
-        assertNotNull(scConnDTO, "ScannerConnectionDTO is null!");
-        
-        ConnectionDTOCreator connDTOCreator = 
-                ConnectionDTOCreatorInit.connectionDTOCreator(printer, scConnDTO);
-        assertNotNull(connDTOCreator, "ConnectionDTOCreator is null!");
-        
-        ConnectionDTO connDTO = connDTOCreator.createConnectionDTO();
-        assertNotNull(connDTO, "ConnectionDTO is null!");
-        
-        SocketCreator admSocketCreator = SocketCreatorInit.socketCreator(connDTO);
-        assertNotNull(admSocketCreator, "Socket creator is null!");
-        
-        try {
-            adminSocket = admSocketCreator.createSocket();
-            assertNotNull(adminSocket, "Socket is null!");
-
-            adminDAO = AdminDAOInit.adminDAO();
-            assertNotNull(adminDAO, "AdminDAO is null!");
-
-            DataStreamCreator dsCreator = 
-                    DataStreamCreatorInit.dataStreamCreator(adminSocket);
-            assertNotNull(dsCreator, "DataStreamCreator is null!");
-            dsCreator.createDataStream();
-            
-            DataStream ds = DataStreamInit.dataStream(dsCreator);
-            assertNotNull(ds, "DataStream is null!");
-            
-            MessageSender msgSender = 
-                    MessageSenderInit.messageSender(ds.dataOutputStream());
-            assertNotNull(msgSender, "MessageSender is null!");
-            
-            MessageRecipient msgRecipient = 
-                    MessageRecipientInit.messageRecipient(ds.dataInputStream());
-            assertNotNull(msgRecipient, "MessageRecipient is null!");
-            
-            MessageCommandDTO msgCmdDTO = 
-                    MessageCommandDTOInit.messageCommandDTO(msgSender, msgRecipient);
-            assertNotNull(msgCmdDTO, "MessageCommandDTO is null!");
-            
-            MessageCommandCreator msgCmdCreator
-                    = MessageCommandCreatorInit.messageCommandCreator(msgCmdDTO);
-            assertNotNull(msgCmdCreator, "MessageCommandCreator is null!");
-            
-            msgCmdHolder = msgCmdCreator.createMessageCommandHolder();
-            assertNotNull(msgCmdHolder, "MessageCommandHolder is null!");
+    @Parameters({"ip", "port"})
+    public void setUpTest(String ip, int port) {
+        if(!TestServer.serverOn) {
+            Thread testServerTh = new Thread(new TestServer(port));
+            testServerTh.start();
         }
-        catch(SocketException | 
-                DataStreamCreatorException ex) {
-            System.out.println("CATCH! Message: " + ex.getMessage());
-        }
+    }
+
+    @BeforeClass
+    @Parameters({"ip", "port"})
+    public void setUpMethod(String ip, int port) {
+        TestServer.closeClient = false;
+        TestServer.setAnswerMessage(null);
+        TestServer.setSimpleMode(true);
+
+        adminDTO = DataProviderCreator.createDataProvider(AdminDTO.class, ip, port);
+        assertNotNull(adminDTO, "AdminDTO is null!");
     }
     
     @Test
     public void adminSocket() {
         testBegin("AdminDTO", "adminSocket()");
-        
-        AdminDTO admDTO = AdminDTOInit.adminDTO(adminSocket, adminDAO, printer, msgCmdHolder);
-        assertNotNull(admDTO, "AdminDTO is null!");
-        assertNotNull(admDTO.adminSocket(), "AdminDTO: adminSocket() is null!");
-        
-        System.out.println("AdminDTO.adminSocket(): " + admDTO.adminSocket());
+
+        assertNotNull(adminDTO.adminSocket(), "AdminDTO: adminSocket() is null!");
+        System.out.println("AdminDTO.adminSocket(): " + adminDTO.adminSocket());
         
         testEnd("AdminDTO", "adminSocket()");
     }
@@ -153,11 +67,8 @@ public class AdminDTOTestNG {
     public void adminDAO() {
         testBegin("AdminDTO", "adminDAO()");
         
-        AdminDTO admDTO = AdminDTOInit.adminDTO(adminSocket, adminDAO, printer, msgCmdHolder);
-        assertNotNull(admDTO, "AdminDTO is null!");
-        assertNotNull(admDTO.adminSocket(), "AdminDTO: adminDAO() is null!");
-        
-        System.out.println("AdminDTO.adminDAO(): " + admDTO.adminDAO());
+        assertNotNull(adminDTO.adminSocket(), "AdminDTO: adminDAO() is null!");
+        System.out.println("AdminDTO.adminDAO(): " + adminDTO.adminDAO());
         
         testEnd("AdminDTO", "adminDAO()");
     }
@@ -165,12 +76,9 @@ public class AdminDTOTestNG {
     @Test
     public void printer() {
         testBegin("AdminDTO", "printer()");
-        
-        AdminDTO admDTO = AdminDTOInit.adminDTO(adminSocket, adminDAO, printer, msgCmdHolder);
-        assertNotNull(admDTO, "AdminDTO is null!");
-        assertNotNull(admDTO.printer(), "AdminDTO: printer() is null!");
-        
-        System.out.println("AdminDTO.printer(): " + admDTO.printer());
+
+        assertNotNull(adminDTO.printer(), "AdminDTO: printer() is null!");
+        System.out.println("AdminDTO.printer(): " + adminDTO.printer());
         
         testEnd("AdminDTO", "printer()");
     }
@@ -179,46 +87,15 @@ public class AdminDTOTestNG {
     public void messageCommandHolder() {
         testBegin("AdminDTO", "messageCommandHolder()");
         
-        AdminDTO admDTO = AdminDTOInit.adminDTO(adminSocket, adminDAO, printer, msgCmdHolder);
-        assertNotNull(admDTO, "AdminDTO is null!");
-        assertNotNull(admDTO.messageCommandHolder(), "AdminDTO: messageCommandHolder() is null!");
-        
-        System.out.println("AdminDTO.messageCommandHolder(): " + admDTO.messageCommandHolder());
+        assertNotNull(adminDTO.messageCommandHolder(), "AdminDTO: messageCommandHolder() is null!");
+        System.out.println("AdminDTO.messageCommandHolder(): " + adminDTO.messageCommandHolder());
         
         testEnd("AdminDTO", "messageCommandHolder()");
     }
     
-    @AfterTest
+    @AfterClass
     public void closeMethod() {
-        closeServer = false;
-    }
-    
-    private class TestServer implements Runnable {
-
-        @Override
-        public void run() {
-            ServerSocket serverSocket = null;
-            
-            try { serverSocket = new ServerSocket(50000); }
-            catch(IOException ex) {
-                System.out.println("CATCH! Message: " + ex.getMessage());
-            }
-            
-            System.out.println("Test server on");
-            
-            try { if(serverSocket != null) serverSocket.accept(); }
-            catch(IOException ex) {
-                System.out.println("CATCH! Message: " + ex.getMessage());
-            }
-            
-            while(closeServer) { /* Just waiting for the end of test */ }
-            
-            try { if(serverSocket != null) serverSocket.close(); }
-            catch(IOException ex) {
-                System.out.println("CATCH! Message: " + ex.getMessage());
-            }
-            
-            System.out.println("Test server off");
-        }   
+        TestServer.setSimpleMode(false);
+        TestServer.closeClient = true;
     }
 }

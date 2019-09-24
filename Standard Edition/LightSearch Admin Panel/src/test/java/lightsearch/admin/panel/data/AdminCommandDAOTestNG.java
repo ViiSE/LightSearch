@@ -18,6 +18,8 @@ package lightsearch.admin.panel.data;
 import lightsearch.admin.panel.data.AdminCommandDAO;
 import lightsearch.admin.panel.data.AdminCommandDAOInit;
 import static org.testng.Assert.*;
+
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
@@ -29,10 +31,10 @@ import static test.message.TestMessage.testEnd;
 public class AdminCommandDAOTestNG {
     
     @Test
-    public void name() {
+    @Parameters({"name"})
+    public void name(String name) {
         testBegin("AdminCommandDAO", "name()");
-        
-        String name = "name";
+
         assertNotNull(name, "Name is null!");
         
         AdminCommandDAO admCmdDAO = AdminCommandDAOInit.adminCommandDAO();
@@ -47,10 +49,10 @@ public class AdminCommandDAOTestNG {
     }
     
     @Test
-    public void serverTime() {
+    @Parameters({"serverTime"})
+    public void serverTime(String serverTime) {
         testBegin("AdminCommandDAO", "serverTime()");
-        
-        String serverTime = "8";
+
         assertNotNull(serverTime, "serverTime is null!");
         
         AdminCommandDAO admCmdDAO = AdminCommandDAOInit.adminCommandDAO();
@@ -65,10 +67,10 @@ public class AdminCommandDAOTestNG {
     }
     
     @Test
-    public void clientTimeout() {
+    @Parameters({"clientTimeout"})
+    public void clientTimeout(String clientTimeout) {
         testBegin("AdminCommandDAO", "clientTimeout()");
-        
-        String clientTimeout = "50000";
+
         assertNotNull(clientTimeout, "clientTimeout is null!");
         
         AdminCommandDAO admCmdDAO = AdminCommandDAOInit.adminCommandDAO();
@@ -83,10 +85,10 @@ public class AdminCommandDAOTestNG {
     }
     
     @Test
-    public void IMEI() {
+    @Parameters({"IMEI"})
+    public void IMEI(String IMEI) {
         testBegin("AdminCommandDAO", "IMEI()");
         
-        String IMEI = "123456789123456";
         assertNotNull(IMEI, "IMEI is null!");
         
         AdminCommandDAO admCmdDAO = AdminCommandDAOInit.adminCommandDAO();
@@ -101,10 +103,10 @@ public class AdminCommandDAOTestNG {
     }
     
     @Test
-    public void adminName() {
+    @Parameters({"adminName"})
+    public void adminName(String adminName) {
         testBegin("AdminCommandDAO", "adminName()");
-        
-        String adminName = "adminName";
+
         assertNotNull(adminName, "adminName is null!");
         
         AdminCommandDAO admCmdDAO = AdminCommandDAOInit.adminCommandDAO();
@@ -119,10 +121,10 @@ public class AdminCommandDAOTestNG {
     }
     
     @Test
-    public void password() {
+    @Parameters({"password"})
+    public void password(String password) {
         testBegin("AdminCommandDAO", "password()");
-        
-        String password = "password";
+
         assertNotNull(password, "password is null!");
         
         AdminCommandDAO admCmdDAO = AdminCommandDAOInit.adminCommandDAO();
@@ -137,10 +139,10 @@ public class AdminCommandDAOTestNG {
     }
     
     @Test
-    public void ip() {
+    @Parameters({"ip"})
+    public void ip(String ip) {
         testBegin("AdminCommandDAO", "ip()");
-        
-        String ip = "ip";
+
         assertNotNull(ip, "ip is null!");
         
         AdminCommandDAO admCmdDAO = AdminCommandDAOInit.adminCommandDAO();
@@ -155,10 +157,10 @@ public class AdminCommandDAOTestNG {
     }
     
     @Test
-    public void port() {
+    @Parameters({"port"})
+    public void port(String port) {
         testBegin("AdminCommandDAO", "port()");
-        
-        String port = "port";
+
         assertNotNull(port, "port is null!");
         
         AdminCommandDAO admCmdDAO = AdminCommandDAOInit.adminCommandDAO();
@@ -173,10 +175,10 @@ public class AdminCommandDAOTestNG {
     }
     
     @Test
-    public void dbName() {
+    @Parameters("dbName")
+    public void dbName(String dbName) {
         testBegin("AdminCommandDAO", "dbName()");
-        
-        String dbName = "dbName";
+
         assertNotNull(dbName, "dbName is null!");
         
         AdminCommandDAO admCmdDAO = AdminCommandDAOInit.adminCommandDAO();

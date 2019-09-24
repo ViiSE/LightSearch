@@ -20,6 +20,8 @@ import lightsearch.admin.panel.message.type.MessageAddBlacklistInit;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 import static org.testng.Assert.*;
+
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 /**
@@ -29,19 +31,17 @@ import org.testng.annotations.Test;
 public class MessageAddBlacklistTestNG {
     
     @Test
-    public void message() {
+    @Parameters({"name", "IMEI"})
+    public void message(String name, String IMEI) {
         testBegin("MessageAddBlacklist", "message()");
         
-        String name = "name";
         assertNotNull(name, "Name is null!");
         assertFalse(name.isEmpty(), "Name is null!");
         
-        String IMEI = "123456789123456";
         assertNotNull(IMEI, "IMEI is null!");
         assertFalse(IMEI.isEmpty(), "IMEI is null!");
         
-        MessageAddBlacklist msgAddBl = 
-                MessageAddBlacklistInit.messageAddBlacklist(name, IMEI);
+        MessageAddBlacklist msgAddBl = MessageAddBlacklistInit.messageAddBlacklist(name, IMEI);
         assertNotNull(msgAddBl, "MessageAddBlacklist is null!");
         
         String message = msgAddBl.message();

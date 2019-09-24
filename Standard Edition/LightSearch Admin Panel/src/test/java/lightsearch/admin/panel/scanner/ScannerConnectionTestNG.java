@@ -26,44 +26,45 @@ import lightsearch.admin.panel.validate.IPValidatorInit;
 import lightsearch.admin.panel.validate.PortValidator;
 import lightsearch.admin.panel.validate.PortValidatorInit;
 import static org.testng.Assert.*;
+import static test.message.TestMessage.*;
+
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import static test.message.TestMessage.testBegin;
-import static test.message.TestMessage.testEnd;
+
 /**
  *
  * @author ViiSE
  */
 public class ScannerConnectionTestNG {
+
+     private ScannerConnection scannerConnection;
     
-    private ScannerConnectionDTO scannerDTO;
-    
-    @BeforeTest
+    @BeforeClass
     public void initScannerConnectionDTO() {
         IPValidator ipValidator = IPValidatorInit.ipValidator();
         PortValidator portValidator = PortValidatorInit.portValidator();
         Scanner scanner = new Scanner(System.in);
-        scannerDTO = ScannerConnectionDTOInit.scannerConnectionDTO(scanner, ipValidator, portValidator);
+        ScannerConnectionDTO scannerDTO =
+                ScannerConnectionDTOInit.scannerConnectionDTO(scanner, ipValidator, portValidator);
+
+        scannerConnection = ScannerConnectionInit.scannerConnection(scannerDTO);
+        assertNotNull(scannerConnection, "ScannerConnection is null!");
     }
     
     @Test
     public void scanIP() {
         testBegin("ScannerConnection", "scanIP()");
-        
-        assertNotNull(scannerDTO, "Scanner DTO is null!");
-        
-        ScannerConnection scannerConnection = ScannerConnectionInit.scannerConnection(scannerDTO);
-        
+
         String ip;
         while(true) {
             try {
                 System.out.print("Input ip:");
                 ip = scannerConnection.scanIP();
-
                 break;
-            } 
-            catch (ScannerException ex) {
-                System.out.println(ex.getMessage());
+            } catch (ScannerException ex) {
+                catchMessage(ex);
             }
         }
         System.out.println("ip:" + ip);
@@ -74,21 +75,15 @@ public class ScannerConnectionTestNG {
     @Test
     public void scanPort() {
         testBegin("ScannerConnection", "scanPort()");
-        
-        assertNotNull(scannerDTO, "Scanner DTO is null!");
-        
-        ScannerConnection scannerConnection = ScannerConnectionInit.scannerConnection(scannerDTO);
-        
+
         int port;
         while(true) {
             try {
                 System.out.print("Input port:");
                 port = scannerConnection.scanPort();
-
                 break;
-            } 
-            catch (ScannerException ex) {
-                System.out.println(ex.getMessage());
+            } catch (ScannerException ex) {
+                catchMessage(ex);
             }
         }
         System.out.println("port:" + port);

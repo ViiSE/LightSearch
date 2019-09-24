@@ -22,10 +22,11 @@ import lightsearch.admin.panel.exception.ScannerException;
 import lightsearch.admin.panel.scanner.ScannerTimeout;
 import lightsearch.admin.panel.scanner.ScannerTimeoutInit;
 import static org.testng.Assert.*;
+import static test.message.TestMessage.*;
+
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import static test.message.TestMessage.testBegin;
-import static test.message.TestMessage.testEnd;
 
 /**
  *
@@ -33,15 +34,16 @@ import static test.message.TestMessage.testEnd;
  */
 public class ScannerTimeoutTestNG {
     
-    private ScannerTimeoutDTO scannerTimeoutDTO;
+    private ScannerTimeout scanner;
     
-    @BeforeTest
+    @BeforeClass
     public void setUpMethod() {
-        ScannerTimeoutDTOCreator scToutDTOCreator = 
-                ScannerTimeoutDTOCreatorInit.scannerTimeoutDTOCreator();
+        ScannerTimeoutDTOCreator scToutDTOCreator = ScannerTimeoutDTOCreatorInit.scannerTimeoutDTOCreator();
         assertNotNull(scToutDTOCreator, "ScannerTimeoutDTOCreator is null!");
-        
-        scannerTimeoutDTO = scToutDTOCreator.createScannerTimeoutDTO();
+
+        ScannerTimeoutDTO scannerTimeoutDTO = scToutDTOCreator.createScannerTimeoutDTO();
+        scanner = ScannerTimeoutInit.scannerTimeout(scannerTimeoutDTO);
+        assertNotNull(scanner, "ScannerTimeout is null!");
     }
     
     @Test
@@ -49,18 +51,11 @@ public class ScannerTimeoutTestNG {
         testBegin("ScannerTimeout", "scanTimeoutValue()");
         
         try {
-            assertNotNull(scannerTimeoutDTO, "ScannerTimeoutDTO is null!");
-            
-            ScannerTimeout scanner = 
-                    ScannerTimeoutInit.scannerTimeout(scannerTimeoutDTO);
-            assertNotNull(scanner, "ScannerTimeout is null!");
-            
             System.out.print("Input timeout value: ");
             String toutValue = scanner.scanTimeoutValue();
             System.out.println("Scan timeout value: " + toutValue);
-        }
-        catch(ScannerException ex) {
-            System.out.println("CATCH! Message: " + ex.getMessage());
+        } catch(ScannerException ex) {
+            catchMessage(ex);
         }
         
         testEnd("ScannerTimeout", "scanTimeoutValue()");

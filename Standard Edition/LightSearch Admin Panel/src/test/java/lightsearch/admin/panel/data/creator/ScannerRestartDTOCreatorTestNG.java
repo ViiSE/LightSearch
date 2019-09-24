@@ -33,14 +33,12 @@ public class ScannerRestartDTOCreatorTestNG {
     public void createScannerRestartDTO() {
         testBegin("ScannerRestartDTOCreator", "createScannerRestartDTO()");
         
-        ScannerRestartDTOCreator scResDTOCreator = 
-                ScannerRestartDTOCreatorInit.scannerRestartDTOCreator();
+        ScannerRestartDTOCreator scResDTOCreator = ScannerRestartDTOCreatorInit.scannerRestartDTOCreator();
         assertNotNull(scResDTOCreator, "ScannerRestartDTOCreator is null!");
         
         System.out.println("ScannerRestartDTOCreator: " + scResDTOCreator);
         
-        ScannerRestartDTO scResDTO = 
-                scResDTOCreator.createScannerRestartDTO();
+        ScannerRestartDTO scResDTO = scResDTOCreator.createScannerRestartDTO();
         assertNotNull(scResDTO, "ScannerRestartDTO is null!");
         
         System.out.println("ScannerRestartDTO: " + scResDTO);

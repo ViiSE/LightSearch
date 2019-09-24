@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="UtilSuite">
+
+    <parameter name="key" value="1"/>
+    <parameter name="value" value="66"/>
+
+
+    <test name="UtilTestSuite">
+        <packages>
+            <package name="lightsearch.admin.panel.util"/>
+        </packages>
+    </test>
+
+</suite>

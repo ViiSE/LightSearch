@@ -19,9 +19,10 @@ import lightsearch.admin.panel.exception.ValidatorException;
 import lightsearch.admin.panel.validate.TimeoutValidator;
 import lightsearch.admin.panel.validate.TimeoutValidatorInit;
 import static org.testng.Assert.*;
+import static test.message.TestMessage.*;
+
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import static test.message.TestMessage.testBegin;
-import static test.message.TestMessage.testEnd;
 
 /**
  *
@@ -30,20 +31,17 @@ import static test.message.TestMessage.testEnd;
 public class TimeoutValidatorTestNG {
     
     @Test
-    public void validate() {
+    @Parameters({"timeoutValue"})
+    public void validate(String timeoutValue) {
         testBegin("TimeoutValidator", "validate()");
         
         try {    
-            String toutValue = "10000";
-            assertNotNull(toutValue, "Timeout value is null!");
-
+            assertNotNull(timeoutValue, "Timeout value is null!");
             TimeoutValidator dbNameValidator = TimeoutValidatorInit.timeoutValidator();
-            dbNameValidator.validate(toutValue);
-            
+            dbNameValidator.validate(timeoutValue);
             System.out.println("Validation success");
-        }
-        catch(ValidatorException ex) {
-            System.out.println("CATCH! Message: " + ex.getMessage());
+        } catch(ValidatorException ex) {
+            catchMessage(ex);
         }
         
         testEnd("TimeoutValidator", "validate()");
