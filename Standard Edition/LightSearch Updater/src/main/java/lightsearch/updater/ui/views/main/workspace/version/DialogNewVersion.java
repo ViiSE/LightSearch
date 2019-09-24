@@ -49,8 +49,7 @@ public class DialogNewVersion extends Dialog {
                     textFieldDialog.setErrorMessage(ex.getMessage());
                     textFieldDialog.setInvalid(true);
                 }
-            }
-            else
+            } else
                 textFieldDialog.setErrorMessage("Enter release version!");
         });
 

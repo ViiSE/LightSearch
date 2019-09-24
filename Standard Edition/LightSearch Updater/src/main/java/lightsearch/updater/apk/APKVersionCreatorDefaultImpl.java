@@ -51,8 +51,7 @@ public class APKVersionCreatorDefaultImpl implements APKVersionCreator {
             try {
                 Files.createDirectories(path);
                 logger.info("New version is created: " + versionName);
-            }
-            catch (IOException ex) {
+            } catch (IOException ex) {
                 logger.error("APKVersionCreator: createNewVersion exception: " + ex.getMessage());
                 throw new APKException(ex.getMessage());
             }

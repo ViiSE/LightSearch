@@ -34,8 +34,7 @@ public class UploadAPK extends Upload {
             try {
                 apk.setContent(memoryBuffer.getInputStream());
                 Notification.show("File " + event.getFileName() + " uploaded.");
-            }
-            catch(IOException ex) {
+            } catch(IOException ex) {
                 Notification.show(ex.getMessage());
             }
         });

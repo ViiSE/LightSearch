@@ -32,8 +32,7 @@ public class ButtonChangeInfo extends Button {
                 infoChecker.check(editor.getValue());
                 infoSaver.saveInfo(editor.getValue());
                 Notification.show("Release information is changed!");
-            }
-            catch(ReleaseInfoException ex) {
+            } catch(ReleaseInfoException ex) {
                 Notification.show(ex.getMessage());
             }
         });

@@ -30,6 +30,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,7 +59,7 @@ public class APKVersionsUploaderDefaultImpl implements APKVersionsUploader {
                     .collect(Collectors.toList());
         } catch (IOException ex) {
             logger.error("uploadVersions: " + ex.getMessage() + ". Create empty versions list.");
-            return Arrays.asList(new String[] {});
+            return Collections.emptyList();
         }
     }
 }

@@ -65,7 +65,7 @@ public class LoginJUnitTest {
                 post("/login")
                 .accept(MediaType.ALL)
                 .param("username", "admin")
-                .param("password", "password")
+                .param("password", "tokarBER256!")
         ).andExpect(MockMvcResultMatchers.redirectedUrl("/"));
     }
 

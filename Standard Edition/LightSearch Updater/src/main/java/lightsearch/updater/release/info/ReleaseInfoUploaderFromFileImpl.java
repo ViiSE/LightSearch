@@ -57,15 +57,13 @@ public class ReleaseInfoUploaderFromFileImpl implements ReleaseInfoUploader {
                 logger.error("uploadInfo: " + ex.getMessage());
                 throw new ReleaseInfoException(ex.getMessage());
             }
-        }
-        else {
+        } else {
             try {
                 String info = infoCreator.createInfo(path);
 
                 logger.info("Release info is uploaded");
                 return info;
-            }
-            catch (ReleaseInfoCreatorException ex) {
+            } catch (ReleaseInfoCreatorException ex) {
                 logger.error("uploadInfo: " + ex.getMessage());
                 throw new ReleaseInfoException(ex.getMessage());
             }

@@ -70,7 +70,7 @@ public class MvcConfiguration extends WebSecurityConfigurerAdapter implements We
     @Override
     public UserDetailsService userDetailsService() {
         UserDetails user = User.withUsername("admin")
-                .password("{noop}password")
+                .password("{bcrypt}$2a$15$9GEmgFJ7iyj.B2SKzrfIp./nJv.pbxwAu9v/anmPj9ZPt4zSN5Q/u")
                 .roles("USER").build();
 
         return new InMemoryUserDetailsManager(user);
@@ -83,6 +83,8 @@ public class MvcConfiguration extends WebSecurityConfigurerAdapter implements We
                 "/favicon.ico",
                 "/robots.txt",
                 "/static/**",
+                "META-INF/resources/**",
+                "WEB-INF/images/**",
 
                 "/manifest.webmanifest",
                 "/sw.js",

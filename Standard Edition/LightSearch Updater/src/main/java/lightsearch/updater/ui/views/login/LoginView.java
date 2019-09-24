@@ -31,30 +31,17 @@ import java.util.Collections;
 @PageTitle("Login")
 public class LoginView extends VerticalLayout implements BeforeEnterObserver{
 
-    public static final String ROUTE = "login";
+    static final String ROUTE = "login";
 
     private LoginOverlay login = new LoginOverlay();
 
-    public LoginView() { //AuthenticationManager authenticationManager, CustomRequestCache requestCache) {
+    public LoginView() {
         login.setAction("login");
         login.setOpened(true);
         login.setTitle("LightSearch Updater");
         login.setDescription("Sign in, please");
         login.setForgotPasswordButtonVisible(false);
         super.getElement().appendChild(login.getElement());
-//        super.add(login);
-//        login.addLoginListener(e -> {
-//            try {
-//                final Authentication authentication = authenticationManager.authenticate(
-//                        new UsernamePasswordAuthenticationToken(e.getUsername(), e.getPassword()));
-//                SecurityContextHolder.getContext().setAuthentication(authentication);
-//                login.close();
-//                UI.getCurrent().navigate(requestCache.resolveRedirectUrl());
-//            } catch(AuthenticationException ex) {
-//                login.setError(true);
-//            }
-//        });
-        //super.add(login);
     }
 
     @Override

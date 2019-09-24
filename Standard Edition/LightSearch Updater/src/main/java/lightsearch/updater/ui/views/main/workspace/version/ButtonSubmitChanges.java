@@ -37,11 +37,9 @@ public class ButtonSubmitChanges extends Button {
                     } catch (APKException ex) {
                         Notification.show(ex.getMessage());
                     }
-                }
-                else
+                } else
                     Notification.show("Upload APK file!");
-            }
-            else {
+            } else {
                 comboBoxVersions.setErrorMessage("Select APK version!");
                 comboBoxVersions.setInvalid(true);
             }
