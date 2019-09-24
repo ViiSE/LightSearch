@@ -19,15 +19,11 @@ import lightsearch.admin.panel.data.ScannerChooserCommandDTO;
 import lightsearch.admin.panel.data.creator.ScannerChooserCommandDTOCreator;
 import lightsearch.admin.panel.data.creator.ScannerChooserCommandDTOCreatorInit;
 import lightsearch.admin.panel.exception.ScannerException;
-import lightsearch.admin.panel.scanner.ScannerChooserCommand;
-import lightsearch.admin.panel.scanner.ScannerChooserCommandInit;
-import static org.testng.Assert.*;
-import static test.message.TestMessage.*;
-
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertNotNull;
+import static test.message.TestMessage.*;
 
 /**
  *

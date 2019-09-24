@@ -15,9 +15,10 @@
  */
 package lightsearch.admin.panel.message;
 
+import lightsearch.admin.panel.exception.MessageRecipientException;
+
 import java.io.DataInputStream;
 import java.io.IOException;
-import lightsearch.admin.panel.exception.MessageRecipientException;
 
 /**
  *

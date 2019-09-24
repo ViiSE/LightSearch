@@ -15,13 +15,11 @@
  */
 package lightsearch.admin.panel.menu;
 
-import lightsearch.admin.panel.menu.AdminPanelMenuCreatorInit;
-import static org.testng.Assert.*;
+import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertNotNull;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
-import org.testng.annotations.Test;
-import lightsearch.admin.panel.menu.AdminPanelMenu;
-import lightsearch.admin.panel.menu.AdminPanelMenuCreator;
 
 /**
  *

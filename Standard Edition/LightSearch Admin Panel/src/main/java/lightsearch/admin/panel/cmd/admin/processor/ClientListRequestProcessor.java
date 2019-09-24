@@ -15,7 +15,6 @@
  */
 package lightsearch.admin.panel.cmd.admin.processor;
 
-import java.util.function.Function;
 import lightsearch.admin.panel.cmd.admin.result.ClientListResult;
 import lightsearch.admin.panel.cmd.admin.result.ClientListResultInit;
 import lightsearch.admin.panel.cmd.message.MessageCommandEnum;
@@ -25,6 +24,8 @@ import lightsearch.admin.panel.data.AdminCommandDAO;
 import lightsearch.admin.panel.data.AdminCommandDAOInit;
 import lightsearch.admin.panel.data.AdminDTO;
 import lightsearch.admin.panel.data.AdminPanelDTO;
+
+import java.util.function.Function;
 
 /**
  *

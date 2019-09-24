@@ -15,33 +15,11 @@
  */
 package lightsearch.admin.panel.session;
 
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
 import lightsearch.admin.panel.cmd.admin.AdminCommandCreator;
-import lightsearch.admin.panel.cmd.admin.AdminCommandCreatorInit;
-import lightsearch.admin.panel.cmd.message.MessageCommandCreator;
-import lightsearch.admin.panel.cmd.message.MessageCommandCreatorInit;
-import lightsearch.admin.panel.data.creator.ConnectionDTOCreator;
-import lightsearch.admin.panel.data.creator.ConnectionDTOCreatorInit;
-import lightsearch.admin.panel.data.AdminDAO;
-import lightsearch.admin.panel.data.AdminDAOInit;
-import lightsearch.admin.panel.data.AdminDTO;
-import lightsearch.admin.panel.data.AdminDTOInit;
 import lightsearch.admin.panel.data.AdminPanelDTO;
-import lightsearch.admin.panel.data.creator.AdminPanelDTOCreator;
-import lightsearch.admin.panel.data.creator.AdminPanelDTOCreatorInit;
 import lightsearch.admin.panel.data.AdminPanelSessionDTO;
 import lightsearch.admin.panel.data.AdminPanelSessionDTOInit;
-import lightsearch.admin.panel.data.ConnectionDTO;
-import lightsearch.admin.panel.data.MessageCommandDTO;
-import lightsearch.admin.panel.data.MessageCommandDTOInit;
-import lightsearch.admin.panel.data.ScannerChooserCommandDTO;
-import lightsearch.admin.panel.data.ScannerConnectionDTO;
-import lightsearch.admin.panel.data.creator.ScannerChooserCommandDTOCreator;
-import lightsearch.admin.panel.data.creator.ScannerChooserCommandDTOCreatorInit;
-import lightsearch.admin.panel.data.creator.ScannerConnectionDTOCreator;
-import lightsearch.admin.panel.data.creator.ScannerConnectionDTOCreatorInit;
+import lightsearch.admin.panel.data.creator.AdminPanelDTOCreatorInit;
 import lightsearch.admin.panel.data.stream.DataStream;
 import lightsearch.admin.panel.data.stream.DataStreamCreator;
 import lightsearch.admin.panel.data.stream.DataStreamCreatorInit;
@@ -50,7 +28,6 @@ import lightsearch.admin.panel.exception.DataStreamCreatorException;
 import lightsearch.admin.panel.exception.MessageRecipientException;
 import lightsearch.admin.panel.exception.MessageSenderException;
 import lightsearch.admin.panel.menu.AdminPanelMenu;
-import lightsearch.admin.panel.menu.AdminPanelMenuCreator;
 import lightsearch.admin.panel.menu.AdminPanelMenuCreatorInit;
 import lightsearch.admin.panel.message.MessageRecipient;
 import lightsearch.admin.panel.message.MessageRecipientInit;
@@ -59,21 +36,17 @@ import lightsearch.admin.panel.message.MessageSenderInit;
 import lightsearch.admin.panel.print.AdminPanelPrinter;
 import lightsearch.admin.panel.print.AdminPanelPrinterInit;
 import lightsearch.admin.panel.scanner.ScannerChooserCommand;
-import lightsearch.admin.panel.scanner.ScannerChooserCommandInit;
-import lightsearch.admin.panel.session.AdminPanelSession;
-import lightsearch.admin.panel.session.AdminPanelSessionInit;
-import lightsearch.admin.panel.socket.SocketCreator;
-import lightsearch.admin.panel.socket.SocketCreatorInit;
-import lightsearch.admin.panel.util.MapRemover;
-import lightsearch.admin.panel.util.MapRemoverInit;
-import static org.testng.Assert.*;
-import static test.message.TestMessage.*;
-
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import test.data.DataProviderCreator;
+
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+import static org.testng.Assert.assertNotNull;
+import static test.message.TestMessage.*;
 
 /**
  *

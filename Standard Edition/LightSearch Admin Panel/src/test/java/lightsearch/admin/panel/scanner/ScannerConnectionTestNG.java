@@ -15,23 +15,20 @@
  */
 package lightsearch.admin.panel.scanner;
 
-import java.util.Scanner;
 import lightsearch.admin.panel.data.ScannerConnectionDTO;
 import lightsearch.admin.panel.data.ScannerConnectionDTOInit;
 import lightsearch.admin.panel.exception.ScannerException;
-import lightsearch.admin.panel.scanner.ScannerConnection;
-import lightsearch.admin.panel.scanner.ScannerConnectionInit;
 import lightsearch.admin.panel.validate.IPValidator;
 import lightsearch.admin.panel.validate.IPValidatorInit;
 import lightsearch.admin.panel.validate.PortValidator;
 import lightsearch.admin.panel.validate.PortValidatorInit;
-import static org.testng.Assert.*;
-import static test.message.TestMessage.*;
-
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import java.util.Scanner;
+
+import static org.testng.Assert.assertNotNull;
+import static test.message.TestMessage.*;
 
 /**
  *

@@ -15,7 +15,6 @@
  */
 package lightsearch.admin.panel.cmd.message.processor;
 
-import java.util.function.Function;
 import lightsearch.admin.panel.cmd.result.CommandResult;
 import lightsearch.admin.panel.cmd.result.CommandResultInit;
 import lightsearch.admin.panel.data.AdminCommandDAO;
@@ -23,6 +22,8 @@ import lightsearch.admin.panel.data.MessageCommandDTO;
 import lightsearch.admin.panel.exception.MessageParserException;
 import lightsearch.admin.panel.message.parser.MessageParser;
 import lightsearch.admin.panel.message.parser.MessageParserInit;
+
+import java.util.function.Function;
 
 /**
  *

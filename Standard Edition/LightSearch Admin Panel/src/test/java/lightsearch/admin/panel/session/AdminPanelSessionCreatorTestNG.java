@@ -15,13 +15,10 @@
  */
 package lightsearch.admin.panel.session;
 
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
 import lightsearch.admin.panel.data.AdminPanelDTO;
+import lightsearch.admin.panel.data.ScannerConnectionDTO;
 import lightsearch.admin.panel.data.creator.AdminPanelDTOCreator;
 import lightsearch.admin.panel.data.creator.AdminPanelDTOCreatorInit;
-import lightsearch.admin.panel.data.ScannerConnectionDTO;
 import lightsearch.admin.panel.data.creator.ScannerConnectionDTOCreator;
 import lightsearch.admin.panel.data.creator.ScannerConnectionDTOCreatorInit;
 import lightsearch.admin.panel.data.stream.DataStream;
@@ -37,16 +34,16 @@ import lightsearch.admin.panel.message.MessageSender;
 import lightsearch.admin.panel.message.MessageSenderInit;
 import lightsearch.admin.panel.print.AdminPanelPrinter;
 import lightsearch.admin.panel.print.AdminPanelPrinterInit;
-import lightsearch.admin.panel.session.AdminPanelSession;
-import lightsearch.admin.panel.session.AdminPanelSessionCreator;
-import lightsearch.admin.panel.session.AdminPanelSessionCreatorInit;
-import static org.testng.Assert.*;
-import static test.message.TestMessage.*;
-
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+import static org.testng.Assert.assertNotNull;
+import static test.message.TestMessage.*;
 
 /**
  *

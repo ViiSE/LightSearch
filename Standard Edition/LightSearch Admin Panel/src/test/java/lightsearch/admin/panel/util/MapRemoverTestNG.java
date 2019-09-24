@@ -15,15 +15,14 @@
  */
 package lightsearch.admin.panel.util;
 
-import java.util.HashMap;
-import java.util.Map;
-import lightsearch.admin.panel.util.MapRemover;
-import lightsearch.admin.panel.util.MapRemoverInit;
-import static org.testng.Assert.*;
-
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.testng.Assert.assertNotNull;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 

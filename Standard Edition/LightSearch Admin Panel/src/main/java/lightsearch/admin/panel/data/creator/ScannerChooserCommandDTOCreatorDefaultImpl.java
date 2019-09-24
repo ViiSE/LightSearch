@@ -15,11 +15,12 @@
  */
 package lightsearch.admin.panel.data.creator;
 
-import java.util.Scanner;
 import lightsearch.admin.panel.data.ScannerChooserCommandDTO;
 import lightsearch.admin.panel.data.ScannerChooserCommandDTOInit;
 import lightsearch.admin.panel.validate.CommandValidator;
 import lightsearch.admin.panel.validate.CommandValidatorInit;
+
+import java.util.Scanner;
 
 /**
  *

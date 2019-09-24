@@ -15,18 +15,16 @@
  */
 package lightsearch.admin.panel.connect.processor;
 
-import test.TestServer;
 import lightsearch.admin.panel.data.stream.DataStream;
 import lightsearch.admin.panel.message.MessageRecipient;
 import lightsearch.admin.panel.message.MessageRecipientInit;
 import lightsearch.admin.panel.message.MessageSender;
 import lightsearch.admin.panel.message.MessageSenderInit;
-
-import static org.testng.Assert.*;
-
 import org.testng.annotations.*;
+import test.TestServer;
 import test.data.DataProviderCreator;
 
+import static org.testng.Assert.assertNotNull;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 

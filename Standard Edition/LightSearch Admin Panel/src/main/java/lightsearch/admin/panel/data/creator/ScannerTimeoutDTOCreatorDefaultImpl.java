@@ -15,11 +15,12 @@
  */
 package lightsearch.admin.panel.data.creator;
 
-import java.util.Scanner;
 import lightsearch.admin.panel.data.ScannerTimeoutDTO;
 import lightsearch.admin.panel.data.ScannerTimeoutDTOInit;
 import lightsearch.admin.panel.validate.TimeoutValidator;
 import lightsearch.admin.panel.validate.TimeoutValidatorInit;
+
+import java.util.Scanner;
 
 /**
  *

@@ -15,7 +15,6 @@
  */
 package lightsearch.admin.panel.cmd.admin.processor;
 
-import java.util.function.Function;
 import lightsearch.admin.panel.cmd.message.MessageCommandEnum;
 import lightsearch.admin.panel.cmd.message.MessageCommandResultEnum;
 import lightsearch.admin.panel.cmd.result.CommandResult;
@@ -26,6 +25,8 @@ import lightsearch.admin.panel.data.AdminPanelDTO;
 import lightsearch.admin.panel.exception.ScannerException;
 import lightsearch.admin.panel.scanner.ScannerClientValue;
 import lightsearch.admin.panel.util.MapRemover;
+
+import java.util.function.Function;
 
 /**
  *

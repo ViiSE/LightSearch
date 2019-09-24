@@ -15,10 +15,11 @@
  */
 package lightsearch.admin.panel.scanner;
 
-import java.util.Arrays;
+import lightsearch.admin.panel.data.ScannerRegistrationDTO;
 import lightsearch.admin.panel.exception.ScannerException;
 import lightsearch.admin.panel.exception.ValidatorException;
-import lightsearch.admin.panel.data.ScannerRegistrationDTO;
+
+import java.util.Arrays;
 
 /**
  *

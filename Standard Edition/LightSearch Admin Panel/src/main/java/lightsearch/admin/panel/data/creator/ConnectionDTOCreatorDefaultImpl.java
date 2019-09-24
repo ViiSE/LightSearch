@@ -19,9 +19,9 @@ import lightsearch.admin.panel.data.ConnectionDTO;
 import lightsearch.admin.panel.data.ConnectionDTOInit;
 import lightsearch.admin.panel.data.ScannerConnectionDTO;
 import lightsearch.admin.panel.exception.ScannerException;
+import lightsearch.admin.panel.print.AdminPanelPrinter;
 import lightsearch.admin.panel.scanner.ScannerConnection;
 import lightsearch.admin.panel.scanner.ScannerConnectionInit;
-import lightsearch.admin.panel.print.AdminPanelPrinter;
 
 /**
  *

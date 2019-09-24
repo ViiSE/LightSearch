@@ -15,10 +15,11 @@
  */
 package lightsearch.admin.panel.socket;
 
-import java.io.IOException;
-import java.net.Socket;
 import lightsearch.admin.panel.data.ConnectionDTO;
 import lightsearch.admin.panel.exception.SocketException;
+
+import java.io.IOException;
+import java.net.Socket;
 
 /**
  *

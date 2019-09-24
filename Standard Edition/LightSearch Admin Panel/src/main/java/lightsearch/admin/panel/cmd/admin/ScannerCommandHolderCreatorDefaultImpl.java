@@ -15,31 +15,9 @@
  */
 package lightsearch.admin.panel.cmd.admin;
 
-import lightsearch.admin.panel.data.ScannerDatabaseDTO;
-import lightsearch.admin.panel.data.creator.ScannerDatabaseDTOCreator;
-import lightsearch.admin.panel.data.creator.ScannerDatabaseDTOCreatorInit;
-import lightsearch.admin.panel.data.creator.ScannerClientValueDTOCreatorInit;
-import lightsearch.admin.panel.data.ScannerRegistrationDTO;
-import lightsearch.admin.panel.data.creator.ScannerRegistrationDTOCreator;
-import lightsearch.admin.panel.data.creator.ScannerRegistrationDTOCreatorInit;
-import lightsearch.admin.panel.data.ScannerRestartDTO;
-import lightsearch.admin.panel.data.creator.ScannerRestartDTOCreator;
-import lightsearch.admin.panel.data.creator.ScannerRestartDTOCreatorInit;
-import lightsearch.admin.panel.data.ScannerTimeoutDTO;
-import lightsearch.admin.panel.data.creator.ScannerTimeoutDTOCreator;
-import lightsearch.admin.panel.data.creator.ScannerTimeoutDTOCreatorInit;
-import lightsearch.admin.panel.scanner.ScannerDatabase;
-import lightsearch.admin.panel.scanner.ScannerDatabaseInit;
-import lightsearch.admin.panel.scanner.ScannerClientValueInit;
-import lightsearch.admin.panel.scanner.ScannerRegistration;
-import lightsearch.admin.panel.scanner.ScannerRegistrationInit;
-import lightsearch.admin.panel.scanner.ScannerRestart;
-import lightsearch.admin.panel.scanner.ScannerRestartInit;
-import lightsearch.admin.panel.scanner.ScannerTimeout;
-import lightsearch.admin.panel.scanner.ScannerTimeoutInit;
-import lightsearch.admin.panel.data.ScannerClientValueDTO;
-import lightsearch.admin.panel.data.creator.ScannerClientValueDTOCreator;
-import lightsearch.admin.panel.scanner.ScannerClientValue;
+import lightsearch.admin.panel.data.*;
+import lightsearch.admin.panel.data.creator.*;
+import lightsearch.admin.panel.scanner.*;
 
 /**
  *

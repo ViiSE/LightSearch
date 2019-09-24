@@ -15,15 +15,11 @@
  */
 package lightsearch.admin.panel.data.creator;
 
-import java.util.Scanner;
 import lightsearch.admin.panel.data.ScannerDatabaseDTO;
 import lightsearch.admin.panel.data.ScannerDatabaseDTOInit;
-import lightsearch.admin.panel.validate.DatabaseNameValidator;
-import lightsearch.admin.panel.validate.DatabaseNameValidatorInit;
-import lightsearch.admin.panel.validate.IPValidator;
-import lightsearch.admin.panel.validate.IPValidatorInit;
-import lightsearch.admin.panel.validate.PortValidator;
-import lightsearch.admin.panel.validate.PortValidatorInit;
+import lightsearch.admin.panel.validate.*;
+
+import java.util.Scanner;
 
 /**
  *

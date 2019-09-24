@@ -15,21 +15,20 @@
  */
 package lightsearch.admin.panel.cmd.message.processor;
 
-import java.util.Map;
-import java.util.function.Function;
-
-import test.TestServer;
 import lightsearch.admin.panel.cmd.message.MessageCommandCreator;
 import lightsearch.admin.panel.cmd.message.MessageCommandEnum;
 import lightsearch.admin.panel.cmd.result.CommandResult;
 import lightsearch.admin.panel.data.AdminCommandDAO;
 import lightsearch.admin.panel.data.AdminCommandDAOInit;
-
-import static org.testng.Assert.*;
-
 import org.testng.annotations.*;
+import test.TestServer;
 import test.data.DataProviderCreator;
 
+import java.util.Map;
+import java.util.function.Function;
+
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 

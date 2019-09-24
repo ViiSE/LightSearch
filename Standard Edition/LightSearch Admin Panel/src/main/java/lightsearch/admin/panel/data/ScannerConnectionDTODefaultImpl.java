@@ -15,9 +15,10 @@
  */
 package lightsearch.admin.panel.data;
 
-import java.util.Scanner;
 import lightsearch.admin.panel.validate.IPValidator;
 import lightsearch.admin.panel.validate.PortValidator;
+
+import java.util.Scanner;
 
 /**
  *

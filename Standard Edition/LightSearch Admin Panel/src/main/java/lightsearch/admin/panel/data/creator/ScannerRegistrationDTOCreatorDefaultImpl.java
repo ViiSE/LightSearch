@@ -15,13 +15,14 @@
  */
 package lightsearch.admin.panel.data.creator;
 
-import java.util.Scanner;
 import lightsearch.admin.panel.data.ScannerRegistrationDTO;
 import lightsearch.admin.panel.data.ScannerRegistrationDTOInit;
 import lightsearch.admin.panel.security.HashAlgorithms;
 import lightsearch.admin.panel.security.HashAlgorithmsInit;
 import lightsearch.admin.panel.validate.AdminNameValidator;
 import lightsearch.admin.panel.validate.AdminNameValidatorInit;
+
+import java.util.Scanner;
 
 /**
  *

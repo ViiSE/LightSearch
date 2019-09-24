@@ -19,14 +19,11 @@ import lightsearch.admin.panel.data.ScannerTimeoutDTO;
 import lightsearch.admin.panel.data.creator.ScannerTimeoutDTOCreator;
 import lightsearch.admin.panel.data.creator.ScannerTimeoutDTOCreatorInit;
 import lightsearch.admin.panel.exception.ScannerException;
-import lightsearch.admin.panel.scanner.ScannerTimeout;
-import lightsearch.admin.panel.scanner.ScannerTimeoutInit;
-import static org.testng.Assert.*;
-import static test.message.TestMessage.*;
-
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertNotNull;
+import static test.message.TestMessage.*;
 
 /**
  *

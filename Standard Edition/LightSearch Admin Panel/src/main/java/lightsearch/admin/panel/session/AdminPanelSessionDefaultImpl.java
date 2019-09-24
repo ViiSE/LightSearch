@@ -15,10 +15,11 @@
  */
 package lightsearch.admin.panel.session;
 
-import java.util.function.Function;
 import lightsearch.admin.panel.data.AdminPanelDTO;
 import lightsearch.admin.panel.data.AdminPanelSessionDTO;
 import lightsearch.admin.panel.exception.ScannerException;
+
+import java.util.function.Function;
 
 /**
  *

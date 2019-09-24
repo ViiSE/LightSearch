@@ -15,10 +15,9 @@
  */
 package lightsearch.admin.panel.print;
 
-import lightsearch.admin.panel.print.AdminPanelPrinterInit;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import lightsearch.admin.panel.print.AdminPanelPrinter;
+
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 

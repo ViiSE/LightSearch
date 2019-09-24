@@ -15,16 +15,17 @@
  */
 package lightsearch.admin.panel.cmd.admin.processor;
 
-import java.util.function.Function;
 import lightsearch.admin.panel.cmd.message.MessageCommandEnum;
 import lightsearch.admin.panel.cmd.message.MessageCommandResultEnum;
 import lightsearch.admin.panel.cmd.result.CommandResult;
+import lightsearch.admin.panel.data.AdminCommandDAO;
+import lightsearch.admin.panel.data.AdminCommandDAOInit;
 import lightsearch.admin.panel.data.AdminDTO;
 import lightsearch.admin.panel.data.AdminPanelDTO;
 import lightsearch.admin.panel.exception.ScannerException;
 import lightsearch.admin.panel.scanner.ScannerRegistration;
-import lightsearch.admin.panel.data.AdminCommandDAO;
-import lightsearch.admin.panel.data.AdminCommandDAOInit;
+
+import java.util.function.Function;
 
 /**
  *

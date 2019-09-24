@@ -15,18 +15,16 @@
  */
 package lightsearch.admin.panel.data;
 
-import java.util.Scanner;
-import lightsearch.admin.panel.data.ScannerConnectionDTO;
-import lightsearch.admin.panel.data.ScannerConnectionDTOInit;
 import lightsearch.admin.panel.validate.IPValidator;
 import lightsearch.admin.panel.validate.IPValidatorInit;
 import lightsearch.admin.panel.validate.PortValidator;
 import lightsearch.admin.panel.validate.PortValidatorInit;
-import static org.testng.Assert.*;
-
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
+import java.util.Scanner;
+
+import static org.testng.Assert.assertNotNull;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 

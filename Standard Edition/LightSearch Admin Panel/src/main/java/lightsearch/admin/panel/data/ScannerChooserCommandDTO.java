@@ -15,8 +15,9 @@
  */
 package lightsearch.admin.panel.data;
 
-import java.util.Scanner;
 import lightsearch.admin.panel.validate.CommandValidator;
+
+import java.util.Scanner;
 
 /**
  *

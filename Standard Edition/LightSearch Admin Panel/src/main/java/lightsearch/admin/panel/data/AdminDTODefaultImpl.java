@@ -15,11 +15,12 @@
  */
 package lightsearch.admin.panel.data;
 
+import lightsearch.admin.panel.cmd.result.CommandResult;
+import lightsearch.admin.panel.print.AdminPanelPrinter;
+
 import java.net.Socket;
 import java.util.Map;
 import java.util.function.Function;
-import lightsearch.admin.panel.cmd.result.CommandResult;
-import lightsearch.admin.panel.print.AdminPanelPrinter;
 
 /**
  *

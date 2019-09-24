@@ -15,24 +15,14 @@
  */
 package lightsearch.admin.panel.cmd.admin;
 
-import lightsearch.admin.panel.cmd.admin.processor.ExitAdminPanelProcessor;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Function;
-import lightsearch.admin.panel.cmd.admin.processor.AddBlacklistProcessor;
-import lightsearch.admin.panel.cmd.admin.processor.AuthenticationProcessor;
-import lightsearch.admin.panel.cmd.admin.processor.BlacklistRequestProcessor;
-import lightsearch.admin.panel.cmd.admin.processor.ChangeDatabaseProcessor;
-import lightsearch.admin.panel.cmd.admin.processor.ClientKickProcessor;
-import lightsearch.admin.panel.cmd.admin.processor.ClientListRequestProcessor;
-import lightsearch.admin.panel.cmd.admin.processor.CreateAdminProcessor;
-import lightsearch.admin.panel.cmd.admin.processor.DelBlacklistProcessor;
-import lightsearch.admin.panel.cmd.admin.processor.RestartProcessor;
-import lightsearch.admin.panel.cmd.admin.processor.TimeoutClientProcessor;
-import lightsearch.admin.panel.cmd.admin.processor.TimeoutServerProcessor;
+import lightsearch.admin.panel.cmd.admin.processor.*;
 import lightsearch.admin.panel.data.AdminDTO;
 import lightsearch.admin.panel.data.AdminPanelDTO;
 import lightsearch.admin.panel.util.MapRemover;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
 
 /**
  *

@@ -15,17 +15,11 @@
  */
 package lightsearch.admin.panel.cmd.admin;
 
-import lightsearch.admin.panel.cmd.admin.ScannerCommandHolder;
-import lightsearch.admin.panel.cmd.admin.ScannerCommandHolderCreator;
-import lightsearch.admin.panel.cmd.admin.ScannerCommandHolderCreatorInit;
-import lightsearch.admin.panel.scanner.ScannerClientValue;
-import lightsearch.admin.panel.scanner.ScannerDatabase;
-import lightsearch.admin.panel.scanner.ScannerRegistration;
-import lightsearch.admin.panel.scanner.ScannerRestart;
-import lightsearch.admin.panel.scanner.ScannerTimeout;
-import static org.testng.Assert.*;
+import lightsearch.admin.panel.scanner.*;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertNotNull;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 

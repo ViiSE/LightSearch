@@ -15,8 +15,9 @@
  */
 package lightsearch.admin.panel.cmd.admin.result;
 
-import java.util.Map;
 import org.json.simple.JSONArray;
+
+import java.util.Map;
 
 /**
  *

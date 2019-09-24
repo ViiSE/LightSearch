@@ -19,15 +19,11 @@ import lightsearch.admin.panel.data.ScannerClientValueDTO;
 import lightsearch.admin.panel.data.creator.ScannerClientValueDTOCreator;
 import lightsearch.admin.panel.data.creator.ScannerClientValueDTOCreatorInit;
 import lightsearch.admin.panel.exception.ScannerException;
-import lightsearch.admin.panel.scanner.ScannerClientValue;
-import lightsearch.admin.panel.scanner.ScannerClientValueInit;
-import static org.testng.Assert.*;
-import static test.message.TestMessage.*;
-
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertNotNull;
+import static test.message.TestMessage.*;
 
 /**
  *

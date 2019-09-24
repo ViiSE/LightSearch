@@ -15,12 +15,11 @@
  */
 package lightsearch.admin.panel.menu;
 
-import lightsearch.admin.panel.menu.AdminPanelMenuInit;
-import static org.testng.Assert.*;
-
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import lightsearch.admin.panel.menu.AdminPanelMenu;
+
+import static org.testng.Assert.assertNotEquals;
+import static org.testng.Assert.assertNotNull;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 

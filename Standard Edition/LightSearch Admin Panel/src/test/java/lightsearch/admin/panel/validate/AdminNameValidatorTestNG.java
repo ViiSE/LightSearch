@@ -16,13 +16,11 @@
 package lightsearch.admin.panel.validate;
 
 import lightsearch.admin.panel.exception.ValidatorException;
-import lightsearch.admin.panel.validate.AdminNameValidator;
-import lightsearch.admin.panel.validate.AdminNameValidatorInit;
-import static org.testng.Assert.*;
-import static test.message.TestMessage.*;
-
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertNotNull;
+import static test.message.TestMessage.*;
 
 /**
  *

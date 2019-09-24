@@ -15,10 +15,11 @@
  */
 package lightsearch.admin.panel.cmd.admin.result;
 
-import java.util.Map;
 import lightsearch.admin.panel.cmd.result.CommandResultEnum;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+import java.util.Map;
 
 /**
  *

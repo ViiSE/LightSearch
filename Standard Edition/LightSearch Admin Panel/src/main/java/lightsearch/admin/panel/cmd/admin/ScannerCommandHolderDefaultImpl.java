@@ -15,11 +15,7 @@
  */
 package lightsearch.admin.panel.cmd.admin;
 
-import lightsearch.admin.panel.scanner.ScannerDatabase;
-import lightsearch.admin.panel.scanner.ScannerRegistration;
-import lightsearch.admin.panel.scanner.ScannerRestart;
-import lightsearch.admin.panel.scanner.ScannerTimeout;
-import lightsearch.admin.panel.scanner.ScannerClientValue;
+import lightsearch.admin.panel.scanner.*;
 
 /**
  *

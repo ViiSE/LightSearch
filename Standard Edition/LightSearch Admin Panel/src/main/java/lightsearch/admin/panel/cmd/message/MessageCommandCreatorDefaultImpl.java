@@ -15,23 +15,14 @@
  */
 package lightsearch.admin.panel.cmd.message;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Function;
-import lightsearch.admin.panel.cmd.message.processor.AddBlacklistMessageProcessor;
-import lightsearch.admin.panel.cmd.message.processor.AuthenticationMessageProcessor;
-import lightsearch.admin.panel.cmd.message.processor.BlacklistMessageProcessor;
-import lightsearch.admin.panel.cmd.message.processor.ChangeDatabaseMessageProcessor;
-import lightsearch.admin.panel.cmd.message.processor.ClientListMessageProcessor;
-import lightsearch.admin.panel.cmd.message.processor.CreateAdminMessageProcessor;
-import lightsearch.admin.panel.cmd.message.processor.DelBlacklistMessageProcessor;
-import lightsearch.admin.panel.cmd.message.processor.KickMessageProcessor;
-import lightsearch.admin.panel.cmd.message.processor.RestartMessageProcessor;
-import lightsearch.admin.panel.cmd.message.processor.TimeoutClientMessageProcessor;
-import lightsearch.admin.panel.cmd.message.processor.TimeoutServerMessageProcessor;
+import lightsearch.admin.panel.cmd.message.processor.*;
 import lightsearch.admin.panel.cmd.result.CommandResult;
 import lightsearch.admin.panel.data.AdminCommandDAO;
 import lightsearch.admin.panel.data.MessageCommandDTO;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
 
 /**
  *

@@ -15,9 +15,10 @@
  */
 package lightsearch.admin.panel.data;
 
-import java.util.Scanner;
 import lightsearch.admin.panel.validate.IMEIValidator;
 import lightsearch.admin.panel.validate.NumberValidator;
+
+import java.util.Scanner;
 
 /**
  *

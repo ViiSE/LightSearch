@@ -15,7 +15,8 @@
  */
 package lightsearch.admin.panel.data.stream;
 
-import java.io.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 /**
  *
  * @author ViiSE

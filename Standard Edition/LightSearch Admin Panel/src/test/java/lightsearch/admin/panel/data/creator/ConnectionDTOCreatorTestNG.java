@@ -17,18 +17,13 @@ package lightsearch.admin.panel.data.creator;
 
 import lightsearch.admin.panel.data.ConnectionDTO;
 import lightsearch.admin.panel.data.ScannerConnectionDTO;
-import lightsearch.admin.panel.data.creator.ConnectionDTOCreator;
-import lightsearch.admin.panel.data.creator.ConnectionDTOCreatorInit;
-import lightsearch.admin.panel.data.creator.ScannerConnectionDTOCreator;
-import lightsearch.admin.panel.data.creator.ScannerConnectionDTOCreatorInit;
 import lightsearch.admin.panel.print.AdminPanelPrinter;
 import lightsearch.admin.panel.print.AdminPanelPrinterInit;
-import static org.testng.Assert.*;
-
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertNotNull;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 

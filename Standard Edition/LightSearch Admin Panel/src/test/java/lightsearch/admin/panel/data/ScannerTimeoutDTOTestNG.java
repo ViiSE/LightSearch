@@ -15,14 +15,11 @@
  */
 package lightsearch.admin.panel.data;
 
-import lightsearch.admin.panel.data.ScannerTimeoutDTO;
-import lightsearch.admin.panel.data.creator.ScannerTimeoutDTOCreator;
 import lightsearch.admin.panel.data.creator.ScannerTimeoutDTOCreatorInit;
-import static org.testng.Assert.*;
-
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertNotNull;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 

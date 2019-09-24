@@ -16,8 +16,6 @@
 package lightsearch.admin.panel.validate;
 
 import lightsearch.admin.panel.exception.ValidatorException;
-import lightsearch.admin.panel.validate.PortValidator;
-import lightsearch.admin.panel.validate.PortValidatorInit;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 

@@ -15,12 +15,11 @@
  */
 package lightsearch.admin.panel.message.type;
 
-import lightsearch.admin.panel.message.type.MessageTimeoutClient;
-import lightsearch.admin.panel.message.type.MessageTimeoutClientInit;
-import static org.testng.Assert.*;
-
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 

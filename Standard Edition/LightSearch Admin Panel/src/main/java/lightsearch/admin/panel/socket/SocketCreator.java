@@ -15,8 +15,9 @@
  */
 package lightsearch.admin.panel.socket;
 
-import java.net.Socket;
 import lightsearch.admin.panel.exception.SocketException;
+
+import java.net.Socket;
 
 /**
  *

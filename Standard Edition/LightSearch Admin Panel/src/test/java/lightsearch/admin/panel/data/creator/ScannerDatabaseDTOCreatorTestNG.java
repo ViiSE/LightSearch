@@ -16,10 +16,9 @@
 package lightsearch.admin.panel.data.creator;
 
 import lightsearch.admin.panel.data.ScannerDatabaseDTO;
-import lightsearch.admin.panel.data.creator.ScannerDatabaseDTOCreator;
-import lightsearch.admin.panel.data.creator.ScannerDatabaseDTOCreatorInit;
-import static org.testng.Assert.*;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertNotNull;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 

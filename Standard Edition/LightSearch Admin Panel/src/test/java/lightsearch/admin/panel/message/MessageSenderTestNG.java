@@ -15,15 +15,17 @@
  */
 package lightsearch.admin.panel.message;
 
-import test.TestServer;
 import lightsearch.admin.panel.data.stream.DataStream;
 import lightsearch.admin.panel.exception.MessageSenderException;
-
-import static org.testng.Assert.*;
-import static test.message.TestMessage.*;
-
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import test.TestServer;
 import test.data.DataProviderCreator;
+
+import static org.testng.Assert.assertNotNull;
+import static test.message.TestMessage.*;
 
 /**
  *

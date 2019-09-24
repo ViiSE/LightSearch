@@ -15,11 +15,12 @@
  */
 package lightsearch.admin.panel.data;
 
-import java.util.Map;
-import java.util.function.Function;
 import lightsearch.admin.panel.menu.AdminPanelMenu;
 import lightsearch.admin.panel.print.AdminPanelPrinter;
 import lightsearch.admin.panel.scanner.ScannerChooserCommand;
+
+import java.util.Map;
+import java.util.function.Function;
 
 /**
  *

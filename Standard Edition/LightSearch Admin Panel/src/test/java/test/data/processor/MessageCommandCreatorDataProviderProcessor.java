@@ -1,12 +1,8 @@
 package test.data.processor;
 
 import lightsearch.admin.panel.cmd.message.MessageCommandCreatorInit;
-import lightsearch.admin.panel.data.*;
+import lightsearch.admin.panel.data.MessageCommandDTO;
 import test.data.DataProviderCreator;
-
-import java.net.Socket;
-
-import static test.message.TestMessage.catchMessage;
 
 public class MessageCommandCreatorDataProviderProcessor implements DataProviderProcessor {
 

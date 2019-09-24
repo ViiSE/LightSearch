@@ -15,9 +15,10 @@
  */
 package lightsearch.admin.panel.cmd.admin.processor;
 
-import java.util.function.Function;
 import lightsearch.admin.panel.data.AdminDTO;
 import lightsearch.admin.panel.data.AdminPanelDTO;
+
+import java.util.function.Function;
 
 /**
  *

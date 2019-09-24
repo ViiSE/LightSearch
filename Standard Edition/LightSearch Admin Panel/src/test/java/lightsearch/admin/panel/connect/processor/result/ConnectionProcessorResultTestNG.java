@@ -15,9 +15,9 @@
  */
 package lightsearch.admin.panel.connect.processor.result;
 
-import test.TestServer;
 import lightsearch.admin.panel.connect.processor.ConnectionProcessor;
 import org.testng.annotations.*;
+import test.TestServer;
 import test.data.DataProviderCreator;
 
 import static org.testng.Assert.assertFalse;

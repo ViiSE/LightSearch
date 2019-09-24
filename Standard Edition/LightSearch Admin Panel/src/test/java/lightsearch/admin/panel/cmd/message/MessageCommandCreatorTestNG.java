@@ -15,13 +15,11 @@
  */
 package lightsearch.admin.panel.cmd.message;
 
-import test.TestServer;
-
-import static org.testng.Assert.*;
-
 import org.testng.annotations.*;
+import test.TestServer;
 import test.data.DataProviderCreator;
 
+import static org.testng.Assert.assertNotNull;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 

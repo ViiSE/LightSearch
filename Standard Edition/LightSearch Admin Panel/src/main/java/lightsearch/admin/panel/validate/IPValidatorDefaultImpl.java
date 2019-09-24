@@ -15,9 +15,10 @@
  */
 package lightsearch.admin.panel.validate;
 
+import lightsearch.admin.panel.exception.ValidatorException;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import lightsearch.admin.panel.exception.ValidatorException;
 
 /**
  *

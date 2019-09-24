@@ -1,12 +1,12 @@
 package test.data.processor;
 
-import lightsearch.admin.panel.cmd.admin.AdminCommandCreator;
 import lightsearch.admin.panel.cmd.admin.AdminCommandCreatorInit;
 import lightsearch.admin.panel.cmd.message.MessageCommandCreator;
 import lightsearch.admin.panel.cmd.message.MessageCommandCreatorInit;
 import lightsearch.admin.panel.cmd.result.CommandResult;
 import lightsearch.admin.panel.data.*;
-import lightsearch.admin.panel.data.creator.*;
+import lightsearch.admin.panel.data.creator.ConnectionDTOCreator;
+import lightsearch.admin.panel.data.creator.ConnectionDTOCreatorInit;
 import lightsearch.admin.panel.data.stream.DataStream;
 import lightsearch.admin.panel.data.stream.DataStreamCreator;
 import lightsearch.admin.panel.data.stream.DataStreamCreatorInit;

@@ -15,10 +15,11 @@
  */
 package lightsearch.admin.panel.cmd.message;
 
-import java.util.Map;
-import java.util.function.Function;
 import lightsearch.admin.panel.cmd.result.CommandResult;
 import lightsearch.admin.panel.data.AdminCommandDAO;
+
+import java.util.Map;
+import java.util.function.Function;
 
 /**
  *

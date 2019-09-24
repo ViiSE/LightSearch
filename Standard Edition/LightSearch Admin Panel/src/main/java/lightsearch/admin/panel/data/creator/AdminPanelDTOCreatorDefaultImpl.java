@@ -15,10 +15,11 @@
  */
 package lightsearch.admin.panel.data.creator;
 
-import java.util.HashMap;
-import java.util.Map;
 import lightsearch.admin.panel.data.AdminPanelDTO;
 import lightsearch.admin.panel.data.AdminPanelDTOInit;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *

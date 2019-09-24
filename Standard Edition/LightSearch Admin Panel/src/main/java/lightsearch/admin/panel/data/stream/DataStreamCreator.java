@@ -15,9 +15,10 @@
  */
 package lightsearch.admin.panel.data.stream;
 
+import lightsearch.admin.panel.exception.DataStreamCreatorException;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import lightsearch.admin.panel.exception.DataStreamCreatorException;
 
 /**
  *

@@ -15,26 +15,19 @@
  */
 package lightsearch.admin.panel.socket;
 
-import java.io.IOException;
-import java.net.Socket;
+import lightsearch.admin.panel.data.ConnectionDTO;
 import lightsearch.admin.panel.data.creator.ConnectionDTOCreator;
 import lightsearch.admin.panel.data.creator.ConnectionDTOCreatorInit;
-import lightsearch.admin.panel.data.ConnectionDTO;
-import lightsearch.admin.panel.data.ScannerConnectionDTO;
-import lightsearch.admin.panel.data.creator.ScannerConnectionDTOCreator;
-import lightsearch.admin.panel.data.creator.ScannerConnectionDTOCreatorInit;
 import lightsearch.admin.panel.exception.SocketException;
-import lightsearch.admin.panel.print.AdminPanelPrinter;
-import lightsearch.admin.panel.print.AdminPanelPrinterInit;
-import lightsearch.admin.panel.socket.SocketCreator;
-import lightsearch.admin.panel.socket.SocketCreatorInit;
-import static org.testng.Assert.*;
-import static test.message.TestMessage.*;
-
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import java.io.IOException;
+import java.net.Socket;
+
+import static org.testng.Assert.assertNotNull;
+import static test.message.TestMessage.*;
 
 /**
  *

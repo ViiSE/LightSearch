@@ -18,8 +18,6 @@ package lightsearch.admin.panel.cmd.admin.processor.test;
 import lightsearch.admin.panel.cmd.admin.processor.AbstractProcessorAdmin;
 import lightsearch.admin.panel.data.AdminDTO;
 import lightsearch.admin.panel.data.AdminPanelDTO;
-import lightsearch.admin.panel.exception.ScannerException;
-import lightsearch.admin.panel.scanner.ScannerRestart;
 
 import java.io.IOException;
 

@@ -1,8 +1,6 @@
 package test.data.processor;
 
-import lightsearch.admin.panel.cmd.message.MessageCommandCreatorInit;
 import lightsearch.admin.panel.data.ConnectionDTO;
-import lightsearch.admin.panel.data.MessageCommandDTO;
 import lightsearch.admin.panel.data.MessageCommandDTOInit;
 import lightsearch.admin.panel.data.creator.ConnectionDTOCreator;
 import lightsearch.admin.panel.data.creator.ConnectionDTOCreatorInit;
@@ -16,8 +14,6 @@ import lightsearch.admin.panel.message.MessageRecipient;
 import lightsearch.admin.panel.message.MessageRecipientInit;
 import lightsearch.admin.panel.message.MessageSender;
 import lightsearch.admin.panel.message.MessageSenderInit;
-import lightsearch.admin.panel.print.AdminPanelPrinter;
-import lightsearch.admin.panel.print.AdminPanelPrinterInit;
 import lightsearch.admin.panel.socket.SocketCreator;
 import lightsearch.admin.panel.socket.SocketCreatorInit;
 

@@ -15,12 +15,10 @@
  */
 package lightsearch.admin.panel.data;
 
-import lightsearch.admin.panel.data.AdminDAO;
-import lightsearch.admin.panel.data.AdminDAOInit;
-import static org.testng.Assert.*;
-
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertNotNull;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 

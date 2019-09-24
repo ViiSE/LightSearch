@@ -1,32 +1,17 @@
 package test.data.processor;
 
-import lightsearch.admin.panel.cmd.admin.AdminCommandCreatorInit;
-import lightsearch.admin.panel.cmd.message.MessageCommandCreator;
-import lightsearch.admin.panel.cmd.message.MessageCommandCreatorInit;
-import lightsearch.admin.panel.cmd.result.CommandResult;
-import lightsearch.admin.panel.data.*;
+import lightsearch.admin.panel.data.ConnectionDTO;
 import lightsearch.admin.panel.data.creator.ConnectionDTOCreator;
 import lightsearch.admin.panel.data.creator.ConnectionDTOCreatorInit;
-import lightsearch.admin.panel.data.stream.DataStream;
 import lightsearch.admin.panel.data.stream.DataStreamCreator;
 import lightsearch.admin.panel.data.stream.DataStreamCreatorInit;
 import lightsearch.admin.panel.data.stream.DataStreamInit;
 import lightsearch.admin.panel.exception.DataStreamCreatorException;
 import lightsearch.admin.panel.exception.SocketException;
-import lightsearch.admin.panel.message.MessageRecipient;
-import lightsearch.admin.panel.message.MessageRecipientInit;
-import lightsearch.admin.panel.message.MessageSender;
-import lightsearch.admin.panel.message.MessageSenderInit;
-import lightsearch.admin.panel.print.AdminPanelPrinter;
-import lightsearch.admin.panel.print.AdminPanelPrinterInit;
 import lightsearch.admin.panel.socket.SocketCreator;
 import lightsearch.admin.panel.socket.SocketCreatorInit;
-import lightsearch.admin.panel.util.MapRemover;
-import lightsearch.admin.panel.util.MapRemoverInit;
 
 import java.net.Socket;
-import java.util.Map;
-import java.util.function.Function;
 
 import static test.message.TestMessage.catchMessage;
 

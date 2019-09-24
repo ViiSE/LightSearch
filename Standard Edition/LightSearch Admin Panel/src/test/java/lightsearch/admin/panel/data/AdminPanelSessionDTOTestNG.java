@@ -15,21 +15,6 @@
  */
 package lightsearch.admin.panel.data;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Function;
-import lightsearch.admin.panel.data.AdminPanelDTO;
-import lightsearch.admin.panel.data.AdminPanelDTOInit;
-import lightsearch.admin.panel.data.AdminPanelSessionDTOInit;
-import static org.testng.Assert.*;
-
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
-import static test.message.TestMessage.testBegin;
-import static test.message.TestMessage.testEnd;
-import lightsearch.admin.panel.data.AdminPanelSessionDTO;
-import lightsearch.admin.panel.data.ScannerChooserCommandDTO;
 import lightsearch.admin.panel.data.creator.ScannerChooserCommandDTOCreator;
 import lightsearch.admin.panel.data.creator.ScannerChooserCommandDTOCreatorInit;
 import lightsearch.admin.panel.menu.AdminPanelMenu;
@@ -39,6 +24,16 @@ import lightsearch.admin.panel.print.AdminPanelPrinter;
 import lightsearch.admin.panel.print.AdminPanelPrinterInit;
 import lightsearch.admin.panel.scanner.ScannerChooserCommand;
 import lightsearch.admin.panel.scanner.ScannerChooserCommandInit;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+
+import static org.testng.Assert.assertNotNull;
+import static test.message.TestMessage.testBegin;
+import static test.message.TestMessage.testEnd;
 
 /**
  *

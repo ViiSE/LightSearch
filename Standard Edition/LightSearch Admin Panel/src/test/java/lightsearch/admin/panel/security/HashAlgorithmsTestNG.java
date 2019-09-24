@@ -15,12 +15,10 @@
  */
 package lightsearch.admin.panel.security;
 
-import lightsearch.admin.panel.security.HashAlgorithms;
-import lightsearch.admin.panel.security.HashAlgorithmsInit;
-import static org.testng.Assert.*;
-
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertNotNull;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 

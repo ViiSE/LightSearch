@@ -15,11 +15,12 @@
  */
 package lightsearch.admin.panel.cmd.admin.processor;
 
-import java.io.IOException;
 import lightsearch.admin.panel.data.AdminDTO;
 import lightsearch.admin.panel.data.AdminPanelDTO;
 import lightsearch.admin.panel.exception.ScannerException;
 import lightsearch.admin.panel.scanner.ScannerRestart;
+
+import java.io.IOException;
 
 /**
  *

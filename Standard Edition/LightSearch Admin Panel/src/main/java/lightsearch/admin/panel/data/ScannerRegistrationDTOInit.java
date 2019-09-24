@@ -15,9 +15,10 @@
  */
 package lightsearch.admin.panel.data;
 
-import java.util.Scanner;
 import lightsearch.admin.panel.security.HashAlgorithms;
 import lightsearch.admin.panel.validate.AdminNameValidator;
+
+import java.util.Scanner;
 
 /**
  *

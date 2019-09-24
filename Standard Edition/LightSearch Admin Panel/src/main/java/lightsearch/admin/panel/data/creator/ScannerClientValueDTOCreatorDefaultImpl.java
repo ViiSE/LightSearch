@@ -15,13 +15,14 @@
  */
 package lightsearch.admin.panel.data.creator;
 
-import java.util.Scanner;
 import lightsearch.admin.panel.data.ScannerClientValueDTO;
 import lightsearch.admin.panel.data.ScannerClientValueDTOInit;
 import lightsearch.admin.panel.validate.IMEIValidator;
 import lightsearch.admin.panel.validate.IMEIValidatorInit;
 import lightsearch.admin.panel.validate.NumberValidator;
 import lightsearch.admin.panel.validate.NumberValidatorInit;
+
+import java.util.Scanner;
 
 /**
  *

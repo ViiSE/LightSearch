@@ -15,9 +15,9 @@
  */
 package lightsearch.admin.panel.scanner;
 
+import lightsearch.admin.panel.data.ScannerClientValueDTO;
 import lightsearch.admin.panel.exception.ScannerException;
 import lightsearch.admin.panel.exception.ValidatorException;
-import lightsearch.admin.panel.data.ScannerClientValueDTO;
 
 /**
  *

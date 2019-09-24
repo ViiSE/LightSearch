@@ -16,13 +16,12 @@
 package lightsearch.admin.panel.message.parser;
 
 import lightsearch.admin.panel.exception.MessageParserException;
-import lightsearch.admin.panel.message.parser.MessageParser;
-import lightsearch.admin.panel.message.parser.MessageParserInit;
-import static org.testng.Assert.*;
-import static test.message.TestMessage.*;
-
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
+import static test.message.TestMessage.*;
 
 /**
  *

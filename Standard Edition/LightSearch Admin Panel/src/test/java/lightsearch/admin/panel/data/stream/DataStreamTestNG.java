@@ -15,17 +15,17 @@
  */
 package lightsearch.admin.panel.data.stream;
 
+import lightsearch.admin.panel.exception.DataStreamCreatorException;
+import org.testng.annotations.*;
+import test.TestServer;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-import test.TestServer;
-import lightsearch.admin.panel.exception.DataStreamCreatorException;
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertNotNull;
 import static test.message.TestMessage.*;
-
-import org.testng.annotations.*;
 
 /**
  *

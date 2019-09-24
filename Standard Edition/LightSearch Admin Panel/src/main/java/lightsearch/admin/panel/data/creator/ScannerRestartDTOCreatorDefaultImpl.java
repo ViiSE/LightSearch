@@ -15,11 +15,12 @@
  */
 package lightsearch.admin.panel.data.creator;
 
-import java.util.Scanner;
 import lightsearch.admin.panel.data.ScannerRestartDTO;
 import lightsearch.admin.panel.data.ScannerRestartDTOInit;
 import lightsearch.admin.panel.validate.RestartValidator;
 import lightsearch.admin.panel.validate.RestartValidatorInit;
+
+import java.util.Scanner;
 
 /**
  *
