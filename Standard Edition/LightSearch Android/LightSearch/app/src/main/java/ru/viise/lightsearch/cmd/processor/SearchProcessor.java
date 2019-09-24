@@ -59,14 +59,12 @@ public class SearchProcessor implements Function<CommandDTO, CommandResult> {
             CommandResultCreator cmdResCr;
             if(cmdSearchDTO instanceof CommandSearchSoftCheckDTO) {
                 cmdResCr = CommandResultCreatorInit.commandResultSearchSoftCheckCreator(rawMessage, IMEI);
-            }
-            else {
+            } else {
                 String subdivision = cmdSearchDTO.subdivision();
                 cmdResCr = CommandResultCreatorInit.commandResultSearchCreator(rawMessage, IMEI, subdivision);
             }
             return cmdResCr.createCommandResult();
-        }
-        catch (CommandResultCreatorException | MessageSenderException | MessageRecipientException ex) {
+        } catch (CommandResultCreatorException | MessageSenderException | MessageRecipientException ex) {
             return errorCommandResult(ex.getMessageRU(), commandDTO);
         }
     }

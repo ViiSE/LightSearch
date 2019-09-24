@@ -111,8 +111,7 @@ public class SoftCheckFragment extends Fragment implements ISoftCheckFragment {
             if(barcode.length() < 5) {
                 Toast t = Toast.makeText(this.getActivity().getApplicationContext(), R.string.toast_barcode_not_enough_symbols, Toast.LENGTH_LONG);
                 t.show();
-            }
-            else
+            } else
                 setSoftCheckBarcode(barcode);
 
             editTextSearch.clearFocus();
@@ -136,8 +135,7 @@ public class SoftCheckFragment extends Fragment implements ISoftCheckFragment {
             if(adapter.getItemCount() == 0) {
                 Toast t = Toast.makeText(this.getActivity().getApplicationContext(), R.string.toast_empty_soft_check, Toast.LENGTH_LONG);
                 t.show();
-            }
-            else {
+            } else {
                 SharedPreferences sPref = this.getActivity().getSharedPreferences(PREF, Context.MODE_PRIVATE);
                 PreferencesManager prefManager = PreferencesManagerInit.preferencesManager(sPref);
                 CommandConfirmSoftCheckRecordsDTO cmdConSCResDTO =

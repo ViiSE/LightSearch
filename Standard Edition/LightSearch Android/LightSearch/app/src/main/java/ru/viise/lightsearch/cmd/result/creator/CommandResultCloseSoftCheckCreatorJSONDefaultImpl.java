@@ -59,8 +59,7 @@ public class CommandResultCloseSoftCheckCreatorJSONDefaultImpl implements Comman
 
             return CloseSoftCheckCommandResultInit.closeSoftCheckCommandResult(isDone, message,
                         null);
-        }
-        catch(MessageParserException | NullPointerException ex) {
+        } catch(MessageParserException | NullPointerException ex) {
             throw new CommandResultCreatorException(ex.getMessage());
         }
     }

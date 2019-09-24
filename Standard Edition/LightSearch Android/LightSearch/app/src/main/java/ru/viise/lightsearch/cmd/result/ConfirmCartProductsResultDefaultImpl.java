@@ -28,8 +28,8 @@ public class ConfirmCartProductsResultDefaultImpl implements ConfirmCartProducts
     private final List<SoftCheckRecord> cartRecords;
     private final ReconnectDTO reconnectDTO;
 
-    public ConfirmCartProductsResultDefaultImpl(boolean isDone, String message,
-                                                List<SoftCheckRecord> cartRecords, ReconnectDTO reconnectDTO) {
+    public ConfirmCartProductsResultDefaultImpl(
+            boolean isDone, String message, List<SoftCheckRecord> cartRecords, ReconnectDTO reconnectDTO) {
         this.isDone = isDone;
         this.message = message;
         this.cartRecords = cartRecords;

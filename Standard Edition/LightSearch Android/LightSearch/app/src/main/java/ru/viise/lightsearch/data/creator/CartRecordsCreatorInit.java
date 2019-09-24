@@ -22,8 +22,8 @@ import ru.viise.lightsearch.data.SoftCheckRecord;
 
 public class CartRecordsCreatorInit {
 
-    public static CartRecordsCreator cartRecordsCreator(List<SoftCheckRecord> softCheckRecords,
-                        Object data) {
+    public static CartRecordsCreator cartRecordsCreator(
+            List<SoftCheckRecord> softCheckRecords, Object data) {
         return new CartRecordsCreatorJSONDefaultImpl(softCheckRecords, data);
     }
 }

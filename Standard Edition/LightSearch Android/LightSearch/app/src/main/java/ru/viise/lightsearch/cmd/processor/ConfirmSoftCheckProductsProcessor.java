@@ -62,17 +62,14 @@ public class ConfirmSoftCheckProductsProcessor implements Function<CommandDTO, C
             if(cmdConSCRecDTO instanceof CommandConfirmCartRecordsDTO) {
                 cmdResCr = CommandResultCreatorInit.commandResultConfirmCartProductsCreator(
                         rawMessage, IMEI, cmdConSCRecDTO.softCheckRecords());
-            }
-            else {
+            } else {
                 cmdResCr = CommandResultCreatorInit.commandResultConfirmSoftCheckProductsCreator(
                         rawMessage, IMEI, cmdConSCRecDTO.softCheckRecords());
             }
             return cmdResCr.createCommandResult();
-        }
-        catch(CommandResultCreatorException ex) {
+        } catch(CommandResultCreatorException ex) {
             return errorCommandResult(ex.getMessageRU(), cmdConSCRecDTO);
-        }
-        catch(MessageSenderException | MessageRecipientException ex) {
+        } catch(MessageSenderException | MessageRecipientException ex) {
             return errorCommandResult(ex.getMessageRU(), cmdConSCRecDTO);
         }
     }

@@ -48,16 +48,14 @@ public class OpenSoftCheckResultUIProcessor implements Function<CommandResult, V
 
             if(containerFragment != null)
                 containerFragment.switchToSoftCheckFragment();
-        }
-        else if(openSCCmdRes.isReconnect()) {
+        } else if(openSCCmdRes.isReconnect()) {
             SharedPreferences sPref = activity.getSharedPreferences("pref", Context.MODE_PRIVATE);
             PreferencesManager prefManager = PreferencesManagerInit.preferencesManager(sPref);
             String ip = prefManager.load(PreferencesManagerType.HOST_MANAGER);
             String port = prefManager.load(PreferencesManagerType.PORT_MANAGER);
             ConnectionDTO connDTO = ConnectionDTOInit.connectionDTO(ip, port);
             activity.reconnect(connDTO, openSCCmdRes.reconnectDTO());
-        }
-        else {
+        } else {
             activity.callDialogError(openSCCmdRes.message());
             IContainerFragment containerFragment = activity.getContainerFragment();
 

@@ -51,8 +51,7 @@ public class CartRecordDefaultImpl implements CartRecord {
         if(currentAmount <= this.newMaxAmount) {
             this.currentAmount = currentAmount;
             isConfirmed = true;
-        }
-        else {
+        } else {
             this.currentAmount = this.newMaxAmount;
             isConfirmed = false;
         }

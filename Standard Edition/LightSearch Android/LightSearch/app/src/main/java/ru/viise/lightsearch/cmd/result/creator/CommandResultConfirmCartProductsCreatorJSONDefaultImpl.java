@@ -69,8 +69,7 @@ public class CommandResultConfirmCartProductsCreatorJSONDefaultImpl implements C
 
             return ConfirmCartProductsResultInit.confirmCartProductsResult(isDone, null,
                     cartRecords, null);
-        }
-        catch(MessageParserException | NullPointerException ex) {
+        } catch(MessageParserException | NullPointerException ex) {
             throw new CommandResultCreatorException(ex.getMessage());
         }
     }

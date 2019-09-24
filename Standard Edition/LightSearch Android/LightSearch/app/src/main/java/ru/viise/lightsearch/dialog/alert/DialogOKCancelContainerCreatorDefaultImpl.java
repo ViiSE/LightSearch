@@ -38,6 +38,7 @@ public class DialogOKCancelContainerCreatorDefaultImpl implements DialogOKCancel
         Button buttonCancel = dialogView.findViewById(R.id.buttonCancelDialogOKCancel);
         TextView textViewTitle = dialogView.findViewById(R.id.textViewTitleDialogOKCancel);
         TextView textViewResult = dialogView.findViewById(R.id.textViewDialogOKCancel);
-        return DialogOKCancelContainerInit.dialogOKCancelContainer(dialogView, buttonOK, buttonCancel, textViewTitle, textViewResult);
+        return DialogOKCancelContainerInit.dialogOKCancelContainer(
+                dialogView, buttonOK, buttonCancel, textViewTitle, textViewResult);
     }
 }

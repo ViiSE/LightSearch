@@ -21,8 +21,8 @@ import ru.viise.lightsearch.data.SoftCheckRecord;
 
 public class SearchSoftCheckCommandResultInit {
 
-    public static SearchSoftCheckCommandResult searchSoftCheckCommandResult(boolean isDone,
-                                                                            String message, SoftCheckRecord record, ReconnectDTO reconnectDTO) {
+    public static SearchSoftCheckCommandResult searchSoftCheckCommandResult(
+            boolean isDone, String message, SoftCheckRecord record, ReconnectDTO reconnectDTO) {
         return new SearchSoftCheckCommandResultDefaultImpl(isDone, message, record, reconnectDTO);
     }
 }

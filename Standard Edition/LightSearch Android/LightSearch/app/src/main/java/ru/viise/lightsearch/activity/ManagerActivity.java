@@ -126,8 +126,7 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
             ImplFinder<OnBackPressedListener> finder = new ImplFinderFragmentFromActivityDefaultImpl<>(this);
             OnBackPressedListener backPressedListener = finder.findImpl(OnBackPressedListener.class);
             backPressedListener.onBackPressed();
-        }
-        catch(FindableException ex) { super.onBackPressed(); }
+        } catch(FindableException ex) { super.onBackPressed(); }
     }
 
     @Override
@@ -266,8 +265,7 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
                 ImplFinder<IAuthorizationFragment> finder = new ImplFinderFragmentFromActivityDefaultImpl<>(this);
                 IAuthorizationFragment authFragment = finder.findImpl(IAuthorizationFragment.class);
                 authDTO = authFragment.authorizationData();
-            }
-            catch(FindableException ignore) {
+            } catch(FindableException ignore) {
                 SharedPreferences sPref = this.getSharedPreferences("pref", Context.MODE_PRIVATE);
                 PreferencesManager prefManager = PreferencesManagerInit.preferencesManager(sPref);
                 authDTO = AuthorizationDTOInit.authorizationDTO(
@@ -292,8 +290,7 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
 
             CommandManagerAsyncTask cmdManagerAT = new CommandManagerAsyncTask(this, authDialog);
             cmdManagerAT.execute(cmdManagerATDTO);
-        }
-        else
+        } else
             callDialogError(message);
     }
 

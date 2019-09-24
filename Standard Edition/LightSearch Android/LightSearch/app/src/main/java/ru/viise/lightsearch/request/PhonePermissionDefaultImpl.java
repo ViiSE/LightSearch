@@ -39,8 +39,7 @@ public class PhonePermissionDefaultImpl implements PhonePermission {
             RequestPhonePermissionAlertDialogCreator reqPPADCr =
                     RequestPhonePermissionAlertDialogCreatorInit.requestPhonePermissionAlertDialogCreator(activity);
             reqPPADCr.createAlertDialog().show();
-        }
-        else
+        } else
             ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_EXTERNAL_STORAGE},
                     PHONE_STATE_CODE);
     }

@@ -69,8 +69,7 @@ public class SearchRecordsCreatorJSONDefaultImpl implements SearchRecordsCreator
             }
 
             return records;
-        }
-        catch (NullPointerException | IndexOutOfBoundsException ex) {
+        } catch (NullPointerException | IndexOutOfBoundsException ex) {
             return null;
         }
     }

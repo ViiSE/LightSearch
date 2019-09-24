@@ -24,8 +24,8 @@ import ru.viise.lightsearch.message.MessageSender;
  */
 public class ConnectionProcessorInit {
     
-    public static ConnectionProcessor connectionProcessor(MessageSender messageSender,
-                                                          MessageRecipient messageRecipient) {
+    public static ConnectionProcessor connectionProcessor(
+            MessageSender messageSender, MessageRecipient messageRecipient) {
         return new ConnectionProcessorDefaultImpl(messageSender, messageRecipient);
     }
 }

@@ -59,11 +59,9 @@ public class CloseSoftCheckProcessor implements Function<CommandDTO, CommandResu
             CommandResultCreator cmdResCr =
                     CommandResultCreatorInit.commandResultCloseSoftCheckCreator(rawMessage, IMEI);
             return cmdResCr.createCommandResult();
-        }
-        catch(CommandResultCreatorException ex) {
+        } catch(CommandResultCreatorException ex) {
             return errorCommandResult(ex.getMessageRU(), null);
-        }
-        catch (MessageSenderException | MessageRecipientException ex) {
+        } catch (MessageSenderException | MessageRecipientException ex) {
             ReconnectDTO recDTO = ReconnectDTOInit.reconnectDTO(cmdCloseSCDTO, CommandTypeEnum.CLOSE_SOFT_CHECK);
             return errorCommandResult(ex.getMessageRU(), recDTO);
         }
@@ -75,7 +73,6 @@ public class CloseSoftCheckProcessor implements Function<CommandDTO, CommandResu
                     CommandResultCreatorInit.commandResultCloseSoftCheckCreator(false,
                             reconnectDTO, message);
             return cmdResCr.createCommandResult();
-        }
-        catch(CommandResultCreatorException ignore) { return null; /* never happen */ }
+        } catch(CommandResultCreatorException ignore) { return null; /* never happen */ }
     }
 }

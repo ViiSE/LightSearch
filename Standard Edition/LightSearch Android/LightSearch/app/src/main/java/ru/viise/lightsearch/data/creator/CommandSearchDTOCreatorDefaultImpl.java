@@ -31,7 +31,8 @@ public class CommandSearchDTOCreatorDefaultImpl implements CommandSearchDTOCreat
     private String sklad;
     private String TK;
 
-    public CommandSearchDTOCreatorDefaultImpl(String barcode, SearchFragmentContentEnum subdivision, String sklad, String TK) {
+    public CommandSearchDTOCreatorDefaultImpl(
+            String barcode, SearchFragmentContentEnum subdivision, String sklad, String TK) {
         this.barcode = barcode;
         this.subdivision = subdivision;
         this.sklad = sklad;

@@ -65,8 +65,7 @@ public class CommandResultSearchSoftCheckCreatorJSONDefaultImpl implements Comma
 
             return SearchSoftCheckCommandResultInit.searchSoftCheckCommandResult(isDone, null,
                             record, null);
-        }
-        catch(MessageParserException | NullPointerException ex) {
+        } catch(MessageParserException | NullPointerException ex) {
             throw new CommandResultCreatorException(ex.getMessage());
         }
     }

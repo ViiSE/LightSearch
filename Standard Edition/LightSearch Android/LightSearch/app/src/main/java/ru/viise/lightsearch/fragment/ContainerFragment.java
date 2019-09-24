@@ -139,8 +139,7 @@ public class ContainerFragment extends Fragment implements OnBackPressedListener
                     ExitToAuthorizationAlertDialogCreatorInit.exitToAuthorizationAlertDialogCreator(
                             this.getActivity(), commandManager);
             exitTAADCr.createAlertDialog().show();
-        }
-        else if(onBackPressedListenerType == OnBackPressedListenerType.SOFT_CHECK_FRAGMENT) {
+        } else if(onBackPressedListenerType == OnBackPressedListenerType.SOFT_CHECK_FRAGMENT) {
             CancelSoftCheckAlertDialogCreator cancelSCADCr =
                     CancelSoftCheckAlertDialogCreatorInit.cancelSoftCheckAlertDialogCreator(
                             this, managerActivityHandler, queryDialog, commandManager);
@@ -164,8 +163,7 @@ public class ContainerFragment extends Fragment implements OnBackPressedListener
             ImplFinder<IOpenSoftCheckFragment> finder = new ImplFinderFragmentFromFragmentDefaultImpl<>(this);
             IOpenSoftCheckFragment openSoftCheckFragment = finder.findImpl(IOpenSoftCheckFragment.class);
             openSoftCheckFragment.setCardCode(cardCode);
-        }
-        catch(FindableException ignore) {}
+        } catch(FindableException ignore) {}
     }
 
     @Override

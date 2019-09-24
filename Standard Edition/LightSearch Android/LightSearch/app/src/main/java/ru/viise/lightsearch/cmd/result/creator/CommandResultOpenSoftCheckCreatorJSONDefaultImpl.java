@@ -58,8 +58,7 @@ public class CommandResultOpenSoftCheckCreatorJSONDefaultImpl implements Command
             String message = Objects.requireNonNull(objMsg.get(MESSAGE)).toString();
 
             return OpenSoftCheckCommandResultInit.openSoftCheckCommandResult(isDone, message, null);
-        }
-        catch(MessageParserException | NullPointerException ex) {
+        } catch(MessageParserException | NullPointerException ex) {
             throw new CommandResultCreatorException(ex.getMessage());
         }
     }

@@ -129,12 +129,10 @@ public class CartFragment extends Fragment implements ICartFragment, OnBackPress
             if(adapter.getItemCount() == 0) {
                 Toast t = Toast.makeText(this.getActivity().getApplicationContext(), R.string.toast_empty_cart, Toast.LENGTH_LONG);
                 t.show();
-            }
-            else if(spinnerDeliveryType.getSelectedItem().toString().equals(NO)) {
+            } else if(spinnerDeliveryType.getSelectedItem().toString().equals(NO)) {
                 Toast t = Toast.makeText(this.getActivity().getApplicationContext(), R.string.toast_delivery_not_chosen, Toast.LENGTH_LONG);
                 t.show();
-            }
-            else {
+            } else {
                 SharedPreferences sPref = this.getActivity().getSharedPreferences(PREF, Context.MODE_PRIVATE);
                 PreferencesManager prefManager = PreferencesManagerInit.preferencesManager(sPref);
                 CommandConfirmCartRecordsDTO cmdConCRecDTO =

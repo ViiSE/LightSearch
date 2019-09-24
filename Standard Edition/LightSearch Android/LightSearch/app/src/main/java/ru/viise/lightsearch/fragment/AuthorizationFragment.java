@@ -167,8 +167,7 @@ public class AuthorizationFragment extends Fragment implements IAuthorizationFra
                     Toast t = Toast.makeText(this.getActivity().getApplicationContext(),
                             R.string.toast_not_enough_auth_data, Toast.LENGTH_LONG);
                     t.show();
-                }
-                else {
+                } else {
                     prefManager.save(PreferencesManagerType.USERNAME_MANAGER, editTextUsername.getText().toString());
                     prefManager.save(PreferencesManagerType.PASS_MANAGER, editTextPassword.getText().toString());
                     prefManager.save(PreferencesManagerType.HOST_MANAGER, editTextHost.getText().toString());

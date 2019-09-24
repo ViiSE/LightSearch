@@ -70,8 +70,7 @@ public class CommandResultConfirmSoftCheckProductsCreatorJSONDefaultImpl impleme
 
             return ConfirmSoftCheckProductsResultInit.confirmSoftCheckProductsResult(isDone,
                         null, cartRecords, null);
-        }
-        catch(MessageParserException | NullPointerException ex) {
+        } catch(MessageParserException | NullPointerException ex) {
             throw new CommandResultCreatorException(ex.getMessage());
         }
     }

@@ -50,8 +50,7 @@ public class ConfirmSoftCheckProductsResultUIProcessor implements Function<Comma
             String port = prefManager.load(PreferencesManagerType.PORT_MANAGER);
             ConnectionDTO connDTO = ConnectionDTOInit.connectionDTO(ip, port);
             activity.reconnect(connDTO, conSCProdRes.reconnectDTO());
-        }
-        else
+        } else
             activity.callDialogError(conSCProdRes.message());
 
         return null;

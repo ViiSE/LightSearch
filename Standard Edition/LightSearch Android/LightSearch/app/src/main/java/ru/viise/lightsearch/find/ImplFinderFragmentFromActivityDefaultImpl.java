@@ -39,8 +39,7 @@ public class ImplFinderFragmentFromActivityDefaultImpl<T extends Findable> imple
             if(((Class<T>) type).isInstance(fragment)) {
                 try {
                     return ((Class<T>) type).cast(fragment);
-                }
-                catch(ClassCastException ex) {
+                } catch(ClassCastException ex) {
                     throw new FindableException(ex.getMessage());
                 }
             }

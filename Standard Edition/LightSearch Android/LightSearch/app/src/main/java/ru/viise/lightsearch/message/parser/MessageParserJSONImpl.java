@@ -31,8 +31,7 @@ public class MessageParserJSONImpl implements MessageParser {
         try {
             JSONParser parser = new JSONParser();
             return parser.parse(rawMessage);
-        }
-        catch (ParseException | NullPointerException | ClassCastException ex) {
+        } catch (ParseException | NullPointerException | ClassCastException ex) {
             throw new MessageParserException(ex.getMessage());
         }
     }

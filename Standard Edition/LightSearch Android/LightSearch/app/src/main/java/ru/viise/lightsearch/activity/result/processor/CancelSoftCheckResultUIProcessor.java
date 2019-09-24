@@ -55,8 +55,7 @@ public class CancelSoftCheckResultUIProcessor implements Function<CommandResult,
 
             if(containerFragment != null)
                 containerFragment.switchToOpenSoftCheckFragment();
-        }
-        else if(cancelSCCmdRes.isReconnect()) {
+        } else if(cancelSCCmdRes.isReconnect()) {
             SharedPreferences sPref = activity.getSharedPreferences("pref", Context.MODE_PRIVATE);
             PreferencesManager prefManager = PreferencesManagerInit.preferencesManager(sPref);
             String ip = prefManager.load(PreferencesManagerType.HOST_MANAGER);
@@ -64,8 +63,7 @@ public class CancelSoftCheckResultUIProcessor implements Function<CommandResult,
             ConnectionDTO connDTO = ConnectionDTOInit.connectionDTO(ip, port);
             ReconnectDTO recDTO = cancelSCCmdRes.reconnectDTO();
             activity.reconnect(connDTO, recDTO);
-        }
-        else
+        } else
             activity.callDialogError(cancelSCCmdRes.message());
 
         return null;

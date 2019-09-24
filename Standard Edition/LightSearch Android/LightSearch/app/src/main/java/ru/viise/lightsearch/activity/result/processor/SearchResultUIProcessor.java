@@ -55,16 +55,14 @@ public class SearchResultUIProcessor implements Function<CommandResult, Void> {
                     activity.doResultSearchFragmentTransaction(title, searchCmdRes.records());
             } else
                 activity.callDialogNoResult();
-        }
-        else if(searchCmdRes.isReconnect()) {
+        } else if(searchCmdRes.isReconnect()) {
             SharedPreferences sPref = activity.getSharedPreferences("pref", Context.MODE_PRIVATE);
             PreferencesManager prefManager = PreferencesManagerInit.preferencesManager(sPref);
             String ip = prefManager.load(PreferencesManagerType.HOST_MANAGER);
             String port = prefManager.load(PreferencesManagerType.PORT_MANAGER);
             ConnectionDTO connDTO = ConnectionDTOInit.connectionDTO(ip, port);
             activity.reconnect(connDTO, searchCmdRes.reconnectDTO());
-        }
-        else
+        } else
             activity.callDialogError(searchCmdRes.message());
 
         return null;

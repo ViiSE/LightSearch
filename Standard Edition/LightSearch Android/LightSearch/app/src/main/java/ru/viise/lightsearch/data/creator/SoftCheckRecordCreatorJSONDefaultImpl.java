@@ -63,8 +63,7 @@ public class SoftCheckRecordCreatorJSONDefaultImpl implements SoftCheckRecordCre
                 subdivisions.addSubdivision(subdivision);
             }
             return SoftCheckRecordInit.softCheckRecord(name, barcode, price, amountUnit, subdivisions);
-        }
-        catch (NullPointerException | IndexOutOfBoundsException ex) {
+        } catch (NullPointerException | IndexOutOfBoundsException ex) {
             return null;
         }
     }

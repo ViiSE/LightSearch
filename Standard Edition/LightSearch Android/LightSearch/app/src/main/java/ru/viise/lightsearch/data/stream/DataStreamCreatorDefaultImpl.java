@@ -41,8 +41,7 @@ public class DataStreamCreatorDefaultImpl implements DataStreamCreator {
         try {
             dataOutputStream  = new DataOutputStream(this.clientSocket.getOutputStream());
             dataInputStream   = new DataInputStream(this.clientSocket.getInputStream());
-        }
-        catch(IOException ex) {
+        } catch(IOException ex) {
             throw new DataStreamCreatorException(ex.getMessage());
         }
     }

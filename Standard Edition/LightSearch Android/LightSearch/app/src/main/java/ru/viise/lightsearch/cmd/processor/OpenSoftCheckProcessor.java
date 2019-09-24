@@ -58,11 +58,9 @@ public class OpenSoftCheckProcessor implements Function<CommandDTO, CommandResul
             CommandResultCreator cmdResCr =
                     CommandResultCreatorInit.commandResultOpenSoftCheckCreator(rawMessage, IMEI);
             return cmdResCr.createCommandResult();
-        }
-        catch(CommandResultCreatorException ex) {
+        } catch(CommandResultCreatorException ex) {
             return errorCommandResult(ex.getMessageRU(), null);
-        }
-        catch(MessageSenderException | MessageRecipientException ex) {
+        } catch(MessageSenderException | MessageRecipientException ex) {
             ReconnectDTO recDTO = ReconnectDTOInit.reconnectDTO(cmdOSCDTO, CommandTypeEnum.OPEN_SOFT_CHECK);
             return errorCommandResult(ex.getMessageRU(), recDTO);
         }
@@ -74,7 +72,6 @@ public class OpenSoftCheckProcessor implements Function<CommandDTO, CommandResul
                     CommandResultCreatorInit.commandResultOpenSoftCheckCreator(false, message,
                             reconnectDTO);
             return cmdResCr.createCommandResult();
-        }
-        catch(CommandResultCreatorException ignore) { return null; /* never happen*/ }
+        } catch(CommandResultCreatorException ignore) { return null; /* never happen*/ }
     }
 }

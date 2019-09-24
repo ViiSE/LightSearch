@@ -61,8 +61,7 @@ public class CommandResultReconnectCreatorJSONDefaultImpl implements CommandResu
             String message = Objects.requireNonNull(objMsg.get(MESSAGE)).toString();
 
             return ReconnectCommandResultInit.reconnectCommandResult(isDone, message, reconnectDTO);
-        }
-        catch(MessageParserException | NullPointerException ex) {
+        } catch(MessageParserException | NullPointerException ex) {
             throw new CommandResultCreatorException(ex.getMessage());
         }
     }

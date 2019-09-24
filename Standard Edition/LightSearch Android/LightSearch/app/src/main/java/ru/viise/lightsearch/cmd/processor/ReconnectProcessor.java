@@ -56,8 +56,7 @@ public class ReconnectProcessor implements Function<CommandDTO, CommandResult> {
             CommandResultCreator cmdResCr =
                     CommandResultCreatorInit.commandResultReconnectCreator(rawMessage, IMEI, cmdAuthDTO.reconnectDTO());
             return cmdResCr.createCommandResult();
-        }
-        catch(CommandResultCreatorException | MessageSenderException | MessageRecipientException ex) {
+        } catch(CommandResultCreatorException | MessageSenderException | MessageRecipientException ex) {
             return errorCommandResult(ex.getMessageRU(), cmdAuthDTO.reconnectDTO());
         }
     }
@@ -67,7 +66,6 @@ public class ReconnectProcessor implements Function<CommandDTO, CommandResult> {
             CommandResultCreator cmdResCr =
                     CommandResultCreatorInit.commandResultReconnectCreator(false, message, reconnectDTO);
             return cmdResCr.createCommandResult();
-        }
-        catch(CommandResultCreatorException ignore) { return null; /* never happen */ }
+        } catch(CommandResultCreatorException ignore) { return null; /* never happen */ }
     }
 }

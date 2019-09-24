@@ -68,8 +68,7 @@ public class CommandResultSearchCreatorJSONDefaultImpl implements CommandResultC
 
             return SearchCommandResultInit.searchCommandResult(isDone,
                     null, searchRecords, subdivision, null);
-        }
-        catch(MessageParserException | NullPointerException ex) {
+        } catch(MessageParserException | NullPointerException ex) {
             throw new CommandResultCreatorException(ex.getMessage());
         }
     }

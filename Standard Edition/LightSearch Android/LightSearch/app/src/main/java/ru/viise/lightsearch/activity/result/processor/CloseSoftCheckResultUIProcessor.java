@@ -44,16 +44,14 @@ public class CloseSoftCheckResultUIProcessor implements Function<CommandResult, 
         if(closeSCCmdRes.isDone()) {
             activity.callDialogSuccess(closeSCCmdRes.message());
             activity.doContainerFragmentTransactionFromCart();
-        }
-        else if(closeSCCmdRes.isReconnect()) {
+        } else if(closeSCCmdRes.isReconnect()) {
             SharedPreferences sPref = activity.getSharedPreferences("pref", Context.MODE_PRIVATE);
             PreferencesManager prefManager = PreferencesManagerInit.preferencesManager(sPref);
             String ip = prefManager.load(PreferencesManagerType.HOST_MANAGER);
             String port = prefManager.load(PreferencesManagerType.PORT_MANAGER);
             ConnectionDTO connDTO = ConnectionDTOInit.connectionDTO(ip, port);
             activity.reconnect(connDTO, closeSCCmdRes.reconnectDTO());
-        }
-        else
+        } else
             activity.callDialogError(closeSCCmdRes.message());
 
         return null;

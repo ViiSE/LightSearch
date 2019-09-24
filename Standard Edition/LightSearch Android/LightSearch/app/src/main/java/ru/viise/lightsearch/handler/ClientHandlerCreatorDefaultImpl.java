@@ -76,20 +76,17 @@ public class ClientHandlerCreatorDefaultImpl implements ClientHandlerCreator {
 
                 return ClientHandlerDTOInit.clientHandlerDTO(clientHandler, null);
 
-            }
-            else {
+            } else {
                 String message = "Сервер не дал разрешение на подключение. " +
                         "Обратитесь к администратору для устранения проблемы.";
 
                 return ClientHandlerDTOInit.clientHandlerDTO(null, message);
             }
-        }
-        catch(SocketException ex) {
+        } catch(SocketException ex) {
             String message = "Не удалось подключиться к серверу: превышен лимит ожидания. " +
                     "Проверьте подключение к сети и повторите попытку.";
             return ClientHandlerDTOInit.clientHandlerDTO(null, message);
-        }
-        catch(DataStreamCreatorException ex) {
+        } catch(DataStreamCreatorException ex) {
             String message = "Возникла ошибка, сообщение: " + ex.getMessage();
             return ClientHandlerDTOInit.clientHandlerDTO(null, message);
         }

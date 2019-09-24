@@ -61,8 +61,7 @@ public class CommandResultCancelSoftCheckCreatorJSONDefaultImpl implements Comma
 
             return CancelSoftCheckCommandResultInit.cancelSoftCheckCommandResult(isDone, message,
                     null, isCart);
-        }
-        catch(MessageParserException | NullPointerException ex) {
+        } catch(MessageParserException | NullPointerException ex) {
             throw new CommandResultCreatorException(ex.getMessage());
         }
     }

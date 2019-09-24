@@ -46,8 +46,7 @@ public class AuthorizationResultUIProcessor implements Function<CommandResult, V
             prefManager.save(PreferencesManagerType.USER_IDENT_MANAGER, authCmdRes.userIdent());
             activity.callDialogSuccess(authCmdRes.message());
             activity.doContainerFragmentTransaction(authCmdRes.skladList(), authCmdRes.TKList());
-        }
-        else
+        } else
             activity.callDialogError(authCmdRes.message());
 
         return null;

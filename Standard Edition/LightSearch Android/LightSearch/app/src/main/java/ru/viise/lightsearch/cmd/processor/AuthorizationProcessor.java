@@ -55,8 +55,7 @@ public class AuthorizationProcessor implements Function<CommandDTO, CommandResul
             CommandResultCreator cmdResCr =
                     CommandResultCreatorInit.commandResultAuthorizationCreator(rawMessage, IMEI);
             return cmdResCr.createCommandResult();
-        }
-        catch(CommandResultCreatorException | MessageSenderException | MessageRecipientException ex) {
+        } catch(CommandResultCreatorException | MessageSenderException | MessageRecipientException ex) {
             return errorCommandResult(ex.getMessageRU());
         }
     }
@@ -66,7 +65,6 @@ public class AuthorizationProcessor implements Function<CommandDTO, CommandResul
             CommandResultCreator cmdResCr =
                     CommandResultCreatorInit.commandResultAuthorizationCreator(false, message);
             return cmdResCr.createCommandResult();
-        }
-        catch(CommandResultCreatorException ignore) { return null; /* never happen */ }
+        } catch(CommandResultCreatorException ignore) { return null; /* never happen */ }
     }
 }

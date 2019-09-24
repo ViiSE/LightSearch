@@ -52,6 +52,7 @@ public class CommandAuthorizationDTOCreatorDefaultImpl implements CommandAuthori
 
     @Override
     public CommandAuthorizationDTO createCommandDTO() {
-        return CommandAuthorizationDTOInit.commandAuthorizationDTO(IMEI, ip, os, model, username, password, userIdent, reconnectDTO);
+        return CommandAuthorizationDTOInit.commandAuthorizationDTO(
+                IMEI, ip, os, model, username, password, userIdent, reconnectDTO);
     }
 }

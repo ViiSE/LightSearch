@@ -20,8 +20,8 @@ import ru.viise.lightsearch.data.ReconnectDTO;
 
 public class ReconnectCommandResultInit {
 
-    public static ReconnectCommandResult reconnectCommandResult(boolean isDone, String message,
-                        ReconnectDTO reconnectDTO) {
+    public static ReconnectCommandResult reconnectCommandResult(
+            boolean isDone, String message, ReconnectDTO reconnectDTO) {
         return new ReconnectCommandResultDefaultImpl(isDone, message, reconnectDTO);
     }
 }

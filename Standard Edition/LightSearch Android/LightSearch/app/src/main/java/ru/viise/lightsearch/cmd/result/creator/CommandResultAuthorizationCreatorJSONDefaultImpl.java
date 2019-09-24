@@ -81,8 +81,7 @@ public class CommandResultAuthorizationCreatorJSONDefaultImpl implements Command
 
             return AuthorizationCommandResultInit.authorizationCommandResult(isDone, message,
                     userIdent, skladList, TKList);
-        }
-        catch(MessageParserException | NullPointerException ex) {
+        } catch(MessageParserException | NullPointerException ex) {
             throw new CommandResultCreatorException(ex.getMessage());
         }
     }

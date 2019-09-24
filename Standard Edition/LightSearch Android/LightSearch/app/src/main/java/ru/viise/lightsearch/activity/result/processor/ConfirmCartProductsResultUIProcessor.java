@@ -50,18 +50,15 @@ public class ConfirmCartProductsResultUIProcessor implements Function<CommandRes
             try {
                 ICartFragment cartFragment = finder.findImpl(ICartFragment.class);
                 cartFragment.refreshCartRecords(conCProdRes.cartRecords());
-            }
-            catch(FindableException ignore) {}
-        }
-        else if(conCProdRes.isReconnect()) {
+            } catch(FindableException ignore) {}
+        } else if(conCProdRes.isReconnect()) {
             SharedPreferences sPref = activity.getSharedPreferences("pref", Context.MODE_PRIVATE);
             PreferencesManager prefManager = PreferencesManagerInit.preferencesManager(sPref);
             String ip = prefManager.load(PreferencesManagerType.HOST_MANAGER);
             String port = prefManager.load(PreferencesManagerType.PORT_MANAGER);
             ConnectionDTO connDTO = ConnectionDTOInit.connectionDTO(ip, port);
             activity.reconnect(connDTO, conCProdRes.reconnectDTO());
-        }
-        else
+        } else
             activity.callDialogError(conCProdRes.message());
 
         return null;

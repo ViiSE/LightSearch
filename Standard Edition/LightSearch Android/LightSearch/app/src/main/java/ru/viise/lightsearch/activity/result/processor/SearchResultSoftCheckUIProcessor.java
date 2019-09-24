@@ -47,8 +47,7 @@ public class SearchResultSoftCheckUIProcessor implements Function<CommandResult,
                 IContainerFragment containerFragment = activity.getContainerFragment();
                 if(containerFragment != null)
                     containerFragment.addSoftCheckRecord(searchSCCmdRes.record());
-            }
-            else
+            } else
                 activity.callDialogNoResult();
         else if(searchSCCmdRes.isReconnect()) {
             SharedPreferences sPref = activity.getSharedPreferences("pref", Context.MODE_PRIVATE);
@@ -57,8 +56,7 @@ public class SearchResultSoftCheckUIProcessor implements Function<CommandResult,
             String port = prefManager.load(PreferencesManagerType.PORT_MANAGER);
             ConnectionDTO connDTO = ConnectionDTOInit.connectionDTO(ip, port);
             activity.reconnect(connDTO, searchSCCmdRes.reconnectDTO());
-        }
-        else
+        } else
             activity.callDialogError(searchSCCmdRes.message());
 
         return null;

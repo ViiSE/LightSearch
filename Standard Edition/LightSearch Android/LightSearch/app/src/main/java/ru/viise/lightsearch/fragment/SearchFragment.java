@@ -198,8 +198,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener, IS
                     Toast t = Toast.makeText(Objects.requireNonNull(this.getActivity()).getApplicationContext(),
                             "Введите не менее пяти символов!", Toast.LENGTH_LONG);
                     t.show();
-                }
-                else {
+                } else {
                     KeyboardHideToolInit.keyboardHideTool(this.getActivity()).hideKeyboard();
                     CommandSearchDTOCreator cmdSearchDTOCr =
                             CommandSearchDTOCreatorInit.commandSearchDTOCreator(

@@ -52,8 +52,7 @@ public class HashAlgorithmsDefaultImpl implements HashAlgorithms {
             }
             
             return hexString.toString();
-        } 
-        catch(UnsupportedEncodingException | NoSuchAlgorithmException ignore){
+        } catch(UnsupportedEncodingException | NoSuchAlgorithmException ignore){
            return null;
         }
     }
