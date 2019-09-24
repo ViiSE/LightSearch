@@ -28,6 +28,6 @@ public class AdminHandlerDTOInit {
             ThreadParametersHolder threadParametersHolder, CurrentDateTime currentDateTime,
             ThreadManager threadManager, AdminDAO adminDAO) {
         return new AdminHandlerDTODefaultImpl(adminParametersHolder, threadParametersHolder, currentDateTime,
-        threadManager, adminDAO);
+                threadManager, adminDAO);
     }
 }

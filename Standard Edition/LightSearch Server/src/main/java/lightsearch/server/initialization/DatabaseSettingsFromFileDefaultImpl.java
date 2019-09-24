@@ -39,6 +39,7 @@ public class DatabaseSettingsFromFileDefaultImpl implements DatabaseSettings {
         this.currentServerDirectory = currentServerDirectory;
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     @Override
     public String name() {
         String currentDirectory = currentServerDirectory.currentDirectory();
@@ -55,8 +56,7 @@ public class DatabaseSettingsFromFileDefaultImpl implements DatabaseSettings {
                 }
                 if(count == 2) dbName.append((char) buffer[i]);
             }
-        }
-        catch(IOException ex) {
+        } catch(IOException ex) {
             throw new RuntimeException("Error: " + ex.getMessage());
         }
         

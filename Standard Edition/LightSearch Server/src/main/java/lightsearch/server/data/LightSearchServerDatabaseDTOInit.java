@@ -21,9 +21,7 @@ package lightsearch.server.data;
  */
 public class LightSearchServerDatabaseDTOInit {
     
-    public static LightSearchServerDatabaseDTO lightSearchServerDatabaseDTO(String dbIP,
-            String dbName,
-            int dbPort) {
+    public static LightSearchServerDatabaseDTO lightSearchServerDatabaseDTO(String dbIP, String dbName, int dbPort) {
         return new LightSearchServerDatabaseDTODefaultImpl(dbIP, dbName, dbPort);
     }
             

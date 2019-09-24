@@ -39,6 +39,7 @@ public class ServerPortFromFileDefaultImpl implements ServerPort {
         this.currentServerDirectory = currentServerDirectory;
     }
     
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     @Override
     public int port() {
         String currentDirectory = currentServerDirectory.currentDirectory();
@@ -55,8 +56,7 @@ public class ServerPortFromFileDefaultImpl implements ServerPort {
             
             if(port < 1023 || port > 65535)
                 throw new RuntimeException("Wrong port number!");
-        }
-        catch(IOException ex) {
+        } catch(IOException ex) {
             throw new RuntimeException("Error: " + ex.getMessage());
         }
         

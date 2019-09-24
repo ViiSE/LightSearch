@@ -38,8 +38,7 @@ import lightsearch.server.message.result.ResultTypeMessageEnum;
  */
 public class ClearAverageTimeProcessorDebug extends AbstractProcessorSystem {
     
-    public ClearAverageTimeProcessorDebug(LightSearchServerDTO serverDTO, 
-            LightSearchChecker checker) {
+    public ClearAverageTimeProcessorDebug(LightSearchServerDTO serverDTO, LightSearchChecker checker) {
         super(serverDTO, checker);
     }
 

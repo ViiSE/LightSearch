@@ -48,10 +48,10 @@ public abstract class SuperDatabaseRecordIdentifierWriterTimer extends SuperTime
     private final long minutesToWrite;
     private final DateTimeComparator dateTimeComparator = DateTimeComparatorInit.dateTimeComparator(null);
     
-    public SuperDatabaseRecordIdentifierWriterTimer(LoggerServer loggerServer,
-                                                    CurrentDateTime currentDateTime, ThreadManager threadManager,
-                                                    DatabaseRecordIdentifierWriter databaseRecordIdentifierWriter,
-                                                    DatabaseRecordIdentifier databaseRecordIdentifier, long minutesToWrite, TimersIDEnum id) {
+    public SuperDatabaseRecordIdentifierWriterTimer(
+            LoggerServer loggerServer, CurrentDateTime currentDateTime, ThreadManager threadManager,
+            DatabaseRecordIdentifierWriter databaseRecordIdentifierWriter,
+            DatabaseRecordIdentifier databaseRecordIdentifier, long minutesToWrite, TimersIDEnum id) {
         super(loggerServer, currentDateTime, threadManager, id);
         this.databaseRecordIdentifierWriter = databaseRecordIdentifierWriter;
         this.databaseRecordIdentifier = databaseRecordIdentifier;

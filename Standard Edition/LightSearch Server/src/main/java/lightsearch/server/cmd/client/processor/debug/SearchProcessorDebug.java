@@ -37,6 +37,7 @@ public class SearchProcessorDebug extends AbstractProcessorClient {
         super(serverDTO, checker);
     }
     
+    @SuppressWarnings("unchecked")
     @Override
     public CommandResult apply(ClientCommand clientCommand) {
         if(!super.checker.isNull(clientCommand.IMEI(), clientCommand.barcode(), 
@@ -46,19 +47,16 @@ public class SearchProcessorDebug extends AbstractProcessorClient {
                 
                 ProductsMapDebug.PRODUCTS.forEach((id, product) -> {
                     if(product.id().equals(clientCommand.barcode()))
-                        if(clientCommand.sklad().equals("all") &&
-                                clientCommand.TK().equals("all")) {
+                        if(clientCommand.sklad().equals("all") && clientCommand.TK().equals("all")) {
                             addProductJSONtoData(jData, product);
                         }
                         else if(clientCommand.sklad().equals("all")) {
-                            if(product.subdivision().contains("Склад")) {
+                            if(product.subdivision().contains("Склад"))
                                 addProductJSONtoData(jData, product);
-                            }
                         }
                         else if(clientCommand.TK().equals("all")) {
-                            if(product.subdivision().contains("ТК")) {
+                            if(product.subdivision().contains("ТК"))
                                 addProductJSONtoData(jData, product);
-                            }
                         }
                         else if(product.subdivision().equals(clientCommand.sklad())) {
                             addProductJSONtoData(jData, product);
@@ -87,6 +85,7 @@ public class SearchProcessorDebug extends AbstractProcessorClient {
                     "Неверный формат команды. Обратитесь к администратору для устранения ошибки. Вы были отключены от сервера", null);
     }
     
+    @SuppressWarnings("unchecked")
     private void addProductJSONtoData(JSONArray jData, ProductDebug product) {
         JSONObject jProd = new JSONObject();
         jProd.put("subdiv", product.subdivision());

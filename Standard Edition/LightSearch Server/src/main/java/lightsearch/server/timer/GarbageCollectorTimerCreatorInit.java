@@ -16,9 +16,7 @@ import lightsearch.server.time.CurrentDateTime;
 public class GarbageCollectorTimerCreatorInit {
     
     public static GarbageCollectorTimerCreator garbageCollectorTimerCreator(
-            LoggerServer loggerServer, CurrentDateTime currentDateTime, 
-            ThreadManager threadManager, TimersIDEnum id) {
-        return new GarbageCollectorTimerCreatorDefaultImpl(loggerServer, 
-                currentDateTime, threadManager, id);
+            LoggerServer loggerServer, CurrentDateTime currentDateTime, ThreadManager threadManager, TimersIDEnum id) {
+        return new GarbageCollectorTimerCreatorDefaultImpl(loggerServer, currentDateTime, threadManager, id);
     }
 }

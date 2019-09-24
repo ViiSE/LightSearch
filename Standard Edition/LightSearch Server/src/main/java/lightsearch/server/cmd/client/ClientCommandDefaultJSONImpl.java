@@ -55,8 +55,7 @@ public class ClientCommandDefaultJSONImpl implements ClientCommand {
     public String command() {
         try {
             return clientInfoObj.get(COMMAND).toString();
-        }
-        catch(NullPointerException ignore) {
+        } catch(NullPointerException ignore) {
             return null;
         }
     }
@@ -65,8 +64,7 @@ public class ClientCommandDefaultJSONImpl implements ClientCommand {
     public String IMEI() {
         try {
             return clientInfoObj.get(IMEI).toString();
-        }
-        catch(NullPointerException ignore) {
+        } catch(NullPointerException ignore) {
             return null;
         }
     }
@@ -75,8 +73,7 @@ public class ClientCommandDefaultJSONImpl implements ClientCommand {
     public String ip() {
         try {
             return clientInfoObj.get(IP).toString();
-        }
-        catch(NullPointerException ignore) {
+        } catch(NullPointerException ignore) {
             return null;
         }
     }
@@ -85,8 +82,7 @@ public class ClientCommandDefaultJSONImpl implements ClientCommand {
     public String os() {
         try {
             return clientInfoObj.get(OS).toString();
-        }
-        catch(NullPointerException ignore) {
+        } catch(NullPointerException ignore) {
             return null;
         }
     }
@@ -95,8 +91,7 @@ public class ClientCommandDefaultJSONImpl implements ClientCommand {
     public String model() {
         try {
             return clientInfoObj.get(MODEL).toString();
-        }
-        catch(NullPointerException ignore) {
+        } catch(NullPointerException ignore) {
             return null;
         }
     }
@@ -105,8 +100,7 @@ public class ClientCommandDefaultJSONImpl implements ClientCommand {
     public String username() {
         try {
             return clientInfoObj.get(USERNAME).toString();
-        }
-        catch(NullPointerException ignore) {
+        } catch(NullPointerException ignore) {
             return null;
         }
     }
@@ -115,8 +109,7 @@ public class ClientCommandDefaultJSONImpl implements ClientCommand {
     public String barcode() {
         try {
             return clientInfoObj.get(BARCODE).toString();
-        }
-        catch(NullPointerException ignore) {
+        } catch(NullPointerException ignore) {
             return null;
         }
     }
@@ -125,8 +118,7 @@ public class ClientCommandDefaultJSONImpl implements ClientCommand {
     public String sklad() {
         try {
             return clientInfoObj.get(SKLAD).toString();
-        }
-        catch(NullPointerException ignore) {
+        } catch(NullPointerException ignore) {
             return null;
         }
     }
@@ -135,8 +127,7 @@ public class ClientCommandDefaultJSONImpl implements ClientCommand {
     public String TK() {
         try {
             return clientInfoObj.get(TK).toString();
-        }
-        catch(NullPointerException ignore) {
+        } catch(NullPointerException ignore) {
             return null;
         }
     }
@@ -145,8 +136,7 @@ public class ClientCommandDefaultJSONImpl implements ClientCommand {
     public String password() {
         try {
             return clientInfoObj.get(PASSWORD).toString();
-        }
-        catch(NullPointerException ignore) {
+        } catch(NullPointerException ignore) {
             return null;
         }
     }
@@ -155,8 +145,7 @@ public class ClientCommandDefaultJSONImpl implements ClientCommand {
     public String data() {
         try {
             return clientInfoObj.get(DATA).toString();
-        }
-        catch(NullPointerException ignore) {
+        } catch(NullPointerException ignore) {
             return null;
         }
     }
@@ -165,8 +154,7 @@ public class ClientCommandDefaultJSONImpl implements ClientCommand {
     public String delivery() {
         try {
             return clientInfoObj.get(DELIVERY).toString();
-        }
-        catch(NullPointerException ignore) {
+        } catch(NullPointerException ignore) {
             return null;
         }
     }
@@ -175,8 +163,7 @@ public class ClientCommandDefaultJSONImpl implements ClientCommand {
     public String userIdentifier() {
         try {
             return clientInfoObj.get(USER_IDENT).toString();
-        }
-        catch(NullPointerException ignore) {
+        } catch(NullPointerException ignore) {
             return null;
         }
     }
@@ -185,8 +172,7 @@ public class ClientCommandDefaultJSONImpl implements ClientCommand {
     public String cardCode() {
         try {
             return clientInfoObj.get(CARD_CODE).toString();
-        }
-        catch(NullPointerException ignore) {
+        } catch(NullPointerException ignore) {
             return null;
         }
     }

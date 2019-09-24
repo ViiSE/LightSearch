@@ -42,12 +42,11 @@ public class CancelSoftCheckProcessorDebug extends AbstractProcessorClient {
     
     @Override
     public CommandResult apply(ClientCommand clientCommand) {
-        if(!super.checker.isNull(clientCommand.IMEI(), clientCommand.userIdentifier(),
-                clientCommand.cardCode())) {
+        if(!super.checker.isNull(clientCommand.IMEI(), clientCommand.userIdentifier(), clientCommand.cardCode())) {
             if(!serverDTO.blacklist().contains(clientCommand.IMEI())) {       
                 if(softCheck.cancelSoftCheck()) {
-                    String logMessage 
-                            = "Client " + clientCommand.IMEI() + 
+                    String logMessage =
+                            "Client " + clientCommand.IMEI() +
                             " cancel SoftCheck, user ident - " + clientCommand.userIdentifier()
                             + ", card code - " + clientCommand.cardCode();
 
@@ -60,18 +59,15 @@ public class CancelSoftCheckProcessorDebug extends AbstractProcessorClient {
 
                     return super.commandResult(clientCommand.IMEI(), LogMessageTypeEnum.INFO, ResultTypeMessageEnum.TRUE,
                             result, logMessage);    
-                }
-                else
+                } else
                     return super.commandResult(clientCommand.IMEI(), LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE,
                             "Невозможно отменить мягкий чек. Попробуйте позже.", 
                             "Client " + clientCommand.IMEI() + " - cannot cancel SoftCheck, user_ident - " + clientCommand.userIdentifier()
                                     + ", card code - " + clientCommand.cardCode());
-            }
-            else
+            } else
                 return super.commandResult(clientCommand.IMEI(), LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE,
                         "Извините, но вы находитесь в черном списке. Отключение от сервера", null);
-        }
-        else
+        } else
             return super.commandResult("Unknown", LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE,
                     "Неверный формат команды. Обратитесь к администратору для устранения ошибки. Вы были отключены от сервера", null);
     }

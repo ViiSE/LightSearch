@@ -40,8 +40,7 @@ public class ClientListRequestProcessor extends AbstractProcessorAdmin {
         if(!super.checker.isNull(admCommand.name())) {
             return super.commandResult(admCommand.name(), LogMessageTypeEnum.INFO, ResultTypeMessageEnum.TRUE,
                     super.serverDTO.clients(), admCommand.name() + " requested clients list");
-        }
-        else
+        } else
             return super.commandResult("Unknown", LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE,
                     "Wrong command format. You are disconnected.", null);
     }

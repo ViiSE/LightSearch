@@ -42,6 +42,7 @@ public class ConfirmSoftCheckProductsProcessorDebug extends AbstractProcessorCli
         super(serverDTO, checker);
     }
     
+    @SuppressWarnings("unchecked")
     @Override
     public CommandResult apply(ClientCommand clientCommand) {
         if(!super.checker.isNull(clientCommand.IMEI(), clientCommand.userIdentifier(), 
@@ -97,17 +98,14 @@ public class ConfirmSoftCheckProductsProcessorDebug extends AbstractProcessorCli
                     return super.commandResult(clientCommand.IMEI(), LogMessageTypeEnum.INFO, ResultTypeMessageEnum.TRUE,
                             result, logMessage);        
                 
-                }
-                catch(MessageParserException ignore) {
+                } catch(MessageParserException ignore) {
                     return super.commandResult("Unknown", LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE,
                     "Неверный формат команды. Обратитесь к администратору для устранения ошибки. Вы были отключены от сервера", null);
                 }    
-            }
-            else
+            } else
                 return super.commandResult(clientCommand.IMEI(), LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE,
                         "Извините, но вы находитесь в черном списке. Отключение от сервера", null);
-        }
-        else
+        } else
             return super.commandResult("Unknown", LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE,
                     "Неверный формат команды. Обратитесь к администратору для устранения ошибки. Вы были отключены от сервера", null);
     }

@@ -54,20 +54,17 @@ public class DelBlacklistProcessor extends AbstractProcessorAdmin {
                     return super.commandResult(admCommand.name(), LogMessageTypeEnum.INFO, ResultTypeMessageEnum.TRUE,
                             "Client " + admCommand.IMEI() + " has been removed from the blacklist.",
                             admCommand.name() + ": client " + admCommand.IMEI() + " has been removed from the blacklist");
-                }
-                catch(IOException ex) {
+                } catch(IOException ex) {
                     return super.commandResult(admCommand.name(), LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE,
                             "Client " + admCommand.IMEI() + " has not been removed from the blacklist. Try again.", 
                             admCommand.name() + ": client " + admCommand.IMEI() + " has not been removed from the blacklist. Exception: " + ex.getMessage());
                 }
-            }
-            else {
+            } else {
                 return super.commandResult(admCommand.name(), LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE,
                         "Client " + admCommand.IMEI() + " not in the blacklist.",
                         admCommand.name() + ": client " + admCommand.IMEI() + " not in the blacklist.");
             }
-        }
-        else
+        } else
             return super.commandResult("Unknown", LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE, 
                     "Wrong command format. You are disconnected.", null);
     }

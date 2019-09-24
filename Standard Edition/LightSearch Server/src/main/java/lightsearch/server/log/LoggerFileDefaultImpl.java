@@ -45,8 +45,7 @@ public class LoggerFileDefaultImpl implements LoggerFile {
                     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fout))) {
                 bw.write("[" + currentDateTime.dateTimeWithDot() + "] " + type + ": " + message);
                 bw.newLine();
-            }
-            catch(IOException ex) {
+            } catch(IOException ex) {
                 System.out.println("[" + currentDateTime.dateTimeWithDot() + "] Log file Error: " + ex.getMessage());
             }
         }

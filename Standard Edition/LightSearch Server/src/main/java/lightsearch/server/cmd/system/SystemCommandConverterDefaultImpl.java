@@ -35,12 +35,10 @@ public class SystemCommandConverterDefaultImpl implements SystemCommandConverter
                 Object systemInfo = parser.parse(message);
 
                 return SystemCommandInit.systemCommand(systemInfo);
-            }
-            catch(MessageParserException ex) {
+            } catch(MessageParserException ex) {
                 throw new CommandConverterException(ex.getMessage());
             }
-        }
-        else throw new CommandConverterException("Message is null");
+        } else throw new CommandConverterException("Message is null");
     }
     
 }

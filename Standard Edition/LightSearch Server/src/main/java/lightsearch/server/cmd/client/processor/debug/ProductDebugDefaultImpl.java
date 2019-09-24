@@ -23,8 +23,7 @@ public class ProductDebugDefaultImpl implements ProductDebug {
     private String amount;
     private final String unit;
 
-    public ProductDebugDefaultImpl(String subdivision, String id, 
-            String name, String price, String amount, String unit) {
+    public ProductDebugDefaultImpl(String subdivision, String id, String name, String price, String amount, String unit) {
         this.subdivision = subdivision;
         this.id = id;
         this.name = name;

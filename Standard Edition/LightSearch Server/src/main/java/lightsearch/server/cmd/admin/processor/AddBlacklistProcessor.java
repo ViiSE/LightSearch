@@ -53,8 +53,7 @@ public class AddBlacklistProcessor extends AbstractProcessorAdmin {
                         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fout))) {
                     bw.write(admCommand.IMEI());
                     bw.newLine();
-                }
-                catch(IOException ex) {
+                } catch(IOException ex) {
                     super.serverDTO.blacklist().remove(admCommand.IMEI());
 
                     return super.commandResult(admCommand.name(), LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE, 
@@ -65,8 +64,7 @@ public class AddBlacklistProcessor extends AbstractProcessorAdmin {
                 return super.commandResult(admCommand.name(), LogMessageTypeEnum.INFO, ResultTypeMessageEnum.TRUE, 
                         "Client " + admCommand.IMEI() + " has been added to the blacklist.", 
                         admCommand.name() + ": client " + admCommand.IMEI() + " has been added to the blacklist");
-            }
-            else {
+            } else {
                 return super.commandResult(admCommand.name(), LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE,
                         "Client " + admCommand.IMEI() + " already in the blacklist.",
                         admCommand.name() + ": client " + admCommand.IMEI() + " already in the blacklist");

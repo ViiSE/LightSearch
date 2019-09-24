@@ -30,8 +30,9 @@ import lightsearch.server.timer.TimersIDEnum;
 public interface ServerStateChanger {
     void executeRebootTimer(TimersIDEnum id);
     void destroyRebootTimer(TimersIDEnum id);
-    void executeDatabaseRecordIdentifierWriterTimer(DatabaseRecordIdentifier identifier,
-                                                    DatabaseRecordIdentifierWriter identifierWriter, long minutesToWrite, TimersIDEnum timerId);
+    void executeDatabaseRecordIdentifierWriterTimer(
+            DatabaseRecordIdentifier identifier, DatabaseRecordIdentifierWriter identifierWriter, long minutesToWrite,
+            TimersIDEnum timerId);
     void destroyDatabaseRecordIdentifierWriterTimer(TimersIDEnum id);
     void executeGarbageCollectorTimer(TimersIDEnum id);
     void destroyGarbageCollectorTimer(TimersIDEnum id);

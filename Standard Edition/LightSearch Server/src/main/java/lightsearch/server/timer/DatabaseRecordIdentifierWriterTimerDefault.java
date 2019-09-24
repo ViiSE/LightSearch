@@ -42,12 +42,12 @@ public class DatabaseRecordIdentifierWriterTimerDefault extends SuperDatabaseRec
     
     private final String ID;
     
-    public DatabaseRecordIdentifierWriterTimerDefault(LoggerServer loggerServer,
-                                                      CurrentDateTime currentDateTime, ThreadManager threadManager,
-                                                      DatabaseRecordIdentifierWriter databaseRecordIdentifierWriter,
-                                                      DatabaseRecordIdentifier databaseRecordIdentifier, long minutesToWrite, TimersIDEnum id) {
-        super(loggerServer, currentDateTime, threadManager,
-                databaseRecordIdentifierWriter, databaseRecordIdentifier, minutesToWrite, id);
+    public DatabaseRecordIdentifierWriterTimerDefault(
+            LoggerServer loggerServer, CurrentDateTime currentDateTime, ThreadManager threadManager,
+            DatabaseRecordIdentifierWriter databaseRecordIdentifierWriter,
+            DatabaseRecordIdentifier databaseRecordIdentifier, long minutesToWrite, TimersIDEnum id) {
+        super(loggerServer, currentDateTime, threadManager, databaseRecordIdentifierWriter, databaseRecordIdentifier,
+                minutesToWrite, id);
         ID = super.id().stringValue();
     }
 

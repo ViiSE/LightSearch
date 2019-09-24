@@ -71,8 +71,7 @@ public class DatabaseStatementResultSetSelectDefaultImpl implements DatabaseStat
                     }
                 }
             }
-        }
-        catch(SQLException | DatabasePreparedStatementException ex) {
+        } catch(SQLException | DatabasePreparedStatementException ex) {
             throw new DatabaseStatementResultSetException(ex.getMessage());
         }
         throw new DatabaseStatementResultSetException("Request timed out");

@@ -66,41 +66,29 @@ public class LightSearchServer {
         ServerPort serverPort = ServerPortInit.serverPort(currentServerDirectory);
         int port = serverPort.port();
         
-        ServerSettings serverSettings = 
-                ServerSettingsInit.serverSettings(currentServerDirectory);
+        ServerSettings serverSettings = ServerSettingsInit.serverSettings(currentServerDirectory);
         int serverReboot = serverSettings.rebootServerValue();
         int clientTimeout = serverSettings.timeoutClientValue();
         
-        AdministratorsMap administratorsMap = 
-                AdministratorsMapInit.administratorsMap(currentServerDirectory);
+        AdministratorsMap administratorsMap = AdministratorsMapInit.administratorsMap(currentServerDirectory);
         Map<String, String> admins = administratorsMap.administratorsMap();
 
-        ClientBlacklist clientBlacklist = 
-                ClientBlacklistInit.clientBlacklist(currentServerDirectory);
+        ClientBlacklist clientBlacklist = ClientBlacklistInit.clientBlacklist(currentServerDirectory);
         List<String> blacklist = clientBlacklist.blacklist();
         
-        DatabaseSettings dbSettings = 
-                DatabaseSettingsInit.databaseSettings(currentServerDirectory);
+        DatabaseSettings dbSettings = DatabaseSettingsInit.databaseSettings(currentServerDirectory);
         String dbName = dbSettings.name();
         int dbPort = dbSettings.port();
         String dbIp   = dbSettings.ip();
         
-        LightSearchServerSettingsDAO settingsDAO = 
+        LightSearchServerSettingsDAO settingsDAO =
                 LightSearchServerSettingsDAOInit.settingsDAO(serverReboot, clientTimeout);
         
         LightSearchServerDatabaseDTO databaseDTO = 
-                LightSearchServerDatabaseDTOInit.lightSearchServerDatabaseDTO(dbIp, 
-                dbName,
-                dbPort);
+                LightSearchServerDatabaseDTOInit.lightSearchServerDatabaseDTO(dbIp, dbName, dbPort);
         
         LightSearchServerDTO serverDTO = LightSearchServerDTOInit.LightSearchServerDTO(
-                admins, 
-                new HashMap<>(), 
-                blacklist, 
-                databaseDTO, 
-                port,
-                settingsDAO,
-                currentDirectory);
+                admins, new HashMap<>(), blacklist, databaseDTO, port, settingsDAO, currentDirectory);
         
         LogDirectory logDirectory = LogDirectoryInit.logDirectory("logs");
         LoggerFile loggerFile = LoggerFileInit.loggerFile(logDirectory);
@@ -133,8 +121,8 @@ public class LightSearchServer {
                 + "For administration use LightSearch Server Admin Panel.");        
         Thread.sleep(100);
         
-        ServerStateChanger stateChanger = ServerStateChangerInit.serverStateChanger(serverDTO, 
-                    loggerServer, currentDateTime, threadManager);
+        ServerStateChanger stateChanger =
+                ServerStateChangerInit.serverStateChanger(serverDTO, loggerServer, currentDateTime, threadManager);
         
         TimerRebootValueChecker timerChecker = 
                 TimerRebootValueCheckerInit.timerRebootValueChecker();
@@ -143,15 +131,11 @@ public class LightSearchServer {
         
         TimersIDEnum timerIdentifierId = TimersIDEnum.IDENTIFIER_WRITER_TIMER_ID;
         long minutesToWrite = 30;
-        stateChanger.executeDatabaseRecordIdentifierWriterTimer(identifier, identifierWriter,
-                minutesToWrite, timerIdentifierId);
+        stateChanger.executeDatabaseRecordIdentifierWriterTimer(
+                identifier, identifierWriter, minutesToWrite, timerIdentifierId);
         
-        LightSearchServerListener serverListener = 
-                LightSearchServerListenerInit.lightSearchServerListener(
-                        serverDTO,
-                        listenerDTO,
-                        loggerServer
-        );
+        LightSearchServerListener serverListener =
+                LightSearchServerListenerInit.lightSearchServerListener(serverDTO, listenerDTO, loggerServer);
         serverListener.startServer();
     }
 }

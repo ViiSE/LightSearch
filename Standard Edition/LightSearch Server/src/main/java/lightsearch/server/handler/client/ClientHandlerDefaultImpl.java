@@ -78,15 +78,13 @@ public class ClientHandlerDefaultImpl extends Handler {
                     if(result.logMessage() != null) {
                         if(!result.logMessage().isEmpty())
                             super.logger().log(result.type(), super.currentDateTime(), result.logMessage());
-                    }
-                    else
+                    } else
                         exit = true;
                 } catch (MessageSenderException ex) {
                     super.logger().log(result.type(), super.currentDateTime(), ex.getMessage());
                 }
             }
-        }
-        else
+        } else
             exit = true;
     }
     

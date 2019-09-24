@@ -52,8 +52,7 @@ public class AdminCommandDefaultJSONImpl implements AdminCommand {
     public String name() {
         try {
             return adminInfoObj.get(NAME).toString();
-        }
-        catch(NullPointerException ignore) {
+        } catch(NullPointerException ignore) {
             return null;
         }
     }
@@ -62,8 +61,7 @@ public class AdminCommandDefaultJSONImpl implements AdminCommand {
     public String command() {
         try {
             return adminInfoObj.get(COMMAND).toString();
-        }
-        catch(NullPointerException ignore) {
+        } catch(NullPointerException ignore) {
             return null;
         }
     }
@@ -72,8 +70,7 @@ public class AdminCommandDefaultJSONImpl implements AdminCommand {
     public String serverTime() {
         try {
             return adminInfoObj.get(SERVER_TIME).toString();
-        }
-        catch(NullPointerException ignore) {
+        } catch(NullPointerException ignore) {
             return null;
         }
     }
@@ -82,8 +79,7 @@ public class AdminCommandDefaultJSONImpl implements AdminCommand {
     public String clientTimeout() {
         try {
             return adminInfoObj.get(CLIENT_TIMEOUT).toString();
-        }
-        catch(NullPointerException ignore) {
+        } catch(NullPointerException ignore) {
             return null;
         }
     }
@@ -92,8 +88,7 @@ public class AdminCommandDefaultJSONImpl implements AdminCommand {
     public String IMEI() {
         try {
             return adminInfoObj.get(IMEI).toString();
-        }
-        catch(NullPointerException ignore) {
+        } catch(NullPointerException ignore) {
             return null;
         }
     }
@@ -102,8 +97,7 @@ public class AdminCommandDefaultJSONImpl implements AdminCommand {
     public String password() {
         try {
             return adminInfoObj.get(PASSWORD).toString();
-        }
-        catch(NullPointerException ignore) {
+        } catch(NullPointerException ignore) {
             return null;
         }
     }
@@ -112,8 +106,7 @@ public class AdminCommandDefaultJSONImpl implements AdminCommand {
     public String ip() {
         try {
             return adminInfoObj.get(IP).toString();
-        }
-        catch(NullPointerException ignore) {
+        } catch(NullPointerException ignore) {
             return null;
         }
     }
@@ -122,8 +115,7 @@ public class AdminCommandDefaultJSONImpl implements AdminCommand {
     public String port() {
         try {
             return adminInfoObj.get(PORT).toString();
-        }
-        catch(NullPointerException ignore) {
+        } catch(NullPointerException ignore) {
             return null;
         }
     }
@@ -132,8 +124,7 @@ public class AdminCommandDefaultJSONImpl implements AdminCommand {
     public String dbName() {
         try {
             return adminInfoObj.get(DB_NAME).toString();
-        }
-        catch(NullPointerException ignore) {
+        } catch(NullPointerException ignore) {
             return null;
         }
     }
@@ -142,8 +133,7 @@ public class AdminCommandDefaultJSONImpl implements AdminCommand {
     public String adminName() {
         try {
             return adminInfoObj.get(ADMIN_NAME).toString();
-        }
-        catch(NullPointerException ignore) {
+        } catch(NullPointerException ignore) {
             return null;
         }
     }

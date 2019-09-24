@@ -70,8 +70,7 @@ public class AdministratorsMapFromFileDefaultImpl implements AdministratorsMap {
             
             if(adminMap.isEmpty())
                 adminMap = createAdmin(currentDirectory);
-        }
-        catch(IOException ex) {
+        } catch(IOException ex) {
             adminMap = createAdmin(currentDirectory, ex.getMessage());
         }
         return adminMap;

@@ -60,8 +60,7 @@ public class OpenSoftCheckProcessorDebug extends AbstractProcessorClient {
                     return super.commandResult(clientCommand.IMEI(), 
                             LogMessageTypeEnum.INFO, ResultTypeMessageEnum.TRUE, 
                             result, logMessage);        
-                }
-                else {
+                } else {
                     return super.commandResult(clientCommand.IMEI(), 
                             LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE, 
                             "Невозможно открыть мягкий чек. Скорее всего, он уже открыт. Попробуйте отменить или закрыть мягкий чек.", 
@@ -69,12 +68,10 @@ public class OpenSoftCheckProcessorDebug extends AbstractProcessorClient {
                                     + "user ident - " + clientCommand.userIdentifier()+ ","
                                     + "card code - " + clientCommand.cardCode());
                 }
-            }
-            else
+            } else
                 return super.commandResult(clientCommand.IMEI(), LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE,
                         "Извините, но вы находитесь в черном списке. Отключение от сервера", null);
-        }
-        else
+        } else
             return super.commandResult("Unknown", LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE,
                     "Неверный формат команды. Обратитесь к администратору для устранения ошибки. Вы были отключены от сервера", null);
     }

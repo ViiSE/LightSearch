@@ -37,6 +37,7 @@ public class DatabaseRecordIdentifierReaderDefaultImpl implements DatabaseRecord
         this.serverDTO = serverDTO;
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     @Override
     public long read() {
         long databaseRecordIdentifier;
@@ -48,8 +49,7 @@ public class DatabaseRecordIdentifierReaderDefaultImpl implements DatabaseRecord
             for (byte b : buffer) databaseRecordIdentifierString.append((char) b);
             
             databaseRecordIdentifier = Integer.parseInt(databaseRecordIdentifierString.toString());
-        }
-        catch(IOException | NumberFormatException ex) {
+        } catch(IOException | NumberFormatException ex) {
             throw new RuntimeException("Error: " + ex.getMessage());
         }
         

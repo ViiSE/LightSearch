@@ -43,8 +43,7 @@ public class SystemCommandDefaultJSONImpl implements SystemCommand {
     public String command() {
         try {
             return systemInfoObj.get(COMMAND).toString();
-        }
-        catch(NullPointerException ignore) {
+        } catch(NullPointerException ignore) {
             return null;
         }
     }

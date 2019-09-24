@@ -43,8 +43,7 @@ public class SystemCommandCreatorDefaultImpl implements SystemCommandCreator {
     public Map<String, Function<SystemCommand, CommandResult>> createCommandHolder() {
         Map<String, Function<SystemCommand, CommandResult>> result = new HashMap<>();
         
-        result.put(CLEAR_AVERAGE_TIME, new ClearAverageTimeProcessorDebug(serverDTO, 
-                listenerDTO.checker()));
+        result.put(CLEAR_AVERAGE_TIME, new ClearAverageTimeProcessorDebug(serverDTO, listenerDTO.checker()));
         
         return result;
     }

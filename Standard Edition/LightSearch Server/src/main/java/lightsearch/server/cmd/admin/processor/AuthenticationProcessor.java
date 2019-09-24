@@ -48,8 +48,7 @@ public class AuthenticationProcessor extends AbstractProcessorAdmin {
                 adminDAO.setIsFirst(false);
                 return super.commandResult(admCommand.name(), LogMessageTypeEnum.INFO, ResultTypeMessageEnum.TRUE,
                         "Administrator " + admCommand.name() + " connected.", "Administrator " + admCommand.name() + " connected");
-            }
-            else
+            } else
                 if(adminDAO.tryNumber() == adminDAO.maxTryNumber())
                     return super.commandResult(admCommand.name(), LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE, 
                             "Administrator " + admCommand.name() + " - invalid login and/or password, or this user in the blacklist. Disconnect to server.", 
@@ -62,8 +61,7 @@ public class AuthenticationProcessor extends AbstractProcessorAdmin {
                             "Administrator " + admCommand.name() + " - invalid login and/or password, or this user in the blacklist. " + 
                             (adminDAO.maxTryNumber() - adminDAO.tryNumber()) + " tries left");
                 }
-        }
-        else
+        } else
             return super.commandResult("Unknown", LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE, 
                     "Wrong command format. You are disconnected.", null);
     }

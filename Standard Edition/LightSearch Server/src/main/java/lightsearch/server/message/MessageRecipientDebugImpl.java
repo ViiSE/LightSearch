@@ -62,8 +62,7 @@ public class MessageRecipientDebugImpl implements MessageRecipient {
             System.out.println("avg: " + msgTimeAdder.averageTime());
             
             return res;
-        }
-        catch(IOException ex) {
+        } catch(IOException ex) {
             throw new MessageRecipientException(ex.getMessage());
         }
     }

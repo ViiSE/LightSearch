@@ -69,15 +69,13 @@ public class SystemHandlerDefaultImpl extends Handler {
                     if(result.logMessage() != null) {
                         if(!result.logMessage().isEmpty())
                             super.logger().log(result.type(), super.currentDateTime(), result.logMessage());
-                    }
-                    else
+                    } else
                         exit = true;
                 } catch (MessageSenderException ex) {
                     super.logger().log(result.type(), super.currentDateTime(), ex.getMessage());
                 }
             }
-        }
-        else
+        } else
             exit = true;
     }
     
@@ -108,13 +106,11 @@ public class SystemHandlerDefaultImpl extends Handler {
             super.threadManager().holder().getThread(super.threadParametersHolder().id()).setIsDone(true);
             try {
                 systemParametersHolder.systemSocket().close();
-            }
-            catch(IOException  ignore) {}
+            } catch(IOException  ignore) {}
             
             if(exit)
                 super.threadManager().interrupt(super.threadParametersHolder().id()); 
-        }
-        catch(MessageRecipientException ignore) {
+        } catch(MessageRecipientException ignore) {
             super.logger().log(LogMessageTypeEnum.INFO, super.currentDateTime(), "System bot disconnected");
             super.threadManager().holder().getThread(super.threadParametersHolder().id()).setIsDone(true);
             super.threadManager().interrupt(super.threadParametersHolder().id());                    

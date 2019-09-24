@@ -38,8 +38,7 @@ public class DaemonServerWindowsDefaultImpl implements DaemonServer {
             Runtime.getRuntime().exec(new String[] {"cmd.exe", "/c", "cd", "C:\\Windows\\system32\\", "&", "start", 
                 "cmd.exe", "/c", "java", "-jar", currentDirectory + "LightSearch_Daemon.jar", currentDirectory + "LightSearch_Server.jar"});
             System.exit(0);
-        }
-        catch (IOException ignored) { }
+        } catch (IOException ignored) { }
     }
     
 }

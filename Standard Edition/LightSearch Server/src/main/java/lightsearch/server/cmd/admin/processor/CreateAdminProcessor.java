@@ -54,20 +54,17 @@ public class CreateAdminProcessor extends AbstractProcessorAdmin {
                     return super.commandResult(admCommand.name(), LogMessageTypeEnum.INFO, ResultTypeMessageEnum.TRUE,
                             "Administrator " + admCommand.adminName() + " is created.",
                             admCommand.name() + " created new administrator - " + admCommand.adminName());                
-                }
-                catch(IOException ex) {
+                } catch(IOException ex) {
                     return super.commandResult(admCommand.adminName(), LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE,
                             "Administrator " + admCommand.adminName() + " is not created. Try again.",
                             admCommand.name() + ": administrator " + admCommand.adminName() + " is not created. Exception: " + ex.getMessage());
                 }
-            }
-            else {
+            } else {
                 return super.commandResult(admCommand.name(), LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE,
                         "Administrator " + admCommand.adminName() + " is already exist.",
                         admCommand.name() + ": administrator " + admCommand.adminName() + " is already exist");
             }
-        }
-        else
+        } else
             return super.commandResult("Unknown", LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE, 
                     "Wrong command format. You are disconnected.", null);
     }

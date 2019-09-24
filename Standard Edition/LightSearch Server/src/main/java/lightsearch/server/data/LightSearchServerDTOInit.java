@@ -31,12 +31,7 @@ public class LightSearchServerDTOInit {
             int serverPort,
             LightSearchServerSettingsDAO settingsDTO,
             String currentDirectory){
-        return new LightSearchServerDTOImpl(admins,
-                clients,
-                blacklist,
-                databaseDTO,
-                serverPort,
-                settingsDTO,
-                currentDirectory);
+        return new LightSearchServerDTOImpl(
+                admins, clients, blacklist, databaseDTO, serverPort, settingsDTO, currentDirectory);
     }
 }

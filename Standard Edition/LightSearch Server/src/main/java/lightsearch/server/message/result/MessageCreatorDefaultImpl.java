@@ -41,16 +41,13 @@ public class MessageCreatorDefaultImpl implements MessageCreator {
         if(message instanceof String) {
             String strMessage = (String)message;
             return messageType.createFormattedMessage(name, isDone.stringValue(), strMessage);
-        }
-        else if(message instanceof List) {
-            List<String> listMessage = (List)message;
+        } else if(message instanceof List) {
+            List listMessage = (List)message;
             return messageType.createFormattedMessage(name, isDone.stringValue(), listMessage);
-        }
-        else if(message instanceof HashMap) {
-            HashMap<String, String> hashMessage = (HashMap)message;
+        } else if(message instanceof HashMap) {
+            HashMap hashMessage = (HashMap)message;
             return messageType.createFormattedMessage(name, isDone.stringValue(), hashMessage);
-        }
-        else
+        } else
             return null;
     }
     

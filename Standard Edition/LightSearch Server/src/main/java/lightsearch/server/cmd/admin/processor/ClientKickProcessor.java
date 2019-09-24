@@ -43,14 +43,12 @@ public class ClientKickProcessor extends AbstractProcessorAdmin {
                 return super.commandResult(admCommand.name(), LogMessageTypeEnum.INFO, ResultTypeMessageEnum.TRUE, 
                         "Client " + admCommand.IMEI() + " is kicked.",
                         admCommand.name() + " kicked client. IMEI: " + admCommand.IMEI());
-            }
-            else {
+            } else {
                 return super.commandResult(admCommand.name(), LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE,
                         "Client " + admCommand.IMEI() + " does not exist.",
                         admCommand.name() + ": client does not exist. IMEI: " + admCommand.IMEI());
             }
-        }
-        else
+        } else
             return super.commandResult("Unknown", LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE,
                     "Wrong command format. You are disconnected.", null);
     }

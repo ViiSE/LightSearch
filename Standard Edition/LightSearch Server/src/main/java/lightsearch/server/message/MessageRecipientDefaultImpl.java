@@ -39,8 +39,7 @@ public class MessageRecipientDefaultImpl implements MessageRecipient {
     public String acceptMessage() throws MessageRecipientException {
         try {
             return dataInputStream.readUTF();
-        }
-        catch(IOException ex) {
+        } catch(IOException ex) {
             throw new MessageRecipientException(ex.getMessage());
         }
     }

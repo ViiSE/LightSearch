@@ -57,6 +57,7 @@ public class LightSearchServerListenerSocketDefaultImpl implements LightSearchSe
         this.loggerServer = loggerServer;
     }
 
+    @SuppressWarnings("InfiniteLoopStatement")
     @Override
     public void startServer() {
             ServerSocket serverSocket = ServerSocketCreator.createServerSocket(serverDTO.serverPort());
@@ -76,16 +77,13 @@ public class LightSearchServerListenerSocketDefaultImpl implements LightSearchSe
                     HandlerCreator handlerCreator = HandlerCreatorInit.handlerCreator(
                             connectionIdentifierResult, serverDTO, listenerDTO, loggerServer);
                     handlerExecutor.executeHandler(handlerCreator.getHandler());
-                }
-                catch(IOException ex) {
+                } catch(IOException ex) {
                     loggerServer.log(LogMessageTypeEnum.ERROR, listenerDTO.currentDateTime(), "StartServer, acceptSocket, message - " + ex.getMessage());
                     if(clientSocket != null)
                         try { clientSocket.close(); } catch (IOException ignore) {}
-                }
-                catch(ConnectionIdentifierException ex) {
+                } catch(ConnectionIdentifierException ex) {
                     if(ex.getMessage() != null)
                         loggerServer.log(LogMessageTypeEnum.ERROR, listenerDTO.currentDateTime(), "StartServer, connectionIdentifier, message - " + ex.getMessage());
-                    if(clientSocket != null)
                     try { clientSocket.close(); } catch (IOException ignore) {}
                 }
             }

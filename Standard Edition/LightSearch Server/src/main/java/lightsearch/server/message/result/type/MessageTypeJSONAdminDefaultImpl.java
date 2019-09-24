@@ -78,6 +78,7 @@ public class MessageTypeJSONAdminDefaultImpl implements MessageType {
     private final String USERNAME = AdminCommandResultEnum.USERNAME.stringValue();
     private final String IMEI = AdminCommandResultEnum.IMEI.stringValue();
     
+    @SuppressWarnings("unchecked")
     @Override
     public String createFormattedMessage(String name, String isDone, Object message) {
         if(message instanceof String) {
@@ -86,8 +87,7 @@ public class MessageTypeJSONAdminDefaultImpl implements MessageType {
             messageJSON.put(IS_DONE, isDone);
             messageJSON.put(MESSAGE, message);
             return messageJSON.toString();
-        } 
-        else if(message instanceof List) {
+        } else if(message instanceof List) {
             List<String> data = (ArrayList)message;
             JSONArray dataArray = new JSONArray();
             dataArray.addAll(data);
@@ -98,16 +98,15 @@ public class MessageTypeJSONAdminDefaultImpl implements MessageType {
             dataList.put(DATA, dataArray);
 
             return dataList.toString();
-        }
-        else if(message instanceof HashMap) {
+        } else if(message instanceof HashMap) {
             HashMap<String,String> data = (HashMap)message;
             JSONArray clients = new JSONArray();
-            data.entrySet().forEach((nameCl) -> {
-                    JSONObject item = new JSONObject();
-                    item.put(IMEI, nameCl.getKey());
-                    item.put(USERNAME, nameCl.getValue());
-                    clients.add(item);
-                });
+            data.forEach((key, value) -> {
+                JSONObject item = new JSONObject();
+                item.put(IMEI, key);
+                item.put(USERNAME, value);
+                clients.add(item);
+            });
 
             JSONObject clList = new JSONObject();
             clList.put(NAME, name);

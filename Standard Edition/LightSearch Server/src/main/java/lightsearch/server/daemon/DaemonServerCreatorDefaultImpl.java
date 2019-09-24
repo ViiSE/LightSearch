@@ -36,9 +36,8 @@ public class DaemonServerCreatorDefaultImpl implements DaemonServerCreator {
 
     @Override
     public DaemonServer createDaemonServer() {
-        if(osDetector.isWindows()) {
+        if(osDetector.isWindows())
             return DaemonServerInit.daemonServerWindows(currentDirectory);
-        }
         else return null;
     }
     

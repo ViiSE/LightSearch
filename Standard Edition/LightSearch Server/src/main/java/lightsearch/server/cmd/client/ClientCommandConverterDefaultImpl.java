@@ -35,12 +35,10 @@ public class ClientCommandConverterDefaultImpl implements ClientCommandConverter
                 Object clientInfo = parser.parse(message);
 
                 return ClientCommandInit.clientCommand(clientInfo);
-            }
-            catch(MessageParserException ex) {
+            } catch(MessageParserException ex) {
                 throw new CommandConverterException(ex.getMessage());
             }
-        }
-        else throw new CommandConverterException("Message is null");
+        } else throw new CommandConverterException("Message is null");
     }
     
 }

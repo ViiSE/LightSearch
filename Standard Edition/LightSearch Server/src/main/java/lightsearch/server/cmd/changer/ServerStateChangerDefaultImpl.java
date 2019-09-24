@@ -65,13 +65,15 @@ public class ServerStateChangerDefaultImpl implements ServerStateChanger {
     }
 
     @Override
-    public void executeDatabaseRecordIdentifierWriterTimer(DatabaseRecordIdentifier identifier,
-                                                           DatabaseRecordIdentifierWriter identifierWriter, long minutesToWrite, TimersIDEnum timerId) {
-        DatabaseRecordIdentifierWriterTimerCreator identifierTimerCreator = DatabaseRecordIdentifierWriterTimerCreatorInit.databaseRecordIdentifierWriterTimerCreator(
-                logger, currentDateTime, threadManager, identifierWriter,
-                identifier, minutesToWrite, timerId);
+    public void executeDatabaseRecordIdentifierWriterTimer(
+            DatabaseRecordIdentifier identifier, DatabaseRecordIdentifierWriter identifierWriter,
+            long minutesToWrite, TimersIDEnum timerId) {
+        DatabaseRecordIdentifierWriterTimerCreator identifierTimerCreator =
+                DatabaseRecordIdentifierWriterTimerCreatorInit.databaseRecordIdentifierWriterTimerCreator(
+                        logger, currentDateTime, threadManager, identifierWriter, identifier, minutesToWrite, timerId);
         DatabaseRecordIdentifierWriterTimerExecutor identifierTimerExec =
-                DatabaseRecordIdentifierWriterTimerExecutorInit.databaseRecordIdentifierWriterTimerExecutor(identifierTimerCreator.getTimer());
+                DatabaseRecordIdentifierWriterTimerExecutorInit.databaseRecordIdentifierWriterTimerExecutor(
+                        identifierTimerCreator.getTimer());
         identifierTimerExec.startDatabaseRecordIdentifierWriterTimer();
     }
 
@@ -83,7 +85,8 @@ public class ServerStateChangerDefaultImpl implements ServerStateChanger {
 
     @Override
     public void executeGarbageCollectorTimer(TimersIDEnum id) {
-        GarbageCollectorTimerCreator garbageTimerCreator = GarbageCollectorTimerCreatorInit.garbageCollectorTimerCreator(logger, currentDateTime, threadManager, id);
+        GarbageCollectorTimerCreator garbageTimerCreator =
+                GarbageCollectorTimerCreatorInit.garbageCollectorTimerCreator(logger, currentDateTime, threadManager, id);
         GarbageCollectorTimerExecutorInit.garbageCollectorTimerExecutor(garbageTimerCreator.getTimer())
                         .startGarbageCollectorTimerExecutor();
     }

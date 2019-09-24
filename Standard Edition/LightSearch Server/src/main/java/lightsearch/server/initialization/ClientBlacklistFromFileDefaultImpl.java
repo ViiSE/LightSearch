@@ -50,19 +50,16 @@ public class ClientBlacklistFromFileDefaultImpl implements ClientBlacklist {
         try(FileInputStream fin = new FileInputStream(currDir + "blacklist"); 
                 BufferedReader br = new BufferedReader(new InputStreamReader(fin))) {
             String strLine;
-            while ((strLine = br.readLine()) != null){
+            while ((strLine = br.readLine()) != null)
                 blacklist.add(strLine);
-            }
-        }
-        catch(IOException ex) {
+        } catch(IOException ex) {
             System.out.println();
             System.out.println("Error blacklist file: " + ex.getMessage());
             System.out.println("Create new blacklist file...");
             try {
                 File blacklistFile = new File(currDir + "blacklist");
                 blacklistFile.createNewFile();
-            }
-            catch(IOException ioEx) {
+            } catch(IOException ioEx) {
                 throw new RuntimeException("Error: " + ioEx.getMessage());
             }
         }

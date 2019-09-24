@@ -50,14 +50,12 @@ public class ChangeDatabaseProcessor extends AbstractProcessorAdmin {
                 return super.commandResult(admCommand.name(), LogMessageTypeEnum.INFO, ResultTypeMessageEnum.TRUE, 
                         "Database is changed. Need restart server to apply changes.", 
                         admCommand.name() + " changed database.");
-            }
-            catch(IOException ex) {
+            } catch(IOException ex) {
                 return super.commandResult(admCommand.name(), LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE,
                         "Database is not changed. Try again.",
                         admCommand.name() + ": database is not changed. Exception: " + ex.getMessage());
             }
-        }
-        else
+        } else
             return super.commandResult("Unknown", LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE,
                     "Wrong command format. You are disconnected.", null);
     }

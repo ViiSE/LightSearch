@@ -36,10 +36,10 @@ public class DatabaseRecordIdentifierWriterTimerCreatorDefaultImpl implements Da
     private final long minutesToWrite;
     private final TimersIDEnum id;
     
-    public DatabaseRecordIdentifierWriterTimerCreatorDefaultImpl(LoggerServer loggerServer,
-                                                                 CurrentDateTime currentDateTime, ThreadManager threadManager,
-                                                                 DatabaseRecordIdentifierWriter databaseRecordIdentifierWriter,
-                                                                 DatabaseRecordIdentifier databaseRecordIdentifier, long minutesToWrite, TimersIDEnum id) {
+    public DatabaseRecordIdentifierWriterTimerCreatorDefaultImpl(
+            LoggerServer loggerServer, CurrentDateTime currentDateTime, ThreadManager threadManager,
+            DatabaseRecordIdentifierWriter databaseRecordIdentifierWriter,
+            DatabaseRecordIdentifier databaseRecordIdentifier, long minutesToWrite, TimersIDEnum id) {
         this.loggerServer = loggerServer;
         this.currentDateTime = currentDateTime;
         this.threadManager = threadManager;
@@ -52,7 +52,7 @@ public class DatabaseRecordIdentifierWriterTimerCreatorDefaultImpl implements Da
     @Override
     public SuperDatabaseRecordIdentifierWriterTimer getTimer() {
         return DatabaseRecordIdentifierWriterTimerInit.databaseRecordIdentifierWriterTimer(
-                loggerServer, currentDateTime, threadManager,
-                databaseRecordIdentifierWriter, databaseRecordIdentifier, minutesToWrite, id);
+                loggerServer, currentDateTime, threadManager, databaseRecordIdentifierWriter, databaseRecordIdentifier,
+                minutesToWrite, id);
     }
 }

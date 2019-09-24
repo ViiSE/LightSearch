@@ -63,7 +63,8 @@ public class RebootServerTimerDefault extends SuperRebootServerTimer {
 
                 if(super.threadManager().interruptAll(ID)) {
                     OsDetector osDetector = OsDetectorInit.osDetector();
-                    DaemonServerCreator daemonServerCreator = DaemonServerCreatorInit.daemonServerCreator(osDetector, super.currentDirectory());
+                    DaemonServerCreator daemonServerCreator =
+                            DaemonServerCreatorInit.daemonServerCreator(osDetector, super.currentDirectory());
                     DaemonServer daemonServer = daemonServerCreator.createDaemonServer();
                     daemonServer.exec();
                 }

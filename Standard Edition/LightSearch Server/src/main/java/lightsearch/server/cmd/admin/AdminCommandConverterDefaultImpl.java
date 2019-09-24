@@ -37,7 +37,6 @@ public class AdminCommandConverterDefaultImpl implements AdminCommandConverter {
             } catch(MessageParserException ex) {
                 throw new CommandConverterException(ex.getMessage());
             }
-        }
-        else throw new CommandConverterException("Message is null");
+        } else throw new CommandConverterException("Message is null");
     }
 }

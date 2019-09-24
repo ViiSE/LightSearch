@@ -43,6 +43,7 @@ public class ServerSettingsFromFileDefaultImpl implements ServerSettings{
         this.currentServerDirectory = currentServerDirectory;
     }
     
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     @Override
     public int rebootServerValue() {
         int serverReboot;
@@ -53,16 +54,14 @@ public class ServerSettingsFromFileDefaultImpl implements ServerSettings{
             fin.read(buffer, 0, fin.available());
             String serverRebootString = "";
             for (int i = 0; i < buffer.length; i++) {
-                if ((char)buffer[i] == ';') {
+                if ((char)buffer[i] == ';')
                     break;
-                }
                 if (i == 0) serverRebootString += (char)buffer[i];
             }
             serverReboot = Integer.parseInt(serverRebootString);
             if(serverReboot < 0)
                 throw new RuntimeException("Server reboot value is less than 0!");
-        }
-        catch(IOException ex) {
+        } catch(IOException ex) {
             throw new RuntimeException("Error: " + ex.getMessage());
         }
         

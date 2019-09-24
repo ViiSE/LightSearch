@@ -36,9 +36,10 @@ public class LightSearchListenerDTODefaultImpl implements LightSearchListenerDTO
     private final DatabaseRecordIdentifierWriter databaseRecordIdentifierWriter;
     private final TimersIDEnum timerRebootId;
     
-    public LightSearchListenerDTODefaultImpl(LightSearchChecker checker, CurrentDateTime currentDateTime,
-                                             ThreadManager threadManager, DatabaseRecordIdentifier databaseRecordIdentifier,
-                                             DatabaseRecordIdentifierWriter databaseRecordIdentifierWriter, TimersIDEnum timerRebootId) {
+    public LightSearchListenerDTODefaultImpl(
+            LightSearchChecker checker, CurrentDateTime currentDateTime, ThreadManager threadManager,
+            DatabaseRecordIdentifier databaseRecordIdentifier,
+            DatabaseRecordIdentifierWriter databaseRecordIdentifierWriter, TimersIDEnum timerRebootId) {
         this.checker = checker;
         this.currentDateTime = currentDateTime;
         this.threadManager = threadManager;

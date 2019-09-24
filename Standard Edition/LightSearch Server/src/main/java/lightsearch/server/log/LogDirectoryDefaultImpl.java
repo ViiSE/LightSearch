@@ -38,8 +38,7 @@ public class LogDirectoryDefaultImpl implements LogDirectory {
     @Override
     public String logDirectory() {
         OsDetector osDetector = OsDetectorInit.osDetector();
-        CurrentServerDirectory currentServerDirectory = CurrentServerDirectoryInit.currentDirectory(
-                osDetector);
+        CurrentServerDirectory currentServerDirectory = CurrentServerDirectoryInit.currentDirectory(osDetector);
         String loggerDirectory = currentServerDirectory.currentDirectory();
         
         if(osDetector.isWindows())

@@ -37,6 +37,7 @@ public class MessageTypeClientJSONFailDefaultImpl implements MessageType {
     private final String IS_DONE = ClientCommandResultEnum.IS_DONE.stringValue();
     private final String MESSAGE = ClientCommandResultEnum.MESSAGE.stringValue();
     
+    @SuppressWarnings("unchecked")
     @Override
     public String createFormattedMessage(String IMEI, String isDone, Object message) {
         JSONObject jObj = new JSONObject();

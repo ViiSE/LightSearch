@@ -21,7 +21,7 @@ public class GarbageCollectorTimerDefaultImpl implements GarbageCollectorTimer {
 
     @Override
     public void start() {
-        Executors.newScheduledThreadPool(1).scheduleAtFixedRate(() -> System.gc(), 1, 1000, TimeUnit.MILLISECONDS);
+        Executors.newScheduledThreadPool(1).scheduleAtFixedRate(System::gc, 1, 1000, TimeUnit.MILLISECONDS);
     }
     
 }

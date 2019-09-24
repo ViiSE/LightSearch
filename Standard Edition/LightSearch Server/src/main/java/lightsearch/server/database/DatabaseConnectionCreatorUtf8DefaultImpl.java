@@ -48,12 +48,10 @@ public class DatabaseConnectionCreatorUtf8DefaultImpl implements DatabaseConnect
                 "?encoding=utf8&amp;useUnicode=true&amp;characterEncoding=utf8", 
                 username, password);
             return DatabaseConnectionInit.databaseConnection(connection);
-        }
-        catch(ClassNotFoundException ex) {
+        } catch(ClassNotFoundException ex) {
             throw new DatabaseConnectionCreatorException(ex.getMessage(), 
             "Ошибка драйвера JDBC Jaybird. Обратитесь к администратору для устранения ошибки.");
-        }
-        catch(SQLException ex) {
+        } catch(SQLException ex) {
             //335544344 - неверное имя базы
             //335544345 - неверное имя юзера или пароль
             //335544721 - неверный порт или ip, или сервер отключен

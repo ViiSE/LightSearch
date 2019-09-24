@@ -44,8 +44,7 @@ public class DatabaseStatementResultSetUpdateDefaultImpl implements DatabaseStat
     public void exec() throws DatabaseStatementResultSetException {
         try {
             databasePreparedStatement.preparedStatement().executeUpdate();
-        }
-        catch(SQLException | DatabasePreparedStatementException ex) {
+        } catch(SQLException | DatabasePreparedStatementException ex) {
             throw new DatabaseStatementResultSetException(ex.getMessage());
         }
     }    

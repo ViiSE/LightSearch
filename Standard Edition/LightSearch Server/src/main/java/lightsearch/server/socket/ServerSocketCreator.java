@@ -30,8 +30,7 @@ public class ServerSocketCreator {
     public static ServerSocket createServerSocket(int serverPort) {
         try {
             return new ServerSocket(serverPort);
-        }
-        catch(IOException ex) {
+        } catch(IOException ex) {
             throw new RuntimeException("ServerSocket not create: " + ex.getMessage());
         }
     }

@@ -44,26 +44,22 @@ public class DateTimeComparatorDefaultImpl implements DateTimeComparator {
 
     @Override
     public boolean isAfter(Object originalDate, LocalDateTime afterDate) {
-        if(originalDate instanceof LocalDateTime) {
+        if(originalDate instanceof LocalDateTime)
             return ((LocalDateTime) originalDate).isAfter(afterDate);
-        }
-        else if(originalDate instanceof String) {
+        else if(originalDate instanceof String)
             return LocalDateTime.parse((String)originalDate, DateTimeFormatter.ofPattern(pattern)).isAfter(afterDate);
-        }
-        else 
+        else
             return false;
     }
 
     @Override
     public boolean isBefore(Object originalDate, LocalDateTime beforeDate) {
-        if(originalDate instanceof LocalDateTime) {
+        if(originalDate instanceof LocalDateTime)
             //LocalDateTime origDate = (LocalDateTime) originalDate;
             return ((LocalDateTime) originalDate).isBefore(beforeDate);
-        }
-        else if(originalDate instanceof String) {
+        else if(originalDate instanceof String)
             //LocalDateTime origDate = LocalDateTime.parse((String)originalDate, DateTimeFormatter.ofPattern(pattern));
             return LocalDateTime.parse((String)originalDate, DateTimeFormatter.ofPattern(pattern)).isBefore(beforeDate);
-        }
         else 
             return false;
     }

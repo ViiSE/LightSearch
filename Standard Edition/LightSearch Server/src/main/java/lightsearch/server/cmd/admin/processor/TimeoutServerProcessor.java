@@ -77,14 +77,12 @@ public class TimeoutServerProcessor extends AbstractProcessorAdmin {
                 return super.commandResult(admCommand.name(), LogMessageTypeEnum.INFO, ResultTypeMessageEnum.TRUE,
                         "Server timeout is set to " + serverReboot + " h.",
                         admCommand.name() + " set server timeout to " + serverReboot + " h.");
-            }
-            catch(IOException ex) {
+            } catch(IOException ex) {
                 return super.commandResult(admCommand.name(), LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE, 
                         "Server timeout is not set. Try again.",
                         admCommand.name() + ": server timeout is not set. Exception: " + ex.getMessage());
             }
-        }
-        else
+        } else
             return super.commandResult("Unknown", LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE, 
                     "Wrong command format. You are disconnected.", null);
     }
