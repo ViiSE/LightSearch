@@ -27,9 +27,9 @@ public class ScannerCommandHolderCreatorDefaultImpl implements ScannerCommandHol
 
     @Override
     public ScannerCommandHolder createScannerCommandHolder() {
-        ScannerRegistrationDTOCreator scRegDTOCreator = 
+        ScannerRegistrationDTOCreator scRegDTOCreator =
                 ScannerRegistrationDTOCreatorInit.scannerRegistrationDTOCreator();
-        ScannerClientValueDTOCreator scClValDTOCreator = 
+        ScannerClientValueDTOCreator scClValDTOCreator =
                 ScannerClientValueDTOCreatorInit.scannerClientValueDTOCreator();
         ScannerDatabaseDTOCreator scDbDTOCreator = 
                 ScannerDatabaseDTOCreatorInit.scannerDatabaseDTOCreator();
@@ -49,10 +49,7 @@ public class ScannerCommandHolderCreatorDefaultImpl implements ScannerCommandHol
         ScannerDatabase scDb = ScannerDatabaseInit.scannerDatabase(scDbDTO);
         ScannerTimeout scTout = ScannerTimeoutInit.scannerTimeout(scToutDTO);
         ScannerRestart scRes = ScannerRestartInit.scannerRestart(scResDTO);
-        
-        ScannerCommandHolder scCmdHolder = ScannerCommandHolderInit.
-                scannerCommandHolder(scReg, scClVal, scDb, scTout, scRes);
-        
-        return scCmdHolder;
+
+        return ScannerCommandHolderInit.scannerCommandHolder(scReg, scClVal, scDb, scTout, scRes);
     }
 }

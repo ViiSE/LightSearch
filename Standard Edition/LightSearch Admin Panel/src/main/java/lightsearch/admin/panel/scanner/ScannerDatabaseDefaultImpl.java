@@ -37,8 +37,7 @@ public class ScannerDatabaseDefaultImpl implements ScannerDatabase {
             String ip = scannerDTO.scanner().nextLine();
             scannerDTO.ipValidator().validate(ip);
             return ip;
-        }
-        catch(ValidatorException ex) {
+        } catch(ValidatorException ex) {
             throw new ScannerException(ex.getMessage());
         }
     }
@@ -49,11 +48,9 @@ public class ScannerDatabaseDefaultImpl implements ScannerDatabase {
             int port = Integer.parseInt(scannerDTO.scanner().nextLine());
             scannerDTO.portValidator().validate(port);
             return String.valueOf(port);
-        }
-        catch(ValidatorException ex) {
+        } catch(ValidatorException ex) {
             throw new ScannerException(ex.getMessage());
-        }
-        catch(NumberFormatException ex) {
+        } catch(NumberFormatException ex) {
             throw new ScannerException(ex.getMessage() 
                     + ": port value contains non-numeric characters!");
         }
@@ -65,8 +62,7 @@ public class ScannerDatabaseDefaultImpl implements ScannerDatabase {
             String dbName = scannerDTO.scanner().nextLine();
             scannerDTO.dbNameValidattor().validate(dbName);
             return dbName;
-        }
-        catch(ValidatorException ex) {
+        } catch(ValidatorException ex) {
             throw new ScannerException(ex.getMessage());
         }
     }

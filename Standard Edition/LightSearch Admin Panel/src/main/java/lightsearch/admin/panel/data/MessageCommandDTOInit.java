@@ -24,8 +24,7 @@ import lightsearch.admin.panel.message.MessageSender;
  */
 public class MessageCommandDTOInit {
     
-    public static MessageCommandDTO messageCommandDTO(MessageSender messageSender,
-            MessageRecipient messageRecipient) {
+    public static MessageCommandDTO messageCommandDTO(MessageSender messageSender, MessageRecipient messageRecipient) {
         return new MessageCommandDTODefaultImpl(messageSender, messageRecipient);
     }
 }

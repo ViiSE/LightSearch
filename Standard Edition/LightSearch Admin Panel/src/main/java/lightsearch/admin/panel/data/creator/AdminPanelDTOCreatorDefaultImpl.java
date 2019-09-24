@@ -31,9 +31,7 @@ public class AdminPanelDTOCreatorDefaultImpl implements AdminPanelDTOCreator {
     public AdminPanelDTO createAdminPanelDTO() {
         Map<String, String> clients = new HashMap<>();
         Map<String, String> blacklist = new HashMap<>();
-        
-        AdminPanelDTO adminPanelDTO = AdminPanelDTOInit.adminPanelDTO(clients, blacklist);
-        
-        return adminPanelDTO;
+
+        return AdminPanelDTOInit.adminPanelDTO(clients, blacklist);
     }
 }

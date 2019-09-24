@@ -36,16 +36,14 @@ public class ClientListMessageProcessor extends AbstractProcessorMessage {
     @Override
     public CommandResult apply(AdminCommandDAO admCmdDAO) {
         try {
-            MessageClientList messageClientList =
-                    MessageClientListInit.messageClientList(admCmdDAO.name());
+            MessageClientList messageClientList = MessageClientListInit.messageClientList(admCmdDAO.name());
             String msgClientList = messageClientList.message();
             super.messageCommandDTO().messageSender().sendMessage(msgClientList);
             
             String rawMessage = super.messageCommandDTO().messageRecipient().acceptMessage();
             
             return super.commandResult(rawMessage);
-        }
-        catch(MessageSenderException | MessageRecipientException ex) {
+        } catch(MessageSenderException | MessageRecipientException ex) {
             throw new RuntimeException(ex.getMessage());
         }
     }

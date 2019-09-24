@@ -62,11 +62,9 @@ public class ClientKickProcessorTest extends AbstractProcessorAdmin {
                     if(cmdRes.isDone().equals(TRUE)) {
                         mapRemover.removeFromMap(admPanelDTO.clients(), value);
                         return cmdRes.message();
-                    }
-                    else
+                    } else
                         return cmdRes.message();
-                }
-                else
+                } else
                     System.out.println(cmdRes.message());
             }
         }

@@ -36,19 +36,14 @@ public class ScannerClientValueDefaultImpl implements ScannerClientValue {
         
         String value = scannerDTO.scanner().nextLine();
         try {
-            String IMEI = value;
-            scannerDTO.IMEIValidator().validate(IMEI);
-            return IMEI;
-        }
-        catch(ValidatorException exIMEI) {
+            scannerDTO.IMEIValidator().validate(value);
+            return value;
+        } catch(ValidatorException exIMEI) {
             try {
                 scannerDTO.numberValidator().validate(value);
                 return value;
-            } 
-            catch(ValidatorException exNumber) {
-                throw new ScannerException(exIMEI.getMessage() + 
-                        " or " 
-                        + exNumber.getMessage());
+            } catch(ValidatorException exNumber) {
+                throw new ScannerException(exIMEI.getMessage() + " or " + exNumber.getMessage());
             }
         }
     }

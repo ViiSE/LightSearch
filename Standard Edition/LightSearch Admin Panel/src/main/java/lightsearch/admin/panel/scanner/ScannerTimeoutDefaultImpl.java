@@ -37,8 +37,7 @@ public class ScannerTimeoutDefaultImpl implements ScannerTimeout {
             String timeoutValue = scannerDTO.scanner().nextLine();
             scannerDTO.timeoutValidator().validate(timeoutValue);
             return timeoutValue;
-        }
-        catch(ValidatorException ex) {
+        } catch(ValidatorException ex) {
             throw new ScannerException(ex.getMessage());
         }
     }

@@ -33,9 +33,7 @@ public class ScannerDatabaseDTOCreatorDefaultImpl implements ScannerDatabaseDTOC
         IPValidator ipValidator = IPValidatorInit.ipValidator();
         PortValidator portValidator = PortValidatorInit.portValidator();
         DatabaseNameValidator dbNameValidator = DatabaseNameValidatorInit.databaseNameValidator();
-        
-        ScannerDatabaseDTO scannerDTO = ScannerDatabaseDTOInit.scannerDatabaseDTO(
-                scanner, ipValidator, portValidator, dbNameValidator);
-        return scannerDTO;
+
+        return ScannerDatabaseDTOInit.scannerDatabaseDTO(scanner, ipValidator, portValidator, dbNameValidator);
     }
 }

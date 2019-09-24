@@ -54,8 +54,7 @@ public class AdminCommandCreatorDefaultImpl implements AdminCommandCreator {
     @Override
     public Map<String, Function<AdminPanelDTO, String>> createCommandHolder() {
         
-        ScannerCommandHolderCreator scCmdHolderCreator =
-                ScannerCommandHolderCreatorInit.scannerCommandHolderCreator();
+        ScannerCommandHolderCreator scCmdHolderCreator = ScannerCommandHolderCreatorInit.scannerCommandHolderCreator();
         ScannerCommandHolder scCmdHolder = scCmdHolderCreator.createScannerCommandHolder();
         
         Map<String, Function<AdminPanelDTO, String>> cmdHolder = new HashMap<>();

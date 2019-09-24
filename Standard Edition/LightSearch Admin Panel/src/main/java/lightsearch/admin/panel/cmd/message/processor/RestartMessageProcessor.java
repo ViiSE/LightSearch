@@ -42,8 +42,7 @@ public class RestartMessageProcessor extends AbstractProcessorMessage {
             String rawMessage = "{\"message\": \"True\"}";
             
             return super.commandResult(rawMessage);
-        }
-        catch(MessageSenderException ex) {
+        } catch(MessageSenderException ex) {
             throw new RuntimeException(ex.getMessage());
         }
     }    

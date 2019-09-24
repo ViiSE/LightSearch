@@ -36,10 +36,8 @@ public class SocketCreatorDefaultImpl implements SocketCreator {
     @Override
     public Socket createSocket() throws SocketException {
         try {
-            Socket socket = new Socket(connectionDTO.ip(), connectionDTO.port());
-            return socket;
-        }
-        catch (IOException ex) {
+            return new Socket(connectionDTO.ip(), connectionDTO.port());
+        } catch (IOException ex) {
             throw new SocketException("Error: " + ex.getMessage() + "\n. Try again.");
         }
     }    

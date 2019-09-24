@@ -34,8 +34,7 @@ public class CommandValidatorDefaultImpl implements CommandValidator {
                 throw new ValidatorException("Command number must be more or equals than " + commandMinCount + "!");
             if(cmd > commandMaxCount)
                 throw new ValidatorException("Command number must be less or equals " + commandMaxCount + "!");
-        }
-        catch (NumberFormatException ignore) {
+        } catch (NumberFormatException ignore) {
             throw new ValidatorException("Input value is not a number!");
         }
     }

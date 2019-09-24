@@ -25,8 +25,7 @@ import java.util.Scanner;
  */
 public class ScannerChooserCommandDTOInit {
     
-    public static ScannerChooserCommandDTO scannerChooserCommandDTO(
-            Scanner scanner, CommandValidator commandValidator) {
+    public static ScannerChooserCommandDTO scannerChooserCommandDTO(Scanner scanner, CommandValidator commandValidator) {
         return new ScannerChooserCommandDTODefaultImpl(scanner, commandValidator);
     }
 }

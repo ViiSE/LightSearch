@@ -38,6 +38,7 @@ public class MessageAuthenticationJSONDefaultImpl implements MessageAuthenticati
         this.pass = pass;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public String message() {
         JSONObject msgAuthObj = new JSONObject();

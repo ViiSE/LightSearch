@@ -37,9 +37,8 @@ public class AdminPanelMenuCreatorDefaultImpl implements AdminPanelMenuCreator {
                       "|11. Exit                          |\n" +
                       "+----------------------------------+\n" +
                       "Choose command: ";
-        AdminPanelMenu adminMenu = AdminPanelMenuInit.adminMenu(menu);
-        
-        return adminMenu;
+
+        return AdminPanelMenuInit.adminMenu(menu);
     }
     
 }

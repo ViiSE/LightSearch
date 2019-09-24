@@ -37,18 +37,14 @@ public class TimeoutServerMessageProcessor extends AbstractProcessorMessage {
     public CommandResult apply(AdminCommandDAO admCmdDAO) {
         try {
             MessageTimeoutServer messageTimeoutServer =
-                    MessageTimeoutServerInit.messageTimeoutServer(
-                            admCmdDAO.name(), 
-                            admCmdDAO.serverTimeout()
-                    );
+                    MessageTimeoutServerInit.messageTimeoutServer(admCmdDAO.name(), admCmdDAO.serverTimeout());
             String msgToutServer = messageTimeoutServer.message();
             super.messageCommandDTO().messageSender().sendMessage(msgToutServer);
             
             String rawMessage = super.messageCommandDTO().messageRecipient().acceptMessage();
             
             return super.commandResult(rawMessage);
-        }
-        catch(MessageSenderException | MessageRecipientException ex) {
+        } catch(MessageSenderException | MessageRecipientException ex) {
             throw new RuntimeException(ex.getMessage());
         }
     }

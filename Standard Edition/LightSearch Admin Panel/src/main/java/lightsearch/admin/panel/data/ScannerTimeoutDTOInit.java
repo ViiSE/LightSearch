@@ -25,8 +25,7 @@ import java.util.Scanner;
  */
 public class ScannerTimeoutDTOInit {
     
-    public static ScannerTimeoutDTO scannerTimeoutDTO(Scanner scanner,
-            TimeoutValidator timeoutValidator) {
+    public static ScannerTimeoutDTO scannerTimeoutDTO(Scanner scanner, TimeoutValidator timeoutValidator) {
         return new ScannerTimeoutDTODefaultImpl(scanner, timeoutValidator);
     }
 }

@@ -21,8 +21,7 @@ package lightsearch.admin.panel.message.type;
  */
 public class MessageChangeDatabaseInit {
     
-    public static MessageChangeDatabase messageChangeDatabase(String name,
-            String dbName, String ip, String port) {
+    public static MessageChangeDatabase messageChangeDatabase(String name, String dbName, String ip, String port) {
         return new MessageChangeDatabaseJSONDefaultImpl(name, dbName, ip, port);
     }
 }

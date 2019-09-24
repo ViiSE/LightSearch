@@ -30,8 +30,7 @@ public class ScannerClientValueDTODefaultImpl implements ScannerClientValueDTO {
     private final IMEIValidator imeiValidator;
     private final NumberValidator numberValidator;
 
-    public ScannerClientValueDTODefaultImpl(Scanner scanner, IMEIValidator imeiValidator,
-            NumberValidator numberValidator) {
+    public ScannerClientValueDTODefaultImpl(Scanner scanner, IMEIValidator imeiValidator, NumberValidator numberValidator) {
         this.scanner = scanner;
         this.imeiValidator = imeiValidator;
         this.numberValidator = numberValidator;

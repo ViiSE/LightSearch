@@ -35,26 +35,25 @@ public class BlacklistResultJSONDefaultImpl implements BlacklistResult {
 
     @Override
     public String result() {
-        String res = "";
-        res += "+================================================+\n";
+        StringBuilder res = new StringBuilder();
+        res.append("+================================================+\n");
         int blacklistCount = 1;
         if(data != null) {
-            for (int j = 0; j < data.size(); j++) {
-                res += "|" + blacklistCount + ". " + data.get(j).toString();
-                int spaceCount = 45 - data.get(j).toString().length();
-                for(int i = 0; i < spaceCount; i++)
-                    res += " ";
-                res += "|\n";
-                res += "+------------------------------------------------+\n";
-                blacklist.put(String.valueOf(blacklistCount), data.get(j).toString());
+            for (Object blStr : data) {
+                res.append("|").append(blacklistCount).append(". ").append(blStr.toString());
+                int spaceCount = 45 - blStr.toString().length();
+                for (int i = 0; i < spaceCount; i++)
+                    res.append(" ");
+                res.append("|\n");
+                res.append("+------------------------------------------------+\n");
+                blacklist.put(String.valueOf(blacklistCount), blStr.toString());
                 blacklistCount++;
             }
-            blacklistCount--;
-            res += "Blacklist size: " + data.size() + "\n";
-        }
-        else {
-            res += "Blacklist size: 0\n";
-        }
-        return res;
+            --blacklistCount;
+            res.append("Blacklist size: ").append(data.size()).append("\n");
+        } else
+            res.append("Blacklist size: 0\n");
+
+        return res.toString();
     }
 }

@@ -26,7 +26,8 @@ import java.util.Scanner;
  */
 public class ScannerConnectionDTOInit {
     
-    public static ScannerConnectionDTO scannerConnectionDTO(Scanner scanner, IPValidator ipValidator, PortValidator portValidator) {
+    public static ScannerConnectionDTO scannerConnectionDTO(
+            Scanner scanner, IPValidator ipValidator, PortValidator portValidator) {
         return new ScannerConnectionDTODefaultImpl(scanner, ipValidator, portValidator);
     }
 }

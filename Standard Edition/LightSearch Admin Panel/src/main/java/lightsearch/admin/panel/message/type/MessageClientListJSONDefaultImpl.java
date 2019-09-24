@@ -35,6 +35,7 @@ public class MessageClientListJSONDefaultImpl implements MessageClientList {
         this.name = name;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public String message() {
         JSONObject msgClientListObj = new JSONObject();

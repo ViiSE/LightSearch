@@ -26,10 +26,10 @@ import java.util.regex.Pattern;
  */
 public class IPValidatorDefaultImpl implements IPValidator {
 
-    private final String ipv4Pattern = ValidatorEnum.IPV4_PATTERN.toString();
-    Pattern pattern;
+    private Pattern pattern;
     
     public IPValidatorDefaultImpl() {
+        String ipv4Pattern = ValidatorEnum.IPV4_PATTERN.toString();
         pattern = Pattern.compile(ipv4Pattern);
     }
     

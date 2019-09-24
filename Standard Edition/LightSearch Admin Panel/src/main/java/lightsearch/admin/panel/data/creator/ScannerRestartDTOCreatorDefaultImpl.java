@@ -32,8 +32,7 @@ public class ScannerRestartDTOCreatorDefaultImpl implements ScannerRestartDTOCre
     public ScannerRestartDTO createScannerRestartDTO() {
         Scanner scanner = new Scanner(System.in);
         RestartValidator restartValidator = RestartValidatorInit.restartValidator();
-        ScannerRestartDTO scannerRestartDTO = 
-                ScannerRestartDTOInit.scannerRestartDTO(scanner, restartValidator);
-        return scannerRestartDTO;
+
+        return ScannerRestartDTOInit.scannerRestartDTO(scanner, restartValidator);
     }
 }

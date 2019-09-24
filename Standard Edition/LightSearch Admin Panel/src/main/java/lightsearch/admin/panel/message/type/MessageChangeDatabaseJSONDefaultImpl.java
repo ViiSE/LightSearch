@@ -44,6 +44,7 @@ public class MessageChangeDatabaseJSONDefaultImpl implements MessageChangeDataba
         this.port = port;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public String message() {
         JSONObject msgChDbObj = new JSONObject();

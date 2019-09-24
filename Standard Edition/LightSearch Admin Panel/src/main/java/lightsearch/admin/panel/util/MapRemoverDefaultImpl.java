@@ -34,11 +34,11 @@ public class MapRemoverDefaultImpl implements MapRemover {
                 return false;
             
             return removeFromMapWithKey(map, foundKey);
-        }
-        else
+        } else
             return false;
     }
     
+    @SuppressWarnings("unchecked")
     private boolean removeFromMapWithKey(Map map, Object key) {
         int begin;
         if(key instanceof String)

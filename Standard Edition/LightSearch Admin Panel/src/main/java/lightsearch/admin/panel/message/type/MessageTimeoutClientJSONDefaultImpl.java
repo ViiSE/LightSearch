@@ -38,6 +38,7 @@ public class MessageTimeoutClientJSONDefaultImpl implements MessageTimeoutClient
         this.clientTimeout = clientTimeout;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public String message() {
         JSONObject msgToutClientObj = new JSONObject();

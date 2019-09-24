@@ -38,6 +38,7 @@ public class MessageTimeoutServerJSONDefaultImpl implements MessageTimeoutServer
         this.serverTime = serverTime;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public String message() {
         JSONObject msgToutServer = new JSONObject();

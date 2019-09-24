@@ -23,8 +23,7 @@ import lightsearch.admin.panel.data.ScannerRegistrationDTO;
  */
 public class ScannerRegistrationInit {
     
-    public static ScannerRegistration scannerRegistration(
-            ScannerRegistrationDTO scannerDTO) {
+    public static ScannerRegistration scannerRegistration(ScannerRegistrationDTO scannerDTO) {
         return new ScannerRegistrationDefaultImpl(scannerDTO);
     }
 }

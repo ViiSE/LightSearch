@@ -23,8 +23,7 @@ import lightsearch.admin.panel.data.ScannerChooserCommandDTO;
  */
 public class ScannerChooserCommandInit {
     
-    public static ScannerChooserCommand scannerChooserCommand(
-            ScannerChooserCommandDTO scannerChooserCommandDTO) {
+    public static ScannerChooserCommand scannerChooserCommand(ScannerChooserCommandDTO scannerChooserCommandDTO) {
         return new ScannerChooserCommandDefaultImpl(scannerChooserCommandDTO);
     }
 }

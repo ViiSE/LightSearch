@@ -48,22 +48,16 @@ public class ClientListRequestProcessor extends AbstractProcessorAdmin {
         Function<AdminCommandDAO, CommandResult> processor = 
                 super.adminDTO().messageCommandHolder().get(COMMAND);
         
-        if(processor != null){
+        if(processor != null) {
             CommandResult cmdRes = processor.apply(admCmdDAO);
             if(cmdRes.name().equals(super.adminDTO().adminDAO().name())) {
                 if(cmdRes.isDone().equals(TRUE)) {
                     Object data = cmdRes.data();
-                    ClientListResult clListRes = 
-                            ClientListResultInit.clientListResult(data, admPanelDTO.clients());
-                    String resMsg = clListRes.result();
-                    return resMsg;
-                }
-                else {
-                    String errMsg = cmdRes.message();
-                    return errMsg;
-                }
-            }
-            else
+                    ClientListResult clListRes = ClientListResultInit.clientListResult(data, admPanelDTO.clients());
+                    return clListRes.result();
+                } else
+                    return cmdRes.message();
+            } else
                 throw new RuntimeException(cmdRes.message());
         }
         

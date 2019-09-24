@@ -33,20 +33,19 @@ public class AdminPanelSessionDefaultImpl implements AdminPanelSession {
         this.sessionDTO = sessionDTO;
     }
     
+    @SuppressWarnings("InfiniteLoopStatement")
     @Override
     public void startSession() {
         while(true) {
             try {
                 sessionDTO.adminMenu().menu();
                 String command = sessionDTO.scannerCommand().scanCommand();
-                Function<AdminPanelDTO, String> processor = 
-                        sessionDTO.commandHolder().get(command);
+                Function<AdminPanelDTO, String> processor = sessionDTO.commandHolder().get(command);
                 if(processor != null) {
                     String result = processor.apply(sessionDTO.adminPanelDTO());
                     sessionDTO.printer().println(result);
                 }
-            }
-            catch(ScannerException ex) {
+            } catch(ScannerException ex) {
                 sessionDTO.printer().println(ex.getMessage());
             }
         }

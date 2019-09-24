@@ -49,8 +49,7 @@ public class AddBlacklistProcessor extends AbstractProcessorAdmin {
             try {
                 super.adminDTO().printer().print("Input IMEI or number in table of clients: ");
                 String value = scanner.scanValue();
-                String IMEI = admPanelDTO.clients().containsKey(value) ? 
-                        admPanelDTO.clients().get(value) : value;
+                String IMEI = admPanelDTO.clients().containsKey(value) ? admPanelDTO.clients().get(value) : value;
                 
                 AdminCommandDAO admCmdDAO = AdminCommandDAOInit.adminCommandDAO();
                 admCmdDAO.setName(super.adminDTO().adminDAO().name());
@@ -59,27 +58,20 @@ public class AddBlacklistProcessor extends AbstractProcessorAdmin {
                 Function<AdminCommandDAO, CommandResult> processor = 
                         super.adminDTO().messageCommandHolder().get(COMMAND);
                 
-                if(processor != null){
+                if(processor != null) {
                     CommandResult cmdRes = processor.apply(admCmdDAO);
                     if(cmdRes.name().equals(super.adminDTO().adminDAO().name())) {
                         if(cmdRes.isDone().equals(TRUE)) {
                             int keyInt = admPanelDTO.blacklist().size() + 1;
                             admPanelDTO.blacklist().put(String.valueOf(keyInt), IMEI);
-                            String resMsg = cmdRes.message();
-                            return resMsg;
+                            return cmdRes.message();
+                        } else {
+                            return cmdRes.message();
                         }
-                        else {
-                            String errMsg = cmdRes.message();
-                            return errMsg;
-                        }
-                    }
-                    else {
+                    } else
                         throw new RuntimeException(cmdRes.message());
-                    }
                 }
-                    
-            }
-            catch(ScannerException ex) {
+            } catch(ScannerException ex) {
                 super.adminDTO().printer().println(ex.getMessage());
             }
         }

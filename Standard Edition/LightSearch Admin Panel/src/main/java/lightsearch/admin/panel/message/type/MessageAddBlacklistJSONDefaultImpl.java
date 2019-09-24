@@ -38,6 +38,7 @@ public class MessageAddBlacklistJSONDefaultImpl implements MessageAddBlacklist {
         this.IMEI = IMEI;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public String message() {
         JSONObject msgAddBlObj = new JSONObject();

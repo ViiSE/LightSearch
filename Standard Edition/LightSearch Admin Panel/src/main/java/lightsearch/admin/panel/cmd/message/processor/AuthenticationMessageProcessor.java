@@ -37,18 +37,14 @@ public class AuthenticationMessageProcessor extends AbstractProcessorMessage {
     public CommandResult apply(AdminCommandDAO admCmdDAO) {
         try {
             MessageAuthentication messageAuthentication =
-                    MessageAuthenticationInit.messageAuthentication(
-                            admCmdDAO.name(), 
-                            admCmdDAO.password()
-                    );
+                    MessageAuthenticationInit.messageAuthentication(admCmdDAO.name(), admCmdDAO.password());
             String messageAuth = messageAuthentication.message();
             super.messageCommandDTO().messageSender().sendMessage(messageAuth);
             
             String rawMessage = super.messageCommandDTO().messageRecipient().acceptMessage();
             
             return super.commandResult(rawMessage);
-        }
-        catch(MessageSenderException | MessageRecipientException ex) {
+        } catch(MessageSenderException | MessageRecipientException ex) {
             throw new RuntimeException(ex.getMessage());
         }
     }

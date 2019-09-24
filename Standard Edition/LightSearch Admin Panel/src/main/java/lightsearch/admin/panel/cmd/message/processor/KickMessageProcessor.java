@@ -36,16 +36,14 @@ public class KickMessageProcessor extends AbstractProcessorMessage {
     @Override
     public CommandResult apply(AdminCommandDAO admCmdDAO) {
         try {
-            MessageKick messageKick =
-                    MessageKickInit.messageKick(admCmdDAO.name(),admCmdDAO.IMEI());
+            MessageKick messageKick = MessageKickInit.messageKick(admCmdDAO.name(), admCmdDAO.IMEI());
             String msgKick = messageKick.message();
             super.messageCommandDTO().messageSender().sendMessage(msgKick);
             
             String rawMessage = super.messageCommandDTO().messageRecipient().acceptMessage();
             
             return super.commandResult(rawMessage);
-        }
-        catch(MessageSenderException | MessageRecipientException ex) {
+        } catch(MessageSenderException | MessageRecipientException ex) {
             throw new RuntimeException(ex.getMessage());
         }
     }

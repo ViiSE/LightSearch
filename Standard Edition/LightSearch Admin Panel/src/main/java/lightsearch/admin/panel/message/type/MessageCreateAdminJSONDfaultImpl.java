@@ -41,6 +41,7 @@ public class MessageCreateAdminJSONDfaultImpl implements MessageCreateAdmin {
         this.password = password;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public String message() {
         JSONObject msgCreateAdmin = new JSONObject();

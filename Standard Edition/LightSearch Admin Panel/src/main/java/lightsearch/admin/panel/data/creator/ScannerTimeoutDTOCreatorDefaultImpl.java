@@ -32,8 +32,7 @@ public class ScannerTimeoutDTOCreatorDefaultImpl implements ScannerTimeoutDTOCre
     public ScannerTimeoutDTO createScannerTimeoutDTO() {
         Scanner scanner = new Scanner(System.in);
         TimeoutValidator timeoutValidator = TimeoutValidatorInit.timeoutValidator();
-        ScannerTimeoutDTO scannerTimeoutDTO = 
-                ScannerTimeoutDTOInit.scannerTimeoutDTO(scanner, timeoutValidator);
-        return scannerTimeoutDTO;
+
+        return ScannerTimeoutDTOInit.scannerTimeoutDTO(scanner, timeoutValidator);
     }
 }

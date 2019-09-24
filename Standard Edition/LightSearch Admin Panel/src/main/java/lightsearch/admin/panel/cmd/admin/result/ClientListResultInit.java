@@ -23,8 +23,7 @@ import java.util.Map;
  */
 public class ClientListResultInit {
     
-    public static ClientListResult clientListResult(Object data,
-            Map<String, String> clients) {
+    public static ClientListResult clientListResult(Object data, Map<String, String> clients) {
         return new ClientListResultJSONDefaultImpl(data, clients);
     }
 }

@@ -78,10 +78,8 @@ public class AdminSessionCreatorInteractiveDefaultImpl implements AdminPanelSess
     public AdminPanelSession createSession() {
         while(true) {
             try {
-                ConnectionDTOCreator connectionDTOCreator = 
-                        ConnectionDTOCreatorInit.connectionDTOCreator(
-                                printer, scannerDTO);
-
+                ConnectionDTOCreator connectionDTOCreator =
+                        ConnectionDTOCreatorInit.connectionDTOCreator(printer, scannerDTO);
                 ConnectionDTO connectionDTO = connectionDTOCreator.createConnectionDTO();
 
                 SocketCreator socketCreator = SocketCreatorInit.socketCreator(connectionDTO);
@@ -101,36 +99,30 @@ public class AdminSessionCreatorInteractiveDefaultImpl implements AdminPanelSess
                         
                         AdminDAO adminDAO = AdminDAOInit.adminDAO();
                         
-                        MessageCommandDTO msgCmdDTO = 
+                        MessageCommandDTO msgCmdDTO =
                                 MessageCommandDTOInit.messageCommandDTO(messageSender, messageRecipient);
-                        MessageCommandCreator msgCmdCreator = 
+                        MessageCommandCreator msgCmdCreator =
                                 MessageCommandCreatorInit.messageCommandCreator(msgCmdDTO);
                         
                         AdminDTO adminDTO = AdminDTOInit.adminDTO(
-                                socket,
-                                adminDAO,
-                                printer,
-                                msgCmdCreator.createMessageCommandHolder()
-                        );
+                                socket, adminDAO, printer, msgCmdCreator.createMessageCommandHolder());
                         
                         
                         MapRemover mapRemover = MapRemoverInit.mapRemover();
-                        AdminCommandCreator admCmdCreator = 
+                        AdminCommandCreator admCmdCreator =
                                 AdminCommandCreatorInit.adminCommandCreator(adminDTO, mapRemover);
                         
-                        Map<String, Function<AdminPanelDTO, String>> cmdHolder = 
-                                admCmdCreator.createCommandHolder();
+                        Map<String, Function<AdminPanelDTO, String>> cmdHolder = admCmdCreator.createCommandHolder();
                         
-                        Function<AdminPanelDTO, String> authProcessor =
-                                cmdHolder.get(AUTHENTICATION);
+                        Function<AdminPanelDTO, String> authProcessor = cmdHolder.get(AUTHENTICATION);
                         
                         if(authProcessor != null) {
                             String result = authProcessor.apply(adminPanelDTO);
                             printer.println(result);
                             
-                            ScannerChooserCommandDTOCreator scChCmdDTOCreator = 
+                            ScannerChooserCommandDTOCreator scChCmdDTOCreator =
                                     ScannerChooserCommandDTOCreatorInit.scannerChooserCommandDTOCreator();
-                            ScannerChooserCommandDTO scChCmdDTO = 
+                            ScannerChooserCommandDTO scChCmdDTO =
                                     scChCmdDTOCreator.createScannerChooserCommandDTO();
                             
                             ScannerChooserCommand scChCmd = 
@@ -139,24 +131,17 @@ public class AdminSessionCreatorInteractiveDefaultImpl implements AdminPanelSess
                             AdminPanelMenuCreator menuCreator = AdminPanelMenuCreatorInit.adminMenuCreator();
                             AdminPanelMenu menu = menuCreator.createAdminMenu();
                             
-                            AdminPanelSessionDTO admPanelSessionDTO = 
-                                    AdminPanelSessionDTOInit.adminPanelDTO(
-                                            menu, adminPanelDTO, cmdHolder, printer, scChCmd);
-                            
-                            AdminPanelSession admPanelSession =
-                                    AdminPanelSessionInit.adminPanelSession(admPanelSessionDTO);
-                            
-                            return admPanelSession;
+                            AdminPanelSessionDTO admPanelSessionDTO = AdminPanelSessionDTOInit.adminPanelDTO(
+                                    menu, adminPanelDTO, cmdHolder, printer, scChCmd);
+
+                            return AdminPanelSessionInit.adminPanelSession(admPanelSessionDTO);
                         }                        
-                }
-                else 
+                } else
                     throw new RuntimeException("Cannot connect to LightSearch Server. "
                             + "Make sure that LightSearch server is running "
                             + "with these an IP address and port.");
                 
-            }
-            catch (SocketException | 
-                    DataStreamCreatorException ex) {
+            } catch (SocketException | DataStreamCreatorException ex) {
                 printer.println(ex.getMessage());
             }
         }

@@ -25,8 +25,7 @@ import lightsearch.admin.panel.print.AdminPanelPrinter;
  */
 public class AdminPanelSessionCreatorInit {
     public static AdminPanelSessionCreator adminPanelSessionCreatorInteractive(
-            AdminPanelPrinter printer, ScannerConnectionDTO scannerDTO,
-            AdminPanelDTO adminPanelDTO) {
+            AdminPanelPrinter printer, ScannerConnectionDTO scannerDTO, AdminPanelDTO adminPanelDTO) {
         return new AdminSessionCreatorInteractiveDefaultImpl(printer, scannerDTO, adminPanelDTO);
     }
 }

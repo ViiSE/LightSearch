@@ -56,24 +56,20 @@ public class RestartProcessor extends AbstractProcessorAdmin {
                     Function<AdminCommandDAO, CommandResult> processor =
                             super.adminDTO().messageCommandHolder().get(COMMAND);
 
-                    if(processor != null){
-                        CommandResult cmdRes = processor.apply(admCmdDAO);
+                    if(processor != null) {
+                        processor.apply(admCmdDAO);
                         super.adminDTO().printer().println("Server Restarted");
                         super.adminDTO().printer().println("Goodbye, " + super.adminDTO().adminDAO().name() + "!");
                         try {
                             super.adminDTO().adminSocket().close();
-                        }
-                        catch(IOException ignore) {}
+                        } catch(IOException ignore) {}
                         finally {
                             System.exit(0);
                         }
                     }
-                }
-                else {
+                } else
                     return answer;
-                }
-            }
-            catch(ScannerException ex) {
+            } catch(ScannerException ex) {
                 super.adminDTO().printer().println(ex.getMessage());
             }
         }

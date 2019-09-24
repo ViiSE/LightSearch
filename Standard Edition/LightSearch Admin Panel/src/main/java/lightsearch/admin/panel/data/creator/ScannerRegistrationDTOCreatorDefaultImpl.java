@@ -35,9 +35,7 @@ public class ScannerRegistrationDTOCreatorDefaultImpl implements ScannerRegistra
         Scanner scanner = new Scanner(System.in);
         AdminNameValidator adminNameValidator = AdminNameValidatorInit.adminNameValidator();
         HashAlgorithms hashAlgorithms = HashAlgorithmsInit.hashAlgorithms();
-        
-        ScannerRegistrationDTO scannerDTO = ScannerRegistrationDTOInit.
-                scannerAuthenticationDTO(scanner, adminNameValidator, hashAlgorithms);
-        return scannerDTO;
+
+        return ScannerRegistrationDTOInit.scannerAuthenticationDTO(scanner, adminNameValidator, hashAlgorithms);
     }
 }

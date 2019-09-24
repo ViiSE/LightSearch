@@ -64,23 +64,17 @@ public class ChangeDatabaseProcessor extends AbstractProcessorAdmin {
                 
                 Function<AdminCommandDAO, CommandResult> processor = 
                         super.adminDTO().messageCommandHolder().get(COMMAND);
-                if(processor != null){
+                if(processor != null) {
                     CommandResult cmdRes = processor.apply(admCmdDAO);
                     if(cmdRes.name().equals(super.adminDTO().adminDAO().name())) {
                         if(cmdRes.isDone().equals(TRUE)) {
-                            String resMsg = cmdRes.message();
-                            return resMsg;
-                        }
-                        else {
-                            String errMsg = cmdRes.message();
-                            return errMsg;
-                        }
-                    }
-                    else
+                            return cmdRes.message();
+                        } else
+                            return cmdRes.message();
+                    } else
                         throw new RuntimeException(cmdRes.message());
                 }
-            }
-            catch (ScannerException ex) {
+            } catch (ScannerException ex) {
                 super.adminDTO().printer().println(ex.getMessage());
             }
         }

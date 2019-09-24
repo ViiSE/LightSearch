@@ -45,25 +45,18 @@ public class BlacklistRequestProcessor extends AbstractProcessorAdmin {
         AdminCommandDAO admCmdDAO = AdminCommandDAOInit.adminCommandDAO();
         admCmdDAO.setName(super.adminDTO().adminDAO().name());
         
-        Function<AdminCommandDAO, CommandResult> processor = 
-                super.adminDTO().messageCommandHolder().get(COMMAND);
+        Function<AdminCommandDAO, CommandResult> processor = super.adminDTO().messageCommandHolder().get(COMMAND);
         
-        if(processor != null){
+        if(processor != null) {
             CommandResult cmdRes = processor.apply(admCmdDAO);
             if(cmdRes.name().equals(super.adminDTO().adminDAO().name())) {
                 if(cmdRes.isDone().equals(TRUE)) {
                     Object data = cmdRes.data();
-                    BlacklistResult blRes =
-                            BlacklistResultInit.blacklistResult(data, admPanelDTO.blacklist());
-                    String resMsg = blRes.result();
-                    return resMsg;
-                }
-                else {
-                    String errMsg = cmdRes.message();
-                    return errMsg;
-                }
-            }
-            else
+                    BlacklistResult blRes = BlacklistResultInit.blacklistResult(data, admPanelDTO.blacklist());
+                    return blRes.result();
+                } else
+                    return cmdRes.message();
+            } else
                 throw new RuntimeException(cmdRes.message());
         }
         

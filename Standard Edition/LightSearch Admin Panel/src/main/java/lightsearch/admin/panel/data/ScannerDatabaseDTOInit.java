@@ -27,10 +27,8 @@ import java.util.Scanner;
  */
 public class ScannerDatabaseDTOInit {
 
-    public static ScannerDatabaseDTO scannerDatabaseDTO(Scanner scanner, 
-            IPValidator ipValidator, PortValidator portValidator,
-            DatabaseNameValidator dbNameValidator) {
-        return new ScannerDatabaseDTODefaultImpl(scanner, ipValidator, 
-                portValidator, dbNameValidator);
+    public static ScannerDatabaseDTO scannerDatabaseDTO(
+            Scanner scanner, IPValidator ipValidator, PortValidator portValidator, DatabaseNameValidator dbNameValidator) {
+        return new ScannerDatabaseDTODefaultImpl(scanner, ipValidator, portValidator, dbNameValidator);
     }
 }

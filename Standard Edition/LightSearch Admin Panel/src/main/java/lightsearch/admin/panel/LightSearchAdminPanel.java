@@ -33,27 +33,20 @@ import lightsearch.admin.panel.session.AdminPanelSessionCreatorInit;
  */
 public class LightSearchAdminPanel {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {      
+    public static void main(String[] args) {
         System.out.println("LightSearch Admin Panel, v. 2.0.0");
         System.out.println("Welcome!");
         
         AdminPanelPrinter printer = AdminPanelPrinterInit.adminPanelPrinter();
         
-        ScannerConnectionDTOCreator scannerDTOCreator = 
-                ScannerConnectionDTOCreatorInit.scannerConnectionDTOCreator();
-        ScannerConnectionDTO scannerConnectionDTO = 
-                scannerDTOCreator.createScannerConnectionDTO();
+        ScannerConnectionDTOCreator scannerDTOCreator = ScannerConnectionDTOCreatorInit.scannerConnectionDTOCreator();
+        ScannerConnectionDTO scannerConnectionDTO = scannerDTOCreator.createScannerConnectionDTO();
         
-        AdminPanelDTOCreator admPanelDTOCreator = 
-                AdminPanelDTOCreatorInit.adminPanelDTOCreator();
+        AdminPanelDTOCreator admPanelDTOCreator = AdminPanelDTOCreatorInit.adminPanelDTOCreator();
         AdminPanelDTO adminPanelDTO = admPanelDTOCreator.createAdminPanelDTO();
         
-        AdminPanelSessionCreator sessionCreator = 
-                AdminPanelSessionCreatorInit.adminPanelSessionCreatorInteractive(
-                        printer, scannerConnectionDTO, adminPanelDTO);
+        AdminPanelSessionCreator sessionCreator = AdminPanelSessionCreatorInit.adminPanelSessionCreatorInteractive(
+                printer, scannerConnectionDTO, adminPanelDTO);
         AdminPanelSession session = sessionCreator.createSession();
 
         session.startSession();

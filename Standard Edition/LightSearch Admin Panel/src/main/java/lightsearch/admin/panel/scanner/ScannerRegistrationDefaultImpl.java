@@ -50,7 +50,6 @@ public class ScannerRegistrationDefaultImpl implements ScannerRegistration {
             throw new ScannerException("Not supported for this console!");
         
         char[] adminPassCh = System.console().readPassword();
-        String adminPassSha = scannerDTO.hashAlgorithms().sha256(Arrays.toString(adminPassCh));
-        return adminPassSha;
+        return scannerDTO.hashAlgorithms().sha256(Arrays.toString(adminPassCh));
     }
 }

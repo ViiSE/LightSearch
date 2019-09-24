@@ -35,8 +35,6 @@ public class ScannerClientValueDTOCreatorDefaultImpl implements ScannerClientVal
         Scanner scanner = new Scanner(System.in);
         IMEIValidator imeiValidator = IMEIValidatorInit.IMEIValidator();
         NumberValidator numberValidator = NumberValidatorInit.numberValidator();
-        ScannerClientValueDTO scannerIMEIDTO = ScannerClientValueDTOInit.scannerIMEIDTO(
-                scanner, imeiValidator, numberValidator);
-        return scannerIMEIDTO;
+        return ScannerClientValueDTOInit.scannerIMEIDTO(scanner, imeiValidator, numberValidator);
     }
 }

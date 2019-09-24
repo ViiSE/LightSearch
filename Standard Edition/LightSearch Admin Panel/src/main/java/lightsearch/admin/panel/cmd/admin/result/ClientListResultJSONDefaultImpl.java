@@ -40,30 +40,29 @@ public class ClientListResultJSONDefaultImpl implements ClientListResult {
 
     @Override
     public String result() {
-        String res = "";
+        StringBuilder res = new StringBuilder();
         clients.clear();
-        res += "+================================================+\n";
-        res += "|         IMEI          |        username        |\n";
-        res += "+================================================+\n";
+        res.append("+================================================+\n");
+        res.append("|         IMEI          |        username        |\n");
+        res.append("+================================================+\n");
         int clientsCount = 1;
         if(data != null) {
             for (Object client : data) {
                 JSONObject clientJSON = (JSONObject)client;
-                res += "|" + clientsCount + ". " + clientJSON.get(IMEI).toString()
-                        + "     |" + clientJSON.get(USERNAME).toString();
+                res.append("|").append(clientsCount).append(". ").append(clientJSON.get(IMEI).toString())
+                        .append("     |").append(clientJSON.get(USERNAME).toString());
                 int spaceCount = 24 - clientJSON.get(USERNAME).toString().length();
                 for(int i = 0; i < spaceCount; i++)
-                    res += " ";
-                res += "|\n";
-                res += "+------------------------------------------------+\n";
+                    res.append(" ");
+                res.append("|\n");
+                res.append("+------------------------------------------------+\n");
                 clients.put(String.valueOf(clientsCount), clientJSON.get(IMEI).toString());
                 clientsCount++;
             }
-            res += "Clients connected: " + data.size() + "\n";
-        }
-        else
-            res += "Clients connected: 0\n";
+            res.append("Clients connected: ").append(data.size()).append("\n");
+        } else
+            res.append("Clients connected: 0\n");
         
-        return res;
+        return res.toString();
     }
 }

@@ -38,6 +38,7 @@ public class MessageKickJSONDefaultImpl implements MessageKick {
         this.IMEI = IMEI;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public String message() {
         JSONObject msgKickObj = new JSONObject();

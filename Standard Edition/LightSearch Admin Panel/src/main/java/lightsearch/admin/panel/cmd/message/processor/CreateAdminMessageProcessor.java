@@ -36,20 +36,15 @@ public class CreateAdminMessageProcessor extends AbstractProcessorMessage {
     @Override
     public CommandResult apply(AdminCommandDAO admCmdDAO) {
         try {
-            MessageCreateAdmin messageCreateAdmin =
-                    MessageCreateAdminInit.messageCreateAdmin(
-                            admCmdDAO.name(), 
-                            admCmdDAO.adminName(),
-                            admCmdDAO.password()
-                    );
+            MessageCreateAdmin messageCreateAdmin = MessageCreateAdminInit.messageCreateAdmin(
+                    admCmdDAO.name(), admCmdDAO.adminName(), admCmdDAO.password());
             String msgCreateAdmin = messageCreateAdmin.message();
             super.messageCommandDTO().messageSender().sendMessage(msgCreateAdmin);
             
             String rawMessage = super.messageCommandDTO().messageRecipient().acceptMessage();
             
             return super.commandResult(rawMessage);
-        }
-        catch(MessageSenderException | MessageRecipientException ex) {
+        } catch(MessageSenderException | MessageRecipientException ex) {
             throw new RuntimeException(ex.getMessage());
         }
     }

@@ -26,8 +26,8 @@ import java.util.Scanner;
  */
 public class ScannerClientValueDTOInit {
 
-    public static ScannerClientValueDTO scannerIMEIDTO(Scanner scanner, 
-            IMEIValidator imeiValidator, NumberValidator numberValidator) {
+    public static ScannerClientValueDTO scannerIMEIDTO(
+            Scanner scanner, IMEIValidator imeiValidator, NumberValidator numberValidator) {
         return new ScannerClientValueDTODefaultImpl(scanner, imeiValidator, numberValidator);
     }
 }

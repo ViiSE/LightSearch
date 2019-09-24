@@ -37,18 +37,14 @@ public class DelBlacklistMessageProcessor extends AbstractProcessorMessage {
     public CommandResult apply(AdminCommandDAO admCmdDAO) {
         try {
             MessageDelBlacklist messageDelBlacklist =
-                    MessageDelBlacklistInit.messageDelBlacklist(
-                            admCmdDAO.name(), 
-                            admCmdDAO.IMEI()
-                    );
+                    MessageDelBlacklistInit.messageDelBlacklist(admCmdDAO.name(), admCmdDAO.IMEI());
             String msgDelBl = messageDelBlacklist.message();
             super.messageCommandDTO().messageSender().sendMessage(msgDelBl);
             
             String rawMessage = super.messageCommandDTO().messageRecipient().acceptMessage();
             
             return super.commandResult(rawMessage);
-        }
-        catch(MessageSenderException | MessageRecipientException ex) {
+        } catch(MessageSenderException | MessageRecipientException ex) {
             throw new RuntimeException(ex.getMessage());
         }
     }

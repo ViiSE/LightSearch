@@ -31,7 +31,6 @@ public class AdminPanelSessionDTOInit {
     public static AdminPanelSessionDTO adminPanelDTO(AdminPanelMenu menu, 
             AdminPanelDTO adminPanelDTO, Map<String, Function<AdminPanelDTO, String>> commandHolder,
             AdminPanelPrinter printer, ScannerChooserCommand scannerCmd) {
-        return new AdminPanelSessionDTODefaultImpl(menu, adminPanelDTO, commandHolder,
-                printer, scannerCmd);
+        return new AdminPanelSessionDTODefaultImpl(menu, adminPanelDTO, commandHolder, printer, scannerCmd);
     }
 }

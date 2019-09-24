@@ -30,7 +30,8 @@ public class ScannerRegistrationDTODefaultImpl implements ScannerRegistrationDTO
     private final AdminNameValidator adminNameValidator;
     private final HashAlgorithms hashAlgorithms;
 
-    public ScannerRegistrationDTODefaultImpl(Scanner scanner, AdminNameValidator adminNameValidator, HashAlgorithms hashAlgorithms) {
+    public ScannerRegistrationDTODefaultImpl(
+            Scanner scanner, AdminNameValidator adminNameValidator, HashAlgorithms hashAlgorithms) {
         this.scanner = scanner;
         this.adminNameValidator = adminNameValidator;
         this.hashAlgorithms = hashAlgorithms;

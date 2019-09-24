@@ -35,6 +35,7 @@ public class MessageBlacklistJSONDefaultImpl implements MessageBlacklist {
         this.name = name;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public String message() {
         JSONObject msgBlObj = new JSONObject();

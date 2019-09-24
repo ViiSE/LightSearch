@@ -25,8 +25,7 @@ import java.util.Scanner;
  */
 public class ScannerRestartDTOInit {
     
-    public static ScannerRestartDTO scannerRestartDTO(Scanner scanner, 
-            RestartValidator restartValidator) {
+    public static ScannerRestartDTO scannerRestartDTO(Scanner scanner, RestartValidator restartValidator) {
         return new ScannerRestartDTODefaultImpl(scanner, restartValidator);
     }
 }

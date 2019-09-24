@@ -36,21 +36,15 @@ public class ChangeDatabaseMessageProcessor extends AbstractProcessorMessage {
     @Override
     public CommandResult apply(AdminCommandDAO admCmdDAO) {
         try {
-            MessageChangeDatabase messageChangeDatabase =
-                    MessageChangeDatabaseInit.messageChangeDatabase(
-                            admCmdDAO.name(), 
-                            admCmdDAO.dbName(),
-                            admCmdDAO.ip(),
-                            admCmdDAO.port()
-                    );
+            MessageChangeDatabase messageChangeDatabase = MessageChangeDatabaseInit.messageChangeDatabase(
+                    admCmdDAO.name(), admCmdDAO.dbName(), admCmdDAO.ip(), admCmdDAO.port());
             String msgChDb = messageChangeDatabase.message();
             super.messageCommandDTO().messageSender().sendMessage(msgChDb);
             
             String rawMessage = super.messageCommandDTO().messageRecipient().acceptMessage();
             
             return super.commandResult(rawMessage);
-        }
-        catch(MessageSenderException | MessageRecipientException ex) {
+        } catch(MessageSenderException | MessageRecipientException ex) {
             throw new RuntimeException(ex.getMessage());
         }
     }

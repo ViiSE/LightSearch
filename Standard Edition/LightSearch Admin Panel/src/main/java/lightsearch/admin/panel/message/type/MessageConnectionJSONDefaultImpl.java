@@ -27,6 +27,7 @@ public class MessageConnectionJSONDefaultImpl implements MessageConnection {
     private final String IDENTIFITER = IdentifierEnum.IDENTIFIER.stringValue();
     private final String ADMIN = IdentifierEnum.ADMIN.stringValue();
     
+    @SuppressWarnings("unchecked")
     @Override
     public String message() {
         JSONObject msgConnObj = new JSONObject();

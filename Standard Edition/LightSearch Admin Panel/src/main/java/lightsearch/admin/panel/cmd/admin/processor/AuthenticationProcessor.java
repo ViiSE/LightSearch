@@ -57,27 +57,22 @@ public class AuthenticationProcessor extends AbstractProcessorAdmin {
                 admCmdDAO.setName(name);
                 admCmdDAO.setPassword(pass);
                 
-                Function<AdminCommandDAO, CommandResult> processor = 
-                        super.adminDTO().messageCommandHolder().get(COMMAND);
+                Function<AdminCommandDAO, CommandResult> processor = super.adminDTO().messageCommandHolder().get(COMMAND);
                 
-                if(processor != null){
+                if(processor != null) {
                     CommandResult cmdRes = processor.apply(admCmdDAO);
                     if(cmdRes.isDone().equals(TRUE)) {
                         super.adminDTO().adminDAO().setName(name);
-                        String resMsg = cmdRes.message();
-                        return resMsg;
-                    }
-                    else {
+                        return cmdRes.message();
+                    } else {
                         String errMsg = cmdRes.message();
-                        
                         super.adminDTO().printer().println(errMsg);
-                        
+
                         if(errMsg.contains("Disconnect"))
                             System.exit(-1);
                     }
                 }
-            }
-            catch (ScannerException ex) {
+            } catch (ScannerException ex) {
                 super.adminDTO().printer().println(ex.getMessage());
             }
         }

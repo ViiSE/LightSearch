@@ -49,11 +49,9 @@ public class ScannerConnectionDefaultImpl implements ScannerConnection {
             int port = Integer.parseInt(scannerDTO.scanner().nextLine());
             scannerDTO.portValidator().validate(port);
             return port;
-        }
-        catch(ValidatorException ex) {
+        } catch(ValidatorException ex) {
             throw new ScannerException(ex.getMessage());
-        }
-        catch (NumberFormatException ignore) {
+        } catch (NumberFormatException ignore) {
             throw new ScannerException("Input value is not a number!");
         }
     }

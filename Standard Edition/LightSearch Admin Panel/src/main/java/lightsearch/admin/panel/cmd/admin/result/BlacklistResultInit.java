@@ -23,8 +23,7 @@ import java.util.Map;
  */
 public class BlacklistResultInit {
     
-    public static BlacklistResult blacklistResult(Object data, 
-            Map<String, String> blacklist) {
+    public static BlacklistResult blacklistResult(Object data, Map<String, String> blacklist) {
         return new BlacklistResultJSONDefaultImpl(data, blacklist);
     }
 }

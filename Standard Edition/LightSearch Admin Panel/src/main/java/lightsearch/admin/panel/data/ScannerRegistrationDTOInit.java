@@ -27,9 +27,7 @@ import java.util.Scanner;
 public class ScannerRegistrationDTOInit {
     
     public static ScannerRegistrationDTO scannerAuthenticationDTO(
-            Scanner scanner, AdminNameValidator adminNameValidator,
-            HashAlgorithms hashAlgorithms) {
-        return new ScannerRegistrationDTODefaultImpl(scanner, adminNameValidator,
-                hashAlgorithms);
+            Scanner scanner, AdminNameValidator adminNameValidator, HashAlgorithms hashAlgorithms) {
+        return new ScannerRegistrationDTODefaultImpl(scanner, adminNameValidator, hashAlgorithms);
     }
 }

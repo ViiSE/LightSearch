@@ -37,8 +37,7 @@ public class ScannerRestartDefaultImpl implements ScannerRestart {
             String answer = scannerDTO.scanner().nextLine();
             scannerDTO.restartValidator().validate(answer);
             return answer;
-        }
-        catch(ValidatorException ex) {
+        } catch(ValidatorException ex) {
             throw new ScannerException(ex.getMessage());
         }
     }

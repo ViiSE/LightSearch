@@ -21,8 +21,7 @@ package lightsearch.admin.panel.message.type;
  */
 public class MessageCreateAdminInit {
     
-    public static MessageCreateAdmin messageCreateAdmin(String name, 
-            String adminName, String password) {
+    public static MessageCreateAdmin messageCreateAdmin(String name, String adminName, String password) {
         return new MessageCreateAdminJSONDfaultImpl(name, adminName, password);
     }
 }

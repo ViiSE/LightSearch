@@ -35,6 +35,7 @@ public class MessageRestartJSONDefaultImpl implements MessageRestart {
         this.name = name;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public String message() {
         JSONObject msgRestartObj = new JSONObject();
