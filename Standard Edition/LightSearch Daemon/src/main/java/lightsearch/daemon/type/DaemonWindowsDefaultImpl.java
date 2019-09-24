@@ -37,8 +37,7 @@ public class DaemonWindowsDefaultImpl implements Daemon {
                 "cd", "C:\\Windows\\system32\\", "&", 
                 "start", "cmd.exe", "/c", 
                 "java", "-jar", lightSearchServerName});
-        }
-        catch(IOException ex) {
+        } catch(IOException ex) {
             throw new RuntimeException(ex.getMessage());
         }
         System.exit(0);
