@@ -43,7 +43,7 @@ public class SoftCheckRecordDefaultImpl implements SoftCheckRecord {
         this.amountUnit = amountUnit;
         this.subdivisions = subdivisions;
 
-        int tempMaxAmount = 0;
+        float tempMaxAmount = 0;
         for(Subdivision subdivision : subdivisions.collection())
             tempMaxAmount += subdivision.productAmount();
 

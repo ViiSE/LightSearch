@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 ViiSE.
+ * Copyright 2016 javiersantos.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package ru.viise.lightsearch.util.appupdater;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -24,9 +25,9 @@ class LibraryPreferences {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
-    static final String KeyAppUpdaterShow = "prefAppUpdaterShow";
-    static final String KeySuccessfulChecks = "prefSuccessfulChecks";
+    private static final String KeySuccessfulChecks = "prefSuccessfulChecks";
 
+    @SuppressLint("CommitPrefEdits")
     public LibraryPreferences(Context context) {
         this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         this.editor = sharedPreferences.edit();

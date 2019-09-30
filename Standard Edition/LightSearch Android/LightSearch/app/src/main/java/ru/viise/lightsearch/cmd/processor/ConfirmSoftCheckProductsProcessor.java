@@ -67,9 +67,7 @@ public class ConfirmSoftCheckProductsProcessor implements Function<CommandDTO, C
                         rawMessage, IMEI, cmdConSCRecDTO.softCheckRecords());
             }
             return cmdResCr.createCommandResult();
-        } catch(CommandResultCreatorException ex) {
-            return errorCommandResult(ex.getMessageRU(), cmdConSCRecDTO);
-        } catch(MessageSenderException | MessageRecipientException ex) {
+        } catch(CommandResultCreatorException | MessageSenderException | MessageRecipientException ex) {
             return errorCommandResult(ex.getMessageRU(), cmdConSCRecDTO);
         }
     }

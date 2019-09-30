@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 ViiSE.
+ * Copyright 2016 javiersantos.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,7 +45,7 @@ public class UtilsLibrary {
     }
 
     static Integer getAppInstalledVersionCode(Context context) {
-        Integer versionCode = 0;
+        int versionCode = 0;
 
         try {
             versionCode = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionCode;
@@ -80,7 +80,7 @@ public class UtilsLibrary {
     }
 
     static Boolean isStringAnUrl(String s) {
-        Boolean res = false;
+        boolean res = false;
         try {
             new URL(s);
             res = true;
@@ -94,7 +94,7 @@ public class UtilsLibrary {
     }
 
 
-    static Intent intentToUpdate(URL url) {
+    private static Intent intentToUpdate(URL url) {
         return new Intent(Intent.ACTION_VIEW, Uri.parse(url.toString()));
     }
 

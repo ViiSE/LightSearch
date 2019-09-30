@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 ViiSE.
+ * Copyright 2016 javiersantos.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import java.io.IOException;
 
 public class ApkFileDeleterDefaultImpl implements ApkFileDeleter {
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     @Override
     public boolean tryToDeleteApkFile() {
         File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS); //new File("/mnt/sdcard/Download/"); //new File(Environment.getExternalStorageDirectory().getPath() + "/Download");//
@@ -31,11 +32,9 @@ public class ApkFileDeleterDefaultImpl implements ApkFileDeleter {
         file.delete();
         if(!file.exists())
             return true;
-        else
+        else {
             try { file.getCanonicalFile().delete(); } catch (IOException ignore) { }
-            if(!file.exists())
-                return true;
-            else
-                return false;
+            return !file.exists();
+        }
     }
 }

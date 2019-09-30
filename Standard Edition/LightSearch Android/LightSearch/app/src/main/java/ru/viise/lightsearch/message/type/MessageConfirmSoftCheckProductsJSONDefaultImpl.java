@@ -39,7 +39,8 @@ public class MessageConfirmSoftCheckProductsJSONDefaultImpl implements MessageCo
 
     private final CommandConfirmSoftCheckRecordsDTO cmdConSCRecDTO;
 
-    public MessageConfirmSoftCheckProductsJSONDefaultImpl(String IMEI, CommandConfirmSoftCheckRecordsDTO cmdConSCRecDTO) {
+    public MessageConfirmSoftCheckProductsJSONDefaultImpl(
+            String IMEI, CommandConfirmSoftCheckRecordsDTO cmdConSCRecDTO) {
         this.IMEI = IMEI;
         this.cmdConSCRecDTO = cmdConSCRecDTO;
     }

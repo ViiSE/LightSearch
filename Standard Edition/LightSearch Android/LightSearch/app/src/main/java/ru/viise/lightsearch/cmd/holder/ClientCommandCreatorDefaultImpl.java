@@ -49,8 +49,8 @@ public class ClientCommandCreatorDefaultImpl implements ClientCommandCreator {
     private final MessageSender msgSender;
     private final MessageRecipient msgRecipient;
 
-    public ClientCommandCreatorDefaultImpl(String IMEI, MessageSender msgSender,
-               MessageRecipient msgRecipient) {
+    public ClientCommandCreatorDefaultImpl(
+            String IMEI, MessageSender msgSender, MessageRecipient msgRecipient) {
         this.IMEI = IMEI;
         this.msgSender = msgSender;
         this.msgRecipient = msgRecipient;

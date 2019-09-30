@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 ViiSE.
+ * Copyright 2016 javiersantos.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -90,13 +90,10 @@ class ParserJSON {
     }
 
     private JSONObject readJsonFromUrl() throws IOException, JSONException {
-        InputStream is = this.jsonUrl.openStream();
-        try {
+        try (InputStream is = this.jsonUrl.openStream()) {
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
             String jsonText = readAll(rd);
             return new JSONObject(jsonText);
-        } finally {
-            is.close();
         }
     }
 

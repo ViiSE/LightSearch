@@ -53,8 +53,8 @@ public class ReconnectProcessor implements Function<CommandDTO, CommandResult> {
             String message = msgAuth.message();
             msgSender.sendMessage(message);
             String rawMessage = msgRecipient.acceptMessage();
-            CommandResultCreator cmdResCr =
-                    CommandResultCreatorInit.commandResultReconnectCreator(rawMessage, IMEI, cmdAuthDTO.reconnectDTO());
+            CommandResultCreator cmdResCr = CommandResultCreatorInit.commandResultReconnectCreator(
+                    rawMessage, IMEI, cmdAuthDTO.reconnectDTO());
             return cmdResCr.createCommandResult();
         } catch(CommandResultCreatorException | MessageSenderException | MessageRecipientException ex) {
             return errorCommandResult(ex.getMessageRU(), cmdAuthDTO.reconnectDTO());
@@ -63,8 +63,8 @@ public class ReconnectProcessor implements Function<CommandDTO, CommandResult> {
 
     private CommandResult errorCommandResult(String message, ReconnectDTO reconnectDTO) {
         try {
-            CommandResultCreator cmdResCr =
-                    CommandResultCreatorInit.commandResultReconnectCreator(false, message, reconnectDTO);
+            CommandResultCreator cmdResCr = CommandResultCreatorInit.commandResultReconnectCreator(
+                    false, message, reconnectDTO);
             return cmdResCr.createCommandResult();
         } catch(CommandResultCreatorException ignore) { return null; /* never happen */ }
     }
