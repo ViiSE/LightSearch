@@ -14,12 +14,9 @@
  * limitations under the License.
  */
 
-package util;
+package ru.viise.lightsearch.util;
 
 import org.junit.Test;
-
-import ru.viise.lightsearch.util.IPAddressProvider;
-import ru.viise.lightsearch.util.IPAddressProviderInit;
 
 import static com.google.common.truth.Truth.assertThat;
 import static test.TestMessage.testBegin;

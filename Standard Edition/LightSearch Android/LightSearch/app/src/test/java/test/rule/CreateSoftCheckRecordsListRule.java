@@ -16,7 +16,6 @@
 
 package test.rule;
 
-import org.junit.Rule;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
@@ -45,11 +44,11 @@ public class CreateSoftCheckRecordsListRule implements TestRule {
             @Override
             public void evaluate() throws Throwable {
                 SoftCheckRecord item1 = SoftCheckRecordInit.softCheckRecord(
-                        "Item 1", "8800500", "35", amountUnit, subdivList);
+                        "Item 1", "111111", "35", amountUnit, subdivList);
                 item1.setProductsCount(100L);
 
                 SoftCheckRecord item2 = SoftCheckRecordInit.softCheckRecord(
-                        "Item 2", "1010180", "100", amountUnit, subdivList);
+                        "Item 2", "222222", "100", amountUnit, subdivList);
                 item2.setProductsCount(10L);
 
                 SoftCheckRecord item3 = SoftCheckRecordInit.softCheckRecord

@@ -104,8 +104,7 @@ public class CommandManagerDefaultImpl implements CommandManager {
                 done = true;
                 try { Thread.sleep(100); } catch(InterruptedException ignore) {}
                 return true;
-            }
-            else {
+            } else {
                 clientHandlerRunnerMessage = clHandlerDTO.message();
                 done = true;
                 try { Thread.sleep(100); } catch(InterruptedException ignore) {}

@@ -14,12 +14,9 @@
  * limitations under the License.
  */
 
-package util;
+package ru.viise.lightsearch.util;
 
 import org.junit.Test;
-
-import ru.viise.lightsearch.util.ProductAmountFormat;
-import ru.viise.lightsearch.util.ProductAmountFormatInit;
 
 import static com.google.common.truth.Truth.assertThat;
 import static test.TestMessage.testBegin;
