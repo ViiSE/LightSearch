@@ -1,26 +1,24 @@
 /*
- * Copyright 2019 ViiSE.
+ *  Copyright 2019 ViiSE.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
  */
 
 package lightsearch.server.producer.cmd.client;
 
 import lightsearch.server.checker.LightSearchChecker;
-import lightsearch.server.cmd.client.processor.ProcessorClient;
-import lightsearch.server.cmd.client.processor.debug.SoftCheckDebug;
-import lightsearch.server.data.ClientDAO;
-import lightsearch.server.data.LightSearchServerDTO;
+import lightsearch.server.cmd.client.processor.ClientProcessor;
+import lightsearch.server.data.LightSearchServerService;
 import lightsearch.server.identifier.DatabaseRecordIdentifier;
 import lightsearch.server.time.CurrentDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,85 +46,85 @@ public class ProcessorClientProducerDefaultImpl implements ProcessorClientProduc
     private ApplicationContext ctx;
 
     @Override
-    public ProcessorClient getAuthenticationProcessorInstance(
-            LightSearchServerDTO serverDTO, LightSearchChecker checker, ClientDAO clientDAO,
+    public ClientProcessor getAuthenticationProcessorInstance(
+            LightSearchServerService serverDTO, LightSearchChecker checker,
             CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier) {
-        return (ProcessorClient) ctx.getBean(AUTHENTICATION_PROCESSOR, serverDTO, checker, clientDAO, currentDateTime,
+        return (ClientProcessor) ctx.getBean(AUTHENTICATION_PROCESSOR, serverDTO, checker, currentDateTime,
                 databaseRecordIdentifier);
     }
 
     @Override
-    public ProcessorClient getSearchProcessorInstance(
-            LightSearchServerDTO serverDTO, LightSearchChecker checker, ClientDAO clientDAO,
+    public ClientProcessor getSearchProcessorInstance(
+            LightSearchServerService serverDTO, LightSearchChecker checker,
             CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier) {
-        return (ProcessorClient) ctx.getBean(SEARCH_PROCESSOR, serverDTO, checker, clientDAO, currentDateTime,
+        return (ClientProcessor) ctx.getBean(SEARCH_PROCESSOR, serverDTO, checker, currentDateTime,
                 databaseRecordIdentifier);
     }
 
     @Override
-    public ProcessorClient getCancelSoftCheckProcessorInstance(
-            LightSearchServerDTO serverDTO, LightSearchChecker checker, ClientDAO clientDAO,
+    public ClientProcessor getCancelSoftCheckProcessorInstance(
+            LightSearchServerService serverDTO, LightSearchChecker checker,
             CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier) {
-        return (ProcessorClient) ctx.getBean(CANCEL_SOFT_CHECK_PROCESSOR, serverDTO, checker, clientDAO, currentDateTime,
+        return (ClientProcessor) ctx.getBean(CANCEL_SOFT_CHECK_PROCESSOR, serverDTO, checker, currentDateTime,
                 databaseRecordIdentifier);
     }
 
     @Override
-    public ProcessorClient getCloseSoftCheckProcessorInstance(
-            LightSearchServerDTO serverDTO, LightSearchChecker checker, ClientDAO clientDAO,
+    public ClientProcessor getCloseSoftCheckProcessorInstance(
+            LightSearchServerService serverDTO, LightSearchChecker checker,
             CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier) {
-        return (ProcessorClient) ctx.getBean(CLOSE_SOFT_CHECK_PROCESSOR, serverDTO, checker, clientDAO, currentDateTime,
+        return (ClientProcessor) ctx.getBean(CLOSE_SOFT_CHECK_PROCESSOR, serverDTO, checker, currentDateTime,
                 databaseRecordIdentifier);
     }
 
     @Override
-    public ProcessorClient getConfirmSoftCheckProductsProcessorInstance(
-            LightSearchServerDTO serverDTO, LightSearchChecker checker, ClientDAO clientDAO,
+    public ClientProcessor getConfirmSoftCheckProductsProcessorInstance(
+            LightSearchServerService serverDTO, LightSearchChecker checker,
             CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier) {
-        return (ProcessorClient) ctx.getBean(CONFIRM_SOFT_CHECK_PRODUCTS_PROCESSOR, serverDTO, checker, clientDAO, currentDateTime,
+        return (ClientProcessor) ctx.getBean(CONFIRM_SOFT_CHECK_PRODUCTS_PROCESSOR, serverDTO, checker, currentDateTime,
                 databaseRecordIdentifier);
     }
 
     @Override
-    public ProcessorClient getOpenSoftCheckProcessorInstance(
-            LightSearchServerDTO serverDTO, LightSearchChecker checker, ClientDAO clientDAO,
+    public ClientProcessor getOpenSoftCheckProcessorInstance(
+            LightSearchServerService serverDTO, LightSearchChecker checker,
             CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier) {
-        return (ProcessorClient) ctx.getBean(OPEN_SOFT_CHECK_PROCESSOR, serverDTO, checker, clientDAO, currentDateTime,
+        return (ClientProcessor) ctx.getBean(OPEN_SOFT_CHECK_PROCESSOR, serverDTO, checker, currentDateTime,
                 databaseRecordIdentifier);
     }
 
-    @Override
-    public ProcessorClient getAuthenticationProcessorDebugInstance(
-            LightSearchServerDTO serverDTO, LightSearchChecker checker, ClientDAO clientDAO) {
-        return (ProcessorClient) ctx.getBean(AUTHENTICATION_PROCESSOR_DEBUG, serverDTO, checker, clientDAO);
-    }
-
-    @Override
-    public ProcessorClient getSearchProcessorDebugInstance(LightSearchServerDTO serverDTO, LightSearchChecker checker) {
-        return (ProcessorClient) ctx.getBean(SEARCH_PROCESSOR_DEBUG, serverDTO, checker);
-    }
-
-    @Override
-    public ProcessorClient getCancelSoftCheckProcessorDebugInstance(
-            LightSearchServerDTO serverDTO, LightSearchChecker checker, SoftCheckDebug softCheck) {
-        return (ProcessorClient) ctx.getBean(CANCEL_SOFT_CHECK_PROCESSOR_DEBUG, serverDTO, checker, softCheck);
-    }
-
-    @Override
-    public ProcessorClient getCloseSoftCheckProcessorDebugInstance(
-            LightSearchServerDTO serverDTO, LightSearchChecker checker, SoftCheckDebug softCheck) {
-        return (ProcessorClient) ctx.getBean(CLOSE_SOFT_CHECK_PROCESSOR_DEBUG, serverDTO, checker, softCheck);
-    }
-
-    @Override
-    public ProcessorClient getConfirmSoftCheckProductsProcessorDebugInstance(
-            LightSearchServerDTO serverDTO, LightSearchChecker checker) {
-        return (ProcessorClient) ctx.getBean(CONFIRM_SOFT_CHECK_PRODUCTS_PROCESSOR_DEBUG, serverDTO, checker);
-    }
-
-    @Override
-    public ProcessorClient getOpenSoftCheckProcessorDebugInstance(
-            LightSearchServerDTO serverDTO, LightSearchChecker checker, SoftCheckDebug softCheck) {
-        return (ProcessorClient) ctx.getBean(OPEN_SOFT_CHECK_PROCESSOR_DEBUG, serverDTO, checker, softCheck);
-    }
+//    @Override
+//    public ClientProcessor getAuthenticationProcessorDebugInstance(
+//            LightSearchServerService serverDTO, LightSearchChecker checker, ClientDAO clientDAO) {
+//        return (ClientProcessor) ctx.getBean(AUTHENTICATION_PROCESSOR_DEBUG, serverDTO, checker, clientDAO);
+//    }
+//
+//    @Override
+//    public ClientProcessor getSearchProcessorDebugInstance(LightSearchServerService serverDTO, LightSearchChecker checker) {
+//        return (ClientProcessor) ctx.getBean(SEARCH_PROCESSOR_DEBUG, serverDTO, checker);
+//    }
+//
+//    @Override
+//    public ClientProcessor getCancelSoftCheckProcessorDebugInstance(
+//            LightSearchServerService serverDTO, LightSearchChecker checker, SoftCheckDebug softCheck) {
+//        return (ClientProcessor) ctx.getBean(CANCEL_SOFT_CHECK_PROCESSOR_DEBUG, serverDTO, checker, softCheck);
+//    }
+//
+//    @Override
+//    public ClientProcessor getCloseSoftCheckProcessorDebugInstance(
+//            LightSearchServerService serverDTO, LightSearchChecker checker, SoftCheckDebug softCheck) {
+//        return (ClientProcessor) ctx.getBean(CLOSE_SOFT_CHECK_PROCESSOR_DEBUG, serverDTO, checker, softCheck);
+//    }
+//
+//    @Override
+//    public ClientProcessor getConfirmSoftCheckProductsProcessorDebugInstance(
+//            LightSearchServerService serverDTO, LightSearchChecker checker) {
+//        return (ClientProcessor) ctx.getBean(CONFIRM_SOFT_CHECK_PRODUCTS_PROCESSOR_DEBUG, serverDTO, checker);
+//    }
+//
+//    @Override
+//    public ClientProcessor getOpenSoftCheckProcessorDebugInstance(
+//            LightSearchServerService serverDTO, LightSearchChecker checker, SoftCheckDebug softCheck) {
+//        return (ClientProcessor) ctx.getBean(OPEN_SOFT_CHECK_PROCESSOR_DEBUG, serverDTO, checker, softCheck);
+//    }
 }

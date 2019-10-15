@@ -1,4 +1,20 @@
 /*
+ *  Copyright 2019 ViiSE.
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
+/*
  * ViiSE (C). 2019. All rights reserved.
  * 
  *
@@ -9,14 +25,12 @@
  */
 package lightsearch.server.database.cmd.message;
 
-import lightsearch.server.exception.MessageParserException;
-import lightsearch.server.message.parser.MessageParser;
-import lightsearch.server.producer.message.MessageParserProducer;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
+import lightsearch.server.cmd.client.ClientCommand;
+import lightsearch.server.data.pojo.Product;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  *
@@ -38,50 +52,37 @@ public class DatabaseCommandMessageConfirmSoftCheckProductsDefaultWindowsJSONImp
     private final String IMEI;
     private final String userIdent;
     private final String cardCode;
-    private final String data;
+    private final List<Product> data;
 
-    @Autowired
-    private MessageParserProducer msgParserProducer;
-
-    public DatabaseCommandMessageConfirmSoftCheckProductsDefaultWindowsJSONImpl(String command, 
-            String IMEI, String userIdent, String cardCode, String data) {
-        this.command   = command;
-        this.IMEI      = IMEI;
-        this.userIdent = userIdent;
-        this.cardCode  = cardCode;
-        this.data      = data;
+    @SuppressWarnings("unchecked")
+    public DatabaseCommandMessageConfirmSoftCheckProductsDefaultWindowsJSONImpl(ClientCommand clientCommand) {
+        this.command   = clientCommand.command();
+        this.IMEI      = clientCommand.IMEI();
+        this.userIdent = clientCommand.userIdentifier();
+        this.cardCode  = clientCommand.cardCode();
+        this.data      = (List<Product>) clientCommand.data();
     }
-    
+
     @Override
     public String message() {
-        String rawData = "[";
-        String jMsgStr = "{\"data\": " + data + "}";
-        MessageParser msgParser = msgParserProducer.getMessageParserJSONInstance();
-        try {
-            JSONObject message = (JSONObject)msgParser.parse(jMsgStr);
-            JSONArray jData = (JSONArray)message.get("data");
+        final StringBuilder rawData = new StringBuilder("[");
+        data.forEach(product -> {
+            rawData.append("\r\n{\r\n");
+            String id = product.getId();
+            String amount = product.getAmount();
+            rawData.append("\"").append(ID_FIELD).append("\":\"").append(id).append("\",\r\n")
+                    .append("\"").append(AMOUNT_FIELD).append("\":\"").append(amount).append("\"\r\n},");
+            });
 
-            for(Object product : jData) {
-                rawData += "\r\n{\r\n";
-                JSONObject productJSON = (JSONObject)product;
-                String id = productJSON.get(ID_FIELD).toString();
-                String amount = productJSON.get(AMOUNT_FIELD).toString();
-                rawData += "\"" + ID_FIELD     + "\"" + ":" + "\"" + id     + "\",\r\n" +
-                           "\"" + AMOUNT_FIELD + "\"" + ":" + "\"" + amount + "\"\r\n},";
-            }
-        }
-        catch(MessageParserException ignore) {}
-        
-        rawData = rawData.substring(0, rawData.lastIndexOf("},")) + "}";
-        rawData += "\r\n]";
-        
-        String message = "{\r\n"
-                + "\"" + CMD_FIELD + "\":\""  + command + "\",\r\n"
-                + "\"" + IMEI_FIELD + "\":\"" + IMEI + "\",\r\n"
-                + "\"" + USER_IDENT_FIELD + "\":\"" + userIdent + "\",\r\n"
-                + "\"" + CARD_CODE_FIELD + "\":\"" + cardCode + "\",\r\n"
-                + "\"" + DATA_FIELD + "\":" + rawData + "\r\n"
+        String rawDataStr = rawData.substring(0, rawData.lastIndexOf("},")) + "}";
+        rawDataStr += "\r\n]";
+
+        return "{\r\n"
+                    + "\"" + CMD_FIELD + "\":\""  + command + "\",\r\n"
+                    + "\"" + IMEI_FIELD + "\":\"" + IMEI + "\",\r\n"
+                    + "\"" + USER_IDENT_FIELD + "\":\"" + userIdent + "\",\r\n"
+                    + "\"" + CARD_CODE_FIELD + "\":\"" + cardCode + "\",\r\n"
+                    + "\"" + DATA_FIELD + "\":" + rawDataStr + "\r\n"
                 + "}";
-        return message;
     }
 }

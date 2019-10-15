@@ -1,22 +1,21 @@
-/* 
- * Copyright 2019 ViiSE.
+/*
+ *  Copyright 2019 ViiSE.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
  */
 package lightsearch.server.database.statement;
 
 
-import lightsearch.server.database.DatabaseConnection;
 import lightsearch.server.database.DatabaseReader;
 import lightsearch.server.database.DatabaseWriter;
 import lightsearch.server.database.cmd.message.DatabaseCommandMessage;
@@ -39,18 +38,15 @@ import org.springframework.stereotype.Component;
 @Scope("prototype")
 public class DatabaseStatementExecutorDefaultImpl implements DatabaseStatementExecutor {
 
-    private final DatabaseConnection databaseConnection;
     private final long lsCode;
     private final String dateTime;
     private final DatabaseCommandMessage databaseCommandMessage;
 
-    @Autowired DatabaseWriterProducer dbWriterProducer;
-    @Autowired DatabaseReaderProducer dbReaderProducer;
-    @Autowired DatabaseStatementResultProducer dbStatementResProducer;
+    @Autowired private DatabaseWriterProducer dbWriterProducer;
+    @Autowired private DatabaseReaderProducer dbReaderProducer;
+    @Autowired private DatabaseStatementResultProducer dbStatementResProducer;
 
-    public DatabaseStatementExecutorDefaultImpl(DatabaseConnection databaseConnection, 
-            long lsCode, String dateTime, DatabaseCommandMessage databaseCommandMessage) {
-        this.databaseConnection = databaseConnection;
+    public DatabaseStatementExecutorDefaultImpl(long lsCode, String dateTime, DatabaseCommandMessage databaseCommandMessage) {
         this.lsCode = lsCode;
         this.dateTime = dateTime;
         this.databaseCommandMessage = databaseCommandMessage;
@@ -59,13 +55,12 @@ public class DatabaseStatementExecutorDefaultImpl implements DatabaseStatementEx
     @Override
     public DatabaseStatementResult exec() throws DatabaseStatementExecutorException {
         String message = databaseCommandMessage.message();
-        DatabaseWriter dbWriter = dbWriterProducer.getDatabaseWriterDefaultInstance(databaseConnection, lsCode, dateTime, message);
-        DatabaseReader dbReader = dbReaderProducer.getDatabaseReaderDefaultInstance(databaseConnection, lsCode);
+        DatabaseWriter dbWriter = dbWriterProducer.getDatabaseWriterDefaultInstance(lsCode, dateTime, message);
+        DatabaseReader dbReader = dbReaderProducer.getDatabaseReaderDefaultInstance(lsCode);
         try {
             dbWriter.write();
             String result = dbReader.read();
-            DatabaseStatementResult dbStatRes = dbStatementResProducer.getDatabaseStatementResultDefaultInstance(result);
-            return dbStatRes;
+            return dbStatementResProducer.getDatabaseStatementResultDefaultInstance(result);
         } catch (DatabaseWriterException ex) {
             throw new DatabaseStatementExecutorException(ex.getMessage(), ex.getMessageRU());
         } catch (DatabaseReaderException ex) {

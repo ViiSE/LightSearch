@@ -16,6 +16,7 @@
 package lightsearch.server.initialization;
 
 import lightsearch.server.LightSearchServer;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.net.URISyntaxException;
@@ -24,6 +25,7 @@ import java.net.URISyntaxException;
  *
  * @author ViiSE
  */
+@Component("currentServerDirectoryFromFile")
 public class CurrentServerDirectoryFromFileImpl implements CurrentServerDirectory {
 
     private final OsDetector osDetector;

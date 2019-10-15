@@ -15,10 +15,13 @@
  */
 package lightsearch.server.initialization;
 
+import org.springframework.stereotype.Component;
+
 /**
  *
  * @author ViiSE
  */
+@Component("osDetectorDefault")
 public class OsDetectorDefaultImpl implements OsDetector {
 
     @Override

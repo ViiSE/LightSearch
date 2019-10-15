@@ -1,142 +1,126 @@
-/* 
- * Copyright 2019 ViiSE.
+/*
+ *  Copyright 2019 ViiSE.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
  */
+
 package lightsearch.server.cmd.client.processor;
 
 import lightsearch.server.checker.LightSearchChecker;
 import lightsearch.server.cmd.client.ClientCommand;
 import lightsearch.server.cmd.result.CommandResult;
-import lightsearch.server.data.ClientDAO;
-import lightsearch.server.data.LightSearchServerDTO;
-import lightsearch.server.data.LightSearchServerDatabaseDTO;
-import lightsearch.server.database.DatabaseConnection;
-import lightsearch.server.database.DatabaseConnectionCreator;
+import lightsearch.server.cmd.result.CommandResultCreator;
+import lightsearch.server.data.BlacklistService;
+import lightsearch.server.data.ClientsService;
+import lightsearch.server.data.LightSearchServerService;
 import lightsearch.server.database.cmd.message.DatabaseCommandMessage;
 import lightsearch.server.database.statement.DatabaseStatementExecutor;
 import lightsearch.server.database.statement.result.DatabaseStatementResult;
-import lightsearch.server.exception.DatabaseConnectionCreatorException;
+import lightsearch.server.exception.CommandResultException;
 import lightsearch.server.exception.DatabaseStatementExecutorException;
 import lightsearch.server.identifier.DatabaseRecordIdentifier;
-import lightsearch.server.log.LogMessageTypeEnum;
-import lightsearch.server.message.result.ResultTypeMessageEnum;
-import lightsearch.server.producer.cmd.client.CommandResultClientCreatorProducer;
+import lightsearch.server.log.LoggerServer;
+import lightsearch.server.producer.cmd.result.CommandResultCreatorProducer;
 import lightsearch.server.producer.database.DatabaseCommandMessageProducer;
-import lightsearch.server.producer.database.DatabaseConnectionCreatorProducer;
 import lightsearch.server.producer.database.DatabaseStatementExecutorProducer;
 import lightsearch.server.time.CurrentDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.Map;
+import static lightsearch.server.log.LogMessageTypeEnum.ERROR;
+import static lightsearch.server.log.LogMessageTypeEnum.INFO;
 
-/**
- *
- * @author ViiSE
- */
 @Component("authenticationProcessorClient")
 @Scope("prototype")
-public class AuthenticationProcessor implements ProcessorClient {
+public class AuthenticationProcessor implements ClientProcessor<CommandResult> {
 
+    private final ClientsService<String, String> clientsService;
+    private final BlacklistService blacklistService;
     private final LightSearchChecker checker;
-    private final List<String> blacklist;
-    private final LightSearchServerDatabaseDTO databaseDTO;
-    private final Map<String, String> clients;
-    private final ClientDAO clientDAO;
     private final CurrentDateTime currentDateTime;
     private final DatabaseRecordIdentifier databaseRecordIdentifier;
 
-    @Autowired private CommandResultClientCreatorProducer cmdResClCrProducer;
-    @Autowired private DatabaseConnectionCreatorProducer dbConnCrProducer;
+    @Autowired private LoggerServer logger;
+    @Autowired private CommandResultCreatorProducer commandResultCreatorProducer;
     @Autowired private DatabaseCommandMessageProducer dbCmdMsgProducer;
     @Autowired private DatabaseStatementExecutorProducer dbStateExecProducer;
 
-    public AuthenticationProcessor(LightSearchServerDTO serverDTO, LightSearchChecker checker, ClientDAO clientDAO,
-                                   CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier) {
+    @SuppressWarnings("unchecked")
+    public AuthenticationProcessor(
+            LightSearchServerService serverService, LightSearchChecker checker, CurrentDateTime currentDateTime,
+            DatabaseRecordIdentifier databaseRecordIdentifier) {
+        this.clientsService = serverService.clientsService();
+        this.blacklistService = serverService.blacklistService();
         this.checker = checker;
-        this.blacklist = serverDTO.blacklist();
-        this.databaseDTO = serverDTO.databaseDTO();
-        this.clients = serverDTO.clients();
-
-        this.clientDAO = clientDAO;
         this.currentDateTime = currentDateTime;
         this.databaseRecordIdentifier = databaseRecordIdentifier;
     }
 
     @Override
-    public CommandResult apply(ClientCommand clientCommand) {
-        if(!checker.isNull(clientCommand.username(), clientCommand.password(),
-                clientCommand.IMEI(), clientCommand.ip(), clientCommand.os(), 
-                clientCommand.model(), clientCommand.userIdentifier())) {
-            if(!blacklist.contains(clientCommand.IMEI())) {
+    public CommandResult apply(ClientCommand command) {
+        if(!checker.isNull(command.username(), command.password(), command.IMEI(), command.ip(), command.os(),
+                command.model(), command.userIdentifier())) {
+            if(!blacklistService.blacklist().contains(command.IMEI())) {
                 try {
-                    DatabaseConnectionCreator dbConnCreator = dbConnCrProducer.getDatabaseConnectionCreatorWin1251DefaultInstance(
-                            databaseDTO, clientCommand.username(), clientCommand.password());
-                    DatabaseConnection databaseConnection = dbConnCreator.createFirebirdConnection();
+                    DatabaseCommandMessage dbCmdMessage =
+                            dbCmdMsgProducer.getDatabaseCommandMessageConnectionDefaultWindowsJSONInstance(command);
 
-                    DatabaseCommandMessage dbCmdMessage = dbCmdMsgProducer.getDatabaseCommandMessageConnectionDefaultWindowsJSONInstance(
-                                    clientCommand.command(), clientCommand.IMEI(), clientCommand.username(), clientCommand.userIdentifier());
-                    
-                    DatabaseStatementExecutor dbStatementExecutor = dbStateExecProducer.getDatabaseStatementExecutorDefaultInstance(
-                            databaseConnection, databaseRecordIdentifier.next(), currentDateTime.dateTimeInStandardFormat(), dbCmdMessage);
-                    
+                    DatabaseStatementExecutor dbStatementExecutor =
+                            dbStateExecProducer.getDatabaseStatementExecutorDefaultInstance(
+                                    databaseRecordIdentifier.next(),
+                                    currentDateTime.dateTimeInStandardFormat(), dbCmdMessage);
+
                     DatabaseStatementResult dbStatRes = dbStatementExecutor.exec();
 
-                    String message = "IMEI - "  + clientCommand.IMEI()
-                        + ", ip - "          + clientCommand.ip()
-                        + ", os - "          + clientCommand.os()
-                        + ", model - "       + clientCommand.model()
-                        + ", username - "    + clientCommand.username()
-                        + ", user ident - "  + clientCommand.userIdentifier();
-
-                    clients.put(clientCommand.IMEI(), clientCommand.username());
-
-                    clientDAO.setIsFirst(false);
-                    clientDAO.setIMEI(clientCommand.IMEI());
-                    clientDAO.setDatabaseConnection(databaseConnection);
+                    String message = "IMEI - " + command.IMEI()
+                        + ", ip - "            + command.ip()
+                        + ", os - "            + command.os()
+                        + ", model - "         + command.model()
+                        + ", username - "      + command.username()
+                        + ", user ident - "    + command.userIdentifier();
 
                     String result = dbStatRes.result();
 
-                    return commandResult(clientCommand.IMEI(), LogMessageTypeEnum.INFO, ResultTypeMessageEnum.TRUE,
-                            result, "Client " + clientCommand.IMEI() + " connected: " + message);        
-                } catch(DatabaseConnectionCreatorException ex) {
-                    clientDAO.setIsFirst(false);
-                    return commandResult(clientCommand.IMEI(), LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE,
-                            ex.getMessageRU(), "Client " + clientCommand.IMEI() + " " + ex.getMessage());
-                } catch(DatabaseStatementExecutorException ex) {
-                    clientDAO.setIsFirst(false);
-                    return commandResult(clientCommand.IMEI(), LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE,
-                            ex.getMessageRU(), "Client " + clientCommand.IMEI() + " " + ex.getMessage());
-                }    
+                    CommandResultCreator commandResultCreator =
+                            commandResultCreatorProducer.getCommandResultCreatorClientJSONInstance(result);
+                    logger.log(INFO, currentDateTime, "Client connected:\n" + message);
+                    clientsService.clients().put(command.IMEI(), command.username());
+                    return commandResultCreator.createCommandResult();
+                } catch (CommandResultException | DatabaseStatementExecutorException ex) {
+                    logger.log(ERROR, currentDateTime, ex.getMessage());
+                    return createErrorResult(command.IMEI(), "Невозможно создать результат команды. " +
+                            "Обратитесь к администратору для устранения проблемы.");
+                }
+            } else {
+                logger.log(ERROR, currentDateTime, "Client " + command.IMEI() + " in the blacklist.");
+                return createErrorResult(command.IMEI(), "Извините, но вы находитесь в черном списке.");
             }
-            else {
-                clientDAO.setIsFirst(false);
-                return commandResult(clientCommand.IMEI(), LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE,
-                        "Извините, но вы находитесь в черном списке. Отключение от сервера.", null);
-            }
-        }
-        else {
-            clientDAO.setIsFirst(false);
-            return commandResult("Unknown", LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE,
-                    "Неверный формат команды. Обратитесь к администратору для устранения ошибки. Вы были отключены от сервера", null);
+        } else {
+            logger.log(ERROR, currentDateTime, "Authentication: unknown client.");
+            return createErrorResult("Unknown", "Неверный формат команды. " +
+                    "Обратитесь к администратору для устранения ошибки.");
         }
     }
 
-    private CommandResult commandResult(String name, LogMessageTypeEnum type, ResultTypeMessageEnum resultValue, Object message, String logMessage) {
-        return cmdResClCrProducer.getCommandResultClientCreatorDefaultInstance(name, type, resultValue, message, logMessage)
-                .createCommandResult();
+    private CommandResult createErrorResult(String IMEI, String message) {
+        CommandResultCreator commandResultCreatorError =
+                commandResultCreatorProducer.getCommandResultCreatorClientErrorInstance(IMEI, message);
+        try {
+            return commandResultCreatorError.createCommandResult();
+        } catch (CommandResultException ignore) {
+            // never happened
+            return null;
+        }
     }
 }
