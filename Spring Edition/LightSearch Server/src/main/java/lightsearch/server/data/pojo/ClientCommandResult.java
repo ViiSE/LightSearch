@@ -21,13 +21,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import lightsearch.server.cmd.result.CommandResult;
 
 import java.util.List;
 
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ClientCommandResult implements CommandResult {
+public class ClientCommandResult {
 
     @JsonProperty("IMEI") private final String IMEI;
     private final String isDone;

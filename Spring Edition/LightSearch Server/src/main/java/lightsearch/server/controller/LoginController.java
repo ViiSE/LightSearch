@@ -20,7 +20,6 @@ import lightsearch.server.cmd.CommandConverter;
 import lightsearch.server.cmd.ProcessorHolder;
 import lightsearch.server.cmd.client.ClientCommand;
 import lightsearch.server.cmd.client.processor.ClientProcessor;
-import lightsearch.server.cmd.result.CommandResult;
 import lightsearch.server.cmd.result.ErrorResultCreator;
 import lightsearch.server.data.pojo.ClientCommandDTO;
 import lightsearch.server.data.pojo.ClientCommandResult;
