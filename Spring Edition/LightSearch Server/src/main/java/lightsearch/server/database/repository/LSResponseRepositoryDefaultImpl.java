@@ -24,11 +24,11 @@ import lightsearch.server.time.CurrentDateTime;
 import lightsearch.server.time.CurrentDateTimePattern;
 import lightsearch.server.time.DateTimeComparator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.QueryTimeoutException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
@@ -78,6 +78,10 @@ public class LSResponseRepositoryDefaultImpl implements LSResponseRepository {
         } catch (QueryTimeoutException ex) {
             logger.log(ERROR, currentDateTime, "LSResponseRepositoryDefaultImpl: " + ex.getMessage());
             throw new RepositoryException("Время ожидания запроса истекло");
+        } catch (DataAccessException ex) {
+            logger.log(ERROR, currentDateTime, "LSResponseRepositoryDefaultImpl: " + ex.getMessage());
+            throw new RepositoryException("Произошла ошибка на сервере. Обратитесь к администратору для устранения проблем. " +
+                    "Сообщение: " + ex.getLocalizedMessage());
         }
     }
 

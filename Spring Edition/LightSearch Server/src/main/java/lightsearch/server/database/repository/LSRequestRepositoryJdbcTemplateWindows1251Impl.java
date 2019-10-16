@@ -34,6 +34,7 @@ public class LSRequestRepositoryJdbcTemplateWindows1251Impl implements LSRequest
     @Autowired private LoggerServer logger;
     @Autowired private CurrentDateTime currentDateTime;
     @Autowired private JdbcTemplate jdbcTemplate;
+    @Autowired private LSRequestRowChecker rowChecker;
 
     @Override
     public void writeCommand(Object... values) throws RepositoryException {
@@ -54,9 +55,12 @@ public class LSRequestRepositoryJdbcTemplateWindows1251Impl implements LSRequest
             byte[] cmdin  = ((String) values[2]).getBytes("windows-1251");
             boolean state = (boolean) values[3];
 
-            jdbcTemplate.setQueryTimeout(30);
-            jdbcTemplate.update("INSERT INTO LS_REQUEST (LSCODE, DDOC, CMDIN, STATE) VALUES (?,?,?,?)",
-                    lsCode, ddoc, cmdin, state);
+            if(!rowChecker.isExist(lsCode)) {
+                jdbcTemplate.setQueryTimeout(30);
+                jdbcTemplate.update("INSERT INTO LS_REQUEST (LSCODE, DDOC, CMDIN, STATE) VALUES (?,?,?,?)",
+                        lsCode, ddoc, cmdin, state);
+            } else
+                throw new RepositoryException("Строка с данным LSCODE уже существует!");
         } catch (QueryTimeoutException ex) {
             logger.log(ERROR, currentDateTime, "LSRequestRepositoryJdbcTemplateImpl: " + ex.getMessage());
             throw new RepositoryException("Время ожидания запроса истекло");

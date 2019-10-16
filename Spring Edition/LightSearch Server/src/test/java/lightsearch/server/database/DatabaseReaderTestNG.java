@@ -18,7 +18,6 @@ package lightsearch.server.database;
 
 import lightsearch.server.LightSearchServer;
 import lightsearch.server.exception.DatabaseReaderException;
-import lightsearch.server.exception.DatabaseWriterException;
 import lightsearch.server.producer.cmd.client.ClientCommandProducer;
 import lightsearch.server.producer.database.DatabaseReaderProducer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +42,7 @@ public class DatabaseReaderTestNG extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void write() {
+    public void read() {
         testBegin("DatabaseReaderTestNG", "read()");
 
         try {

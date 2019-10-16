@@ -50,6 +50,7 @@ public class DatabaseWriterTestNG extends AbstractTestNGSpringContextTests {
         dateTime = currentDateTimeProducer.getCurrentDateTimeDefaultInstance().dateTimeInStandardFormat();
 
         ClientCommandDTO clientCommandDTO = new ClientCommandDTO();
+        clientCommandDTO.setCommand("connect");
         clientCommandDTO.setUsername("test");
         clientCommandDTO.setPassword("321");
         clientCommandDTO.setIMEI("111111111111111");
