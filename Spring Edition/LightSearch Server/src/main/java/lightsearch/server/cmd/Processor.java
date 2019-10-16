@@ -16,8 +16,6 @@
 
 package lightsearch.server.cmd;
 
-import lightsearch.server.cmd.result.CommandResult;
-
 import java.util.function.Function;
 
 public interface Processor<T extends Command, R> extends Function<T, R> {

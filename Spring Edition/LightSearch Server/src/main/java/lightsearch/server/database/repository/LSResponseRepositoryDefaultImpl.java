@@ -62,16 +62,24 @@ public class LSResponseRepositoryDefaultImpl implements LSResponseRepository {
         jdbcTemplate.setQueryTimeout(30);
         try {
             while (dateTimeStop.isAfter(LocalDateTime.now())) {
-                ResponseResult result = jdbcTemplate.queryForObject(
-                        "SELECT * FROM LS_RESPONSE WHERE (LSCODE = ?) AND (STATE = ?)",
-                        new Object[]{lsCode, state},
-                        new ResponseResultRowMapper());
-                LocalDateTime nowMax = LocalDateTime.now().with(LocalTime.MAX);
-                LocalDateTime nowMin = LocalDateTime.now().with(LocalTime.MIN);
-                if (result != null)
-                    if (dateTimeComparator.isBefore(result.getDdoc(), nowMax)
-                            && dateTimeComparator.isAfter(result.getDdoc(), nowMin))
-                        return result;
+                try {
+                    ResponseResult result = jdbcTemplate.queryForObject(
+                            "SELECT * FROM LS_RESPONSE WHERE (LSCODE = ?) AND (STATE = ?)",
+                            new Object[]{lsCode, state},
+                            new ResponseResultRowMapper());
+                    LocalDateTime nowMax = LocalDateTime.now().with(LocalTime.MAX);
+                    LocalDateTime nowMin = LocalDateTime.now().with(LocalTime.MIN);
+                    if (result != null)
+                        if (dateTimeComparator.isBefore(result.getDdoc(), nowMax)
+                                && dateTimeComparator.isAfter(result.getDdoc(), nowMin))
+                            return result;
+                } catch(DataAccessException ex) {
+                    if(!ex.getMessage().contains("Incorrect result size")) {
+                        logger.log(ERROR, currentDateTime, "LSResponseRepositoryDefaultImpl: " + ex.getMessage());
+                        throw new RepositoryException("Произошла ошибка на сервере. Обратитесь к администратору для устранения проблем. " +
+                                "Сообщение: " + ex.getLocalizedMessage());
+                    }
+                }
             }
             logger.log(ERROR, currentDateTime, "Время ожидания запроса истекло");
             throw new RepositoryException("LSResponseRepositoryDefaultImpl: Request timed out");

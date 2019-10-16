@@ -16,4 +16,9 @@
 
 package lightsearch.server.cmd.result;
 
-public interface CommandResult { }
+import lightsearch.server.data.pojo.ClientCommandResult;
+import lightsearch.server.exception.CommandResultException;
+
+public interface ClientCommandResultCreator {
+    ClientCommandResult createClientCommandResult() throws CommandResultException;
+}

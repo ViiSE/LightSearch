@@ -16,7 +16,7 @@
 
 package lightsearch.server.producer.cmd.result;
 
-import lightsearch.server.cmd.result.CommandResultCreator;
+import lightsearch.server.cmd.result.ClientCommandResultCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
@@ -31,12 +31,12 @@ public class CommandResultCreatorProducerDefaultImpl implements CommandResultCre
     private ApplicationContext ctx;
 
     @Override
-    public CommandResultCreator getCommandResultCreatorClientJSONInstance(String rawJSONResult) {
-        return (CommandResultCreator) ctx.getBean(COMMAND_RESULT_CREATOR, rawJSONResult);
+    public ClientCommandResultCreator getCommandResultCreatorClientJSONInstance(String rawJSONResult) {
+        return (ClientCommandResultCreator) ctx.getBean(COMMAND_RESULT_CREATOR, rawJSONResult);
     }
 
     @Override
-    public CommandResultCreator getCommandResultCreatorClientErrorInstance(String IMEI, String message) {
-        return (CommandResultCreator) ctx.getBean(COMMAND_RESULT_CREATOR_ERROR, IMEI, message);
+    public ClientCommandResultCreator getCommandResultCreatorClientErrorInstance(String IMEI, String message) {
+        return (ClientCommandResultCreator) ctx.getBean(COMMAND_RESULT_CREATOR_ERROR, IMEI, message);
     }
 }

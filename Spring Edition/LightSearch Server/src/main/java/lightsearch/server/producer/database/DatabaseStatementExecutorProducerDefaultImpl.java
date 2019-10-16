@@ -33,6 +33,6 @@ public class DatabaseStatementExecutorProducerDefaultImpl implements DatabaseSta
     @Override
     public DatabaseStatementExecutor getDatabaseStatementExecutorDefaultInstance(
             long lsCode, String dateTime, DatabaseCommandMessage databaseCommandMessage) {
-        return (DatabaseStatementExecutor) ctx.getBean(DATABASE_STATEMENT_EXECUTOR, lsCode, databaseCommandMessage);
+        return (DatabaseStatementExecutor) ctx.getBean(DATABASE_STATEMENT_EXECUTOR, lsCode, dateTime, databaseCommandMessage);
     }
 }

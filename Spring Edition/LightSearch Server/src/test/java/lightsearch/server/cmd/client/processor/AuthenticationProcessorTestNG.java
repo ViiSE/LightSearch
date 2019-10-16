@@ -66,7 +66,13 @@ public class AuthenticationProcessorTestNG extends AbstractTestNGSpringContextTe
         testBegin("AuthenticationProcessor", "apply()");
 
         ClientCommandResult result = (ClientCommandResult) processorHolder.get(clientCommand.command()).apply(clientCommand);
-        System.out.println("Result: " + result);
+        System.out.println("Result: ");
+        System.out.println("IMEI: " + result.getIMEI());
+        System.out.println("isDone: " + result.getIsDone());
+        System.out.println("message: " + result.getMessage());
+        System.out.println("userIdentifier: " + result.getUserIdentifier());
+        System.out.println("TK list: " + result.getTKList());
+        System.out.println("Sklad list: " + result.getSkladList());
 
         testEnd("AuthenticationProcessor", "apply()");
     }

@@ -27,8 +27,8 @@ public class ResponseResultRowMapper implements RowMapper<ResponseResult> {
     @Override
     public ResponseResult mapRow(ResultSet resultSet, int i) throws SQLException {
         ResponseResult result = new ResponseResult();
-        result.setCmdOut("CMDOUT");
-        result.setDdoc("DDOC");
+        result.setCmdOut(resultSet.getString("CMDOUT"));
+        result.setDdoc(resultSet.getString("DDOC"));
 
         return result;
     }

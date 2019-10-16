@@ -18,11 +18,11 @@ package lightsearch.server.cmd.client.processor;
 
 import lightsearch.server.checker.LightSearchChecker;
 import lightsearch.server.cmd.client.ClientCommand;
-import lightsearch.server.cmd.result.CommandResult;
-import lightsearch.server.cmd.result.CommandResultCreator;
+import lightsearch.server.cmd.result.ClientCommandResultCreator;
 import lightsearch.server.data.BlacklistService;
 import lightsearch.server.data.ClientsService;
 import lightsearch.server.data.LightSearchServerService;
+import lightsearch.server.data.pojo.ClientCommandResult;
 import lightsearch.server.database.cmd.message.DatabaseCommandMessage;
 import lightsearch.server.database.statement.DatabaseStatementExecutor;
 import lightsearch.server.database.statement.result.DatabaseStatementResult;
@@ -43,7 +43,7 @@ import static lightsearch.server.log.LogMessageTypeEnum.INFO;
 
 @Component("authenticationProcessorClient")
 @Scope("prototype")
-public class AuthenticationProcessor implements ClientProcessor<CommandResult> {
+public class AuthenticationProcessor implements ClientProcessor<ClientCommandResult> {
 
     private final ClientsService<String, String> clientsService;
     private final BlacklistService blacklistService;
@@ -68,7 +68,7 @@ public class AuthenticationProcessor implements ClientProcessor<CommandResult> {
     }
 
     @Override
-    public CommandResult apply(ClientCommand command) {
+    public ClientCommandResult apply(ClientCommand command) {
         if(!checker.isNull(command.username(), command.password(), command.IMEI(), command.ip(), command.os(),
                 command.model(), command.userIdentifier())) {
             if(!blacklistService.blacklist().contains(command.IMEI())) {
@@ -92,11 +92,11 @@ public class AuthenticationProcessor implements ClientProcessor<CommandResult> {
 
                     String result = dbStatRes.result();
 
-                    CommandResultCreator commandResultCreator =
+                    ClientCommandResultCreator commandResultCreator =
                             commandResultCreatorProducer.getCommandResultCreatorClientJSONInstance(result);
                     logger.log(INFO, currentDateTime, "Client connected:\n" + message);
                     clientsService.clients().put(command.IMEI(), command.username());
-                    return commandResultCreator.createCommandResult();
+                    return commandResultCreator.createClientCommandResult();
                 } catch (CommandResultException | DatabaseStatementExecutorException ex) {
                     logger.log(ERROR, currentDateTime, ex.getMessage());
                     return createErrorResult(command.IMEI(), "Невозможно создать результат команды. " +
@@ -113,11 +113,11 @@ public class AuthenticationProcessor implements ClientProcessor<CommandResult> {
         }
     }
 
-    private CommandResult createErrorResult(String IMEI, String message) {
-        CommandResultCreator commandResultCreatorError =
+    private ClientCommandResult createErrorResult(String IMEI, String message) {
+        ClientCommandResultCreator commandResultCreatorError =
                 commandResultCreatorProducer.getCommandResultCreatorClientErrorInstance(IMEI, message);
         try {
-            return commandResultCreatorError.createCommandResult();
+            return commandResultCreatorError.createClientCommandResult();
         } catch (CommandResultException ignore) {
             // never happened
             return null;

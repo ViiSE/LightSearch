@@ -17,15 +17,16 @@
 package lightsearch.server.cmd.result;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lightsearch.server.data.pojo.ClientCommandResult;
 import lightsearch.server.exception.CommandResultException;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
-@Service("commandResultCreatorClientJSON")
+@Service("clientCommandResultCreatorJSON")
 @Scope("prototype")
-public class CommandResultCreatorClientJSONImpl implements CommandResultCreator {
+public class CommandResultCreatorClientJSONImpl implements ClientCommandResultCreator {
 
     private final String rawJSONResult;
 
@@ -34,10 +35,10 @@ public class CommandResultCreatorClientJSONImpl implements CommandResultCreator 
     }
 
     @Override
-    public CommandResult createCommandResult() throws CommandResultException {
+    public ClientCommandResult createClientCommandResult() throws CommandResultException {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            return mapper.readValue(rawJSONResult, CommandResult.class);
+            return mapper.readValue(rawJSONResult, ClientCommandResult.class);
         } catch (IOException ex) {
             throw new CommandResultException(ex.getMessage());
         }
