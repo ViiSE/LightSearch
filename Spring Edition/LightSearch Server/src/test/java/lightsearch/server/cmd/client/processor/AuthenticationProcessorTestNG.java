@@ -21,7 +21,6 @@ import lightsearch.server.cmd.Command;
 import lightsearch.server.cmd.Processor;
 import lightsearch.server.cmd.ProcessorHolder;
 import lightsearch.server.cmd.client.ClientCommand;
-import lightsearch.server.cmd.result.CommandResult;
 import lightsearch.server.data.pojo.ClientCommandDTO;
 import lightsearch.server.data.pojo.ClientCommandResult;
 import lightsearch.server.producer.cmd.ProcessorHolderProducer;
