@@ -30,7 +30,7 @@ import lightsearch.server.exception.CommandResultException;
 import lightsearch.server.exception.DatabaseStatementExecutorException;
 import lightsearch.server.identifier.DatabaseRecordIdentifier;
 import lightsearch.server.log.LoggerServer;
-import lightsearch.server.producer.cmd.result.CommandResultCreatorProducer;
+import lightsearch.server.producer.cmd.result.ClientCommandResultCreatorProducer;
 import lightsearch.server.producer.database.DatabaseCommandMessageProducer;
 import lightsearch.server.producer.database.DatabaseStatementExecutorProducer;
 import lightsearch.server.time.CurrentDateTime;
@@ -52,7 +52,7 @@ public class AuthenticationProcessor implements ClientProcessor<ClientCommandRes
     private final DatabaseRecordIdentifier databaseRecordIdentifier;
 
     @Autowired private LoggerServer logger;
-    @Autowired private CommandResultCreatorProducer commandResultCreatorProducer;
+    @Autowired private ClientCommandResultCreatorProducer clientCommandResultCreatorProducer;
     @Autowired private DatabaseCommandMessageProducer dbCmdMsgProducer;
     @Autowired private DatabaseStatementExecutorProducer dbStateExecProducer;
 
@@ -93,7 +93,7 @@ public class AuthenticationProcessor implements ClientProcessor<ClientCommandRes
                     String result = dbStatRes.result();
 
                     ClientCommandResultCreator commandResultCreator =
-                            commandResultCreatorProducer.getCommandResultCreatorClientJSONInstance(result);
+                            clientCommandResultCreatorProducer.getCommandResultCreatorClientJSONInstance(result);
                     logger.log(INFO, currentDateTime, "Client connected:\n" + message);
                     clientsService.clients().put(command.IMEI(), command.username());
                     return commandResultCreator.createClientCommandResult();
@@ -115,7 +115,7 @@ public class AuthenticationProcessor implements ClientProcessor<ClientCommandRes
 
     private ClientCommandResult createErrorResult(String IMEI, String message) {
         ClientCommandResultCreator commandResultCreatorError =
-                commandResultCreatorProducer.getCommandResultCreatorClientErrorInstance(IMEI, message);
+                clientCommandResultCreatorProducer.getCommandResultCreatorClientErrorInstance(IMEI, message);
         try {
             return commandResultCreatorError.createClientCommandResult();
         } catch (CommandResultException ignore) {

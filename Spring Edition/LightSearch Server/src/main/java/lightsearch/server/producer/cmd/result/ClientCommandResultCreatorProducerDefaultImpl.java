@@ -22,10 +22,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 @Service("commandResultCreatorProducerDefault")
-public class CommandResultCreatorProducerDefaultImpl implements CommandResultCreatorProducer {
+public class ClientCommandResultCreatorProducerDefaultImpl implements ClientCommandResultCreatorProducer {
 
-    private final String COMMAND_RESULT_CREATOR       = "commandResultCreatorClientJSON";
-    private final String COMMAND_RESULT_CREATOR_ERROR = "commandResultCreatorClientError";
+    private final String COMMAND_RESULT_CREATOR       = "clientCommandResultCreatorJSON";
+    private final String COMMAND_RESULT_CREATOR_ERROR = "clientCommandResultCreatorClientError";
 
     @Autowired
     private ApplicationContext ctx;

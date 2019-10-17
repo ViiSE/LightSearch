@@ -18,7 +18,7 @@ package lightsearch.server.producer.cmd.result;
 
 import lightsearch.server.cmd.result.ClientCommandResultCreator;
 
-public interface CommandResultCreatorProducer {
+public interface ClientCommandResultCreatorProducer {
     ClientCommandResultCreator getCommandResultCreatorClientJSONInstance(String rawJSONResult);
     ClientCommandResultCreator getCommandResultCreatorClientErrorInstance(String IMEI, String message);
 }

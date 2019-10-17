@@ -17,8 +17,6 @@
 package lightsearch.server.cmd.client.processor;
 
 import lightsearch.server.LightSearchServer;
-import lightsearch.server.cmd.Command;
-import lightsearch.server.cmd.Processor;
 import lightsearch.server.cmd.ProcessorHolder;
 import lightsearch.server.cmd.client.ClientCommand;
 import lightsearch.server.data.pojo.ClientCommandDTO;
