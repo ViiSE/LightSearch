@@ -16,8 +16,9 @@
 
 package lightsearch.server.producer.identifier;
 
-import lightsearch.server.identifier.DatabaseRecordIdentifier;
+import lightsearch.server.data.LightSearchServerService;
+import lightsearch.server.identifier.DatabaseRecordIdentifierReader;
 
-public interface DatabaseRecordIdentifierProducer {
-    DatabaseRecordIdentifier getDatabaseRecordIdentifierDefaultInstance(long identifierValue);
+public interface DatabaseRecordIdentifierReaderProducer {
+    DatabaseRecordIdentifierReader getDatabaseRecordIdentifierReaderDefaultInstance(LightSearchServerService serverService);
 }

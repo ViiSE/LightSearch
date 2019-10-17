@@ -16,22 +16,23 @@
 
 package lightsearch.server.producer.identifier;
 
+import lightsearch.server.data.LightSearchServerService;
 import lightsearch.server.identifier.DatabaseRecordIdentifier;
+import lightsearch.server.identifier.DatabaseRecordIdentifierReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
-@Service("databaseRecordIdentifierProducerDefault")
-public class DatabaseRecordIdentifierProducerDefaultImpl implements DatabaseRecordIdentifierProducer {
+@Service("databaseRecordIdentifierReaderProducerDefault")
+public class DatabaseRecordIdentifierReaderProducerDefaultImpl implements DatabaseRecordIdentifierReaderProducer {
 
-    private final String DATABASE_RECORD_IDENTIFIER = "databaseRecordIdentifierDefault";
+    private final String DATABASE_RECORD_IDENT_READER = "databaseRecordIdentifierReaderDefault";
 
     @Autowired
     private ApplicationContext ctx;
 
-    // FIXME: 17.10.2019 NEED PRODUCER WITH ARG
     @Override
-    public DatabaseRecordIdentifier getDatabaseRecordIdentifierDefaultInstance(long identifierValue) {
-        return (DatabaseRecordIdentifier) ctx.getBean(DATABASE_RECORD_IDENTIFIER, identifierValue);
+    public DatabaseRecordIdentifierReader getDatabaseRecordIdentifierReaderDefaultInstance(LightSearchServerService serverService) {
+        return (DatabaseRecordIdentifierReader) ctx.getBean(DATABASE_RECORD_IDENT_READER, serverService);
     }
 }
