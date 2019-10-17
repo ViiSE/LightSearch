@@ -17,13 +17,21 @@
 package lightsearch.server.producer.identifier;
 
 import lightsearch.server.identifier.DatabaseRecordIdentifier;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 @Service("databaseRecordIdentifierProducerDefault")
 public class DatabaseRecordIdentifierProducerDefaultImpl implements DatabaseRecordIdentifierProducer {
 
+    private final String DATABASE_RECORD_IDENTIFIER = "databaseRecordIdentifierDefault";
+
+    @Autowired
+    private ApplicationContext ctx;
+
+    // FIXME: 17.10.2019 NEED PRODUCER WITH ARG
     @Override
     public DatabaseRecordIdentifier getDatabaseRecordIdentifierDefaultInstance() {
-        return null;
+        return (DatabaseRecordIdentifier) ctx.getBean(DATABASE_RECORD_IDENTIFIER, 0);
     }
 }
