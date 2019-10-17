@@ -14,11 +14,18 @@
  *  limitations under the License.
  */
 
-package lightsearch.server.producer.identifier;
+package lightsearch.server.about;
 
-import lightsearch.server.identifier.DatabaseRecordIdentifier;
+public class EndStartupMessageDefaultImpl implements EndStartupMessage {
 
-public interface DatabaseRecordIdentifierProducer {
-    DatabaseRecordIdentifier getDatabaseRecordIdentifierDefaultInstance(long identifierValue);
-    DatabaseRecordIdentifier getDatabaseRecordIdentifierDefaultInstance();
+    private final String message;
+
+    public EndStartupMessageDefaultImpl(String message) {
+        this.message = message;
+    }
+
+    @Override
+    public String message() {
+        return message;
+    }
 }

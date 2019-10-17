@@ -49,5 +49,5 @@ public class DatabaseRecordIdentifierDefaultImpl implements DatabaseRecordIdenti
     public long databaseRecordIdentifier() {
         return databaseRecordIdentifier;
     }
-    
+
 }

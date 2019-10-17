@@ -19,12 +19,20 @@ package lightsearch.server;
 import lightsearch.server.data.AdminsService;
 import lightsearch.server.data.BlacklistService;
 import lightsearch.server.data.LightSearchServerService;
+import lightsearch.server.identifier.DatabaseRecordIdentifier;
 import lightsearch.server.identifier.DatabaseRecordIdentifierReader;
+import lightsearch.server.identifier.DatabaseRecordIdentifierWriter;
 import lightsearch.server.initialization.AdminsCreator;
 import lightsearch.server.initialization.BlacklistCreator;
 import lightsearch.server.initialization.CurrentServerDirectory;
 import lightsearch.server.initialization.OsDetector;
 import lightsearch.server.log.LogDirectory;
+import lightsearch.server.log.LogMessageTypeEnum;
+import lightsearch.server.log.LoggerServer;
+import lightsearch.server.producer.identifier.DatabaseRecordIdentifierProducer;
+import lightsearch.server.producer.identifier.DatabaseRecordIdentifierReaderProducer;
+import lightsearch.server.time.CurrentDateTime;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -32,6 +40,11 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 public class LightSearchServer {
+
+    @Autowired private LightSearchServerService serverService;
+    @Autowired private DatabaseRecordIdentifierReaderProducer identifierReaderProducer;
+    @Autowired private DatabaseRecordIdentifierProducer identifierProducer;
+    @Autowired private DatabaseRecordIdentifierWriter identifierWriter;
 
     public static void main(String[] args) {
         ApplicationContext ctx = SpringApplication.run(LightSearchServer.class, args);
@@ -49,6 +62,18 @@ public class LightSearchServer {
         BlacklistCreator blacklistCreator =
                 (BlacklistCreator) ctx.getBean("blacklistCreatorFromFile", currentServerDirectory, blacklistService);
         blacklistCreator.createBlacklist();
+
+        LoggerServer logger = ctx.getBean("loggerServerDefault", LoggerServer.class);
+        CurrentDateTime currentDateTime = ctx.getBean("currentDateTimeDefault", CurrentDateTime.class);
+        LightSearchServerService serverService = ctx.getBean("lightSearchServerServiceDefault", LightSearchServerService.class);
+
+        DatabaseRecordIdentifierReader identifierReader = (DatabaseRecordIdentifierReader)
+                ctx.getBean("databaseRecordIdentifierReaderDefault", serverService);
+        DatabaseRecordIdentifier identifier = (DatabaseRecordIdentifier)
+                ctx.getBean("databaseRecordIdentifierDefault", identifierReader.read());
+
+        logger.log(LogMessageTypeEnum.INFO, currentDateTime, "DatabaseRecordIdentifier read. Value: " +
+                identifier.databaseRecordIdentifier());
 
         ctx.getBean("logDirectoryDefault", "logs", osDetector, currentServerDirectory);
     }

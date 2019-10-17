@@ -29,9 +29,14 @@ public class DatabaseRecordIdentifierProducerDefaultImpl implements DatabaseReco
     @Autowired
     private ApplicationContext ctx;
 
-    // FIXME: 17.10.2019 NEED PRODUCER WITH ARG
     @Override
     public DatabaseRecordIdentifier getDatabaseRecordIdentifierDefaultInstance(long identifierValue) {
         return (DatabaseRecordIdentifier) ctx.getBean(DATABASE_RECORD_IDENTIFIER, identifierValue);
+    }
+
+    @Override
+    public DatabaseRecordIdentifier getDatabaseRecordIdentifierDefaultInstance() {
+        // no need to create with identifier value
+        return (DatabaseRecordIdentifier) ctx.getBean(DATABASE_RECORD_IDENTIFIER, 0);
     }
 }

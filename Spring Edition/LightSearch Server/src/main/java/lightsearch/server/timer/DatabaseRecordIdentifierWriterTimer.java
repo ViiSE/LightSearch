@@ -36,38 +36,20 @@ import org.springframework.stereotype.Component;
 @EnableAsync
 public class DatabaseRecordIdentifierWriterTimer {
 
-    private boolean isRead = false;
     private DatabaseRecordIdentifier identifier;
 
     @Autowired private LoggerServer logger;
     @Autowired private CurrentDateTime currentDateTime;
-    @Autowired private LightSearchServerService serverService;
-    @Autowired private DatabaseRecordIdentifierReaderProducer identifierReaderProducer;
-    @Autowired private DatabaseRecordIdentifierProducer identifierProducer;
     @Autowired private DatabaseRecordIdentifierWriter identifierWriter;
 
     @Async
     @Scheduled(fixedRate = 600000)
     public void writeDatabaseRecordIdentifier() {
-        if(!isRead)
-            read();
-
         try {
             identifierWriter.write(identifier.databaseRecordIdentifier());
         } catch (IdentifierException ex) {
             logger.log(LogMessageTypeEnum.ERROR, currentDateTime, "Cannot write database record identifier. " +
                     "Exception: " + ex.getMessage());
         }
-    }
-
-    private void read() {
-        DatabaseRecordIdentifierReader identifierReader =
-                identifierReaderProducer.getDatabaseRecordIdentifierReaderDefaultInstance(serverService);
-        identifier = identifierProducer.getDatabaseRecordIdentifierDefaultInstance(identifierReader.read());
-
-        logger.log(LogMessageTypeEnum.INFO, currentDateTime, "DatabaseRecordIdentifier read. Value: " +
-                identifier.databaseRecordIdentifier());
-
-        isRead = true;
     }
 }
