@@ -26,7 +26,6 @@ import lightsearch.server.initialization.AdminsCreator;
 import lightsearch.server.initialization.BlacklistCreator;
 import lightsearch.server.initialization.CurrentServerDirectory;
 import lightsearch.server.initialization.OsDetector;
-import lightsearch.server.log.LogDirectory;
 import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.log.LoggerServer;
 import lightsearch.server.producer.identifier.DatabaseRecordIdentifierProducer;
@@ -36,7 +35,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 public class LightSearchServer {
@@ -63,6 +61,8 @@ public class LightSearchServer {
                 (BlacklistCreator) ctx.getBean("blacklistCreatorFromFile", currentServerDirectory, blacklistService);
         blacklistCreator.createBlacklist();
 
+        ctx.getBean("logDirectoryDefault", "logs", osDetector, currentServerDirectory);
+
         LoggerServer logger = ctx.getBean("loggerServerDefault", LoggerServer.class);
         CurrentDateTime currentDateTime = ctx.getBean("currentDateTimeDefault", CurrentDateTime.class);
         LightSearchServerService serverService = ctx.getBean("lightSearchServerServiceDefault", LightSearchServerService.class);
@@ -74,7 +74,5 @@ public class LightSearchServer {
 
         logger.log(LogMessageTypeEnum.INFO, currentDateTime, "DatabaseRecordIdentifier read. Value: " +
                 identifier.databaseRecordIdentifier());
-
-        ctx.getBean("logDirectoryDefault", "logs", osDetector, currentServerDirectory);
     }
 }

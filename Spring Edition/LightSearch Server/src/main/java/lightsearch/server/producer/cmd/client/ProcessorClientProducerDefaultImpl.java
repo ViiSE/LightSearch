@@ -57,40 +57,40 @@ public class ProcessorClientProducerDefaultImpl implements ProcessorClientProduc
     public ClientProcessor getSearchProcessorInstance(
             LightSearchServerService serverDTO, LightSearchChecker checker,
             CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier) {
-        return (ClientProcessor) ctx.getBean(SEARCH_PROCESSOR, serverDTO, checker, currentDateTime,
-                databaseRecordIdentifier);
+        return null;//(ClientProcessor) ctx.getBean(SEARCH_PROCESSOR, serverDTO, checker, currentDateTime,
+               // databaseRecordIdentifier);
     }
 
     @Override
     public ClientProcessor getCancelSoftCheckProcessorInstance(
             LightSearchServerService serverDTO, LightSearchChecker checker,
             CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier) {
-        return (ClientProcessor) ctx.getBean(CANCEL_SOFT_CHECK_PROCESSOR, serverDTO, checker, currentDateTime,
-                databaseRecordIdentifier);
+        return null;//(ClientProcessor) ctx.getBean(CANCEL_SOFT_CHECK_PROCESSOR, serverDTO, checker, currentDateTime,
+                //databaseRecordIdentifier);
     }
 
     @Override
     public ClientProcessor getCloseSoftCheckProcessorInstance(
             LightSearchServerService serverDTO, LightSearchChecker checker,
             CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier) {
-        return (ClientProcessor) ctx.getBean(CLOSE_SOFT_CHECK_PROCESSOR, serverDTO, checker, currentDateTime,
-                databaseRecordIdentifier);
+        return null;//(ClientProcessor) ctx.getBean(CLOSE_SOFT_CHECK_PROCESSOR, serverDTO, checker, currentDateTime,
+                //databaseRecordIdentifier);
     }
 
     @Override
     public ClientProcessor getConfirmSoftCheckProductsProcessorInstance(
             LightSearchServerService serverDTO, LightSearchChecker checker,
             CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier) {
-        return (ClientProcessor) ctx.getBean(CONFIRM_SOFT_CHECK_PRODUCTS_PROCESSOR, serverDTO, checker, currentDateTime,
-                databaseRecordIdentifier);
+        return null;//(ClientProcessor) ctx.getBean(CONFIRM_SOFT_CHECK_PRODUCTS_PROCESSOR, serverDTO, checker, currentDateTime,
+                //databaseRecordIdentifier);
     }
 
     @Override
     public ClientProcessor getOpenSoftCheckProcessorInstance(
             LightSearchServerService serverDTO, LightSearchChecker checker,
             CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier) {
-        return (ClientProcessor) ctx.getBean(OPEN_SOFT_CHECK_PROCESSOR, serverDTO, checker, currentDateTime,
-                databaseRecordIdentifier);
+        return null;//(ClientProcessor) ctx.getBean(OPEN_SOFT_CHECK_PROCESSOR, serverDTO, checker, currentDateTime,
+                //databaseRecordIdentifier);
     }
 
 //    @Override

@@ -16,15 +16,13 @@
 
 package lightsearch.server.timer;
 
-import lightsearch.server.data.LightSearchServerService;
 import lightsearch.server.exception.IdentifierException;
 import lightsearch.server.identifier.DatabaseRecordIdentifier;
-import lightsearch.server.identifier.DatabaseRecordIdentifierReader;
 import lightsearch.server.identifier.DatabaseRecordIdentifierWriter;
 import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.log.LoggerServer;
 import lightsearch.server.producer.identifier.DatabaseRecordIdentifierProducer;
-import lightsearch.server.producer.identifier.DatabaseRecordIdentifierReaderProducer;
+import lightsearch.server.producer.identifier.DatabaseRecordIdentifierWriterProducer;
 import lightsearch.server.time.CurrentDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -36,17 +34,22 @@ import org.springframework.stereotype.Component;
 @EnableAsync
 public class DatabaseRecordIdentifierWriterTimer {
 
-    private DatabaseRecordIdentifier identifier;
-
     @Autowired private LoggerServer logger;
     @Autowired private CurrentDateTime currentDateTime;
-    @Autowired private DatabaseRecordIdentifierWriter identifierWriter;
+    @Autowired private DatabaseRecordIdentifierWriterProducer identifierWriterProducer;
+    @Autowired private DatabaseRecordIdentifierProducer identifierProducer;
 
     @Async
-    @Scheduled(fixedRate = 600000)
+    @Scheduled(fixedDelay = 10000, initialDelay = 10000)
     public void writeDatabaseRecordIdentifier() {
         try {
-            identifierWriter.write(identifier.databaseRecordIdentifier());
+            DatabaseRecordIdentifier identifier = identifierProducer.getDatabaseRecordIdentifierDefaultInstance();
+
+            identifierWriterProducer.getDatabaseRecordIdentifierWriterDefaultInstance()
+                    .write(identifier.databaseRecordIdentifier());
+
+            logger.log(LogMessageTypeEnum.INFO, currentDateTime, "DatabaseRecordIdentifier write. Value: " +
+                    identifier.databaseRecordIdentifier());
         } catch (IdentifierException ex) {
             logger.log(LogMessageTypeEnum.ERROR, currentDateTime, "Cannot write database record identifier. " +
                     "Exception: " + ex.getMessage());
