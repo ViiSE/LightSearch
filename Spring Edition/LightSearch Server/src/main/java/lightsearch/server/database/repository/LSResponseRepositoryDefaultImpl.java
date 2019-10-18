@@ -75,19 +75,19 @@ public class LSResponseRepositoryDefaultImpl implements LSResponseRepository {
                             return result;
                 } catch(DataAccessException ex) {
                     if(!ex.getMessage().contains("Incorrect result size")) {
-                        logger.log(ERROR, currentDateTime, "LSResponseRepositoryDefaultImpl: " + ex.getMessage());
+                        logger.log(ERROR, "LSResponseRepositoryDefaultImpl: " + ex.getMessage());
                         throw new RepositoryException("Произошла ошибка на сервере. Обратитесь к администратору для устранения проблем. " +
                                 "Сообщение: " + ex.getLocalizedMessage());
                     }
                 }
             }
-            logger.log(ERROR, currentDateTime, "Время ожидания запроса истекло");
+            logger.log(ERROR, "Время ожидания запроса истекло");
             throw new RepositoryException("LSResponseRepositoryDefaultImpl: Request timed out");
         } catch (QueryTimeoutException ex) {
-            logger.log(ERROR, currentDateTime, "LSResponseRepositoryDefaultImpl: " + ex.getMessage());
+            logger.log(ERROR, "LSResponseRepositoryDefaultImpl: " + ex.getMessage());
             throw new RepositoryException("Время ожидания запроса истекло");
         } catch (DataAccessException ex) {
-            logger.log(ERROR, currentDateTime, "LSResponseRepositoryDefaultImpl: " + ex.getMessage());
+            logger.log(ERROR, "LSResponseRepositoryDefaultImpl: " + ex.getMessage());
             throw new RepositoryException("Произошла ошибка на сервере. Обратитесь к администратору для устранения проблем. " +
                     "Сообщение: " + ex.getLocalizedMessage());
         }
@@ -109,7 +109,7 @@ public class LSResponseRepositoryDefaultImpl implements LSResponseRepository {
             jdbcTemplate.setQueryTimeout(30);
             jdbcTemplate.update("UPDATE LS_RESPONSE SET STATE = ? WHERE LSCODE = ?", state, lsCode);
         } catch (QueryTimeoutException ex) {
-            logger.log(ERROR, currentDateTime, "LSResponseRepositoryDefaultImpl: " + ex.getMessage());
+            logger.log(ERROR, "LSResponseRepositoryDefaultImpl: " + ex.getMessage());
             throw new RepositoryException("Время ожидания запроса истекло");
         }
     }

@@ -64,7 +64,6 @@ public class LightSearchServer {
         ctx.getBean("logDirectoryDefault", "logs", osDetector, currentServerDirectory);
 
         LoggerServer logger = ctx.getBean("loggerServerDefault", LoggerServer.class);
-        CurrentDateTime currentDateTime = ctx.getBean("currentDateTimeDefault", CurrentDateTime.class);
         LightSearchServerService serverService = ctx.getBean("lightSearchServerServiceDefault", LightSearchServerService.class);
 
         DatabaseRecordIdentifierReader identifierReader = (DatabaseRecordIdentifierReader)
@@ -72,7 +71,7 @@ public class LightSearchServer {
         DatabaseRecordIdentifier identifier = (DatabaseRecordIdentifier)
                 ctx.getBean("databaseRecordIdentifierDefault", identifierReader.read());
 
-        logger.log(LogMessageTypeEnum.INFO, currentDateTime, "DatabaseRecordIdentifier read. Value: " +
+        logger.log(LogMessageTypeEnum.INFO, "DatabaseRecordIdentifier read. Value: " +
                 identifier.databaseRecordIdentifier());
     }
 }

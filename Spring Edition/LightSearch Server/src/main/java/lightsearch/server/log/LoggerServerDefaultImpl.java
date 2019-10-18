@@ -16,6 +16,7 @@
 package lightsearch.server.log;
 
 import lightsearch.server.producer.log.LoggerFileProducer;
+import lightsearch.server.producer.time.CurrentDateTimeProducer;
 import lightsearch.server.time.CurrentDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -32,13 +33,14 @@ public class LoggerServerDefaultImpl implements LoggerServer {
     @Autowired private LogDirectory logDirectory;
     @Autowired private LoggerFileProducer loggerFileProducer;
     @Autowired private LoggerWindow loggerWindow;
+    @Autowired private CurrentDateTimeProducer currentDateTimeProducer;
 
     @Override
-    synchronized public void log(LogMessageTypeEnum type, CurrentDateTime currentDateTime, String message) {
+    synchronized public void log(LogMessageTypeEnum type, String message) {
         LoggerFile loggerFile = loggerFileProducer.getLoggerFileDefaultInstance(logDirectory);
 
-        loggerFile.writeLogFile(type.stringValue(), currentDateTime, message);
-        loggerWindow.printLog(type.stringValue(), currentDateTime, message);
+        loggerFile.writeLogFile(type.stringValue(), currentDateTimeProducer.getCurrentDateTimeDefaultInstance(), message);
+        loggerWindow.printLog(type.stringValue(), currentDateTimeProducer.getCurrentDateTimeDefaultInstance(), message);
     }
     
 }

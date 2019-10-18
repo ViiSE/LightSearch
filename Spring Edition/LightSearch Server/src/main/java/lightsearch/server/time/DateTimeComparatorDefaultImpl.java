@@ -19,6 +19,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -58,5 +59,4 @@ public class DateTimeComparatorDefaultImpl implements DateTimeComparator {
         else 
             return false;
     }
-    
 }

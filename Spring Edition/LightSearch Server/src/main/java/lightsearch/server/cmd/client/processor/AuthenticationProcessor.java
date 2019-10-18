@@ -94,20 +94,20 @@ public class AuthenticationProcessor implements ClientProcessor<ClientCommandRes
 
                     ClientCommandResultCreator commandResultCreator =
                             clientCommandResultCreatorProducer.getCommandResultCreatorClientJSONInstance(result);
-                    logger.log(INFO, currentDateTime, "Client connected:\n" + message);
+                    logger.log(INFO, "Client connected:\n" + message);
                     clientsService.clients().put(command.IMEI(), command.username());
                     return commandResultCreator.createClientCommandResult();
                 } catch (CommandResultException | DatabaseStatementExecutorException ex) {
-                    logger.log(ERROR, currentDateTime, ex.getMessage());
+                    logger.log(ERROR, ex.getMessage());
                     return createErrorResult(command.IMEI(), "Невозможно создать результат команды. " +
                             "Обратитесь к администратору для устранения проблемы.");
                 }
             } else {
-                logger.log(ERROR, currentDateTime, "Client " + command.IMEI() + " in the blacklist.");
+                logger.log(ERROR, "Client " + command.IMEI() + " in the blacklist.");
                 return createErrorResult(command.IMEI(), "Извините, но вы находитесь в черном списке.");
             }
         } else {
-            logger.log(ERROR, currentDateTime, "Authentication: unknown client.");
+            logger.log(ERROR, "Authentication: unknown client.");
             return createErrorResult("Unknown", "Неверный формат команды. " +
                     "Обратитесь к администратору для устранения ошибки.");
         }

@@ -35,12 +35,11 @@ import org.springframework.stereotype.Component;
 public class DatabaseRecordIdentifierWriterTimer {
 
     @Autowired private LoggerServer logger;
-    @Autowired private CurrentDateTime currentDateTime;
     @Autowired private DatabaseRecordIdentifierWriterProducer identifierWriterProducer;
     @Autowired private DatabaseRecordIdentifierProducer identifierProducer;
 
     @Async
-    @Scheduled(fixedDelay = 10000, initialDelay = 10000)
+    @Scheduled(fixedDelay = 1800000, initialDelay = 1800000) // 30 minutes
     public void writeDatabaseRecordIdentifier() {
         try {
             DatabaseRecordIdentifier identifier = identifierProducer.getDatabaseRecordIdentifierDefaultInstance();
@@ -48,10 +47,10 @@ public class DatabaseRecordIdentifierWriterTimer {
             identifierWriterProducer.getDatabaseRecordIdentifierWriterDefaultInstance()
                     .write(identifier.databaseRecordIdentifier());
 
-            logger.log(LogMessageTypeEnum.INFO, currentDateTime, "DatabaseRecordIdentifier write. Value: " +
+            logger.log(LogMessageTypeEnum.INFO, "DatabaseRecordIdentifier write. Value: " +
                     identifier.databaseRecordIdentifier());
         } catch (IdentifierException ex) {
-            logger.log(LogMessageTypeEnum.ERROR, currentDateTime, "Cannot write database record identifier. " +
+            logger.log(LogMessageTypeEnum.ERROR, "Cannot write database record identifier. " +
                     "Exception: " + ex.getMessage());
         }
     }

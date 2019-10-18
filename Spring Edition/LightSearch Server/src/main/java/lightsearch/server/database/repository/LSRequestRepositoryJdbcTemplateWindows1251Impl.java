@@ -32,7 +32,6 @@ import static lightsearch.server.log.LogMessageTypeEnum.ERROR;
 public class LSRequestRepositoryJdbcTemplateWindows1251Impl implements LSRequestRepository {
 
     @Autowired private LoggerServer logger;
-    @Autowired private CurrentDateTime currentDateTime;
     @Autowired private JdbcTemplate jdbcTemplate;
     @Autowired private LSRequestRowChecker rowChecker;
 
@@ -62,10 +61,10 @@ public class LSRequestRepositoryJdbcTemplateWindows1251Impl implements LSRequest
             } else
                 throw new RepositoryException("Строка с данным LSCODE уже существует!");
         } catch (QueryTimeoutException ex) {
-            logger.log(ERROR, currentDateTime, "LSRequestRepositoryJdbcTemplateImpl: " + ex.getMessage());
+            logger.log(ERROR, "LSRequestRepositoryJdbcTemplateImpl: " + ex.getMessage());
             throw new RepositoryException("Время ожидания запроса истекло");
         } catch (UnsupportedEncodingException ex) {
-            logger.log(ERROR, currentDateTime, "LSRequestRepositoryJdbcTemplateImpl: " + ex.getMessage());
+            logger.log(ERROR, "LSRequestRepositoryJdbcTemplateImpl: " + ex.getMessage());
             throw new RepositoryException("Кодировка windows-1251 не поддерживается");
         }
     }

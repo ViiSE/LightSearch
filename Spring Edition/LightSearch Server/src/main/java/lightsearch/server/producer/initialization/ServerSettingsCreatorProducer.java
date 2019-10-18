@@ -13,14 +13,15 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package lightsearch.server.log;
+package lightsearch.server.producer.initialization;
 
-import lightsearch.server.time.CurrentDateTime;
+import lightsearch.server.initialization.CurrentServerDirectory;
+import lightsearch.server.initialization.ServerSettingsCreator;
 
 /**
  *
  * @author ViiSE
  */
-public interface LoggerServer {
-    void log(LogMessageTypeEnum type, String message);
+public interface ServerSettingsCreatorProducer {
+    ServerSettingsCreator getServerSettingsCreatorFromFileJSONInstance(CurrentServerDirectory currentServerDirectory);
 }

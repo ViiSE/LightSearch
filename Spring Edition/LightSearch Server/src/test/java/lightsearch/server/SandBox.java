@@ -18,10 +18,14 @@ package lightsearch.server;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lightsearch.server.data.pojo.ClientCommandDTO;
+import lightsearch.server.data.pojo.LightSearchSettings;
 import org.testng.annotations.Test;
 
+import java.io.File;
 import java.io.IOException;
+import java.time.LocalTime;
 
 public class SandBox {
 
@@ -35,5 +39,15 @@ public class SandBox {
 
         ClientCommandDTO r = mapper.readValue("{\"ident\":25}", ClientCommandDTO.class);
         System.out.println("Deserialization: " + r.getUserIdentifier());
+
+        LocalTime time = LocalTime.now();
+        System.out.println("Time now: " + time);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        LightSearchSettings settings = objectMapper.readValue(new File("settings"), LightSearchSettings.class);
+
+        System.out.println("Reboot: isBefore: " + settings.getRebootTime().isBefore(time));
+        System.out.println("Reboot: isAfter: " + settings.getRebootTime().isAfter(time));
     }
 }

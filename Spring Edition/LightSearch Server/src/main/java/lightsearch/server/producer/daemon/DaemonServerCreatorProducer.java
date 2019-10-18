@@ -13,14 +13,12 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package lightsearch.server.log;
 
-import lightsearch.server.time.CurrentDateTime;
+package lightsearch.server.producer.daemon;
 
-/**
- *
- * @author ViiSE
- */
-public interface LoggerServer {
-    void log(LogMessageTypeEnum type, String message);
+import lightsearch.server.daemon.DaemonServerCreator;
+import lightsearch.server.initialization.OsDetector;
+
+public interface DaemonServerCreatorProducer {
+    DaemonServerCreator getDaemonServerCreatorDefaultInstance(OsDetector osDetector, String currentDirectory);
 }

@@ -13,16 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lightsearch.server.time;
-
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+package lightsearch.server.daemon;
 
 /**
  *
  * @author ViiSE
  */
-public interface DateTimeComparator {
-    boolean isAfter(Object originalDate, LocalDateTime afterDate);
-    boolean isBefore(Object originalDate, LocalDateTime beforeDate);
+public interface DaemonServer {
+    void exec();
 }

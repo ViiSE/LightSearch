@@ -14,27 +14,26 @@
  *  limitations under the License.
  */
 
-package lightsearch.server.log;
+package lightsearch.server.timer;
 
-import lightsearch.server.LightSearchServer;
-import lightsearch.server.producer.time.CurrentDateTimeProducer;
-import lightsearch.server.time.CurrentDateTime;
+import lightsearch.server.configuration.LightSearchConfiguration;
+import lightsearch.server.data.pojo.LightSearchSettings;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.testng.annotations.Test;
 
-import static lightsearch.server.log.LogMessageTypeEnum.INFO;
+import java.time.Duration;
 
-@SpringBootTest(classes = LightSearchServer.class)
-public class LoggerServerTestNG extends AbstractTestNGSpringContextTests {
+import static org.awaitility.Awaitility.await;
+
+@SpringJUnitConfig(LightSearchConfiguration.class)
+public class RestartTimerJUnitTest {
 
     @Autowired
-    private
-    LoggerServer loggerServer;
+    private RestartTimer restartTimer;
 
     @Test
-    public void log() {
-        loggerServer.log(INFO, "|+-+-+-+-+-+-+-+-+|LOG|+-+-+-+-+-+-+-+-+|");
+    public void restart() {
     }
 }
