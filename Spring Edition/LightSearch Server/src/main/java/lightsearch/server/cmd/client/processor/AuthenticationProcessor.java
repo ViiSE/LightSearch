@@ -22,6 +22,7 @@ import lightsearch.server.cmd.result.ClientCommandResultCreator;
 import lightsearch.server.data.BlacklistService;
 import lightsearch.server.data.ClientsService;
 import lightsearch.server.data.LightSearchServerService;
+import lightsearch.server.data.pojo.Client;
 import lightsearch.server.data.pojo.ClientCommandResult;
 import lightsearch.server.database.cmd.message.DatabaseCommandMessage;
 import lightsearch.server.database.statement.DatabaseStatementExecutor;
@@ -45,7 +46,7 @@ import static lightsearch.server.log.LogMessageTypeEnum.INFO;
 @Scope("prototype")
 public class AuthenticationProcessor implements ClientProcessor<ClientCommandResult> {
 
-    private final ClientsService<String, String> clientsService;
+    private final ClientsService<String, Client> clientsService;
     private final BlacklistService blacklistService;
     private final LightSearchChecker checker;
     private final CurrentDateTime currentDateTime;
@@ -95,7 +96,7 @@ public class AuthenticationProcessor implements ClientProcessor<ClientCommandRes
                     ClientCommandResultCreator commandResultCreator =
                             clientCommandResultCreatorProducer.getCommandResultCreatorClientJSONInstance(result);
                     logger.log(INFO, "Client connected:\n" + message);
-                    clientsService.clients().put(command.IMEI(), command.username());
+                    clientsService.clients().put(command.IMEI(), new Client(command.username()));
                     return commandResultCreator.createClientCommandResult();
                 } catch (CommandResultException | DatabaseStatementExecutorException ex) {
                     logger.log(ERROR, ex.getMessage());

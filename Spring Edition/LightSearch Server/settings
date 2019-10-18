@@ -1,4 +1,5 @@
 {
-    "rebootTime":"10:00",
-    "timeoutClient":"30"
+    "rebootTime":"15:10",
+    "timeoutClient":"30",
+    "frequency":"1"
 }

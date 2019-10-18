@@ -22,10 +22,7 @@ import lightsearch.server.data.LightSearchServerService;
 import lightsearch.server.identifier.DatabaseRecordIdentifier;
 import lightsearch.server.identifier.DatabaseRecordIdentifierReader;
 import lightsearch.server.identifier.DatabaseRecordIdentifierWriter;
-import lightsearch.server.initialization.AdminsCreator;
-import lightsearch.server.initialization.BlacklistCreator;
-import lightsearch.server.initialization.CurrentServerDirectory;
-import lightsearch.server.initialization.OsDetector;
+import lightsearch.server.initialization.*;
 import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.log.LoggerServer;
 import lightsearch.server.producer.identifier.DatabaseRecordIdentifierProducer;
@@ -73,5 +70,9 @@ public class LightSearchServer {
 
         logger.log(LogMessageTypeEnum.INFO, "DatabaseRecordIdentifier read. Value: " +
                 identifier.databaseRecordIdentifier());
+
+        ServerSettingsCreator settingsCreator = (ServerSettingsCreator) ctx.getBean(
+                "serverSettingsCreatorFromFileJSON", currentServerDirectory);
+        settingsCreator.createSettings();
     }
 }

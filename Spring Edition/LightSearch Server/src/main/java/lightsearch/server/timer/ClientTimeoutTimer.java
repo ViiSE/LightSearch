@@ -16,32 +16,35 @@
 
 package lightsearch.server.timer;
 
-import lightsearch.server.data.pojo.LightSearchSettings;
-import lightsearch.server.log.LogMessageTypeEnum;
-import lightsearch.server.log.LoggerServer;
+import lightsearch.server.data.LightSearchServerService;
+import lightsearch.server.producer.timer.TimeoutManagerProducer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.context.restart.RestartEndpoint;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
-
-@Component("restartTimer")
+@Component("clientTimeoutTimer")
 @EnableAsync
-public class RestartTimer {
+public class ClientTimeoutTimer {
 
-    @Autowired private LoggerServer logger;
-    @Autowired private RestartEndpoint restartEndpoint;
+    @Autowired private LightSearchServerService serverService;
+    @Autowired private TimeoutManagerProducer timeoutManagerProducer;
+
+    private TimeoutManager timeoutManager;
 
     @Async
-    @Scheduled(fixedDelay = 1000, initialDelay = 30000)
-    public void restart() {
-        if(LightSearchSettings.getRebootDateTime().isBefore(LocalDateTime.now())) {
-            logger.log(LogMessageTypeEnum.INFO, "Server restarted");
-            restartEndpoint.restart();
-        }
+    @Scheduled(fixedDelay = 1000)
+    public void checkClients() {
+        if(timeoutManager == null)
+            initTimeoutManager();
+
+        timeoutManager.refresh();
+        timeoutManager.check();
     }
 
+    @SuppressWarnings("unchecked")
+    private void initTimeoutManager() {
+        timeoutManager = timeoutManagerProducer.getTimeoutManagerReducerImpl(1, serverService.clientsService());
+    }
 }

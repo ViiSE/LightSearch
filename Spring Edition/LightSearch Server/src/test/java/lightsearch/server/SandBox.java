@@ -25,6 +25,7 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class SandBox {
@@ -47,7 +48,14 @@ public class SandBox {
         objectMapper.registerModule(new JavaTimeModule());
         LightSearchSettings settings = objectMapper.readValue(new File("settings"), LightSearchSettings.class);
 
-        System.out.println("Reboot: isBefore: " + settings.getRebootTime().isBefore(time));
-        System.out.println("Reboot: isAfter: " + settings.getRebootTime().isAfter(time));
+        System.out.println("Reboot: isBefore: " + LightSearchSettings.getRebootTime().isBefore(time));
+        System.out.println("Reboot: isAfter: " + LightSearchSettings.getRebootTime().isAfter(time));
+
+        System.out.println("frequency: " + LightSearchSettings.getFrequency());
+
+        LocalDate today = LocalDate.now();
+        System.out.println("Today: " + today);
+
+        System.out.println("Tommorow: " + today.plusDays(1));
     }
 }

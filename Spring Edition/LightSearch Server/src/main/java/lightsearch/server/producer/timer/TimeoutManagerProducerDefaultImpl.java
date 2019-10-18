@@ -14,23 +14,25 @@
  *  limitations under the License.
  */
 
-package lightsearch.server.producer.daemon;
+package lightsearch.server.producer.timer;
 
-import lightsearch.server.daemon.DaemonServer;
+import lightsearch.server.data.ClientsService;
+import lightsearch.server.data.pojo.Client;
+import lightsearch.server.timer.TimeoutManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
-@Service("daemonServerProducerDefault")
-public class DaemonServerProducerDefaultImpl implements DaemonServerProducer {
+@Service("timeoutManagerProducerDefault")
+public class TimeoutManagerProducerDefaultImpl implements TimeoutManagerProducer {
 
-    private final String DAEMON_SERVER_WINDOWS = "daemonServerWindowsDefault";
+    private final String TIMEOUT_MANAGER = "timeoutManagerReducer";
 
     @Autowired
     private ApplicationContext ctx;
 
     @Override
-    public DaemonServer getDaemonServerWindowsDefaultInstance(String currentDirectory) {
-        return (DaemonServer) ctx.getBean(DAEMON_SERVER_WINDOWS, currentDirectory);
+    public TimeoutManager getTimeoutManagerReducerImpl(int reduceValue, ClientsService<String, Client> clientsService) {
+        return (TimeoutManager) ctx.getBean(TIMEOUT_MANAGER, reduceValue, clientsService);
     }
 }

@@ -16,6 +16,7 @@
 
 package lightsearch.server.data;
 
+import lightsearch.server.data.pojo.Client;
 import lightsearch.server.producer.initialization.CurrentServerDirectoryProducer;
 import lightsearch.server.producer.initialization.OsDetectorProducer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class LightSearchServerServiceDefaultImpl implements LightSearchServerSer
 
     @Autowired
     @Qualifier("clientsServiceDefault")
-    private ClientsService<String, String> clientsService;
+    private ClientsService<String, Client> clientsService;
 
     @Autowired
     @Qualifier("blacklistServiceDefault")

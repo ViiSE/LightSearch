@@ -17,7 +17,10 @@
 package lightsearch.server.data.pojo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class LightSearchSettings {
@@ -25,6 +28,9 @@ public class LightSearchSettings {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private static LocalTime rebootTime;
     private static long timeoutClient;
+    private static int frequency;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private static LocalDateTime rebootDateTime;
 
     public void setRebootTime(LocalTime rebootTime) {
         LightSearchSettings.rebootTime = rebootTime;
@@ -40,6 +46,25 @@ public class LightSearchSettings {
 
     public static long getTimeoutClient() {
         return timeoutClient;
+    }
+
+    public void setFrequency(int frequency) {
+        LightSearchSettings.frequency = frequency;
+    }
+
+    public static int getFrequency() {
+        return frequency;
+    }
+
+    public static LocalDateTime getRebootDateTime() {
+        if(rebootDateTime == null)
+            calculateRebootDateTime();
+        return rebootDateTime;
+    }
+
+    private static void calculateRebootDateTime() {
+        LocalDate date = LocalDate.now().plusDays(frequency);
+        rebootDateTime = LocalDateTime.of(date, rebootTime);
     }
 
     @Override

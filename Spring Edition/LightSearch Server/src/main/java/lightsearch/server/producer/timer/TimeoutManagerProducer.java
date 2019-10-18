@@ -13,12 +13,13 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package lightsearch.server.daemon;
 
-/**
- *
- * @author ViiSE
- */
-public interface DaemonServerCreator {
-    DaemonServer createDaemonServer();
+package lightsearch.server.producer.timer;
+
+import lightsearch.server.data.ClientsService;
+import lightsearch.server.data.pojo.Client;
+import lightsearch.server.timer.TimeoutManager;
+
+public interface TimeoutManagerProducer {
+    TimeoutManager getTimeoutManagerReducerImpl(int reduceValue, ClientsService<String, Client> clientsService);
 }

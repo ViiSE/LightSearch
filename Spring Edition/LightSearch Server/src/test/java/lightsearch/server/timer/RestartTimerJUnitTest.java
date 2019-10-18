@@ -16,24 +16,27 @@
 
 package lightsearch.server.timer;
 
-import lightsearch.server.configuration.LightSearchConfiguration;
-import lightsearch.server.data.pojo.LightSearchSettings;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
 
 import static org.awaitility.Awaitility.await;
+import static org.mockito.Mockito.*;
 
-@SpringJUnitConfig(LightSearchConfiguration.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class RestartTimerJUnitTest {
 
-    @Autowired
+    @SpyBean
     private RestartTimer restartTimer;
 
     @Test
     public void restart() {
+        await().atMost(Duration.ofSeconds(5)).untilAsserted(
+                () -> verify(restartTimer, atLeastOnce()).restart());
     }
 }

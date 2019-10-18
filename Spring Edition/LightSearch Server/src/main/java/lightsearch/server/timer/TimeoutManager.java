@@ -14,10 +14,9 @@
  *  limitations under the License.
  */
 
-package lightsearch.server.producer.daemon;
+package lightsearch.server.timer;
 
-import lightsearch.server.daemon.DaemonServer;
-
-public interface DaemonServerProducer {
-    DaemonServer getDaemonServerWindowsDefaultInstance(String currentDirectory);
+public interface TimeoutManager {
+    void refresh();
+    void check();
 }

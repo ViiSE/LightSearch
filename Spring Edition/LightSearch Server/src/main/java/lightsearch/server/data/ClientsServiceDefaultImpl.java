@@ -16,18 +16,19 @@
 
 package lightsearch.server.data;
 
+import lightsearch.server.data.pojo.Client;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Component("clientsServiceDefault")
-public class ClientsServiceDefaultImpl implements ClientsService<String, String> {
+public class ClientsServiceDefaultImpl implements ClientsService<String, Client> {
 
-    private final static Map<String, String> clients = new HashMap<>();
+    private final static Map<String, Client> clients = new HashMap<>();
 
     @Override
-    public Map<String, String> clients() {
+    public Map<String, Client> clients() {
         return clients;
     }
 }
