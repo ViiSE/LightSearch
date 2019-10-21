@@ -18,8 +18,10 @@ package lightsearch.server.data.pojo;
 
 public class Client {
 
+    private static final int TIMEOUT_LIMIT = 1800;
+
     private String username;
-    private int timeoutLimitSeconds = 1800;
+    private int timeoutLimitSeconds = TIMEOUT_LIMIT;
 
     public Client(String username) {
         this.username = username;
@@ -35,6 +37,10 @@ public class Client {
 
     public void setTimeoutLimitSeconds(int timeoutLimitSeconds) {
         this.timeoutLimitSeconds = timeoutLimitSeconds;
+    }
+
+    public void refreshTimeoutValue() {
+        timeoutLimitSeconds = TIMEOUT_LIMIT;
     }
 
     public void decreaseTimeoutLimitValue(int decreaseValueSeconds) {

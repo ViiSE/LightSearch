@@ -19,10 +19,7 @@ package lightsearch.server.cmd.client.processor;
 import lightsearch.server.checker.LightSearchChecker;
 import lightsearch.server.cmd.client.ClientCommand;
 import lightsearch.server.cmd.result.ClientCommandResultCreator;
-import lightsearch.server.data.BlacklistService;
-import lightsearch.server.data.ClientsService;
 import lightsearch.server.data.LightSearchServerService;
-import lightsearch.server.data.pojo.Client;
 import lightsearch.server.data.pojo.ClientCommandResult;
 import lightsearch.server.database.cmd.message.DatabaseCommandMessage;
 import lightsearch.server.database.statement.DatabaseStatementExecutor;
@@ -44,12 +41,11 @@ import org.springframework.stereotype.Component;
 
 import static lightsearch.server.log.LogMessageTypeEnum.INFO;
 
-@Component("authenticationProcessorClient")
+@Component("openSoftCheckProcessor")
 @Scope("prototype")
-public class AuthenticationProcessor implements ClientProcessor<ClientCommandResult> {
+public class OpenSoftCheckProcessor implements ClientProcessor<ClientCommandResult> {
 
-    private final ClientsService<String, Client> clientsService;
-    private final BlacklistService blacklistService;
+    private final LightSearchServerService serverService;
     private final LightSearchChecker checker;
     private final CurrentDateTime currentDateTime;
     private final DatabaseRecordIdentifier databaseRecordIdentifier;
@@ -59,14 +55,12 @@ public class AuthenticationProcessor implements ClientProcessor<ClientCommandRes
     @Autowired private DatabaseCommandMessageProducer dbCmdMsgProducer;
     @Autowired private DatabaseStatementExecutorProducer dbStateExecProducer;
     @Autowired private CommandCheckerProducer commandCheckerProducer;
-    @Autowired private ErrorClientCommandServiceProducer errorCommandServiceProducer;
+    @Autowired private ErrorClientCommandServiceProducer errCmdServiceProducer;
 
-    @SuppressWarnings("unchecked")
-    public AuthenticationProcessor(
+    public OpenSoftCheckProcessor(
             LightSearchServerService serverService, LightSearchChecker checker, CurrentDateTime currentDateTime,
             DatabaseRecordIdentifier databaseRecordIdentifier) {
-        this.clientsService = serverService.clientsService();
-        this.blacklistService = serverService.blacklistService();
+        this.serverService = serverService;
         this.checker = checker;
         this.currentDateTime = currentDateTime;
         this.databaseRecordIdentifier = databaseRecordIdentifier;
@@ -75,10 +69,9 @@ public class AuthenticationProcessor implements ClientProcessor<ClientCommandRes
     @Override
     public ClientCommandResult apply(ClientCommand command) {
         try {
-            commandCheckerProducer.getCommandCheckerClientAuthorizationInstance(command, blacklistService, checker).check();
-
+            commandCheckerProducer.getCommandCheckerClientOpenSoftCheckInstance(command, serverService, checker).check();
             DatabaseCommandMessage dbCmdMessage =
-                    dbCmdMsgProducer.getDatabaseCommandMessageConnectionDefaultWindowsJSONInstance(command);
+                    dbCmdMsgProducer.getDatabaseCommandMessageOpenSoftCheckDefaultWindowsJSONInstance(command);
 
             DatabaseStatementExecutor dbStatementExecutor =
                     dbStateExecProducer.getDatabaseStatementExecutorDefaultInstance(
@@ -86,18 +79,19 @@ public class AuthenticationProcessor implements ClientProcessor<ClientCommandRes
 
             DatabaseStatementResult dbStatRes = dbStatementExecutor.exec();
 
+            String result = dbStatRes.result();
+
             ClientCommandResultCreator commandResultCreator =
-                    clientCommandResultCreatorProducer.getCommandResultCreatorClientJSONInstance(dbStatRes.result());
-            logger.log(INFO, "Client connected:\n" + "IMEI - " + command.IMEI() +
-                    ", ip - " + command.ip() + ", os - " + command.os() + ", model - " + command.model() +
-                    ", username - " + command.username() + ", user ident - " + command.userIdentifier());
-            clientsService.clients().put(command.IMEI(), new Client(command.username()));
+                    clientCommandResultCreatorProducer.getCommandResultCreatorClientJSONInstance(result);
+            logger.log(INFO, "Client " + command.IMEI() + " open soft check:" +
+                    "user identifier - " + command.userIdentifier());
+
             return commandResultCreator.createClientCommandResult();
         } catch (CommandResultException | DatabaseStatementExecutorException ex) {
-            return errorCommandServiceProducer.getErrorClientCommandServiceDefaultInstance().createErrorResult(command.IMEI(),
-                    "Невозможно создать результат команды. Сообщение: " + ex.getMessage(), ex.getMessage());
+            return errCmdServiceProducer.getErrorClientCommandServiceDefaultInstance().createErrorResult(
+                    command.IMEI(), "Невозможно создать результат команды. Сообщение: " + ex.getMessage(), ex.getMessage());
         } catch (CheckerException ex) {
-            return errorCommandServiceProducer.getErrorClientCommandServiceDefaultInstance().createErrorResult(
+            return errCmdServiceProducer.getErrorClientCommandServiceDefaultInstance().createErrorResult(
                     command.IMEI() == null ? "Unknown" : command.IMEI(), ex.getMessage(), ex.getLogMessage());
         }
     }

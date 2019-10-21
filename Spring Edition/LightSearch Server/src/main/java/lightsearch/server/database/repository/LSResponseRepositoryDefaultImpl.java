@@ -76,8 +76,7 @@ public class LSResponseRepositoryDefaultImpl implements LSResponseRepository {
                 } catch(DataAccessException ex) {
                     if(!ex.getMessage().contains("Incorrect result size")) {
                         logger.log(ERROR, "LSResponseRepositoryDefaultImpl: " + ex.getMessage());
-                        throw new RepositoryException("Произошла ошибка на сервере. Обратитесь к администратору для устранения проблем. " +
-                                "Сообщение: " + ex.getLocalizedMessage());
+                        throw new RepositoryException("Произошла ошибка на сервере. Сообщение: " + ex.getLocalizedMessage());
                     }
                 }
             }
@@ -88,8 +87,7 @@ public class LSResponseRepositoryDefaultImpl implements LSResponseRepository {
             throw new RepositoryException("Время ожидания запроса истекло");
         } catch (DataAccessException ex) {
             logger.log(ERROR, "LSResponseRepositoryDefaultImpl: " + ex.getMessage());
-            throw new RepositoryException("Произошла ошибка на сервере. Обратитесь к администратору для устранения проблем. " +
-                    "Сообщение: " + ex.getLocalizedMessage());
+            throw new RepositoryException("Произошла ошибка на сервере. Сообщение: " + ex.getLocalizedMessage());
         }
     }
 

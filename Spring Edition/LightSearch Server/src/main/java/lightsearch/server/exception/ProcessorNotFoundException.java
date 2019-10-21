@@ -14,8 +14,11 @@
  *  limitations under the License.
  */
 
-package lightsearch.server.cmd.result;
+package lightsearch.server.exception;
 
-public interface ErrorResultCreator<T> {
-    T create();
+public class ProcessorNotFoundException extends Exception {
+
+    public ProcessorNotFoundException(String message) {
+        super(message);
+    }
 }

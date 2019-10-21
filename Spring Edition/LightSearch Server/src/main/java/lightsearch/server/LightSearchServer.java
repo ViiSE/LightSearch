@@ -16,6 +16,8 @@
 
 package lightsearch.server;
 
+import lightsearch.server.about.AppGreetings;
+import lightsearch.server.about.EndStartupMessage;
 import lightsearch.server.data.AdminsService;
 import lightsearch.server.data.BlacklistService;
 import lightsearch.server.data.LightSearchServerService;
@@ -36,13 +38,10 @@ import org.springframework.context.ApplicationContext;
 @SpringBootApplication
 public class LightSearchServer {
 
-    @Autowired private LightSearchServerService serverService;
-    @Autowired private DatabaseRecordIdentifierReaderProducer identifierReaderProducer;
-    @Autowired private DatabaseRecordIdentifierProducer identifierProducer;
-    @Autowired private DatabaseRecordIdentifierWriter identifierWriter;
-
     public static void main(String[] args) {
         ApplicationContext ctx = SpringApplication.run(LightSearchServer.class, args);
+
+        System.out.println(ctx.getBean("appGreetingsDefault", AppGreetings.class).greetings());
 
         OsDetector osDetector = ctx.getBean("osDetectorDefault", OsDetector.class);
         CurrentServerDirectory currentServerDirectory =
@@ -74,5 +73,7 @@ public class LightSearchServer {
         ServerSettingsCreator settingsCreator = (ServerSettingsCreator) ctx.getBean(
                 "serverSettingsCreatorFromFileJSON", currentServerDirectory);
         settingsCreator.createSettings();
+
+        System.out.println(ctx.getBean("endStartUpMessageDefault", EndStartupMessage.class).message());
     }
 }

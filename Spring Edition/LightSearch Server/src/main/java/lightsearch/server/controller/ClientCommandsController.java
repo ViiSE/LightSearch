@@ -35,8 +35,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/login")
-public class LoginController {
+@RequestMapping("/commands/type/client")
+public class ClientCommandsController {
 
     @Autowired
     private LoggerServer logger;
@@ -57,8 +57,8 @@ public class LoginController {
     @Qualifier("errorClientCommandServiceProducerDefault")
     private ErrorClientCommandServiceProducer errorClientCommandServiceProducer;
 
-    @RequestMapping(value = "/clients", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ClientCommandResult loginClient(@RequestBody ClientCommandDTO clientCommandDTO) {
+    @RequestMapping(method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ClientCommandResult commandClient(@RequestBody ClientCommandDTO clientCommandDTO) {
         try {
             String command = clientCommandDTO.getCommand();
             ProcessorService<ClientCommandResult> processorService =

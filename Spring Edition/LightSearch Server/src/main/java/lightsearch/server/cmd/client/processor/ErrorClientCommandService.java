@@ -14,16 +14,10 @@
  *  limitations under the License.
  */
 
-package lightsearch.server.about;
+package lightsearch.server.cmd.client.processor;
 
-import org.springframework.stereotype.Component;
+import lightsearch.server.data.pojo.ClientCommandResult;
 
-@Component("endStartupMessageDefault")
-public class EndStartupMessageDefaultImpl implements EndStartupMessage {
-
-    @Override
-    public String message() {
-        return "Now Logging is in the folder logs and this window. For administration use LightSearch Admin Panel. " +
-                "(login/admins POST). See github.com/ViiSE/LightSearch/API.";
-    }
+public interface ErrorClientCommandService {
+    ClientCommandResult createErrorResult(String IMEI, String message, String logMessage);
 }

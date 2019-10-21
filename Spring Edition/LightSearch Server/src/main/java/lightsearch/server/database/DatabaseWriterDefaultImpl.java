@@ -50,8 +50,7 @@ public class DatabaseWriterDefaultImpl implements DatabaseWriter {
             lsRequestRepository.writeCommand(lsCode, dateTime, command, true);
         } catch (RepositoryException ex) {
             throw new DatabaseWriterException(ex.getMessage(),
-                    "Не удалось записать команду в базу данных. Обратитесь к администратору для устранения проблемы. " +
-                            "Сообщение: " + ex.getMessage());
+                    "Не удалось записать команду в базу данных. Сообщение: " + ex.getMessage());
         }
     }
     

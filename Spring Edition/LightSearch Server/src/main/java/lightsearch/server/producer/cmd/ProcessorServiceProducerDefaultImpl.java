@@ -14,29 +14,25 @@
  *  limitations under the License.
  */
 
-package lightsearch.server.cmd.result;
+package lightsearch.server.producer.cmd;
 
+import lightsearch.server.cmd.ProcessorService;
 import lightsearch.server.data.pojo.ClientCommandResult;
-import org.springframework.context.annotation.Scope;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
-import static lightsearch.server.cmd.result.ResultType.FALSE;
+@Service("processorServiceProducerDefault")
+public class ProcessorServiceProducerDefaultImpl implements ProcessorServiceProducer {
 
-@Service("clientCommandResultCreatorClientError")
-@Scope("prototype")
-public class ClientCommandResultCreatorErrorImpl implements ClientCommandResultCreator {
+    private final String CLIENT_PROCESSOR_SERVICE = "clientProcessorServiceDefaultImpl";
 
-    private final String IMEI;
-    private final String message;
+    @Autowired
+    private ApplicationContext ctx;
 
-    public ClientCommandResultCreatorErrorImpl(String IMEI, String message) {
-        this.IMEI = IMEI;
-        this.message = message;
-    }
-
+    @SuppressWarnings("unchecked")
     @Override
-    public ClientCommandResult createClientCommandResult() {
-        return new ClientCommandResult(
-                IMEI, FALSE.stringValue(), message, null, null, null, null);
+    public ProcessorService<ClientCommandResult> getClientProcessorServiceDefaultInstance(String command) {
+        return (ProcessorService<ClientCommandResult>) ctx.getBean(CLIENT_PROCESSOR_SERVICE, command);
     }
 }

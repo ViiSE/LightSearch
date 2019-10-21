@@ -39,7 +39,7 @@ public class DatabaseRecordIdentifierWriterTimer {
     @Autowired private DatabaseRecordIdentifierProducer identifierProducer;
 
     @Async
-    @Scheduled(fixedDelay = 1800000, initialDelay = 1800000) // 30 minutes
+    @Scheduled(fixedDelay = 1800000, initialDelay = 30000) // 30 minutes, 30 seconds
     public void writeDatabaseRecordIdentifier() {
         try {
             DatabaseRecordIdentifier identifier = identifierProducer.getDatabaseRecordIdentifierDefaultInstance();

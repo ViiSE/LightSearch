@@ -44,7 +44,7 @@ public class HashAlgorithmsDefaultImpl implements HashAlgorithms {
                 hexString.append(hex);
             }
             
-            return hexString.toString();
+            return hexString.toString().toUpperCase();
         } catch(UnsupportedEncodingException | NoSuchAlgorithmException ignore) {
            return null;
         }

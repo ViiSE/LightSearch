@@ -17,10 +17,11 @@
 package lightsearch.server.cmd;
 
 import lightsearch.server.checker.LightSearchChecker;
+import lightsearch.server.cmd.client.processor.ClientProcessor;
 import lightsearch.server.data.LightSearchServerService;
 import lightsearch.server.identifier.DatabaseRecordIdentifier;
 import lightsearch.server.producer.checker.LightSearchCheckerProducer;
-import lightsearch.server.producer.cmd.client.ProcessorClientProducer;
+import lightsearch.server.producer.cmd.client.processor.ProcessorClientProducer;
 import lightsearch.server.producer.identifier.DatabaseRecordIdentifierProducer;
 import lightsearch.server.producer.time.CurrentDateTimeProducer;
 import lightsearch.server.time.CurrentDateTime;
@@ -35,7 +36,7 @@ import static lightsearch.server.cmd.client.ClientCommandEnum.*;
 @Component("clientProcessorHolder")
 public class ProcessorHolderClientImpl implements ProcessorHolder {
 
-    private final Map<String, Processor> holder = new HashMap<>();
+    private final Map<String, ClientProcessor> holder = new HashMap<>();
 
     @Autowired private ProcessorClientProducer producer;
     @Autowired private LightSearchServerService serverService;
@@ -52,7 +53,6 @@ public class ProcessorHolderClientImpl implements ProcessorHolder {
     }
 
     private void initHolder() {
-
         LightSearchChecker checker = checkerProducer.getLightSearchCheckerDefaultInstance();
         CurrentDateTime currentDateTime = currentDateTimeProducer.getCurrentDateTimeDefaultInstance();
         DatabaseRecordIdentifier databaseRecordIdentifier =

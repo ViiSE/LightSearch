@@ -49,8 +49,7 @@ public class DatabaseReaderDefaultImpl implements DatabaseReader {
             return result.getCmdOut();
         } catch (RepositoryException ex) {
             throw new DatabaseReaderException(ex.getMessage(),
-                    "Не удалось считать результат команды из базы данных. Обратитесь к администратору для устранения проблемы." +
-                            "Сообщение: " + ex.getMessage());
+                    "Не удалось считать результат команды из базы данных. Сообщение: " + ex.getMessage());
         }
     }
 }

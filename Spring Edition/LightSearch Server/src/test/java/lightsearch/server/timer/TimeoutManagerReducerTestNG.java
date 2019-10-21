@@ -49,7 +49,7 @@ public class TimeoutManagerReducerTestNG extends AbstractTestNGSpringContextTest
     }
 
     @Test
-    public void check() {
+    public void check() throws InterruptedException {
         System.out.println(serverService.clientsService().clients().toString());
 
         timeoutManager.refresh();

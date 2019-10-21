@@ -21,6 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lightsearch.server.data.pojo.ClientCommandDTO;
 import lightsearch.server.data.pojo.LightSearchSettings;
+import lightsearch.server.security.HashAlgorithmsDefaultImpl;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -29,6 +30,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class SandBox {
+
+    /* ~Welcome to the SandBox! You can do whatever you want here. This is experiments zone. Enjoy!~ */
 
     @Test
     public void sandBox() throws JsonProcessingException, IOException {
@@ -57,5 +60,8 @@ public class SandBox {
         System.out.println("Today: " + today);
 
         System.out.println("Tommorow: " + today.plusDays(1));
+
+        String hash = new HashAlgorithmsDefaultImpl().sha256("321");
+        System.out.println(hash);
     }
 }

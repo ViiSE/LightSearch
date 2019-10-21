@@ -14,11 +14,12 @@
  *  limitations under the License.
  */
 
-package lightsearch.server.producer.cmd.client;
+package lightsearch.server.producer.cmd.client.processor;
 
 import lightsearch.server.checker.LightSearchChecker;
 import lightsearch.server.cmd.client.processor.ClientProcessor;
 import lightsearch.server.data.LightSearchServerService;
+import lightsearch.server.data.pojo.ClientCommandResult;
 import lightsearch.server.identifier.DatabaseRecordIdentifier;
 import lightsearch.server.time.CurrentDateTime;
 
@@ -43,15 +44,15 @@ public interface ProcessorClientProducer {
             DatabaseRecordIdentifier databaseRecordIdentifier);
 
 //    ClientProcessor getAuthenticationProcessorDebugInstance(
-//            LightSearchServerDTO serverDTO, LightSearchChecker checker, ClientDAO clientDAO);
-//    ClientProcessor getSearchProcessorDebugInstance(LightSearchServerDTO serverDTO, LightSearchChecker checker);
+//            LightSearchServerDTO serverDTO, LightSearchChecker lightsearch.server.checker, ClientDAO clientDAO);
+//    ClientProcessor getSearchProcessorDebugInstance(LightSearchServerDTO serverDTO, LightSearchChecker lightsearch.server.checker);
 //    ClientProcessor getCancelSoftCheckProcessorDebugInstance(
-//            LightSearchServerDTO serverDTO, LightSearchChecker checker, SoftCheckDebug softCheck);
+//            LightSearchServerDTO serverDTO, LightSearchChecker lightsearch.server.checker, SoftCheckDebug softCheck);
 //    ClientProcessor getCloseSoftCheckProcessorDebugInstance(
-//            LightSearchServerDTO serverDTO, LightSearchChecker checker, SoftCheckDebug softCheck);
+//            LightSearchServerDTO serverDTO, LightSearchChecker lightsearch.server.checker, SoftCheckDebug softCheck);
 //    ClientProcessor getConfirmSoftCheckProductsProcessorDebugInstance(
-//            LightSearchServerDTO serverDTO, LightSearchChecker checker);
+//            LightSearchServerDTO serverDTO, LightSearchChecker lightsearch.server.checker);
 //    ClientProcessor getOpenSoftCheckProcessorDebugInstance(
-//            LightSearchServerDTO serverDTO, LightSearchChecker checker, SoftCheckDebug softCheck);
+//            LightSearchServerDTO serverDTO, LightSearchChecker lightsearch.server.checker, SoftCheckDebug softCheck);
 
 }

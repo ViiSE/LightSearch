@@ -17,26 +17,7 @@
 package lightsearch.server.cmd.result;
 
 import lightsearch.server.data.pojo.ClientCommandResult;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
-import static lightsearch.server.cmd.result.ResultType.FALSE;
-
-@Component("errorResultCreatorClient")
-@Scope("prototype")
-public class ErrorResultCreatorClientImpl implements ErrorResultCreator<ClientCommandResult> {
-
-    private final String IMEI;
-    private final String message;
-
-    public ErrorResultCreatorClientImpl(String IMEI, String message) {
-        this.IMEI = IMEI;
-        this.message = message;
-    }
-
-    @Override
-    public ClientCommandResult create() {
-        return new ClientCommandResult(
-                IMEI, FALSE.stringValue(), message, null, null, null, null);
-    }
+public interface ErrorResultClientCommandCreator {
+    ClientCommandResult createErrorResult();
 }

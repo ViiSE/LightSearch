@@ -14,16 +14,18 @@
  *  limitations under the License.
  */
 
-package lightsearch.server.about;
+package lightsearch.server.exception;
 
-import org.springframework.stereotype.Component;
+public class CheckerException extends Exception {
 
-@Component("endStartupMessageDefault")
-public class EndStartupMessageDefaultImpl implements EndStartupMessage {
+    private final String logMessage;
 
-    @Override
-    public String message() {
-        return "Now Logging is in the folder logs and this window. For administration use LightSearch Admin Panel. " +
-                "(login/admins POST). See github.com/ViiSE/LightSearch/API.";
+    public CheckerException(String message, String logMessage) {
+        super(message);
+        this.logMessage = logMessage;
+    }
+
+    public String getLogMessage() {
+        return logMessage;
     }
 }
