@@ -26,8 +26,8 @@ import org.springframework.stereotype.Service;
 public class DatabaseCommandMessageProducerDefaultImpl implements DatabaseCommandMessageProducer {
 
     private final String DB_CMD_MESSAGE_CONNECTION         = "databaseCommandMessageConnectionDefaultWindowsJSON";
-    private final String DB_CMD_SEARCH                     = "databaseCommandSearchDefaultWindowsJSON";
-    private final String DB_CMD_OPEN_SOFT_CHECK            = "databaseCommandOpenSoftCheckDefaultWindowsJSON";
+    private final String DB_CMD_SEARCH                     = "databaseCommandMessageSearchDefaultWindowsJSON";
+    private final String DB_CMD_OPEN_SOFT_CHECK            = "databaseCommandMessageOpenSoftCheckDefaultWindowsJSON";
     private final String DB_CMD_MESSAGE_CANCEL_SOFT_CHECK  = "databaseCommandMessageCancelSoftCheckDefaultWindowsJSON";
     private final String DB_CMD_MESSAGE_CLOSE_SOFT_CHECK   = "databaseCommandMessageCloseSoftCheckDefaultWindowsJSON";
     private final String DB_CMD_MESSAGE_CONFIRM_SOFT_CHECK = "databaseCommandMessageConfirmSoftCheckProductsDefaultWindowsJSON";

@@ -31,6 +31,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Arrays;
 
 import static lightsearch.server.log.LogMessageTypeEnum.ERROR;
 
@@ -74,10 +75,17 @@ public class LSResponseRepositoryDefaultImpl implements LSResponseRepository {
                                 && dateTimeComparator.isAfter(result.getDdoc(), nowMin))
                             return result;
                 } catch(DataAccessException ex) {
-                    if(!ex.getMessage().contains("Incorrect result size")) {
-                        logger.log(ERROR, "LSResponseRepositoryDefaultImpl: " + ex.getMessage());
-                        throw new RepositoryException("Произошла ошибка на сервере. Сообщение: " + ex.getLocalizedMessage());
+                    if(ex.getMessage() != null)
+                        if(!ex.getMessage().contains("Incorrect result size")) {
+                            logger.log(ERROR, "LSResponseRepositoryDefaultImpl: " + ex.getMessage());
+                            throw new RepositoryException("Произошла ошибка на сервере. Сообщение: " + ex.getLocalizedMessage());
+                        }
+                    else {
+                        logger.log(ERROR, "LSResponseRepositoryDefaultImpl: Null getMessage DataAccessException. " +
+                                "StackTrace: " + Arrays.toString(ex.getStackTrace()));
+                        throw new RepositoryException("Произошла неизвестная ошибка на сервере.");
                     }
+
                 }
             }
             logger.log(ERROR, "Время ожидания запроса истекло");

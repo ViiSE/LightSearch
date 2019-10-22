@@ -16,14 +16,13 @@
 
 package lightsearch.server.timer;
 
+import lightsearch.server.data.LightSearchServerService;
 import lightsearch.server.exception.IdentifierException;
 import lightsearch.server.identifier.DatabaseRecordIdentifier;
-import lightsearch.server.identifier.DatabaseRecordIdentifierWriter;
 import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.log.LoggerServer;
 import lightsearch.server.producer.identifier.DatabaseRecordIdentifierProducer;
 import lightsearch.server.producer.identifier.DatabaseRecordIdentifierWriterProducer;
-import lightsearch.server.time.CurrentDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -37,6 +36,7 @@ public class DatabaseRecordIdentifierWriterTimer {
     @Autowired private LoggerServer logger;
     @Autowired private DatabaseRecordIdentifierWriterProducer identifierWriterProducer;
     @Autowired private DatabaseRecordIdentifierProducer identifierProducer;
+    @Autowired private LightSearchServerService serverService;
 
     @Async
     @Scheduled(fixedDelay = 1800000, initialDelay = 30000) // 30 minutes, 30 seconds
@@ -44,7 +44,7 @@ public class DatabaseRecordIdentifierWriterTimer {
         try {
             DatabaseRecordIdentifier identifier = identifierProducer.getDatabaseRecordIdentifierDefaultInstance();
 
-            identifierWriterProducer.getDatabaseRecordIdentifierWriterDefaultInstance()
+            identifierWriterProducer.getDatabaseRecordIdentifierWriterDefaultInstance(serverService)
                     .write(identifier.databaseRecordIdentifier());
 
             logger.log(LogMessageTypeEnum.INFO, "DatabaseRecordIdentifier write. Value: " +

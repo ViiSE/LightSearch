@@ -17,8 +17,6 @@
 package lightsearch.server.log;
 
 import lightsearch.server.LightSearchServer;
-import lightsearch.server.producer.time.CurrentDateTimeProducer;
-import lightsearch.server.time.CurrentDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;

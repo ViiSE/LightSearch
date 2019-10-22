@@ -14,40 +14,47 @@
  *  limitations under the License.
  */
 
-package lightsearch.server.timer;
+package lightsearch.server.identifier;
 
 import lightsearch.server.LightSearchServer;
-import lightsearch.server.data.pojo.LightSearchSettings;
+import lightsearch.server.producer.identifier.DatabaseRecordIdentifierProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.time.LocalTime;
-
+import static org.testng.Assert.assertEquals;
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 
 @SpringBootTest(classes = LightSearchServer.class)
-public class RestartTimerTestNG extends AbstractTestNGSpringContextTests {
+public class DatabaseRecordIdentifierTestNG extends AbstractTestNGSpringContextTests {
 
-    @Autowired private RestartTimer restartTimer;
+    @Autowired
+    private DatabaseRecordIdentifierProducer databaseRecordIdentifierProducer;
+
+    private DatabaseRecordIdentifier databaseRecordIdentifier;
 
     @BeforeClass
     public void setUpClass() {
-        LightSearchSettings settings = new LightSearchSettings();
-        settings.setRebootTime(LocalTime.now().plusMinutes(1));
-        settings.setFrequency(1);
+        databaseRecordIdentifier = databaseRecordIdentifierProducer.getDatabaseRecordIdentifierDefaultInstance();
     }
 
     @Test
-    public void restart() throws InterruptedException {
-        testBegin("RestartTimer", "restart()");
+    public void next() {
+        testBegin("DatabaseRecordIdentifier", "next()");
 
-        Thread.sleep(1);
-        //restartTimer.restart();
+        long ident = databaseRecordIdentifier.databaseRecordIdentifier();
+        System.out.println("ident BEFORE: " + ident);
 
-        testEnd("RestartTimer", "restart()");
+        long next = databaseRecordIdentifier.next();
+        System.out.println("next: " + next);
+
+        assertEquals(databaseRecordIdentifier.databaseRecordIdentifier(), next, "next and current db value is not equals!");
+
+        System.out.println("ident AFTER: " + databaseRecordIdentifier.databaseRecordIdentifier());
+
+        testEnd("DatabaseRecordIdentifier", "next()");
     }
 }

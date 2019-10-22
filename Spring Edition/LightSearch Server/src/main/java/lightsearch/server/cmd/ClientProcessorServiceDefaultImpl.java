@@ -16,7 +16,6 @@
 
 package lightsearch.server.cmd;
 
-import lightsearch.server.cmd.client.processor.ClientProcessor;
 import lightsearch.server.data.pojo.ClientCommandResult;
 import lightsearch.server.exception.ProcessorNotFoundException;
 import lightsearch.server.producer.cmd.ProcessorHolderProducer;

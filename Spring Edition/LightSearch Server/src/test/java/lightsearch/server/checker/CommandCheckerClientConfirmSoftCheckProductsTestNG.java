@@ -20,6 +20,7 @@ import lightsearch.server.LightSearchServer;
 import lightsearch.server.data.LightSearchServerService;
 import lightsearch.server.data.pojo.Client;
 import lightsearch.server.data.pojo.ClientCommandDTO;
+import lightsearch.server.data.pojo.Product;
 import lightsearch.server.exception.CheckerException;
 import lightsearch.server.producer.checker.CommandCheckerProducer;
 import lightsearch.server.producer.checker.LightSearchCheckerProducer;
@@ -31,10 +32,12 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+
 import static test.message.TestMessage.*;
 
 @SpringBootTest(classes = LightSearchServer.class)
-public class CommandCheckerClientSearchTestNG extends AbstractTestNGSpringContextTests {
+public class CommandCheckerClientConfirmSoftCheckProductsTestNG extends AbstractTestNGSpringContextTests {
 
     @Autowired private CommandCheckerProducer commandCheckerProducer;
     @Autowired private ClientCommandProducer clientCommandProducer;
@@ -47,15 +50,18 @@ public class CommandCheckerClientSearchTestNG extends AbstractTestNGSpringContex
     public void setUpClass() {
         ClientCommandDTO commandDTO = new ClientCommandDTO();
         commandDTO.setIMEI("111111111111111");
-        commandDTO.setBarcode("225054");
-        commandDTO.setSklad("Sklad 1");
-        commandDTO.setTK("null");
+        commandDTO.setUserIdentifier("22505");
+        commandDTO.setCardCode("777");
+        commandDTO.setData(new ArrayList<>() {{
+                add(new Product("Sklad 1", "111111", "Item 1", "24", "pcs."));
+                add(new Product("Sklad 2", "222222", "Item 2", "50", "pcs."));
+        }});
 
-        checker = commandCheckerProducer.getCommandCheckerClientSearchInstance(
+        checker = commandCheckerProducer.getCommandCheckerClientConfirmSoftCheckProductsInstance(
                 clientCommandProducer.getClientCommandDefaultInstance(commandDTO),
                 serverService, checkerProducer.getLightSearchCheckerDefaultInstance());
 
-        testBegin("CommandCheckerClientSearch", "check()");
+        testBegin("CommandCheckerClientConfirmSoftCheckProducts", "check()");
     }
 
     @SuppressWarnings("unchecked")
@@ -75,7 +81,6 @@ public class CommandCheckerClientSearchTestNG extends AbstractTestNGSpringContex
     @Test
     public void check_client_in_the_blacklist() {
         try {
-            serverService.clientsService().clients().remove("111111111111111");
             serverService.blacklistService().blacklist().add("111111111111111");
             checker.check();
             System.out.println("Check: Success!");
@@ -98,6 +103,6 @@ public class CommandCheckerClientSearchTestNG extends AbstractTestNGSpringContex
 
     @AfterClass
     public void shutdownClass() {
-        testEnd("CommandCheckerClientSearch", "check()");
+        testEnd("CommandCheckerClientConfirmSoftCheckProducts", "check()");
     }
 }

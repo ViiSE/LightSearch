@@ -18,7 +18,6 @@ package lightsearch.server.database.repository;
 
 import lightsearch.server.exception.RepositoryException;
 import lightsearch.server.log.LoggerServer;
-import lightsearch.server.time.CurrentDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.QueryTimeoutException;
 import org.springframework.jdbc.core.JdbcTemplate;

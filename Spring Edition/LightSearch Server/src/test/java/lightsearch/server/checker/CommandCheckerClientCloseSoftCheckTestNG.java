@@ -34,7 +34,7 @@ import org.testng.annotations.Test;
 import static test.message.TestMessage.*;
 
 @SpringBootTest(classes = LightSearchServer.class)
-public class CommandCheckerClientSearchTestNG extends AbstractTestNGSpringContextTests {
+public class CommandCheckerClientCloseSoftCheckTestNG extends AbstractTestNGSpringContextTests {
 
     @Autowired private CommandCheckerProducer commandCheckerProducer;
     @Autowired private ClientCommandProducer clientCommandProducer;
@@ -47,15 +47,15 @@ public class CommandCheckerClientSearchTestNG extends AbstractTestNGSpringContex
     public void setUpClass() {
         ClientCommandDTO commandDTO = new ClientCommandDTO();
         commandDTO.setIMEI("111111111111111");
-        commandDTO.setBarcode("225054");
-        commandDTO.setSklad("Sklad 1");
-        commandDTO.setTK("null");
+        commandDTO.setUserIdentifier("22505");
+        commandDTO.setCardCode("777");
+        commandDTO.setDelivery("1");
 
-        checker = commandCheckerProducer.getCommandCheckerClientSearchInstance(
+        checker = commandCheckerProducer.getCommandCheckerClientCloseSoftCheckInstance(
                 clientCommandProducer.getClientCommandDefaultInstance(commandDTO),
                 serverService, checkerProducer.getLightSearchCheckerDefaultInstance());
 
-        testBegin("CommandCheckerClientSearch", "check()");
+        testBegin("CommandCheckerClientCloseSoftCheck", "check()");
     }
 
     @SuppressWarnings("unchecked")
@@ -75,7 +75,6 @@ public class CommandCheckerClientSearchTestNG extends AbstractTestNGSpringContex
     @Test
     public void check_client_in_the_blacklist() {
         try {
-            serverService.clientsService().clients().remove("111111111111111");
             serverService.blacklistService().blacklist().add("111111111111111");
             checker.check();
             System.out.println("Check: Success!");
@@ -98,6 +97,6 @@ public class CommandCheckerClientSearchTestNG extends AbstractTestNGSpringContex
 
     @AfterClass
     public void shutdownClass() {
-        testEnd("CommandCheckerClientSearch", "check()");
+        testEnd("CommandCheckerClientCloseSoftCheck", "check()");
     }
 }

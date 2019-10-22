@@ -15,9 +15,6 @@
  */
 package lightsearch.server.data;
 
-import java.util.List;
-import java.util.Map;
-
 /**
  *
  * @author ViiSE

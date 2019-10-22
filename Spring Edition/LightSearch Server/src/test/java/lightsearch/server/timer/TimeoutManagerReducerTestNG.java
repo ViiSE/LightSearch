@@ -26,8 +26,6 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.Map;
-
 @SpringBootTest(classes = LightSearchServer.class)
 public class TimeoutManagerReducerTestNG extends AbstractTestNGSpringContextTests {
 

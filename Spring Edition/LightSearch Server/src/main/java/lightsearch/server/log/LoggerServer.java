@@ -15,8 +15,6 @@
  */
 package lightsearch.server.log;
 
-import lightsearch.server.time.CurrentDateTime;
-
 /**
  *
  * @author ViiSE

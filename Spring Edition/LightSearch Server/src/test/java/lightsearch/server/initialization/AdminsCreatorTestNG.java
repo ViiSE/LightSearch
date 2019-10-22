@@ -2,9 +2,6 @@ package lightsearch.server.initialization;
 
 import lightsearch.server.LightSearchServer;
 import lightsearch.server.data.AdminsService;
-import lightsearch.server.initialization.AdminsCreator;
-import lightsearch.server.initialization.CurrentServerDirectory;
-import lightsearch.server.initialization.OsDetector;
 import lightsearch.server.producer.initialization.AdminsCreatorProducer;
 import lightsearch.server.producer.initialization.CurrentServerDirectoryProducer;
 import lightsearch.server.producer.initialization.OsDetectorProducer;

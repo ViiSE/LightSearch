@@ -18,7 +18,6 @@ package lightsearch.server.database;
 import lightsearch.server.database.repository.LSRequestRepository;
 import lightsearch.server.exception.DatabaseWriterException;
 import lightsearch.server.exception.RepositoryException;
-import lightsearch.server.producer.time.CurrentDateTimeProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;

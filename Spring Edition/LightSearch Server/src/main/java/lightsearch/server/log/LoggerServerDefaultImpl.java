@@ -17,7 +17,6 @@ package lightsearch.server.log;
 
 import lightsearch.server.producer.log.LoggerFileProducer;
 import lightsearch.server.producer.time.CurrentDateTimeProducer;
-import lightsearch.server.time.CurrentDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;

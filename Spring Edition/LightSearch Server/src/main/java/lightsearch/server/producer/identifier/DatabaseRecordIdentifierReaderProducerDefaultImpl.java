@@ -17,7 +17,6 @@
 package lightsearch.server.producer.identifier;
 
 import lightsearch.server.data.LightSearchServerService;
-import lightsearch.server.identifier.DatabaseRecordIdentifier;
 import lightsearch.server.identifier.DatabaseRecordIdentifierReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;

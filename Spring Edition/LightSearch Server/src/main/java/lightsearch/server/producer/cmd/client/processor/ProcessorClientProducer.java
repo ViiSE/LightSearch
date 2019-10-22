@@ -19,7 +19,6 @@ package lightsearch.server.producer.cmd.client.processor;
 import lightsearch.server.checker.LightSearchChecker;
 import lightsearch.server.cmd.client.processor.ClientProcessor;
 import lightsearch.server.data.LightSearchServerService;
-import lightsearch.server.data.pojo.ClientCommandResult;
 import lightsearch.server.identifier.DatabaseRecordIdentifier;
 import lightsearch.server.time.CurrentDateTime;
 

@@ -18,8 +18,6 @@ package lightsearch.server.database.repository;
 
 import lightsearch.server.exception.RepositoryException;
 
-import java.sql.SQLException;
-
 public interface LSRequestRepository {
     void writeCommand(Object... values) throws RepositoryException;
 }

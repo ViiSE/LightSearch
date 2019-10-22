@@ -21,7 +21,6 @@ import lightsearch.server.cmd.client.ClientCommand;
 import lightsearch.server.data.pojo.ClientCommandDTO;
 import lightsearch.server.data.pojo.ClientCommandResult;
 import lightsearch.server.exception.ProcessorNotFoundException;
-import lightsearch.server.log.LoggerServer;
 import lightsearch.server.producer.cmd.ProcessorServiceProducer;
 import lightsearch.server.producer.cmd.client.ClientCommandProducer;
 import lightsearch.server.producer.cmd.client.processor.ErrorClientCommandServiceProducer;
@@ -37,9 +36,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/commands/type/client")
 public class ClientCommandsController {
-
-    @Autowired
-    private LoggerServer logger;
 
     @Autowired
     @Qualifier("processorServiceProducerDefault")

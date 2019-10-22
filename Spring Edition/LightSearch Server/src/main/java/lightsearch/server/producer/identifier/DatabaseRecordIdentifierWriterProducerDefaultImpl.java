@@ -27,11 +27,11 @@ public class DatabaseRecordIdentifierWriterProducerDefaultImpl implements Databa
 
     private final String DATABASE_RECORD_IDENT_WRITER = "databaseRecordIdentifierWriterDefault";
 
-    @Autowired private LightSearchServerService serverService;
-    @Autowired private ApplicationContext ctx;
+    @Autowired
+    private ApplicationContext ctx;
 
     @Override
-    public DatabaseRecordIdentifierWriter getDatabaseRecordIdentifierWriterDefaultInstance() {
+    public DatabaseRecordIdentifierWriter getDatabaseRecordIdentifierWriterDefaultInstance(LightSearchServerService serverService) {
         return (DatabaseRecordIdentifierWriter) ctx.getBean(DATABASE_RECORD_IDENT_WRITER, serverService);
     }
 }

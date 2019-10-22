@@ -15,20 +15,11 @@
  */
 package lightsearch.server.producer.initialization;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import lightsearch.server.data.pojo.LightSearchSettings;
 import lightsearch.server.initialization.CurrentServerDirectory;
 import lightsearch.server.initialization.ServerSettingsCreator;
-import lightsearch.server.log.LogMessageTypeEnum;
-import lightsearch.server.log.LoggerServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
-
-import java.io.File;
-import java.io.IOException;
-import java.time.LocalTime;
 
 /**
  *
