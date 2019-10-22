@@ -80,12 +80,6 @@ public class LSResponseRepositoryDefaultImpl implements LSResponseRepository {
                             logger.log(ERROR, "LSResponseRepositoryDefaultImpl: " + ex.getMessage());
                             throw new RepositoryException("Произошла ошибка на сервере. Сообщение: " + ex.getLocalizedMessage());
                         }
-                    else {
-                        logger.log(ERROR, "LSResponseRepositoryDefaultImpl: Null getMessage DataAccessException. " +
-                                "StackTrace: " + Arrays.toString(ex.getStackTrace()));
-                        throw new RepositoryException("Произошла неизвестная ошибка на сервере.");
-                    }
-
                 }
             }
             logger.log(ERROR, "Время ожидания запроса истекло");
