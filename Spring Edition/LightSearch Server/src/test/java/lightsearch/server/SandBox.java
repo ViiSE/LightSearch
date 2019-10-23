@@ -22,6 +22,9 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lightsearch.server.data.pojo.ClientCommandDTO;
 import lightsearch.server.data.pojo.LightSearchSettings;
 import lightsearch.server.security.HashAlgorithmsDefaultImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -29,7 +32,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class SandBox {
+@SpringBootTest(classes = LightSearchServer.class)
+public class SandBox extends AbstractTestNGSpringContextTests {
 
     /* ~Welcome to the SandBox! You can do whatever you want here. This is experiments zone. Enjoy!~ */
 

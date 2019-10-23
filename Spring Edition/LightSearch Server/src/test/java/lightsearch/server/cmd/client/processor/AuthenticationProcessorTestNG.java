@@ -21,12 +21,15 @@ import lightsearch.server.cmd.ProcessorHolder;
 import lightsearch.server.cmd.client.ClientCommand;
 import lightsearch.server.data.pojo.ClientCommandDTO;
 import lightsearch.server.data.pojo.ClientCommandResult;
+import lightsearch.server.identifier.DatabaseRecordIdentifier;
 import lightsearch.server.producer.cmd.ProcessorHolderProducer;
 import lightsearch.server.producer.cmd.client.ClientCommandProducer;
+import lightsearch.server.producer.identifier.DatabaseRecordIdentifierProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import static test.message.TestMessage.testBegin;
@@ -37,6 +40,7 @@ public class AuthenticationProcessorTestNG extends AbstractTestNGSpringContextTe
 
     @Autowired private ProcessorHolderProducer holderProducer;
     @Autowired private ClientCommandProducer commandProducer;
+    @Autowired private DatabaseRecordIdentifierProducer identifierProducer;
 
     private ProcessorHolder processorHolder;
     private ClientCommand clientCommand;
@@ -55,6 +59,7 @@ public class AuthenticationProcessorTestNG extends AbstractTestNGSpringContextTe
         clientCommandDTO.setUserIdentifier("777");
 
         clientCommand = commandProducer.getClientCommandDefaultInstance(clientCommandDTO);
+        identifierProducer.getDatabaseRecordIdentifierDefaultInstance(0);
     }
 
     @SuppressWarnings("unchecked")

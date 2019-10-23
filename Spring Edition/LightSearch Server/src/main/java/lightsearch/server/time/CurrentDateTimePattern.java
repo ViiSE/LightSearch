@@ -22,7 +22,7 @@ package lightsearch.server.time;
 public class CurrentDateTimePattern {
 
     public static String dateTimeInStandardFormWithMs() {
-        return "yyyy-MM-dd HH:mm:ss.S";
+        return "yyyy-MM-dd HH:mm:ss.SSS";
     }
     
     public static String dateTimeInStandardForm() {
