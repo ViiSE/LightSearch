@@ -20,6 +20,7 @@ import lightsearch.server.database.repository.LSResponseRepository;
 import lightsearch.server.exception.DatabaseReaderException;
 import lightsearch.server.exception.RepositoryException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -34,6 +35,7 @@ public class DatabaseReaderDefaultImpl implements DatabaseReader {
     private final long lsCode;
 
     @Autowired
+    @Qualifier("lsResponseRepositoryFirebird")
     private LSResponseRepository lsResponseRepository;
 
     public DatabaseReaderDefaultImpl(long lsCode) {

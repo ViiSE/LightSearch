@@ -27,19 +27,19 @@ import org.springframework.stereotype.Component;
  *
  * @author ViiSE
  */
-@Component("databaseWriterDefault")
+@Component("databaseWriterH2Test")
 @Scope("prototype")
-public class DatabaseWriterDefaultImpl implements DatabaseWriter {
+public class DatabaseWriterH2TestImpl implements DatabaseWriter {
 
     private final long lsCode;
     private final String dateTime;
     private final String command;
 
     @Autowired
-    @Qualifier("lsRequestRepositoryFirebirdWindows1251")
+    @Qualifier("lsRequestRepositoryH2")
     private LSRequestRepository lsRequestRepository;
 
-    public DatabaseWriterDefaultImpl(long lsCode, String dateTime, String command) {
+    public DatabaseWriterH2TestImpl(long lsCode, String dateTime, String command) {
         this.lsCode = lsCode;
         this.dateTime = dateTime;
         this.command = command;

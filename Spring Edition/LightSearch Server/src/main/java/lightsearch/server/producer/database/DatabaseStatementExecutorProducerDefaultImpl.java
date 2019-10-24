@@ -26,6 +26,7 @@ import org.springframework.stereotype.Service;
 public class DatabaseStatementExecutorProducerDefaultImpl implements DatabaseStatementExecutorProducer {
 
     private final String DATABASE_STATEMENT_EXECUTOR = "databaseStatementExecutorDefault";
+    private final String DATABASE_STATEMENT_EXECUTOR_H2_TEST = "databaseStatementExecutorH2Test";
 
     @Autowired
     private ApplicationContext ctx;
@@ -34,5 +35,11 @@ public class DatabaseStatementExecutorProducerDefaultImpl implements DatabaseSta
     public DatabaseStatementExecutor getDatabaseStatementExecutorDefaultInstance(
             long lsCode, String dateTime, DatabaseCommandMessage databaseCommandMessage) {
         return (DatabaseStatementExecutor) ctx.getBean(DATABASE_STATEMENT_EXECUTOR, lsCode, dateTime, databaseCommandMessage);
+    }
+
+    @Override
+    public DatabaseStatementExecutor getDatabaseStatementExecutorH2TestInstance(
+            long lsCode, String dateTime, DatabaseCommandMessage databaseCommandMessage) {
+        return (DatabaseStatementExecutor) ctx.getBean(DATABASE_STATEMENT_EXECUTOR_H2_TEST, lsCode, dateTime, databaseCommandMessage);
     }
 }

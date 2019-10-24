@@ -16,12 +16,58 @@
 
 package lightsearch.server.configuration;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
 @ComponentScan
+@EnableWebMvc
 @EnableScheduling
-public class LightSearchConfiguration {
+public class LightSearchConfiguration extends WebSecurityConfigurerAdapter {
+
+    private static final String LOGIN_PROCESSING_URL = "/login/admin";
+    private static final String LOGIN_FAILURE_URL = "/login/amdin?error";
+    private static final String LOGIN_URL = "/login/admin";
+    private static final String LOGOUT_SUCCESS_URL = "/login/admin";
+
+    @Bean
+    @Override
+    public UserDetailsService userDetailsService() {
+        UserDetails admin = User.withUsername("admin")
+                .password("{bcrypt}$2a$15$9GEmgFJ7iyj.B2SKzrfIp./nJv.pbxwAu9v/anmPj9ZPt4zSN5Q/u")
+                .roles("ADMIN").build();
+
+        return new InMemoryUserDetailsManager(admin);
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers(
+                "/login/clients",
+                "/commands/type/client"
+        );
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authorizeRequests()
+                .anyRequest().authenticated()
+                .and().formLogin().loginPage(LOGIN_URL).permitAll().loginProcessingUrl(LOGIN_PROCESSING_URL)
+                .failureUrl(LOGIN_FAILURE_URL)
+                .and().logout().logoutSuccessUrl(LOGOUT_SUCCESS_URL);
+    }
 }

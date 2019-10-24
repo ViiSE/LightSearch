@@ -17,21 +17,31 @@
 package lightsearch.server.log;
 
 import lightsearch.server.LightSearchServer;
+import lightsearch.server.producer.time.CurrentDateTimeProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.Test;
 
-import static lightsearch.server.log.LogMessageTypeEnum.INFO;
+import static test.message.TestMessage.testBegin;
+import static test.message.TestMessage.testEnd;
 
 @SpringBootTest(classes = LightSearchServer.class)
-public class LoggerServerTestNG extends AbstractTestNGSpringContextTests {
+public class LoggerWindowTestNG extends AbstractTestNGSpringContextTests {
 
-    @Autowired
-    private LoggerServer loggerServer;
+    @Autowired private LoggerWindow loggerWindow;
+    @Autowired private CurrentDateTimeProducer currentDateTimeProducer;
 
     @Test
-    public void log() {
-        loggerServer.log(INFO, "|+-+-+-+-+-+-+-+-+|LOG|+-+-+-+-+-+-+-+-+|");
+    public void printLog() {
+        testBegin("LoggerWindow", "printLog()");
+
+        loggerWindow.printLog(
+                LogMessageTypeEnum.INFO.stringValue(),
+                currentDateTimeProducer.getCurrentDateTimeDefaultInstance(),
+                "TEST!");
+        System.out.println("Done!");
+
+        testEnd("LoggerWindow", "printLog()");
     }
 }

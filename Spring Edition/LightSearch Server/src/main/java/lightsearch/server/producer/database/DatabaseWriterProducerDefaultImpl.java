@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 public class DatabaseWriterProducerDefaultImpl implements DatabaseWriterProducer {
 
     private final String DATABASE_WRITER = "databaseWriterDefault";
+    private final String DATABASE_WRITER_H2_TEST = "databaseWriterH2Test";
 
     @Autowired
     private ApplicationContext ctx;
@@ -32,5 +33,10 @@ public class DatabaseWriterProducerDefaultImpl implements DatabaseWriterProducer
     @Override
     public DatabaseWriter getDatabaseWriterDefaultInstance(long lsCode, String dateTime, String command) {
         return (DatabaseWriter) ctx.getBean(DATABASE_WRITER, lsCode, dateTime, command);
+    }
+
+    @Override
+    public DatabaseWriter getDatabaseWriterH2TestInstance(long lsCode, String dateTime, String command) {
+        return (DatabaseWriter) ctx.getBean(DATABASE_WRITER_H2_TEST, lsCode, dateTime, command);
     }
 }

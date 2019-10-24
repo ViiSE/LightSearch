@@ -30,6 +30,7 @@ public class Product {
     @JsonProperty("ID") private String id;
     private final String name;
     private final String amount;
+    private final String price;
     private final String ei;
 
     @JsonCreator
@@ -38,11 +39,13 @@ public class Product {
             @JsonProperty("ID")     String id,
             @JsonProperty("name")   String name,
             @JsonProperty("amount") String amount,
+            @JsonProperty("price")  String price,
             @JsonProperty("ei")     String ei) {
         this.subdiv = subdiv;
         this.id = id;
         this.name = name;
         this.amount = amount;
+        this.price = price;
         this.ei = ei;
     }
 
@@ -60,6 +63,10 @@ public class Product {
 
     public String getAmount() {
         return amount;
+    }
+
+    public String getPrice() {
+        return price;
     }
 
     public String getEi() {

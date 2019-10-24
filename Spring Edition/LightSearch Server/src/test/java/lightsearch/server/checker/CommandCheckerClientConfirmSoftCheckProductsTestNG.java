@@ -53,8 +53,8 @@ public class CommandCheckerClientConfirmSoftCheckProductsTestNG extends Abstract
         commandDTO.setUserIdentifier("22505");
         commandDTO.setCardCode("777");
         commandDTO.setData(new ArrayList<>() {{
-                add(new Product("Sklad 1", "111111", "Item 1", "24", "pcs."));
-                add(new Product("Sklad 2", "222222", "Item 2", "50", "pcs."));
+                add(new Product("Sklad 1", "111111", "Item 1", "24", "20", "pcs."));
+                add(new Product("Sklad 2", "222222", "Item 2", "50", "20", "pcs."));
         }});
 
         checker = commandCheckerProducer.getCommandCheckerClientConfirmSoftCheckProductsInstance(

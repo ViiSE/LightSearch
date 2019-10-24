@@ -21,7 +21,6 @@ import lightsearch.server.cmd.ProcessorHolder;
 import lightsearch.server.cmd.client.ClientCommand;
 import lightsearch.server.data.pojo.ClientCommandDTO;
 import lightsearch.server.data.pojo.ClientCommandResult;
-import lightsearch.server.identifier.DatabaseRecordIdentifier;
 import lightsearch.server.producer.cmd.ProcessorHolderProducer;
 import lightsearch.server.producer.cmd.client.ClientCommandProducer;
 import lightsearch.server.producer.identifier.DatabaseRecordIdentifierProducer;
@@ -29,14 +28,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 
 @SpringBootTest(classes = LightSearchServer.class)
-public class AuthenticationProcessorTestNG extends AbstractTestNGSpringContextTests {
+public class OpenSoftCheckProcessorTestTestNG extends AbstractTestNGSpringContextTests {
 
     @Autowired private ProcessorHolderProducer holderProducer;
     @Autowired private ClientCommandProducer commandProducer;
@@ -47,35 +45,28 @@ public class AuthenticationProcessorTestNG extends AbstractTestNGSpringContextTe
 
     @BeforeClass
     public void setUpClass() {
-        processorHolder = holderProducer.getProcessorHolderClientInstance();
+        processorHolder = holderProducer.getProcessorHolderClientTestInstance();
         ClientCommandDTO clientCommandDTO = new ClientCommandDTO();
-        clientCommandDTO.setCommand("connect");
-        clientCommandDTO.setUsername("test");
-        clientCommandDTO.setPassword("321");
-        clientCommandDTO.setIMEI("123456789123456");
-        clientCommandDTO.setIp("127.0.0.1");
-        clientCommandDTO.setOs("Windows 10");
-        clientCommandDTO.setModel("Lenovo IdeaPad 530s");
+        clientCommandDTO.setCommand("open_soft_check");
+        clientCommandDTO.setIMEI("111111111111111");
         clientCommandDTO.setUserIdentifier("777");
+        clientCommandDTO.setCardCode("007");
 
         clientCommand = commandProducer.getClientCommandDefaultInstance(clientCommandDTO);
-        identifierProducer.getDatabaseRecordIdentifierDefaultInstance(0);
+        identifierProducer.getDatabaseRecordIdentifierDefaultInstance(2);
     }
 
     @SuppressWarnings("unchecked")
     @Test
     public void apply() {
-        testBegin("AuthenticationProcessor", "apply()");
+        testBegin("OpenSoftCheckProcessor", "apply()");
 
         ClientCommandResult result = (ClientCommandResult) processorHolder.get(clientCommand.command()).apply(clientCommand);
         System.out.println("Result: ");
         System.out.println("IMEI: " + result.getIMEI());
         System.out.println("isDone: " + result.getIsDone());
         System.out.println("message: " + result.getMessage());
-        System.out.println("userIdentifier: " + result.getUserIdentifier());
-        System.out.println("TK list: " + result.getTKList());
-        System.out.println("Sklad list: " + result.getSkladList());
 
-        testEnd("AuthenticationProcessor", "apply()");
+        testEnd("OpenSoftCheckProcessor", "apply()");
     }
 }

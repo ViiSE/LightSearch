@@ -27,8 +27,8 @@ import java.io.UnsupportedEncodingException;
 
 import static lightsearch.server.log.LogMessageTypeEnum.ERROR;
 
-@Repository("lsRequestRepositoryJdbcTemplateWindows1251")
-public class LSRequestRepositoryJdbcTemplateWindows1251Impl implements LSRequestRepository {
+@Repository("lsRequestRepositoryFirebirdWindows1251")
+public class LSRequestRepositoryFirebirdWindows1251Impl implements LSRequestRepository {
 
     @Autowired private LoggerServer logger;
     @Autowired private JdbcTemplate jdbcTemplate;

@@ -50,7 +50,7 @@ public class LightSearchCheckerTestNG extends AbstractTestNGSpringContextTests {
         };
 
         testObjectsTrue = new Object[] {
-                new Product("Sklad 1", "111111", "Item 1", "10", "pcs."),
+                new Product("Sklad 1", "111111", "Item 1", "10", "20", "pcs."),
                 null,
                 "String"
         };
@@ -62,8 +62,8 @@ public class LightSearchCheckerTestNG extends AbstractTestNGSpringContextTests {
         };
 
         testObjectsFalse = new Object[] {
-            new Product("Sklad 1", "111111", "Item 1", "10", "pcs."),
-            new Product("Sklad 2", "222222", "Item 2", "20", "pcs."),
+            new Product("Sklad 1", "111111", "Item 1", "10", "20", "pcs."),
+            new Product("Sklad 2", "222222", "Item 2", "20", "10","pcs."),
             "String"
         };
 

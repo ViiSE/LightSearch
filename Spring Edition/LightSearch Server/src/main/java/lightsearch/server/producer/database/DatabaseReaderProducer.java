@@ -20,4 +20,5 @@ import lightsearch.server.database.DatabaseReader;
 
 public interface DatabaseReaderProducer {
     DatabaseReader getDatabaseReaderDefaultInstance(long lsCode);
+    DatabaseReader getDatabaseReaderH2TestInstance(long lsCode);
 }

@@ -39,9 +39,10 @@ public class DateTimeComparatorDefaultImpl implements DateTimeComparator {
     public boolean isAfter(Object originalDate, LocalDateTime afterDate) {
         if(originalDate instanceof LocalDateTime)
             return ((LocalDateTime) originalDate).isAfter(afterDate);
-        else if(originalDate instanceof String)
-            return LocalDateTime.parse((String)originalDate, DateTimeFormatter.ofPattern(pattern)).isAfter(afterDate);
-        else 
+        else if(originalDate instanceof String) {
+            String originalCorrectDate = TimeUtils.correctDateTimeInStandardFormWithMs((String) originalDate);
+            return LocalDateTime.parse(originalCorrectDate, DateTimeFormatter.ofPattern(pattern)).isAfter(afterDate);
+        } else
             return false;
     }
 
@@ -52,10 +53,10 @@ public class DateTimeComparatorDefaultImpl implements DateTimeComparator {
             return ((LocalDateTime) originalDate).isBefore(beforeDate);
         }
         else if(originalDate instanceof String) {
+            String originalCorrectDate = TimeUtils.correctDateTimeInStandardFormWithMs((String)originalDate);
             //LocalDateTime origDate = LocalDateTime.parse((String)originalDate, DateTimeFormatter.ofPattern(pattern));
-            return LocalDateTime.parse((String)originalDate, DateTimeFormatter.ofPattern(pattern)).isBefore(beforeDate);
-        }
-        else 
+            return LocalDateTime.parse(originalCorrectDate, DateTimeFormatter.ofPattern(pattern)).isBefore(beforeDate);
+        } else
             return false;
     }
 }

@@ -22,16 +22,27 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.Test;
 
-import static lightsearch.server.log.LogMessageTypeEnum.INFO;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
+import static test.message.TestMessage.testBegin;
+import static test.message.TestMessage.testEnd;
 
 @SpringBootTest(classes = LightSearchServer.class)
-public class LoggerServerTestNG extends AbstractTestNGSpringContextTests {
+public class LogDirectoryTestNG extends AbstractTestNGSpringContextTests {
 
     @Autowired
-    private LoggerServer loggerServer;
+    private LogDirectory logDirectory;
 
     @Test
-    public void log() {
-        loggerServer.log(INFO, "|+-+-+-+-+-+-+-+-+|LOG|+-+-+-+-+-+-+-+-+|");
+    public void logDirectory() {
+        testBegin("LogDirectory", "logDirectory()");
+
+        String logDir = logDirectory.logDirectory();
+        assertNotNull(logDir, "Log directory is null!");
+        assertFalse(logDir.isEmpty(), "Log directory is empty!");
+
+        System.out.println("Log directory: " + logDir);
+
+        testEnd("LogDirectory", "logDirectory()");
     }
 }

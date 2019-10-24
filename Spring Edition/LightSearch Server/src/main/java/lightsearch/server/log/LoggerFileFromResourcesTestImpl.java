@@ -28,13 +28,13 @@ import java.io.*;
  *
  * @author ViiSE
  */
-@Component("loggerFileDefault")
-public class LoggerFileDefaultImpl implements LoggerFile {
+@Component("loggerFileFromResourcesTest")
+public class LoggerFileFromResourcesTestImpl implements LoggerFile {
 
     private LightSearchChecker checker;
 
     @Autowired private LightSearchCheckerProducer producer;
-    @Autowired @Qualifier("logDirectoryDefault") private LogDirectory logDirectory;
+    @Autowired @Qualifier("logDirectoryResourcesTest") private LogDirectory logDirectory;
 
     @Override
     public synchronized void writeLogFile(String type, CurrentDateTime currentDateTime, String message) {

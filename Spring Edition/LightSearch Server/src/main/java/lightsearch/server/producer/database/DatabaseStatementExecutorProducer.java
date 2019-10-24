@@ -22,4 +22,7 @@ import lightsearch.server.database.statement.DatabaseStatementExecutor;
 public interface DatabaseStatementExecutorProducer {
     DatabaseStatementExecutor getDatabaseStatementExecutorDefaultInstance(
             long lsCode, String dateTime, DatabaseCommandMessage databaseCommandMessage);
+
+    DatabaseStatementExecutor getDatabaseStatementExecutorH2TestInstance(
+            long lsCode, String dateTime, DatabaseCommandMessage databaseCommandMessage);
 }

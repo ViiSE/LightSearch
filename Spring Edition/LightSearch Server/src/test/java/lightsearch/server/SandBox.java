@@ -22,17 +22,18 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lightsearch.server.data.pojo.ClientCommandDTO;
 import lightsearch.server.data.pojo.LightSearchSettings;
 import lightsearch.server.security.HashAlgorithmsDefaultImpl;
+import lightsearch.server.time.TimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.Test;
+import test.TestUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-@SpringBootTest(classes = LightSearchServer.class)
 public class SandBox extends AbstractTestNGSpringContextTests {
 
     /* ~Welcome to the SandBox! You can do whatever you want here. This is experiments zone. Enjoy!~ */
@@ -67,5 +68,8 @@ public class SandBox extends AbstractTestNGSpringContextTests {
 
         String hash = new HashAlgorithmsDefaultImpl().sha256("321");
         System.out.println(hash);
+
+        String correctDateTime = TimeUtils.correctDateTimeInStandardFormWithMs("2019-10-23 17:00:45.45");
+        System.out.println("Correct Date: " + correctDateTime);
     }
 }

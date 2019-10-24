@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 public class DatabaseReaderProducerDefaultImpl implements DatabaseReaderProducer {
 
     private final String DATABASE_READER = "databaseReaderDefault";
+    private final String DATABASE_READER_H2_TEST = "databaseReaderH2Test";
 
     @Autowired
     private ApplicationContext ctx;
@@ -32,5 +33,10 @@ public class DatabaseReaderProducerDefaultImpl implements DatabaseReaderProducer
     @Override
     public DatabaseReader getDatabaseReaderDefaultInstance(long lsCode) {
         return (DatabaseReader) ctx.getBean(DATABASE_READER, lsCode);
+    }
+
+    @Override
+    public DatabaseReader getDatabaseReaderH2TestInstance(long lsCode) {
+        return (DatabaseReader) ctx.getBean(DATABASE_READER_H2_TEST, lsCode);
     }
 }

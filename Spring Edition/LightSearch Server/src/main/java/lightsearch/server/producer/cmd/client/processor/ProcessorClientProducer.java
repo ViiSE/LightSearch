@@ -42,6 +42,25 @@ public interface ProcessorClientProducer {
             LightSearchServerService serverService, LightSearchChecker checker, CurrentDateTime currentDateTime,
             DatabaseRecordIdentifier databaseRecordIdentifier);
 
+    ClientProcessor getAuthenticationProcessorTestInstance(
+            LightSearchServerService serverService, LightSearchChecker checker, CurrentDateTime currentDateTime,
+            DatabaseRecordIdentifier databaseRecordIdentifier);
+    ClientProcessor getSearchProcessorTestInstance(
+            LightSearchServerService serverService, LightSearchChecker checker, CurrentDateTime currentDateTime,
+            DatabaseRecordIdentifier databaseRecordIdentifier);
+    ClientProcessor getCancelSoftCheckProcessorTestInstance(
+            LightSearchServerService serverService, LightSearchChecker checker, CurrentDateTime currentDateTime,
+            DatabaseRecordIdentifier databaseRecordIdentifier);
+    ClientProcessor getCloseSoftCheckProcessorTestInstance(
+            LightSearchServerService serverService, LightSearchChecker checker, CurrentDateTime currentDateTime,
+            DatabaseRecordIdentifier databaseRecordIdentifier);
+    ClientProcessor getConfirmSoftCheckProductsProcessorTestInstance(
+            LightSearchServerService serverService, LightSearchChecker checker, CurrentDateTime currentDateTime,
+            DatabaseRecordIdentifier databaseRecordIdentifier);
+    ClientProcessor getOpenSoftCheckProcessorTestInstance(
+            LightSearchServerService serverService, LightSearchChecker checker, CurrentDateTime currentDateTime,
+            DatabaseRecordIdentifier databaseRecordIdentifier);
+
 //    ClientProcessor getAuthenticationProcessorDebugInstance(
 //            LightSearchServerDTO serverDTO, LightSearchChecker lightsearch.server.checker, ClientDAO clientDAO);
 //    ClientProcessor getSearchProcessorDebugInstance(LightSearchServerDTO serverDTO, LightSearchChecker lightsearch.server.checker);

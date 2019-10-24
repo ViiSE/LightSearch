@@ -20,4 +20,5 @@ import lightsearch.server.database.DatabaseWriter;
 
 public interface DatabaseWriterProducer {
     DatabaseWriter getDatabaseWriterDefaultInstance(long lsCode, String dateTime, String command);
+    DatabaseWriter getDatabaseWriterH2TestInstance(long lsCode, String dateTime, String command);
 }

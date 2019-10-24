@@ -50,8 +50,8 @@ public class DatabaseCommandMessageConfirmSoftCheckProductsDefaultWindowsJSONTes
         cmdDTO.setUserIdentifier("777");
         cmdDTO.setCardCode("22505");
         cmdDTO.setData(new ArrayList<>() {{
-            add(new Product("Sklad 1", "111111", "Item 1", "10", "pcs."));
-            add(new Product("Sklad 2", "222222", "Item 2", "20", "pcs."));
+            add(new Product("Sklad 1", "111111", "Item 1", "10", "30", "pcs."));
+            add(new Product("Sklad 2", "222222", "Item 2", "20", "10", "pcs."));
         }});
 
         dbCmdMsg = dbCmdMsgProducer.getDatabaseCommandMessageConfirmSoftCheckProductsDefaultWindowsJSONInstance(

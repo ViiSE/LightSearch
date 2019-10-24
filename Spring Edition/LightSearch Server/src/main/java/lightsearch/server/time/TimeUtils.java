@@ -14,11 +14,18 @@
  *  limitations under the License.
  */
 
-package lightsearch.server.producer.log;
+package lightsearch.server.time;
 
-import lightsearch.server.log.LogDirectory;
-import lightsearch.server.log.LoggerFile;
+public class TimeUtils {
 
-public interface LoggerFileProducer {
-    LoggerFile getLoggerFileDefaultInstance(LogDirectory logDirectory);
+    public static String correctDateTimeInStandardFormWithMs(String rawTime) {
+        if(rawTime.length() != 21) {
+            if (rawTime.length() < 21)
+                return rawTime;
+            else
+                return rawTime.substring(0, 21);
+        }
+
+        return rawTime;
+    }
 }

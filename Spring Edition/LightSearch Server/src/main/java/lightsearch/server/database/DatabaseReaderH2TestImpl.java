@@ -15,8 +15,9 @@
  */
 package lightsearch.server.database;
 
-import lightsearch.server.database.repository.LSRequestRepository;
-import lightsearch.server.exception.DatabaseWriterException;
+import lightsearch.server.data.pojo.ResponseResult;
+import lightsearch.server.database.repository.LSResponseRepository;
+import lightsearch.server.exception.DatabaseReaderException;
 import lightsearch.server.exception.RepositoryException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -27,32 +28,30 @@ import org.springframework.stereotype.Component;
  *
  * @author ViiSE
  */
-@Component("databaseWriterDefault")
+@Component("databaseReaderH2Test")
 @Scope("prototype")
-public class DatabaseWriterDefaultImpl implements DatabaseWriter {
+public class DatabaseReaderH2TestImpl implements DatabaseReader {
 
     private final long lsCode;
-    private final String dateTime;
-    private final String command;
 
     @Autowired
-    @Qualifier("lsRequestRepositoryFirebirdWindows1251")
-    private LSRequestRepository lsRequestRepository;
+    @Qualifier("lsResponseRepositoryH2")
+    private LSResponseRepository lsResponseRepository;
 
-    public DatabaseWriterDefaultImpl(long lsCode, String dateTime, String command) {
+    public DatabaseReaderH2TestImpl(long lsCode) {
         this.lsCode = lsCode;
-        this.dateTime = dateTime;
-        this.command = command;
-    }
-
-    @Override
-    public void write() throws DatabaseWriterException {
-        try {
-            lsRequestRepository.writeCommand(lsCode, dateTime, command, true);
-        } catch (RepositoryException ex) {
-            throw new DatabaseWriterException(ex.getMessage(),
-                    "Не удалось записать команду в базу данных. Сообщение: " + ex.getMessage());
-        }
     }
     
+    @Override
+    public String read() throws DatabaseReaderException {
+        ResponseResult result = null;
+        try {
+            result = lsResponseRepository.readResult(lsCode, false);
+            lsResponseRepository.updateResultRecord(lsCode, true);
+            return result.getCmdOut();
+        } catch (RepositoryException ex) {
+            throw new DatabaseReaderException(ex.getMessage(),
+                    "Не удалось считать результат команды из базы данных. Сообщение: " + ex.getMessage());
+        }
+    }
 }

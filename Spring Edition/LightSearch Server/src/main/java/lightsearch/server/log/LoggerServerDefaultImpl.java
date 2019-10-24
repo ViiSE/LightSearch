@@ -15,9 +15,9 @@
  */
 package lightsearch.server.log;
 
-import lightsearch.server.producer.log.LoggerFileProducer;
 import lightsearch.server.producer.time.CurrentDateTimeProducer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -29,15 +29,13 @@ import org.springframework.stereotype.Component;
 @Scope("prototype")
 public class LoggerServerDefaultImpl implements LoggerServer {
 
-    @Autowired private LogDirectory logDirectory;
-    @Autowired private LoggerFileProducer loggerFileProducer;
+    @Autowired @Qualifier("logDirectoryDefault") private LogDirectory logDirectory;
+    @Autowired @Qualifier("loggerFileDefault") private LoggerFile loggerFile;
     @Autowired private LoggerWindow loggerWindow;
     @Autowired private CurrentDateTimeProducer currentDateTimeProducer;
 
     @Override
     synchronized public void log(LogMessageTypeEnum type, String message) {
-        LoggerFile loggerFile = loggerFileProducer.getLoggerFileDefaultInstance(logDirectory);
-
         loggerFile.writeLogFile(type.stringValue(), currentDateTimeProducer.getCurrentDateTimeDefaultInstance(), message);
         loggerWindow.printLog(type.stringValue(), currentDateTimeProducer.getCurrentDateTimeDefaultInstance(), message);
     }

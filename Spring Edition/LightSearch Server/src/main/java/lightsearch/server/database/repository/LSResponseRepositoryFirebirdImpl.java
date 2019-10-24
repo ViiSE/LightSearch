@@ -35,8 +35,8 @@ import java.util.Arrays;
 
 import static lightsearch.server.log.LogMessageTypeEnum.ERROR;
 
-@Repository("lsResponseRepositoryDefault")
-public class LSResponseRepositoryDefaultImpl implements LSResponseRepository {
+@Repository("lsResponseRepositoryFirebird")
+public class LSResponseRepositoryFirebirdImpl implements LSResponseRepository {
 
     private final String pattern = CurrentDateTimePattern.dateTimeInStandardFormWithMs();
 

@@ -24,7 +24,8 @@ import org.springframework.stereotype.Service;
 @Service("processorHolderProducerDefault")
 public class ProcessorHolderProducerDefaultImpl implements ProcessorHolderProducer {
 
-    private static final String PROCESSOR_HOLDER_CLIENT = "clientProcessorHolder";
+    private static final String PROCESSOR_HOLDER_CLIENT      = "clientProcessorHolder";
+    private static final String PROCESSOR_HOLDER_CLIENT_TEST = "clientProcessorHolderTest";
 
     @Autowired
     private ApplicationContext ctx;
@@ -32,5 +33,10 @@ public class ProcessorHolderProducerDefaultImpl implements ProcessorHolderProduc
     @Override
     public ProcessorHolder getProcessorHolderClientInstance() {
         return ctx.getBean(PROCESSOR_HOLDER_CLIENT, ProcessorHolder.class);
+    }
+
+    @Override
+    public ProcessorHolder getProcessorHolderClientTestInstance() {
+        return ctx.getBean(PROCESSOR_HOLDER_CLIENT_TEST, ProcessorHolder.class);
     }
 }

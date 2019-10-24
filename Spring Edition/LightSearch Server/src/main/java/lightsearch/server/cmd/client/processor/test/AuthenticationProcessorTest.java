@@ -14,10 +14,11 @@
  *  limitations under the License.
  */
 
-package lightsearch.server.cmd.client.processor;
+package lightsearch.server.cmd.client.processor.test;
 
 import lightsearch.server.checker.LightSearchChecker;
 import lightsearch.server.cmd.client.ClientCommand;
+import lightsearch.server.cmd.client.processor.ClientProcessor;
 import lightsearch.server.cmd.result.ClientCommandResultCreator;
 import lightsearch.server.data.BlacklistService;
 import lightsearch.server.data.ClientsService;
@@ -44,9 +45,9 @@ import org.springframework.stereotype.Component;
 
 import static lightsearch.server.log.LogMessageTypeEnum.INFO;
 
-@Component("authenticationProcessor")
+@Component("authenticationProcessorTest")
 @Scope("prototype")
-public class AuthenticationProcessor implements ClientProcessor<ClientCommandResult> {
+public class AuthenticationProcessorTest implements ClientProcessor<ClientCommandResult> {
 
     private final ClientsService<String, Client> clientsService;
     private final BlacklistService blacklistService;
@@ -62,7 +63,7 @@ public class AuthenticationProcessor implements ClientProcessor<ClientCommandRes
     @Autowired private ErrorClientCommandServiceProducer errorCommandServiceProducer;
 
     @SuppressWarnings("unchecked")
-    public AuthenticationProcessor(
+    public AuthenticationProcessorTest(
             LightSearchServerService serverService, LightSearchChecker checker, CurrentDateTime currentDateTime,
             DatabaseRecordIdentifier databaseRecordIdentifier) {
         this.clientsService = serverService.clientsService();
@@ -81,7 +82,7 @@ public class AuthenticationProcessor implements ClientProcessor<ClientCommandRes
                     dbCmdMsgProducer.getDatabaseCommandMessageConnectionDefaultWindowsJSONInstance(command);
 
             DatabaseStatementExecutor dbStatementExecutor =
-                    dbStateExecProducer.getDatabaseStatementExecutorDefaultInstance(
+                    dbStateExecProducer.getDatabaseStatementExecutorH2TestInstance(
                             databaseRecordIdentifier.next(), currentDateTime.dateTimeInStandardFormat(), dbCmdMessage);
 
             DatabaseStatementResult dbStatRes = dbStatementExecutor.exec();
