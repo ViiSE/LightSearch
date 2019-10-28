@@ -23,13 +23,18 @@ import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.InitialPageSettings;
+import com.vaadin.flow.server.PWA;
+import com.vaadin.flow.server.PageConfigurator;
 
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 @Tag("login-view")
 @Route(value=LoginView.ROUTE)
 @PageTitle("Login")
-public class LoginView extends VerticalLayout implements BeforeEnterObserver{
+public class LoginView extends VerticalLayout implements BeforeEnterObserver { //, PageConfigurator {
 
     static final String ROUTE = "login";
 
@@ -50,4 +55,13 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver{
             login.setError(true);
         }
     }
+
+//    @Override
+//    public void configurePage(InitialPageSettings settings) {
+//        Map<String, String> attributes = new HashMap<>();
+//        attributes.put("rel", "shortcut icon");
+//        attributes.put("type", "image/png");
+//        settings.addLink("shortcut icon", "icons/favico.ico");
+//        settings.addFavIcon("icon", "icons/icon.png", "192x192");
+//    }
 }

@@ -135,16 +135,10 @@
 
     <profiles>
         <profile>
-            <id>production-mode</id>
-            <activation>
-                <property>
-                    <name>vaadin.productionMode</name>
-                </property>
-            </activation>
+            <id>production</id>
             <properties>
                 <vaadin.productionMode>true</vaadin.productionMode>
             </properties>
-
 
             <dependencies>
                 <dependency>
@@ -161,6 +155,20 @@
                         <configuration>
                             <jvmArguments>-Dvaadin.productionMode</jvmArguments>
                         </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>com.vaadin</groupId>
+                        <artifactId>vaadin-maven-plugin</artifactId>
+                        <version>13.0.11</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>copy-production-files</goal>
+                                    <goal>package-for-production</goal>
+                                </goals>
+                                <phase>compile</phase>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>

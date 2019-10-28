@@ -85,6 +85,7 @@ public class MvcConfiguration extends WebSecurityConfigurerAdapter implements We
                 "/static/**",
                 "META-INF/resources/**",
                 "WEB-INF/images/**",
+                "webapp/**",
 
                 "/manifest.webmanifest",
                 "/sw.js",

@@ -19,7 +19,9 @@ package lightsearch.updater.ui.views.main;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.InitialPageSettings;
 import com.vaadin.flow.server.PWA;
+import com.vaadin.flow.server.PageConfigurator;
 import lightsearch.updater.producer.ui.views.main.workspace.file.FilesWorkspaceCreatorProducer;
 import lightsearch.updater.producer.ui.views.main.workspace.version.APKVersionWorkspaceCreatorProducer;
 import lightsearch.updater.ui.views.main.workspace.MainWorkspace;
@@ -28,10 +30,13 @@ import lightsearch.updater.ui.views.main.workspace.file.FilesWorkspace;
 import lightsearch.updater.ui.views.main.workspace.version.APKVersionWorkspace;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Route
 @PWA(name = "LightSearch Updater Admin Panel", shortName = "Admin Panel")
 @PageTitle("Admin Panel")
-public class MainView extends VerticalLayout {
+public class MainView extends VerticalLayout { // implements PageConfigurator {
 
     public MainView(
             @Autowired APKVersionWorkspaceCreatorProducer apkVersionWorkspaceCreatorProducer,
@@ -50,4 +55,23 @@ public class MainView extends VerticalLayout {
 
         super.add(mainWorkspace);
     }
+
+//    @Override
+//    public void configurePage(InitialPageSettings settings) {
+//        Map<String, String> attributes = new HashMap<>();
+//        attributes.put("rel", "shortcut icon");
+//        attributes.put("type", "image/png");
+//        settings.addLink("META-INF/resources/icons/icon.png", attributes);
+//        settings.addLink("shortcut icon", "META-INF/resources/icons/favicon.ico");
+//        settings.addFavIcon("icon", "META-INF/resources/icons/icon.png", "256x256");
+//    }
+
+//    @Override
+//    public void configurePage(InitialPageSettings settings) {
+//        Map<String, String> attributes = new HashMap<>();
+//        attributes.put("rel", "shortcut icon");
+//        attributes.put("type", "image/png");
+//        settings.addLink("shortcut icon", "icons/favico.ico");
+//        settings.addFavIcon("icon", "icons/icon.png", "192x192");
+//    }
 }
