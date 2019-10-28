@@ -14,26 +14,23 @@
  *  limitations under the License.
  */
 
-package lightsearch.server.producer.cmd.result;
+package lightsearch.server.producer.cmd.admin;
 
-import lightsearch.server.cmd.result.ClientCommandResultCreator;
+import lightsearch.server.cmd.admin.processor.ErrorAdminCommandService;
+import lightsearch.server.cmd.client.processor.ErrorClientCommandService;
+import lightsearch.server.producer.cmd.client.processor.ErrorClientCommandServiceProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
-@Service("clientCommandResultCreatorProducerDefault")
-public class ClientCommandResultCreatorProducerDefaultImpl implements ClientCommandResultCreatorProducer {
+@Service("errorAdminCommandServiceProducerDefault")
+public class ErrorAdminCommandServiceProducerDefaultImpl implements ErrorAdminCommandServiceProducer {
 
     @Autowired
     private ApplicationContext ctx;
 
     @Override
-    public ClientCommandResultCreator getCommandResultCreatorClientJSONInstance(String rawJSONResult) {
-        return (ClientCommandResultCreator) ctx.getBean("clientCommandResultCreatorJSON", rawJSONResult);
-    }
-
-    @Override
-    public ClientCommandResultCreator getCommandResultCreatorClientErrorInstance(String IMEI, String message) {
-        return (ClientCommandResultCreator) ctx.getBean("clientCommandResultCreatorClientError", IMEI, message);
+    public ErrorAdminCommandService getErrorAdminCommandServiceDefaultInstance() {
+        return ctx.getBean("errorAdminCommandServiceDefault", ErrorAdminCommandService.class);
     }
 }

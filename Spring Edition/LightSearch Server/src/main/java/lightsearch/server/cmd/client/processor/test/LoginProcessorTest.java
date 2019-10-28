@@ -45,9 +45,9 @@ import org.springframework.stereotype.Component;
 
 import static lightsearch.server.log.LogMessageTypeEnum.INFO;
 
-@Component("authenticationProcessorTest")
+@Component("loginProcessorTest")
 @Scope("prototype")
-public class AuthenticationProcessorTest implements ClientProcessor<ClientCommandResult> {
+public class LoginProcessorTest implements ClientProcessor<ClientCommandResult> {
 
     private final ClientsService<String, Client> clientsService;
     private final BlacklistService blacklistService;
@@ -63,7 +63,7 @@ public class AuthenticationProcessorTest implements ClientProcessor<ClientComman
     @Autowired private ErrorClientCommandServiceProducer errorCommandServiceProducer;
 
     @SuppressWarnings("unchecked")
-    public AuthenticationProcessorTest(
+    public LoginProcessorTest(
             LightSearchServerService serverService, LightSearchChecker checker, CurrentDateTime currentDateTime,
             DatabaseRecordIdentifier databaseRecordIdentifier) {
         this.clientsService = serverService.clientsService();
@@ -92,7 +92,7 @@ public class AuthenticationProcessorTest implements ClientProcessor<ClientComman
             logger.log(INFO, "Client connected:\n" + "IMEI - " + command.IMEI() +
                     ", ip - " + command.ip() + ", os - " + command.os() + ", model - " + command.model() +
                     ", username - " + command.username() + ", user ident - " + command.userIdentifier());
-            clientsService.clients().put(command.IMEI(), new Client(command.username()));
+            clientsService.clients().put(command.IMEI(), new Client(command.IMEI(), command.username()));
             return commandResultCreator.createClientCommandResult();
         } catch (CommandResultException | DatabaseStatementExecutorException ex) {
             return errorCommandServiceProducer.getErrorClientCommandServiceDefaultInstance().createErrorResult(command.IMEI(),

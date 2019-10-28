@@ -16,17 +16,25 @@
 
 package lightsearch.server.data.pojo;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class AdminCommandDTO {
 
     private String command;
     private String serverTime;
-    private String clientTimeout;
+    private int clientTimeout;
     private String IMEI;
     private String name;
     private String adminName;
     private String password;
     private String ip;
-    private String port;
+    private int port;
     private String dbName;
 
     public void setCommand(String command) {
@@ -45,11 +53,12 @@ public class AdminCommandDTO {
         return serverTime;
     }
 
-    public void setClientTimeout(String clientTimeout) {
+    public void setClientTimeout(int clientTimeout) {
         this.clientTimeout = clientTimeout;
     }
 
-    public String getClientTimeout() {
+    @JsonSerialize(using= ToStringSerializer.class)
+    public int getClientTimeout() {
         return clientTimeout;
     }
 
@@ -93,11 +102,12 @@ public class AdminCommandDTO {
         return ip;
     }
 
-    public void setPort(String port) {
+    public void setPort(int port) {
         this.port = port;
     }
 
-    public String getPort() {
+    @JsonSerialize(using=ToStringSerializer.class)
+    public int getPort() {
         return port;
     }
 

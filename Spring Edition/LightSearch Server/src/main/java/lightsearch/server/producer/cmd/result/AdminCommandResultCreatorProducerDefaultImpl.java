@@ -16,24 +16,27 @@
 
 package lightsearch.server.producer.cmd.result;
 
-import lightsearch.server.cmd.result.ClientCommandResultCreator;
+import lightsearch.server.cmd.result.AdminCommandResultCreator;
+import lightsearch.server.data.pojo.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
-@Service("clientCommandResultCreatorProducerDefault")
-public class ClientCommandResultCreatorProducerDefaultImpl implements ClientCommandResultCreatorProducer {
+import java.util.List;
+
+@Service("adminCommandResultCreatorProducerDefault")
+public class AdminCommandResultCreatorProducerDefaultImpl implements AdminCommandResultCreatorProducer {
 
     @Autowired
     private ApplicationContext ctx;
 
     @Override
-    public ClientCommandResultCreator getCommandResultCreatorClientJSONInstance(String rawJSONResult) {
-        return (ClientCommandResultCreator) ctx.getBean("clientCommandResultCreatorJSON", rawJSONResult);
+    public AdminCommandResultCreator getCommandResultCreatorAdminDefaultInstance(String isDone, String message, List<String> blacklist, List<Client> clients) {
+        return null;
     }
 
     @Override
-    public ClientCommandResultCreator getCommandResultCreatorClientErrorInstance(String IMEI, String message) {
-        return (ClientCommandResultCreator) ctx.getBean("clientCommandResultCreatorClientError", IMEI, message);
+    public AdminCommandResultCreator getCommandResultCreatorAdminErrorInstance(String message) {
+        return (AdminCommandResultCreator) ctx.getBean("adminCommandResultCreatorError", message);
     }
 }

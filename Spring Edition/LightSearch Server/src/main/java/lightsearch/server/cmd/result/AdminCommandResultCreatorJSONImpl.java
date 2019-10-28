@@ -16,31 +16,32 @@
 
 package lightsearch.server.cmd.result;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import lightsearch.server.data.pojo.ClientCommandResult;
+import lightsearch.server.data.pojo.AdminCommandResult;
+import lightsearch.server.data.pojo.Client;
 import lightsearch.server.exception.CommandResultException;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
+import java.util.List;
 
-@Service("clientCommandResultCreatorJSON")
+@Service("adminCommandResultCreatorJSON")
 @Scope("prototype")
-public class CommandResultCreatorClientJSONImpl implements ClientCommandResultCreator {
+public class AdminCommandResultCreatorJSONImpl implements AdminCommandResultCreator {
 
-    private final String rawJSONResult;
+    private final String isDone;
+    private final String message;
+    private final List<String> blacklist;
+    private final List<Client> clients;
 
-    public CommandResultCreatorClientJSONImpl(String rawJSONResult) {
-        this.rawJSONResult = rawJSONResult;
+    public AdminCommandResultCreatorJSONImpl(String isDone, String message, List<String> blacklist, List<Client> clients) {
+        this.isDone = isDone;
+        this.message = message;
+        this.blacklist = blacklist;
+        this.clients = clients;
     }
 
     @Override
-    public ClientCommandResult createClientCommandResult() throws CommandResultException {
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            return mapper.readValue(rawJSONResult, ClientCommandResult.class);
-        } catch (IOException ex) {
-            throw new CommandResultException(ex.getMessage());
-        }
+    public AdminCommandResult createAdminCommandResult() throws CommandResultException {
+        return new AdminCommandResult(isDone, message, blacklist, clients);
     }
 }

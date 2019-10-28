@@ -19,8 +19,7 @@ package lightsearch.server;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import lightsearch.server.data.pojo.ClientCommandDTO;
-import lightsearch.server.data.pojo.LightSearchSettings;
+import lightsearch.server.data.pojo.*;
 import lightsearch.server.security.HashAlgorithmsDefaultImpl;
 import lightsearch.server.time.TimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +32,8 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SandBox extends AbstractTestNGSpringContextTests {
 
@@ -49,6 +50,29 @@ public class SandBox extends AbstractTestNGSpringContextTests {
         ClientCommandDTO r = mapper.readValue("{\"ident\":25}", ClientCommandDTO.class);
         System.out.println("Deserialization: " + r.getUserIdentifier());
 
+        AdminCommandDTO adminCommandDTO = new AdminCommandDTO();
+        adminCommandDTO.setCommand("change_db");
+        adminCommandDTO.setPort(8080);
+        adminCommandDTO.setClientTimeout(30);
+        adminCommandDTO.setServerTime("22:05");
+        System.out.println("Serialization ADMIN: " + mapper.writeValueAsString(adminCommandDTO));
+
+        AdminCommandDTO ar = mapper.readValue("{\"port\":\"8080\"}", AdminCommandDTO.class);
+        System.out.println("Deserialization ADMIN: " + ar.getPort());
+
+        AdminCommandResult admCmdRes = new AdminCommandResult("admin", "True", "SPAM EGG!",
+                new ArrayList<>(){{
+                    add("111111111111111");
+                    add("222222222222222");
+                    add("333333333333333");
+                }},
+                new ArrayList<>(){{
+                    add(new Client("444444444444444", "client 1"));
+                    add(new Client("555555555555555", "client 2"));
+                    add(new Client("666666666666666", "client 3"));
+                }});
+        System.out.println("AdminCommand: SERIALIZATION: " + mapper.writeValueAsString(admCmdRes));
+
         LocalTime time = LocalTime.now();
         System.out.println("Time now: " + time);
 
@@ -64,7 +88,7 @@ public class SandBox extends AbstractTestNGSpringContextTests {
         LocalDate today = LocalDate.now();
         System.out.println("Today: " + today);
 
-        System.out.println("Tommorow: " + today.plusDays(1));
+        System.out.println("Tomorrow: " + today.plusDays(1));
 
         String hash = new HashAlgorithmsDefaultImpl().sha256("321");
         System.out.println(hash);

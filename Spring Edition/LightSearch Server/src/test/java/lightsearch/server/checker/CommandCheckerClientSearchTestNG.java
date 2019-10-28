@@ -62,7 +62,7 @@ public class CommandCheckerClientSearchTestNG extends AbstractTestNGSpringContex
     @Test
     public void check_success() {
         try {
-            serverService.clientsService().clients().put("111111111111111", new Client("test"));
+            serverService.clientsService().clients().put("111111111111111", new Client("111111111111111", "test"));
             serverService.blacklistService().blacklist().remove("111111111111111");
             checker.check();
             System.out.println("Check: Success!");

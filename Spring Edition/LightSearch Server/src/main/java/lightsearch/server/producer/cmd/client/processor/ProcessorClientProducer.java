@@ -23,7 +23,7 @@ import lightsearch.server.identifier.DatabaseRecordIdentifier;
 import lightsearch.server.time.CurrentDateTime;
 
 public interface ProcessorClientProducer {
-    ClientProcessor getAuthenticationProcessorInstance(
+    ClientProcessor getLoginProcessorInstance(
             LightSearchServerService serverService, LightSearchChecker checker, CurrentDateTime currentDateTime,
             DatabaseRecordIdentifier databaseRecordIdentifier);
     ClientProcessor getSearchProcessorInstance(
@@ -42,7 +42,7 @@ public interface ProcessorClientProducer {
             LightSearchServerService serverService, LightSearchChecker checker, CurrentDateTime currentDateTime,
             DatabaseRecordIdentifier databaseRecordIdentifier);
 
-    ClientProcessor getAuthenticationProcessorTestInstance(
+    ClientProcessor getLoginProcessorTestInstance(
             LightSearchServerService serverService, LightSearchChecker checker, CurrentDateTime currentDateTime,
             DatabaseRecordIdentifier databaseRecordIdentifier);
     ClientProcessor getSearchProcessorTestInstance(

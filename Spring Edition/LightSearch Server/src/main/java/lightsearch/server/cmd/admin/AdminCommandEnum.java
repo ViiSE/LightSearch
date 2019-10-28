@@ -13,49 +13,56 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-
 package lightsearch.server.cmd.admin;
 
-public enum AdminCommandContentEnum {
-    COMMAND {
+/**
+ *
+ * @author ViiSE
+ */
+public enum AdminCommandEnum {
+    CONNECT {
         @Override
-        public String stringValue() {return "command";}
+        public String stringValue() {return "connect";}
     },
-    ADMIN_NAME {
+    RESTART {
         @Override
-        public String stringValue() {return "name";}
+        public String stringValue() {return "restart";}
     },
-    NEW_ADMIN_NAME {
+    TIMEOUT_SERVER {
         @Override
-        public String stringValue() {return "adminName";}
+        public String stringValue() {return "toutServer";}
     },
-    PASSWORD {
+    TIMEOUT_CLIENT {
         @Override
-        public String stringValue() {return "password";}
+        public String stringValue() {return "toutClient";}
     },
-    SERVER_TIME {
+    CLIENT_LIST {
         @Override
-        public String stringValue() {return "time";}
+        public String stringValue() {return "clientList";}
     },
-    CLIENT_TIMEOUT {
+    KICK {
         @Override
-        public String stringValue() {return "time";}
+        public String stringValue() {return "kick";}
     },
-    IMEI {
+    BLACKLIST {
         @Override
-        public String stringValue() {return "IMEI";}
+        public String stringValue() {return "blacklist";}
     },
-    IP {
+    ADD_BLACKLIST {
         @Override
-        public String stringValue() {return "ip";}
+        public String stringValue() {return "addBlacklist";}
     },
-    PORT {
+    DEL_BLACKLIST {
         @Override
-        public String stringValue() {return "port";}
+        public String stringValue() {return "delBlacklist";}
     },
-    DATABASE_NAME {
+    CREATE_ADMIN {
         @Override
-        public String stringValue() {return "dbName";}
+        public String stringValue() {return "createAdmin";}
+    },
+    CHANGE_DATABASE {
+        @Override
+        public String stringValue() {return "changeDatabase";}
     };
     
     public abstract String stringValue();

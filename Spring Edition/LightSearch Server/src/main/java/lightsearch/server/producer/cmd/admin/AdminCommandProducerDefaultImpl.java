@@ -14,26 +14,24 @@
  *  limitations under the License.
  */
 
-package lightsearch.server.producer.cmd.result;
+package lightsearch.server.producer.cmd.admin;
 
-import lightsearch.server.cmd.result.ClientCommandResultCreator;
+import lightsearch.server.cmd.admin.AdminCommand;
+import lightsearch.server.data.pojo.AdminCommandDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
-@Service("clientCommandResultCreatorProducerDefault")
-public class ClientCommandResultCreatorProducerDefaultImpl implements ClientCommandResultCreatorProducer {
+@Service("adminCommandProducerDefault")
+public class AdminCommandProducerDefaultImpl implements AdminCommandProducer {
+
+    private final String ADMIN_COMMAND = "adminCommandDefault";
 
     @Autowired
     private ApplicationContext ctx;
 
     @Override
-    public ClientCommandResultCreator getCommandResultCreatorClientJSONInstance(String rawJSONResult) {
-        return (ClientCommandResultCreator) ctx.getBean("clientCommandResultCreatorJSON", rawJSONResult);
-    }
-
-    @Override
-    public ClientCommandResultCreator getCommandResultCreatorClientErrorInstance(String IMEI, String message) {
-        return (ClientCommandResultCreator) ctx.getBean("clientCommandResultCreatorClientError", IMEI, message);
+    public AdminCommand getClientCommandDefaultInstance(AdminCommandDTO adminCommandDTO) {
+        return (AdminCommand) ctx.getBean(ADMIN_COMMAND, adminCommandDTO);
     }
 }

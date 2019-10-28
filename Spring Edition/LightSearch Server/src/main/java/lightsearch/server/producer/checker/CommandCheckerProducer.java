@@ -18,6 +18,7 @@ package lightsearch.server.producer.checker;
 
 import lightsearch.server.checker.CommandChecker;
 import lightsearch.server.checker.LightSearchChecker;
+import lightsearch.server.cmd.admin.AdminCommand;
 import lightsearch.server.cmd.client.ClientCommand;
 import lightsearch.server.data.BlacklistService;
 import lightsearch.server.data.LightSearchServerService;
@@ -36,4 +37,7 @@ public interface CommandCheckerProducer {
             ClientCommand command, LightSearchServerService serverService, LightSearchChecker checker);
     CommandChecker getCommandCheckerClientConfirmSoftCheckProductsInstance(
             ClientCommand command, LightSearchServerService serverService, LightSearchChecker checker);
+
+    CommandChecker getCommandCheckerAdminAddBlacklistInstance(
+            AdminCommand command, BlacklistService blacklistService, LightSearchChecker checker);
 }

@@ -46,7 +46,7 @@ import static lightsearch.server.log.LogMessageTypeEnum.INFO;
 
 @Component("authenticationProcessor")
 @Scope("prototype")
-public class AuthenticationProcessor implements ClientProcessor<ClientCommandResult> {
+public class LoginProcessor implements ClientProcessor<ClientCommandResult> {
 
     private final ClientsService<String, Client> clientsService;
     private final BlacklistService blacklistService;
@@ -62,7 +62,7 @@ public class AuthenticationProcessor implements ClientProcessor<ClientCommandRes
     @Autowired private ErrorClientCommandServiceProducer errorCommandServiceProducer;
 
     @SuppressWarnings("unchecked")
-    public AuthenticationProcessor(
+    public LoginProcessor(
             LightSearchServerService serverService, LightSearchChecker checker, CurrentDateTime currentDateTime,
             DatabaseRecordIdentifier databaseRecordIdentifier) {
         this.clientsService = serverService.clientsService();
@@ -91,7 +91,7 @@ public class AuthenticationProcessor implements ClientProcessor<ClientCommandRes
             logger.log(INFO, "Client connected:\n" + "IMEI - " + command.IMEI() +
                     ", ip - " + command.ip() + ", os - " + command.os() + ", model - " + command.model() +
                     ", username - " + command.username() + ", user ident - " + command.userIdentifier());
-            clientsService.clients().put(command.IMEI(), new Client(command.username()));
+            clientsService.clients().put(command.IMEI(), new Client(command.IMEI(), command.username()));
             return commandResultCreator.createClientCommandResult();
         } catch (CommandResultException | DatabaseStatementExecutorException ex) {
             return errorCommandServiceProducer.getErrorClientCommandServiceDefaultInstance().createErrorResult(command.IMEI(),

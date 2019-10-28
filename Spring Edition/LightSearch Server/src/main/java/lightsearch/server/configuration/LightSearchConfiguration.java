@@ -45,7 +45,7 @@ public class LightSearchConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public UserDetailsService userDetailsService() {
         UserDetails admin = User.withUsername("admin")
-                .password("{bcrypt}$2a$15$9GEmgFJ7iyj.B2SKzrfIp./nJv.pbxwAu9v/anmPj9ZPt4zSN5Q/u")
+                .password("{bcrypt}$2y$10$lWGIqgR2zKLfvSZonErz7Oa5W5U8kKiD37ipiQ.JDc8JdQ6EXbaPa")
                 .roles("ADMIN").build();
 
         return new InMemoryUserDetailsManager(admin);

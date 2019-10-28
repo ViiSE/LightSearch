@@ -16,24 +16,22 @@
 
 package lightsearch.server.producer.cmd.result;
 
-import lightsearch.server.cmd.result.ClientCommandResultCreator;
+import lightsearch.server.cmd.result.ErrorResultAdminCommandCreator;
+import lightsearch.server.cmd.result.ErrorResultClientCommandCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
-@Service("clientCommandResultCreatorProducerDefault")
-public class ClientCommandResultCreatorProducerDefaultImpl implements ClientCommandResultCreatorProducer {
+@Service("errorResultAdminCommandCreatorProducerDefault")
+public class ErrorResultAdminCommandCreatorProducerDefaultImpl implements ErrorResultAdminCommandCreatorProducer {
 
     @Autowired
     private ApplicationContext ctx;
 
     @Override
-    public ClientCommandResultCreator getCommandResultCreatorClientJSONInstance(String rawJSONResult) {
-        return (ClientCommandResultCreator) ctx.getBean("clientCommandResultCreatorJSON", rawJSONResult);
-    }
-
-    @Override
-    public ClientCommandResultCreator getCommandResultCreatorClientErrorInstance(String IMEI, String message) {
-        return (ClientCommandResultCreator) ctx.getBean("clientCommandResultCreatorClientError", IMEI, message);
+    public ErrorResultAdminCommandCreator getErrorResultAdminCommandCreatorDefaultInstance(
+            String message, AdminCommandResultCreatorProducer commandResultCreatorProducer) {
+        return (ErrorResultAdminCommandCreator)
+                ctx.getBean("errorResultAdminCommandCreatorDefault", message, commandResultCreatorProducer);
     }
 }

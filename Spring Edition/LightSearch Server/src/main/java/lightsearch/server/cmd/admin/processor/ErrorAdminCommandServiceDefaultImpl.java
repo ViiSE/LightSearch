@@ -14,29 +14,30 @@
  *  limitations under the License.
  */
 
-package lightsearch.server.cmd.client.processor;
+package lightsearch.server.cmd.admin.processor;
 
-import lightsearch.server.data.pojo.ClientCommandResult;
+import lightsearch.server.data.pojo.AdminCommandResult;
 import lightsearch.server.log.LoggerServer;
+import lightsearch.server.producer.cmd.result.AdminCommandResultCreatorProducer;
 import lightsearch.server.producer.cmd.result.ClientCommandResultCreatorProducer;
-import lightsearch.server.producer.cmd.result.ErrorResultClientCommandCreatorProducer;
+import lightsearch.server.producer.cmd.result.ErrorResultAdminCommandCreatorProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import static lightsearch.server.log.LogMessageTypeEnum.ERROR;
 
 @Service("errorClientCommandServiceDefault")
-class ErrorClientCommandServiceDefaultImpl implements ErrorClientCommandService {
+class ErrorAdminCommandServiceDefaultImpl implements ErrorAdminCommandService {
 
     @Autowired private LoggerServer logger;
-    @Autowired private ErrorResultClientCommandCreatorProducer errorResultClientCommandCreatorProducer;
-    @Autowired private ClientCommandResultCreatorProducer clientCommandResultCreatorProducer;
+    @Autowired private ErrorResultAdminCommandCreatorProducer errorResultAdminCommandCreatorProducer;
+    @Autowired private AdminCommandResultCreatorProducer adminCommandResultCreatorProducer;
 
     @Override
-    public ClientCommandResult createErrorResult(String IMEI, String message, String logMessage) {
+    public AdminCommandResult createErrorResult(String message, String logMessage) {
         logger.log(ERROR, logMessage);
-        return errorResultClientCommandCreatorProducer
-                .getErrorResultClientCommandCreatorDefaultInstance(IMEI, message, clientCommandResultCreatorProducer)
+        return errorResultAdminCommandCreatorProducer
+                .getErrorResultAdminCommandCreatorDefaultInstance(message, adminCommandResultCreatorProducer)
                 .createErrorResult();
     }
 }

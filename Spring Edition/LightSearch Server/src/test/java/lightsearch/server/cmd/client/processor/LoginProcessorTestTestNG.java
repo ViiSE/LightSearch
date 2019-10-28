@@ -34,7 +34,7 @@ import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 
 @SpringBootTest(classes = LightSearchServer.class)
-public class AuthenticationProcessorTestTestNG extends AbstractTestNGSpringContextTests {
+public class LoginProcessorTestTestNG extends AbstractTestNGSpringContextTests {
 
     @Autowired private ProcessorHolderProducer holderProducer;
     @Autowired private ClientCommandProducer commandProducer;

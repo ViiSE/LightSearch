@@ -18,11 +18,19 @@ package lightsearch.server.cmd;
 
 import lightsearch.server.LightSearchServer;
 import lightsearch.server.producer.cmd.ProcessorHolderProducer;
+import org.antlr.v4.runtime.CharStreams;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.io.Resource;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 
 import static org.testng.Assert.assertNotNull;
 import static test.message.TestMessage.testBegin;

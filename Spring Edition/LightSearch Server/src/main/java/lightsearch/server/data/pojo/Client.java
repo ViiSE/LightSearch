@@ -16,19 +16,33 @@
 
 package lightsearch.server.data.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Client {
 
-    private static final int TIMEOUT_LIMIT = 1800;
+    @JsonIgnore private static final int TIMEOUT_LIMIT = 1800;
 
+    @JsonProperty("IMEI") private String IMEI;
     private String username;
-    private int timeoutLimitSeconds = TIMEOUT_LIMIT;
+    @JsonIgnore private int timeoutLimitSeconds = TIMEOUT_LIMIT;
 
-    public Client(String username) {
+    public Client(@JsonProperty("IMEI") String IMEI, String username) {
+        this.IMEI = IMEI;
         this.username = username;
     }
 
     public String getUsername() {
         return username;
+    }
+
+    public String getIMEI() {
+        return IMEI;
     }
 
     public int getTimeoutLimitSeconds() {

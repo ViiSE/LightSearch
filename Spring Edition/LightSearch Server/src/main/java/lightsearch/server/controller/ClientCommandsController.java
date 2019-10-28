@@ -24,7 +24,6 @@ import lightsearch.server.exception.ProcessorNotFoundException;
 import lightsearch.server.producer.cmd.ProcessorServiceProducer;
 import lightsearch.server.producer.cmd.client.ClientCommandProducer;
 import lightsearch.server.producer.cmd.client.processor.ErrorClientCommandServiceProducer;
-import lightsearch.server.producer.cmd.result.ClientCommandResultCreatorProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
@@ -44,10 +43,6 @@ public class ClientCommandsController {
     @Autowired
     @Qualifier("clientCommandProducerDefault")
     private ClientCommandProducer clientCommandProducer;
-
-    @Autowired
-    @Qualifier("commandResultCreatorProducerDefault")
-    private ClientCommandResultCreatorProducer clientCommandResultCreatorProducer;
 
     @Autowired
     @Qualifier("errorClientCommandServiceProducerDefault")

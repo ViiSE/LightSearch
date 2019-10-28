@@ -28,37 +28,15 @@ import org.springframework.stereotype.Service;
 @Service("processorClientProducerDefault")
 public class ProcessorClientProducerDefaultImpl implements ProcessorClientProducer {
 
-    private final String AUTHENTICATION_PROCESSOR              = "authenticationProcessor";
-    private final String SEARCH_PROCESSOR                      = "searchProcessor";
-    private final String CANCEL_SOFT_CHECK_PROCESSOR           = "cancelSoftCheckProcessor";
-    private final String CLOSE_SOFT_CHECK_PROCESSOR            = "closeSoftCheckProcessor";
-    private final String CONFIRM_SOFT_CHECK_PRODUCTS_PROCESSOR = "confirmSoftCheckProductsProcessor";
-    private final String OPEN_SOFT_CHECK_PROCESSOR             = "openSoftCheckProcessor";
-
-
-    private final String AUTHENTICATION_PROCESSOR_TEST              = "authenticationProcessorTest";
-    private final String SEARCH_PROCESSOR_TEST                      = "searchProcessorTest";
-    private final String CANCEL_SOFT_CHECK_PROCESSOR_TEST           = "cancelSoftCheckProcessorTest";
-    private final String CLOSE_SOFT_CHECK_PROCESSOR_TEST            = "closeSoftCheckProcessorTest";
-    private final String CONFIRM_SOFT_CHECK_PRODUCTS_PROCESSOR_TEST = "confirmSoftCheckProductsProcessorTest";
-    private final String OPEN_SOFT_CHECK_PROCESSOR_TEST             = "openSoftCheckProcessorTest";
-
-//    private final String AUTHENTICATION_PROCESSOR_DEBUG              = "authenticationProcessorClientDebug";
-//    private final String SEARCH_PROCESSOR_DEBUG                      = "searchProcessorClientDebug";
-//    private final String CANCEL_SOFT_CHECK_PROCESSOR_DEBUG           = "cancelSoftCheckProcessorClientDebug";
-//    private final String CLOSE_SOFT_CHECK_PROCESSOR_DEBUG            = "closeSoftCheckProcessorClientDebug";
-//    private final String CONFIRM_SOFT_CHECK_PRODUCTS_PROCESSOR_DEBUG = "confirmSoftCheckProductsProcessorClientDebug";
-//    private final String OPEN_SOFT_CHECK_PROCESSOR_DEBUG             = "openSoftCheckProcessorClientDebug";
-
     @Autowired
     private ApplicationContext ctx;
 
     @Override
-    public ClientProcessor getAuthenticationProcessorInstance(
+    public ClientProcessor getLoginProcessorInstance(
             LightSearchServerService serverService, LightSearchChecker checker,
             CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier) {
         return (ClientProcessor)
-                ctx.getBean(AUTHENTICATION_PROCESSOR, serverService, checker, currentDateTime, databaseRecordIdentifier);
+                ctx.getBean("loginProcessor", serverService, checker, currentDateTime, databaseRecordIdentifier);
     }
 
     @Override
@@ -66,7 +44,7 @@ public class ProcessorClientProducerDefaultImpl implements ProcessorClientProduc
             LightSearchServerService serverService, LightSearchChecker checker,
             CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier) {
         return (ClientProcessor)
-                ctx.getBean(SEARCH_PROCESSOR, serverService, checker, currentDateTime, databaseRecordIdentifier);
+                ctx.getBean("searchProcessor", serverService, checker, currentDateTime, databaseRecordIdentifier);
     }
 
     @Override
@@ -74,7 +52,7 @@ public class ProcessorClientProducerDefaultImpl implements ProcessorClientProduc
             LightSearchServerService serverService, LightSearchChecker checker,
             CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier) {
         return (ClientProcessor)
-                ctx.getBean(CANCEL_SOFT_CHECK_PROCESSOR, serverService, checker, currentDateTime, databaseRecordIdentifier);
+                ctx.getBean("cancelSoftCheckProcessor", serverService, checker, currentDateTime, databaseRecordIdentifier);
     }
 
     @Override
@@ -82,7 +60,7 @@ public class ProcessorClientProducerDefaultImpl implements ProcessorClientProduc
             LightSearchServerService serverService, LightSearchChecker checker,
             CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier) {
         return (ClientProcessor)
-                ctx.getBean(CLOSE_SOFT_CHECK_PROCESSOR, serverService, checker, currentDateTime, databaseRecordIdentifier);
+                ctx.getBean("closeSoftCheckProcessor", serverService, checker, currentDateTime, databaseRecordIdentifier);
     }
 
     @Override
@@ -90,7 +68,7 @@ public class ProcessorClientProducerDefaultImpl implements ProcessorClientProduc
             LightSearchServerService serverService, LightSearchChecker checker,
             CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier) {
         return (ClientProcessor)
-                ctx.getBean(CONFIRM_SOFT_CHECK_PRODUCTS_PROCESSOR, serverService, checker, currentDateTime, databaseRecordIdentifier);
+                ctx.getBean("confirmSoftCheckProductsProcessor", serverService, checker, currentDateTime, databaseRecordIdentifier);
     }
 
     @Override
@@ -98,15 +76,15 @@ public class ProcessorClientProducerDefaultImpl implements ProcessorClientProduc
             LightSearchServerService serverService, LightSearchChecker checker,
             CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier) {
         return (ClientProcessor)
-                ctx.getBean(OPEN_SOFT_CHECK_PROCESSOR, serverService, checker, currentDateTime, databaseRecordIdentifier);
+                ctx.getBean("openSoftCheckProcessor", serverService, checker, currentDateTime, databaseRecordIdentifier);
     }
 
     @Override
-    public ClientProcessor getAuthenticationProcessorTestInstance(
+    public ClientProcessor getLoginProcessorTestInstance(
             LightSearchServerService serverService, LightSearchChecker checker,
             CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier) {
         return (ClientProcessor)
-                ctx.getBean(AUTHENTICATION_PROCESSOR_TEST, serverService, checker, currentDateTime, databaseRecordIdentifier);
+                ctx.getBean("loginProcessorTest", serverService, checker, currentDateTime, databaseRecordIdentifier);
     }
 
     @Override
@@ -114,7 +92,7 @@ public class ProcessorClientProducerDefaultImpl implements ProcessorClientProduc
             LightSearchServerService serverService, LightSearchChecker checker,
             CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier) {
         return (ClientProcessor)
-                ctx.getBean(SEARCH_PROCESSOR_TEST, serverService, checker, currentDateTime, databaseRecordIdentifier);
+                ctx.getBean("searchProcessorTest", serverService, checker, currentDateTime, databaseRecordIdentifier);
     }
 
     @Override
@@ -122,7 +100,7 @@ public class ProcessorClientProducerDefaultImpl implements ProcessorClientProduc
             LightSearchServerService serverService, LightSearchChecker checker,
             CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier) {
         return (ClientProcessor)
-                ctx.getBean(CANCEL_SOFT_CHECK_PROCESSOR_TEST, serverService, checker, currentDateTime, databaseRecordIdentifier);
+                ctx.getBean("cancelSoftCheckProcessorTest", serverService, checker, currentDateTime, databaseRecordIdentifier);
     }
 
     @Override
@@ -130,7 +108,7 @@ public class ProcessorClientProducerDefaultImpl implements ProcessorClientProduc
             LightSearchServerService serverService, LightSearchChecker checker,
             CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier) {
         return (ClientProcessor)
-                ctx.getBean(CLOSE_SOFT_CHECK_PROCESSOR_TEST, serverService, checker, currentDateTime, databaseRecordIdentifier);
+                ctx.getBean("closeSoftCheckProcessorTest", serverService, checker, currentDateTime, databaseRecordIdentifier);
     }
 
     @Override
@@ -138,7 +116,7 @@ public class ProcessorClientProducerDefaultImpl implements ProcessorClientProduc
             LightSearchServerService serverService, LightSearchChecker checker,
             CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier) {
         return (ClientProcessor)
-                ctx.getBean(CONFIRM_SOFT_CHECK_PRODUCTS_PROCESSOR_TEST, serverService, checker, currentDateTime, databaseRecordIdentifier);
+                ctx.getBean("confirmSoftCheckProductsProcessorTest", serverService, checker, currentDateTime, databaseRecordIdentifier);
     }
 
     @Override
@@ -146,7 +124,7 @@ public class ProcessorClientProducerDefaultImpl implements ProcessorClientProduc
             LightSearchServerService serverService, LightSearchChecker checker,
             CurrentDateTime currentDateTime, DatabaseRecordIdentifier databaseRecordIdentifier) {
         return (ClientProcessor)
-                ctx.getBean(OPEN_SOFT_CHECK_PROCESSOR_TEST, serverService, checker, currentDateTime, databaseRecordIdentifier);
+                ctx.getBean("openSoftCheckProcessorTest", serverService, checker, currentDateTime, databaseRecordIdentifier);
     }
 
 //    @Override
