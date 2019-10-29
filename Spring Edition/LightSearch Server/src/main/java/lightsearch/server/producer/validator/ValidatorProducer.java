@@ -14,17 +14,13 @@
  *  limitations under the License.
  */
 
-package lightsearch.server.cmd.admin;
+package lightsearch.server.producer.validator;
 
-import lightsearch.server.cmd.Command;
+import lightsearch.server.validator.Validator;
 
-public interface AdminCommand extends Command {
-    String username();
-    String restartTime();
-    int clientTimeout();
-    String IMEI();
-    String password();
-    String ip();
-    int port();
-    String dbName();
+public interface ValidatorProducer {
+    Validator<String> getValidatorIpInstance();
+    Validator<Integer> getValidatorPortInstance();
+    Validator<Integer> getValidatorClientTimeoutInstance();
+    Validator<String> getValidatorRestartTimeInstance();
 }

@@ -27,11 +27,10 @@ import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 public class AdminCommandDTO {
 
     private String command;
-    private String serverTime;
+    private String restartTime;
     private int clientTimeout;
     private String IMEI;
-    private String name;
-    private String adminName;
+    private String username;
     private String password;
     private String ip;
     private int port;
@@ -45,12 +44,12 @@ public class AdminCommandDTO {
         return command;
     }
 
-    public void setServerTime(String serverTime) {
-        this.serverTime = serverTime;
+    public void setRestartTime(String restartTime) {
+        this.restartTime = restartTime;
     }
 
-    public String getServerTime() {
-        return serverTime;
+    public String getRestartTime() {
+        return restartTime;
     }
 
     public void setClientTimeout(int clientTimeout) {
@@ -70,20 +69,12 @@ public class AdminCommandDTO {
         return IMEI;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setAdminName(String adminName) {
-        this.adminName = adminName;
-    }
-
-    public String getAdminName() {
-        return adminName;
+    public String getUsername() {
+        return username;
     }
 
     public void setPassword(String password) {

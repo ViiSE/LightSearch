@@ -13,18 +13,22 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+package lightsearch.server.exception;
 
-package lightsearch.server.cmd.admin;
+/**
+ *
+ * @author ViiSE
+ */
+public class ValidatorException extends Exception {
 
-import lightsearch.server.cmd.Command;
+    private final String logMessage;
 
-public interface AdminCommand extends Command {
-    String username();
-    String restartTime();
-    int clientTimeout();
-    String IMEI();
-    String password();
-    String ip();
-    int port();
-    String dbName();
+    public ValidatorException(String message, String logMessage) {
+        super(message);
+        this.logMessage = logMessage;
+    }
+
+    public String getLogMessage() {
+        return logMessage;
+    }
 }

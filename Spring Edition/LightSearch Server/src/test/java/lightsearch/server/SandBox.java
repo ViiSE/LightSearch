@@ -22,18 +22,14 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lightsearch.server.data.pojo.*;
 import lightsearch.server.security.HashAlgorithmsDefaultImpl;
 import lightsearch.server.time.TimeUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.Test;
-import test.TestUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class SandBox extends AbstractTestNGSpringContextTests {
 
@@ -54,7 +50,7 @@ public class SandBox extends AbstractTestNGSpringContextTests {
         adminCommandDTO.setCommand("change_db");
         adminCommandDTO.setPort(8080);
         adminCommandDTO.setClientTimeout(30);
-        adminCommandDTO.setServerTime("22:05");
+        adminCommandDTO.setRestartTime("22:05");
         System.out.println("Serialization ADMIN: " + mapper.writeValueAsString(adminCommandDTO));
 
         AdminCommandDTO ar = mapper.readValue("{\"port\":\"8080\"}", AdminCommandDTO.class);

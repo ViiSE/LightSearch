@@ -19,7 +19,6 @@ package lightsearch.server.cmd.admin.processor;
 import lightsearch.server.data.pojo.AdminCommandResult;
 import lightsearch.server.log.LoggerServer;
 import lightsearch.server.producer.cmd.result.AdminCommandResultCreatorProducer;
-import lightsearch.server.producer.cmd.result.ClientCommandResultCreatorProducer;
 import lightsearch.server.producer.cmd.result.ErrorResultAdminCommandCreatorProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

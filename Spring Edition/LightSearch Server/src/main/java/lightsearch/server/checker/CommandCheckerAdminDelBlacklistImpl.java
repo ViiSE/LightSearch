@@ -22,15 +22,15 @@ import lightsearch.server.exception.CheckerException;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-@Component("commandCheckerAdminAddBlacklist")
+@Component("commandCheckerAdminDelBlacklist")
 @Scope("prototype")
-public class CommandCheckerAdminAddBlacklistImpl implements CommandChecker {
+public class CommandCheckerAdminDelBlacklistImpl implements CommandChecker {
 
     private final BlacklistService blacklistService;
     private final AdminCommand command;
     private final LightSearchChecker checker;
 
-    public CommandCheckerAdminAddBlacklistImpl(AdminCommand command, BlacklistService blacklistService, LightSearchChecker checker) {
+    public CommandCheckerAdminDelBlacklistImpl(AdminCommand command, BlacklistService blacklistService, LightSearchChecker checker) {
         this.blacklistService = blacklistService;
         this.command = command;
         this.checker = checker;
@@ -44,7 +44,7 @@ public class CommandCheckerAdminAddBlacklistImpl implements CommandChecker {
         if(checker.isEmpty(command.IMEI()))
             throw new CheckerException("Неверный формат команды. IMEI имеет пустое значение!", "AddBlacklist: unknown client: IMEI is empty!");
 
-        if(blacklistService.blacklist().contains(command.IMEI()))
-            throw new CheckerException("Данный клиент уже находится в черном списке!", "Client " + command.IMEI() + " already in the blacklist.");
+        if(!blacklistService.blacklist().contains(command.IMEI()))
+            throw new CheckerException("Данного клиента нет черном списке!", "Client " + command.IMEI() + " already in the blacklist.");
     }
 }

@@ -17,21 +17,23 @@
 package lightsearch.server.checker;
 
 import lightsearch.server.cmd.admin.AdminCommand;
-import lightsearch.server.data.BlacklistService;
+import lightsearch.server.data.ClientsService;
+import lightsearch.server.data.pojo.Client;
 import lightsearch.server.exception.CheckerException;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-@Component("commandCheckerAdminAddBlacklist")
+@Component("commandCheckerAdminKickClient")
 @Scope("prototype")
-public class CommandCheckerAdminAddBlacklistImpl implements CommandChecker {
+public class CommandCheckerAdminKickClientImpl implements CommandChecker {
 
-    private final BlacklistService blacklistService;
+    private final ClientsService<String, Client> clientsService;
     private final AdminCommand command;
     private final LightSearchChecker checker;
 
-    public CommandCheckerAdminAddBlacklistImpl(AdminCommand command, BlacklistService blacklistService, LightSearchChecker checker) {
-        this.blacklistService = blacklistService;
+    public CommandCheckerAdminKickClientImpl(
+            AdminCommand command, ClientsService<String, Client> clientsService, LightSearchChecker checker) {
+        this.clientsService = clientsService;
         this.command = command;
         this.checker = checker;
     }
@@ -39,12 +41,12 @@ public class CommandCheckerAdminAddBlacklistImpl implements CommandChecker {
     @Override
     public void check() throws CheckerException {
         if(checker.isNull(command.IMEI()))
-            throw new CheckerException("Неверный формат команды. IMEI имеет значение null!", "AddBlacklist: unknown client: IMEI is null!");
+            throw new CheckerException("Неверный формат команды. IMEI имеет значение null!", "AddBlacklist: unknown client: IMEI is null!.");
 
         if(checker.isEmpty(command.IMEI()))
             throw new CheckerException("Неверный формат команды. IMEI имеет пустое значение!", "AddBlacklist: unknown client: IMEI is empty!");
 
-        if(blacklistService.blacklist().contains(command.IMEI()))
-            throw new CheckerException("Данный клиент уже находится в черном списке!", "Client " + command.IMEI() + " already in the blacklist.");
+        if(clientsService.clients().remove(command.IMEI()) != null)
+            throw new CheckerException("Клиент c данным IMEI не найден. (Не подключен к LightSearch Server)", "Client " + command.IMEI() + " does not exist.");
     }
 }

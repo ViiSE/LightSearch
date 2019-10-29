@@ -21,6 +21,7 @@ import lightsearch.server.checker.LightSearchChecker;
 import lightsearch.server.cmd.admin.AdminCommand;
 import lightsearch.server.cmd.client.ClientCommand;
 import lightsearch.server.data.BlacklistService;
+import lightsearch.server.data.ClientsService;
 import lightsearch.server.data.LightSearchServerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -77,5 +78,32 @@ public class CommandCheckerProducerDefaultImpl implements CommandCheckerProducer
     public CommandChecker getCommandCheckerAdminAddBlacklistInstance(
             AdminCommand command, BlacklistService blacklistService, LightSearchChecker checker) {
         return (CommandChecker) ctx.getBean("commandCheckerAdminAddBlacklist", command, blacklistService, checker);
+    }
+
+    @Override
+    public CommandChecker getCommandCheckerAdminKickClientInstance(
+            AdminCommand command, ClientsService clientsService, LightSearchChecker checker) {
+        return (CommandChecker) ctx.getBean("commandCheckerAdminKickClient", command, clientsService, checker);
+    }
+
+    @Override
+    public CommandChecker getCommandCheckerAdminDelBlacklistInstance(
+            AdminCommand command, BlacklistService blacklistService, LightSearchChecker checker) {
+        return (CommandChecker) ctx.getBean("commandCheckerAdminDelBlacklist", command, blacklistService, checker);
+    }
+
+    @Override
+    public CommandChecker getCommandCheckerAdminChangeDatabaseInstance(AdminCommand command, LightSearchChecker checker) {
+        return (CommandChecker) ctx.getBean("commandCheckerAdminChangeDatabase", command, checker);
+    }
+
+    @Override
+    public CommandChecker getCommandCheckerAdminClientTimeoutInstance(AdminCommand command) {
+        return (CommandChecker) ctx.getBean("commandCheckerAdminClientTimeout", command);
+    }
+
+    @Override
+    public CommandChecker getCommandCheckerAdminRestartTimeInstance(AdminCommand command, LightSearchChecker checker) {
+        return (CommandChecker) ctx.getBean("commandCheckerAdminRestartTime", command, checker);
     }
 }

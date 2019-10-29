@@ -14,17 +14,10 @@
  *  limitations under the License.
  */
 
-package lightsearch.server.cmd.admin;
+package lightsearch.server.validator;
 
-import lightsearch.server.cmd.Command;
+import lightsearch.server.exception.ValidatorException;
 
-public interface AdminCommand extends Command {
-    String username();
-    String restartTime();
-    int clientTimeout();
-    String IMEI();
-    String password();
-    String ip();
-    int port();
-    String dbName();
+public interface Validator<T> {
+    void validate(T item) throws ValidatorException;
 }

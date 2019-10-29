@@ -24,11 +24,10 @@ import org.springframework.stereotype.Component;
 @Scope("prototype")
 public class AdminCommandDefaultImpl implements AdminCommand {
 
-    private final String name;
-    private final String serverTime;
+    private final String username;
+    private final String restartTime;
     private final int clientTimeout;
     private final String IMEI;
-    private final String adminName;
     private final String password;
     private final String ip;
     private final int port;
@@ -36,11 +35,10 @@ public class AdminCommandDefaultImpl implements AdminCommand {
     private final String command;
 
     public AdminCommandDefaultImpl(AdminCommandDTO adminCommandDTO) {
-        this.name = adminCommandDTO.getName();
-        this.serverTime = adminCommandDTO.getServerTime();
+        this.username = adminCommandDTO.getUsername();
+        this.restartTime = adminCommandDTO.getRestartTime();
         this.clientTimeout = adminCommandDTO.getClientTimeout();
         this.IMEI = adminCommandDTO.getIMEI();
-        this.adminName = adminCommandDTO.getAdminName();
         this.password = adminCommandDTO.getPassword();
         this.ip = adminCommandDTO.getIp();
         this.port = adminCommandDTO.getPort();
@@ -49,13 +47,13 @@ public class AdminCommandDefaultImpl implements AdminCommand {
     }
 
     @Override
-    public String name() {
-        return name;
+    public String username() {
+        return username;
     }
 
     @Override
-    public String serverTime() {
-        return serverTime;
+    public String restartTime() {
+        return restartTime;
     }
 
     @Override
@@ -66,11 +64,6 @@ public class AdminCommandDefaultImpl implements AdminCommand {
     @Override
     public String IMEI() {
         return IMEI;
-    }
-
-    @Override
-    public String adminName() {
-        return adminName;
     }
 
     @Override

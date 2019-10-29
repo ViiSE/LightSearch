@@ -19,14 +19,12 @@ import lightsearch.server.checker.LightSearchChecker;
 import lightsearch.server.cmd.admin.AdminCommand;
 import lightsearch.server.cmd.result.AdminCommandResultCreator;
 import lightsearch.server.cmd.result.ResultType;
-import lightsearch.server.data.BlacklistService;
 import lightsearch.server.data.ClientsService;
 import lightsearch.server.data.LightSearchServerService;
 import lightsearch.server.data.pojo.AdminCommandResult;
 import lightsearch.server.data.pojo.Client;
 import lightsearch.server.exception.CheckerException;
 import lightsearch.server.exception.CommandResultException;
-import lightsearch.server.initialization.CurrentServerDirectory;
 import lightsearch.server.log.LoggerServer;
 import lightsearch.server.producer.checker.CommandCheckerProducer;
 import lightsearch.server.producer.cmd.admin.ErrorAdminCommandServiceProducer;
@@ -46,50 +44,33 @@ import static lightsearch.server.log.LogMessageTypeEnum.INFO;
  *
  * @author ViiSE
  */
-@Component("addBlacklistProcessor")
+@Component("clientKickProcessor")
 @Scope("prototype")
-public class AddBlacklistProcessor implements AdminProcessor<AdminCommandResult> {
+public class ClientKickProcessor implements AdminProcessor<AdminCommandResult> {
 
     private final ClientsService<String, Client> clientsService;
-    private final BlacklistService<String> blacklistService;
     private final LightSearchChecker checker;
-    private final String blacklistDirectory;
 
     @Autowired private LoggerServer logger;
     @Autowired private ErrorAdminCommandServiceProducer errAdmCmdServiceProducer;
-    @Autowired private CommandCheckerProducer cmdCheckerProducer;
     @Autowired private AdminCommandResultCreatorProducer admCmdResCrProducer;
+    @Autowired private CommandCheckerProducer cmdCheckerProducer;
 
     @SuppressWarnings("unchecked")
-    public AddBlacklistProcessor(
-            LightSearchServerService serverService, LightSearchChecker checker, CurrentServerDirectory currentDirectory) {
-        this.checker = checker;
+    public ClientKickProcessor(LightSearchServerService serverService, LightSearchChecker checker) {
         this.clientsService = serverService.clientsService();
-        this.blacklistService = serverService.blacklistService();
-        this.blacklistDirectory = currentDirectory.currentDirectory() + "blacklist";
+        this.checker = checker;
     }
 
     @Override
     synchronized public AdminCommandResult apply(AdminCommand command) {
         try {
-            cmdCheckerProducer.getCommandCheckerAdminAddBlacklistInstance(command, blacklistService, checker).check();
-            blacklistService.blacklist().add(command.IMEI());
-            try (FileOutputStream fout = new FileOutputStream(blacklistDirectory, true);
-                 BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fout))) {
-                bw.write(command.IMEI());
-                bw.newLine();
-            } catch (IOException ex) {
-                blacklistService.blacklist().remove(command.IMEI());
-                return errAdmCmdServiceProducer.getErrorAdminCommandServiceDefaultInstance()
-                        .createErrorResult("Невозможно добавить клиента в черный список. Сообщение: " + ex.getMessage(),
-                                "AddBlacklistProcessor: Cannot add client to the blacklist. Exception: " + ex.getMessage());
-            }
-
+            cmdCheckerProducer.getCommandCheckerAdminKickClientInstance(command, clientsService, checker).check();
             clientsService.clients().remove(command.IMEI());
             AdminCommandResultCreator commandResultCreator =
                     admCmdResCrProducer.getCommandResultCreatorAdminDefaultInstance(
-                            ResultType.TRUE.stringValue(), "Данный клиент был добавлен в черный список.", null, null);
-            logger.log(INFO, "Client has been added to the blacklist: IMEI - " + command.IMEI());
+                            ResultType.TRUE.stringValue(), "Клиент был исключен из текущей сессии.", null, null);
+            logger.log(INFO, "Client has been kicked: IMEI - " + command.IMEI());
 
             return commandResultCreator.createAdminCommandResult();
         } catch (CheckerException ex) {

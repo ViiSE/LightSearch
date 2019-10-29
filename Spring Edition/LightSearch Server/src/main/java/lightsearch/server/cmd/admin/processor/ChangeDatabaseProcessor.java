@@ -19,11 +19,8 @@ import lightsearch.server.checker.LightSearchChecker;
 import lightsearch.server.cmd.admin.AdminCommand;
 import lightsearch.server.cmd.result.AdminCommandResultCreator;
 import lightsearch.server.cmd.result.ResultType;
-import lightsearch.server.data.BlacklistService;
-import lightsearch.server.data.ClientsService;
 import lightsearch.server.data.LightSearchServerService;
 import lightsearch.server.data.pojo.AdminCommandResult;
-import lightsearch.server.data.pojo.Client;
 import lightsearch.server.exception.CheckerException;
 import lightsearch.server.exception.CommandResultException;
 import lightsearch.server.initialization.CurrentServerDirectory;
@@ -35,10 +32,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static lightsearch.server.log.LogMessageTypeEnum.INFO;
 
@@ -46,50 +45,62 @@ import static lightsearch.server.log.LogMessageTypeEnum.INFO;
  *
  * @author ViiSE
  */
-@Component("addBlacklistProcessor")
+@Component("changeDatabaseProcessor")
 @Scope("prototype")
-public class AddBlacklistProcessor implements AdminProcessor<AdminCommandResult> {
+public class ChangeDatabaseProcessor implements AdminProcessor<AdminCommandResult> {
 
-    private final ClientsService<String, Client> clientsService;
-    private final BlacklistService<String> blacklistService;
     private final LightSearchChecker checker;
-    private final String blacklistDirectory;
+    private final String applicationPropertiesDirectory;
 
     @Autowired private LoggerServer logger;
     @Autowired private ErrorAdminCommandServiceProducer errAdmCmdServiceProducer;
     @Autowired private CommandCheckerProducer cmdCheckerProducer;
     @Autowired private AdminCommandResultCreatorProducer admCmdResCrProducer;
 
-    @SuppressWarnings("unchecked")
-    public AddBlacklistProcessor(
-            LightSearchServerService serverService, LightSearchChecker checker, CurrentServerDirectory currentDirectory) {
+    public ChangeDatabaseProcessor(LightSearchChecker checker, CurrentServerDirectory currentDirectory) {
         this.checker = checker;
-        this.clientsService = serverService.clientsService();
-        this.blacklistService = serverService.blacklistService();
-        this.blacklistDirectory = currentDirectory.currentDirectory() + "blacklist";
+        this.applicationPropertiesDirectory = currentDirectory.currentDirectory() + "config/application.properties";
     }
 
     @Override
     synchronized public AdminCommandResult apply(AdminCommand command) {
         try {
-            cmdCheckerProducer.getCommandCheckerAdminAddBlacklistInstance(command, blacklistService, checker).check();
-            blacklistService.blacklist().add(command.IMEI());
-            try (FileOutputStream fout = new FileOutputStream(blacklistDirectory, true);
+            cmdCheckerProducer.getCommandCheckerAdminChangeDatabaseInstance(command, checker).check();
+            try (FileOutputStream fout = new FileOutputStream(applicationPropertiesDirectory, true);
                  BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fout))) {
-                bw.write(command.IMEI());
-                bw.newLine();
+                Path propsPath = Paths.get(applicationPropertiesDirectory);
+
+                List<String> properties = Files.readAllLines(propsPath).stream().map(property -> {
+                    String springDbUrlKey      = "spring.datasource.url";
+                    String springDbUsernameKey = "spring.datasource.username";
+                    String springDbPasswordKey = "spring.datasource.password";
+                    if (property.contains(springDbUrlKey)) {
+                        String urlDbType = "jdbc:firebirdsql://";
+                        String urlProperties = "?encoding=win1251&amp;useUnicode=true&amp;characterEncoding=win1251";
+                        return String.format("%s=%s%s:%s%s%s", springDbUrlKey, urlDbType, command.ip(), command.port(),
+                                command.dbName(), urlProperties);
+                    } else if(property.contains(springDbUsernameKey))
+                        return String.format("%s=%s", springDbUsernameKey, command.username());
+                    else if(property.contains(springDbPasswordKey))
+                        return String.format("%s=%s", springDbPasswordKey, command.password());
+                    else
+                        return property;
+                }).collect(Collectors.toList());
+
+                for(String property: properties) {
+                    bw.write(property);
+                    bw.newLine();
+                }
             } catch (IOException ex) {
-                blacklistService.blacklist().remove(command.IMEI());
                 return errAdmCmdServiceProducer.getErrorAdminCommandServiceDefaultInstance()
-                        .createErrorResult("Невозможно добавить клиента в черный список. Сообщение: " + ex.getMessage(),
-                                "AddBlacklistProcessor: Cannot add client to the blacklist. Exception: " + ex.getMessage());
+                        .createErrorResult("Невозможно записать новые параметры в базу данных. Сообщение: " + ex.getMessage(),
+                                "ChangeDatabaseProcessor: Cannot write datasource properties. Exception: " + ex.getMessage());
             }
 
-            clientsService.clients().remove(command.IMEI());
             AdminCommandResultCreator commandResultCreator =
                     admCmdResCrProducer.getCommandResultCreatorAdminDefaultInstance(
-                            ResultType.TRUE.stringValue(), "Данный клиент был добавлен в черный список.", null, null);
-            logger.log(INFO, "Client has been added to the blacklist: IMEI - " + command.IMEI());
+                            ResultType.TRUE.stringValue(), "Параметры базы данных были изменены. Для вступления в силу изменений перезагрузите сервер.", null, null);
+            logger.log(INFO, "Datasource has been changed");
 
             return commandResultCreator.createAdminCommandResult();
         } catch (CheckerException ex) {

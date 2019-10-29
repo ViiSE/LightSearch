@@ -21,6 +21,7 @@ import lightsearch.server.checker.LightSearchChecker;
 import lightsearch.server.cmd.admin.AdminCommand;
 import lightsearch.server.cmd.client.ClientCommand;
 import lightsearch.server.data.BlacklistService;
+import lightsearch.server.data.ClientsService;
 import lightsearch.server.data.LightSearchServerService;
 
 public interface CommandCheckerProducer {
@@ -40,4 +41,11 @@ public interface CommandCheckerProducer {
 
     CommandChecker getCommandCheckerAdminAddBlacklistInstance(
             AdminCommand command, BlacklistService blacklistService, LightSearchChecker checker);
+    CommandChecker getCommandCheckerAdminKickClientInstance(
+            AdminCommand command, ClientsService clientsService, LightSearchChecker checker);
+    CommandChecker getCommandCheckerAdminDelBlacklistInstance(
+            AdminCommand command, BlacklistService blacklistService, LightSearchChecker checker);
+    CommandChecker getCommandCheckerAdminChangeDatabaseInstance(AdminCommand command, LightSearchChecker checker);
+    CommandChecker getCommandCheckerAdminClientTimeoutInstance(AdminCommand command);
+    CommandChecker getCommandCheckerAdminRestartTimeInstance(AdminCommand command, LightSearchChecker checker);
 }
