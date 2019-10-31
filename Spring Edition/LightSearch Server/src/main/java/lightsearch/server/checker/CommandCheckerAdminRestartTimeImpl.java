@@ -49,7 +49,7 @@ public class CommandCheckerAdminRestartTimeImpl implements CommandChecker {
                     "RestartTime: restartTime is empty");
 
         try {
-            validatorProducer.getValidatorRestartTimeInstance().validate(command.restartTime());
+            validatorProducer.getRestartTimeValidatorInstance().validate(command.restartTime());
         } catch (ValidatorException ex) {
             throw new CheckerException(ex.getMessage(), ex.getLogMessage());
         }

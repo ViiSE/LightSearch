@@ -35,9 +35,10 @@ public class LoggerServerDefaultImpl implements LoggerServer {
     @Autowired private CurrentDateTimeProducer currentDateTimeProducer;
 
     @Override
-    synchronized public void log(LogMessageTypeEnum type, String message) {
+    synchronized public void log(Class clazz, LogMessageTypeEnum type, String message) {
         loggerFile.writeLogFile(type.stringValue(), currentDateTimeProducer.getCurrentDateTimeDefaultInstance(), message);
-        loggerWindow.printLog(type.stringValue(), currentDateTimeProducer.getCurrentDateTimeDefaultInstance(), message);
+        loggerWindow.printLog(type.stringValue(), currentDateTimeProducer.getCurrentDateTimeDefaultInstance(),
+                String.format("{%s} : %s", clazz.getSimpleName(), message));
     }
     
 }

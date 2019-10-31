@@ -19,7 +19,6 @@ package lightsearch.server.timer;
 import lightsearch.server.data.LightSearchServerService;
 import lightsearch.server.exception.IdentifierException;
 import lightsearch.server.identifier.DatabaseRecordIdentifier;
-import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.log.LoggerServer;
 import lightsearch.server.producer.identifier.DatabaseRecordIdentifierProducer;
 import lightsearch.server.producer.identifier.DatabaseRecordIdentifierWriterProducer;
@@ -28,6 +27,9 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
+import static lightsearch.server.log.LogMessageTypeEnum.ERROR;
+import static lightsearch.server.log.LogMessageTypeEnum.INFO;
 
 @Component("databaseRecordIdentifierWriterTimer")
 @EnableAsync
@@ -47,10 +49,10 @@ public class DatabaseRecordIdentifierWriterTimer {
             identifierWriterProducer.getDatabaseRecordIdentifierWriterDefaultInstance(serverService)
                     .write(identifier.databaseRecordIdentifier());
 
-            logger.log(LogMessageTypeEnum.INFO, "DatabaseRecordIdentifier write. Value: " +
+            logger.log(DatabaseRecordIdentifierWriterTimer.class, INFO, "Database record identifier write. Value: " +
                     identifier.databaseRecordIdentifier());
         } catch (IdentifierException ex) {
-            logger.log(LogMessageTypeEnum.ERROR, "Cannot write database record identifier. " +
+            logger.log(DatabaseRecordIdentifierWriterTimer.class, ERROR, "Cannot write database record identifier. " +
                     "Exception: " + ex.getMessage());
         }
     }

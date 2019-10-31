@@ -51,7 +51,7 @@ public class ProcessorHolderClientTestImpl implements ProcessorHolder {
         if(holder.isEmpty())
             initHolder();
 
-        if(!command.equals(CONNECT.stringValue()))
+        if(!command.equals(LOGIN.stringValue()))
             serverService.clientsService().clients().put("111111111111111", new Client("111111111111111","test"));
 
         return holder.get(command);
@@ -63,7 +63,7 @@ public class ProcessorHolderClientTestImpl implements ProcessorHolder {
         DatabaseRecordIdentifier databaseRecordIdentifier =
                 databaseRecordIdentifierProducer.getDatabaseRecordIdentifierDefaultInstance();
 
-        holder.put(CONNECT.stringValue(), producer.getLoginProcessorTestInstance(
+        holder.put(LOGIN.stringValue(), producer.getLoginProcessorTestInstance(
                 serverService, checker, currentDateTime, databaseRecordIdentifier));
         holder.put(SEARCH.stringValue(),  producer.getSearchProcessorInstance(
                 serverService, checker, currentDateTime, databaseRecordIdentifier));

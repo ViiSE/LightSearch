@@ -49,18 +49,17 @@ public class ClientCommandsController {
     private ErrorClientCommandServiceProducer errorClientCommandServiceProducer;
 
     @RequestMapping(method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ClientCommandResult commandClient(@RequestBody ClientCommandDTO clientCommandDTO) {
+    public ClientCommandResult clientCommand(@RequestBody ClientCommandDTO clientCommandDTO) {
         try {
-            String command = clientCommandDTO.getCommand();
             ProcessorService<ClientCommandResult> processorService =
-                    processorServiceProducer.getClientProcessorServiceDefaultInstance(command);
+                    processorServiceProducer.getClientProcessorServiceDefaultInstance(clientCommandDTO.getCommand());
 
             ClientCommand clientCommand = clientCommandProducer.getClientCommandDefaultInstance(clientCommandDTO);
             return processorService.getProcessor().apply(clientCommand);
         } catch (ProcessorNotFoundException ex) {
             return errorClientCommandServiceProducer.getErrorClientCommandServiceDefaultInstance()
-                    .createErrorResult(clientCommandDTO.getIMEI(), "Произошла ошибка. Сообщение: " + ex.getMessage(),
-                            ex.getMessage());
+                    .createErrorResult(clientCommandDTO.getIMEI(), "Произошла ошибка. " + "Сообщение: " +
+                            ex.getMessage(), ex.getMessage());
         }
     }
 }

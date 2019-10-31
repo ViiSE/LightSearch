@@ -18,6 +18,7 @@ package lightsearch.server.database;
 
 import lightsearch.server.LightSearchServer;
 import lightsearch.server.cmd.client.ClientCommand;
+import lightsearch.server.cmd.client.ClientCommandEnum;
 import lightsearch.server.data.pojo.ClientCommandDTO;
 import lightsearch.server.exception.DatabaseWriterException;
 import lightsearch.server.producer.cmd.client.ClientCommandProducer;
@@ -50,7 +51,7 @@ public class DatabaseWriterTestNG extends AbstractTestNGSpringContextTests {
         dateTime = currentDateTimeProducer.getCurrentDateTimeDefaultInstance().dateTimeInStandardFormat();
 
         ClientCommandDTO clientCommandDTO = new ClientCommandDTO();
-        clientCommandDTO.setCommand("connect");
+        clientCommandDTO.setCommand(ClientCommandEnum.LOGIN.stringValue());
         clientCommandDTO.setUsername("test");
         clientCommandDTO.setPassword("321");
         clientCommandDTO.setIMEI("111111111111111");

@@ -60,10 +60,10 @@ public class LSRequestRepositoryFirebirdWindows1251Impl implements LSRequestRepo
             } else
                 throw new RepositoryException("Строка с данным LSCODE уже существует!");
         } catch (QueryTimeoutException ex) {
-            logger.log(ERROR, "LSRequestRepositoryJdbcTemplateImpl: " + ex.getMessage());
+            logger.log(LSRequestRepositoryFirebirdWindows1251Impl.class, ERROR, ex.getMessage());
             throw new RepositoryException("Время ожидания запроса истекло");
         } catch (UnsupportedEncodingException ex) {
-            logger.log(ERROR, "LSRequestRepositoryJdbcTemplateImpl: " + ex.getMessage());
+            logger.log(LSRequestRepositoryFirebirdWindows1251Impl.class, ERROR, ex.getMessage());
             throw new RepositoryException("Кодировка windows-1251 не поддерживается");
         }
     }

@@ -20,21 +20,21 @@ package lightsearch.server.cmd.admin;
  * @author ViiSE
  */
 public enum AdminCommandEnum {
-    CONNECT {
+    LOGIN {
         @Override
-        public String stringValue() {return "connect";}
+        public String stringValue() {return "login";}
     },
     RESTART {
         @Override
         public String stringValue() {return "restart";}
     },
-    TIMEOUT_SERVER {
+    RESTART_TIME {
         @Override
-        public String stringValue() {return "toutServer";}
+        public String stringValue() {return "restartServer";}
     },
-    TIMEOUT_CLIENT {
+    CLIENT_TIMEOUT {
         @Override
-        public String stringValue() {return "toutClient";}
+        public String stringValue() {return "clientTimeout";}
     },
     CLIENT_LIST {
         @Override

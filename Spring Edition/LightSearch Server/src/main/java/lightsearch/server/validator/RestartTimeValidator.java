@@ -23,8 +23,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-@Component("validatorRestartTime")
-public class ValidatorRestartTime implements Validator<String> {
+@Component("restartTimeValidator")
+public class RestartTimeValidator implements Validator<String> {
 
     @Override
     public void validate(String restartTime) throws ValidatorException {

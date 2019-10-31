@@ -66,24 +66,24 @@ public class ConfirmSoftCheckProductsProcessor implements ClientProcessor<Client
         this.databaseRecordIdentifier = databaseRecordIdentifier;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public ClientCommandResult apply(ClientCommand command) {
         try {
             commandCheckerProducer.getCommandCheckerClientConfirmSoftCheckProductsInstance(command, serverService, checker).check();
+            serverService.clientsService().refreshTimeout(command.IMEI());
+
             DatabaseCommandMessage dbCmdMessage =
                     dbCmdMsgProducer.getDatabaseCommandMessageConfirmSoftCheckProductsDefaultWindowsJSONInstance(command);
-
             DatabaseStatementExecutor dbStatementExecutor =
                     dbStateExecProducer.getDatabaseStatementExecutorDefaultInstance(
                             databaseRecordIdentifier.next(), currentDateTime.dateTimeInStandardFormat(), dbCmdMessage);
-
             DatabaseStatementResult dbStatRes = dbStatementExecutor.exec();
 
             String result = dbStatRes.result();
-
             ClientCommandResultCreator commandResultCreator =
                     clientCommandResultCreatorProducer.getCommandResultCreatorClientJSONInstance(result);
-            logger.log(INFO, "Client " + command.IMEI() + " confirm soft check products:" +
+            logger.log(ConfirmSoftCheckProductsProcessor.class, INFO, "Client " + command.IMEI() + " confirm soft check products: " +
                     "user identifier - " + command.userIdentifier() + ", card code - " + command.cardCode());
 
             return commandResultCreator.createClientCommandResult();

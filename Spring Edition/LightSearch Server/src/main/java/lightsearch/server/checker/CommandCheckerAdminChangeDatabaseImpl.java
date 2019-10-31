@@ -51,8 +51,8 @@ public class CommandCheckerAdminChangeDatabaseImpl implements CommandChecker {
             throw new CheckerException("Неверный формат команды. IP адрес базы данных имеет пустое значение!", "ChangeDatabase: ip is empty!");
 
         try {
-            validatorProducer.getValidatorIpInstance().validate(command.ip());
-            validatorProducer.getValidatorPortInstance().validate(command.port());
+            validatorProducer.getIpValidatorInstance().validate(command.ip());
+            validatorProducer.getPortValidatorInstance().validate(command.port());
         } catch (ValidatorException ex) {
             throw new CheckerException(ex.getMessage(), ex.getLogMessage());
         }

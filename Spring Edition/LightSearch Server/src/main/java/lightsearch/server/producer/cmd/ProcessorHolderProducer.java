@@ -21,4 +21,6 @@ import lightsearch.server.cmd.ProcessorHolder;
 public interface ProcessorHolderProducer {
     ProcessorHolder getProcessorHolderClientInstance();
     ProcessorHolder getProcessorHolderClientTestInstance();
+    ProcessorHolder getProcessorHolderAdminInstance();
+    ProcessorHolder getProcessorHolderAdminTestInstance();
 }

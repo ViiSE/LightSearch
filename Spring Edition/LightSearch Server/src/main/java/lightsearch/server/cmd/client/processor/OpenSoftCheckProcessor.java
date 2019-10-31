@@ -66,24 +66,24 @@ public class OpenSoftCheckProcessor implements ClientProcessor<ClientCommandResu
         this.databaseRecordIdentifier = databaseRecordIdentifier;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public ClientCommandResult apply(ClientCommand command) {
         try {
             commandCheckerProducer.getCommandCheckerClientOpenSoftCheckInstance(command, serverService, checker).check();
+            serverService.clientsService().refreshTimeout(command.IMEI());
+
             DatabaseCommandMessage dbCmdMessage =
                     dbCmdMsgProducer.getDatabaseCommandMessageOpenSoftCheckDefaultWindowsJSONInstance(command);
-
             DatabaseStatementExecutor dbStatementExecutor =
                     dbStateExecProducer.getDatabaseStatementExecutorDefaultInstance(
                             databaseRecordIdentifier.next(), currentDateTime.dateTimeInStandardFormat(), dbCmdMessage);
-
             DatabaseStatementResult dbStatRes = dbStatementExecutor.exec();
 
             String result = dbStatRes.result();
-
             ClientCommandResultCreator commandResultCreator =
                     clientCommandResultCreatorProducer.getCommandResultCreatorClientJSONInstance(result);
-            logger.log(INFO, "Client " + command.IMEI() + " open soft check:" +
+            logger.log(OpenSoftCheckProcessor.class, INFO, "Client " + command.IMEI() + " open soft check: " +
                     "user identifier - " + command.userIdentifier());
 
             return commandResultCreator.createClientCommandResult();

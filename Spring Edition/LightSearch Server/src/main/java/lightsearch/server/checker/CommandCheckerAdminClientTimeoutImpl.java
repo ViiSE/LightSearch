@@ -40,7 +40,7 @@ public class CommandCheckerAdminClientTimeoutImpl implements CommandChecker {
     @Override
     public void check() throws CheckerException {
         try {
-            validatorProducer.getValidatorClientTimeoutInstance().validate(command.clientTimeout());
+            validatorProducer.getClientTimeoutValidatorInstance().validate(command.clientTimeout());
         } catch (ValidatorException ex) {
             throw new CheckerException(ex.getMessage(), ex.getLogMessage());
         }

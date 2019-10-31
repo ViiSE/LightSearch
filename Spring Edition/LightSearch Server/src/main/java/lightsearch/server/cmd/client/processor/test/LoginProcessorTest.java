@@ -89,9 +89,9 @@ public class LoginProcessorTest implements ClientProcessor<ClientCommandResult> 
 
             ClientCommandResultCreator commandResultCreator =
                     clientCommandResultCreatorProducer.getCommandResultCreatorClientJSONInstance(dbStatRes.result());
-            logger.log(INFO, "Client connected:\n" + "IMEI - " + command.IMEI() +
+            logger.log(LoginProcessorTest.class, INFO, "Client connected: " + "IMEI - " + command.IMEI() +
                     ", ip - " + command.ip() + ", os - " + command.os() + ", model - " + command.model() +
-                    ", username - " + command.username() + ", user ident - " + command.userIdentifier());
+                    ", username - " + command.username() + ", ident - " + command.userIdentifier());
             clientsService.clients().put(command.IMEI(), new Client(command.IMEI(), command.username()));
             return commandResultCreator.createClientCommandResult();
         } catch (CommandResultException | DatabaseStatementExecutorException ex) {

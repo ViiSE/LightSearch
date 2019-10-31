@@ -22,15 +22,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
-@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Client {
 
     @JsonIgnore private static final int TIMEOUT_LIMIT = 1800;
+    @JsonIgnore private int timeoutLimitSeconds = TIMEOUT_LIMIT;
 
     @JsonProperty("IMEI") private String IMEI;
     private String username;
-    @JsonIgnore private int timeoutLimitSeconds = TIMEOUT_LIMIT;
 
     public Client(@JsonProperty("IMEI") String IMEI, String username) {
         this.IMEI = IMEI;
@@ -41,6 +40,7 @@ public class Client {
         return username;
     }
 
+    @JsonProperty("IMEI")
     public String getIMEI() {
         return IMEI;
     }

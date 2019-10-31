@@ -34,7 +34,7 @@ class ErrorClientCommandServiceDefaultImpl implements ErrorClientCommandService 
 
     @Override
     public ClientCommandResult createErrorResult(String IMEI, String message, String logMessage) {
-        logger.log(ERROR, logMessage);
+        logger.log(ErrorClientCommandServiceDefaultImpl.class, ERROR, logMessage);
         return errorResultClientCommandCreatorProducer
                 .getErrorResultClientCommandCreatorDefaultInstance(IMEI, message, clientCommandResultCreatorProducer)
                 .createErrorResult();

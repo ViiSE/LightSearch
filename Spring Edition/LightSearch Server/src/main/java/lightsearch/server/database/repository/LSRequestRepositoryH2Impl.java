@@ -61,7 +61,7 @@ public class LSRequestRepositoryH2Impl implements LSRequestRepository {
             } else
                 throw new RepositoryException("Строка с данным LSCODE уже существует!");
         } catch (QueryTimeoutException ex) {
-            logger.log(ERROR, "LSRequestRepositoryJdbcTemplateImpl: " + ex.getMessage());
+            logger.log(LSRequestRepositoryH2Impl.class, ERROR, ex.getMessage());
             throw new RepositoryException("Время ожидания запроса истекло");
         }
     }

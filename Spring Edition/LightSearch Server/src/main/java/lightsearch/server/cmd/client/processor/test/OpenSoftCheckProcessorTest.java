@@ -84,7 +84,7 @@ public class OpenSoftCheckProcessorTest implements ClientProcessor<ClientCommand
 
             ClientCommandResultCreator commandResultCreator =
                     clientCommandResultCreatorProducer.getCommandResultCreatorClientJSONInstance(result);
-            logger.log(INFO, "Client " + command.IMEI() + " open soft check:" +
+            logger.log(OpenSoftCheckProcessorTest.class, INFO, "Client " + command.IMEI() + " open soft check: " +
                     "user identifier - " + command.userIdentifier());
 
             return commandResultCreator.createClientCommandResult();

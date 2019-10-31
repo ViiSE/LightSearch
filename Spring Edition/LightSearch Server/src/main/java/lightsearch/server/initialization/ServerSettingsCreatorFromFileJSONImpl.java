@@ -18,7 +18,6 @@ package lightsearch.server.initialization;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lightsearch.server.data.pojo.LightSearchSettings;
-import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.log.LoggerServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -27,6 +26,9 @@ import org.springframework.stereotype.Component;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalTime;
+
+import static lightsearch.server.log.LogMessageTypeEnum.ERROR;
+import static lightsearch.server.log.LogMessageTypeEnum.INFO;
 
 /**
  *
@@ -52,12 +54,13 @@ public class ServerSettingsCreatorFromFileJSONImpl implements ServerSettingsCrea
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.registerModule(new JavaTimeModule());
             settings = objectMapper.readValue(new File(currentDirectory + "settings"), LightSearchSettings.class);
-            logger.log(LogMessageTypeEnum.INFO, "LightSearch Server settings is loaded: " + settings.toString());
+            logger.log(ServerSettingsCreatorFromFileJSONImpl.class, INFO,
+                    "LightSearch Server settings is loaded: " + settings.toString());
         } catch (IOException ex) {
             settings = new LightSearchSettings();
             settings.setRebootTime(LocalTime.of(7, 0));
             settings.setTimeoutClient(0);
-            logger.log(LogMessageTypeEnum.ERROR, "ServerSettingsFromFileJSONImpl: cannot create settings." +
+            logger.log(ServerSettingsCreatorFromFileJSONImpl.class, ERROR, "Cannot create settings." +
                     "Default settings applied: " + settings.toString() + ". Exception: " + ex.getMessage());
         }
     }

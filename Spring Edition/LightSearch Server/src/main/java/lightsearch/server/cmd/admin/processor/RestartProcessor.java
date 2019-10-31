@@ -26,8 +26,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.restart.RestartEndpoint;
 import org.springframework.stereotype.Component;
 
-import static lightsearch.server.log.LogMessageTypeEnum.INFO;
-
 /**
  *
  * @author ViiSE
@@ -42,7 +40,7 @@ public class RestartProcessor implements AdminProcessor<AdminCommandResult> {
     @Override
     synchronized public AdminCommandResult apply(AdminCommand command) {
         try {
-            logger.log(LogMessageTypeEnum.INFO, "Server restarted");
+            logger.log(RestartProcessor.class, LogMessageTypeEnum.INFO, "Server restarted");
             restartEndpoint.restart();
 
             return admCmdResCrProducer.getCommandResultCreatorAdminDefaultInstance(

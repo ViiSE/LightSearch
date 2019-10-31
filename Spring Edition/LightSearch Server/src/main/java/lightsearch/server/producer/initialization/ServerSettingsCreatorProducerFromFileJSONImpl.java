@@ -19,22 +19,20 @@ import lightsearch.server.initialization.CurrentServerDirectory;
 import lightsearch.server.initialization.ServerSettingsCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author ViiSE
  */
-@Component("serverSettingsCreatorProducerFromFileJSON")
+@Service("serverSettingsCreatorProducerFromFileJSON")
 public class ServerSettingsCreatorProducerFromFileJSONImpl implements ServerSettingsCreatorProducer {
-
-    private final String SERVER_SETTINGS_CREATOR = "serverSettingsCreatorFromFileJSON";
 
     @Autowired
     private ApplicationContext ctx;
 
     @Override
     public ServerSettingsCreator getServerSettingsCreatorFromFileJSONInstance(CurrentServerDirectory currentServerDirectory) {
-        return (ServerSettingsCreator) ctx.getBean(SERVER_SETTINGS_CREATOR, currentServerDirectory);
+        return (ServerSettingsCreator) ctx.getBean("serverSettingsCreatorFromFileJSON", currentServerDirectory);
     }
 }

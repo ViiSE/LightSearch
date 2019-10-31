@@ -84,10 +84,10 @@ public class SearchProcessorTest implements ClientProcessor<ClientCommandResult>
 
             ClientCommandResultCreator commandResultCreator =
                     clientCommandResultCreatorProducer.getCommandResultCreatorClientJSONInstance(result);
-            logger.log(INFO, "Client: " + command.IMEI() + "; command: search" +
-                    ";barcode: " + command.barcode() +
-                    ";sklad: " + command.sklad() +
-                    ";TK: " + command.TK());
+            logger.log(SearchProcessorTest.class, INFO, "Client: " + command.IMEI() + "; command: search " +
+                    "; barcode: " + command.barcode() +
+                    "; sklad: " + command.sklad() +
+                    "; TK: " + command.TK());
 
             return commandResultCreator.createClientCommandResult();
         } catch (CommandResultException | DatabaseStatementExecutorException ex) {

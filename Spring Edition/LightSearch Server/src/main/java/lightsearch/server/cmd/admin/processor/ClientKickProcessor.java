@@ -66,11 +66,12 @@ public class ClientKickProcessor implements AdminProcessor<AdminCommandResult> {
     synchronized public AdminCommandResult apply(AdminCommand command) {
         try {
             cmdCheckerProducer.getCommandCheckerAdminKickClientInstance(command, clientsService, checker).check();
+
             clientsService.clients().remove(command.IMEI());
             AdminCommandResultCreator commandResultCreator =
                     admCmdResCrProducer.getCommandResultCreatorAdminDefaultInstance(
                             ResultType.TRUE.stringValue(), "Клиент был исключен из текущей сессии.", null, null);
-            logger.log(INFO, "Client has been kicked: IMEI - " + command.IMEI());
+            logger.log(ClientKickProcessor.class, INFO, "Client has been kicked: IMEI - " + command.IMEI());
 
             return commandResultCreator.createAdminCommandResult();
         } catch (CheckerException ex) {

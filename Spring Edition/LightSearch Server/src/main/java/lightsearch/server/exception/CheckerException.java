@@ -16,16 +16,9 @@
 
 package lightsearch.server.exception;
 
-public class CheckerException extends Exception {
-
-    private final String logMessage;
+public class CheckerException extends ExceptionWithLogMessage {
 
     public CheckerException(String message, String logMessage) {
-        super(message);
-        this.logMessage = logMessage;
-    }
-
-    public String getLogMessage() {
-        return logMessage;
+        super(message, logMessage);
     }
 }

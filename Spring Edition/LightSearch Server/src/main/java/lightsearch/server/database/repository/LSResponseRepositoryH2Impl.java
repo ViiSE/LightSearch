@@ -76,18 +76,18 @@ public class LSResponseRepositoryH2Impl implements LSResponseRepository {
                 } catch(DataAccessException ex) {
                     if(ex.getMessage() != null)
                         if(!ex.getMessage().contains("Incorrect result size")) {
-                            logger.log(ERROR, "LSResponseRepositoryH2Impl: " + ex.getMessage());
+                            logger.log(LSResponseRepositoryH2Impl.class, ERROR, ex.getMessage());
                             throw new RepositoryException("Произошла ошибка на сервере. Сообщение: " + ex.getLocalizedMessage());
                         }
                 }
             }
-            logger.log(ERROR, "Время ожидания запроса истекло");
-            throw new RepositoryException("LSResponseRepositoryH2Impl: Request timed out");
+            logger.log(LSResponseRepositoryH2Impl.class, ERROR, "Время ожидания запроса истекло");
+            throw new RepositoryException("Request timed out");
         } catch (QueryTimeoutException ex) {
-            logger.log(ERROR, "LSResponseRepositoryH2Impl: " + ex.getMessage());
+            logger.log(LSResponseRepositoryH2Impl.class, ERROR, ex.getMessage());
             throw new RepositoryException("Время ожидания запроса истекло");
         } catch (DataAccessException ex) {
-            logger.log(ERROR, "LSResponseRepositoryH2Impl: " + ex.getMessage());
+            logger.log(LSResponseRepositoryH2Impl.class, ERROR, ex.getMessage());
             throw new RepositoryException("Произошла ошибка на сервере. Сообщение: " + ex.getLocalizedMessage());
         }
     }
@@ -108,7 +108,7 @@ public class LSResponseRepositoryH2Impl implements LSResponseRepository {
             jdbcTemplate.setQueryTimeout(30);
             jdbcTemplate.update("UPDATE LS_RESPONSE SET STATE = ? WHERE LSCODE = ?", state, lsCode);
         } catch (QueryTimeoutException ex) {
-            logger.log(ERROR, "LSResponseRepositoryH2Impl: " + ex.getMessage());
+            logger.log(LSResponseRepositoryH2Impl.class, ERROR, ex.getMessage());
             throw new RepositoryException("Время ожидания запроса истекло");
         }
     }

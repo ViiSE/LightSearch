@@ -66,26 +66,26 @@ public class CloseSoftCheckProcessor implements ClientProcessor<ClientCommandRes
         this.databaseRecordIdentifier = databaseRecordIdentifier;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public ClientCommandResult apply(ClientCommand command) {
         try {
             commandCheckerProducer.getCommandCheckerClientCloseSoftCheckInstance(command, serverService, checker).check();
+            serverService.clientsService().refreshTimeout(command.IMEI());
+
             DatabaseCommandMessage dbCmdMessage =
                     dbCmdMsgProducer.getDatabaseCommandMessageCloseSoftCheckDefaultWindowsJSONInstance(command);
-
             DatabaseStatementExecutor dbStatementExecutor =
                     dbStateExecProducer.getDatabaseStatementExecutorDefaultInstance(
                             databaseRecordIdentifier.next(), currentDateTime.dateTimeInStandardFormat(), dbCmdMessage);
-
             DatabaseStatementResult dbStatRes = dbStatementExecutor.exec();
 
             String result = dbStatRes.result();
-
             ClientCommandResultCreator commandResultCreator =
                     clientCommandResultCreatorProducer.getCommandResultCreatorClientJSONInstance(result);
-            logger.log(INFO, "Client " + command.IMEI() + " close soft check:" +
+            logger.log(CloseSoftCheckProcessor.class, INFO, "Client " + command.IMEI() + " close soft check: " +
                     "user identifier - " + command.userIdentifier() + ", card code - " + command.cardCode() +
-                    ",delivery type - " + command.delivery());
+                    ", delivery type - " + command.delivery());
 
             return commandResultCreator.createClientCommandResult();
         } catch (CommandResultException | DatabaseStatementExecutorException ex) {

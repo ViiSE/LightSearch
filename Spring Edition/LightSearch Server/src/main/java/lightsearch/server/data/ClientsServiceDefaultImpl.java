@@ -31,4 +31,10 @@ public class ClientsServiceDefaultImpl implements ClientsService<String, Client>
     public Map<String, Client> clients() {
         return clients;
     }
+
+    @Override
+    public void refreshTimeout(String key) {
+        if(clients.get(key) != null)
+            clients.get(key).refreshTimeoutValue();
+    }
 }

@@ -31,7 +31,6 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Arrays;
 
 import static lightsearch.server.log.LogMessageTypeEnum.ERROR;
 
@@ -77,18 +76,18 @@ public class LSResponseRepositoryFirebirdImpl implements LSResponseRepository {
                 } catch(DataAccessException ex) {
                     if(ex.getMessage() != null)
                         if(!ex.getMessage().contains("Incorrect result size")) {
-                            logger.log(ERROR, "LSResponseRepositoryDefaultImpl: " + ex.getMessage());
+                            logger.log(LSResponseRepositoryFirebirdImpl.class, ERROR, ex.getMessage());
                             throw new RepositoryException("Произошла ошибка на сервере. Сообщение: " + ex.getLocalizedMessage());
                         }
                 }
             }
-            logger.log(ERROR, "Время ожидания запроса истекло");
-            throw new RepositoryException("LSResponseRepositoryDefaultImpl: Request timed out");
+            logger.log(LSResponseRepositoryFirebirdImpl.class, ERROR, "Время ожидания запроса истекло");
+            throw new RepositoryException("Request timed out");
         } catch (QueryTimeoutException ex) {
-            logger.log(ERROR, "LSResponseRepositoryDefaultImpl: " + ex.getMessage());
+            logger.log(LSResponseRepositoryFirebirdImpl.class, ERROR, ex.getMessage());
             throw new RepositoryException("Время ожидания запроса истекло");
         } catch (DataAccessException ex) {
-            logger.log(ERROR, "LSResponseRepositoryDefaultImpl: " + ex.getMessage());
+            logger.log(LSResponseRepositoryFirebirdImpl.class, ERROR, ex.getMessage());
             throw new RepositoryException("Произошла ошибка на сервере. Сообщение: " + ex.getLocalizedMessage());
         }
     }
@@ -109,7 +108,7 @@ public class LSResponseRepositoryFirebirdImpl implements LSResponseRepository {
             jdbcTemplate.setQueryTimeout(30);
             jdbcTemplate.update("UPDATE LS_RESPONSE SET STATE = ? WHERE LSCODE = ?", state, lsCode);
         } catch (QueryTimeoutException ex) {
-            logger.log(ERROR, "LSResponseRepositoryDefaultImpl: " + ex.getMessage());
+            logger.log(LSResponseRepositoryFirebirdImpl.class, ERROR, ex.getMessage());
             throw new RepositoryException("Время ожидания запроса истекло");
         }
     }

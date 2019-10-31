@@ -17,6 +17,7 @@
 package lightsearch.server.producer.cmd;
 
 import lightsearch.server.cmd.ProcessorService;
+import lightsearch.server.data.pojo.AdminCommandResult;
 import lightsearch.server.data.pojo.ClientCommandResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -25,14 +26,18 @@ import org.springframework.stereotype.Service;
 @Service("processorServiceProducerDefault")
 public class ProcessorServiceProducerDefaultImpl implements ProcessorServiceProducer {
 
-    private final String CLIENT_PROCESSOR_SERVICE = "clientProcessorServiceDefaultImpl";
-
     @Autowired
     private ApplicationContext ctx;
 
     @SuppressWarnings("unchecked")
     @Override
     public ProcessorService<ClientCommandResult> getClientProcessorServiceDefaultInstance(String command) {
-        return (ProcessorService<ClientCommandResult>) ctx.getBean(CLIENT_PROCESSOR_SERVICE, command);
+        return (ProcessorService<ClientCommandResult>) ctx.getBean("clientProcessorServiceDefaultImpl", command);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public ProcessorService<AdminCommandResult> getAdminProcessorServiceDefaultInstance(String command) {
+        return (ProcessorService<AdminCommandResult>) ctx.getBean("adminProcessorServiceDefaultImpl", command);
     }
 }

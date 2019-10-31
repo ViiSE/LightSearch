@@ -29,12 +29,9 @@ import org.springframework.stereotype.Service;
 public class ErrorResultAdminCommandCreatorDefaultImpl implements ErrorResultAdminCommandCreator {
 
     private final AdminCommandResultCreatorProducer commandResultCreatorProducer;
-    private final String IMEI;
     private final String message;
 
-    public ErrorResultAdminCommandCreatorDefaultImpl(
-            String IMEI, String message, AdminCommandResultCreatorProducer commandResultCreatorProducer) {
-        this.IMEI = IMEI;
+    public ErrorResultAdminCommandCreatorDefaultImpl(String message, AdminCommandResultCreatorProducer commandResultCreatorProducer) {
         this.message = message;
         this.commandResultCreatorProducer = commandResultCreatorProducer;
     }

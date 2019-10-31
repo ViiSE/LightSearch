@@ -19,16 +19,9 @@ package lightsearch.server.exception;
  *
  * @author ViiSE
  */
-public class ValidatorException extends Exception {
-
-    private final String logMessage;
+public class ValidatorException extends ExceptionWithLogMessage {
 
     public ValidatorException(String message, String logMessage) {
-        super(message);
-        this.logMessage = logMessage;
-    }
-
-    public String getLogMessage() {
-        return logMessage;
+        super(message, logMessage);
     }
 }

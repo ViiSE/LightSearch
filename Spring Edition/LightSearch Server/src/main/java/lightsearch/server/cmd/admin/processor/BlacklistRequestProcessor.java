@@ -56,7 +56,7 @@ public class BlacklistRequestProcessor implements AdminProcessor<AdminCommandRes
             AdminCommandResultCreator commandResultCreator =
                     admCmdResCrProducer.getCommandResultCreatorAdminDefaultInstance(
                             ResultType.TRUE.stringValue(), null, blacklistService.blacklist(), null);
-            logger.log(INFO, "Admin request blacklist");
+            logger.log(BlacklistRequestProcessor.class, INFO, "Admin request blacklist");
 
             return commandResultCreator.createAdminCommandResult();
         } catch (CommandResultException ex) {

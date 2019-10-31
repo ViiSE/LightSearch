@@ -66,24 +66,24 @@ public class CancelSoftCheckProcessor implements ClientProcessor<ClientCommandRe
         this.databaseRecordIdentifier = databaseRecordIdentifier;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public ClientCommandResult apply(ClientCommand command) {
         try {
             commandCheckerProducer.getCommandCheckerClientCancelSoftCheckInstance(command, serverService, checker).check();
+            serverService.clientsService().refreshTimeout(command.IMEI());
+
             DatabaseCommandMessage dbCmdMessage =
                     dbCmdMsgProducer.getDatabaseCommandMessageCancelSoftCheckDefaultWindowsJSONInstance(command);
-
             DatabaseStatementExecutor dbStatementExecutor =
                     dbStateExecProducer.getDatabaseStatementExecutorDefaultInstance(
                             databaseRecordIdentifier.next(), currentDateTime.dateTimeInStandardFormat(), dbCmdMessage);
-
             DatabaseStatementResult dbStatRes = dbStatementExecutor.exec();
 
             String result = dbStatRes.result();
-
             ClientCommandResultCreator commandResultCreator =
                     clientCommandResultCreatorProducer.getCommandResultCreatorClientJSONInstance(result);
-            logger.log(INFO, "Client " + command.IMEI() + " cancel soft check:" +
+            logger.log(CancelSoftCheckProcessor.class, INFO, "Client " + command.IMEI() + " cancel soft check: " +
                     "user identifier - " + command.userIdentifier() + ", card code - " + command.cardCode());
 
             return commandResultCreator.createClientCommandResult();

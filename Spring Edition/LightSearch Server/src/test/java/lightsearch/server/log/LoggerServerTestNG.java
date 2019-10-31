@@ -32,6 +32,6 @@ public class LoggerServerTestNG extends AbstractTestNGSpringContextTests {
 
     @Test
     public void log() {
-        loggerServer.log(INFO, "|+-+-+-+-+-+-+-+-+|LOG|+-+-+-+-+-+-+-+-+|");
+        loggerServer.log(LoggerServerTestNG.class, INFO, "|+-+-+-+-+-+-+-+-+|LOG|+-+-+-+-+-+-+-+-+|");
     }
 }

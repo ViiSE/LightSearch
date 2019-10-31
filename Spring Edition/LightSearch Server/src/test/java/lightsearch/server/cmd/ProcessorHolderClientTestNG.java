@@ -17,40 +17,40 @@
 package lightsearch.server.cmd;
 
 import lightsearch.server.LightSearchServer;
-import lightsearch.server.data.pojo.ClientCommandResult;
-import lightsearch.server.exception.ProcessorNotFoundException;
-import lightsearch.server.producer.cmd.ProcessorServiceProducer;
+import lightsearch.server.cmd.client.ClientCommandEnum;
+import lightsearch.server.producer.cmd.ProcessorHolderProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static test.message.TestMessage.*;
+import static org.testng.Assert.assertNotNull;
+import static test.message.TestMessage.testBegin;
+import static test.message.TestMessage.testEnd;
 
 @SpringBootTest(classes = LightSearchServer.class)
-public class ProcessorServiceTestNG extends AbstractTestNGSpringContextTests {
+public class ProcessorHolderClientTestNG extends AbstractTestNGSpringContextTests {
 
     @Autowired
-    private ProcessorServiceProducer processorServiceProducer;
+    private ProcessorHolderProducer processorHolderProducer;
 
-    private ProcessorService<ClientCommandResult> processorService;
+    private ProcessorHolder processorHolder;
 
     @BeforeClass
     public void setUpClass() {
-        processorService = processorServiceProducer.getClientProcessorServiceDefaultInstance("connect");
+        processorHolder = processorHolderProducer.getProcessorHolderClientInstance();
     }
 
     @Test
-    public void getProcessorClient() {
-        testBegin("ProcessorService", "getProcessor()");
+    public void get() {
+        testBegin("ProcessorHolderClient", "get()");
 
-        try {
-            System.out.println("Processor: " + processorService.getProcessor());
-        } catch (ProcessorNotFoundException ex) {
-            catchMessage(ex);
-        }
+        Processor proc = processorHolder.get(ClientCommandEnum.LOGIN.stringValue());
+        assertNotNull(proc, "Processor is null!");
 
-        testEnd("ProcessorService", "getProcessor()");
+        System.out.println("Processor: " + proc);
+
+        testEnd("ProcessorHolderClient", "get()");
     }
 }

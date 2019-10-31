@@ -104,6 +104,6 @@ public class CommandCheckerProducerDefaultImpl implements CommandCheckerProducer
 
     @Override
     public CommandChecker getCommandCheckerAdminRestartTimeInstance(AdminCommand command, LightSearchChecker checker) {
-        return (CommandChecker) ctx.getBean("commandCheckerAdminRestartTime", command, checker);
+        return (CommandChecker) ctx.getBean("commandCheckerAdminRestartTime", checker, command);
     }
 }

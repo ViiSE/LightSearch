@@ -24,11 +24,12 @@ import lightsearch.server.data.LightSearchServerService;
 import lightsearch.server.identifier.DatabaseRecordIdentifier;
 import lightsearch.server.identifier.DatabaseRecordIdentifierReader;
 import lightsearch.server.initialization.*;
-import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.log.LoggerServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+
+import static lightsearch.server.log.LogMessageTypeEnum.INFO;
 
 @SpringBootApplication
 public class LightSearchServer {
@@ -62,7 +63,7 @@ public class LightSearchServer {
         DatabaseRecordIdentifier identifier = (DatabaseRecordIdentifier)
                 ctx.getBean("databaseRecordIdentifierDefault", identifierReader.read());
 
-        logger.log(LogMessageTypeEnum.INFO, "DatabaseRecordIdentifier read. Value: " +
+        logger.log(LightSearchServer.class, INFO, "Database record identifier read. Value: " +
                 identifier.databaseRecordIdentifier());
 
         ServerSettingsCreator settingsCreator = (ServerSettingsCreator) ctx.getBean(

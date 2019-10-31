@@ -27,6 +27,8 @@ import org.springframework.stereotype.Component;
 import java.util.Iterator;
 import java.util.Map;
 
+import static lightsearch.server.log.LogMessageTypeEnum.INFO;
+
 @Component("timeoutManagerReducer")
 @Scope("prototype")
 public class TimeoutManagerReducerImpl implements TimeoutManager {
@@ -55,7 +57,7 @@ public class TimeoutManagerReducerImpl implements TimeoutManager {
             Client client = (Client) entry.getValue();
             String IMEI = (String) entry.getKey();
             if(client.getTimeoutLimitSeconds() <= 0) {
-                logger.log(LogMessageTypeEnum.INFO, "TimeoutManager: Client " + IMEI + " timeout.");
+                logger.log(TimeoutManagerReducerImpl.class, INFO, "Client " + IMEI + " timeout.");
                 iterator.remove();
             }
         }

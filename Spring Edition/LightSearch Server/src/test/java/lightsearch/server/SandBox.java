@@ -56,19 +56,6 @@ public class SandBox extends AbstractTestNGSpringContextTests {
         AdminCommandDTO ar = mapper.readValue("{\"port\":\"8080\"}", AdminCommandDTO.class);
         System.out.println("Deserialization ADMIN: " + ar.getPort());
 
-        AdminCommandResult admCmdRes = new AdminCommandResult("admin", "True", "SPAM EGG!",
-                new ArrayList<>(){{
-                    add("111111111111111");
-                    add("222222222222222");
-                    add("333333333333333");
-                }},
-                new ArrayList<>(){{
-                    add(new Client("444444444444444", "client 1"));
-                    add(new Client("555555555555555", "client 2"));
-                    add(new Client("666666666666666", "client 3"));
-                }});
-        System.out.println("AdminCommand: SERIALIZATION: " + mapper.writeValueAsString(admCmdRes));
-
         LocalTime time = LocalTime.now();
         System.out.println("Time now: " + time);
 

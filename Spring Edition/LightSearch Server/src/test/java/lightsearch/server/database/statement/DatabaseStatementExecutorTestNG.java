@@ -17,6 +17,7 @@
 package lightsearch.server.database.statement;
 
 import lightsearch.server.LightSearchServer;
+import lightsearch.server.cmd.client.ClientCommandEnum;
 import lightsearch.server.data.pojo.ClientCommandDTO;
 import lightsearch.server.database.cmd.message.DatabaseCommandMessage;
 import lightsearch.server.database.statement.result.DatabaseStatementResult;
@@ -46,7 +47,7 @@ public class DatabaseStatementExecutorTestNG extends AbstractTestNGSpringContext
     @BeforeClass
     public void setUpClass() {
         ClientCommandDTO clientCommandDTO = new ClientCommandDTO();
-        clientCommandDTO.setCommand("connect");
+        clientCommandDTO.setCommand(ClientCommandEnum.LOGIN.stringValue());
         clientCommandDTO.setUsername("test");
         clientCommandDTO.setPassword("321");
         clientCommandDTO.setIMEI("111111111111111");

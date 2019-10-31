@@ -60,11 +60,10 @@ public class DelBlacklistProcessor implements AdminProcessor<AdminCommandResult>
     @Autowired private AdminCommandResultCreatorProducer admCmdResCrProducer;
 
     @SuppressWarnings("unchecked")
-    public DelBlacklistProcessor(
-            LightSearchServerService serverService, LightSearchChecker checker, CurrentServerDirectory blacklistDirectory) {
+    public DelBlacklistProcessor(LightSearchServerService serverService, LightSearchChecker checker) {
         this.checker = checker;
         this.blacklistService = serverService.blacklistService();
-        this.blacklistDirectory = blacklistDirectory.currentDirectory() + "blacklist";
+        this.blacklistDirectory = serverService.currentDirectory() + "blacklist";
     }
 
     @Override
@@ -82,14 +81,14 @@ public class DelBlacklistProcessor implements AdminProcessor<AdminCommandResult>
             } catch (IOException ex) {
                 blacklistService.blacklist().add(command.IMEI());
                 return errAdmCmdServiceProducer.getErrorAdminCommandServiceDefaultInstance()
-                        .createErrorResult("Невозможно добавить клиента в черный список. Исключение: " + ex.getMessage(),
-                                "AddBlacklistProcessor: Cannot add client to the blacklist. Exception: " + ex.getMessage());
+                        .createErrorResult("Невозможно удалить клиента из черного списка. Исключение: " + ex.getMessage(),
+                                "Cannot removed client from the blacklist. Exception: " + ex.getMessage());
             }
 
             AdminCommandResultCreator commandResultCreator =
                     admCmdResCrProducer.getCommandResultCreatorAdminDefaultInstance(
                             ResultType.TRUE.stringValue(), "Данный клиент был удален из черного списка.", null, null);
-            logger.log(INFO, "Client has been removed to the blacklist: IMEI - " + command.IMEI());
+            logger.log(DelBlacklistProcessor.class, INFO, "Client has been removed from the blacklist: IMEI - " + command.IMEI());
 
             return commandResultCreator.createAdminCommandResult();
         } catch (CheckerException ex) {

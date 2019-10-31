@@ -20,9 +20,9 @@ package lightsearch.server.cmd.client;
  * @author ViiSE
  */
 public enum ClientCommandEnum {
-    CONNECT {
+    LOGIN {
         @Override
-        public String stringValue() {return "connect";}
+        public String stringValue() {return "login";}
     },
     OPEN_SOFT_CHECK {
         @Override

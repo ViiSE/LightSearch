@@ -25,13 +25,11 @@ import org.springframework.stereotype.Service;
 @Service("currentServerDirectoryProducerDefault")
 public class CurrentServerDirectoryProducerDefaultImpl implements CurrentServerDirectoryProducer {
 
-    private final String CURRENT_SERVER_DIRECTORY = "currentServerDirectoryFromFile";
-
     @Autowired
     private ApplicationContext ctx;
 
     @Override
     public CurrentServerDirectory getCurrentServerDirectoryFromFileInstance(OsDetector osDetector) {
-        return (CurrentServerDirectory) ctx.getBean(CURRENT_SERVER_DIRECTORY, osDetector);
+        return (CurrentServerDirectory) ctx.getBean("currentServerDirectoryFromFile", osDetector);
     }
 }

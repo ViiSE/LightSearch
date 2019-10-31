@@ -20,5 +20,5 @@ import lightsearch.server.cmd.admin.AdminCommand;
 import lightsearch.server.data.pojo.AdminCommandDTO;
 
 public interface AdminCommandProducer {
-    AdminCommand getClientCommandDefaultInstance(AdminCommandDTO adminCommandDTO);
+    AdminCommand getAdminCommandDefaultInstance(AdminCommandDTO adminCommandDTO);
 }

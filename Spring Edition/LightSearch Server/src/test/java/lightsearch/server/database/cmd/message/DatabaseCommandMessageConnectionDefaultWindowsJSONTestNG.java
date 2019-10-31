@@ -18,6 +18,7 @@ package lightsearch.server.database.cmd.message;
 
 import lightsearch.server.LightSearchServer;
 import lightsearch.server.cmd.client.ClientCommand;
+import lightsearch.server.cmd.client.ClientCommandEnum;
 import lightsearch.server.data.pojo.ClientCommandDTO;
 import lightsearch.server.producer.cmd.client.ClientCommandProducer;
 import lightsearch.server.producer.database.DatabaseCommandMessageProducer;
@@ -43,7 +44,7 @@ public class DatabaseCommandMessageConnectionDefaultWindowsJSONTestNG extends Ab
     @BeforeClass
     public void setUpClass() {
         ClientCommandDTO cmdDTO = new ClientCommandDTO();
-        cmdDTO.setCommand("connect");
+        cmdDTO.setCommand(ClientCommandEnum.LOGIN.stringValue());
         cmdDTO.setIMEI("111111111111111");
         cmdDTO.setUsername("test");
         cmdDTO.setUserIdentifier("777");

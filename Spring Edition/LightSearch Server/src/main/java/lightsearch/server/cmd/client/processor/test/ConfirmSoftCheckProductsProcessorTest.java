@@ -84,7 +84,7 @@ public class ConfirmSoftCheckProductsProcessorTest implements ClientProcessor<Cl
 
             ClientCommandResultCreator commandResultCreator =
                     clientCommandResultCreatorProducer.getCommandResultCreatorClientJSONInstance(result);
-            logger.log(INFO, "Client " + command.IMEI() + " confirm soft check products:" +
+            logger.log(ConfirmSoftCheckProductsProcessorTest.class, INFO, "Client " + command.IMEI() + " confirm soft check products: " +
                     "user identifier - " + command.userIdentifier() + ", card code - " + command.cardCode());
 
             return commandResultCreator.createClientCommandResult();

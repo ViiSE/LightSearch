@@ -58,7 +58,7 @@ public class ProcessorHolderClientImpl implements ProcessorHolder {
         DatabaseRecordIdentifier databaseRecordIdentifier =
                 databaseRecordIdentifierProducer.getDatabaseRecordIdentifierDefaultInstance();
 
-        holder.put(CONNECT.stringValue(), producer.getLoginProcessorInstance(
+        holder.put(LOGIN.stringValue(), producer.getLoginProcessorInstance(
                 serverService, checker, currentDateTime, databaseRecordIdentifier));
         holder.put(SEARCH.stringValue(),  producer.getSearchProcessorInstance(
                 serverService, checker, currentDateTime, databaseRecordIdentifier));

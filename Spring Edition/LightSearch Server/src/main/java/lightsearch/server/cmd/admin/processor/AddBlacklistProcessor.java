@@ -26,7 +26,6 @@ import lightsearch.server.data.pojo.AdminCommandResult;
 import lightsearch.server.data.pojo.Client;
 import lightsearch.server.exception.CheckerException;
 import lightsearch.server.exception.CommandResultException;
-import lightsearch.server.initialization.CurrentServerDirectory;
 import lightsearch.server.log.LoggerServer;
 import lightsearch.server.producer.checker.CommandCheckerProducer;
 import lightsearch.server.producer.cmd.admin.ErrorAdminCommandServiceProducer;
@@ -61,12 +60,11 @@ public class AddBlacklistProcessor implements AdminProcessor<AdminCommandResult>
     @Autowired private AdminCommandResultCreatorProducer admCmdResCrProducer;
 
     @SuppressWarnings("unchecked")
-    public AddBlacklistProcessor(
-            LightSearchServerService serverService, LightSearchChecker checker, CurrentServerDirectory currentDirectory) {
+    public AddBlacklistProcessor(LightSearchServerService serverService, LightSearchChecker checker) {
         this.checker = checker;
         this.clientsService = serverService.clientsService();
         this.blacklistService = serverService.blacklistService();
-        this.blacklistDirectory = currentDirectory.currentDirectory() + "blacklist";
+        this.blacklistDirectory = serverService.currentDirectory() + "blacklist";
     }
 
     @Override
@@ -82,14 +80,14 @@ public class AddBlacklistProcessor implements AdminProcessor<AdminCommandResult>
                 blacklistService.blacklist().remove(command.IMEI());
                 return errAdmCmdServiceProducer.getErrorAdminCommandServiceDefaultInstance()
                         .createErrorResult("Невозможно добавить клиента в черный список. Сообщение: " + ex.getMessage(),
-                                "AddBlacklistProcessor: Cannot add client to the blacklist. Exception: " + ex.getMessage());
+                                "Cannot add client to the blacklist. Exception: " + ex.getMessage());
             }
 
             clientsService.clients().remove(command.IMEI());
             AdminCommandResultCreator commandResultCreator =
                     admCmdResCrProducer.getCommandResultCreatorAdminDefaultInstance(
                             ResultType.TRUE.stringValue(), "Данный клиент был добавлен в черный список.", null, null);
-            logger.log(INFO, "Client has been added to the blacklist: IMEI - " + command.IMEI());
+            logger.log(AddBlacklistProcessor.class, INFO, "Client has been added to the blacklist: IMEI - " + command.IMEI());
 
             return commandResultCreator.createAdminCommandResult();
         } catch (CheckerException ex) {

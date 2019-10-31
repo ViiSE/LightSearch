@@ -44,7 +44,7 @@ import org.springframework.stereotype.Component;
 
 import static lightsearch.server.log.LogMessageTypeEnum.INFO;
 
-@Component("authenticationProcessor")
+@Component("loginProcessor")
 @Scope("prototype")
 public class LoginProcessor implements ClientProcessor<ClientCommandResult> {
 
@@ -79,18 +79,16 @@ public class LoginProcessor implements ClientProcessor<ClientCommandResult> {
 
             DatabaseCommandMessage dbCmdMessage =
                     dbCmdMsgProducer.getDatabaseCommandMessageConnectionDefaultWindowsJSONInstance(command);
-
             DatabaseStatementExecutor dbStatementExecutor =
                     dbStateExecProducer.getDatabaseStatementExecutorDefaultInstance(
                             databaseRecordIdentifier.next(), currentDateTime.dateTimeInStandardFormat(), dbCmdMessage);
-
             DatabaseStatementResult dbStatRes = dbStatementExecutor.exec();
 
             ClientCommandResultCreator commandResultCreator =
                     clientCommandResultCreatorProducer.getCommandResultCreatorClientJSONInstance(dbStatRes.result());
-            logger.log(INFO, "Client connected:\n" + "IMEI - " + command.IMEI() +
+            logger.log(LoginProcessor.class, INFO, "Client connected: " + "IMEI - " + command.IMEI() +
                     ", ip - " + command.ip() + ", os - " + command.os() + ", model - " + command.model() +
-                    ", username - " + command.username() + ", user ident - " + command.userIdentifier());
+                    ", username - " + command.username() + ", ident - " + command.userIdentifier());
             clientsService.clients().put(command.IMEI(), new Client(command.IMEI(), command.username()));
             return commandResultCreator.createClientCommandResult();
         } catch (CommandResultException | DatabaseStatementExecutorException ex) {

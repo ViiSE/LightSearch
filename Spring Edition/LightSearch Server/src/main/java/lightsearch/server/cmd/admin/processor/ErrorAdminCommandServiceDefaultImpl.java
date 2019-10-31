@@ -25,7 +25,7 @@ import org.springframework.stereotype.Service;
 
 import static lightsearch.server.log.LogMessageTypeEnum.ERROR;
 
-@Service("errorClientCommandServiceDefault")
+@Service("errorAdminCommandServiceDefault")
 class ErrorAdminCommandServiceDefaultImpl implements ErrorAdminCommandService {
 
     @Autowired private LoggerServer logger;
@@ -34,7 +34,7 @@ class ErrorAdminCommandServiceDefaultImpl implements ErrorAdminCommandService {
 
     @Override
     public AdminCommandResult createErrorResult(String message, String logMessage) {
-        logger.log(ERROR, logMessage);
+        logger.log(ErrorAdminCommandServiceDefaultImpl.class, ERROR, logMessage);
         return errorResultAdminCommandCreatorProducer
                 .getErrorResultAdminCommandCreatorDefaultInstance(message, adminCommandResultCreatorProducer)
                 .createErrorResult();

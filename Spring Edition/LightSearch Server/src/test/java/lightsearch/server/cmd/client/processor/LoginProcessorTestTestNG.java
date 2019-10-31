@@ -19,6 +19,7 @@ package lightsearch.server.cmd.client.processor;
 import lightsearch.server.LightSearchServer;
 import lightsearch.server.cmd.ProcessorHolder;
 import lightsearch.server.cmd.client.ClientCommand;
+import lightsearch.server.cmd.client.ClientCommandEnum;
 import lightsearch.server.data.pojo.ClientCommandDTO;
 import lightsearch.server.data.pojo.ClientCommandResult;
 import lightsearch.server.producer.cmd.ProcessorHolderProducer;
@@ -47,7 +48,7 @@ public class LoginProcessorTestTestNG extends AbstractTestNGSpringContextTests {
     public void setUpClass() {
         processorHolder = holderProducer.getProcessorHolderClientTestInstance();
         ClientCommandDTO clientCommandDTO = new ClientCommandDTO();
-        clientCommandDTO.setCommand("connect");
+        clientCommandDTO.setCommand(ClientCommandEnum.LOGIN.stringValue());
         clientCommandDTO.setUsername("test");
         clientCommandDTO.setPassword("321");
         clientCommandDTO.setIMEI("111111111111111");

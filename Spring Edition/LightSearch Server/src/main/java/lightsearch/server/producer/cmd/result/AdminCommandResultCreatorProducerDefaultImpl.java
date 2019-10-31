@@ -31,8 +31,9 @@ public class AdminCommandResultCreatorProducerDefaultImpl implements AdminComman
     private ApplicationContext ctx;
 
     @Override
-    public AdminCommandResultCreator getCommandResultCreatorAdminDefaultInstance(String isDone, String message, List<String> blacklist, List<Client> clients) {
-        return null;
+    public AdminCommandResultCreator getCommandResultCreatorAdminDefaultInstance(
+            String isDone, String message, List<String> blacklist, List<Client> clients) {
+        return (AdminCommandResultCreator) ctx.getBean("adminCommandResultCreatorDefault", isDone, message, blacklist, clients);
     }
 
     @Override

@@ -19,8 +19,8 @@ package lightsearch.server.producer.validator;
 import lightsearch.server.validator.Validator;
 
 public interface ValidatorProducer {
-    Validator<String> getValidatorIpInstance();
-    Validator<Integer> getValidatorPortInstance();
-    Validator<Integer> getValidatorClientTimeoutInstance();
-    Validator<String> getValidatorRestartTimeInstance();
+    Validator<String> getIpValidatorInstance();
+    Validator<Integer> getPortValidatorInstance();
+    Validator<Integer> getClientTimeoutValidatorInstance();
+    Validator<String> getRestartTimeValidatorInstance();
 }

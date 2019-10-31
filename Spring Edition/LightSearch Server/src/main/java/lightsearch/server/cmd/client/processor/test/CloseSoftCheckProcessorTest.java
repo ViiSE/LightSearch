@@ -84,9 +84,9 @@ public class CloseSoftCheckProcessorTest implements ClientProcessor<ClientComman
 
             ClientCommandResultCreator commandResultCreator =
                     clientCommandResultCreatorProducer.getCommandResultCreatorClientJSONInstance(result);
-            logger.log(INFO, "Client " + command.IMEI() + " close soft check:" +
+            logger.log(CancelSoftCheckProcessorTest.class, INFO, "Client " + command.IMEI() + " close soft check: " +
                     "user identifier - " + command.userIdentifier() + ", card code - " + command.cardCode() +
-                    ",delivery type - " + command.delivery());
+                    ", delivery type - " + command.delivery());
 
             return commandResultCreator.createClientCommandResult();
         } catch (CommandResultException | DatabaseStatementExecutorException ex) {

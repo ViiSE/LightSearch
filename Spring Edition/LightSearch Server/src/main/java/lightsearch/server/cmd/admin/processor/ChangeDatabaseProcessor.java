@@ -19,25 +19,27 @@ import lightsearch.server.checker.LightSearchChecker;
 import lightsearch.server.cmd.admin.AdminCommand;
 import lightsearch.server.cmd.result.AdminCommandResultCreator;
 import lightsearch.server.cmd.result.ResultType;
-import lightsearch.server.data.LightSearchServerService;
 import lightsearch.server.data.pojo.AdminCommandResult;
+import lightsearch.server.data.pojo.Property;
 import lightsearch.server.exception.CheckerException;
 import lightsearch.server.exception.CommandResultException;
-import lightsearch.server.initialization.CurrentServerDirectory;
+import lightsearch.server.exception.PropertiesException;
+import lightsearch.server.exception.WriterException;
 import lightsearch.server.log.LoggerServer;
 import lightsearch.server.producer.checker.CommandCheckerProducer;
 import lightsearch.server.producer.cmd.admin.ErrorAdminCommandServiceProducer;
 import lightsearch.server.producer.cmd.result.AdminCommandResultCreatorProducer;
+import lightsearch.server.producer.properties.PropertiesLocalChangerProducer;
+import lightsearch.server.producer.properties.PropertiesReaderProducer;
+import lightsearch.server.producer.properties.PropertiesWriterProducer;
+import lightsearch.server.properties.PropertiesReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 import static lightsearch.server.log.LogMessageTypeEnum.INFO;
 
@@ -50,60 +52,45 @@ import static lightsearch.server.log.LogMessageTypeEnum.INFO;
 public class ChangeDatabaseProcessor implements AdminProcessor<AdminCommandResult> {
 
     private final LightSearchChecker checker;
-    private final String applicationPropertiesDirectory;
+    private final String propsDir;
 
     @Autowired private LoggerServer logger;
     @Autowired private ErrorAdminCommandServiceProducer errAdmCmdServiceProducer;
     @Autowired private CommandCheckerProducer cmdCheckerProducer;
     @Autowired private AdminCommandResultCreatorProducer admCmdResCrProducer;
+    @Autowired private PropertiesLocalChangerProducer propsLocalChProducer;
+    @Autowired private PropertiesReaderProducer propsReaderProducer;
+    @Autowired private PropertiesWriterProducer propsWriterProducer;
 
-    public ChangeDatabaseProcessor(LightSearchChecker checker, CurrentServerDirectory currentDirectory) {
+    public ChangeDatabaseProcessor(LightSearchChecker checker, String currentDirectory) {
         this.checker = checker;
-        this.applicationPropertiesDirectory = currentDirectory.currentDirectory() + "config/application.properties";
+        this.propsDir = currentDirectory + "config/application.properties";
     }
 
     @Override
     synchronized public AdminCommandResult apply(AdminCommand command) {
         try {
             cmdCheckerProducer.getCommandCheckerAdminChangeDatabaseInstance(command, checker).check();
-            try (FileOutputStream fout = new FileOutputStream(applicationPropertiesDirectory, true);
-                 BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fout))) {
-                Path propsPath = Paths.get(applicationPropertiesDirectory);
 
-                List<String> properties = Files.readAllLines(propsPath).stream().map(property -> {
-                    String springDbUrlKey      = "spring.datasource.url";
-                    String springDbUsernameKey = "spring.datasource.username";
-                    String springDbPasswordKey = "spring.datasource.password";
-                    if (property.contains(springDbUrlKey)) {
-                        String urlDbType = "jdbc:firebirdsql://";
-                        String urlProperties = "?encoding=win1251&amp;useUnicode=true&amp;characterEncoding=win1251";
-                        return String.format("%s=%s%s:%s%s%s", springDbUrlKey, urlDbType, command.ip(), command.port(),
-                                command.dbName(), urlProperties);
-                    } else if(property.contains(springDbUsernameKey))
-                        return String.format("%s=%s", springDbUsernameKey, command.username());
-                    else if(property.contains(springDbPasswordKey))
-                        return String.format("%s=%s", springDbPasswordKey, command.password());
-                    else
-                        return property;
-                }).collect(Collectors.toList());
-
-                for(String property: properties) {
-                    bw.write(property);
-                    bw.newLine();
-                }
-            } catch (IOException ex) {
-                return errAdmCmdServiceProducer.getErrorAdminCommandServiceDefaultInstance()
-                        .createErrorResult("Невозможно записать новые параметры в базу данных. Сообщение: " + ex.getMessage(),
-                                "ChangeDatabaseProcessor: Cannot write datasource properties. Exception: " + ex.getMessage());
-            }
-
+            // FIXME: 31.10.2019 NEED UNIVERSAL METHOD FOR ALL CLASS, BUT NEED ALSO LS_REQUEST REPOSITORY MAKE UNIVERSAL (FOR ALL DATABASES)
+            // FIXME: 31.10.2019 NEED HIBERNATE?
+            Map<String, Property> propsMap = new HashMap<>() {{
+                put("spring.datasource.url", new Property("%s=%s%s:%s%s%s",
+                        "jdbc:firebirdsql://", command.ip(), command.port(), command.dbName(),
+                        "?encoding=win1251&amp;useUnicode=true&amp;characterEncoding=win1251"));
+                put("spring.datasource.username", new Property("%s=%s", command.username()));
+                put("spring.datasource.password", new Property("%s=%s", command.password()));
+            }};
+            PropertiesReader<List<String>> propsReader = propsReaderProducer.getPropertiesListStringReaderInstance(propsDir);
+            List<String> chPropsList = propsLocalChProducer.getPropertiesLocalChangerDefaultInstance(propsMap, propsReader)
+                    .getChangedProperties();
+            propsWriterProducer.getPropertiesFileWriterInstance(propsDir, chPropsList, false).write();
             AdminCommandResultCreator commandResultCreator =
-                    admCmdResCrProducer.getCommandResultCreatorAdminDefaultInstance(
-                            ResultType.TRUE.stringValue(), "Параметры базы данных были изменены. Для вступления в силу изменений перезагрузите сервер.", null, null);
-            logger.log(INFO, "Datasource has been changed");
-
+                    admCmdResCrProducer.getCommandResultCreatorAdminDefaultInstance(ResultType.TRUE.stringValue(),
+                            "Параметры базы данных были изменены. Для вступления в силу изменений перезагрузите сервер.", null, null);
+            logger.log(ChangeDatabaseProcessor.class, INFO, "Datasource has been changed");
             return commandResultCreator.createAdminCommandResult();
-        } catch (CheckerException ex) {
+        } catch (PropertiesException | WriterException | CheckerException ex) {
             return errAdmCmdServiceProducer.getErrorAdminCommandServiceDefaultInstance()
                     .createErrorResult(ex.getMessage(), ex.getLogMessage());
         } catch (CommandResultException ex) {

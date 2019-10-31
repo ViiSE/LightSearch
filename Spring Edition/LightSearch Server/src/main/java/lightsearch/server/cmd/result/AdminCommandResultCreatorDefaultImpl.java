@@ -24,16 +24,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service("adminCommandResultCreatorJSON")
+@Service("adminCommandResultCreatorDefault")
 @Scope("prototype")
-public class AdminCommandResultCreatorJSONImpl implements AdminCommandResultCreator {
+public class AdminCommandResultCreatorDefaultImpl implements AdminCommandResultCreator {
 
     private final String isDone;
     private final String message;
     private final List<String> blacklist;
     private final List<Client> clients;
 
-    public AdminCommandResultCreatorJSONImpl(String isDone, String message, List<String> blacklist, List<Client> clients) {
+    public AdminCommandResultCreatorDefaultImpl(String isDone, String message, List<String> blacklist, List<Client> clients) {
         this.isDone = isDone;
         this.message = message;
         this.blacklist = blacklist;

@@ -52,12 +52,8 @@ public class LoginController {
     @RequestMapping(value = "/clients", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ClientCommandResult loginClient(@RequestBody ClientCommandDTO clientCommandDTO) {
         try {
-//            String command = "login"; //clientCommandDTO.getCommand();
-//            if(!command.equals(ClientCommandEnum.CONNECT.stringValue()))
-//                return sendError(clientCommandDTO.getIMEI(), "Wrong command.", "LoginController: Wrong command.");
-
             ProcessorService<ClientCommandResult> processorService =
-                    processorServiceProducer.getClientProcessorServiceDefaultInstance("login");
+                    processorServiceProducer.getClientProcessorServiceDefaultInstance(ClientCommandEnum.LOGIN.stringValue());
 
             ClientCommand clientCommand = clientCommandProducer.getClientCommandDefaultInstance(clientCommandDTO);
             return processorService.getProcessor().apply(clientCommand);
@@ -71,25 +67,4 @@ public class LoginController {
         return errorClientCommandServiceProducer.getErrorClientCommandServiceDefaultInstance()
                 .createErrorResult(IMEI, message, logMessage);
     }
-
-    // FIXME: 25.10.2019 API?
-    //----------------------------------------
-    // login/clients
-    // commands/type/client/search
-    // commands/type/client/open_soft_check
-    // commands/type/client/confirm_prod_sf
-    // commands/type/client/cancel_soft_check
-    // commands/type/client/close_soft_check
-
-    // login/admins
-    // commands/type/admin/add_bl
-    // commands/type/admin/ch_db
-    // commands/type/admin/kick
-    // commands/type/admin/cl_list
-    // commands/type/admin/cr_admin
-    // commands/type/admin/del_bl
-    // commands/type/admin/restart
-    // commands/type/admin/tout_cl
-    // commands/type/admin/tout_server
-    //----------------------------------------
 }

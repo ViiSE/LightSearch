@@ -29,25 +29,25 @@ public class ValidatorProducerDefaultImpl implements ValidatorProducer {
 
     @SuppressWarnings("unchecked")
     @Override
-    public Validator<String> getValidatorIpInstance() {
-        return ctx.getBean("validatorIp", Validator.class);
+    public Validator<String> getIpValidatorInstance() {
+        return ctx.getBean("ipValidator", Validator.class);
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public Validator<Integer> getValidatorPortInstance() {
-        return ctx.getBean("validatorPort", Validator.class);
+    public Validator<Integer> getPortValidatorInstance() {
+        return ctx.getBean("portValidator", Validator.class);
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public Validator<Integer> getValidatorClientTimeoutInstance() {
-        return ctx.getBean("validatorClientTimeout", Validator.class);
+    public Validator<Integer> getClientTimeoutValidatorInstance() {
+        return ctx.getBean("clientTimeoutValidator", Validator.class);
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public Validator<String> getValidatorRestartTimeInstance() {
-        return ctx.getBean("validatorRestartTime", Validator.class);
+    public Validator<String> getRestartTimeValidatorInstance() {
+        return ctx.getBean("restartTimeValidator", Validator.class);
     }
 }

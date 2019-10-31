@@ -20,26 +20,26 @@ import lightsearch.server.cmd.admin.AdminCommand;
 import lightsearch.server.cmd.result.AdminCommandResultCreator;
 import lightsearch.server.cmd.result.ResultType;
 import lightsearch.server.data.pojo.AdminCommandResult;
+import lightsearch.server.data.pojo.Property;
 import lightsearch.server.exception.CheckerException;
 import lightsearch.server.exception.CommandResultException;
-import lightsearch.server.initialization.CurrentServerDirectory;
+import lightsearch.server.exception.PropertiesException;
+import lightsearch.server.exception.WriterException;
 import lightsearch.server.log.LoggerServer;
 import lightsearch.server.producer.checker.CommandCheckerProducer;
 import lightsearch.server.producer.cmd.admin.ErrorAdminCommandServiceProducer;
 import lightsearch.server.producer.cmd.result.AdminCommandResultCreatorProducer;
+import lightsearch.server.producer.properties.PropertiesLocalChangerProducer;
+import lightsearch.server.producer.properties.PropertiesReaderProducer;
+import lightsearch.server.producer.properties.PropertiesWriterProducer;
+import lightsearch.server.properties.PropertiesReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 import static lightsearch.server.log.LogMessageTypeEnum.INFO;
 
@@ -52,52 +52,40 @@ import static lightsearch.server.log.LogMessageTypeEnum.INFO;
 public class RestartTimeProcessor implements AdminProcessor<AdminCommandResult> {
 
     private final LightSearchChecker checker;
-    private final String applicationPropertiesDirectory;
+    private final String propsDir;
 
     @Autowired private LoggerServer logger;
     @Autowired private ErrorAdminCommandServiceProducer errAdmCmdServiceProducer;
     @Autowired private CommandCheckerProducer cmdCheckerProducer;
     @Autowired private AdminCommandResultCreatorProducer admCmdResCrProducer;
+    @Autowired private PropertiesLocalChangerProducer propsLocalChProducer;
+    @Autowired private PropertiesReaderProducer propsReaderProducer;
+    @Autowired private PropertiesWriterProducer propsWriterProducer;
 
-    public RestartTimeProcessor(LightSearchChecker checker, CurrentServerDirectory currentDirectory) {
+    public RestartTimeProcessor(LightSearchChecker checker, String currentDirectory) {
         this.checker = checker;
-        this.applicationPropertiesDirectory = currentDirectory.currentDirectory() + "config/application.properties";
+        this.propsDir = currentDirectory + "config/application.properties";
     }
 
     @Override
     synchronized public AdminCommandResult apply(AdminCommand command) {
         try {
             cmdCheckerProducer.getCommandCheckerAdminRestartTimeInstance(command, checker).check();
-            try (FileOutputStream fout = new FileOutputStream(applicationPropertiesDirectory, true);
-                 BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fout))) {
-                Path propsPath = Paths.get(applicationPropertiesDirectory);
-
-                List<String> properties = Files.readAllLines(propsPath).stream().map(property -> {
-                    String clToutKey = "lightsearch.server.restart-time";
-                    if (property.contains(clToutKey))
-                        return String.format("%s=%s", clToutKey, command.restartTime());
-                    else
-                        return property;
-                }).collect(Collectors.toList());
-
-                for(String property: properties) {
-                    bw.write(property);
-                    bw.newLine();
-                }
-            } catch (IOException ex) {
-                return errAdmCmdServiceProducer.getErrorAdminCommandServiceDefaultInstance()
-                        .createErrorResult("Невозможно записать значение времени перезагрузки сервера. Сообщение: " + ex.getMessage(),
-                                "ClientTimeoutProcessor: Cannot write server time reboot property. Exception: " + ex.getMessage());
-            }
+            Map<String, Property> propsMap = new HashMap<>() {{
+                put("lightsearch.server.restart.restart-time", new Property("%s=%s", command.restartTime()));
+            }};
+            PropertiesReader<List<String>> propsReader = propsReaderProducer.getPropertiesListStringReaderInstance(propsDir);
+            List<String> chPropsList = propsLocalChProducer.getPropertiesLocalChangerDefaultInstance(propsMap, propsReader)
+                    .getChangedProperties();
+            propsWriterProducer.getPropertiesFileWriterInstance(propsDir, chPropsList, false).write();
 
             AdminCommandResultCreator commandResultCreator =
                     admCmdResCrProducer.getCommandResultCreatorAdminDefaultInstance(
                             ResultType.TRUE.stringValue(), "Значение времени перезагрузки сервера было изменено. " +
                                     "Для вступления в силу изменений перезагрузите сервер.", null, null);
-            logger.log(INFO, "Server time reboot value has been changed");
-
+            logger.log(RestartTimeProcessor.class, INFO, "Server time reboot value has been changed");
             return commandResultCreator.createAdminCommandResult();
-        } catch (CheckerException ex) {
+        } catch (PropertiesException | WriterException | CheckerException ex) {
             return errAdmCmdServiceProducer.getErrorAdminCommandServiceDefaultInstance()
                     .createErrorResult(ex.getMessage(), ex.getLogMessage());
         } catch (CommandResultException ex) {

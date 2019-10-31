@@ -16,8 +16,6 @@
 
 package lightsearch.server.timer;
 
-import lightsearch.server.data.LightSearchServerService;
-import lightsearch.server.producer.timer.TimeoutManagerProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -28,23 +26,12 @@ import org.springframework.stereotype.Component;
 @EnableAsync
 public class ClientTimeoutTimer {
 
-    @Autowired private LightSearchServerService serverService;
-    @Autowired private TimeoutManagerProducer timeoutManagerProducer;
-
-    private TimeoutManager timeoutManager;
+    @Autowired private TimeoutManagerService timeoutManagerService;
 
     @Async
     @Scheduled(fixedDelay = 1000)
     public void checkClients() {
-        if(timeoutManager == null)
-            initTimeoutManager();
-
-        timeoutManager.refresh();
-        timeoutManager.check();
-    }
-
-    @SuppressWarnings("unchecked")
-    private void initTimeoutManager() {
-        timeoutManager = timeoutManagerProducer.getTimeoutManagerReducerImpl(1, serverService.clientsService());
+        timeoutManagerService.getTimeoutManager().refresh();
+        timeoutManagerService.getTimeoutManager().check();
     }
 }

@@ -26,14 +26,12 @@ import org.springframework.stereotype.Service;
 @Service("blacklistCreatorProducerDefault")
 public class BlacklistCreatorProducerDefaultImpl implements BlacklistCreatorProducer {
 
-    private final String BLACKLIST_CREATOR = "blacklistCreatorFromFile";
-
     @Autowired
     private ApplicationContext ctx;
 
     @Override
     public BlacklistCreator getBlacklistCreatorFromFileInstance(
             CurrentServerDirectory currentDirectory, BlacklistService blacklistService) {
-        return (BlacklistCreator) ctx.getBean(BLACKLIST_CREATOR, currentDirectory, blacklistService);
+        return (BlacklistCreator) ctx.getBean("blacklistCreatorFromFile", currentDirectory, blacklistService);
     }
 }

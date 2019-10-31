@@ -20,4 +20,5 @@ import java.util.Map;
 
 public interface ClientsService<K,V> {
     Map<K,V> clients();
+    void refreshTimeout(K key);
 }

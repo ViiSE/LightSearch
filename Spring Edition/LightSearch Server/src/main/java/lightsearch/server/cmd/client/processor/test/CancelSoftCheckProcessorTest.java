@@ -84,7 +84,7 @@ public class CancelSoftCheckProcessorTest implements ClientProcessor<ClientComma
 
             ClientCommandResultCreator commandResultCreator =
                     clientCommandResultCreatorProducer.getCommandResultCreatorClientJSONInstance(result);
-            logger.log(INFO, "Client " + command.IMEI() + " cancel soft check:" +
+            logger.log(CancelSoftCheckProcessorTest.class, INFO, "Client " + command.IMEI() + " cancel soft check:" +
                     "user identifier - " + command.userIdentifier() + ", card code - " + command.cardCode());
 
             return commandResultCreator.createClientCommandResult();

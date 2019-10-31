@@ -19,26 +19,26 @@ import lightsearch.server.cmd.admin.AdminCommand;
 import lightsearch.server.cmd.result.AdminCommandResultCreator;
 import lightsearch.server.cmd.result.ResultType;
 import lightsearch.server.data.pojo.AdminCommandResult;
+import lightsearch.server.data.pojo.Property;
 import lightsearch.server.exception.CheckerException;
 import lightsearch.server.exception.CommandResultException;
-import lightsearch.server.initialization.CurrentServerDirectory;
+import lightsearch.server.exception.PropertiesException;
+import lightsearch.server.exception.WriterException;
 import lightsearch.server.log.LoggerServer;
 import lightsearch.server.producer.checker.CommandCheckerProducer;
 import lightsearch.server.producer.cmd.admin.ErrorAdminCommandServiceProducer;
 import lightsearch.server.producer.cmd.result.AdminCommandResultCreatorProducer;
+import lightsearch.server.producer.properties.PropertiesLocalChangerProducer;
+import lightsearch.server.producer.properties.PropertiesReaderProducer;
+import lightsearch.server.producer.properties.PropertiesWriterProducer;
+import lightsearch.server.properties.PropertiesReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 import static lightsearch.server.log.LogMessageTypeEnum.INFO;
 
@@ -50,51 +50,40 @@ import static lightsearch.server.log.LogMessageTypeEnum.INFO;
 @Scope("prototype")
 public class ClientTimeoutProcessor implements AdminProcessor<AdminCommandResult> {
 
-    private final String applicationPropertiesDirectory;
+    private final String propsDir;
 
     @Autowired private LoggerServer logger;
     @Autowired private ErrorAdminCommandServiceProducer errAdmCmdServiceProducer;
     @Autowired private CommandCheckerProducer cmdCheckerProducer;
     @Autowired private AdminCommandResultCreatorProducer admCmdResCrProducer;
+    @Autowired private PropertiesLocalChangerProducer propsLocalChProducer;
+    @Autowired private PropertiesReaderProducer propsReaderProducer;
+    @Autowired private PropertiesWriterProducer propsWriterProducer;
 
-    public ClientTimeoutProcessor(CurrentServerDirectory currentDirectory) {
-        this.applicationPropertiesDirectory = currentDirectory.currentDirectory() + "config/application.properties";
+    public ClientTimeoutProcessor(String currentDirectory) {
+        this.propsDir = currentDirectory + "config/application.properties";
     }
 
     @Override
     synchronized public AdminCommandResult apply(AdminCommand command) {
         try {
             cmdCheckerProducer.getCommandCheckerAdminClientTimeoutInstance(command).check();
-            try (FileOutputStream fout = new FileOutputStream(applicationPropertiesDirectory, true);
-                 BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fout))) {
-                Path propsPath = Paths.get(applicationPropertiesDirectory);
 
-                List<String> properties = Files.readAllLines(propsPath).stream().map(property -> {
-                    String clToutKey = "lightsearch.server.client-timeout";
-                    if (property.contains(clToutKey))
-                        return String.format("%s=%s", clToutKey, command.clientTimeout());
-                    else
-                        return property;
-                }).collect(Collectors.toList());
-
-                for(String property: properties) {
-                    bw.write(property);
-                    bw.newLine();
-                }
-            } catch (IOException ex) {
-                return errAdmCmdServiceProducer.getErrorAdminCommandServiceDefaultInstance()
-                        .createErrorResult("Невозможно записать значение тайм-аута клиента. Сообщение: " + ex.getMessage(),
-                                "ClientTimeoutProcessor: Cannot write client timeout property. Exception: " + ex.getMessage());
-            }
+            Map<String, Property> propsMap = new HashMap<>() {{
+                put("lightsearch.server.timeout.client-timeout", new Property("%s=%s", command.clientTimeout()));
+            }};
+            PropertiesReader<List<String>> propsReader = propsReaderProducer.getPropertiesListStringReaderInstance(propsDir);
+            List<String> chPropsList = propsLocalChProducer.getPropertiesLocalChangerDefaultInstance(propsMap, propsReader)
+                    .getChangedProperties();
+            propsWriterProducer.getPropertiesFileWriterInstance(propsDir, chPropsList, false).write();
 
             AdminCommandResultCreator commandResultCreator =
                     admCmdResCrProducer.getCommandResultCreatorAdminDefaultInstance(
                             ResultType.TRUE.stringValue(), "Значение тайм-аута клиента было изменено. " +
                                     "Для вступления в силу изменений перезагрузите сервер.", null, null);
-            logger.log(INFO, "Client timeout has been changed");
-
+            logger.log(ClientTimeoutProcessor.class, INFO, "Client timeout has been changed");
             return commandResultCreator.createAdminCommandResult();
-        } catch (CheckerException ex) {
+        } catch (PropertiesException | WriterException | CheckerException ex) {
             return errAdmCmdServiceProducer.getErrorAdminCommandServiceDefaultInstance()
                     .createErrorResult(ex.getMessage(), ex.getLogMessage());
         } catch (CommandResultException ex) {

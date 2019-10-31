@@ -17,8 +17,10 @@
 package lightsearch.server.producer.cmd;
 
 import lightsearch.server.cmd.ProcessorService;
+import lightsearch.server.data.pojo.AdminCommandResult;
 import lightsearch.server.data.pojo.ClientCommandResult;
 
 public interface ProcessorServiceProducer {
     ProcessorService<ClientCommandResult> getClientProcessorServiceDefaultInstance(String command);
+    ProcessorService<AdminCommandResult> getAdminProcessorServiceDefaultInstance(String command);
 }

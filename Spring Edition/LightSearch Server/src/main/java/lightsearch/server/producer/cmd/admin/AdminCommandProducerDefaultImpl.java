@@ -31,7 +31,7 @@ public class AdminCommandProducerDefaultImpl implements AdminCommandProducer {
     private ApplicationContext ctx;
 
     @Override
-    public AdminCommand getClientCommandDefaultInstance(AdminCommandDTO adminCommandDTO) {
+    public AdminCommand getAdminCommandDefaultInstance(AdminCommandDTO adminCommandDTO) {
         return (AdminCommand) ctx.getBean(ADMIN_COMMAND, adminCommandDTO);
     }
 }

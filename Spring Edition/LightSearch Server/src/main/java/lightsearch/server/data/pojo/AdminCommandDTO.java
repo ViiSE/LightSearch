@@ -35,6 +35,7 @@ public class AdminCommandDTO {
     private String ip;
     private int port;
     private String dbName;
+    private int frequency;
 
     public void setCommand(String command) {
         this.command = command;
@@ -108,5 +109,14 @@ public class AdminCommandDTO {
 
     public String getDbName() {
         return dbName;
+    }
+
+    public void setFrequency(int frequency) {
+        this.frequency = frequency;
+    }
+
+    @JsonSerialize(using=ToStringSerializer.class)
+    public int getFrequency() {
+        return frequency;
     }
 }

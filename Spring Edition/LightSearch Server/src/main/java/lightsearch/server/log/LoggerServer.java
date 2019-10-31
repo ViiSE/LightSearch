@@ -20,5 +20,5 @@ package lightsearch.server.log;
  * @author ViiSE
  */
 public interface LoggerServer {
-    void log(LogMessageTypeEnum type, String message);
+    void log(Class clazz, LogMessageTypeEnum type, String message);
 }

@@ -66,27 +66,27 @@ public class SearchProcessor implements ClientProcessor<ClientCommandResult> {
         this.databaseRecordIdentifier = databaseRecordIdentifier;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public ClientCommandResult apply(ClientCommand command) {
         try {
             commandCheckerProducer.getCommandCheckerClientSearchInstance(command, serverService, checker).check();
+            serverService.clientsService().refreshTimeout(command.IMEI());
+
             DatabaseCommandMessage dbCmdMessage =
                     dbCmdMsgProducer.getDatabaseCommandMessageSearchDefaultWindowsJSONInstance(command);
-
             DatabaseStatementExecutor dbStatementExecutor =
                     dbStateExecProducer.getDatabaseStatementExecutorDefaultInstance(
                             databaseRecordIdentifier.next(), currentDateTime.dateTimeInStandardFormat(), dbCmdMessage);
-
             DatabaseStatementResult dbStatRes = dbStatementExecutor.exec();
 
             String result = dbStatRes.result();
-
             ClientCommandResultCreator commandResultCreator =
                     clientCommandResultCreatorProducer.getCommandResultCreatorClientJSONInstance(result);
-            logger.log(INFO, "Client: " + command.IMEI() + "; command: search" +
-                    ";barcode: " + command.barcode() +
-                    ";sklad: " + command.sklad() +
-                    ";TK: " + command.TK());
+            logger.log(SearchProcessor.class, INFO, "Client: " + command.IMEI() + "; command: search " +
+                    "; barcode: " + command.barcode() +
+                    "; sklad: " + command.sklad() +
+                    "; TK: " + command.TK());
 
             return commandResultCreator.createClientCommandResult();
         } catch (CommandResultException | DatabaseStatementExecutorException ex) {
