@@ -17,8 +17,6 @@
 package lightsearch.server.producer.cmd.admin;
 
 import lightsearch.server.cmd.admin.processor.ErrorAdminCommandService;
-import lightsearch.server.cmd.client.processor.ErrorClientCommandService;
-import lightsearch.server.producer.cmd.client.processor.ErrorClientCommandServiceProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;

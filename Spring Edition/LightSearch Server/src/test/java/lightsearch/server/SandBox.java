@@ -19,7 +19,9 @@ package lightsearch.server;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import lightsearch.server.data.pojo.*;
+import lightsearch.server.data.pojo.AdminCommandDTO;
+import lightsearch.server.data.pojo.ClientCommandDTO;
+import lightsearch.server.data.pojo.LightSearchSettings;
 import lightsearch.server.security.HashAlgorithmsDefaultImpl;
 import lightsearch.server.time.TimeUtils;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -29,7 +31,6 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 
 public class SandBox extends AbstractTestNGSpringContextTests {
 

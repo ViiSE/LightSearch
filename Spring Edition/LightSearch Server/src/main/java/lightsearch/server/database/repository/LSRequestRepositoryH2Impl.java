@@ -23,9 +23,6 @@ import org.springframework.dao.QueryTimeoutException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
-
 import static lightsearch.server.log.LogMessageTypeEnum.ERROR;
 
 @Repository("lsRequestRepositoryH2")

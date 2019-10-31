@@ -18,7 +18,6 @@ package lightsearch.server.cmd;
 
 import lightsearch.server.LightSearchServer;
 import lightsearch.server.cmd.admin.AdminCommandEnum;
-import lightsearch.server.cmd.client.ClientCommandEnum;
 import lightsearch.server.producer.cmd.ProcessorHolderProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

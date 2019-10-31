@@ -24,7 +24,6 @@ import lightsearch.server.data.LightSearchServerService;
 import lightsearch.server.data.pojo.AdminCommandResult;
 import lightsearch.server.exception.CheckerException;
 import lightsearch.server.exception.CommandResultException;
-import lightsearch.server.initialization.CurrentServerDirectory;
 import lightsearch.server.log.LoggerServer;
 import lightsearch.server.producer.checker.CommandCheckerProducer;
 import lightsearch.server.producer.cmd.admin.ErrorAdminCommandServiceProducer;
@@ -38,7 +37,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.List;
-import java.util.StringJoiner;
 
 import static lightsearch.server.log.LogMessageTypeEnum.INFO;
 

@@ -17,7 +17,6 @@
 package lightsearch.server.cmd.admin.processor;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lightsearch.server.LightSearchServer;
 import lightsearch.server.cmd.ProcessorHolder;
 import lightsearch.server.cmd.ProcessorHolderAdminTestImpl;

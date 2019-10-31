@@ -15,8 +15,6 @@
  */
 package lightsearch.server.log;
 
-import lightsearch.server.initialization.CurrentServerDirectory;
-import lightsearch.server.initialization.OsDetector;
 import lightsearch.server.producer.initialization.CurrentServerDirectoryProducer;
 import lightsearch.server.producer.initialization.OsDetectorProducer;
 import org.springframework.beans.factory.annotation.Autowired;

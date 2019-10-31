@@ -30,8 +30,6 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
-
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 

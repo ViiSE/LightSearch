@@ -17,10 +17,8 @@
 package lightsearch.server.cmd.result;
 
 import lightsearch.server.data.pojo.AdminCommandResult;
-import lightsearch.server.data.pojo.ClientCommandResult;
 import lightsearch.server.exception.CommandResultException;
 import lightsearch.server.producer.cmd.result.AdminCommandResultCreatorProducer;
-import lightsearch.server.producer.cmd.result.ClientCommandResultCreatorProducer;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 

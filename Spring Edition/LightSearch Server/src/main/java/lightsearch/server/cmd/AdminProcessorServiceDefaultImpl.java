@@ -17,7 +17,6 @@
 package lightsearch.server.cmd;
 
 import lightsearch.server.data.pojo.AdminCommandResult;
-import lightsearch.server.data.pojo.ClientCommandResult;
 import lightsearch.server.exception.ProcessorNotFoundException;
 import lightsearch.server.producer.cmd.ProcessorHolderProducer;
 import org.springframework.beans.factory.annotation.Autowired;

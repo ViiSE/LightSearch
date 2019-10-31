@@ -19,14 +19,11 @@ package lightsearch.server.log;
 import lightsearch.server.LightSearchServer;
 import lightsearch.server.initialization.CurrentServerDirectory;
 import lightsearch.server.producer.time.CurrentDateTimeProducer;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.Test;
-import test.ResourcesFilesPath;
 
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;

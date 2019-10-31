@@ -21,7 +21,6 @@ import lightsearch.server.cmd.admin.processor.AdminProcessor;
 import lightsearch.server.data.LightSearchServerService;
 import lightsearch.server.producer.checker.LightSearchCheckerProducer;
 import lightsearch.server.producer.cmd.admin.processor.ProcessorAdminProducer;
-import lightsearch.server.producer.time.CurrentDateTimeProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -18,7 +18,6 @@ package lightsearch.server.timer;
 
 import lightsearch.server.data.ClientsService;
 import lightsearch.server.data.pojo.Client;
-import lightsearch.server.log.LogMessageTypeEnum;
 import lightsearch.server.log.LoggerServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;

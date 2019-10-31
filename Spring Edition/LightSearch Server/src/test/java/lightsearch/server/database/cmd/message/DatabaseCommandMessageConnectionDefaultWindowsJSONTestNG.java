@@ -17,7 +17,6 @@
 package lightsearch.server.database.cmd.message;
 
 import lightsearch.server.LightSearchServer;
-import lightsearch.server.cmd.client.ClientCommand;
 import lightsearch.server.cmd.client.ClientCommandEnum;
 import lightsearch.server.data.pojo.ClientCommandDTO;
 import lightsearch.server.producer.cmd.client.ClientCommandProducer;
