@@ -79,7 +79,7 @@ public class SearchProcessor extends AbstractProcessorClient {
                         "Извините, но вы находитесь в черном списке. Отключение от сервера", null);
         } else
             return super.commandResult("Unknown", LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE,
-                    "Неверный формат команды. Обратитесь к администратору для устранения ошибки. Вы были отключены от сервера", null);
+                    "Неверный формат команды. Вы были отключены от сервера", null);
     }
     
 }

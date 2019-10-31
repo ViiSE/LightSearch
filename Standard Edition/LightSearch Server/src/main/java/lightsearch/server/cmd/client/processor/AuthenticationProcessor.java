@@ -114,7 +114,7 @@ public class AuthenticationProcessor extends AbstractProcessorClient {
         } else {
             clientDAO.setIsFirst(false);
             return super.commandResult("Unknown", LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE, 
-                    "Неверный формат команды. Обратитесь к администратору для устранения ошибки. Вы были отключены от сервера", null);
+                    "Неверный формат команды. Вы были отключены от сервера", null);
         }
     }
     

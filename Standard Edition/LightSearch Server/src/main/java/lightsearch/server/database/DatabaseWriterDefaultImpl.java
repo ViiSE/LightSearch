@@ -57,8 +57,7 @@ public class DatabaseWriterDefaultImpl implements DatabaseWriter {
         try {
             dbRS.exec();
         } catch (DatabaseStatementResultSetException ex) {
-            throw new DatabaseWriterException(ex.getMessage(), 
-                    "Не удалось записать команду в базу данных. Обратитесь к администратору для устранения проблемы.");
+            throw new DatabaseWriterException(ex.getMessage(), "Не удалось записать команду в базу данных.");
         }
     }
     

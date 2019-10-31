@@ -55,6 +55,7 @@ public class DelBlacklistProcessor extends AbstractProcessorAdmin {
                             "Client " + admCommand.IMEI() + " has been removed from the blacklist.",
                             admCommand.name() + ": client " + admCommand.IMEI() + " has been removed from the blacklist");
                 } catch(IOException ex) {
+                    serverDTO.blacklist().add(admCommand.IMEI());
                     return super.commandResult(admCommand.name(), LogMessageTypeEnum.ERROR, ResultTypeMessageEnum.FALSE,
                             "Client " + admCommand.IMEI() + " has not been removed from the blacklist. Try again.", 
                             admCommand.name() + ": client " + admCommand.IMEI() + " has not been removed from the blacklist. Exception: " + ex.getMessage());

@@ -48,21 +48,20 @@ public class DatabaseConnectionCreatorWin1251DefaultImpl implements DatabaseConn
                 "?encoding=win1251&amp;useUnicode=true&amp;characterEncoding=win1251", username, password);
             return DatabaseConnectionInit.databaseConnection(connection);
         } catch(ClassNotFoundException ex) {
-            throw new DatabaseConnectionCreatorException(ex.getMessage(), 
-            "Ошибка драйвера JDBC Jaybird. Обратитесь к администратору для устранения ошибки.");
+            throw new DatabaseConnectionCreatorException(ex.getMessage(), "Ошибка драйвера JDBC Jaybird.");
         } catch(SQLException ex) {
             //335544344 - неверное имя базы
             //335544345 - неверное имя юзера или пароль
             //335544721 - неверный порт или ip, или сервер отключен
             switch (ex.getErrorCode()) {
                 case 335544344:
-                    throw new DatabaseConnectionCreatorException("Invalid database name", "Неверное имя базы данных. Обратитесь к администратору для устранения ошибки.");
+                    throw new DatabaseConnectionCreatorException("Invalid database name", "Неверное имя базы данных.");
                 case 335544345:
                     throw new DatabaseConnectionCreatorException("Invalid username and/or password", "Неверное имя пользователя и/или пароль.");
                 case 335544721:
                     throw new DatabaseConnectionCreatorException("Invalid port and/or host, or server is shut down", "Неверный порт и/или хост, или сервер отключен.");
             }
-            throw new DatabaseConnectionCreatorException(ex.getMessage(), "Неизвестная ошибка. Обратитесь к администратору для устранения проблемы.");
+            throw new DatabaseConnectionCreatorException(ex.getMessage(), "Неизвестная ошибка.");
         }
     }
     

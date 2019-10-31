@@ -60,8 +60,7 @@ public class DatabaseReaderDefaultImpl implements DatabaseReader {
             dbRSU.exec();
             return dbRSS.result();
         } catch (DatabaseStatementResultSetException ex) {
-            throw new DatabaseReaderException(ex.getMessage(), 
-                    "Не удалось считать результат команды из базы данных. Обратитесь к администратору для устранения проблемы.");
+            throw new DatabaseReaderException(ex.getMessage(), "Не удалось считать результат команды из базы данных.");
         }
     }
 }
