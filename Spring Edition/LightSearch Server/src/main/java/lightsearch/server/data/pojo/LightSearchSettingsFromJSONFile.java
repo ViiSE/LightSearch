@@ -23,17 +23,17 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-public class LightSearchSettings {
+public class LightSearchSettingsFromJSONFile {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private static LocalTime rebootTime;
     private static long timeoutClient;
     private static int frequency;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
     private static LocalDateTime rebootDateTime;
 
     public void setRebootTime(LocalTime rebootTime) {
-        LightSearchSettings.rebootTime = rebootTime;
+        LightSearchSettingsFromJSONFile.rebootTime = rebootTime;
     }
 
     public static LocalTime getRebootTime() {
@@ -41,7 +41,7 @@ public class LightSearchSettings {
     }
 
     public void setTimeoutClient(long timeoutClient) {
-        LightSearchSettings.timeoutClient = timeoutClient;
+        LightSearchSettingsFromJSONFile.timeoutClient = timeoutClient;
     }
 
     public static long getTimeoutClient() {
@@ -49,7 +49,7 @@ public class LightSearchSettings {
     }
 
     public void setFrequency(int frequency) {
-        LightSearchSettings.frequency = frequency;
+        LightSearchSettingsFromJSONFile.frequency = frequency;
     }
 
     public static int getFrequency() {

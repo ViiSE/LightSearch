@@ -18,6 +18,7 @@ package lightsearch.server.initialization;
 import lightsearch.server.data.BlacklistService;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.*;
 
@@ -26,7 +27,7 @@ import java.io.*;
  * @author ViiSE
  */
 
-@Component("blacklistCreatorFromFile")
+@Service("blacklistCreatorFromFile")
 @Scope("prototype")
 public class BlacklistCreatorFromFileImpl implements BlacklistCreator {
 

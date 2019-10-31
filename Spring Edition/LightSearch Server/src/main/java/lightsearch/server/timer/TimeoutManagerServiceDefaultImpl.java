@@ -17,19 +17,18 @@
 package lightsearch.server.timer;
 
 import lightsearch.server.data.LightSearchServerService;
+import lightsearch.server.data.pojo.LightSearchSettingsFromPropertiesFile;
 import lightsearch.server.producer.timer.TimeoutManagerProducer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.objenesis.instantiator.sun.MagicInstantiator;
 import org.springframework.stereotype.Service;
 
 @Service("timeoutManagerServiceDefault")
 public class TimeoutManagerServiceDefaultImpl implements TimeoutManagerService {
 
-    @Value("${lightsearch.server.timeout.reduce-value}")
-    private int reduceValue;
-
     @Autowired private TimeoutManagerProducer timeoutManagerProducer;
     @Autowired private LightSearchServerService serverService;
+    @Autowired private LightSearchSettingsFromPropertiesFile settings;
 
     private TimeoutManager timeoutManager;
 
@@ -43,6 +42,7 @@ public class TimeoutManagerServiceDefaultImpl implements TimeoutManagerService {
 
     @SuppressWarnings("unchecked")
     private void initTimeoutManager() {
-        timeoutManager = timeoutManagerProducer.getTimeoutManagerReducerImpl(reduceValue, serverService.clientsService());
+        timeoutManager = timeoutManagerProducer
+                .getTimeoutManagerReducerImpl(settings.getReduceValue(), serverService.clientsService());
     }
 }

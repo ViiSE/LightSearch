@@ -14,43 +14,40 @@
  *  limitations under the License.
  */
 
-package lightsearch.server.timer;
+package lightsearch.server.data;
 
 import lightsearch.server.LightSearchServer;
-import lightsearch.server.data.pojo.LightSearchSettingsFromJSONFile;
-import lightsearch.server.data.pojo.LightSearchSettingsFromPropertiesFile;
+import lightsearch.server.data.pojo.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.time.LocalTime;
-
 import static test.message.TestMessage.testBegin;
 import static test.message.TestMessage.testEnd;
 
 @SpringBootTest(classes = LightSearchServer.class)
-public class RestartTimerTestNG extends AbstractTestNGSpringContextTests {
+public class ClientTestNG extends AbstractTestNGSpringContextTests {
 
-    @Autowired private RestartTimer restartTimer;
+    @Autowired
+    private LightSearchServerService serverService;
 
+    private ClientsService<String, Client> clientsService;
+
+    @SuppressWarnings({"unchecked"})
     @BeforeClass
     public void setUpClass() {
-//        LightSearchSettingsFromJSONFile settings = new LightSearchSettingsFromJSONFile();
-//        settings.setRebootTime(LocalTime.now().plusMinutes(1));
-//        settings.setFrequency(1);
-//        LightSearchSettingsFromPropertiesFile settings = new LightSearchSettingsFromPropertiesFile();
-//        settings.
+        clientsService = serverService.clientsService();
+        clientsService.addClient("111111111111111", new Client("111111111111111", "Client 1"));
     }
 
     @Test
-    public void restart() throws InterruptedException {
-        testBegin("RestartTimer", "restart()");
+    public void client_test_application_properties_read_value_timeout_client() {
+        testBegin("Client", "");
 
-        Thread.sleep(1);
-        //restartTimer.restart();
+        System.out.println(clientsService.clients().get("111111111111111").getTimeoutLimitSeconds());
 
-        testEnd("RestartTimer", "restart()");
+        testEnd("Client", "");
     }
 }

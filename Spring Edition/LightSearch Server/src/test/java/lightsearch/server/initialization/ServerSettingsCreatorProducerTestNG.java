@@ -17,7 +17,7 @@
 package lightsearch.server.initialization;
 
 import lightsearch.server.LightSearchServer;
-import lightsearch.server.data.pojo.LightSearchSettings;
+import lightsearch.server.data.pojo.LightSearchSettingsFromJSONFile;
 import lightsearch.server.producer.initialization.CurrentServerDirectoryProducer;
 import lightsearch.server.producer.initialization.OsDetectorProducer;
 import lightsearch.server.producer.initialization.ServerSettingsCreatorProducer;
@@ -52,8 +52,8 @@ public class ServerSettingsCreatorProducerTestNG extends AbstractTestNGSpringCon
         testBegin("ServerSettingsCreator", "createSettings()");
 
         settingsCreator.createSettings();
-        System.out.println("Reboot time: " + LightSearchSettings.getRebootTime());
-        System.out.println("Timeout client: " + LightSearchSettings.getTimeoutClient());
+        System.out.println("Reboot time: " + LightSearchSettingsFromJSONFile.getRebootTime());
+        System.out.println("Timeout client: " + LightSearchSettingsFromJSONFile.getTimeoutClient());
 
         testEnd("ServerSettingsCreator", "createSettings()");
     }

@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lightsearch.server.data.pojo.AdminCommandDTO;
 import lightsearch.server.data.pojo.ClientCommandDTO;
-import lightsearch.server.data.pojo.LightSearchSettings;
+import lightsearch.server.data.pojo.LightSearchSettingsFromJSONFile;
 import lightsearch.server.security.HashAlgorithmsDefaultImpl;
 import lightsearch.server.time.TimeUtils;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -62,12 +62,12 @@ public class SandBox extends AbstractTestNGSpringContextTests {
 
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
-        LightSearchSettings settings = objectMapper.readValue(new File("settings"), LightSearchSettings.class);
+        LightSearchSettingsFromJSONFile settings = objectMapper.readValue(new File("settings"), LightSearchSettingsFromJSONFile.class);
 
-        System.out.println("Reboot: isBefore: " + LightSearchSettings.getRebootTime().isBefore(time));
-        System.out.println("Reboot: isAfter: " + LightSearchSettings.getRebootTime().isAfter(time));
+        System.out.println("Reboot: isBefore: " + LightSearchSettingsFromJSONFile.getRebootTime().isBefore(time));
+        System.out.println("Reboot: isAfter: " + LightSearchSettingsFromJSONFile.getRebootTime().isAfter(time));
 
-        System.out.println("frequency: " + LightSearchSettings.getFrequency());
+        System.out.println("frequency: " + LightSearchSettingsFromJSONFile.getFrequency());
 
         LocalDate today = LocalDate.now();
         System.out.println("Today: " + today);

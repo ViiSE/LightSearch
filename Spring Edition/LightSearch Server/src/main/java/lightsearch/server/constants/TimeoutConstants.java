@@ -14,12 +14,9 @@
  *  limitations under the License.
  */
 
-package lightsearch.server.data;
+package lightsearch.server.constants;
 
-import java.util.Map;
-
-public interface ClientsService<K,V> {
-    Map<K,V> clients();
-    void refreshTimeout(K key);
-    void addClient(K key, V value);
+public class TimeoutConstants {
+    public static final int TIMEOUT_OFF = -1;
+    public static final int TIMEOUT_ENDED = 0;
 }

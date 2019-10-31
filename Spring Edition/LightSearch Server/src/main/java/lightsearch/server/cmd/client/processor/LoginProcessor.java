@@ -89,7 +89,7 @@ public class LoginProcessor implements ClientProcessor<ClientCommandResult> {
             logger.log(LoginProcessor.class, INFO, "Client connected: " + "IMEI - " + command.IMEI() +
                     ", ip - " + command.ip() + ", os - " + command.os() + ", model - " + command.model() +
                     ", username - " + command.username() + ", ident - " + command.userIdentifier());
-            clientsService.clients().put(command.IMEI(), new Client(command.IMEI(), command.username()));
+            clientsService.addClient(command.IMEI(), new Client(command.IMEI(), command.username()));
             return commandResultCreator.createClientCommandResult();
         } catch (CommandResultException | DatabaseStatementExecutorException ex) {
             return errorCommandServiceProducer.getErrorClientCommandServiceDefaultInstance().createErrorResult(command.IMEI(),

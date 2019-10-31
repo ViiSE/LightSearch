@@ -78,7 +78,7 @@ public class AddBlacklistProcessorTestNG extends AbstractTestNGSpringContextTest
                 .getCurrentServerDirectoryFromFileInstance(osDetectorProducer.getOsDetectorDefaultInstance())
                 .currentDirectory() + ResourcesFilesPath.getResourcesFilesPath();
 
-        clientsService.clients().put("111111111111111", new Client("111111111111111", "Client 1"));
+        clientsService.addClient("111111111111111", new Client("111111111111111", "Client 1"));
         when(serverService.currentDirectory()).thenReturn(currentDirectory);
         when(serverService.blacklistService()).thenReturn(blacklistService);
         when(serverService.clientsService()).thenReturn(clientsService);

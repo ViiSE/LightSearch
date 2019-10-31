@@ -52,7 +52,7 @@ public class ProcessorHolderClientTestImpl implements ProcessorHolder {
             initHolder();
 
         if(!command.equals(LOGIN.stringValue()))
-            serverService.clientsService().clients().put("111111111111111", new Client("111111111111111","test"));
+            serverService.clientsService().addClient("111111111111111", new Client("111111111111111","test"));
 
         return holder.get(command);
     }

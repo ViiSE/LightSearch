@@ -70,7 +70,7 @@ public class ClientTimeoutProcessor implements AdminProcessor<AdminCommandResult
             cmdCheckerProducer.getCommandCheckerAdminClientTimeoutInstance(command).check();
 
             Map<String, Property> propsMap = new HashMap<>() {{
-                put("lightsearch.server.timeout.client-timeout", new Property("%s=%s", command.clientTimeout()));
+                put("lightsearch.server.settings.timeout.client-timeout", new Property("%s=%s", command.clientTimeout()));
             }};
             PropertiesReader<List<String>> propsReader = propsReaderProducer.getPropertiesListStringReaderInstance(propsDir);
             List<String> chPropsList = propsLocalChProducer.getPropertiesLocalChangerDefaultInstance(propsMap, propsReader)

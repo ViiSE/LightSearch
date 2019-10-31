@@ -72,7 +72,7 @@ public class RestartTimeProcessor implements AdminProcessor<AdminCommandResult> 
         try {
             cmdCheckerProducer.getCommandCheckerAdminRestartTimeInstance(command, checker).check();
             Map<String, Property> propsMap = new HashMap<>() {{
-                put("lightsearch.server.restart.restart-time", new Property("%s=%s", command.restartTime()));
+                put("lightsearch.server.settings.restart.restart-time", new Property("%s=%s", command.restartTime()));
             }};
             PropertiesReader<List<String>> propsReader = propsReaderProducer.getPropertiesListStringReaderInstance(propsDir);
             List<String> chPropsList = propsLocalChProducer.getPropertiesLocalChangerDefaultInstance(propsMap, propsReader)

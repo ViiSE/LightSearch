@@ -38,10 +38,10 @@ public class TimeoutManagerReducerTestNG extends AbstractTestNGSpringContextTest
     @BeforeClass
     public void setUpClass() {
         timeoutManager = timeoutManagerProducer.getTimeoutManagerReducerImpl(1, serverService.clientsService());
-        serverService.clientsService().clients().put("111111111111111", new Client("111111111111111", "user1"));
-        serverService.clientsService().clients().put("222222222222222", new Client("222222222222222", "user2"));
-        serverService.clientsService().clients().put("333333333333333", new Client("333333333333333", "user3"));
-        serverService.clientsService().clients().put("444444444444444", new Client("444444444444444", "user4"));
+        serverService.clientsService().addClient("111111111111111", new Client("111111111111111", "user1"));
+        serverService.clientsService().addClient("222222222222222", new Client("222222222222222", "user2"));
+        serverService.clientsService().addClient("333333333333333", new Client("333333333333333", "user3"));
+        serverService.clientsService().addClient("444444444444444", new Client("444444444444444", "user4"));
         Client client = (Client) serverService.clientsService().clients().get("444444444444444");
         client.setTimeoutLimitSeconds(1);
     }

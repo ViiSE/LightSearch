@@ -79,9 +79,9 @@ public class ClientKickProcessorTestNG extends AbstractTestNGSpringContextTests 
                 .getCurrentServerDirectoryFromFileInstance(osDetectorProducer.getOsDetectorDefaultInstance())
                 .currentDirectory() + ResourcesFilesPath.getResourcesFilesPath();
 
-        clientsService.clients().put("111111111111111", new Client("111111111111111", "Client 1"));
-        clientsService.clients().put("222222222222222", new Client("222222222222222", "Client 2"));
-        clientsService.clients().put("333333333333333", new Client("333333333333333", "Client 3"));
+        clientsService.addClient("111111111111111", new Client("111111111111111", "Client 1"));
+        clientsService.addClient("222222222222222", new Client("222222222222222", "Client 2"));
+        clientsService.addClient("333333333333333", new Client("333333333333333", "Client 3"));
         when(serverService.currentDirectory()).thenReturn(currentDirectory);
         when(serverService.blacklistService()).thenReturn(blacklistService);
         when(serverService.clientsService()).thenReturn(clientsService);

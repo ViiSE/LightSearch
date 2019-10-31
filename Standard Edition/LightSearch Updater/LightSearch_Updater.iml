@@ -129,7 +129,7 @@
     <orderEntry type="library" name="Maven: com.juicy:juicyaceeditor:1.0.9" level="project" />
     <orderEntry type="library" name="Maven: org.webjars.bowergithub.juicy:juicy-ace-editor:2.1.0" level="project" />
     <orderEntry type="library" name="Maven: org.webjars.bowergithub.webcomponents:webcomponentsjs:1.2.6" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars.bowergithub.ajaxorg:ace-builds:1.4.5" level="project" />
+    <orderEntry type="library" name="Maven: org.webjars.bowergithub.ajaxorg:ace-builds:1.4.7" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-test:2.1.6.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter:2.1.6.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-logging:2.1.6.RELEASE" level="project" />

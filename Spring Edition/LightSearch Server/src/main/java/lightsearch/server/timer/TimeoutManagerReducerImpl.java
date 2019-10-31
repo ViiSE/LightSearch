@@ -16,6 +16,7 @@
 
 package lightsearch.server.timer;
 
+import lightsearch.server.constants.TimeoutConstants;
 import lightsearch.server.data.ClientsService;
 import lightsearch.server.data.pojo.Client;
 import lightsearch.server.log.LoggerServer;
@@ -55,7 +56,7 @@ public class TimeoutManagerReducerImpl implements TimeoutManager {
             Map.Entry entry = (Map.Entry) iterator.next();
             Client client = (Client) entry.getValue();
             String IMEI = (String) entry.getKey();
-            if(client.getTimeoutLimitSeconds() <= 0) {
+            if(client.getTimeoutLimitSeconds() <= TimeoutConstants.TIMEOUT_ENDED) {
                 logger.log(TimeoutManagerReducerImpl.class, INFO, "Client " + IMEI + " timeout.");
                 iterator.remove();
             }

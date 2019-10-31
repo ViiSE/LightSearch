@@ -16,7 +16,7 @@
 
 package lightsearch.server.timer;
 
-import lightsearch.server.data.pojo.LightSearchSettings;
+import lightsearch.server.data.pojo.LightSearchSettingsFromPropertiesFile;
 import lightsearch.server.log.LoggerServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.restart.RestartEndpoint;
@@ -35,11 +35,12 @@ public class RestartTimer {
 
     @Autowired private LoggerServer logger;
     @Autowired private RestartEndpoint restartEndpoint;
+    @Autowired private LightSearchSettingsFromPropertiesFile settings;
 
     @Async
     @Scheduled(fixedDelay = 1000, initialDelay = 30000)
     public void restart() {
-        if(LightSearchSettings.getRebootDateTime().isBefore(LocalDateTime.now())) {
+        if(settings.getRestartDateTime().isBefore(LocalDateTime.now())) {//LightSearchSettingsFromJSONFile.getRebootDateTime().isBefore(LocalDateTime.now())) {
             logger.log(RestartTimer.class, INFO, "Server restarted");
             restartEndpoint.restart();
         }

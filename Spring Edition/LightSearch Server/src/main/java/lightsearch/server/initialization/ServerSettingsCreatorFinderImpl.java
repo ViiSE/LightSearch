@@ -14,12 +14,15 @@
  *  limitations under the License.
  */
 
-package lightsearch.server.data;
+package lightsearch.server.initialization;
 
-import java.util.Map;
+import org.springframework.stereotype.Service;
 
-public interface ClientsService<K,V> {
-    Map<K,V> clients();
-    void refreshTimeout(K key);
-    void addClient(K key, V value);
+@Service("serverSettingsCreatorFinder")
+public class ServerSettingsCreatorFinderImpl implements ServerSettingsCreator {
+
+    @Override
+    public void createSettings() {
+
+    }
 }

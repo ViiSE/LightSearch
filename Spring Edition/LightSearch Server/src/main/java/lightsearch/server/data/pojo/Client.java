@@ -23,8 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Client {
 
-    @JsonIgnore private static final int TIMEOUT_LIMIT = 1800;
-    @JsonIgnore private int timeoutLimitSeconds = TIMEOUT_LIMIT;
+    @JsonIgnore private int timeoutLimitSeconds;
 
     @JsonProperty("IMEI") private String IMEI;
     private String username;
@@ -49,10 +48,6 @@ public class Client {
 
     public void setTimeoutLimitSeconds(int timeoutLimitSeconds) {
         this.timeoutLimitSeconds = timeoutLimitSeconds;
-    }
-
-    public void refreshTimeoutValue() {
-        timeoutLimitSeconds = TIMEOUT_LIMIT;
     }
 
     public void decreaseTimeoutLimitValue(int decreaseValueSeconds) {

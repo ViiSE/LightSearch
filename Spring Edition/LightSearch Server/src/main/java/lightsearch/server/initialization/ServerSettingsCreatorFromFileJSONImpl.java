@@ -17,11 +17,11 @@ package lightsearch.server.initialization;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import lightsearch.server.data.pojo.LightSearchSettings;
+import lightsearch.server.data.pojo.LightSearchSettingsFromJSONFile;
 import lightsearch.server.log.LoggerServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,7 +34,7 @@ import static lightsearch.server.log.LogMessageTypeEnum.INFO;
  *
  * @author ViiSE
  */
-@Component("serverSettingsCreatorFromFileJSON")
+@Service("serverSettingsCreatorFromFileJSON")
 @Scope("prototype")
 public class ServerSettingsCreatorFromFileJSONImpl implements ServerSettingsCreator {
 
@@ -49,15 +49,15 @@ public class ServerSettingsCreatorFromFileJSONImpl implements ServerSettingsCrea
     
     @Override
     public void createSettings() {
-        LightSearchSettings settings;
+        LightSearchSettingsFromJSONFile settings;
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.registerModule(new JavaTimeModule());
-            settings = objectMapper.readValue(new File(currentDirectory + "settings"), LightSearchSettings.class);
+            settings = objectMapper.readValue(new File(currentDirectory + "settings"), LightSearchSettingsFromJSONFile.class);
             logger.log(ServerSettingsCreatorFromFileJSONImpl.class, INFO,
                     "LightSearch Server settings is loaded: " + settings.toString());
         } catch (IOException ex) {
-            settings = new LightSearchSettings();
+            settings = new LightSearchSettingsFromJSONFile();
             settings.setRebootTime(LocalTime.of(7, 0));
             settings.setTimeoutClient(0);
             logger.log(ServerSettingsCreatorFromFileJSONImpl.class, ERROR, "Cannot create settings." +

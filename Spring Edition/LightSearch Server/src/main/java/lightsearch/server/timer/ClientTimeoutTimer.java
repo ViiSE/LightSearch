@@ -16,6 +16,9 @@
 
 package lightsearch.server.timer;
 
+import lightsearch.server.constants.TimeoutConstants;
+import lightsearch.server.data.LightSearchServerService;
+import lightsearch.server.data.pojo.LightSearchSettingsFromPropertiesFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -26,12 +29,16 @@ import org.springframework.stereotype.Component;
 @EnableAsync
 public class ClientTimeoutTimer {
 
+    @Autowired private LightSearchServerService serverService;
+    @Autowired private LightSearchSettingsFromPropertiesFile settings;
     @Autowired private TimeoutManagerService timeoutManagerService;
 
     @Async
     @Scheduled(fixedDelay = 1000)
     public void checkClients() {
-        timeoutManagerService.getTimeoutManager().refresh();
-        timeoutManagerService.getTimeoutManager().check();
+        if(!(settings.getTimeoutLimit() == TimeoutConstants.TIMEOUT_OFF)) {
+            timeoutManagerService.getTimeoutManager().refresh();
+            timeoutManagerService.getTimeoutManager().check();
+        }
     }
 }
