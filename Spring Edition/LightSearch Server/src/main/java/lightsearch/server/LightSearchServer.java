@@ -58,12 +58,7 @@ public class LightSearchServer {
 
         LoggerServer logger = ctx.getBean("loggerServerDefault", LoggerServer.class);
         LightSearchServerService serverService = ctx.getBean("lightSearchServerServiceDefault", LightSearchServerService.class);
-
-        serverService.clientsService().addClient("222222222222222", new Client("222222222222222", "Client 2"));
-        serverService.clientsService().addClient("333333333333333", new Client("333333333333333", "Client 3"));
-        serverService.clientsService().addClient("444444444444444", new Client("444444444444444", "Client 4"));
-        serverService.clientsService().addClient("555555555555555", new Client("555555555555555", "Client 5"));
-
+        
         DatabaseRecordIdentifierReader identifierReader = (DatabaseRecordIdentifierReader)
                 ctx.getBean("databaseRecordIdentifierReaderDefault", serverService);
         DatabaseRecordIdentifier identifier = (DatabaseRecordIdentifier)
