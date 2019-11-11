@@ -54,6 +54,7 @@ public class ClientCommandResult {
         this.data = data;
     }
 
+    @JsonProperty("IMEI")
     public String getIMEI() {
         return IMEI;
     }
@@ -70,6 +71,7 @@ public class ClientCommandResult {
         return userIdentifier;
     }
 
+    @JsonProperty("TK_list")
     public List<String> getTKList() {
         return TKList;
     }

@@ -38,7 +38,7 @@ public class ProcessorAdminServiceTestNG extends AbstractTestNGSpringContextTest
 
     @BeforeClass
     public void setUpClass() {
-        processorService = processorServiceProducer.getAdminProcessorServiceDefaultInstance(null);//AdminCommandEnum.BLACKLIST.stringValue());
+        processorService = processorServiceProducer.getAdminProcessorPostServiceInstance(null);//AdminCommandEnum.BLACKLIST.stringValue());
     }
 
     @Test

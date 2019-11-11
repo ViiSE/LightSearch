@@ -25,6 +25,7 @@ import lightsearch.server.data.*;
 import lightsearch.server.data.pojo.AdminCommandDTO;
 import lightsearch.server.data.pojo.AdminCommandResult;
 import lightsearch.server.data.pojo.Client;
+import lightsearch.server.initialization.CurrentServerDirectory;
 import lightsearch.server.producer.checker.LightSearchCheckerProducer;
 import lightsearch.server.producer.cmd.admin.AdminCommandProducer;
 import lightsearch.server.producer.cmd.admin.processor.ProcessorAdminProducer;
@@ -71,17 +72,19 @@ public class AddBlacklistProcessorTestNG extends AbstractTestNGSpringContextTest
 
         AdminCommandDTO admCmdDTO = new AdminCommandDTO();
         admCmdDTO.setCommand(AdminCommandEnum.ADD_BLACKLIST.stringValue());
-        admCmdDTO.setIMEI("111111111111111");
+        admCmdDTO.setIMEI("999999999999999");
         adminCommand = commandProducer.getAdminCommandDefaultInstance(admCmdDTO);
 
-        String currentDirectory = currentServerDirectoryProducer
-                .getCurrentServerDirectoryFromFileInstance(osDetectorProducer.getOsDetectorDefaultInstance())
-                .currentDirectory() + ResourcesFilesPath.getResourcesFilesPath();
+        CurrentServerDirectory curServDir = currentServerDirectoryProducer
+                .getCurrentServerDirectoryFromFileInstance(osDetectorProducer.getOsDetectorDefaultInstance());
 
-        clientsService.addClient("111111111111111", new Client("111111111111111", "Client 1"));
+        String currentDirectory = curServDir.currentDirectory() + ResourcesFilesPath.getResourcesFilesPath();
+
         when(serverService.currentDirectory()).thenReturn(currentDirectory);
         when(serverService.blacklistService()).thenReturn(blacklistService);
         when(serverService.clientsService()).thenReturn(clientsService);
+        clientsService.addClient("111111111111111", new Client("111111111111111", "Client 1"));
+        clientsService.clients().get("111111111111111").setTimeoutLimitSeconds(1800);
     }
 
     @SuppressWarnings("unchecked")

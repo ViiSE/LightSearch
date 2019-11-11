@@ -65,7 +65,7 @@ public class ClientKickProcessor implements AdminProcessor<AdminCommandResult> {
             clientsService.clients().remove(command.IMEI());
             AdminCommandResultCreator commandResultCreator =
                     admCmdResCrProducer.getCommandResultCreatorAdminDefaultInstance(
-                            ResultType.TRUE.stringValue(), "Клиент был исключен из текущей сессии.", null, null);
+                            ResultType.TRUE.stringValue(), "The client has been kicked from the current session.", null, null);
             logger.log(ClientKickProcessor.class, INFO, "Client has been kicked: IMEI - " + command.IMEI());
 
             return commandResultCreator.createAdminCommandResult();

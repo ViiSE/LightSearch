@@ -28,7 +28,7 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AdminCommandResult {
 
-    private final String isDone;
+    private final boolean isDone;
     private final String message;
     private final List<String> blacklist;
     private final List<Client> clients;
@@ -39,13 +39,18 @@ public class AdminCommandResult {
             @JsonProperty("message")   String message,
             @JsonProperty("blacklist") List<String> blacklist,
             @JsonProperty("clients")   List<Client> clients) {
-        this.isDone = isDone;
+        if(isDone.equalsIgnoreCase("true"))
+            this.isDone = true;
+        else if(isDone.equalsIgnoreCase("false"))
+            this.isDone = false;
+        else
+            this.isDone = false;
         this.message = message;
         this.blacklist = blacklist;
         this.clients = clients;
     }
 
-    public String getIsDone() {
+    public boolean getIsDone() {
         return isDone;
     }
 

@@ -54,6 +54,7 @@ public class ClientCommandDTO {
         this.IMEI = IMEI;
     }
 
+    @JsonProperty("IMEI")
     public String getIMEI() {
         return IMEI;
     }
@@ -118,6 +119,7 @@ public class ClientCommandDTO {
         this.TK = TK;
     }
 
+    @JsonProperty("TK")
     public String getTK() {
         return TK;
     }
@@ -134,6 +136,7 @@ public class ClientCommandDTO {
         this.userIdentifier = userIdentifier;
     }
 
+    @JsonProperty("ident")
     public String getUserIdentifier() {
         return userIdentifier;
     }

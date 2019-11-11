@@ -20,6 +20,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lightsearch.server.data.pojo.AdminCommandDTO;
+import lightsearch.server.data.pojo.AdminCommandResult;
 import lightsearch.server.data.pojo.ClientCommandDTO;
 import lightsearch.server.data.pojo.LightSearchSettingsFromJSONFile;
 import lightsearch.server.security.HashAlgorithmsDefaultImpl;
@@ -53,6 +54,10 @@ public class SandBox extends AbstractTestNGSpringContextTests {
         adminCommandDTO.setClientTimeout(30);
         adminCommandDTO.setRestartTime("22:05");
         System.out.println("Serialization ADMIN: " + mapper.writeValueAsString(adminCommandDTO));
+
+        AdminCommandResult adminCommandResult = new AdminCommandResult("True", "OK!", null, null);
+        System.out.println("Serialization ADMIN RESULT: " + mapper.writeValueAsString(adminCommandResult));
+
 
         AdminCommandDTO ar = mapper.readValue("{\"port\":\"8080\"}", AdminCommandDTO.class);
         System.out.println("Deserialization ADMIN: " + ar.getPort());

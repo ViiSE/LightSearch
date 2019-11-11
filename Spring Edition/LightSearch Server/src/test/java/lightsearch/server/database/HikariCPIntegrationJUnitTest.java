@@ -24,7 +24,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.sql.DataSource;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(properties = "spring.datasource.type=com.zaxxer.hikari.HikariDataSource")
@@ -35,6 +37,6 @@ public class HikariCPIntegrationJUnitTest {
 
     @Test
     public void hikariConnectionPoolIsConfigured() {
-        assertEquals("com.zaxxer.hikari.HikariDataSource", dataSource.getClass().getName());
+        assertTrue(dataSource.getClass().getName().contains("com.zaxxer.hikari.HikariDataSource"));
     }
 }

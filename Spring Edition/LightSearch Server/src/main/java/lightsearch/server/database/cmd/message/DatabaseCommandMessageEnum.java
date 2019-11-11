@@ -34,7 +34,7 @@ public enum DatabaseCommandMessageEnum {
     },
     ID {
         @Override
-        public String stringValue() { return "ID"; }
+        public String stringValue() { return "id"; }
     },
     AMOUNT {
         @Override

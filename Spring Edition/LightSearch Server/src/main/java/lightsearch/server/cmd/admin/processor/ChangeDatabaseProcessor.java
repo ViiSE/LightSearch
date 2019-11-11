@@ -87,7 +87,7 @@ public class ChangeDatabaseProcessor implements AdminProcessor<AdminCommandResul
             propsWriterProducer.getPropertiesFileWriterInstance(propsDir, chPropsList, false).write();
             AdminCommandResultCreator commandResultCreator =
                     admCmdResCrProducer.getCommandResultCreatorAdminDefaultInstance(ResultType.TRUE.stringValue(),
-                            "Параметры базы данных были изменены. Для вступления в силу изменений перезагрузите сервер.", null, null);
+                            "Datasource has been changed. For the changes to take effect, restart the server.", null, null);
             logger.log(ChangeDatabaseProcessor.class, INFO, "Datasource has been changed");
             return commandResultCreator.createAdminCommandResult();
         } catch (PropertiesException | WriterException | CheckerException ex) {

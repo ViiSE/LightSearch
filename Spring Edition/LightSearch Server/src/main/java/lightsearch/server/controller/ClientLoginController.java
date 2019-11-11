@@ -28,14 +28,12 @@ import lightsearch.server.producer.cmd.client.processor.ErrorClientCommandServic
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/login")
-public class LoginController {
+public class ClientLoginController {
 
     @Autowired
     @Qualifier("processorServiceProducerDefault")
@@ -59,7 +57,7 @@ public class LoginController {
             return processorService.getProcessor().apply(clientCommand);
         } catch (ProcessorNotFoundException ex) {
             return sendError(clientCommandDTO.getIMEI(), "Произошла ошибка. Сообщение: " + ex.getMessage(),
-                            ex.getMessage());
+                    ex.getMessage());
         }
     }
 

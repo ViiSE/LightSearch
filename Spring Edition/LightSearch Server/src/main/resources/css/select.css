@@ -1,0 +1,29 @@
+select {
+    border: 0;
+    width: 100%;
+    font-family: arial, sans-serif;
+    border-radius: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+select:after {
+    content: '>';
+    font: 17px 'Consolas', monospace;
+    color: #333;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+    right: 11px;
+    top: 18px;
+    padding: 0 0 2px;
+    border-bottom: 1px solid #999;
+
+    position: absolute;
+    pointer-events: none;
+}
+
+select:option {
+    font-family: arial, sans-serif;
+}

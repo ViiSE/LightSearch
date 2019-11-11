@@ -23,8 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Client {
 
-    @JsonIgnore private int timeoutLimitSeconds;
-
+    @JsonProperty("timeout") private int timeoutLimitSeconds;
     @JsonProperty("IMEI") private String IMEI;
     private String username;
 

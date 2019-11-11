@@ -79,14 +79,14 @@ public class AddBlacklistProcessor implements AdminProcessor<AdminCommandResult>
             } catch (IOException ex) {
                 blacklistService.blacklist().remove(command.IMEI());
                 return errAdmCmdServiceProducer.getErrorAdminCommandServiceDefaultInstance()
-                        .createErrorResult("Невозможно добавить клиента в черный список. Сообщение: " + ex.getMessage(),
+                        .createErrorResult("Cannot add client to the blacklist. Exception: " + ex.getMessage(),
                                 "Cannot add client to the blacklist. Exception: " + ex.getMessage());
             }
 
             clientsService.clients().remove(command.IMEI());
             AdminCommandResultCreator commandResultCreator =
                     admCmdResCrProducer.getCommandResultCreatorAdminDefaultInstance(
-                            ResultType.TRUE.stringValue(), "Данный клиент был добавлен в черный список.", null, null);
+                            ResultType.TRUE.stringValue(), "Client has been added to the blacklist.", null, null);
             logger.log(AddBlacklistProcessor.class, INFO, "Client has been added to the blacklist: IMEI - " + command.IMEI());
 
             return commandResultCreator.createAdminCommandResult();

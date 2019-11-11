@@ -1,0 +1,57 @@
+#clTitle {
+    text-align: center;
+    font-family: arial, sans-serif;
+}
+
+#clients {
+    text-align: center;
+    font-family: arial, sans-serif;
+    width: 90%;
+    border-spacing: 0;
+    box-shadow: 0px 3px 3px 1px rgba(0, 0, 0, 0.28);
+    border-collapse: separate;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+#clients th {
+    background-color: #007dff;
+    color: white;
+}
+
+#clients td, #clients th {
+    padding: 6px;
+}
+
+#clients tr:hover {
+    background-color: #ddd;
+    transition: background-color .2s linear;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+#clients tr:last-child:hover td:first-child {
+    border-radius: 0px 0px 0px 10px;
+    -moz-border-radius: 0px 0px 0px 10px;
+    -webkit-border-radius: 0px 0px 0px 10px;
+}
+
+#clients tr:last-child td:last-child {
+    border-radius: 0px 0px 10px 0px;
+    -moz-border-radius: 0px 0px 10px 0px;
+    -webkit-border-radius: 0px 0px 10px 0px;
+}
+
+#clients thead tr:first-child th:first-child {
+    border-radius: 10px 0px 0px 0px;
+    -moz-border-radius: 10px 0px 0px 0px;
+    -webkit-border-radius: 10px 0px 0px 0px;
+}
+
+#clients thead tr:first-child th:last-child {
+    border-radius: 0px 10px 0px 0px;
+    -moz-border-radius: 0px 10px 0px 0px;
+    -webkit-border-radius: 0px 10px 0px 0px;
+}

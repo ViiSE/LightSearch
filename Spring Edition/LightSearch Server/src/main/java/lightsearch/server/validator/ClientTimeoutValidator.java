@@ -27,7 +27,7 @@ public class ClientTimeoutValidator implements Validator<Integer> {
         if(clientTimeout < 0)
             if(clientTimeout != -1)
             throw new ValidatorException(
-                    "Неверное значение тайм-аута клиента! Значение тайм-аута может быть больше нуля, или -1 (тайм-аута нет).",
+                    "Invalid client timeout value! The timeout value may be greater than zero, or -1 (no timeout).",
                     "Wrong clientTimeout value");
     }
 }

@@ -37,7 +37,13 @@ public class ProcessorServiceProducerDefaultImpl implements ProcessorServiceProd
 
     @SuppressWarnings("unchecked")
     @Override
-    public ProcessorService<AdminCommandResult> getAdminProcessorServiceDefaultInstance(String command) {
-        return (ProcessorService<AdminCommandResult>) ctx.getBean("adminProcessorServiceDefaultImpl", command);
+    public ProcessorService<AdminCommandResult> getAdminProcessorPostServiceInstance(String command) {
+        return (ProcessorService<AdminCommandResult>) ctx.getBean("adminProcessorPostServiceImpl", command);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public ProcessorService<AdminCommandResult> getAdminProcessorGetServiceInstance(String command) {
+        return (ProcessorService<AdminCommandResult>) ctx.getBean("adminProcessorGetServiceImpl", command);
     }
 }

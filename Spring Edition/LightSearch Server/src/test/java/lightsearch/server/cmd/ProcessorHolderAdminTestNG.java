@@ -39,7 +39,7 @@ public class ProcessorHolderAdminTestNG extends AbstractTestNGSpringContextTests
 
     @BeforeClass
     public void setUpClass() {
-        processorHolder = processorHolderProducer.getProcessorHolderAdminInstance();
+        processorHolder = processorHolderProducer.getProcessorHolderAdminPostInstance();
     }
 
     @Test

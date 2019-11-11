@@ -39,12 +39,12 @@ public class CommandCheckerAdminAddBlacklistImpl implements CommandChecker {
     @Override
     public void check() throws CheckerException {
         if(checker.isNull(command.IMEI()))
-            throw new CheckerException("Неверный формат команды. IMEI имеет значение null!", "AddBlacklist: unknown client: IMEI is null!");
+            throw new CheckerException("Wrong command format. IMEI is null!", "AddBlacklist: unknown client: IMEI is null!");
 
         if(checker.isEmpty(command.IMEI()))
-            throw new CheckerException("Неверный формат команды. IMEI имеет пустое значение!", "AddBlacklist: unknown client: IMEI is empty!");
+            throw new CheckerException("Wrong command format. IMEI is empty!", "AddBlacklist: unknown client: IMEI is empty!");
 
         if(blacklistService.blacklist().contains(command.IMEI()))
-            throw new CheckerException("Данный клиент уже находится в черном списке!", "Client " + command.IMEI() + " already in the blacklist.");
+            throw new CheckerException("This client is already in the blacklist!", "Client " + command.IMEI() + " already in the blacklist.");
     }
 }

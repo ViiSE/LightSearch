@@ -42,10 +42,10 @@ public class CommandCheckerAdminRestartTimeImpl implements CommandChecker {
     @Override
     public void check() throws CheckerException {
         if(checker.isNull(command.restartTime()))
-            throw new CheckerException("Неверный формат команды. Время перезагрузки сервера имеет нулевое значение!",
+            throw new CheckerException("Wrong command format. Restart server time is null!",
                     "RestartTime: restartTime is null");
         if(checker.isEmpty(command.restartTime()))
-            throw new CheckerException("Неверный формат команды. Время перезагрузки сервера имеет пустое значение!",
+            throw new CheckerException("Wrong command format. Restart server time is empty!",
                     "RestartTime: restartTime is empty");
 
         try {

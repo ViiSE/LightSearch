@@ -22,5 +22,6 @@ import lightsearch.server.data.pojo.ClientCommandResult;
 
 public interface ProcessorServiceProducer {
     ProcessorService<ClientCommandResult> getClientProcessorServiceDefaultInstance(String command);
-    ProcessorService<AdminCommandResult> getAdminProcessorServiceDefaultInstance(String command);
+    ProcessorService<AdminCommandResult> getAdminProcessorPostServiceInstance(String command);
+    ProcessorService<AdminCommandResult> getAdminProcessorGetServiceInstance(String command);
 }

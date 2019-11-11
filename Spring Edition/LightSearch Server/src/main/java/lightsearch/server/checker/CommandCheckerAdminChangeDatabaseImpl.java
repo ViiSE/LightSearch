@@ -42,13 +42,13 @@ public class CommandCheckerAdminChangeDatabaseImpl implements CommandChecker {
     @Override
     public void check() throws CheckerException {
         if(checker.isNull(command.dbName()))
-            throw new CheckerException("Неверный формат команды. Имя базы данных имеет значение null!", "ChangeDatabase: dbName is null!");
+            throw new CheckerException("Wrong command format. Database name is null!", "ChangeDatabase: dbName is null!");
         if(checker.isEmpty(command.dbName()))
-            throw new CheckerException("Неверный формат команды. Имя базы данных имеет пустое значение!", "ChangeDatabase: dbName is empty!");
+            throw new CheckerException("Wrong command format. Database name is empty!", "ChangeDatabase: dbName is empty!");
         if(checker.isNull(command.ip()))
-            throw new CheckerException("Неверный формат команды. IP адрес базы данных имеет значение null!", "ChangeDatabase: ip is null!");
+            throw new CheckerException("Wrong command format. Database IP is null!", "ChangeDatabase: ip is null!");
         if(checker.isEmpty(command.ip()))
-            throw new CheckerException("Неверный формат команды. IP адрес базы данных имеет пустое значение!", "ChangeDatabase: ip is empty!");
+            throw new CheckerException("Wrong command format. Database IP is empty!", "ChangeDatabase: ip is empty!");
 
         try {
             validatorProducer.getIpValidatorInstance().validate(command.ip());

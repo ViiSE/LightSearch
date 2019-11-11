@@ -16,20 +16,25 @@
 
 package lightsearch.server.data;
 
-import lightsearch.server.constants.TimeoutConstants;
 import lightsearch.server.data.pojo.Client;
 import lightsearch.server.data.pojo.LightSearchSettingsFromPropertiesFile;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Component("clientsServiceDefault")
+@Service("clientsServiceDefault")
 public class ClientsServiceDefaultImpl implements ClientsService<String, Client> {
 
     @Autowired
     private LightSearchSettingsFromPropertiesFile settings;
+
+    public ClientsServiceDefaultImpl() {}
+
+    public ClientsServiceDefaultImpl(LightSearchSettingsFromPropertiesFile settings) {
+        this.settings = settings;
+    }
 
     private final static Map<String, Client> clients = new HashMap<>();
 
@@ -41,7 +46,8 @@ public class ClientsServiceDefaultImpl implements ClientsService<String, Client>
     @Override
     public void refreshTimeout(String key) {
         if(clients.get(key) != null)
-            clients.get(key).setTimeoutLimitSeconds(settings.getTimeoutLimit());
+            if(settings != null)
+                clients.get(key).setTimeoutLimitSeconds(settings.getTimeoutLimit());
     }
 
     @Override

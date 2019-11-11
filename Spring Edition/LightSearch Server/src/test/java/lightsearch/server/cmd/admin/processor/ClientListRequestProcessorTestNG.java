@@ -27,6 +27,7 @@ import lightsearch.server.data.*;
 import lightsearch.server.data.pojo.AdminCommandDTO;
 import lightsearch.server.data.pojo.AdminCommandResult;
 import lightsearch.server.data.pojo.Client;
+import lightsearch.server.data.pojo.LightSearchSettingsFromPropertiesFile;
 import lightsearch.server.producer.checker.LightSearchCheckerProducer;
 import lightsearch.server.producer.cmd.admin.AdminCommandProducer;
 import lightsearch.server.producer.cmd.admin.processor.ProcessorAdminProducer;
@@ -54,6 +55,7 @@ public class ClientListRequestProcessorTestNG extends AbstractTestNGSpringContex
     @Autowired private CurrentServerDirectoryProducer currentServerDirectoryProducer;
     @Autowired private ProcessorAdminProducer processorAdminProducer;
     @Autowired private LightSearchCheckerProducer checkerProducer;
+    @Autowired private LightSearchSettingsFromPropertiesFile settings;
 
     @Mock
     private LightSearchServerService serverService;
@@ -63,7 +65,6 @@ public class ClientListRequestProcessorTestNG extends AbstractTestNGSpringContex
 
     private AdminCommand adminCommand;
     private final BlacklistService<String> blacklistService = new BlacklistServiceDefaultImpl();
-    private final ClientsService<String, Client> clientsService = new ClientsServiceDefaultImpl();
 
     @BeforeClass
     public void setUpClass() {
@@ -79,6 +80,7 @@ public class ClientListRequestProcessorTestNG extends AbstractTestNGSpringContex
                 .getCurrentServerDirectoryFromFileInstance(osDetectorProducer.getOsDetectorDefaultInstance())
                 .currentDirectory() + ResourcesFilesPath.getResourcesFilesPath();
 
+        ClientsService<String, Client> clientsService = new ClientsServiceDefaultImpl(settings);
         clientsService.addClient("111111111111111", new Client("111111111111111", "Client 1"));
         clientsService.addClient("222222222222222", new Client("222222222222222", "Client 2"));
         clientsService.addClient("333333333333333", new Client("333333333333333", "Client 3"));

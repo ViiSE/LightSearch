@@ -27,7 +27,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 public class Product {
 
     private final String subdiv;
-    @JsonProperty("ID") private String id;
+    private String id;
     private final String name;
     private final String amount;
     private final String price;
@@ -36,7 +36,7 @@ public class Product {
     @JsonCreator
     public Product(
             @JsonProperty("subdiv") String subdiv,
-            @JsonProperty("ID")     String id,
+            @JsonProperty("id")     String id,
             @JsonProperty("name")   String name,
             @JsonProperty("amount") String amount,
             @JsonProperty("price")  String price,

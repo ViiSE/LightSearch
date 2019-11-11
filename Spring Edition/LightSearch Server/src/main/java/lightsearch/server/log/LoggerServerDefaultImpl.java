@@ -36,7 +36,8 @@ public class LoggerServerDefaultImpl implements LoggerServer {
 
     @Override
     synchronized public void log(Class clazz, LogMessageTypeEnum type, String message) {
-        loggerFile.writeLogFile(type.stringValue(), currentDateTimeProducer.getCurrentDateTimeDefaultInstance(), message);
+        loggerFile.writeLogFile(type.stringValue(), currentDateTimeProducer.getCurrentDateTimeDefaultInstance(),
+                String.format("{%s} : %s", clazz.getSimpleName(), message));
         loggerWindow.printLog(type.stringValue(), currentDateTimeProducer.getCurrentDateTimeDefaultInstance(),
                 String.format("{%s} : %s", clazz.getSimpleName(), message));
     }

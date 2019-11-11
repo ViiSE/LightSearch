@@ -38,8 +38,13 @@ public class ProcessorHolderProducerDefaultImpl implements ProcessorHolderProduc
     }
 
     @Override
-    public ProcessorHolder getProcessorHolderAdminInstance() {
-        return ctx.getBean("adminProcessorHolder", ProcessorHolder.class);
+    public ProcessorHolder getProcessorHolderAdminPostInstance() {
+        return ctx.getBean("adminProcessorHolderPost", ProcessorHolder.class);
+    }
+
+    @Override
+    public ProcessorHolder getProcessorHolderAdminGetInstance() {
+        return ctx.getBean("adminProcessorHolderGet", ProcessorHolder.class);
     }
 
     @Override

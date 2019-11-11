@@ -79,13 +79,13 @@ public class DelBlacklistProcessor implements AdminProcessor<AdminCommandResult>
             } catch (IOException ex) {
                 blacklistService.blacklist().add(command.IMEI());
                 return errAdmCmdServiceProducer.getErrorAdminCommandServiceDefaultInstance()
-                        .createErrorResult("Невозможно удалить клиента из черного списка. Исключение: " + ex.getMessage(),
+                        .createErrorResult("Cannot removed client from the blacklist. Exception: " + ex.getMessage(),
                                 "Cannot removed client from the blacklist. Exception: " + ex.getMessage());
             }
 
             AdminCommandResultCreator commandResultCreator =
                     admCmdResCrProducer.getCommandResultCreatorAdminDefaultInstance(
-                            ResultType.TRUE.stringValue(), "Данный клиент был удален из черного списка.", null, null);
+                            ResultType.TRUE.stringValue(), "Current client has been removed from the blacklist.", null, null);
             logger.log(DelBlacklistProcessor.class, INFO, "Client has been removed from the blacklist: IMEI - " + command.IMEI());
 
             return commandResultCreator.createAdminCommandResult();

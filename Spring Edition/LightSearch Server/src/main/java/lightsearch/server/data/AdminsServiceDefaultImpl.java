@@ -16,12 +16,12 @@
 
 package lightsearch.server.data;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Component("adminsServiceDefault")
+@Service("adminsServiceDefault")
 public class AdminsServiceDefaultImpl implements AdminsService<String, String> {
 
     private static final Map<String, String> adminsMap = new HashMap<>();

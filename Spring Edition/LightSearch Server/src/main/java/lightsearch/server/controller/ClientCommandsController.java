@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/commands/type/client")
+@RequestMapping("/commands")
 public class ClientCommandsController {
 
     @Autowired
@@ -48,7 +48,7 @@ public class ClientCommandsController {
     @Qualifier("errorClientCommandServiceProducerDefault")
     private ErrorClientCommandServiceProducer errorClientCommandServiceProducer;
 
-    @RequestMapping(method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/type/client", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ClientCommandResult clientCommand(@RequestBody ClientCommandDTO clientCommandDTO) {
         try {
             ProcessorService<ClientCommandResult> processorService =

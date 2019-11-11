@@ -27,13 +27,10 @@ import lightsearch.server.producer.cmd.admin.ErrorAdminCommandServiceProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/commands/type/admin")
+@RequestMapping("/commands")
 public class AdminCommandsController {
 
     @Autowired
@@ -48,18 +45,47 @@ public class AdminCommandsController {
     @Qualifier("errorAdminCommandServiceProducerDefault")
     private ErrorAdminCommandServiceProducer errorAdminCommandServiceProducer;
 
-    @RequestMapping(method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public AdminCommandResult adminCommand(@RequestBody AdminCommandDTO adminCommandDTO) {
+    @RequestMapping(value = "/type/admin", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public AdminCommandResult adminCommandPost(@RequestBody AdminCommandDTO adminCommandDTO) {
         try {
             String command = adminCommandDTO.getCommand();
             ProcessorService<AdminCommandResult> processorService =
-                    processorServiceProducer.getAdminProcessorServiceDefaultInstance(command);
+                    processorServiceProducer.getAdminProcessorPostServiceInstance(command);
 
             AdminCommand adminCommand = adminCommandProducer.getAdminCommandDefaultInstance(adminCommandDTO);
             return processorService.getProcessor().apply(adminCommand);
         } catch (ProcessorNotFoundException ex) {
             return errorAdminCommandServiceProducer.getErrorAdminCommandServiceDefaultInstance()
-                    .createErrorResult("Произошла ошибка. Сообщение: " + ex.getMessage(), ex.getMessage());
+                    .createErrorResult("Error. Exception: " + ex.getMessage(), ex.getMessage());
         }
     }
+
+    @RequestMapping(value = "/type/admin", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @ResponseBody
+    public AdminCommandResult adminCommandGet(@RequestParam String command) {
+        try {
+            ProcessorService<AdminCommandResult> processorService =
+                    processorServiceProducer.getAdminProcessorGetServiceInstance(command);
+
+            AdminCommand adminCommand =
+                    adminCommandProducer.getAdminCommandDefaultInstance(new AdminCommandDTO() {{setCommand(command);}});
+            return processorService.getProcessor().apply(adminCommand);
+        } catch (ProcessorNotFoundException ex) {
+            return errorAdminCommandServiceProducer.getErrorAdminCommandServiceDefaultInstance()
+                    .createErrorResult("Error. Exception: " + ex.getMessage(), ex.getMessage());
+        }
+    }
+
+//    private AdminCommandResult requestAdminCommandResult(String command, AdminCommandDTO adminCommandDTO) {
+//        try {
+//            ProcessorService<AdminCommandResult> processorService =
+//                    processorServiceProducer.getAdminProcessorPostServiceInstance(command);
+//
+//            AdminCommand adminCommand = adminCommandProducer.getAdminCommandDefaultInstance(adminCommandDTO);
+//            return processorService.getProcessor().apply(adminCommand);
+//        } catch (ProcessorNotFoundException ex) {
+//            return errorAdminCommandServiceProducer.getErrorAdminCommandServiceDefaultInstance()
+//                    .createErrorResult("Error. Exception: " + ex.getMessage(), ex.getMessage());
+//        }
+//    }
 }

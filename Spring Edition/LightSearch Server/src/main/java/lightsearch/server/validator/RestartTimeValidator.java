@@ -31,7 +31,7 @@ public class RestartTimeValidator implements Validator<String> {
         try {
             LocalTime.parse(restartTime, DateTimeFormatter.ofPattern("HH:mm"));
         } catch (DateTimeParseException ex) {
-            throw new ValidatorException("Неверный формат времени! Сообщение: " + ex.getMessage(),
+            throw new ValidatorException("Wrong time format! Exception: " + ex.getMessage(),
                     "Wrong time format. Exception: " + ex.getMessage());
         }
     }

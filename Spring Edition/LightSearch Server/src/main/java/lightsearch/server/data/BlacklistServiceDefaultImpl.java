@@ -16,12 +16,12 @@
 
 package lightsearch.server.data;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Component("blacklistServiceDefault")
+@Service("blacklistServiceDefault")
 public class BlacklistServiceDefaultImpl implements BlacklistService<String> {
 
     private static final List<String> blacklist = new ArrayList<>();

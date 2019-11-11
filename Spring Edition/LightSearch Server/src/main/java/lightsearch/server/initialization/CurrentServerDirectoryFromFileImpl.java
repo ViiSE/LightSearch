@@ -15,11 +15,9 @@
  */
 package lightsearch.server.initialization;
 
-import lightsearch.server.LightSearchServer;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
-import java.net.URISyntaxException;
 
 /**
  *
@@ -27,28 +25,9 @@ import java.net.URISyntaxException;
  */
 @Component("currentServerDirectoryFromFile")
 public class CurrentServerDirectoryFromFileImpl implements CurrentServerDirectory {
-
-    private final OsDetector osDetector;
-    
-    public CurrentServerDirectoryFromFileImpl(OsDetector osDetector) {
-        this.osDetector = osDetector;
-    }
     
     @Override
     public String currentDirectory() {
-
-        String currentDirectory = null;
-        try {
-            currentDirectory = new File(LightSearchServer.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath();
-            currentDirectory = currentDirectory.replaceAll("LightSearch_Server.jar", "");
-            currentDirectory = currentDirectory.substring(0, currentDirectory.length());
-
-            if(osDetector.isWindows())
-                currentDirectory = currentDirectory + "\\";
-
-        } catch (URISyntaxException ex) {
-            throw new RuntimeException("Error: " + ex.getMessage());
-        }
-        return currentDirectory;
+            return System.getProperty("user.dir") + File.separator;
     }
 }

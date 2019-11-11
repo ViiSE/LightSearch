@@ -24,9 +24,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-@Service("adminProcessorServiceDefaultImpl")
+@Service("adminProcessorPostServiceImpl")
 @Scope("prototype")
-public class AdminProcessorServiceDefaultImpl implements ProcessorService<AdminCommandResult> {
+public class AdminProcessorPostServiceImpl implements ProcessorService<AdminCommandResult> {
 
     private final String command;
 
@@ -34,7 +34,7 @@ public class AdminProcessorServiceDefaultImpl implements ProcessorService<AdminC
     @Qualifier("processorHolderProducerDefault")
     private ProcessorHolderProducer holderProducer;
 
-    public AdminProcessorServiceDefaultImpl(String command) {
+    public AdminProcessorPostServiceImpl(String command) {
         this.command = command;
     }
 
@@ -44,7 +44,7 @@ public class AdminProcessorServiceDefaultImpl implements ProcessorService<AdminC
         if(command == null)
             throw new ProcessorNotFoundException("Missing 'command' field");
 
-        ProcessorHolder holder = holderProducer.getProcessorHolderAdminInstance();
+        ProcessorHolder holder = holderProducer.getProcessorHolderAdminPostInstance();
 
         if(holder.get(command) == null)
             throw new ProcessorNotFoundException("Command '" + command + "' not found");

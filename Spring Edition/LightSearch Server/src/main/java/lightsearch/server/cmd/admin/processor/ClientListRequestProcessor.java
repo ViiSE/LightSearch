@@ -59,7 +59,7 @@ public class ClientListRequestProcessor implements AdminProcessor<AdminCommandRe
             AdminCommandResultCreator commandResultCreator =
                     admCmdResCrProducer.getCommandResultCreatorAdminDefaultInstance(
                             ResultType.TRUE.stringValue(), null, null, new ArrayList<>(clientsService.clients().values()));
-            logger.log(ClientListRequestProcessor.class, INFO, "Admin request client list");
+//            logger.log(ClientListRequestProcessor.class, INFO, "Admin request client list");
 
             return commandResultCreator.createAdminCommandResult();
         } catch (CommandResultException ex) {

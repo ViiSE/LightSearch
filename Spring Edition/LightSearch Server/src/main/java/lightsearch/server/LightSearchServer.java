@@ -18,9 +18,9 @@ package lightsearch.server;
 
 import lightsearch.server.about.AppGreetings;
 import lightsearch.server.about.EndStartupMessage;
-import lightsearch.server.data.AdminsService;
 import lightsearch.server.data.BlacklistService;
 import lightsearch.server.data.LightSearchServerService;
+import lightsearch.server.data.pojo.Client;
 import lightsearch.server.identifier.DatabaseRecordIdentifier;
 import lightsearch.server.identifier.DatabaseRecordIdentifierReader;
 import lightsearch.server.initialization.*;
@@ -41,12 +41,12 @@ public class LightSearchServer {
 
         OsDetector osDetector = ctx.getBean("osDetectorDefault", OsDetector.class);
         CurrentServerDirectory currentServerDirectory =
-                (CurrentServerDirectory) ctx.getBean("currentServerDirectoryFromFile", osDetector);
+                (CurrentServerDirectory) ctx.getBean("currentServerDirectoryFromFile");
 
-        AdminsService adminsService = ctx.getBean("adminsServiceDefault", AdminsService.class);
-        AdminsCreator adminsCreator = (AdminsCreator) ctx.getBean(
-                "adminsCreatorFromFile", currentServerDirectory, adminsService);
-        adminsCreator.createAdmins();
+//        AdminsService adminsService = ctx.getBean("adminsServiceDefault", AdminsService.class);
+//        AdminsCreator adminsCreator = (AdminsCreator) ctx.getBean(
+//                "adminsCreatorFromFile", currentServerDirectory, adminsService);
+//        adminsCreator.createAdmins();
 
         BlacklistService blacklistService = ctx.getBean("blacklistServiceDefault", BlacklistService.class);
         BlacklistCreator blacklistCreator =
@@ -62,6 +62,9 @@ public class LightSearchServer {
                 ctx.getBean("databaseRecordIdentifierReaderDefault", serverService);
         DatabaseRecordIdentifier identifier = (DatabaseRecordIdentifier)
                 ctx.getBean("databaseRecordIdentifierDefault", identifierReader.read());
+
+        serverService.clientsService().addClient("111111111111111", new Client("111111111111111", "client 1"));
+        serverService.clientsService().addClient("222222222222222", new Client("222222222222222", "client 2"));
 
         logger.log(LightSearchServer.class, INFO, "Database record identifier read. Value: " +
                 identifier.databaseRecordIdentifier());

@@ -17,6 +17,7 @@
 package lightsearch.server.data.pojo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -62,6 +63,7 @@ public class AdminCommandDTO {
         return clientTimeout;
     }
 
+    @JsonProperty("IMEI")
     public void setIMEI(String IMEI) {
         this.IMEI = IMEI;
     }

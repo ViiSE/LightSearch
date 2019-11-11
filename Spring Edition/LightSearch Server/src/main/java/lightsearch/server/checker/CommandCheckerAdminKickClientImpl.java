@@ -41,12 +41,12 @@ public class CommandCheckerAdminKickClientImpl implements CommandChecker {
     @Override
     public void check() throws CheckerException {
         if(checker.isNull(command.IMEI()))
-            throw new CheckerException("Неверный формат команды. IMEI имеет значение null!", "AddBlacklist: unknown client: IMEI is null!.");
+            throw new CheckerException("Wrong command format. IMEI is null!", "AddBlacklist: unknown client: IMEI is null!.");
 
         if(checker.isEmpty(command.IMEI()))
-            throw new CheckerException("Неверный формат команды. IMEI имеет пустое значение!", "AddBlacklist: unknown client: IMEI is empty!");
+            throw new CheckerException("Wrong command format. IMEI is empty!", "AddBlacklist: unknown client: IMEI is empty!");
 
         if(!clientsService.clients().containsKey(command.IMEI()))
-            throw new CheckerException("Клиент c данным IMEI не найден. (Не подключен к LightSearch Server)", "Client " + command.IMEI() + " does not exist.");
+            throw new CheckerException("Client with current IMEI not found. (Not connected to LightSearch Server)", "Client " + command.IMEI() + " does not exist.");
     }
 }

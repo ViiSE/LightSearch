@@ -79,8 +79,8 @@ public class ClientTimeoutProcessor implements AdminProcessor<AdminCommandResult
 
             AdminCommandResultCreator commandResultCreator =
                     admCmdResCrProducer.getCommandResultCreatorAdminDefaultInstance(
-                            ResultType.TRUE.stringValue(), "Значение тайм-аута клиента было изменено. " +
-                                    "Для вступления в силу изменений перезагрузите сервер.", null, null);
+                            ResultType.TRUE.stringValue(), " Client timeout value has been changed. " +
+                                    "For the changes to take effect, restart the server.", null, null);
             logger.log(ClientTimeoutProcessor.class, INFO, "Client timeout has been changed");
             return commandResultCreator.createAdminCommandResult();
         } catch (PropertiesException | WriterException | CheckerException ex) {

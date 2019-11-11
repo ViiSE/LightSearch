@@ -20,12 +20,17 @@ import java.io.File;
 
 public class ResourcesFilesPath {
 
-    private final static String resourcesFilesPath = levelUp() + levelUp() +
+    private final static String oldResourcesFilePath = levelUp() + levelUp() +
+            dir("src") + dir("test") + dir("resources");
+
+    private final static String resourcesFilesPath =
             dir("src") + dir("test") + dir("resources");
 
     public static String getResourcesFilesPath() {
         return resourcesFilesPath;
     }
+
+    public static String getOldResourcesFilePath() { return oldResourcesFilePath; }
 
     private static String levelUp() {
         return ".." + File.separator;

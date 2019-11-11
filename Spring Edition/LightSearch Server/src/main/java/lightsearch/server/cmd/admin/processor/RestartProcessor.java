@@ -44,7 +44,7 @@ public class RestartProcessor implements AdminProcessor<AdminCommandResult> {
             restartEndpoint.restart();
 
             return admCmdResCrProducer.getCommandResultCreatorAdminDefaultInstance(
-                    ResultType.TRUE.stringValue(), "Перезагрузка сервера прошла успешно!", null, null)
+                    ResultType.TRUE.stringValue(), "Server reboot was successful!", null, null)
                     .createAdminCommandResult();
         } catch (CommandResultException ignore) {
             return null; // never happened

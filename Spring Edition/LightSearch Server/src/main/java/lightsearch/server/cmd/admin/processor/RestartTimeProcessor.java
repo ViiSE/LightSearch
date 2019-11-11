@@ -81,9 +81,9 @@ public class RestartTimeProcessor implements AdminProcessor<AdminCommandResult> 
 
             AdminCommandResultCreator commandResultCreator =
                     admCmdResCrProducer.getCommandResultCreatorAdminDefaultInstance(
-                            ResultType.TRUE.stringValue(), "Значение времени перезагрузки сервера было изменено. " +
-                                    "Для вступления в силу изменений перезагрузите сервер.", null, null);
-            logger.log(RestartTimeProcessor.class, INFO, "Server time reboot value has been changed");
+                            ResultType.TRUE.stringValue(), "Reboot server time value has been changed. " +
+                                    "For the changes to take effect, restart the server.", null, null);
+            logger.log(RestartTimeProcessor.class, INFO, "Reboot server time value has been changed");
             return commandResultCreator.createAdminCommandResult();
         } catch (PropertiesException | WriterException | CheckerException ex) {
             return errAdmCmdServiceProducer.getErrorAdminCommandServiceDefaultInstance()

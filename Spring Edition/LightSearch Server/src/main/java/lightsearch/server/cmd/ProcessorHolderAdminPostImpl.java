@@ -29,8 +29,8 @@ import java.util.Map;
 
 import static lightsearch.server.cmd.admin.AdminCommandEnum.*;
 
-@Component("adminProcessorHolder")
-public class ProcessorHolderAdminImpl implements ProcessorHolder {
+@Component("adminProcessorHolderPost")
+public class ProcessorHolderAdminPostImpl implements ProcessorHolder {
 
     private final Map<String, AdminProcessor> holder = new HashMap<>();
 
@@ -51,8 +51,6 @@ public class ProcessorHolderAdminImpl implements ProcessorHolder {
 
         holder.put(ADD_BLACKLIST.stringValue(),  producer.getAddBlacklistProcessorInstance(serverService, checker));
         holder.put(DEL_BLACKLIST.stringValue(), producer.getDelBlacklistProcessorInstance(serverService, checker));
-        holder.put(BLACKLIST.stringValue(), producer.getBlacklistRequestProcessorInstance(serverService));
-        holder.put(CLIENT_LIST.stringValue(), producer.getClientListRequestProcessorInstance(serverService));
         holder.put(KICK.stringValue(), producer.getClientKickProcessorInstance(serverService, checker));
         holder.put(CHANGE_DATABASE.stringValue(), producer.getChangeDatabaseProcessorInstance(checker, serverService.currentDirectory()));
         holder.put(CLIENT_TIMEOUT.stringValue(), producer.getClientTimeoutProcessorInstance(serverService.currentDirectory()));

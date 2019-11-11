@@ -16,36 +16,37 @@
 
 package lightsearch.server.configuration;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
 @ComponentScan
-@EnableWebMvc
+@EnableWebSecurity
 @EnableScheduling
-public class LightSearchConfiguration extends WebSecurityConfigurerAdapter {
+public class LightSearchSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private static final String LOGIN_PROCESSING_URL = "/login/admin";
-    private static final String LOGIN_FAILURE_URL = "/login/amdin?error";
-    private static final String LOGIN_URL = "/login/admin";
-    private static final String LOGOUT_SUCCESS_URL = "/login/admin";
+    @Value("${lightsearch.server.admin.username}")
+    private String adminName;
+
+    @Value("${lightsearch.server.admin.password}")
+    private String password;
 
     @Bean
     @Override
     public UserDetailsService userDetailsService() {
-        UserDetails admin = User.withUsername("admin")
-                .password("{bcrypt}$2y$10$lWGIqgR2zKLfvSZonErz7Oa5W5U8kKiD37ipiQ.JDc8JdQ6EXbaPa")
+        UserDetails admin = User.withUsername(adminName)
+                .password(password)
                 .roles("ADMIN").build();
 
         return new InMemoryUserDetailsManager(admin);
@@ -55,19 +56,36 @@ public class LightSearchConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers(
                 "/login/clients",
-                "/commands/type/client"
+                "/commands/type/client",
+                "/static/**",
+                "/static/favicon.ico",
+                "/js/**",
+                "/css/**"
         );
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
                 .authorizeRequests()
-                .anyRequest().authenticated()
-                .and().formLogin().loginPage(LOGIN_URL).permitAll().loginProcessingUrl(LOGIN_PROCESSING_URL)
-                .failureUrl(LOGIN_FAILURE_URL)
-                .and().logout().logoutSuccessUrl(LOGOUT_SUCCESS_URL);
+//                    .antMatchers("/static/favicon.ico")
+//                    .permitAll()
+                    .antMatchers("/")
+                        .authenticated()
+                    .antMatchers(
+                            "/session/admin",
+                            "/commands/type/admin/",
+                            "/commands/type/admin",
+                            "/commands/type/admin?**")
+                        .hasRole("ADMIN")
+                .and()
+                .formLogin()
+                    .loginPage("/login/admin")
+                    .permitAll()
+                    .failureUrl("/login/admin?error")
+                    .defaultSuccessUrl("/session/admin", true)
+                .and()
+                    .logout()
+                    .logoutSuccessUrl("/login/admin");
     }
 }
