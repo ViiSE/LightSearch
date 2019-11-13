@@ -1,4 +1,4 @@
-import ApplyClButton from '/js/button_apply_cl.js';
+import ApplyBlButton from '/js/button_apply_bl.js';
 'use strict';
 const e = React.createElement;
 
@@ -6,14 +6,14 @@ var isErrorShow = true;
 var isRefresh = true;
 var currentIMEI = '';
 
-class ClientsTable extends React.Component {
+class BlacklistTable extends React.Component {
     constructor(props) {
         super(props);
         this.state = {clients: []};
 
         this.mouseOverSelect = this.mouseOverSelect.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
-        this.applyClButton = React.createRef();
+        this.applyBlButton = React.createRef();
     }
 
     componentDidMount() {

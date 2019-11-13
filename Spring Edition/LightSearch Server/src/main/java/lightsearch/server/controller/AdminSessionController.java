@@ -35,7 +35,7 @@ public class AdminSessionController {
 
     @GetMapping(value = "/admin")
     public String createSession(HttpServletRequest request) {
-        logger.log(AdminSessionController.class, INFO, "Admin connected: ip - " + request.getRemoteAddr());
+        logger.log(AdminSessionController.class, INFO, "Admin has been visited to the Admin Panel : ip - " + request.getRemoteAddr());
         return "admin-session";
     }
 }

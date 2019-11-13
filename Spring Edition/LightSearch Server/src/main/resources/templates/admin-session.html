@@ -2,40 +2,25 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <meta charset="UTF-8">
-        <title>Hello!</title>
-<!--        <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>-->
-<!--        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>-->
-        <script src="/js/react.development.js" crossorigin></script>
-        <script src="/js/react-dom.development.js" crossorigin></script>
+        <title>Admin Panel</title>
+        <link rel="stylesheet" href="/css/tables.css">
         <link rel="stylesheet" href="/css/client_table.css">
         <link rel="stylesheet" href="/css/select.css">
-        <link rel="stylesheet" href="/css/btn_apply_clients.css">
+        <link rel="stylesheet" href="/css/buttons.css">
+        <link rel="stylesheet" href="/css/notifications.css">
+        <script src="/js/notifications.js" crossorigin></script>
+        <script src="/js/nfc.js" crossorigin></script>
+        <script src="/js/react.development.js" crossorigin></script>
+        <script src="/js/react-dom.development.js" crossorigin></script>
     </head>
     <body>
-
         <h1 align="center">
             <img src="/static/logo.png" alt="logo" width="150" height="150">
         </h1>
 
         <div sec:authorize="hasRole('ROLE_ADMIN')">
             <div id="root"></div>
-
-<!--            <button id="clB">Client list</button>-->
-<!--            <button id="blB">Blacklist</button>-->
-<!--            <p id="content"></p>-->
-<!--            <p id="blacklist"></p>-->
         </div>
-
-<!--        <h2>List of clients</h2>-->
-<!--        <table>-->
-<!--            <thead>-->
-<!--            <tr>-->
-<!--                <th>IMEI</th>-->
-<!--                <th>Username</th>-->
-<!--            </tr>-->
-<!--            </thead>-->
-<!--        </table>-->
-
-        <script type="module" src="/js/table_cl.js"></script>
+        <script type="module" src="/js/app.js"></script>
     </body>
 </html>

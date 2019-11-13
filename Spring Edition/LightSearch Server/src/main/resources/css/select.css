@@ -5,23 +5,12 @@ select {
     border-radius: 10px;
     padding-top: 3px;
     padding-bottom: 3px;
-}
-
-select:after {
-    content: '>';
-    font: 17px 'Consolas', monospace;
-    color: #333;
-    -webkit-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    transform: rotate(90deg);
-    right: 11px;
-    top: 18px;
-    padding: 0 0 2px;
-    border-bottom: 1px solid #999;
-
-    position: absolute;
-    pointer-events: none;
+    background-image: linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%);
+    background-position: calc(100% - 20px) calc(1em - 5px), calc(100% - 15px) calc(1em - 5px);
+    background-size: 5px 5px, 5px 5px, 1px 1.5em;
+    background-repeat: no-repeat;
+    -webkit-appearance: none;
+    font-size: 12pt;
 }
 
 select:option {

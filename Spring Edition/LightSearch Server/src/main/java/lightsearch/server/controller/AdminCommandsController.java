@@ -75,17 +75,4 @@ public class AdminCommandsController {
                     .createErrorResult("Error. Exception: " + ex.getMessage(), ex.getMessage());
         }
     }
-
-//    private AdminCommandResult requestAdminCommandResult(String command, AdminCommandDTO adminCommandDTO) {
-//        try {
-//            ProcessorService<AdminCommandResult> processorService =
-//                    processorServiceProducer.getAdminProcessorPostServiceInstance(command);
-//
-//            AdminCommand adminCommand = adminCommandProducer.getAdminCommandDefaultInstance(adminCommandDTO);
-//            return processorService.getProcessor().apply(adminCommand);
-//        } catch (ProcessorNotFoundException ex) {
-//            return errorAdminCommandServiceProducer.getErrorAdminCommandServiceDefaultInstance()
-//                    .createErrorResult("Error. Exception: " + ex.getMessage(), ex.getMessage());
-//        }
-//    }
 }

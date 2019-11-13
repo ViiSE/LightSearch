@@ -58,7 +58,7 @@ public class LightSearchSecurityConfiguration extends WebSecurityConfigurerAdapt
                 "/login/clients",
                 "/commands/type/client",
                 "/static/**",
-                "/static/favicon.ico",
+                "/favicon.ico",
                 "/js/**",
                 "/css/**"
         );
@@ -68,8 +68,6 @@ public class LightSearchSecurityConfiguration extends WebSecurityConfigurerAdapt
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-//                    .antMatchers("/static/favicon.ico")
-//                    .permitAll()
                     .antMatchers("/")
                         .authenticated()
                     .antMatchers(

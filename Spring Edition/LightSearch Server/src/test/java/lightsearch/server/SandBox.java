@@ -49,10 +49,15 @@ public class SandBox extends AbstractTestNGSpringContextTests {
         System.out.println("Deserialization: " + r.getUserIdentifier());
 
         AdminCommandDTO adminCommandDTO = new AdminCommandDTO();
-        adminCommandDTO.setCommand("change_db");
+        adminCommandDTO.setCommand("changeDb");
         adminCommandDTO.setPort(8080);
         adminCommandDTO.setClientTimeout(30);
         adminCommandDTO.setRestartTime("22:05");
+        adminCommandDTO.setIMEI("111111111111111");
+        adminCommandDTO.setDbName("db name");
+        adminCommandDTO.setUsername("username");
+        adminCommandDTO.setPassword("pass");
+        adminCommandDTO.setIp("127.0.0.1");
         System.out.println("Serialization ADMIN: " + mapper.writeValueAsString(adminCommandDTO));
 
         AdminCommandResult adminCommandResult = new AdminCommandResult("True", "OK!", null, null);

@@ -65,6 +65,13 @@ public class LightSearchServer {
 
         serverService.clientsService().addClient("111111111111111", new Client("111111111111111", "client 1"));
         serverService.clientsService().addClient("222222222222222", new Client("222222222222222", "client 2"));
+        serverService.clientsService().addClient("333333333333333", new Client("333333333333333", "client 3"));
+        serverService.clientsService().addClient("444444444444444", new Client("444444444444444", "client 4"));
+        serverService.clientsService().addClient("555555555555555", new Client("555555555555555", "client 5"));
+        serverService.clientsService().addClient("666666666666666", new Client("666666666666666", "client 6"));
+        serverService.clientsService().addClient("777777777777777", new Client("777777777777777", "client 7"));
+        serverService.clientsService().addClient("888888888888888", new Client("888888888888888", "client 8"));
+        serverService.clientsService().addClient("999999999999999", new Client("999999999999999", "client 9"));
 
         logger.log(LightSearchServer.class, INFO, "Database record identifier read. Value: " +
                 identifier.databaseRecordIdentifier());

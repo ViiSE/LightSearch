@@ -24,7 +24,6 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 import java.util.List;
 
-@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AdminCommandResult {
 
@@ -35,7 +34,7 @@ public class AdminCommandResult {
 
     @JsonCreator
     public AdminCommandResult(
-            @JsonProperty("is_done")   String isDone,
+            @JsonProperty("isDone")   String isDone,
             @JsonProperty("message")   String message,
             @JsonProperty("blacklist") List<String> blacklist,
             @JsonProperty("clients")   List<Client> clients) {

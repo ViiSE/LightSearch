@@ -27,10 +27,10 @@ public class LightSearchWebConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/favicon.ico")
-                .addResourceLocations("classpath:/static/favicon.ico");
         registry.addResourceHandler("/static/**")
                 .addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/favicon.ico")
+                .addResourceLocations("classpath:/static/favicon.ico");
         registry.addResourceHandler("/js/**")
                 .addResourceLocations("classpath:/js/");
         registry.addResourceHandler("/css/**")
