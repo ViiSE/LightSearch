@@ -74,3 +74,5 @@ LightSearch состоит из пяти программ:
 - [JUnit 5](https://junit.org/junit5/)
 - [TestNG](https://testng.org/doc/)
 - [Mockito](https://github.com/mockito/mockito)
+- [React](https://github.com/facebook/react)
+- [Thymeleaf](https://github.com/thymeleaf)
