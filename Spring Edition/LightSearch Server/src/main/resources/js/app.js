@@ -1,5 +1,5 @@
-import Tables from '/js/tables_container.js';
+import TablesContainer from '/js/tables_container.js';
 'use strict';
 const e = React.createElement;
 
-ReactDOM.render(e(Tables, null), document.getElementById('root'));
+ReactDOM.render(e(TablesContainer, null), document.getElementById('root'));

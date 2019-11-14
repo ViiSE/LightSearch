@@ -1,4 +1,5 @@
 import ClientsTable from '/js/table_cl.js';
+import BlacklistTable from '/js/table_bl.js';
 'use strict';
 const e = React.createElement;
 
@@ -9,8 +10,12 @@ class TablesContainer extends React.Component {
 
     render() {
         return e('div', {id: 'tablesContainer'},
-                    e(ClientsTable, null));
+                    e(ClientsTable, null),
+                    e(BlacklistTable, null));
     }
 }
 
-export default Tables;
+export default TablesContainer;
+
+//,
+//                    e(BlacklistTable, null)

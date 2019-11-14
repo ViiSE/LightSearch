@@ -1,19 +1,18 @@
-import ApplyClButton from '/js/button_apply_cl.js';
+import ApplyButtonTables from '/js/button_apply_tables.js';
 'use strict';
 const e = React.createElement;
 
-var isErrorShow = true;
-var isRefresh = true;
-var currentIMEI = '';
+var isErrorShowCl = true;
+var isRefreshCl = true;
+var currentIMEICl = '';
 
 class ClientsTable extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {clients: []};
+        this.state = {clients: [], actions: [], disabled: true};
 
         this.mouseOverSelect = this.mouseOverSelect.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
-        this.applyClButton = React.createRef();
     }
 
     componentDidMount() {
@@ -25,29 +24,53 @@ class ClientsTable extends React.Component {
     }
 
     refreshTable() {
-        if(isRefresh) {
+        if(isRefreshCl) {
             fetch('/commands/type/admin?command=clientList')
     		    .then(response => response.json())
     		    .then((result) => {this.setState({clients: result.clients})},
-    		          (error) => {if(isErrorShow){isErrorShow = false; nfcErr({title: 'Error', message: error.message});} if(error.message.includes('NetworkError')) {isRefresh = false;}});
+    		          (error) => {if(isErrorShowCl){isErrorShowCl = false; nfcErr({title: 'Error', message: error.message});} if(error.message.includes('NetworkError')) {isRefreshCl = false;}});
+            this.setState(state => {
+                if(state.actions.length != 0) {
+                    var activeActions = [];
+                    var newDisabled = false;
+                    for(var i = 0; i < state.actions.length; i++)
+                    if(!state.actions[i].isProcessed)
+                        activeActions.push(state.actions[i]);
+                    if(activeActions.length == 0)
+                        newDisabled = true;
+                    return {actions: activeActions, disabled: newDisabled}}});
         }
     }
 
     mouseOverSelect(event) {
-        currentIMEI = this.state.clients[event.currentTarget.rowIndex-1].IMEI;
+        currentIMEICl = this.state.clients[event.currentTarget.rowIndex-1].IMEI;
     }
 
     handleSelect(event) {
         var actionVal = event.currentTarget.value;
+        var newActions = [];
+        var newDisabled = false;
         if(actionVal != 'none') {
             var action = new Object();
             action.command = actionVal;
-            action.IMEI = currentIMEI;
+            action.IMEI = currentIMEICl;
             action.isProcessed = false;
-            this.applyClButton.current.addAction(action);
-        } else
-            this.applyClButton.current.removeAction(currentIMEI);
-        currentIMEI = '';
+            if(this.state.actions.find(_action => _action.IMEI == action.IMEI) == undefined) {
+                newActions = this.state.actions;
+                newActions.push(action);
+            } else {
+                var foundIndex = state.actions.findIndex(_action => _action.IMEI == action.IMEI);
+                newActions = this.state.actions;
+                if(foundIndex != -1)
+                    newActions[foundIndex] = action;
+            }
+        } else {
+            newActions = this.state.actions.filter(action => action.IMEI != currentIMEICl);
+            if(newActions.length == 0)
+                newDisabled = true;
+        }
+        this.setState({actions: newActions, disabled: newDisabled});
+        currentIMEICl = '';
     }
 
     renderTableData() {
@@ -77,7 +100,7 @@ class ClientsTable extends React.Component {
                                 e('th', {key: 'actions'}, 'Actions'))),
                         e('tbody', null,
                             this.renderTableData())),
-                    e(ApplyClButton, {ref: this.applyClButton}));
+                    e(ApplyButtonTables, {id:'btnApplyClients', actions: this.state.actions, disabled: this.state.disabled}));
     }
 }
 

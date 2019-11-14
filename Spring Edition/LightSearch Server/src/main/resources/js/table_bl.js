@@ -1,84 +1,113 @@
-import ApplyBlButton from '/js/button_apply_bl.js';
+import ApplyButtonTables from '/js/button_apply_tables.js';
 'use strict';
 const e = React.createElement;
 
-var isErrorShow = true;
-var isRefresh = true;
-var currentIMEI = '';
+var isErrorShowBl = true;
+var isRefreshBl = true;
+var currentIMEIBl = '';
+var actionsLength = 0;
 
 class BlacklistTable extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {clients: []};
+        this.state = {blacklist: [], actions: [], disabled: true};
 
         this.mouseOverSelect = this.mouseOverSelect.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
-        this.applyBlButton = React.createRef();
-    }
-
-    componentDidMount() {
-        this.timerID = setInterval(() => this.refreshTable(), 1000);
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.timerID);
+        this.checkActionsBl = this.checkActionsBl.bind(this);
+        this.getActiveActions = this.getActiveActions.bind(this);
+        this.refreshTable = this.refreshTable.bind(this);
     }
 
     refreshTable() {
-        if(isRefresh) {
-            fetch('/commands/type/admin?command=clientList')
-    		    .then(response => response.json())
-    		    .then((result) => {this.setState({clients: result.clients})},
-    		          (error) => {if(isErrorShow){isErrorShow = false; nfcErr({title: 'Error', message: error.message});} if(error.message.includes('NetworkError')) {isRefresh = false;}});
+        var activeActions = this.getActiveActions();
+        var newDisabled = activeActions.length == 0 ? true : false;
+        if(isRefreshBl) {
+            fetch('/commands/type/admin?command=blacklist')
+                .then(response => response.json())
+                .then((result) => {var bl = result.blacklist;this.setState({blacklist: bl, actions: activeActions, disabled: newDisabled});},
+                      (error) => {if(isErrorShowBl){isErrorShowBl = false; nfcErr({title: 'Error', message: error.message});} if(error.message.includes('NetworkError')) {isRefreshBl = false;}});
         }
     }
 
+    componentDidMount() {
+        this.refreshTable();
+    }
+
+    getActiveActions() {
+        var activeActions = [];
+        var newDisabled = false;
+        for(var i = 0; i < this.state.actions.length; i++)
+            if(!this.state.actions[i].isProcessed)
+                activeActions.push(this.state.actions[i]);
+        return activeActions;
+    }
+
+    checkActionsBl() {
+        if(this.state.actions.length != 0)
+            return this.getActiveActions().length == 0 ? false : true;
+        return false;
+    }
+
+    componentDidUpdate() {
+        if(this.checkActionsBl())
+            refreshTable();
+    }
+
     mouseOverSelect(event) {
-        currentIMEI = this.state.clients[event.currentTarget.rowIndex-1].IMEI;
+        currentIMEIBl = this.state.blacklist[event.currentTarget.rowIndex-1];
     }
 
     handleSelect(event) {
         var actionVal = event.currentTarget.value;
+        var newActions = [];
+        var newDisabled = false;
         if(actionVal != 'none') {
             var action = new Object();
             action.command = actionVal;
-            action.IMEI = currentIMEI;
+            action.IMEI = currentIMEICl;
             action.isProcessed = false;
-            this.applyClButton.current.addAction(action);
-        } else
-            this.applyClButton.current.removeAction(currentIMEI);
-        currentIMEI = '';
+            if(this.state.actions.find(_action => _action.IMEI == action.IMEI) == undefined) {
+                newActions = this.state.actions;
+                newActions.push(action);
+            } else {
+                var foundIndex = state.actions.findIndex(_action => _action.IMEI == action.IMEI);
+                newActions = this.state.actions;
+                if(foundIndex != -1)
+                    newActions[foundIndex] = action;
+            }
+        } else {
+            newActions = this.state.actions.filter(action => action.IMEI != currentIMEICl);
+            if(newActions.length == 0)
+                newDisabled = true;
+        }
+        this.setState({actions: newActions, disabled: newDisabled});
+        currentIMEICl = '';
     }
 
     renderTableData() {
-        return this.state.clients.map(client => {
-            const {IMEI, username, timeout} = client;
+        return this.state.blacklist.map(IMEI => {
             return e('tr', {key: IMEI, onMouseOver: this.mouseOverSelect},
                         e('td', null, IMEI),
-                        e('td', null, username),
-                        e('td', null, timeout),
                         e('td', null,
                             e('select', {onChange:this.handleSelect},
                                 e('option', {value:'none'}, "None"),
-                                e('option', {value:'kick'}, "Kick"),
-                                e('option', {value:'addBlacklist'}, "Add to the Blacklist"))));
+                                e('option', {value:'delBlacklist'}, "Delete from the Blacklist"))));
         });
     }
 
     render() {
-        return e('div', {id: 'divClTable'},
-                    e('h2', {id: 'clTitle'}, 'Clients'),
-                    e('table', {align:'center', id:'clients'},
+        return e('div', {id: 'divBlTable'},
+                    e('h2', {id: 'blTitle'}, 'Blacklist'),
+                    e('table', {align:'center', id:'blacklist'},
                         e('thead', null,
                             e('tr', null,
                                 e('th', {key: 'IMEI'}, 'IMEI'),
-                                e('th', {key: 'username'}, 'Username'),
-                                e('th', {key: 'timeout'}, 'Timeout'),
                                 e('th', {key: 'actions'}, 'Actions'))),
                         e('tbody', null,
                             this.renderTableData())),
-                    e(ApplyClButton, {ref: this.applyClButton}));
+                    e(ApplyButtonTables, {id:'btnApplyBl', actions: this.state.actions, disabled: this.state.disabled}));
     }
 }
 
-export default ClientsTable;
+export default BlacklistTable;

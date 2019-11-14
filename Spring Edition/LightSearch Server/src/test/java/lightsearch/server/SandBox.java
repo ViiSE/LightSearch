@@ -32,6 +32,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 public class SandBox extends AbstractTestNGSpringContextTests {
 
@@ -60,7 +61,7 @@ public class SandBox extends AbstractTestNGSpringContextTests {
         adminCommandDTO.setIp("127.0.0.1");
         System.out.println("Serialization ADMIN: " + mapper.writeValueAsString(adminCommandDTO));
 
-        AdminCommandResult adminCommandResult = new AdminCommandResult("True", "OK!", null, null);
+        AdminCommandResult adminCommandResult = new AdminCommandResult("True", "OK!", new ArrayList<>() {{add("111111111111111"); add("222222222222222");}}, null);
         System.out.println("Serialization ADMIN RESULT: " + mapper.writeValueAsString(adminCommandResult));
 
 

@@ -30,6 +30,6 @@ button[disabled]{
   color: white;
 }
 
-#btnApplyClients {
-    margin-right: 4.95%;
+#btnApplyClients, #btnApplyBl {
+    margin-right: 2.45%;
 }
