@@ -11,10 +11,6 @@
     font-size: 12pt;
   }
 
-  input {
-    width: 20%;
-  }
-
   #tablesContainer {
     padding-bottom: 12%;
   }
@@ -31,13 +27,21 @@
     padding-top: 8%;
   }
 
-  #dsopt {
-    font-size: 12pt;
+  #addBlOpt,#toutClOpt {
+    font-size: 15pt;
+    margin-inline-start: 2%;
+    margin-block-start: 1%;
     margin-block-end: 1.4%;
   }
 
-  #btnApplyDs {
-    margin-inline-end: 92%;
+  #btnApplyAddBl,#btnApplyToutCl {
+    padding-block-end: 3%;
+    margin-inline-end: -30%;
+    margin-block-start: -3.5%;
+  }
+
+  #btnApplyAddBl {
+    margin-inline-end: -33%;
   }
 }
 
@@ -54,8 +58,13 @@
     font-size: 8pt;
   }
 
-  input {
-    width: 50%;
+  input[type='text'] {
+    width: 55%;
+    font-size: 9pt;
+  }
+
+  #toutInput {
+    width: 51%;
   }
 
   #clTitle {
@@ -70,15 +79,34 @@
     padding-bottom: 21%;
   }
 
-  #dsopt {
+  #addBlOpt, #toutClOpt {
+    font-size: 11pt;
+    margin-inline-start: 3%;
+    margin-block-start: 5%;
     margin-block-end: 5%;
   }
 
-  #btnApplyDs {
-    margin-inline-end: 66%;
+  #btnApplyAddBl, #btnApplyToutCl {
+    padding-block-end: 4%;
+    padding-block-start: 4%;
+    padding-inline-start: 4%;
+    padding-inline-end: 4%;
   }
 
-  #dsopt {
-    margin-block-end: 5%;
+  #btnApplyAddBl {
+    margin-inline-end: -30.2%;
+  }
+
+  #btnApplyToutCl {
+    margin-inline-end: -27.6%;
+  }
+
+  #addBlInputDiv, #toutClInputDiv {
+    margin-inline-start: -7%;
+  }
+
+  #addBlLabel, #toutClLabel {
+    font-size: 9pt;
+    margin-inline-end: 1%;
   }
 }

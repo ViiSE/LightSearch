@@ -1,10 +1,15 @@
-input {
+input[type='text'] {
     background-color: white;
     background-color: #F2F2F2;
     border-radius: 20px;
     border-style: solid;
-    margin-inline-end: 60%;
     text-align: left;
-    padding-inline-start: 1%;
+    padding-inline-start: 3%;
+    padding-inline-end: 3%;
     margin-inline-start: 1.4%;
+    font-size: 11pt;
+}
+
+#addBlInputDiv, #toutClInputDiv {
+    display:inline-block;
 }

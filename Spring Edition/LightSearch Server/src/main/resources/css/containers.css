@@ -11,10 +11,9 @@
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     border-radius: 10px;
-    font-size: 12pt;
 }
 
-#ctitle {
+#cTitle {
     color: #007dff;
     text-align: center;
     display: block;
@@ -24,16 +23,15 @@
     margin-block-start: 4%;
 }
 
-#ds {
+#addBl, #toutCl {
     margin-block-start: 3%;
 }
 
-#iplabel {
-    display: block;
-    margin-inline-start: 1.4%;
+#addBlLabel, #toutClLabel {
+    margin-inline-start: 20%;
 }
 
-#dsopt {
+#addBlOpt, #toutClOpt {
     display: block;
     margin-inline-start: 0.5%;
     padding-block-end: 0.1%;
