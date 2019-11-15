@@ -27,10 +27,6 @@ import org.springframework.stereotype.Service;
 public class LightSearchServerServiceDefaultImpl implements LightSearchServerService {
 
     @Autowired
-    @Qualifier("adminsServiceDefault")
-    private AdminsService<String, String> adminsService;
-
-    @Autowired
     @Qualifier("clientsServiceDefault")
     private ClientsService<String, Client> clientsService;
 
@@ -43,11 +39,6 @@ public class LightSearchServerServiceDefaultImpl implements LightSearchServerSer
 
     @Autowired
     private OsDetectorProducer osDetectorProducer;
-
-    @Override
-    public AdminsService adminsService() {
-        return adminsService;
-    }
 
     @Override
     public ClientsService clientsService() {

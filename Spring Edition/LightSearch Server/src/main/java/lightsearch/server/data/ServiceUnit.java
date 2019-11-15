@@ -13,14 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+
 package lightsearch.server.data;
 
-/**
- *
- * @author ViiSE
- */
-public interface LightSearchServerService {
-    ClientsService clientsService();
-    BlacklistService blacklistService();
-    String currentDirectory();
-}
+public interface ServiceUnit { }

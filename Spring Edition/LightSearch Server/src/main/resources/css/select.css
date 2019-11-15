@@ -1,7 +1,6 @@
 select {
     border: 0;
     width: 100%;
-    font-family: arial, sans-serif;
     border-radius: 10px;
     padding-top: 3px;
     padding-bottom: 3px;
@@ -10,7 +9,6 @@ select {
     background-size: 5px 5px, 5px 5px, 1px 1.5em;
     background-repeat: no-repeat;
     -webkit-appearance: none;
-    font-size: 12pt;
 }
 
 select:option {

@@ -72,6 +72,24 @@ public class LightSearchServer {
         serverService.clientsService().addClient("777777777777777", new Client("777777777777777", "client 7"));
         serverService.clientsService().addClient("888888888888888", new Client("888888888888888", "client 8"));
         serverService.clientsService().addClient("999999999999999", new Client("999999999999999", "client 9"));
+        serverService.clientsService().addClient("111", new Client("111", "client 10"));
+        serverService.clientsService().addClient("222", new Client("222", "client 11"));
+        serverService.clientsService().addClient("333", new Client("333", "client 12"));
+        serverService.clientsService().addClient("444", new Client("444", "client 13"));
+        serverService.clientsService().addClient("555", new Client("555", "client 14"));
+        serverService.clientsService().addClient("666", new Client("666", "client 15"));
+        serverService.clientsService().addClient("777", new Client("777", "client 16"));
+        serverService.clientsService().addClient("888", new Client("888", "client 17"));
+        serverService.clientsService().addClient("999", new Client("999", "client 18"));
+        serverService.clientsService().addClient("11", new Client("11", "client 19"));
+        serverService.clientsService().addClient("22", new Client("22", "client 20"));
+        serverService.clientsService().addClient("33", new Client("33", "client 21"));
+        serverService.clientsService().addClient("44", new Client("44", "client 22"));
+        serverService.clientsService().addClient("55", new Client("55", "client 23"));
+        serverService.clientsService().addClient("66", new Client("66", "client 24"));
+        serverService.clientsService().addClient("77", new Client("77", "client 25"));
+        serverService.clientsService().addClient("88", new Client("88", "client 26"));
+        serverService.clientsService().addClient("99", new Client("99", "client 27"));
 
         logger.log(LightSearchServer.class, INFO, "Database record identifier read. Value: " +
                 identifier.databaseRecordIdentifier());

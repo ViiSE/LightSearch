@@ -100,7 +100,7 @@ class ClientsTable extends React.Component {
                                 e('th', {key: 'actions'}, 'Actions'))),
                         e('tbody', null,
                             this.renderTableData())),
-                    e(ApplyButtonTables, {id:'btnApplyClients', actions: this.state.actions, disabled: this.state.disabled}));
+                    e(ApplyButtonTables, {id: 'btnApplyClients', actions: this.state.actions, disabled: this.state.disabled, ishandler: 'false', updatedatahandler: null}));
     }
 }
 

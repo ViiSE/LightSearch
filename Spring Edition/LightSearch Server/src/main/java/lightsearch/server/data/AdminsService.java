@@ -18,6 +18,6 @@ package lightsearch.server.data;
 
 import java.util.Map;
 
-public interface AdminsService<K, V> {
+public interface AdminsService<K, V> extends ServiceUnit {
     Map<K, V> admins();
 }

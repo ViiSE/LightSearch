@@ -14,9 +14,9 @@ class BlacklistTable extends React.Component {
 
         this.mouseOverSelect = this.mouseOverSelect.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
-        this.checkActionsBl = this.checkActionsBl.bind(this);
         this.getActiveActions = this.getActiveActions.bind(this);
         this.refreshTable = this.refreshTable.bind(this);
+        this.updatedatahandler = this.updatedatahandler.bind(this);
     }
 
     refreshTable() {
@@ -25,7 +25,7 @@ class BlacklistTable extends React.Component {
         if(isRefreshBl) {
             fetch('/commands/type/admin?command=blacklist')
                 .then(response => response.json())
-                .then((result) => {var bl = result.blacklist;this.setState({blacklist: bl, actions: activeActions, disabled: newDisabled});},
+                .then((result) => {console.log('BLLLLLLLLL: ' + result.blacklist); var bl = result.blacklist; this.setState({blacklist: bl, actions: activeActions, disabled: newDisabled});},
                       (error) => {if(isErrorShowBl){isErrorShowBl = false; nfcErr({title: 'Error', message: error.message});} if(error.message.includes('NetworkError')) {isRefreshBl = false;}});
         }
     }
@@ -43,15 +43,10 @@ class BlacklistTable extends React.Component {
         return activeActions;
     }
 
-    checkActionsBl() {
-        if(this.state.actions.length != 0)
-            return this.getActiveActions().length == 0 ? false : true;
-        return false;
-    }
-
-    componentDidUpdate() {
-        if(this.checkActionsBl())
-            refreshTable();
+    updatedatahandler() {
+        console.log(JSON.stringify(this.getActiveActions()));
+        console.log("I AM UPDATE");
+        this.refreshTable();
     }
 
     mouseOverSelect(event) {
@@ -65,7 +60,7 @@ class BlacklistTable extends React.Component {
         if(actionVal != 'none') {
             var action = new Object();
             action.command = actionVal;
-            action.IMEI = currentIMEICl;
+            action.IMEI = currentIMEIBl;
             action.isProcessed = false;
             if(this.state.actions.find(_action => _action.IMEI == action.IMEI) == undefined) {
                 newActions = this.state.actions;
@@ -77,12 +72,14 @@ class BlacklistTable extends React.Component {
                     newActions[foundIndex] = action;
             }
         } else {
-            newActions = this.state.actions.filter(action => action.IMEI != currentIMEICl);
+            newActions = this.state.actions.filter(action => action.IMEI != currentIMEIBl);
             if(newActions.length == 0)
                 newDisabled = true;
         }
         this.setState({actions: newActions, disabled: newDisabled});
-        currentIMEICl = '';
+        currentIMEIBl = '';
+        console.log(JSON.stringify(this.getActiveActions()));
+        console.log("I AM SELECT");
     }
 
     renderTableData() {
@@ -106,7 +103,7 @@ class BlacklistTable extends React.Component {
                                 e('th', {key: 'actions'}, 'Actions'))),
                         e('tbody', null,
                             this.renderTableData())),
-                    e(ApplyButtonTables, {id:'btnApplyBl', actions: this.state.actions, disabled: this.state.disabled}));
+                    e(ApplyButtonTables, {id: 'btnApplyBl', actions: this.state.actions, disabled: this.state.disabled, ishandler: 'true', updatedatahandler: this.updatedatahandler}));
     }
 }
 

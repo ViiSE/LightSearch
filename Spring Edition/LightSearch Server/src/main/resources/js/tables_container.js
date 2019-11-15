@@ -10,12 +10,10 @@ class TablesContainer extends React.Component {
 
     render() {
         return e('div', {id: 'tablesContainer'},
+                    e('label', {id:'ctitle'}, 'Tables'),
                     e(ClientsTable, null),
                     e(BlacklistTable, null));
     }
 }
 
 export default TablesContainer;
-
-//,
-//                    e(BlacklistTable, null)

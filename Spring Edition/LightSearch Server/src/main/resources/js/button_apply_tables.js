@@ -23,10 +23,12 @@ class ApplyButtonTables extends React.Component {
                               (error) => {nfcErr({title: 'Error', message: error.message});});
             actions[i].isProcessed = true;
         }
+        if(this.props.ishandler == 'true')
+            this.props.updatedatahandler.apply();
     }
 
     render() {
-        return e('button', {id:this.props.id, disabled: this.props.disabled, actions: this.props.actions, onClick: this.handleClick}, 'Apply');
+        return e('button', {id: this.props.id, disabled: this.props.disabled, actions: this.props.actions, onClick: this.handleClick, ishandler: this.props.ishandler, updatedatahandler: this.props.updatedatahandler}, 'Apply');
     }
 }
 

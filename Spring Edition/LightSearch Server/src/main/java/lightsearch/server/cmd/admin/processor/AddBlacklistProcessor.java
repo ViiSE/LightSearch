@@ -86,7 +86,7 @@ public class AddBlacklistProcessor implements AdminProcessor<AdminCommandResult>
             clientsService.clients().remove(command.IMEI());
             AdminCommandResultCreator commandResultCreator =
                     admCmdResCrProducer.getCommandResultCreatorAdminDefaultInstance(
-                            ResultType.TRUE.stringValue(), "Client has been added to the blacklist.", null, null);
+                            ResultType.TRUE.stringValue(), "Client " + command.IMEI() + " has been added to the blacklist.", null, null);
             logger.log(AddBlacklistProcessor.class, INFO, "Client has been added to the blacklist: IMEI - " + command.IMEI());
 
             return commandResultCreator.createAdminCommandResult();

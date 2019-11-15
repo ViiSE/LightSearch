@@ -1,14 +1,6 @@
 #clTitle, #blTitle  {
     text-align: center;
-    font-family: arial, sans-serif;
-}
-
-#clTitle {
-    padding-top: 1%;
-}
-
-#blTitle {
-    padding-top: 3%;
+    opacity: 0.8;
 }
 
 table {
@@ -21,7 +13,6 @@ table {
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     border-radius: 10px;
-    font-size: 12pt;
 }
 
 table th {
@@ -33,7 +24,7 @@ table th {
     padding: 6px;
 }
 
-#clients tr:hover, blacklist tr:hover {
+#clients tr:hover, #blacklist tr:hover {
     background-color: #ddd;
     transition: background-color .2s linear;
     -moz-border-radius: 10px;

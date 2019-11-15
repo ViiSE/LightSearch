@@ -69,7 +69,7 @@ public class DelBlacklistProcessor implements AdminProcessor<AdminCommandResult>
         try {
             cmdCheckerProducer.getCommandCheckerAdminDelBlacklistInstance(command, blacklistService, checker).check();
             blacklistService.blacklist().remove(command.IMEI());
-            try (FileOutputStream fout = new FileOutputStream(blacklistDirectory, true);
+            try (FileOutputStream fout = new FileOutputStream(blacklistDirectory, false);
                  BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fout))) {
                 List<String> blacklist = blacklistService.blacklist();
                 for (String IMEI : blacklist) {
@@ -85,7 +85,7 @@ public class DelBlacklistProcessor implements AdminProcessor<AdminCommandResult>
 
             AdminCommandResultCreator commandResultCreator =
                     admCmdResCrProducer.getCommandResultCreatorAdminDefaultInstance(
-                            ResultType.TRUE.stringValue(), "Current client has been removed from the blacklist.", null, null);
+                            ResultType.TRUE.stringValue(), "Client " + command.IMEI() + " has been removed from the blacklist.", null, null);
             logger.log(DelBlacklistProcessor.class, INFO, "Client has been removed from the blacklist: IMEI - " + command.IMEI());
 
             return commandResultCreator.createAdminCommandResult();

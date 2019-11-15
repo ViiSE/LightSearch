@@ -18,7 +18,7 @@ package lightsearch.server.data;
 
 import java.util.Map;
 
-public interface ClientsService<K,V> {
+public interface ClientsService<K,V> extends ServiceUnit {
     Map<K,V> clients();
     void refreshTimeout(K key);
     void addClient(K key, V value);

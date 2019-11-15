@@ -50,7 +50,7 @@ public class SandBox extends AbstractTestNGSpringContextTests {
         System.out.println("Deserialization: " + r.getUserIdentifier());
 
         AdminCommandDTO adminCommandDTO = new AdminCommandDTO();
-        adminCommandDTO.setCommand("changeDb");
+        adminCommandDTO.setCommand("delBlacklist");
         adminCommandDTO.setPort(8080);
         adminCommandDTO.setClientTimeout(30);
         adminCommandDTO.setRestartTime("22:05");

@@ -18,6 +18,6 @@ package lightsearch.server.data;
 
 import java.util.List;
 
-public interface BlacklistService<V> {
+public interface BlacklistService<V> extends ServiceUnit {
     List<V> blacklist();
 }
