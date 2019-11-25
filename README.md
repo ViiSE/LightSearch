@@ -76,3 +76,4 @@ LightSearch состоит из пяти программ:
 - [Mockito](https://github.com/mockito/mockito)
 - [React](https://github.com/facebook/react)
 - [Thymeleaf](https://github.com/thymeleaf)
+- [Jenkins](https://jenkins.io)
