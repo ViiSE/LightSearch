@@ -17,5 +17,5 @@
 package ru.viise.lightsearch.dialog.alert;
 
 public interface DialogOKCancelContainerCreator {
-    DialogOKCancelContainer createDialogOkCancelContainer();
+    DialogOKCancelContainer create();
 }

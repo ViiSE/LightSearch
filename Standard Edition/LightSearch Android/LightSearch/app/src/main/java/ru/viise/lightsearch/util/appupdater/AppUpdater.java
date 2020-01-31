@@ -65,7 +65,7 @@ public class AppUpdater implements IAppUpdater {
 
                     AlertDialog alertDialog =
                             UpdateAlertDialogCreatorInit.alertDialogUpdateCreator(activity, update)
-                            .createAlertDialog();
+                            .create();
 
 
 

@@ -57,9 +57,9 @@ public class CancelSoftCheckFromCartAlertDialogCreatorDefaultImpl implements Can
     }
 
     @Override
-    public AlertDialog createAlertDialog() {
+    public AlertDialog create() {
         DialogOKCancelContainer dialogOKCancelContainer = DialogOKCancelContainerCreatorInit.
-                dialogOKCancelContainerCreator(activity).createDialogOkCancelContainer();
+                dialogOKCancelContainerCreator(activity).create();
 
         dialogOKCancelContainer.textViewTitle().setVisibility(View.GONE);
         dialogOKCancelContainer.textViewResult().setText(R.string.dialog_exit_to_cart);

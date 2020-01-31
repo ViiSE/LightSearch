@@ -35,9 +35,9 @@ public class SuccessAlertDialogCreatorDefaultImpl implements SuccessAlertDialogC
     }
 
     @Override
-    public AlertDialog createAlertDialog() {
+    public AlertDialog create() {
         DialogOKContainer dialogOKContainer =
-                DialogOKContainerCreatorInit.dialogOKContainerCreator(activity).createDialogOKContainer();
+                DialogOKContainerCreatorInit.dialogOKContainerCreator(activity).create();
 
         dialogOKContainer.textViewTitle().setText(R.string.dialog_success);
         dialogOKContainer.textViewResult().setText(message);

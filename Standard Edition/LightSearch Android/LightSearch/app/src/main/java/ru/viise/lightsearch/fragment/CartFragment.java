@@ -223,7 +223,7 @@ public class CartFragment extends Fragment implements ICartFragment, OnBackPress
                 InfoProductAlertDialogCreator infoProdADCr =
                         InfoProductAlertDialogCreatorInit.infoProductAlertDialogCreator(getActivity(),
                                 (CartRecord)adapter.getItem(position));
-                infoProdADCr.createAlertDialog().show();
+                infoProdADCr.create().show();
             }
         };
 
@@ -268,7 +268,7 @@ public class CartFragment extends Fragment implements ICartFragment, OnBackPress
     private void callDialogUnconfirmed() {
         UnconfirmedRecordAlertDialogCreator unconRecADCr =
                 UnconfirmedRecordAlertDialogCreatorInit.unconfirmedRecordAlertDialogCreator(this.getActivity());
-        unconRecADCr.createAlertDialog().show();
+        unconRecADCr.create().show();
     }
 
     private DeliveryTypeEnum getDeliveryType() {
@@ -293,6 +293,6 @@ public class CartFragment extends Fragment implements ICartFragment, OnBackPress
         CancelSoftCheckFromCartAlertDialogCreator cancelSCFCADCr =
                 CancelSoftCheckFromCartAlertDialogCreatorInit.cancelSoftCheckFromCartAlertDialogCreator(
                         this, managerActivityHandler, commandManager, queryDialog);
-        cancelSCFCADCr.createAlertDialog().show();
+        cancelSCFCADCr.create().show();
     }
 }

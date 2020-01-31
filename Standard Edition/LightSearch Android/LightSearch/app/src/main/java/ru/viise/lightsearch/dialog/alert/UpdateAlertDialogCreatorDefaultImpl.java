@@ -38,10 +38,10 @@ public class UpdateAlertDialogCreatorDefaultImpl implements UpdateAlertDialogCre
     }
 
     @Override
-    public AlertDialog createAlertDialog() {
+    public AlertDialog create() {
         DialogOKCancelContainer dialogOKCancelContainer =
                 DialogOKCancelContainerCreatorInit.dialogOKCancelContainerCreator(activity)
-                        .createDialogOkCancelContainer();
+                        .create();
 
         dialogOKCancelContainer.textViewTitle().setText(R.string.dialog_update_title);
         dialogOKCancelContainer.textViewResult().setText(description);

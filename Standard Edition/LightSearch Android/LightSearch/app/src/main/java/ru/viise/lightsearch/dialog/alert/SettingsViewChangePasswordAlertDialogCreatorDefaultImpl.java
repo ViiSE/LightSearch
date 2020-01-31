@@ -42,7 +42,7 @@ public class SettingsViewChangePasswordAlertDialogCreatorDefaultImpl implements 
     }
 
     @Override
-    public AlertDialog createAlertDialog() {
+    public AlertDialog create() {
         DialogSettingsContainer dialogSettingsContainer =
                 DialogSettingsContainerCreatorInit.dialogSettingsContainerCreator(rootActivity)
                         .createDialogSettingsContainer();

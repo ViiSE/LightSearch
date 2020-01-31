@@ -110,4 +110,32 @@ public class CommandResultCreatorInit {
                          ReconnectDTO reconnectDTO) {
         return new CommandResultReconnectCreatorErrorDefaultImpl(isDone, message, reconnectDTO);
     }
+
+//----------------------------------------------------------------------------------------------------------//
+    public static CommandResultCreator commandResultBindCheckCreator(
+            String rawMessage,
+            String IMEI,
+            int selected,
+            String factoryBarcode) {
+        return new CommandResultBindCheckCreatorJSONDefaultImpl(
+                rawMessage,
+                IMEI,
+                selected,
+                factoryBarcode);
+    }
+
+    public static CommandResultCreator commandResultBindCheckCreator(
+            boolean isDone, String message, ReconnectDTO reconnectDTO) {
+        return new CommandResultBindCheckCreatorErrorDefaultImpl(isDone, message, reconnectDTO);
+    }
+
+    public static CommandResultCreator commandResultBindCreator(
+            String rawMessage, String IMEI, int selected, String factoryBarcode) {
+        return new CommandResultBindCreatorJSONDefaultImpl(rawMessage, IMEI, selected, factoryBarcode);
+    }
+
+    public static CommandResultCreator commandResultBindCreator(
+            boolean isDone, String message, ReconnectDTO reconnectDTO) {
+        return new CommandResultBindCreatorErrorDefaultImpl(isDone, message, reconnectDTO);
+    }
 }

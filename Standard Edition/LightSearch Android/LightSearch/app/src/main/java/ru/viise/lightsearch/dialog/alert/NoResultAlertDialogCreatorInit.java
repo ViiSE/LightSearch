@@ -23,4 +23,8 @@ public class NoResultAlertDialogCreatorInit {
     public static NoResultAlertDialogCreator noResultAlertDialogCreator(Activity activity, String message) {
         return new NoResultAlertDialogCreatorDefaultImpl(activity, message);
     }
+
+    public static NoResultAlertDialogCreator bindCheckNoResultAlertDialogCreator(Activity activity, String message) {
+        return new BindCheckNoResultAlertDialogCreatorDefaultImpl(activity, message);
+    }
 }

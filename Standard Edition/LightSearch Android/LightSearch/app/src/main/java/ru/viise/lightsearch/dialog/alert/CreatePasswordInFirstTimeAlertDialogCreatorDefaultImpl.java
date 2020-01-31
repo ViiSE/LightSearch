@@ -42,7 +42,7 @@ public class CreatePasswordInFirstTimeAlertDialogCreatorDefaultImpl implements C
     }
 
     @Override
-    public AlertDialog createAlertDialog() {
+    public AlertDialog create() {
         DialogSettingsContainer dialogSettingsContainer =
                 DialogSettingsContainerCreatorInit.dialogSettingsContainerCreator(activity)
                         .createDialogSettingsContainer();

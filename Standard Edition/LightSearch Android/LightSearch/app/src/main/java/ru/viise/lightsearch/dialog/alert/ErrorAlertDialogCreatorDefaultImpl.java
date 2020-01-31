@@ -33,9 +33,9 @@ public class ErrorAlertDialogCreatorDefaultImpl implements ErrorAlertDialogCreat
     }
 
     @Override
-    public AlertDialog createAlertDialog() {
+    public AlertDialog create() {
         DialogOKContainer dialogOKContainer =
-                DialogOKContainerCreatorInit.dialogOKContainerCreator(rootActivity).createDialogOKContainer();
+                DialogOKContainerCreatorInit.dialogOKContainerCreator(rootActivity).create();
         dialogOKContainer.textViewTitle().setText(R.string.dialog_error);
         dialogOKContainer.textViewResult().setText(errorMessage);
 

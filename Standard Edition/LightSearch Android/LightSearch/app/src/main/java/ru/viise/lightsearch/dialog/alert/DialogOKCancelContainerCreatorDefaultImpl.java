@@ -32,7 +32,7 @@ public class DialogOKCancelContainerCreatorDefaultImpl implements DialogOKCancel
     }
 
     @Override
-    public DialogOKCancelContainer createDialogOkCancelContainer() {
+    public DialogOKCancelContainer create() {
         View dialogView = this.activity.getLayoutInflater().inflate(R.layout.dialog_ok_cancel, null);
         Button buttonOK = dialogView.findViewById(R.id.buttonOKDialogOKCancel);
         Button buttonCancel = dialogView.findViewById(R.id.buttonCancelDialogOKCancel);

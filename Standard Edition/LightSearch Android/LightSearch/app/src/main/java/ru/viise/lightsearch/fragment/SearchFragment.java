@@ -194,9 +194,9 @@ public class SearchFragment extends Fragment implements View.OnClickListener, IS
                 v.startAnimation(animAlpha);
                 String barcode = searchEditText.getText().toString();
 
-                if(barcode.length() < 5) {
+                if(barcode.length() < 2) {
                     Toast t = Toast.makeText(Objects.requireNonNull(this.getActivity()).getApplicationContext(),
-                            "Введите не менее пяти символов!", Toast.LENGTH_LONG);
+                            "Введите не менее двух символов!", Toast.LENGTH_LONG);
                     t.show();
                 } else {
                     KeyboardHideToolInit.keyboardHideTool(this.getActivity()).hideKeyboard();

@@ -665,9 +665,9 @@ public class ResultSearchFragment extends ListFragment {
         super.onListItemClick(l, v, position, id);
 
         OneResultAlertDialogCreator oneResADCr =
-                OneResultAlertDialogCreatorInit.oneResultAlertDialogCreator(this.getActivity(),
+                OneResultAlertDialogCreatorInit.oneResultSearchAlertDialogCreator(this.getActivity(),
                         searchRecords.get(position));
-        oneResADCr.createAlertDialog().show();
+        oneResADCr.create().show();
     }
 
     @Override

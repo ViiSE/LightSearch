@@ -54,7 +54,7 @@ public class ConfirmSoftCheckProductsProcessorTest implements Function<String, S
             String cardCode = (String) jMessage.get(ClientCommandContentEnum.CARD_CODE.stringValue());
             assertThat(cardCode).isNotNull();
             if(!cardCode.matches("[0-9]+"))
-                return errorMessage("Wrong cardCode!", IMEI);
+                return errorMessage("Wrong userIdent!", IMEI);
 
 
             Object data = jMessage.get(ClientCommandContentEnum.DATA.stringValue());

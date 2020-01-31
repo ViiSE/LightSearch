@@ -52,10 +52,10 @@ public class CancelSoftCheckAlertDialogCreatorDefaultImpl implements CancelSoftC
     }
 
     @Override
-    public AlertDialog createAlertDialog() {
+    public AlertDialog create() {
         DialogOKCancelContainer dialogOKCancelContainer =
                 DialogOKCancelContainerCreatorInit.dialogOKCancelContainerCreator(fragment.getActivity())
-                        .createDialogOkCancelContainer();
+                        .create();
 
         dialogOKCancelContainer.textViewResult().setText(R.string.dialog_cancel_soft_check);
         dialogOKCancelContainer.textViewTitle().setText(R.string.dialog_message);

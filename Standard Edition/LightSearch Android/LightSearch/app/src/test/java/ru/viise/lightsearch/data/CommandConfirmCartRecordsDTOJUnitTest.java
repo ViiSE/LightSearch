@@ -58,15 +58,15 @@ public class CommandConfirmCartRecordsDTOJUnitTest {
 
     @Test
     public void cardCode() {
-        testBegin("CommandConfirmSoftCheckRecordsDTO", "cardCode()");
+        testBegin("CommandConfirmSoftCheckRecordsDTO", "userIdent()");
 
         String cardCode = cmdConfirmSCRecsDTO.cardCode();
         assertThat(cardCode).isNotNull();
         assertThat(cardCode).isNotEmpty();
 
-        System.out.println("cardCode: " + cardCode);
+        System.out.println("userIdent: " + cardCode);
 
-        testEnd("CommandConfirmSoftCheckRecordsDTO", "cardCode()");
+        testEnd("CommandConfirmSoftCheckRecordsDTO", "userIdent()");
     }
 
     @Test

@@ -18,6 +18,8 @@ package ru.viise.lightsearch.fragment.transaction;
 
 import java.util.List;
 
+import ru.viise.lightsearch.cmd.result.BindCommandResult;
+import ru.viise.lightsearch.data.BindRecord;
 import ru.viise.lightsearch.data.SearchRecord;
 import ru.viise.lightsearch.data.SoftCheckRecord;
 
@@ -27,4 +29,8 @@ public interface FragmentTransactionManager {
     void doResultSearchFragmentTransaction(String title, List<SearchRecord> searchRecords);
     void doCartFragmentTransaction(List<SoftCheckRecord> cartRecords);
     void doContainerFragmentTransactionFromCart();
+
+    void doResultBindFragmentTransaction(String title, BindCommandResult bindCmdRes);
+    void doBindingContainerFragmentTransaction(String[] skladArray, String[] TKArray);
+    void doBindingContainerFragmentTransactionFromResultBind();
 }

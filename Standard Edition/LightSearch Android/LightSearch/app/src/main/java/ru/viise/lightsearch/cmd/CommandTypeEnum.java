@@ -19,6 +19,8 @@ package ru.viise.lightsearch.cmd;
 public enum CommandTypeEnum {
     AUTHORIZATION,
     SEARCH,
+    BIND_CHECK,
+    BIND,
     SEARCH_SC,
     OPEN_SOFT_CHECK,
     CANCEL_SOFT_CHECK,

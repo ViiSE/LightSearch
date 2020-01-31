@@ -54,15 +54,15 @@ public class CommandCancelSoftCheckDTOJUnitTest {
 
     @Test
     public void cardCode() {
-        testBegin("CommandCancelSoftCheckDTO", "cardCode()");
+        testBegin("CommandCancelSoftCheckDTO", "userIdent()");
 
         String cardCode = cmdCancelSCDTO.cardCode();
         assertThat(cardCode).isNotNull();
         assertThat(cardCode).isNotEmpty();
 
-        System.out.println("cardCode: " + cardCode);
+        System.out.println("userIdent: " + cardCode);
 
-        testEnd("CommandCancelSoftCheckDTO", "cardCode()");
+        testEnd("CommandCancelSoftCheckDTO", "userIdent()");
     }
 
     @Test

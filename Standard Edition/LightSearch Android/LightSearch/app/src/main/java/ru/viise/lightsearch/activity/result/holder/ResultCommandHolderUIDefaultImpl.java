@@ -23,6 +23,7 @@ import ru.viise.lightsearch.activity.result.processor.ResultProcessorUI;
 import ru.viise.lightsearch.activity.result.processor.ResultProcessorUIInit;
 import ru.viise.lightsearch.cmd.CommandTypeEnum;
 import ru.viise.lightsearch.cmd.result.AuthorizationCommandResult;
+import ru.viise.lightsearch.cmd.result.BindCommandResult;
 import ru.viise.lightsearch.cmd.result.CancelSoftCheckCommandResult;
 import ru.viise.lightsearch.cmd.result.CloseSoftCheckCommandResult;
 import ru.viise.lightsearch.cmd.result.CommandResult;
@@ -44,6 +45,8 @@ public class ResultCommandHolderUIDefaultImpl implements ResultCommandHolderUI {
     private final CommandTypeEnum CONFIRM_CART_PRODUCTS       = CommandTypeEnum.CONFIRM_CART_PRODUCTS;
     private final CommandTypeEnum CLOSE_SOFT_CHECK            = CommandTypeEnum.CLOSE_SOFT_CHECK;
     private final CommandTypeEnum RECONNECT                   = CommandTypeEnum.RECONNECT;
+
+    private final CommandTypeEnum BIND                        = CommandTypeEnum.BIND;
 
     private final Map<CommandTypeEnum, Function<CommandResult, Void>> commandHolderUI;
 
@@ -71,6 +74,9 @@ public class ResultCommandHolderUIDefaultImpl implements ResultCommandHolderUI {
             return ResultProcessorUIInit.resultProcessorUI(commandHolderUI.get(CLOSE_SOFT_CHECK));
         else if(cmdRes instanceof ReconnectCommandResult)
             return ResultProcessorUIInit.resultProcessorUI(commandHolderUI.get(RECONNECT));
+        //----------------------------------------------------------------------------------------//
+        else if(cmdRes instanceof BindCommandResult)
+            return ResultProcessorUIInit.resultProcessorUI(commandHolderUI.get(BIND));
 
         return null;
     }

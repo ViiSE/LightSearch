@@ -35,10 +35,10 @@ public class ExitToAuthorizationAlertDialogCreatorDefaultImpl implements ExitToA
     }
 
     @Override
-    public AlertDialog createAlertDialog() {
+    public AlertDialog create() {
         DialogOKCancelContainer dialogOKCancelContainer =
                 DialogOKCancelContainerCreatorInit.dialogOKCancelContainerCreator(activity)
-                        .createDialogOkCancelContainer();
+                        .create();
 
         dialogOKCancelContainer.textViewTitle().setText(R.string.dialog_exit);
         dialogOKCancelContainer.textViewResult().setText(R.string.dialog_exit_to_auth);

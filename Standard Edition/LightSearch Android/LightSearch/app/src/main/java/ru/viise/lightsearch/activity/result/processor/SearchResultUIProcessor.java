@@ -50,7 +50,7 @@ public class SearchResultUIProcessor implements Function<CommandResult, Void> {
                                 searchCmdRes.records().get(0).barcode());
                 String title = searchResTitleCr.createTitle();
                 if (searchCmdRes.records().size() == 1)
-                    activity.callDialogOneResult(searchCmdRes.records().get(0));
+                    activity.callSearchDialogOneResult(searchCmdRes.records().get(0));
                 else
                     activity.doResultSearchFragmentTransaction(title, searchCmdRes.records());
             } else

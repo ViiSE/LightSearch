@@ -22,6 +22,7 @@ import java.util.function.Function;
 
 import ru.viise.lightsearch.activity.ManagerActivity;
 import ru.viise.lightsearch.activity.result.processor.AuthorizationResultUIProcessor;
+import ru.viise.lightsearch.activity.result.processor.BindResultUIProcessor;
 import ru.viise.lightsearch.activity.result.processor.CancelSoftCheckResultUIProcessor;
 import ru.viise.lightsearch.activity.result.processor.CloseSoftCheckResultUIProcessor;
 import ru.viise.lightsearch.activity.result.processor.ConfirmCartProductsResultUIProcessor;
@@ -44,6 +45,8 @@ public class ResultCommandUICreatorDefaultImpl implements ResultCommandUICreator
     private final CommandTypeEnum CONFIRM_CART_PRODUCTS       = CommandTypeEnum.CONFIRM_CART_PRODUCTS;
     private final CommandTypeEnum CLOSE_SOFT_CHECK            = CommandTypeEnum.CLOSE_SOFT_CHECK;
     private final CommandTypeEnum RECONNECT                   = CommandTypeEnum.RECONNECT;
+    private final CommandTypeEnum BIND                        = CommandTypeEnum.BIND;
+
 
     private final ManagerActivity activity;
 
@@ -63,6 +66,8 @@ public class ResultCommandUICreatorDefaultImpl implements ResultCommandUICreator
         cmdHolder.put(CONFIRM_CART_PRODUCTS, new ConfirmCartProductsResultUIProcessor(activity));
         cmdHolder.put(CLOSE_SOFT_CHECK, new CloseSoftCheckResultUIProcessor(activity));
         cmdHolder.put(RECONNECT, new ReconnectResultUIProcessor(activity));
+        //----------------------------------------------------------------------------------------//
+        cmdHolder.put(BIND, new BindResultUIProcessor(activity));
 
         return ResultCommandHolderUIInit.resultCommandHolderUI(cmdHolder);
     }

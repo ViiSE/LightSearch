@@ -45,7 +45,9 @@ public class AuthorizationResultUIProcessor implements Function<CommandResult, V
             PreferencesManager prefManager = PreferencesManagerInit.preferencesManager(sPref);
             prefManager.save(PreferencesManagerType.USER_IDENT_MANAGER, authCmdRes.userIdent());
             activity.callDialogSuccess(authCmdRes.message());
-            activity.doContainerFragmentTransaction(authCmdRes.skladList(), authCmdRes.TKList());
+            // TODO: 29.01.20 UNCOMMENT LATER
+//            activity.doContainerFragmentTransaction(authCmdRes.skladList(), authCmdRes.TKList());
+            activity.doBindingContainerFragmentTransaction(authCmdRes.skladList(), authCmdRes.TKList());
         } else
             activity.callDialogError(authCmdRes.message());
 

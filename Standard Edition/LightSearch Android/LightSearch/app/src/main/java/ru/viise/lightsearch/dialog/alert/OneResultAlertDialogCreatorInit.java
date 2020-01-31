@@ -18,12 +18,27 @@ package ru.viise.lightsearch.dialog.alert;
 
 import android.app.Activity;
 
+import ru.viise.lightsearch.data.BindRecord;
 import ru.viise.lightsearch.data.SearchRecord;
 
 public class OneResultAlertDialogCreatorInit {
 
-    public static OneResultAlertDialogCreator oneResultAlertDialogCreator(Activity activity,
-                      SearchRecord searchRecord) {
+    public static OneResultAlertDialogCreator oneResultSearchAlertDialogCreator(
+            Activity activity, SearchRecord searchRecord) {
         return new OneResultAlertDialogCreatorDefaultImpl(activity, searchRecord);
+    }
+
+    //-------------------------------------------------------------------------------------------//
+    public static OneResultAlertDialogCreator oneResultBindCheckAlertDialogCreator(
+            Activity activity, BindRecord bindRecord) {
+        return new OneResultAlertDialogCreatorBindCheckImpl(activity, bindRecord);
+    }
+
+    public static OneResultAlertDialogCreator oneResultBindAlertDialogCreator(
+            Activity activity,
+            BindRecord bindRecord,
+            android.app.AlertDialog queryDialog,
+            String factoryBarcode) {
+        return new OneResultAlertDialogCreatorBindImpl(activity, bindRecord, queryDialog, factoryBarcode);
     }
 }

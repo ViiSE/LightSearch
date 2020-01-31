@@ -138,12 +138,12 @@ public class ContainerFragment extends Fragment implements OnBackPressedListener
             ExitToAuthorizationAlertDialogCreator exitTAADCr =
                     ExitToAuthorizationAlertDialogCreatorInit.exitToAuthorizationAlertDialogCreator(
                             this.getActivity(), commandManager);
-            exitTAADCr.createAlertDialog().show();
+            exitTAADCr.create().show();
         } else if(onBackPressedListenerType == OnBackPressedListenerType.SOFT_CHECK_FRAGMENT) {
             CancelSoftCheckAlertDialogCreator cancelSCADCr =
                     CancelSoftCheckAlertDialogCreatorInit.cancelSoftCheckAlertDialogCreator(
                             this, managerActivityHandler, queryDialog, commandManager);
-            cancelSCADCr.createAlertDialog().show();
+            cancelSCADCr.create().show();
         }
     }
 

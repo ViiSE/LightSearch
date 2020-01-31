@@ -203,12 +203,11 @@ public class AuthorizationFragment extends Fragment implements IAuthorizationFra
     private void createPassFirstDialog(AlertDialogCreatorDTO aDCreatorDTO, HashAlgorithms hashAlgorithms) {
         CreatePasswordInFirstTimeAlertDialogCreatorDTO crPIFTADCreatorDTO =
                 CreatePasswordInFirstTimeAlertDialogCreatorDTOInit.createPasswordInFirstTimeAlertDialogCreatorDTO(
-                        aDCreatorDTO, hashAlgorithms
-                );
+                        aDCreatorDTO, hashAlgorithms);
         CreatePasswordInFirstTimeAlertDialogCreator crPIFTADCreator =
                 CreatePasswordInFirstTimeDialogAlertCreatorInit.createPasswordInFirstTimeAlertDialogCreator(
                         crPIFTADCreatorDTO);
-        createPassFirst = crPIFTADCreator.createAlertDialog();
+        createPassFirst = crPIFTADCreator.create();
     }
 
     private void createInputPassDialog(AlertDialogCreatorDTO aDCreatorDTO, HashAlgorithms hashAlgorithms) {
@@ -218,19 +217,17 @@ public class AuthorizationFragment extends Fragment implements IAuthorizationFra
                         cbSettings);
         InputPasswordAlertDialogCreator iPADCreator =
                 InputPasswordAlertDialogCreatorInit.inputPasswordAlertDialogCreator(iPADCreatorDTO);
-        inputPassword = iPADCreator.createAlertDialog();
+        inputPassword = iPADCreator.create();
     }
 
     private void createSettingsViewChangePassDialog(AlertDialogCreatorDTO aDCreatorDTO, HashAlgorithms hashAlgorithms) {
         SettingsViewChangePasswordAlertDialogCreatorDTO sVCPADCreatorDTO =
                 SettingsViewChangePasswordAlertDialogCreatorDTOInit.settingsViewChangePasswordAlertDialogCreatorDTO(
-                        aDCreatorDTO, hashAlgorithms
-                );
+                        aDCreatorDTO, hashAlgorithms);
         SettingsViewChangePasswordAlertDialogCreator sVCPADCreator =
                 SettingsViewChangePasswordAlertDialogCreatorInit.settingsViewChangePasswordAlertDialogCreator(
-                        sVCPADCreatorDTO
-                );
-        createPass = sVCPADCreator.createAlertDialog();
+                        sVCPADCreatorDTO);
+        createPass = sVCPADCreator.create();
     }
 
     @Override

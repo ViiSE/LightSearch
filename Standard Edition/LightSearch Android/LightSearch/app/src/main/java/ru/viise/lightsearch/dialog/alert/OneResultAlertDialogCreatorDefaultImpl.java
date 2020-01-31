@@ -19,7 +19,6 @@ package ru.viise.lightsearch.dialog.alert;
 import android.app.Activity;
 import android.support.v4.text.HtmlCompat;
 import android.support.v7.app.AlertDialog;
-import android.text.Html;
 import android.view.View;
 
 import ru.viise.lightsearch.R;
@@ -36,7 +35,7 @@ public class OneResultAlertDialogCreatorDefaultImpl implements OneResultAlertDia
     }
 
     @Override
-    public AlertDialog createAlertDialog() {
+    public AlertDialog create() {
         String id = "<b>" + activity.getString(R.string.dialog_res_prod_id) + "</b>";
         String name = "<b>" + activity.getString(R.string.dialog_res_prod_name) + "</b>";
         String price = "<b>" + activity.getString(R.string.dialog_res_prod_price) + "</b>";
@@ -50,7 +49,7 @@ public class OneResultAlertDialogCreatorDefaultImpl implements OneResultAlertDia
                 subdivisions + ": " + "<br>" + searchRecord.subdivisions().toString();
 
         DialogOKContainer dialogOKContainer = DialogOKContainerCreatorInit.dialogOKContainerCreator(activity)
-                .createDialogOKContainer();
+                .create();
 
         dialogOKContainer.textViewTitle().setVisibility(View.GONE);
 

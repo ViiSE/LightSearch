@@ -42,7 +42,7 @@ public class InputPasswordAlertDialogCreatorDefaultImpl implements InputPassword
     }
 
     @Override
-    public AlertDialog createAlertDialog() {
+    public AlertDialog create() {
         DialogSettingsContainer dialogSettingsContainer =
                 DialogSettingsContainerCreatorInit.dialogSettingsContainerCreator(activity)
                         .createDialogSettingsContainer();
@@ -66,7 +66,7 @@ public class InputPasswordAlertDialogCreatorDefaultImpl implements InputPassword
             } else {
                 ErrorAlertDialogCreator errADCr =
                         ErrorPassAlertDialogCreatorInit.errorPassAlertDialogCreator(activity, creatorDTO);
-                errADCr.createAlertDialog().show();
+                errADCr.create().show();
                 dialogSettingsContainer.editText().setText("");
                 dialog.dismiss();
             }

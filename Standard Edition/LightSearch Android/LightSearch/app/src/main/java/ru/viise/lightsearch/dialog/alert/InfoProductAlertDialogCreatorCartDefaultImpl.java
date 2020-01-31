@@ -35,7 +35,7 @@ public class InfoProductAlertDialogCreatorCartDefaultImpl implements InfoProduct
     }
 
     @Override
-    public AlertDialog createAlertDialog() {
+    public AlertDialog create() {
         String id = "<b>" + activity.getString(R.string.dialog_res_prod_id) + "</b>";
         String name = "<b>" + activity.getString(R.string.dialog_res_prod_name) + "</b>";
         String price = "<b>" + activity.getString(R.string.dialog_res_prod_price) + "</b>";
@@ -44,7 +44,7 @@ public class InfoProductAlertDialogCreatorCartDefaultImpl implements InfoProduct
         String new_max_amount = "<b>" + activity.getString(R.string.dialog_res_prod_new_max_amount) + "</b>";
 
         DialogOKContainer dialogOKContainer =
-                DialogOKContainerCreatorInit.dialogOKContainerCreator(activity).createDialogOKContainer();
+                DialogOKContainerCreatorInit.dialogOKContainerCreator(activity).create();
         dialogOKContainer.textViewTitle().setVisibility(View.GONE);
 
         String message = id + ": " + record.barcode() + "<br>" +

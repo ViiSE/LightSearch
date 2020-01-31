@@ -17,6 +17,7 @@
     <string name="current_price_unit">руб.</string>
     <string name="default_ip">127.0.0.1</string>
     <string name="default_port">50000</string>
+    <string name="bind_barcode">Привязка товара №</string>
     <!-- ======== -->
 
     <!-- CheckBox -->
@@ -39,6 +40,8 @@
     <string name="buttonCloseSC_label">Закрыть мягкий чек</string>
     <string name="button_update">Обновить</string>
     <string name="button_update_later">Позже</string>
+    <string name="button_bind_check">Проверить</string>
+    <string name="button_bind">Привязать</string>
     <!-- ====== -->
 
     <!-- Spinner -->
@@ -60,15 +63,21 @@
     <string name="dialog_exit">Выход</string>
     <string name="dialog_exit_to_auth">Вы уверены, что хотите выйти в меню авторизации?</string>
     <string name="dialog_cancel_soft_check">Вы уверены, что хотите отменить текущий мягкий чек?</string>
+    <string name="dialog_cancel_binding">Вы уверены, что хотите отменить привязку по текущему товару?</string>
     <string name="dialog_exit_to_cart">Вы уверены, что хотите выйти из корзины? Это отменит текущий мягкий чек.</string>
     <string name="dialog_message">Сообщение</string>
     <string name="dialog_no_result">Запрос не дал результата</string>
+    <string name="dialog_bind_check_no_result_title">Товар не найден!</string>
+    <string name="dialog_bind_check_no_result">Данный товар не привязан ни к одному из существующих товаров. Переход в режим привязки.</string>
+    <string name="dialog_bind_check_one_result_title">Товар привязан!</string>
+    <string name="dialog_bind_cancel">Привязка отменена.</string>
     <string name="permission_request">Запрос на права</string>
     <string name="permission_request_IMEI">Нужны права на отправку IMEI</string>
     <string name="unconfirmed_record">Количество некоторых товаров, указанных в мягком чеке, больше, чем свободное количество данных товаров на складах. Данные товары выделены красным.</string>
     <string name="spots_dialog_query_exec">Выполнение</string>
     <string name="spots_dialog_connect">Подключение</string>
     <string name="spots_dialog_auth">Авторизация</string>
+    <string name="dialog_res_bind">Привязать данный товар?</string>
     <string name="dialog_res_prod_id">ИД</string>
     <string name="dialog_res_prod_name">Наименование</string>
     <string name="dialog_res_prod_price">Цена</string>
@@ -107,7 +116,9 @@
     <string name="fragment_soft_check">Мягкий чек</string>
     <string name="fragment_container">LightSearch</string>
     <string name="fragment_result_search">Результат</string>
+    <string name="fragment_result_bind">Результат</string>
     <string name="fragment_cart">Корзина</string>
+    <string name="fragment_binding">Привязка</string>
     <!-- ============ -->
 
     <!-- App Updater -->

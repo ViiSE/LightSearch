@@ -209,7 +209,7 @@ public class SoftCheckFragment extends Fragment implements ISoftCheckFragment {
                 InfoProductAlertDialogCreator infoProdADCr =
                         InfoProductAlertDialogCreatorInit.infoProductAlertDialogCreator(getActivity(),
                                 adapter.getItem(position));
-                infoProdADCr.createAlertDialog().show();
+                infoProdADCr.create().show();
             }
         };
 

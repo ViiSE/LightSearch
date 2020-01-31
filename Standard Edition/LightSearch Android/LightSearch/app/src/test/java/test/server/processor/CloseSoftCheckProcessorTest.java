@@ -53,7 +53,7 @@ public class CloseSoftCheckProcessorTest implements Function<String, String> {
             String cardCode = (String) jMessage.get(ClientCommandContentEnum.CARD_CODE.stringValue());
             assertThat(cardCode).isNotNull();
             if(!cardCode.matches("[0-9]+"))
-                return errorMessage("Wrong cardCode!", IMEI);
+                return errorMessage("Wrong userIdent!", IMEI);
 
             String delivery = (String) jMessage.get(ClientCommandContentEnum.DELIVERY.stringValue());
             assertThat(delivery).isNotNull();

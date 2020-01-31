@@ -43,6 +43,14 @@ public enum ClientCommandEnum {
     SEARCH {
         @Override
         public String stringValue() { return "search"; }
+    },
+    BIND_CHECK {
+        @Override
+        public String stringValue() { return "bind_check"; }
+    },
+    BIND {
+        @Override
+        public String stringValue() { return "bind"; }
     };
     
     public abstract String stringValue();

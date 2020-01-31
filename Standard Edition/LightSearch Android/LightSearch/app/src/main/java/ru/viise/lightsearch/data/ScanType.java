@@ -19,5 +19,6 @@ package ru.viise.lightsearch.data;
 public enum ScanType {
     SEARCH,
     SEARCH_SOFT_CHECK,
-    OPEN_SOFT_CHECK
+    OPEN_SOFT_CHECK,
+    SEARCH_BIND
 }

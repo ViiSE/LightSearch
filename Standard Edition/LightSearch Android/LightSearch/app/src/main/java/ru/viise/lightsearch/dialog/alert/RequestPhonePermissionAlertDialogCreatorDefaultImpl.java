@@ -36,7 +36,7 @@ public class RequestPhonePermissionAlertDialogCreatorDefaultImpl implements Requ
     public AlertDialog createAlertDialog() {
         DialogOKCancelContainer dialogOKCancelContainer =
                 DialogOKCancelContainerCreatorInit.dialogOKCancelContainerCreator(activity)
-                        .createDialogOkCancelContainer();
+                        .create();
 
         dialogOKCancelContainer.textViewTitle().setText(R.string.permission_request);
         dialogOKCancelContainer.textViewResult().setText(R.string.permission_request_IMEI);

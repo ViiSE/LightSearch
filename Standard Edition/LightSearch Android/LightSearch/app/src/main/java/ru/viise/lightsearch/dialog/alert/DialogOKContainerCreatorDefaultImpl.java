@@ -32,7 +32,7 @@ public class DialogOKContainerCreatorDefaultImpl implements DialogOKViewCreator 
     }
 
     @Override
-    public DialogOKContainer createDialogOKContainer() {
+    public DialogOKContainer create() {
         View dialogView = this.activity.getLayoutInflater().inflate(R.layout.dialog_ok, null);
         Button buttonOK = dialogView.findViewById(R.id.buttonDialogOK);
         TextView textViewTitle = dialogView.findViewById(R.id.textViewTitleDialogOK);

@@ -28,13 +28,13 @@ public class CardCodePreferencesManagerDefaultImpl implements CardCodePreference
 
     @Override
     public String loadCardCode() {
-        return sPref.getString("cardCode", "");
+        return sPref.getString("userIdent", "");
     }
 
     @Override
     public void saveCardCode(String cardCode) {
         SharedPreferences.Editor ed = sPref.edit();
-        ed.putString("cardCode", cardCode);
+        ed.putString("userIdent", cardCode);
         ed.apply();
     }
 }

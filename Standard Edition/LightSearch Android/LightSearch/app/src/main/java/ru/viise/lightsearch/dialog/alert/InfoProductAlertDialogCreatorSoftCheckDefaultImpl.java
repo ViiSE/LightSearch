@@ -35,7 +35,7 @@ public class InfoProductAlertDialogCreatorSoftCheckDefaultImpl implements InfoPr
     }
 
     @Override
-    public AlertDialog createAlertDialog() {
+    public AlertDialog create() {
         String id = "<b>" + activity.getString(R.string.dialog_res_prod_id) + "</b>";
         String name = "<b>" + activity.getString(R.string.dialog_res_prod_name) + "</b>";
         String price = "<b>" + activity.getString(R.string.dialog_res_prod_price) + "</b>";
@@ -49,7 +49,7 @@ public class InfoProductAlertDialogCreatorSoftCheckDefaultImpl implements InfoPr
                 subdivisions + ": " + "<br>" + record.subdivisions().toString();
 
         DialogOKContainer dialogOKContainer =
-                DialogOKContainerCreatorInit.dialogOKContainerCreator(activity).createDialogOKContainer();
+                DialogOKContainerCreatorInit.dialogOKContainerCreator(activity).create();
 
         dialogOKContainer.textViewTitle().setVisibility(View.GONE);
         dialogOKContainer.textViewResult().setText(HtmlCompat.fromHtml(result, HtmlCompat.FROM_HTML_MODE_LEGACY));

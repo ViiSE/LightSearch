@@ -22,6 +22,8 @@ import java.util.function.Function;
 
 import ru.viise.lightsearch.cmd.CommandTypeEnum;
 import ru.viise.lightsearch.cmd.processor.AuthorizationProcessor;
+import ru.viise.lightsearch.cmd.processor.BindCheckProcessor;
+import ru.viise.lightsearch.cmd.processor.BindProcessor;
 import ru.viise.lightsearch.cmd.processor.CancelSoftCheckProcessor;
 import ru.viise.lightsearch.cmd.processor.CloseSoftCheckProcessor;
 import ru.viise.lightsearch.cmd.processor.ConfirmSoftCheckProductsProcessor;
@@ -44,6 +46,9 @@ public class ClientCommandCreatorDefaultImpl implements ClientCommandCreator {
     private final CommandTypeEnum CONFIRM_SOFT_CHECK_PRODUCTS = CommandTypeEnum.CONFIRM_SOFT_CHECK_PRODUCTS;
     private final CommandTypeEnum CLOSE_SOFT_CHECK            = CommandTypeEnum.CLOSE_SOFT_CHECK;
     private final CommandTypeEnum RECONNECT                   = CommandTypeEnum.RECONNECT;
+
+    private final CommandTypeEnum BIND_CHECK                  = CommandTypeEnum.BIND_CHECK;
+    private final CommandTypeEnum BIND                        = CommandTypeEnum.BIND;
 
     private final String IMEI;
     private final MessageSender msgSender;
@@ -68,6 +73,10 @@ public class ClientCommandCreatorDefaultImpl implements ClientCommandCreator {
         cmdHolder.put(CONFIRM_SOFT_CHECK_PRODUCTS, new ConfirmSoftCheckProductsProcessor(clCmdDTO));
         cmdHolder.put(CLOSE_SOFT_CHECK, new CloseSoftCheckProcessor(clCmdDTO));
         cmdHolder.put(RECONNECT, new ReconnectProcessor(clCmdDTO));
+
+        cmdHolder.put(BIND_CHECK, new BindCheckProcessor(clCmdDTO));
+        cmdHolder.put(BIND, new BindProcessor(clCmdDTO));
+
 
         return ClientCommandHolderInit.clientCommandHolder(cmdHolder);
     }

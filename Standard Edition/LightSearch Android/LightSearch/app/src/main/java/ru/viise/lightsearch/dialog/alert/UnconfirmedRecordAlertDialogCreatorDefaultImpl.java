@@ -31,9 +31,9 @@ public class UnconfirmedRecordAlertDialogCreatorDefaultImpl implements Unconfirm
     }
 
     @Override
-    public AlertDialog createAlertDialog() {
+    public AlertDialog create() {
         DialogOKContainer dialogOKContainer =
-                DialogOKContainerCreatorInit.dialogOKContainerCreator(activity).createDialogOKContainer();
+                DialogOKContainerCreatorInit.dialogOKContainerCreator(activity).create();
 
         dialogOKContainer.textViewTitle().setVisibility(View.GONE);
         dialogOKContainer.textViewResult().setText(R.string.unconfirmed_record);

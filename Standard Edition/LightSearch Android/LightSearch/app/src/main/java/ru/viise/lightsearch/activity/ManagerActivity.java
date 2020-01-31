@@ -46,9 +46,11 @@ import ru.viise.lightsearch.cmd.manager.CommandManager;
 import ru.viise.lightsearch.cmd.manager.CommandManagerInit;
 import ru.viise.lightsearch.cmd.manager.task.CommandManagerAsyncTask;
 import ru.viise.lightsearch.cmd.manager.task.ConnectionAsyncTask;
+import ru.viise.lightsearch.cmd.result.BindCommandResult;
 import ru.viise.lightsearch.cmd.result.CommandResult;
 import ru.viise.lightsearch.data.AuthorizationDTO;
 import ru.viise.lightsearch.data.AuthorizationDTOInit;
+import ru.viise.lightsearch.data.BindRecord;
 import ru.viise.lightsearch.data.ClientHandlerCreatorDTO;
 import ru.viise.lightsearch.data.ClientHandlerCreatorDTOInit;
 import ru.viise.lightsearch.data.CommandAuthorizationDTO;
@@ -74,6 +76,7 @@ import ru.viise.lightsearch.exception.FindableException;
 import ru.viise.lightsearch.find.ImplFinder;
 import ru.viise.lightsearch.find.ImplFinderFragmentFromActivityDefaultImpl;
 import ru.viise.lightsearch.fragment.IAuthorizationFragment;
+import ru.viise.lightsearch.fragment.IBindingContainerFragment;
 import ru.viise.lightsearch.fragment.IContainerFragment;
 import ru.viise.lightsearch.fragment.transaction.FragmentTransactionManager;
 import ru.viise.lightsearch.fragment.transaction.FragmentTransactionManagerInit;
@@ -143,6 +146,14 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
                     containerFragment.setCardCode(scanContent);
                 else if(scanType == ScanType.SEARCH_SOFT_CHECK)
                     containerFragment.setSoftCheckBarcode(scanContent);
+
+            IBindingContainerFragment bindingContainerFragment = getBindingContainerFragment();
+            if(bindingContainerFragment != null)
+                if(scanType == ScanType.SEARCH)
+                    bindingContainerFragment.setSearchBarcode(scanContent);
+                else if (scanType == ScanType.SEARCH_BIND)
+                    bindingContainerFragment.setSearchBindingBarcode(scanContent);
+
         }
     }
 
@@ -181,6 +192,20 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
         fragmentTransactionManager.doContainerFragmentTransaction(skladArr, TKArr);
     }
 
+    // TODO: 29.01.20 REMOVE THIS LATER
+    public void doBindingContainerFragmentTransaction(String[] skladArr, String[] TKArr) {
+        FragmentTransactionManager fragmentTransactionManager =
+                FragmentTransactionManagerInit.fragmentTransactionManager(this);
+        fragmentTransactionManager.doBindingContainerFragmentTransaction(skladArr, TKArr);
+    }
+
+    // TODO: 29.01.20 REMOVE THIS LATER
+    public void doBindingContainerFragmentTransactionFromResultBind() {
+        FragmentTransactionManager fragmentTransactionManager =
+                FragmentTransactionManagerInit.fragmentTransactionManager(this);
+        fragmentTransactionManager.doBindingContainerFragmentTransactionFromResultBind();
+    }
+
     public void doContainerFragmentTransactionFromCart() {
         FragmentTransactionManager fragmentTransactionManager =
                 FragmentTransactionManagerInit.fragmentTransactionManager(this);
@@ -191,6 +216,13 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
         FragmentTransactionManager fragmentTransactionManager =
                 FragmentTransactionManagerInit.fragmentTransactionManager(this);
         fragmentTransactionManager.doResultSearchFragmentTransaction(title, searchRecords);
+    }
+
+    // TODO: 30.01.20 REMOVE THIS LATER
+    public void doResultBindFragmentTransaction(String title, BindCommandResult bindCmdRes) {
+        FragmentTransactionManager fragmentTransactionManager =
+                FragmentTransactionManagerInit.fragmentTransactionManager(this);
+        fragmentTransactionManager.doResultBindFragmentTransaction(title, bindCmdRes);
     }
 
     public void doCartFragmentTransaction(List<SoftCheckRecord> cartRecords) {
@@ -204,26 +236,60 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
     public void callDialogError(String errorMessage) {
         ErrorAlertDialogCreator errADCr =
                 ErrorAlertDialogCreatorInit.errorAlertDialogCreator(this, errorMessage);
-        errADCr.createAlertDialog().show();
+        errADCr.create().show();
     }
 
     public void callDialogSuccess(String message) {
         SuccessAlertDialogCreator successADCr =
                 SuccessAlertDialogCreatorInit.successAlertDialogCreator(this, message);
-        successADCr.createAlertDialog().show();
+        successADCr.create().show();
     }
 
     public void callDialogNoResult() {
         String message = this.getString(R.string.dialog_no_result);
         NoResultAlertDialogCreator noResADCr =
                 NoResultAlertDialogCreatorInit.noResultAlertDialogCreator(this, message);
-        noResADCr.createAlertDialog().show();
+        noResADCr.create().show();
     }
 
-    public void callDialogOneResult(SearchRecord searchRecord) {
+
+    // TODO: 30.01.20 REMOVE THIS LATER
+    public void callBindCheckDialogNoResult() {
+        String message = this.getString(R.string.dialog_bind_check_no_result);
+        NoResultAlertDialogCreator noResADCr =
+                NoResultAlertDialogCreatorInit.bindCheckNoResultAlertDialogCreator(this, message);
+        noResADCr.create().show();
+        getBindingContainerFragment().switchToBind();
+    }
+
+    public void callSearchDialogOneResult(SearchRecord searchRecord) {
         OneResultAlertDialogCreator oneResADCr =
-                OneResultAlertDialogCreatorInit.oneResultAlertDialogCreator(this, searchRecord);
-        android.support.v7.app.AlertDialog oneResAD = oneResADCr.createAlertDialog();
+                OneResultAlertDialogCreatorInit.oneResultSearchAlertDialogCreator(this, searchRecord);
+        android.support.v7.app.AlertDialog oneResAD = oneResADCr.create();
+        oneResAD.setCanceledOnTouchOutside(false);
+        oneResAD.show();
+    }
+
+    // TODO: 30.01.20 REMOVE THIS LATER
+    public void callBindCheckDialogOneResult(BindRecord bindRecord) {
+        OneResultAlertDialogCreator oneResADCr =
+                OneResultAlertDialogCreatorInit.oneResultBindCheckAlertDialogCreator(this, bindRecord);
+        android.support.v7.app.AlertDialog oneResAD = oneResADCr.create();
+        oneResAD.setCanceledOnTouchOutside(false);
+        oneResAD.show();
+    }
+
+    // TODO: 30.01.20 REMOVE THIS LATER
+    public void callBindDialogOneResult(BindRecord bindRecord, String factoryBarcode) {
+        OneResultAlertDialogCreator oneResADCr =
+                OneResultAlertDialogCreatorInit.oneResultBindAlertDialogCreator(
+                        this,
+                        bindRecord,
+                        SpotsDialogCreatorInit
+                                .spotsDialogCreator(this, R.string.spots_dialog_query_exec)
+                                .create(),
+                        factoryBarcode);
+        android.support.v7.app.AlertDialog oneResAD = oneResADCr.create();
         oneResAD.setCanceledOnTouchOutside(false);
         oneResAD.show();
     }
@@ -231,6 +297,12 @@ public class ManagerActivity extends AppCompatActivity implements ManagerActivit
     public IContainerFragment getContainerFragment() {
         ImplFinder<IContainerFragment> finder = new ImplFinderFragmentFromActivityDefaultImpl<>(this);
         try { return finder.findImpl(IContainerFragment.class); }
+        catch(FindableException ignore) { return null; }
+    }
+
+    public IBindingContainerFragment getBindingContainerFragment() {
+        ImplFinder<IBindingContainerFragment> finder = new ImplFinderFragmentFromActivityDefaultImpl<>(this);
+        try { return finder.findImpl(IBindingContainerFragment.class); }
         catch(FindableException ignore) { return null; }
     }
 
