@@ -51,6 +51,10 @@ public enum DatabaseCommandMessageEnum {
         @Override
         public String stringValue() { return "barcode"; }
     },
+    FACTORY_BARCODE {
+        @Override
+        public String stringValue() { return "factory_barcode"; }
+    },
     SKLAD {
         @Override
         public String stringValue() { return "sklad"; }

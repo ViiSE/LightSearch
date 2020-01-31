@@ -31,6 +31,14 @@ public class DatabaseCommandMessageInit {
             String barcode, String sklad, String TK) {
         return new DatabaseCommandMessageSearchDefaultWindowsJSONImpl(command, IMEI, barcode, sklad, TK);
     }
+
+    public static DatabaseCommandMessage databaseCommandMessageBindCheck(String command, String IMEI, String factoryBarcode) {
+        return new DatabaseCommandMessageBindCheckDefaultWindowsJSONImpl(command, IMEI, factoryBarcode);
+    }
+
+    public static DatabaseCommandMessage databaseCommandMessageBind(String command, String IMEI, String factoryBarcode, String barcode, String userIdent) {
+        return new DatabaseCommandMessageBindDefaultWindowsJSONImpl(command, IMEI, factoryBarcode, barcode, userIdent);
+    }
     
     public static DatabaseCommandMessage databaseCommandMessageOpenSoftCheck(String command, String IMEI,
             String userIdent, String cardCode) {

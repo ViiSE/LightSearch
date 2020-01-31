@@ -35,6 +35,8 @@ public class ClientCommandCreatorDebugDefaultImpl implements ClientCommandCreato
     private final String CANCEL_SOFT_CHECK           = ClientCommandEnum.CANCEL_SOFT_CHECK.stringValue();
     private final String CONFIRM_SOFT_CHECK_PRODUCTS = ClientCommandEnum.CONFIRM_SOFT_CHECK_PRODUCTS.stringValue();
     private final String SEARCH                      = ClientCommandEnum.SEARCH.stringValue();
+    private final String BIND_CHECK                  = ClientCommandEnum.BIND_CHECK.stringValue();
+    private final String BIND                        = ClientCommandEnum.BIND.stringValue();
     
     private final LightSearchServerDTO serverDTO;
     private final LightSearchListenerDTO listenerDTO;
@@ -58,8 +60,9 @@ public class ClientCommandCreatorDebugDefaultImpl implements ClientCommandCreato
         result.put(OPEN_SOFT_CHECK, new OpenSoftCheckProcessorDebug(serverDTO, listenerDTO.checker(), softCheckDebug));
         result.put(CLOSE_SOFT_CHECK, new CloseSoftCheckProcessorDebug(serverDTO, listenerDTO.checker(), softCheckDebug));
         result.put(CANCEL_SOFT_CHECK, new CancelSoftCheckProcessorDebug(serverDTO, listenerDTO.checker(), softCheckDebug));
-        result.put(CONFIRM_SOFT_CHECK_PRODUCTS, new ConfirmSoftCheckProductsProcessorDebug(serverDTO, 
-                listenerDTO.checker()));
+        result.put(CONFIRM_SOFT_CHECK_PRODUCTS, new ConfirmSoftCheckProductsProcessorDebug(serverDTO, listenerDTO.checker()));
+        result.put(BIND_CHECK, new BindCheckProcessorDebug(serverDTO, listenerDTO.checker()));
+        result.put(BIND, new BindProcessorDebug(serverDTO, listenerDTO.checker()));
         
         return result;
     }

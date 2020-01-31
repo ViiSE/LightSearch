@@ -56,6 +56,10 @@ public enum ClientCommandContentEnum {
         @Override
         public String stringValue() {return "barcode";}
     },
+    FACTORY_BARCODE {
+        @Override
+        public String stringValue() {return "factory_barcode";}
+    },
     SKLAD {
         @Override
         public String stringValue() {return "sklad";}

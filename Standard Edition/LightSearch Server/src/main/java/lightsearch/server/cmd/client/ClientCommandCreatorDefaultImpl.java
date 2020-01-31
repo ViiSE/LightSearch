@@ -41,6 +41,8 @@ public class ClientCommandCreatorDefaultImpl implements ClientCommandCreator {
     private final String CANCEL_SOFT_CHECK           = ClientCommandEnum.CANCEL_SOFT_CHECK.stringValue();
     private final String CONFIRM_SOFT_CHECK_PRODUCTS = ClientCommandEnum.CONFIRM_SOFT_CHECK_PRODUCTS.stringValue();
     private final String SEARCH                      = ClientCommandEnum.SEARCH.stringValue();
+    private final String BIND_CHECK                  = ClientCommandEnum.BIND_CHECK.stringValue();
+    private final String BIND                        = ClientCommandEnum.BIND.stringValue();
     
     private final LightSearchServerDTO serverDTO;
     private final LightSearchListenerDTO listenerDTO;
@@ -69,6 +71,12 @@ public class ClientCommandCreatorDefaultImpl implements ClientCommandCreator {
                 clientDAO, listenerDTO.currentDateTime(), listenerDTO.databaseRecordIdentifier()));
         result.put(CONFIRM_SOFT_CHECK_PRODUCTS, new ConfirmSoftCheckProductsProcessor(serverDTO, 
                 listenerDTO.checker(), clientDAO, listenerDTO.currentDateTime(), 
+                listenerDTO.databaseRecordIdentifier()));
+        result.put(BIND_CHECK, new BindCheckProcessor(serverDTO,
+                listenerDTO.checker(), clientDAO, listenerDTO.currentDateTime(),
+                listenerDTO.databaseRecordIdentifier()));
+        result.put(BIND, new BindProcessor(serverDTO,
+                listenerDTO.checker(), clientDAO, listenerDTO.currentDateTime(),
                 listenerDTO.databaseRecordIdentifier()));
         
         return result;

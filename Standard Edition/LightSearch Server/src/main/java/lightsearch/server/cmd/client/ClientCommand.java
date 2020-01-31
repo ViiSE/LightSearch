@@ -36,6 +36,7 @@ public interface ClientCommand extends Command {
     String username();
     String password();
     String barcode();
+    String factoryBarcode();
     String sklad();
     String TK();
     String data();
