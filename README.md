@@ -24,18 +24,15 @@ LightSearch состоит из пяти программ:
    - Выбор поиска по подразделению;
    - Сохранение параметров подключения.
   
-2) [LightSearch Android](https://github.com/ViiSE/LightSearch-Android)
-[История](https://github.com/ViiSE/LightSearch/blob/master/Documents/Project%20history/LightSearchAndroid.pdf)
-- работает под операционной системой Android версии 8.1 и выше.
+2) [LightSearch Android](https://github.com/ViiSE/LightSearch-Android) - работает под операционной системой Android версии 8.1 и выше.
  * Реализованы следующие функции:
    -  Поиск по наименованию, части наименования, штрих-коду, короткому штрих-коду, и по подразделению;
    -  Считывание штрих-кода через камеру смартфона;
    -  Привязка товара и проверка привязки товара;
    -  Мягкий чек;
    -  Автообновление.
-
+ * [История](https://github.com/ViiSE/LightSearch/blob/master/Documents/Project%20history/LightSearchAndroid.pdf)
 3) [LightSearch Server](https://github.com/ViiSE/LightSearch-Server).
- [История](https://github.com/ViiSE/LightSearch/blob/master/Documents/Project%20history/LightSearchServer.pdf)
  * (Standard Edition) Реализованы следующие функции:
    - Общение между клиентом и сервером через JSON по принципу "команда-ответ";
    - Сохранение настроек, параметров базы данных и списка администраторов;
@@ -43,7 +40,8 @@ LightSearch состоит из пяти программ:
    - Создание обработчика мягкого чека;
    - Черный список.
  * (Spring Edition). LightSearch Server Spring Edition является RESTful сервером и поддерживает большинство фишек Spring'а.
- Более подробно читайте в DevNotes.
+ Более подробно читайте в [DevNotes](https://github.com/ViiSE/LightSearch/blob/master/Dev%20notes).
+ * [История](https://github.com/ViiSE/LightSearch/blob/master/Documents/Project%20history/LightSearchServer.pdf)
 
 4) [LightSearch Admin Panel](https://github.com/ViiSE/LightSearch/blob/master/Documents/Project%20history/LightSearchAdminPanel.pdf) - работает под операционными системами GNU/Linux и Windows. Обеспечивает настройку и администрирование LightSearchServer.
  * Реализованы следующие функции:
