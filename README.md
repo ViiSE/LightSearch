@@ -16,14 +16,17 @@ LightSearch - комплекс программ для решения задач
 ------------------------------------------
 LightSearch состоит из пяти программ:
 
-1) [LightSearch PC](https://github.com/ViiSE/LightSearch/blob/master/Documents/Project%20history/LightSearchPC.pdf). Обеспечивает оперативный поиск по базе данных. 
+1) [LightSearch PC](https://github.com/ViiSE/LightSearch/blob/master/Documents/Project%20history/LightSearchPC.pdf).
+Обеспечивает оперативный поиск по базе данных.
  * Реализованы следующие функции:
    - Поиск по наименованию, по части наименования, или по штрих-коду;
    - Режим сканера и автоматического поиска;
    - Выбор поиска по подразделению;
    - Сохранение параметров подключения.
   
-2) [LightSearch Android](https://github.com/ViiSE/LightSearch/blob/master/Documents/Project%20history/LightSearchAndroid.pdf) - работает под операционной системой Android версии 8.1 и выше.
+2) [LightSearch Android](https://github.com/ViiSE/LightSearch-Android)
+[История](https://github.com/ViiSE/LightSearch/blob/master/Documents/Project%20history/LightSearchAndroid.pdf)
+- работает под операционной системой Android версии 8.1 и выше.
  * Реализованы следующие функции:
    -  Поиск по наименованию, части наименования, штрих-коду, короткому штрих-коду, и по подразделению;
    -  Считывание штрих-кода через камеру смартфона;
@@ -31,7 +34,8 @@ LightSearch состоит из пяти программ:
    -  Мягкий чек;
    -  Автообновление.
 
-3) [LightSearch Server](https://github.com/ViiSE/LightSearch/blob/master/Documents/Project%20history/LightSearchServer.pdf).
+3) [LightSearch Server](https://github.com/ViiSE/LightSearch-Server).
+ [История](https://github.com/ViiSE/LightSearch/blob/master/Documents/Project%20history/LightSearchServer.pdf)
  * (Standard Edition) Реализованы следующие функции:
    - Общение между клиентом и сервером через JSON по принципу "команда-ответ";
    - Сохранение настроек, параметров базы данных и списка администраторов;
@@ -53,7 +57,7 @@ LightSearch состоит из пяти программ:
    - Создание нового администратора;
    - Смена параметров базы данных.
    
-5) [LightSearch Updater](https://github.com/ViiSE/LightSearch/tree/master/Standard%20Edition/LightSearch%20Updater) - cервис для обновления LightSearch Android. Имеет web-панель администратора, при помощи которой можно создавать новые версии релиза LightSearch Android, добавлять через drag-and-drop apk файлы, и изменять файл релиза, который считывается LightSearch Android для проверки выхода нового релиза, в редакторе с поддержкой синтаксиса JSON. 
+5) [LightSearch Updater](https://github.com/ViiSE/LightSearch-Updater) - cервис для обновления LightSearch Android. Имеет web-панель администратора, при помощи которой можно создавать новые версии релиза LightSearch Android, добавлять через drag-and-drop apk файлы, и изменять файл релиза, который считывается LightSearch Android для проверки выхода нового релиза, в редакторе с поддержкой синтаксиса JSON. 
 
 История проекта будет описываться в документах, расположенных в папке Documents/Project history.
 
