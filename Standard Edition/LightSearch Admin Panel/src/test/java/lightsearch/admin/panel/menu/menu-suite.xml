@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="MenuSuite">
+
+    <parameter name="menu" value="Simple menu. Welcome!&#xA;---------------&#xA;1. First item;&#xA;2. Second item;&#xA;3. Third item.&#xA;"/>
+
+    <test name="MenuTestSuite">
+        <packages>
+            <package name="lightsearch.admin.panel.menu"/>
+        </packages>
+    </test>
+
+</suite>

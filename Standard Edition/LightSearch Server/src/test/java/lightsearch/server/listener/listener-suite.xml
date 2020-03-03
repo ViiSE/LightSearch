@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="InitializationSuite" verbose="1" >
+
+    <parameter name="ip" value="127.0.0.1"/>
+    <parameter name="logDirectory" value="logs"/>
+    <parameter name="minutesToWrite" value="30"/>
+    <parameter name="openTest" value="false"/>
+
+    <test name="InitializationSuiteTest">
+        <packages>
+            <package name="lightsearch.server.listener"/>
+        </packages>
+    </test>
+</suite>

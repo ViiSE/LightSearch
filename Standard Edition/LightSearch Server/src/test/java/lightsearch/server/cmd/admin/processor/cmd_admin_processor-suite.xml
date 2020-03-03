@@ -1,0 +1,81 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="CmdAdminProcessorSuite" verbose="1" >
+    <test name="CmdAdminProcessorSuiteTest" >
+        <parameter name="addBlacklistMessage"
+                   value="{
+                            &quot;command&quot;:&quot;addBlacklist&quot;,
+                            &quot;name&quot;:&quot;admin&quot;,
+                            &quot;IMEI&quot;:&quot;123456789123456&quot;
+                           }"/>
+        <parameter name="authenticationAdminMessage"
+                   value="{
+                            &quot;command&quot;:&quot;connect&quot;,
+                            &quot;name&quot;:&quot;admin&quot;,
+                            &quot;password&quot;:&quot;5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8&quot;
+                           }"/>
+                                                                    <!-- sha256, password -->
+        <parameter name="blacklistRequestMessage"
+                   value="{
+                            &quot;command&quot;:&quot;blList&quot;,
+                            &quot;name&quot;:&quot;admin&quot;
+                          }"/>
+        <parameter name="changeDatabaseMessage"
+                   value="{
+                            &quot;command&quot;:&quot;chDb&quot;,
+                            &quot;name&quot;:&quot;admin&quot;,
+                            &quot;adminName&quot;:&quot;newAdmin&quot;,
+                            &quot;dbName&quot;:&quot;newDBName&quot;,
+                            &quot;ip&quot;:&quot;127.0.0.1&quot;,
+                            &quot;port&quot;:&quot;8080&quot;
+                          }"/>
+        <parameter name="clientKickMessage"
+                   value="{
+                            &quot;command&quot;:&quot;kick&quot;,
+                            &quot;name&quot;:&quot;admin&quot;,
+                            &quot;IMEI&quot;:&quot;123456789123456&quot;
+                          }"/>
+        <parameter name="clientListRequestMessage"
+                   value="{
+                            &quot;command&quot;:&quot;clList&quot;,
+                            &quot;name&quot;:&quot;admin&quot;
+                          }"/>
+        <parameter name="createAdminMessage"
+                   value="{
+                            &quot;command&quot;:&quot;createAdmin&quot;,
+                            &quot;name&quot;:&quot;admin&quot;,
+                            &quot;adminName&quot;:&quot;newAdmin&quot;,
+                            &quot;password&quot;:&quot;5c29a959abce4eda5f0e7a4e7ea53dce4fa0f0abbe8eaa63717e2fed5f193d31&quot;
+                          }"/>
+                                                                        <!-- sha256, newPassword -->
+        <parameter name="delBlacklistMessage"
+                   value="{
+                            &quot;command&quot;:&quot;delBlacklist&quot;,
+                            &quot;name&quot;:&quot;admin&quot;,
+                            &quot;IMEI&quot;:&quot;123456789123456&quot;
+                          }"/>
+        <parameter name="restartMessage"
+                   value="{
+                            &quot;command&quot;:&quot;restart&quot;,
+                            &quot;name&quot;:&quot;admin&quot;
+                          }"/>
+        <parameter name="timeoutClientMessage"
+                   value="{
+                            &quot;command&quot;:&quot;toutClient&quot;,
+                            &quot;name&quot;:&quot;admin&quot;,
+                            &quot;time&quot;:&quot;3000&quot;
+                          }"/>
+        <parameter name="timeoutServerMessage"
+                   value="{
+                            &quot;command&quot;:&quot;toutServer&quot;,
+                            &quot;name&quot;:&quot;admin&quot;,
+                            &quot;time&quot;:&quot;3&quot;
+                          }"/>
+        <parameter name="logDirectoryName" value="logs"/>
+        <parameter name="openTest" value="false"/>
+
+        <packages>
+            <package name="lightsearch.server.cmd.admin.processor"/>
+        </packages>
+    </test>
+</suite>

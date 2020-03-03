@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="SocketSuite">
+
+    <parameter name="ip" value="127.0.0.1"/>
+    <parameter name="port" value="50000"/>
+
+    <test name="SocketSuiteTest">
+        <packages>
+            <package name="lightsearch.client.bot.socket"/>
+        </packages>
+    </test>
+
+</suite>

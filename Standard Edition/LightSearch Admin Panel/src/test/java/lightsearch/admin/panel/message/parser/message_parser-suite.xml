@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="MessageParserSuite">
+
+    <parameter name="message"
+               value="{
+                        &quot;name&quot;:&quot;admin&quot;
+                      }"/>
+
+    <test name="MessageParserTestSuite">
+        <packages>
+            <package name="lightsearch.admin.panel.message.parser"/>
+        </packages>
+    </test>
+
+</suite>

@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="HandlerSuite" verbose="1" >
+
+    <parameter name="ip" value="127.0.0.1"/>
+    <parameter name="port" value="49000"/>
+    <parameter name="logDirectory" value="logs"/>
+    <parameter name="id" value="admin"/>
+
+    <test name="HandlerSuiteTest">
+        <packages>
+            <package name="lightsearch.server.handler"/>
+        </packages>
+    </test>
+</suite>

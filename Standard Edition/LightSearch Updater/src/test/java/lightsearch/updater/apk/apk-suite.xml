@@ -1,0 +1,26 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="APKSuite" verbose="1" >
+    <test name="APKWithParamsTest" >
+        <parameter name="apkName" value="app-release.apk"/>
+        <parameter name="apkVersion" value="1.0"/>
+        <parameter name="apkContent"
+                   value="13423490234891320849132483204813480321840483290840913284903128492857485734895738429570
+                   39485324905704329579278346123784671236478326578314657843673627856347856832476583476643
+                   45687049798137948172867563758917894738975867033248756327856734286578326578236573767676
+                   34785632487563473248568236476578324657834657346597324653467523478563246347653472619199
+                   65867021174016451345063157801345961978463018741365781346578654836574365781459812741765
+                   43543278347895634783248567324673896781263812034871320413274873248534654378564378563247"/>
+        <classes>
+            <class name="lightsearch.updater.apk.APKTestNG"/>
+            <class name="lightsearch.updater.apk.APKSaverTestNG"/>
+        </classes>
+    </test>
+    
+    <test name="APKWithoutParamsTest" >
+        <classes>
+            <class name="lightsearch.updater.apk.APKVersionCreatorTestNG"/>
+            <class name="lightsearch.updater.apk.APKVersionsUploaderTestNG"/>
+        </classes>
+    </test>
+</suite>

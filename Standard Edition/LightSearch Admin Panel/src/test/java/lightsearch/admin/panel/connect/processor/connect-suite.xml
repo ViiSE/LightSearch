@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="ConnectSuite">
+
+    <parameter name="ip" value="127.0.0.1"/>
+    <parameter name="port" value="50000"/>
+
+    <test name="ConnectTestSuite">
+        <classes>
+            <class name="lightsearch.admin.panel.connect.processor.ConnectionProcessorTestNG"/>
+        </classes>
+    </test>
+
+</suite>

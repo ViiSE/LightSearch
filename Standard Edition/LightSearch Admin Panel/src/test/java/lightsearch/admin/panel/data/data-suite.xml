@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="DataSuite">
+
+    <parameter name="name" value="name"/>
+    <parameter name="serverTime" value="8"/>
+    <parameter name="serverTime" value="8"/>
+    <parameter name="clientTimeout" value="50000"/>
+    <parameter name="IMEI" value="123456789123456"/>
+    <parameter name="adminName" value="adminName"/>
+    <parameter name="password" value="password"/>
+    <parameter name="ip" value="127.0.0.1"/>
+    <parameter name="port" value="50000"/>
+    <parameter name="dbName" value="dbName"/>
+
+
+    <test name="DataTestSuite">
+        <classes>
+            <class name="lightsearch.admin.panel.data.AdminCommandDAOTestNG"/>
+            <class name="lightsearch.admin.panel.data.AdminDAOTestNG"/>
+            <class name="lightsearch.admin.panel.data.AdminDTOTestNG"/>
+            <class name="lightsearch.admin.panel.data.AdminPanelDTOTestNG"/>
+            <class name="lightsearch.admin.panel.data.AdminPanelSessionDTOTestNG"/>
+            <class name="lightsearch.admin.panel.data.ConnectionDTOTestNG"/>
+            <class name="lightsearch.admin.panel.data.MessageCommandDTOTestNG"/>
+            <class name="lightsearch.admin.panel.data.ScannerChooserCommandDTOTestNG"/>
+            <class name="lightsearch.admin.panel.data.ScannerConnectionDTOTestNG"/>
+            <class name="lightsearch.admin.panel.data.ScannerClientValueDTOTestNG"/>
+            <class name="lightsearch.admin.panel.data.ScannerConnectionDTOTestNG"/>
+            <class name="lightsearch.admin.panel.data.ScannerDatabaseDTOTestNG"/>
+            <class name="lightsearch.admin.panel.data.ScannerRegistrationDTOTestNG"/>
+            <class name="lightsearch.admin.panel.data.ScannerRestartDTOTestNG"/>
+            <class name="lightsearch.admin.panel.data.ScannerTimeoutDTOTestNG"/>
+        </classes>
+    </test>
+
+</suite>

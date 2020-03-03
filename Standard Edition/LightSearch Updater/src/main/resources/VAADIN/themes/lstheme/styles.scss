@@ -1,0 +1,7 @@
+@import "lstheme";
+@import "addons.scss";
+
+.lstheme {
+    @include addons;
+    @include lstheme;
+}
