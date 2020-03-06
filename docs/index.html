@@ -144,7 +144,12 @@
         opacity: 0.7;
         border-color: black transparent transparent transparent;
     }
-
+    html {
+        overflow-y: scroll;
+    }
+    body {
+        position: relative;
+    }
 </style>
 <h1>
     <img src="https://user-images.githubusercontent.com/43209824/64838878-905c6e00-d638-11e9-8026-e7b04d1af80f.png"
@@ -160,7 +165,7 @@
             </label>
         </div>
         <input type="radio" id="tab1" name="tab-group" checked>
-        <section class="tab-content">
+        <section class="tab-content" style="width: 100%">
             <div class="cCard" style="margin: 1% auto 0 6%">
                 <div class="cDate">&#9679;</div>
                 <div class="cText">
@@ -190,8 +195,8 @@
                     </div>
                     <div class="cDivMargin"></div>
                     <div class="cTextInner">
-                        Вся информация о проекте и исходный код доступен в
-                        <a href="https://github.com/ViiSE/LightSearch">GitHub</a>.
+                        Вся необходимая информация и исходный код доступен в
+                        <a href="https://github.com/ViiSE/LightSearch-Server">GitHub</a>.
                     </div>
                 </div>
             </div>
@@ -205,7 +210,7 @@
         <div class="cDivCenter">
             <label for="tab2" class="tab-title">
                 <span class="tooltiptext" style="left: 95px;">История</span>
-                <img alt="dev notes" style="text-align: center" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgaGVpZ2h0PSIyOHB4IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAzMiAzMiIgd2lkdGg9IjI4cHgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6c2tldGNoPSJodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2gvbnMiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48dGl0bGUvPjxkZXNjLz48ZGVmcy8+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIiBpZD0iUGFnZS0xIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSI+PGcgZmlsbD0iI0ZGRkZGRiIgaWQ9Imljb24tNDQtbm90ZS10ZXh0Ij48cGF0aCBkPSJNNSwxMSBMNSwyNS45OTkxMzU4IEM1LDI3LjA5ODM3MjcgNS44OTI3NzEyLDI4IDYuOTk0MDYwMjgsMjggTDIxLDI4IEwyMSwyMS45OTgxMDE0IEMyMSwyMC44ODY3MDY0IDIxLjg5ODA4MDYsMjAgMjMuMDA1OTE5MSwyMCBMMjgsMjAgTDI4LDExIEw1LDExIEw1LDExIFogTTUsMTAgTDUsNy4wMDA4NjQyMiBDNSw1Ljg5NTgxNzQzIDUuOTAxNjI3MjYsNSA3LjAwMDg2NDIyLDUgTDI1Ljk5OTEzNTgsNSBDMjcuMTA0MTgyNiw1IDI4LDUuODkzMzk3MzMgMjgsNi45OTE4ODQxOSBMMjgsMTAgTDUsMTAgTDUsMTAgWiBNMjIsMjggTDIyLDIyLjAwMjkyOTMgQzIyLDIxLjQ0OTAyNjggMjIuNDUwOTc1MiwyMSAyMi45OTA3NzgsMjEgTDI4LDIxIEwyMiwyOCBMMjIsMjggWiBNOCwxNCBMOCwxNSBMMjUsMTUgTDI1LDE0IEw4LDE0IEw4LDE0IFogTTgsMTcgTDgsMTggTDI1LDE4IEwyNSwxNyBMOCwxNyBMOCwxNyBaIE04LDIwIEw4LDIxIEwxOSwyMSBMMTksMjAgTDgsMjAgTDgsMjAgWiBNOCwyMyBMOCwyNCBMMTksMjQgTDE5LDIzIEw4LDIzIEw4LDIzIFoiIGlkPSJub3RlLXRleHQiLz48L2c+PC9nPjwvc3ZnPgo=">
+                <img alt="devNotes" style="text-align: center" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgaGVpZ2h0PSIyOHB4IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAzMiAzMiIgd2lkdGg9IjI4cHgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6c2tldGNoPSJodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2gvbnMiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48dGl0bGUvPjxkZXNjLz48ZGVmcy8+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIiBpZD0iUGFnZS0xIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSI+PGcgZmlsbD0iI0ZGRkZGRiIgaWQ9Imljb24tNDQtbm90ZS10ZXh0Ij48cGF0aCBkPSJNNSwxMSBMNSwyNS45OTkxMzU4IEM1LDI3LjA5ODM3MjcgNS44OTI3NzEyLDI4IDYuOTk0MDYwMjgsMjggTDIxLDI4IEwyMSwyMS45OTgxMDE0IEMyMSwyMC44ODY3MDY0IDIxLjg5ODA4MDYsMjAgMjMuMDA1OTE5MSwyMCBMMjgsMjAgTDI4LDExIEw1LDExIEw1LDExIFogTTUsMTAgTDUsNy4wMDA4NjQyMiBDNSw1Ljg5NTgxNzQzIDUuOTAxNjI3MjYsNSA3LjAwMDg2NDIyLDUgTDI1Ljk5OTEzNTgsNSBDMjcuMTA0MTgyNiw1IDI4LDUuODkzMzk3MzMgMjgsNi45OTE4ODQxOSBMMjgsMTAgTDUsMTAgTDUsMTAgWiBNMjIsMjggTDIyLDIyLjAwMjkyOTMgQzIyLDIxLjQ0OTAyNjggMjIuNDUwOTc1MiwyMSAyMi45OTA3NzgsMjEgTDI4LDIxIEwyMiwyOCBMMjIsMjggWiBNOCwxNCBMOCwxNSBMMjUsMTUgTDI1LDE0IEw4LDE0IEw4LDE0IFogTTgsMTcgTDgsMTggTDI1LDE4IEwyNSwxNyBMOCwxNyBMOCwxNyBaIE04LDIwIEw4LDIxIEwxOSwyMSBMMTksMjAgTDgsMjAgTDgsMjAgWiBNOCwyMyBMOCwyNCBMMTksMjQgTDE5LDIzIEw4LDIzIEw4LDIzIFoiIGlkPSJub3RlLXRleHQiLz48L2c+PC9nPjwvc3ZnPgo=">
             </label>
         </div>
         <input type="radio" id="tab2" name="tab-group">
@@ -675,11 +680,20 @@
                     <div class="cDivMargin"></div>
                     <div class="cTextInner">
                         Добавил на свою страницу сайта вкладки: 'Главная' и 'История'. Во вкладке 'Главная' содержится
-                        общая информация о проекте и ссылки, а во вкладке 'История' содержится Dev notes.
+                        общая информация об проекте и ссылки, в во вкладке 'История' содержится Dev notes.
                     </div>
                 </div>
             </div>
-            <div class="cDivCenter">
+            <div class="cCard">
+                <div class="cDate">06.03.20</div>
+                <div class="cText">
+                    <div class="cTextInner">
+                        Исправил изменение ширины карточки на странице 'Главная'. Теперь ширина растягивается
+                        относительно размеров экрана.
+                    </div>
+                </div>
+            </div>
+            <div class="cDivCenter" style="margin-right: 6%">
                 <a href="https://github.com/ViiSE/LightSearch" class="cLink">LightSearch</a>
                 <div class="cLink">2020 © ViiSE</div>
             </div>
