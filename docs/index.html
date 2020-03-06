@@ -33,7 +33,7 @@
         padding-left: 1%;
         padding-top: 1%;
         color: #007dff;
-        font-size: x-large;
+        font-size: 18pt;
         font-weight: bold;
     }
     .cText {
@@ -41,13 +41,13 @@
         color: black;
         padding: 2% 10% 50px;
         margin: 0 auto 0;
-        font-size: large;
+        font-size: 14pt;
         text-align: left;
     }
     .cTextInner {
         font-family: 'Open Sans', serif;
         margin: auto 0;
-        font-size: large;
+        font-size: 14pt;
         text-align: left;
     }
     .cLink {
@@ -149,6 +149,17 @@
     }
     body {
         position: relative;
+    }
+    @media (max-device-width: 450px) {
+        .cTextInner {
+            font-size: 30pt;
+        }
+        .cText {
+            font-size: 30pt;
+        }
+        .cDate {
+            font-size: 34pt;
+        }
     }
 </style>
 <h1>
@@ -689,7 +700,8 @@
                 <div class="cText">
                     <div class="cTextInner">
                         Исправил изменение ширины карточки на странице 'Главная'. Теперь ширина растягивается
-                        относительно размеров экрана.
+                        относительно размеров экрана. Также добавил адаптию шрифта карточек для разных разрешений
+                        устройств.
                     </div>
                 </div>
             </div>
