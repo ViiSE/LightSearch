@@ -222,6 +222,46 @@
         <input type="radio" id="tab2" name="tab-group">
         <section class="tab-content">
             <div class="cCard">
+                <div class="cDate">23.03.20</div>
+                <div class="cText">
+                    <div class="cTextInner">
+                        Изменил логику входа в приложение LightSearch Android. Когда клиент находится в главном меню, то
+                        после нажатия кнопки 'назад' смартфона, происходит выход из приложения. Когда пользователь снова
+                        откроет приложение, то LightSearch Android проверит срок годности токена, и если он просрочен,
+                        то покажет окно авторизации, а иначе перейдет в главное меню и отправит две команды на сервер -
+                        clients/tkList и clients/skladList, и будет выполнять их в каждом отдельном AsyncTask.
+                    </div>
+                    <div class="cDivMargin"></div>
+                    <div class="cTextInner">
+                        clients/tkList и clients/skladList выгружают список складов и ТК соответственно. Они необходимы
+                        для заполнения Spinner'ов фрагмента поиска в LightSearch Android. Для этого был создан
+                        ProgressBar, который приобретает значение свойства visibility.GONE после завершения работы
+                        AsyncTask по заполнению Spinner'а.
+                    </div>
+                    <div class="cDivCenter">
+                        <img alt="scr-16" src="Screenshot_20200323-151500.png" class="cImageText">
+                    </div>
+                    <div class="cDivMargin"></div>
+                    <div class="cTextInner">
+                        Был замечен эффект: если переходить в другую вкладку (например, 'еще') и после перейти обратно
+                        на вкладку 'поиск', то запускается заново отрисовка данного окна
+                        (вызывается метод onCreateView), при этом до этого метод onSaveInstanceState вызван не был.
+                        Поэтому раз за разом дергался сервер, что не есть хорошо. Поэтому был создан класс
+                        SpinnerWithCallback, которому можно установить callback-функцию после вызова setAdapter. Был
+                        написан callback, который в качестве параметра принимает данные, которые имеет Spinner. Таким
+                        образом, при помощи этого callback'а можно сохранять массивы с данными во фрагменте, тем самым
+                        не вызывая каждый раз команды сервера при перелистывании страниц.
+                    </div>
+                    <div class="cDivMargin"></div>
+                    <div class="cTextInner">
+                        Была добавлена команда /clients/softChecks/products : поиск для мягкого чека. Эта команда
+                        отличается от команды /clients/products тем, что в ней мы не указываем по какому складу и ТК
+                        необходимо осуществлять поиск, а указываем имя пользователя, который закреплен за определенным
+                        подразделением, по которому и будет осуществляться поиск.
+                    </div>
+                </div>
+            </div>
+            <div class="cCard">
                 <div class="cDate">20.03.20</div>
                 <div class="cText">
                     <div class="cTextInner">
@@ -274,9 +314,9 @@
                         количества текущих позиций в мягком чеке.
                     </div>
                     <div class="cDivCenter">
-                        <img alt="scr-8" src="Screenshot_20200314-231931.png" class="cImageText">
-                        <img alt="scr-9" src="Screenshot_20200314-231941.png" class="cImageText">
-                        <img alt="scr-10" src="Screenshot_20200314-231955.png" class="cImageText">
+                        <img alt="scr-8" src="Screenshot_20200323-151721.png" class="cImageText">
+                        <img alt="scr-9" src="Screenshot_20200323-151727.png" class="cImageText">
+                        <img alt="scr-10" src="Screenshot_20200323-151730.png" class="cImageText">
                     </div>
                     <div class="cDivMargin"></div>
                     <div class="cTextInner">
