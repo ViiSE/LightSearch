@@ -222,6 +222,61 @@
         <input type="radio" id="tab2" name="tab-group">
         <section class="tab-content">
             <div class="cCard">
+                <div class="cDate">31.03.20</div>
+                <div class="cText">
+                    <div class="cTextInner">
+                        Создал страницу для загрузки последней версии LightSearch Android в LightSearch Updater. При
+                        нажатии на кнопку 'Получить' скачивается APK-файл LightSearch Android последней версии. Также во
+                        время загрузки кнопка изменяется на уведомление о загрузке файла.
+                    </div>
+                    <div class="cDivCenter">
+                        <img alt="scr-17" src="Screenshot_20200331-181031_Chrome.jpg" class="cImageText">
+                        <img alt="scr-18" src="Screenshot_20200331-181124_Chrome.jpg" class="cImageText">
+                    </div>
+                    <div class="cDivMargin"></div>
+                    <div class="cTextInner">
+                        Для реализации этой страницы в LightSearch Updater была создана точка GET app/versions/latest,
+                        которая выдает массив байтов файла. При этом сведения о последней версии берется с файла
+                        info.json.
+                    </div>
+                    <div class="cDivMargin"></div>
+                    <div class="cTextInner">
+                        На этой странице была добавлена поддержка мобильных устройств, так как все же этой страницей
+                        будут пользоваться прежде всего пользователи мобильных устройств.
+                    </div>
+                    <div class="cDivMargin"></div>
+                    <div class="cTextInner">
+                        Страница доступна по точке /app.
+                    </div>
+                    <div class="cDivMargin"></div>
+                    <div class="cTextInner">
+                        Доделал обработку ошибок в LightSearch Server. Теперь ошибки будут приходить пользователям на
+                        русском языке, а на сервере будут писаться на английском + сообщение из соответствующего
+                        Exception.
+                    </div>
+                    <div class="cDivMargin"></div>
+                    <div class="cTextInner">
+                        Убрал код лишний код из контролерров, обрабатывающих команды клиента и администратора. Прежде
+                        всего из контроллера администратора убрал Logger, и сделал новые декоратора процессов,
+                        исполняющих команды, содержащие Logger. Все действия, производимые с DTO, убрал внутрь метода
+                        formForSend() интерфейсов результата команд клиента и администратора.
+                    </div>
+                    <div class="cDivMargin"></div>
+                    <div class="cTextInner">
+                        Исправил ошибку в LightSearch Android, которая заключалась в том, что при переходах из разных
+                        фрагментов главного меню эти фрагменты наслаивались друг на друга, и возникала такая ситуация,
+                        что при нажатии на пустую область одного фрагмента вызывались нажатия элементов другого
+                        фрагмента. Это было связано с анимацией перехода с одного фрагмента на другой. Код анимации был
+                        взят из официальной документации по
+                        <a href=https://developer.android.com/training/animation/screen-slide#java>Android</a>.
+                        Проблемы возникали с анимацией Depth. Дело в том, что эта анимация не смещает фрагмент по оси
+                        абцисс. Об этом написано в документации, но в код примера не был включен расчет координаты
+                        заменяемого фрагмента. Куда применить код я так и не разобрался, поэтому взял другую анимацию -
+                        ZoomOut, для которой расчет не нужен.
+                    </div>
+                </div>
+            </div>
+            <div class="cCard">
                 <div class="cDate">25.03.20</div>
                 <div class="cText">
                     <div class="cTextInner">
