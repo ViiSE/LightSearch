@@ -20,7 +20,7 @@ LightSearch состоит из пяти программ:
    - Выбор поиска по подразделению;
    - Сохранение параметров подключения.
   
-2) [LightSearch Android](https://github.com/ViiSE/LightSearch-Android) - работает под операционной системой Android версии 8.1 и выше.
+2) [LightSearch Android](https://github.com/ViiSE/LightSearch-Android) - работает под операционной системой Android версии 7.1 и выше.
  * Реализованы следующие функции:
    -  Поиск по наименованию, части наименования, штрих-коду, короткому штрих-коду, и по подразделению;
    -  Считывание штрих-кода через камеру смартфона;
@@ -28,7 +28,7 @@ LightSearch состоит из пяти программ:
    -  Мягкий чек;
    -  Автообновление.
  * [История](https://github.com/ViiSE/LightSearch/blob/master/Documents/Project%20history/LightSearchAndroid.pdf)
-3) [LightSearch Server](https://github.com/ViiSE/LightSearch-Server).
+3) [LightSearch Server](https://github.com/ViiSE/LightSearch-Server) - RESTful сервер, обеспечивающий общение между клиентами LightSearch и программой, реализующей бизнес-логику, и реализующий необходимые функции для предприятия.
  * (Standard Edition) Реализованы следующие функции:
    - Общение между клиентом и сервером через JSON по принципу "команда-ответ";
    - Сохранение настроек, параметров базы данных и списка администраторов;
