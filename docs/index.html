@@ -222,6 +222,33 @@
         <input type="radio" id="tab2" name="tab-group">
         <section class="tab-content">
             <div class="cCard">
+                <div class="cDate">14.05.20</div>
+                <div class="cText">
+                    <div class="cTextInner">
+                        Добавил поддержку зашифрованной авторизации. Для этого в LightSearch Server добавил две точки:
+                        GET /clients/login/key и POST /clients/login/encrypted. Первая точка позволяет получить ключ,
+                        метод и алгоритм для шифрования авторизационных данных клиента, а вторая точка принимает в
+                        качестве тела запроса JSON с полем data, которое содержит авторизационную информацию клиента в
+                        зашифрованном виде. Архитектура сделана таким образом, что можно использовать любые алгоритмы
+                        шифрования и их реализации. На данный момент сделана реализация алгоритма RSA
+                        (RSA/ECB/OAEPWithSHA1AndMGF1Padding). GET /clients/login/key возвращает открытый RSA ключ, а в
+                        точке POST /clients/login/encrypted происходит расшифрование данных через закрытый RSA ключ.
+                        В LightSearch Android была добавлена поддержка данной функции.
+
+                    </div>
+                    <div class="cDivMargin"></div>
+                    <div class="cTextInner">
+                        В LightSearch Android был исправлен баг, который заключался в том, что при переходе в
+                        ResultSearchFragment через SearchFragment определенное выбранное подразделение не запоминалось,
+                        т.е. если был выбран тип подразделения 'Склады', и был выбран склад 'Склад 1', то после выхода
+                        из ResultSearchFragment выбранный склад 'Склад 1' не запоминался. Этот баг был исправлен
+                        добавлением переменной pos в SearchFragment, которая запоминает текущее положение Spinner'а.
+                        Значение этой переменной сохранялось в методе onSavedInstanceState фрагмента, и считывалось в
+                        методе onCreate.
+                    </div>
+                </div>
+            </div>
+            <div class="cCard">
                 <div class="cDate">28.04.20</div>
                 <div class="cText">
                     <div class="cTextInner">
