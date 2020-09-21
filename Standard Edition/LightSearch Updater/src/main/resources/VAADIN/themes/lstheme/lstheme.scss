@@ -1,9 +1,0 @@
-@import "../valo/valo.scss";
-
-@mixin lstheme {
-    @include valo;
-
-    .backColorLSMainLight {
-        background-color:#69B2FF;
-    }
-}
