@@ -1,0 +1,7 @@
+FROM openjdk:11-jre-buster
+
+ARG JAR_FILE=lightsearch/server/LightSearch_Server*.jar
+COPY ${JAR_FILE} lightsearch-server.jar
+COPY lightsearch/server/VERSION VERSION
+
+ENTRYPOINT ["java", "-jar", "/lightsearch-server.jar"]

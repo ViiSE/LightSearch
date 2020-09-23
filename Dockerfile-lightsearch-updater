@@ -1,0 +1,6 @@
+FROM openjdk:13-alpine
+
+ARG JAR_FILE=lightsearch/updater/LightSearch_Updater*.jar
+COPY ${JAR_FILE} lightsearch-updater.jar
+
+ENTRYPOINT ["java", "-jar", "/lightsearch-updater.jar"]

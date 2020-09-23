@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+  nginx:
+    container_name: nginx-ls
+    build:
+      context: .
+      dockerfile: Dockerfile-nginx
+    volumes:
+      - ${PWD}/nginx-v/log:/var/log/nginx
+    depends_on:
+      - lightsearch-server
+      - lightsearch-updater
+    ports:
+      - 80:80
+      - 443:443
+    expose:
+      - 80
+      - 443
+    restart: always
+  lightsearch-server:
+    container_name: lightsearch-server
+    environment:
+      - SERVER_SERVLET_CONTEXT_PATH=/server
+    build:
+      context: .
+      dockerfile: Dockerfile-lightsearch-server
+    volumes:
+      - ${PWD}/lightsearch-server-v/logs:/logs
+      - type: bind
+        source: ${PWD}/lightsearch-server-v/blacklist
+        target: /blacklist
+  lightsearch-updater:
+    container_name: lightsearch-updater
+    environment:
+      - SERVER_SERVLET_CONTEXT_PATH=/updater
+    build:
+      context: .
+      dockerfile: Dockerfile-lightsearch-updater
+    volumes:
+      - ${PWD}/lightsearch-updater-v/logs:/logs
+      - ${PWD}/lightsearch-updater-v/doc:/doc
+      - ${PWD}/lightsearch-updater-v/update:/update

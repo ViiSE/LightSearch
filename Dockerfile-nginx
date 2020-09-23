@@ -1,0 +1,10 @@
+FROM nginx:1.19.1
+
+COPY ls-nginx/nginx.conf /etc/nginx/nginx.conf
+
+COPY ls-nginx/keys/certificate.key /etc/ssl/private/nginx-certificate.key
+COPY ls-nginx/keys/certificate.crt /etc/ssl/certs/nginx-certificate.crt
+COPY ls-nginx/keys/dhparam.pem /etc/ssl/certs/dhparam.pem
+
+COPY ls-nginx/snippets/ssl-params.conf /etc/nginx/snippets/ssl-params.conf
+COPY ls-nginx/snippets/certificates.conf /etc/nginx/snippets/certificates.conf

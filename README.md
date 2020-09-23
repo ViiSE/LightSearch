@@ -58,6 +58,65 @@ LightSearch состоит из пяти программ:
 Standard Edition теперь в [архивном репозитории](https://github.com/viise/LightSearch-Archive)
 -----------------------------------------------------------------
 
+Поддержка Docker <img src="https://user-images.githubusercontent.com/43209824/89869724-1a6dd780-dbf8-11ea-8a1b-2cae7cb9db14.png" width="371" height="88"/>
+---------------------------
+LightSearch поддерживает Docker. Для этого нужно собрать проекты LightSearch Server и LightSearch Updater при помощи 
+docker-файлов `Dockerfile-lightsearch-server` и `Dockerfile-lightsearch-updater` соответственно.
+
+#### Docker Compose <img src="https://user-images.githubusercontent.com/43209824/89871634-11cad080-dbfb-11ea-8cc7-e7580446c69a.png" width="87" height="111"/>
+LightSearch поддерживает Docker Compose. Для его запуска необходимо сделать следующие шаги:
+1) Собрать проекты LightSearch Server и LightSearch Updater;
+2) В папку `lightsearch/server` (которая находится в этом репозитории) поместить `LightSearch_Server_<версия>.jar` (где
+   <версия> - номер версии LightSearch Server), и файл `VERSION`;
+3) В папку `lightsearch/updater` (которая находится в этом репозитории) поместить `LightSearch_Server_Updater.jar`;
+4) Создать папку `lightsearch-server-v`, в которую необходимо поместить файл `blacklist`;
+5) Создать папку `lightsearch-updater-v`, в которую необходимо поместить:
+   - Папку `doc`, в которой содержится файлы документации в формате pdf;
+   - Файл `update/info/update.json`, в котором содержится информация по обновлению LightSearch Android;
+   - Папку `releases`, в которой в папках вида `v<f>.<s>` (где `<f>` - первое число версии, `<s>` - второе число 
+     версии) содержится релиз LightSearch Android.
+
+Если планируете использовать HTTPS, то в папку `ls-nginx/keys` надо добавить файлы `certificate.crt`, `certificate.key` 
+и `dhparam.pem`. Для тестов можно создать self-signed сертификаты при помощи скрипта `ls-nginx/create-ssl-cert.sh`.
+
+Для запуска Docker Compose выполните команду:
+
+```bash
+docker-compose up
+```
+Docker Compose запустит три сервиса: `nginx`, `lightsearch-server` и `lightsearch-updater`. Nginx служит прокси-сервером
+для LightSearch: весь трафик проходит через него. Nginx позволяет работать LightSearch через HTTPS. Для доступа к 
+LightSearch Server укажите endpoint `/server` после имени сервера (например, `localhost/server`), для доступа к 
+LightSearch Updater - `/updater` (например, `localhost/updater`). Все endpoint'ы будут оборачиваться в HTTPS.
+
+Если необходима работа с HTTP, то запускайте Docker Compose так:
+```bash
+docker-compose -f docker-compose-http.yml up
+```
+
+Все настройки для Nginx лежат в папке `ls-nginx`.
+
+После запуска Docker Compose создается:
+1) В разделе `lightsearch-server-v` директория `logs`, в которой содержатся логи LightSearch Server;
+2) В разделе `lightsearch-updater-v` директория `logs`, в которой содержатся логи LightSearch Updater;
+3) Раздел `nginx-v` с директорией `log`, в которой содержатся логи Nginx.
+
+Для остановки сервисов необходимо ввести следующую команду:
+
+```bash
+docker-compose down
+```
+
+После любых изменений в файлах `docker-compose.yml`, `docker-compose-http.yml`, `Dockerfile-lightsearch-server`, 
+`Dockerfile-lightsearch-updater`, `Dockerfile-nginx`, `Dockerfile-nginx-http`, Docker Compose необходимо запускать с 
+ключом `--build`:
+```bash
+docker-compose up --build
+```  
+
+Это пересоберет все образы и пересоздаст контейнеры.
+
+
 Используемые библиотеки, фреймворки и технологии
 -------------------------------------------------
 - [JSON.simple](https://github.com/fangyidong/json-simple)
@@ -76,3 +135,6 @@ Standard Edition теперь в [архивном репозитории](https
 - [React](https://github.com/facebook/react)
 - [Thymeleaf](https://github.com/thymeleaf)
 - [JsonWebToken](https://jwt.io)
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://github.com/docker/compose)
+- [nginx](https://www.nginx.org)
