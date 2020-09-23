@@ -66,9 +66,9 @@ docker-файлов `Dockerfile-lightsearch-server` и `Dockerfile-lightsearch-u
 #### Docker Compose <img src="https://user-images.githubusercontent.com/43209824/89871634-11cad080-dbfb-11ea-8cc7-e7580446c69a.png" width="87" height="111"/>
 LightSearch поддерживает Docker Compose. Для его запуска необходимо сделать следующие шаги:
 1) Собрать проекты LightSearch Server и LightSearch Updater;
-2) В папку `lightsearch/server` (которая находится в этом репозитории) поместить `LightSearch_Server_<версия>.jar` (где
+2) В папку `lightsearch/server` поместить `LightSearch_Server_<версия>.jar` (где
    <версия> - номер версии LightSearch Server), и файл `VERSION`;
-3) В папку `lightsearch/updater` (которая находится в этом репозитории) поместить `LightSearch_Server_Updater.jar`;
+3) В папку `lightsearch/updater` поместить `LightSearch_Server_Updater.jar`;
 4) Создать папку `lightsearch-server-v`, в которую необходимо поместить файл `blacklist`;
 5) Создать папку `lightsearch-updater-v`, в которую необходимо поместить:
    - Папку `doc`, в которой содержится файлы документации в формате pdf;
