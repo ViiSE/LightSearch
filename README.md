@@ -28,14 +28,14 @@ LightSearch состоит из пяти программ:
    -  Мягкий чек;
    -  Автообновление.
  * [История](https://github.com/ViiSE/LightSearch/blob/master/Documents/Project%20history/LightSearchAndroid.pdf)
-3) [LightSearch Server](https://github.com/ViiSE/LightSearch-Server) - RESTful сервер, обеспечивающий общение между клиентами LightSearch и программой, реализующей бизнес-логику, и реализующий необходимые функции для предприятия.
+3) [LightSearch Server](https://github.com/ViiSE/LightSearch-Server) - REST сервер, обеспечивающий общение между клиентами LightSearch и программой, реализующей бизнес-логику, и реализующий необходимые функции для предприятия.
  * (Standard Edition) Реализованы следующие функции:
    - Общение между клиентом и сервером через JSON по принципу "команда-ответ";
    - Сохранение настроек, параметров базы данных и списка администраторов;
    - Логирование;
    - Создание обработчика мягкого чека;
    - Черный список.
- * (Spring Edition). LightSearch Server Spring Edition является RESTful сервером и поддерживает большинство фишек Spring'а.
+ * (Spring Edition). LightSearch Server Spring Edition является REST сервером и поддерживает большинство фишек Spring'а.
  Более подробно читайте в [DevNotes](https://github.com/ViiSE/LightSearch/blob/master/Dev%20notes).
  * [История](https://github.com/ViiSE/LightSearch/blob/master/Documents/Project%20history/LightSearchServer.pdf)
 
